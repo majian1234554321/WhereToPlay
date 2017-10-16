@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg"
+        android:orientation="vertical">
+
+        <com.fanc.wheretoplay.view.TopMenu
+            android:id="@+id/tm_settings"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.fanc.wheretoplay.view.ItemView
+            android:id="@+id/iv_settings_set_pay_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onViewClick"/>
+
+        <com.fanc.wheretoplay.view.ItemView
+            android:id="@+id/iv_settings_advice_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onViewClick"/>
+
+        <com.fanc.wheretoplay.view.ItemView
+            android:id="@+id/iv_settings_system_notify"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onViewClick"/>
+
+        <com.fanc.wheretoplay.view.ItemView
+            android:id="@+id/iv_settings_check_to_update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onViewClick"/>
+
+        <com.fanc.wheretoplay.view.ItemView
+            android:id="@+id/iv_settings_clear_cache"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onViewClick"/>
+
+        <com.fanc.wheretoplay.view.ItemView
+            android:id="@+id/iv_settings_about_us"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onViewClick"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_0"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/btn_settings_sign_out"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_40"
+            android:layout_marginBottom="@dimen/margin_50"
+            android:layout_marginLeft="@dimen/margin_15"
+            android:layout_marginRight="@dimen/margin_15"
+            android:background="@drawable/shape_btn_signin"
+            android:onClick="onViewClick"
+            android:text="@string/sign_out"
+            android:textColor="@color/black"
+            android:textSize="@dimen/textsize_level2"/>
+
+    </LinearLayout>
+</layout>

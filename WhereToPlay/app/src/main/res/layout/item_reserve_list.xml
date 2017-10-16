@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="order"
+            type="com.fanc.wheretoplay.datamodel.OrderList.Order"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_10">
+
+        <View
+            android:id="@+id/v_bg_top"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_50"
+            android:background="@drawable/shape_reserve_list_item_top"/>
+
+        <View
+            android:id="@+id/v_bg_bottom"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_120"
+            android:layout_below="@+id/v_bg_top"
+            android:background="@drawable/shape_reserve_list_item_bottom"/>
+
+        <TextView
+            android:id="@+id/tv_reserve_list_item_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/v_bg_top"
+            android:layout_alignTop="@+id/v_bg_top"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:gravity="center_vertical"
+            android:text="@{order.store_name}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_level2"/>
+
+        <TextView
+            android:id="@+id/tv_reserve_list_item_discount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_reserve_list_item_title"
+            android:layout_marginLeft="@dimen/margin_5"
+            android:layout_toRightOf="@+id/tv_reserve_list_item_title"
+            android:background="@drawable/discount"
+            android:paddingLeft="@dimen/padding_20"
+            android:paddingRight="@dimen/padding_5"
+            android:textColor="@color/text_black"/>
+
+        <TextView
+            android:id="@+id/tv_reserve_list_item_room"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_reserve_list_item_title"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_10"
+            android:text='@{order.room_type+" "+order.room_number}'
+            android:textColor="@color/textcolor_d2"
+            android:textSize="@dimen/normal_textsize"/>
+
+        <TextView
+            android:id="@+id/tv_reserve_list_item_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/v_bg_bottom"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_15"
+            android:text="@{order.nickname}"
+            android:textColor="@color/textcolor_d2"
+            android:textSize="@dimen/normal_textsize"/>
+
+        <TextView
+            android:id="@+id/tv_reserve_list_item_mobile"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_reserve_list_item_name"
+            android:layout_below="@+id/tv_reserve_list_item_name"
+            android:layout_marginTop="@dimen/margin_10"
+            android:text="@{order.mobile}"
+            android:textColor="@color/textcolor_d2"
+            android:textSize="@dimen/normal_textsize"/>
+
+        <TextView
+            android:id="@+id/tv_reserve_list_item_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_reserve_list_item_mobile"
+            android:layout_below="@+id/tv_reserve_list_item_mobile"
+            android:layout_marginTop="@dimen/margin_10"
+            android:text="到店 09-10 22:00"
+            android:textColor="@color/textcolor_d2"
+            android:textSize="@dimen/normal_textsize"/>
+
+        <ImageView
+            android:id="@+id/iv_reserve_list_item_way"
+            android:layout_width="@dimen/width_50"
+            android:layout_height="@dimen/height_50"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/v_bg_bottom"
+            android:src="@drawable/prepay"/>
+
+        <TextView
+            android:id="@+id/tv_reserve_list_item_state"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/tv_reserve_list_item_name"
+            android:layout_marginRight="@dimen/margin_40"
+            android:layout_marginTop="@dimen/margin_2"
+            android:text="@string/reserving"
+            android:textColor="@color/text_and_buttor_orange"
+            android:textSize="@dimen/textsize_level2"/>
+
+        <ImageView
+            android:id="@+id/iv_reserve_list_item_state"
+            android:layout_width="@dimen/width_25"
+            android:layout_height="@dimen/height_25"
+            android:layout_alignTop="@+id/tv_reserve_list_item_name"
+            android:layout_marginRight="@dimen/margin_5"
+            android:layout_toLeftOf="@+id/tv_reserve_list_item_state"
+            android:src="@drawable/reserving"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/v_bg_bottom"
+            android:layout_alignParentRight="true"
+            android:gravity="right"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_reserve_list_item_to_comment"
+                android:layout_width="@dimen/width_80"
+                android:layout_height="@dimen/height_30"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:background="@drawable/shape_white"
+                android:text="@string/to_evaluate"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/normal_textsize"
+                android:visibility="gone"/>
+
+            <Button
+                android:id="@+id/btn_reserve_list_item_cancel"
+                android:layout_width="@dimen/width_80"
+                android:layout_height="@dimen/height_30"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:background="@drawable/shape_white"
+                android:text="@string/cancel_reverse"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/normal_textsize"
+                android:visibility="gone"/>
+
+
+            <Button
+                android:id="@+id/btn_reserve_list_item_buy"
+                android:layout_width="@dimen/width_80"
+                android:layout_height="@dimen/height_30"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:background="@drawable/shape_btn_orange"
+                android:text="@string/buy"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/normal_textsize"
+                android:visibility="gone"/>
+        </LinearLayout>
+    </RelativeLayout>
+</layout>

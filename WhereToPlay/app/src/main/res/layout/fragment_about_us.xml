@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <com.fanc.wheretoplay.view.TopMenu
+            android:id="@+id/tm_about_us"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ImageView
+            android:layout_width="@dimen/width_80"
+            android:layout_height="@dimen/height_80"
+            android:layout_marginTop="@dimen/margin_50"
+            android:src="@mipmap/ic_launcher"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_12"
+            android:text="@string/app_name"
+            android:textColor="@color/text_detail_white_bc"
+            android:textSize="@dimen/textsize_level4"/>
+
+        <com.fanc.wheretoplay.view.ItemView
+            android:id="@+id/iv_about_us_version"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_100"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Copyright ©2017-2022"
+            android:textColor="@color/text_detail_white_bc"
+            android:textSize="@dimen/textsize_levelsmall"/>
+
+        <TextView
+            android:id="@+id/tv_company"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_5"
+            android:text="上海和平之旅文化传播有限公司"
+            android:textColor="@color/text_detail_white_bc"
+            android:textSize="@dimen/normal_textsize"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
+    </LinearLayout>
+</layout>

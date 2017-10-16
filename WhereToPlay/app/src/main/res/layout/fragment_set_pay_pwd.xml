@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="click"
+            type="com.fanc.wheretoplay.fragment.SetPayPwdFragment"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <com.fanc.wheretoplay.view.TopMenu
+            android:id="@+id/tm_set_pay_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <TextView
+            android:id="@+id/tv_set_pay_pwd_hint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_15"
+            android:layout_marginTop="@dimen/margin_30"
+            android:text="@string/hint_set_pay_pwd_1"
+            android:textColor="@color/text_down_payment_and_way"
+            android:textSize="@dimen/normal_textsize"/>
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_15"
+            android:layout_marginRight="@dimen/margin_15"
+            android:background="@drawable/shape_password"
+            android:padding="@dimen/padding_1">
+
+
+            <com.fanc.wheretoplay.view.NumPswView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/npv_set_pay_pwd"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_password"
+                android:inputType="number"
+                android:maxLength="6"
+                app:borderColor="@color/tran"
+                app:borderMargin="@dimen/margin_1"
+                app:borderRadius="@dimen/width_0"
+                app:borderWidth="@dimen/margin_1"
+                app:passwordColor="@color/pay_reserve_list_text"
+                app:passwordLength="6"
+                app:passwordWidth="@dimen/margin_5"
+                app:solidColor="@color/bg"/>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_set_pay_pwd_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_40"
+            android:layout_marginLeft="@dimen/margin_15"
+            android:layout_marginRight="@dimen/margin_15"
+            android:layout_marginTop="@dimen/margin_50"
+            android:background="@drawable/shape_btn_signin"
+            android:onClick="@{click.onViewClick}"
+            android:text="@string/next"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/textsize_level2"/>
+    </LinearLayout>
+</layout>

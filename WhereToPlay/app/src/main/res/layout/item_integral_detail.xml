@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="score"
+            type="com.fanc.wheretoplay.datamodel.ScoreList.Score"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_15">
+
+        <TextView
+            android:id="@+id/tv_item_integral_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{score.name}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normal_textsize"/>
+
+        <TextView
+            android:id="@+id/tv_item_integral_get_way"
+            android:layout_width="@dimen/width_0"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_weight="1"
+            android:text="@string/get_integral_way"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normal_textsize"/>
+
+        <TextView
+            android:id="@+id/tv_item_integral_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:text='@{"+"+(int)Double.parseDouble(score.score_detail)}'
+            android:textColor="@color/text_and_buttor_orange"
+            android:textSize="@dimen/textsize_level2"/>
+    </LinearLayout>
+
+</layout>

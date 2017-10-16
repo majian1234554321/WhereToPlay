@@ -1,0 +1,133 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/bg</item>
+        <item name="colorPrimaryDark">@color/bg</item>
+        <item name="colorAccent">@color/bg</item>
+        <!--<item name="android:windowAnimationStyle">@style/ActivityAnimation</item>-->
+    </style>
+
+    <style name="ActivityAnimation" parent="@android:style/Animation.Activity">
+        <item name="android:activityOpenEnterAnimation">@anim/anim_enter_bottom</item>
+        <item name="android:activityCloseEnterAnimation">@anim/anim_in_top_right</item>
+        <item name="android:activityOpenExitAnimation">@anim/anim_out_top_right</item>
+        <item name="android:activityCloseExitAnimation">@anim/anim_close_top</item>
+    </style>
+    <!--启动主题-->
+    <style name="StartAppTheme" parent="android:Theme.Light.NoTitleBar.Fullscreen">
+        <item name="android:windowAnimationStyle">@style/ActivityAnimation</item>
+        <item name="android:windowBackground">@drawable/launch_1</item>
+        <item name="android:windowNoTitle">true</item>
+    </style>
+    <!--line样式-->
+    <style name="line_style">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/line_height</item>
+        <item name="android:background">@color/black</item>
+    </style>
+
+    <style name="line_style_1px">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/line_height_1px</item>
+        <item name="android:background">@color/pay_reserve_list_divider</item>
+    </style>
+
+    <style name="base_text_style">
+        <item name="android:layout_marginTop">@dimen/margin_10</item>
+        <item name="android:layout_marginBottom">@dimen/margin_10</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/height_50</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/normal_textsize</item>
+        <item name="android:textColor">@color/textcolor_3b</item>
+        <item name="android:layout_marginLeft">@dimen/margin_8</item>
+    </style>
+
+    <!--自定义进度条-->
+    <style name="progress_dialog" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:background">@null</item>
+        <item name="android:windowBackground">@null</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+    <!--画廊-->
+    <style name="ecoGalleryStyle"></style>
+    <!--弹窗风格-->
+    <style name="DialogStyle" parent="@android:style/Theme.Dialog">
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowFrame">@null</item>
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="star" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/drawable_star_small</item>
+        <item name="android:maxHeight">16dp</item>
+        <item name="android:minHeight">10dp</item>
+    </style>
+
+    <style name="star_large" parent="@android:style/Widget.RatingBar">
+        <!--<item name="android:progressDrawable">@drawable/drawable_star_large</item>-->
+        <item name="android:maxHeight">54dp</item>
+        <item name="android:minHeight">36dp</item>
+    </style>
+
+    <!--微信支付相关-->
+    <style name="NavPage">
+        <item name="android:layout_width">fill_parent</item>
+        <item name="android:layout_height">fill_parent</item>
+        <item name="android:orientation">vertical</item>
+        <item name="android:gravity">center_horizontal</item>
+        <!-- <item name="android:background">@drawable/nav_page</item> -->
+        <!--<item name="android:background">@color/navpage</item>-->
+    </style>
+
+    <!--半透明-->
+    <style name="Translucence" parent="@android:style/Theme.Translucent.NoTitleBar">
+        <item name="android:windowBackground">@color/translucence_1</item>
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+    <!--半透明-->
+    <style name="Trans" parent="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
+        <item name="android:windowBackground">@color/toast_bg</item>
+        <!--<item name="colorPrimaryDark">@color/toast_bg</item>-->
+        <!--<item name="windowIsTranslucent">true</item>-->
+    </style>
+
+    <style name="PopupWindowTrans" parent="@android:style/Theme.Dialog">
+        <item name="android:windowFrame">@null</item>
+        <item name="android:windowIsFloating">true</item>
+        <item name="android:windowIsTranslucent">false</item>
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:backgroundDimEnabled">false</item>
+    </style>
+
+    <style name="SearchText">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">@dimen/height_30</item>
+        <item name="android:background">@drawable/shape_item_search</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingLeft">@dimen/padding_10</item>
+        <item name="android:paddingRight">@dimen/padding_10</item>
+        <item name="android:textColor">@color/pay_reserve_list_text</item>
+        <item name="android:textSize">@dimen/textsize_level2</item>
+    </style>
+
+    <style name="reserve_dicount">
+        <item name="android:textSize">@dimen/textsize_level4</item>
+    </style>
+
+    <style name="reserve_dicount_small">
+        <item name="android:textSize">@dimen/textsize_levelsmall</item>
+    </style>
+
+</resources>

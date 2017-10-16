@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="city"
+            type="com.fanc.wheretoplay.datamodel.CityResource.City"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_city_white">
+
+        <TextView
+            android:id="@+id/tv_hot_city_name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text="@{city.name}"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/textsize_level2"/>
+    </RelativeLayout>
+</layout>

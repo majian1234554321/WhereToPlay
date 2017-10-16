@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="click"
+            type="com.fanc.wheretoplay.fragment.SearchFragment"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/menu_height"
+            android:background="@color/text_and_buttor_orange"
+            android:orientation="horizontal"
+            android:paddingTop="@dimen/statubar_height">
+
+            <ImageView
+                android:id="@+id/iv_search_back"
+                android:layout_width="@dimen/width_48"
+                android:layout_height="match_parent"
+                android:onClick="@{click.onClick}"
+                android:paddingBottom="@dimen/padding_12"
+                android:paddingLeft="@dimen/padding_16"
+                android:paddingRight="@dimen/padding_16"
+                android:paddingTop="@dimen/padding_12"
+                android:src="@drawable/left"/>
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="@dimen/width_0"
+                android:layout_height="@dimen/height_40"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/margin_20"
+                android:layout_marginRight="@dimen/margin_5"
+                android:layout_weight="1"
+                android:background="@drawable/shape_white"
+                android:drawableLeft="@drawable/search"
+                android:drawablePadding="@dimen/padding_5"
+                android:hint="@string/hint_search"
+                android:paddingLeft="@dimen/padding_5"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <TextView
+                android:id="@+id/tv_search"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/margin_15"
+                android:gravity="center"
+                android:onClick="@{click.onClick}"
+                android:text="@string/search"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textsize_level2"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_search_before"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/margin_15"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
+                android:text="@string/referral_search"
+                android:textColor="@color/pay_reserve_list_text"
+                android:textSize="@dimen/textsize_level2"/>
+
+            <!--<android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_search_referral"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:layout_marginRight="@dimen/margin_15"
+                android:visibility="gone"/>-->
+
+            <com.fanc.wheretoplay.view.FlowLayout
+                android:id="@+id/fl_search_referral"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/padding_10"
+                app:lineSpacing="@dimen/padding_10">
+
+            </com.fanc.wheretoplay.view.FlowLayout>
+
+            <View
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/line_height"
+                android:background="@color/pay_reserve_list_divider"/>
+
+            <!--<LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">-->
+
+            <TextView
+                android:id="@+id/tv_search_history"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:layout_marginTop="@dimen/margin_15"
+                android:layout_marginRight="@dimen/margin_15"
+                android:text="@string/no_search_history"
+                android:textColor="@color/pay_reserve_list_text"
+                android:textSize="@dimen/textsize_level2"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_search_history"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:layout_marginRight="@dimen/margin_15"/>
+            <!--</LinearLayout>-->
+        </LinearLayout>
+
+        <ListView
+            android:id="@+id/lv_search_result"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"/>
+    </LinearLayout>
+</layout>

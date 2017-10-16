@@ -1,0 +1,522 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="store"
+            type="com.fanc.wheretoplay.datamodel.StoreDescribe.Store"/>
+
+        <variable
+            name="click"
+            type="com.fanc.wheretoplay.fragment.ReserveInfoFragment"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <com.fanc.wheretoplay.view.TopMenu
+            android:id="@+id/tm_reserve_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:paddingBottom="@dimen/padding_10"
+                    android:paddingLeft="@dimen/padding_15"
+                    android:paddingRight="@dimen/padding_15"
+                    android:paddingTop="@dimen/padding_10">
+
+                    <ImageView
+                        android:id="@+id/iv_reserve_info"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_180"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/default_rect"
+                        app:url="@{store.cover}"/>
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_55"
+                        android:layout_below="@+id/iv_reserve_info"
+                        android:background="@drawable/shape_white_reserve_bottom"/>
+
+                    <TextView
+                        android:id="@+id/tv_reserve_info_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/iv_reserve_info"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:text="@{store.name}"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textsize_level2"/>
+
+                    <TextView
+                        android:id="@+id/tv_reserve_info_discount_real"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/margin_10"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:background="@drawable/discount"
+                        android:paddingLeft="@dimen/padding_20"
+                        android:paddingRight="@dimen/padding_10"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textsize_level3"/>
+
+                    <TextView
+                        android:id="@+id/tv_reserve_info_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_reserve_info_title"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:drawableLeft="@drawable/reserve_address"
+                        android:drawablePadding="@dimen/padding_10"
+                        android:maxWidth="@dimen/width_260"
+                        android:textColor="@color/text_comment_category"
+                        android:textSize="@dimen/textsize_levelsmall"/>
+
+                    <TextView
+                        android:id="@+id/tv_reserve_info_distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/tv_reserve_info_address"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_marginRight="@dimen/margin_10"
+                        android:layout_toLeftOf="@+id/iv_reserve_info_service"
+                        android:layout_toRightOf="@+id/tv_reserve_info_address"
+                        android:textColor="@color/text_comment_category"
+                        android:textSize="@dimen/textsize_levelsmall"/>
+
+                    <TextView
+                        android:id="@+id/tv_reserve_little_consume"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/tv_reserve_info_address"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/margin_15"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textsize_level5"/>
+
+                    <ImageView
+                        android:id="@+id/iv_reserve_info_service"
+                        android:layout_width="@dimen/width_30"
+                        android:layout_height="@dimen/height_30"
+                        android:layout_alignTop="@+id/tv_reserve_little_consume"
+                        android:layout_marginRight="@dimen/margin_10"
+                        android:layout_toLeftOf="@+id/tv_reserve_little_consume"
+                        android:padding="@dimen/padding_2"
+                        android:src="@drawable/service_online"/>
+                </RelativeLayout>
+
+                <RadioGroup
+                    android:id="@+id/rg_reserve_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginTop="@dimen/margin_1"
+                    android:gravity="center_vertical"
+                    android:onCheckedChanged="@{click.onCheckedChanged}"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/padding_20"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/relativeLayout2">
+
+
+                    <RadioButton
+                        android:id="@+id/rb_reserve_info_credit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/height_25"
+                        android:background="@drawable/selector_reserve_info_bg"
+                        android:button="@null"
+                        android:checked="true"
+                        android:paddingLeft="@dimen/padding_20"
+                        android:paddingRight="@dimen/padding_20"
+                        android:text="@string/credit_reserve"
+                        android:textColor="@drawable/selector_reserve_info_text_color"
+                        android:textSize="@dimen/normal_textsize"/>
+
+                    <RadioButton
+                        android:id="@+id/rb_reserve_info_prepay"
+                        android:layout_width="wrap_content"
+                        android:layout_height="@dimen/height_25"
+                        android:layout_marginLeft="@dimen/margin_15"
+                        android:background="@drawable/selector_reserve_info_bg"
+                        android:button="@null"
+                        android:paddingLeft="@dimen/padding_20"
+                        android:paddingRight="@dimen/padding_20"
+                        android:text="@string/prepay_reserve"
+                        android:textColor="@drawable/selector_reserve_info_text_color"
+                        android:textSize="@dimen/normal_textsize"/>
+                </RadioGroup>
+
+
+                <TextView
+                    android:id="@+id/tv_reserve_info_name"
+                    android:layout_width="@dimen/width_60"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:gravity="center_vertical"
+                    android:text="@string/name"
+                    android:textColor="@color/text_and_buttor_orange"
+                    android:textSize="@dimen/normal_textsize"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rg_reserve_info"/>
+
+                <EditText
+                    android:id="@+id/et_reserve_info_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginLeft="@dimen/margin_30"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="@string/hint_name"
+                    android:maxLength="30"
+                    android:textColor="@color/text_detail_white_bc"
+                    android:textColorHint="@color/text_detail_white_bc"
+                    android:textSize="@dimen/normal_textsize"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_reserve_info_name"
+                    app:layout_constraintTop_toTopOf="@+id/tv_reserve_info_name"/>
+
+                <View
+                    android:id="@+id/view2"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:background="@color/down_payment_divider"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_reserve_info_name"/>
+
+                <TextView
+                    android:id="@+id/tv_reserve_info_mobile"
+                    android:layout_width="@dimen/width_60"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_1"
+                    android:gravity="center_vertical"
+                    android:text="@string/cellphone"
+                    android:textColor="@color/text_and_buttor_orange"
+                    android:textSize="@dimen/normal_textsize"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_reserve_info_name"/>
+
+                <EditText
+                    android:id="@+id/et_reserve_info_mobile"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginLeft="@dimen/margin_30"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="@string/hint_mobile"
+                    android:maxLength="11"
+                    android:textColor="@color/text_detail_white_bc"
+                    android:textColorHint="@color/text_detail_white_bc"
+                    android:textSize="@dimen/normal_textsize"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_reserve_info_mobile"
+                    app:layout_constraintTop_toTopOf="@+id/tv_reserve_info_mobile"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_5"
+                    android:background="@color/discover_divider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_reserve_info_mobile"/>
+
+                <TextView
+                    android:id="@+id/tv_reserve_info_room_category"
+                    android:layout_width="@dimen/width_60"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:gravity="center_vertical"
+                    android:text="@string/choose_room_category"
+                    android:textColor="@color/text_and_buttor_orange"
+                    android:textSize="@dimen/normal_textsize"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_reserve_info_mobile"/>
+
+                <TextView
+                    android:id="@+id/tv_reserve_info_room"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginLeft="@dimen/margin_30"
+                    android:gravity="center_vertical"
+                    android:onClick="@{click.onViewClick}"
+                    android:text="@string/please_choose_room_type"
+                    android:textColor="@color/text_detail_white_bc"
+                    android:textSize="@dimen/normal_textsize"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_reserve_info_right"
+                    app:layout_constraintStart_toEndOf="@+id/tv_reserve_info_room_category"
+                    app:layout_constraintTop_toTopOf="@+id/tv_reserve_info_room_category"/>
+
+                <ImageView
+                    android:id="@+id/iv_reserve_info_right"
+                    android:layout_width="@dimen/width_40"
+                    android:layout_height="@dimen/height_40"
+                    android:onClick="@{click.onViewClick}"
+                    android:padding="@dimen/padding_12"
+                    android:src="@drawable/right"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_reserve_info_room_category"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:background="@color/down_payment_divider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_reserve_info_room_category"/>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:background="@color/down_payment_divider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/rg_reserve_info"/>
+
+
+                <TextView
+                    android:id="@+id/tv_reserve_info_reserve_time"
+                    android:layout_width="@dimen/width_60"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_1"
+                    android:gravity="center_vertical"
+                    android:text="@string/arrive_time"
+                    android:textColor="@color/text_and_buttor_orange"
+                    android:textSize="@dimen/normal_textsize"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_reserve_info_room_category"/>
+
+                <TextView
+                    android:id="@+id/tv_reserve_info_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginLeft="@dimen/margin_30"
+                    android:gravity="center_vertical"
+                    android:onClick="@{click.onViewClick}"
+                    android:text="@string/please_choose_arrive_time"
+                    android:textColor="@color/text_detail_white_bc"
+                    android:textSize="@dimen/normal_textsize"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_reserve_info_date"
+                    app:layout_constraintStart_toEndOf="@+id/tv_reserve_info_reserve_time"
+                    app:layout_constraintTop_toTopOf="@+id/tv_reserve_info_reserve_time"/>
+
+                <ImageView
+                    android:id="@+id/iv_reserve_info_date"
+                    android:layout_width="@dimen/width_40"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginRight="@dimen/margin_5"
+                    android:onClick="@{click.onViewClick}"
+                    android:padding="@dimen/padding_10"
+                    android:src="@drawable/date"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_reserve_info_reserve_time"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_5"
+                    android:background="@color/discover_divider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_reserve_info_reserve_time"/>
+
+                <TextView
+                    android:id="@+id/tv_reserve_info_waiter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:gravity="center_vertical"
+                    android:text="@string/waiter"
+                    android:textColor="@color/text_and_buttor_orange"
+                    android:textSize="@dimen/normal_textsize"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_reserve_info_reserve_time"/>
+
+                <TextView
+                    android:id="@+id/tv_reserve_info_waiter_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:onClick="@{click.onViewClick}"
+                    android:text="@string/please_choose"
+                    android:textColor="@color/text_detail_white_bc"
+                    android:textSize="@dimen/normal_textsize"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@+id/et_reserve_info_name"
+                    app:layout_constraintTop_toTopOf="@+id/tv_reserve_info_waiter"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:background="@color/down_payment_divider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_reserve_info_waiter"/>
+
+
+                <TextView
+                    android:id="@+id/tv_reserve_info_carport"
+                    android:layout_width="@dimen/width_60"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_1"
+                    android:gravity="center_vertical"
+                    android:text="@string/carport"
+                    android:textColor="@color/text_and_buttor_orange"
+                    android:textSize="@dimen/normal_textsize"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_reserve_info_waiter"/>
+
+                <EditText
+                    android:id="@+id/et_reserve_info_carport"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginLeft="@dimen/margin_30"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="@string/hint_carport"
+                    android:inputType="number"
+                    android:maxLength="1"
+                    android:textColor="@color/text_detail_white_bc"
+                    android:textColorHint="@color/text_detail_white_bc"
+                    android:textSize="@dimen/normal_textsize"
+                    app:layout_constraintStart_toEndOf="@+id/tv_reserve_info_carport"
+                    app:layout_constraintTop_toTopOf="@+id/tv_reserve_info_carport"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:background="@color/down_payment_divider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_reserve_info_carport"/>
+
+                <TextView
+                    android:id="@+id/tv_reserve_info_number_of_people"
+                    android:layout_width="@dimen/width_30"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_1"
+                    android:gravity="center_vertical"
+                    android:text="@string/number_of_people"
+                    android:textColor="@color/text_and_buttor_orange"
+                    android:textSize="@dimen/normal_textsize"
+                    app:layout_constraintLeft_toRightOf="@+id/et_reserve_info_carport"
+                    app:layout_constraintRight_toLeftOf="@+id/et_reserve_info_number_of_people"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_reserve_info_waiter"/>
+
+                <EditText
+                    android:id="@+id/et_reserve_info_number_of_people"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginLeft="@dimen/margin_30"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="@string/hint_number_of_people"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:text="1"
+                    android:textColor="@color/text_detail_white_bc"
+                    android:textColorHint="@color/text_detail_white_bc"
+                    android:textSize="@dimen/normal_textsize"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_reserve_info_number_of_people"
+                    app:layout_constraintTop_toTopOf="@+id/tv_reserve_info_number_of_people"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:background="@color/down_payment_divider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_reserve_info_number_of_people"/>
+
+                <TextView
+                    android:id="@+id/tv_reserve_info_remark"
+                    android:layout_width="@dimen/width_60"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_1"
+                    android:gravity="center_vertical"
+                    android:text="@string/remark"
+                    android:textColor="@color/text_and_buttor_orange"
+                    android:textSize="@dimen/normal_textsize"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_reserve_info_number_of_people"/>
+
+                <EditText
+                    android:id="@+id/et_reserve_info_remark"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginLeft="@dimen/margin_30"
+                    android:background="@null"
+                    android:gravity="center_vertical"
+                    android:hint="@string/hint_input"
+                    android:maxLength="500"
+                    android:textColor="@color/text_detail_white_bc"
+                    android:textColorHint="@color/text_detail_white_bc"
+                    android:textSize="@dimen/normal_textsize"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_reserve_info_remark"
+                    app:layout_constraintTop_toTopOf="@+id/tv_reserve_info_remark"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/margin_5"
+                    android:background="@color/discover_divider"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_reserve_info_remark"/>
+
+                <Button
+                    android:id="@+id/btn_reserve_info_pay"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginBottom="@dimen/margin_50"
+                    android:layout_marginLeft="@dimen/margin_20"
+                    android:layout_marginRight="@dimen/margin_20"
+                    android:layout_marginTop="@dimen/margin_20"
+                    android:background="@drawable/shape_btn_signin"
+                    android:onClick="@{click.onViewClick}"
+                    android:text="@string/submit_reserve_info"
+                    android:textSize="@dimen/textsize_level2"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv_reserve_info_remark"/>
+
+            </android.support.constraint.ConstraintLayout>
+        </ScrollView>
+    </LinearLayout>
+
+</layout>

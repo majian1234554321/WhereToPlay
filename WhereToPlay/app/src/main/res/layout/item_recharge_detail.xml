@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="detail"
+            type="com.fanc.wheretoplay.datamodel.Recharge.RechargeDetail"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_15"
+        android:paddingRight="@dimen/padding_15">
+
+        <TextView
+            android:id="@+id/tv_item_recharge_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_15"
+            android:text='@{detail.balance_type.equals("1")?@string/recharge_way_ali:@string/recharge_way_weixin}'
+            android:textColor="@color/white"
+            android:textSize="@dimen/normal_textsize"/>
+
+        <TextView
+            android:id="@+id/tv_item_recharge_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_item_recharge_title"
+            android:layout_marginBottom="@dimen/margin_15"
+            android:layout_marginTop="@dimen/margin_10"
+            android:textColor="@color/text_deal_detail_tab"
+            android:textSize="@dimen/textsize_levelsmall"/>
+
+        <TextView
+            android:id="@+id/tv_item_recharge_sum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="@{'+'+detail.balance}"
+            android:textColor="@color/text_and_buttor_orange"
+            android:textSize="@dimen/normal_textsize"/>
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="click"
+            type="com.fanc.wheretoplay.fragment.WalletFragment"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg"
+        android:orientation="vertical">
+
+        <com.fanc.wheretoplay.view.TopMenu
+            android:id="@+id/tm_wallet"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/height_10"
+            android:background="@color/pay_reserve_list_divider"/>
+
+        <LinearLayout
+            android:id="@+id/ll_pay_bill_balance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/width_50"
+                android:layout_height="@dimen/height_50"
+                android:padding="@dimen/padding_14"
+                android:src="@drawable/pay_by_balance"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/mine_balance"
+                android:textColor="@color/white"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <TextView
+                android:id="@+id/tv_wallet_balance"
+                android:layout_width="@dimen/width_0"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/margin_15"
+                android:layout_weight="1"
+                android:focusable="true"
+                android:gravity="right"
+                android:text="0元"
+                android:textColor="@color/text_and_buttor_orange"
+                android:textSize="@dimen/normal_textsize"/>
+
+        </LinearLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/pay_reserve_list_divider"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/padding_10"
+            android:paddingLeft="@dimen/padding_20"
+            android:paddingTop="@dimen/padding_15"
+            android:text="@string/recharge_sum"
+            android:textColor="@color/pay_reserve_list_text"
+            android:textSize="@dimen/normal_textsize"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/pay_reserve_list_divider"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:padding="@dimen/padding_15">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/sum_1"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_level2"/>
+
+            <EditText
+                android:id="@+id/et_wallet_sum"
+                android:layout_width="@dimen/width_0"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_30"
+                android:layout_weight="1"
+                android:background="@null"
+                android:hint="@string/hint_consume_sum"
+                android:inputType="numberDecimal"
+                android:maxLength="6"
+                android:textColor="@color/text_and_buttor_orange"
+                android:textColorHint="@color/text_down_payment_and_way"
+                android:textSize="@dimen/textsize_level2"/>
+        </LinearLayout>
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/height_10"
+            android:background="@color/pay_reserve_list_divider"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg"
+            android:paddingBottom="@dimen/padding_10"
+            android:paddingLeft="@dimen/padding_20"
+            android:paddingTop="@dimen/padding_15"
+            android:text="@string/recharge_way"
+            android:textColor="@color/pay_reserve_list_text"
+            android:textSize="@dimen/normal_textsize"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/pay_reserve_list_divider"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_100">
+
+            <LinearLayout
+                android:id="@+id/ll_wallet_weixin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:onClick="@{click.onViewClick}"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/width_50"
+                    android:layout_height="@dimen/height_50"
+                    android:padding="@dimen/padding_14"
+                    android:src="@drawable/pay_by_weixin"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/pay_by_weixin"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/normal_textsize"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_wallet_ali"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_wallet_weixin"
+                android:onClick="@{click.onViewClick}"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/width_50"
+                    android:layout_height="@dimen/height_50"
+                    android:padding="@dimen/padding_14"
+                    android:src="@drawable/pay_by_ali"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="@string/pay_by_ali"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/normal_textsize"/>
+
+            </LinearLayout>
+
+
+            <RadioGroup
+                android:id="@+id/rg_wallet"
+                android:layout_width="@dimen/width_50"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:onCheckedChanged="@{click.onCheckedChanged}"
+                android:orientation="vertical"
+                android:paddingLeft="@dimen/padding_10">
+
+                <RadioButton
+                    android:id="@+id/rb_wallet_weixin"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_0"
+                    android:layout_weight="1"
+                    android:button="@drawable/selector_pay_way"
+                    android:checked="true"/>
+
+                <RadioButton
+                    android:id="@+id/rb_wallet_ali"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_0"
+                    android:layout_weight="1"
+                    android:button="@drawable/selector_pay_way"/>
+            </RadioGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:layout_alignBottom="@+id/ll_wallet_weixin"
+                android:background="@color/down_payment_divider"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:layout_alignBottom="@+id/ll_wallet_ali"
+                android:background="@color/down_payment_divider"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_0"
+            android:layout_weight="1"/>
+
+        <Button
+            android:id="@+id/btn_wallet_recharge"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_40"
+            android:layout_marginBottom="@dimen/margin_50"
+            android:layout_marginLeft="@dimen/margin_20"
+            android:layout_marginRight="@dimen/margin_20"
+            android:background="@drawable/shape_btn_signin"
+            android:onClick="@{click.onViewClick}"
+            android:text="@string/recharge"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/textsize_level2"/>
+    </LinearLayout>
+</layout>

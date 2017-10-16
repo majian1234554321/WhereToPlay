@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.fanc.wheretoplay.util.DateFormatUtil"/>
+
+        <variable
+            name="notification"
+            type="com.fanc.wheretoplay.datamodel.NotificationList.Notification"/>
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_10">
+
+        <ImageView
+            android:id="@+id/iv_item_system_notify"
+            android:layout_width="@dimen/width_40"
+            android:layout_height="@dimen/height_40"
+            android:src="@drawable/system_notify"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_item_system_notify_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_15"
+            android:text="@string/system_notify"
+            android:textColor="@color/text_and_buttor_orange"
+            android:textSize="@dimen/normal_textsize"
+            app:layout_constraintStart_toEndOf="@+id/iv_item_system_notify"
+            app:layout_constraintTop_toTopOf="@+id/iv_item_system_notify"/>
+
+        <TextView
+            android:id="@+id/tv_item_system_notify_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@{notification.content}"
+            android:textColor="@color/text_detail_white_bc"
+            android:textSize="@dimen/normal_textsize"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/tv_item_system_notify_title"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_system_notify_title"/>
+
+        <TextView
+            android:id="@+id/tv_item_system_notify_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:text="@{DateFormatUtil.getDateFormatMMDDHHmm(notification.created_time)}"
+            android:textColor="@color/pay_reserve_list_text"
+            android:textSize="@dimen/textsize_levelsmall"
+            app:layout_constraintStart_toStartOf="@+id/tv_item_system_notify_content"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_system_notify_content"/>
+
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

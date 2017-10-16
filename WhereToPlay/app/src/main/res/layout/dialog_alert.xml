@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_white"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_alert_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_10"
+            android:textColor="@color/text_and_buttor_orange"
+            android:textSize="@dimen/normal_textsize"/>
+
+        <TextView
+            android:id="@+id/tv_alert_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_20"
+            android:layout_marginLeft="@dimen/margin_50"
+            android:layout_marginRight="@dimen/margin_50"
+            android:layout_marginTop="@dimen/margin_15"
+            android:gravity="center_horizontal"
+            android:lineSpacingExtra="@dimen/padding_5"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/normal_textsize"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_alert_input_box"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_20"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_marginRight="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_15"
+            android:background="@drawable/shape_password"
+            android:padding="@dimen/padding_1"
+            android:visibility="gone">
+
+            <com.fanc.wheretoplay.view.NumPswView
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/npv_alert_input_box"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number"
+                android:maxLength="6"
+                app:borderColor="@color/text_down_payment_and_way"
+                app:borderMargin="@dimen/margin_1"
+                app:borderRadius="@dimen/width_0"
+                app:borderWidth="@dimen/margin_1"
+                app:passwordColor="@color/bg"
+                app:passwordLength="6"
+                app:passwordWidth="@dimen/margin_5"/>
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/line_bg"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btn_alert_left"
+                android:layout_width="@dimen/width_0"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:text="@string/confirm"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <View
+                android:layout_width="@dimen/line_width"
+                android:layout_height="match_parent"
+                android:background="@color/line_bg"/>
+
+            <Button
+                android:id="@+id/btn_alert_right"
+                android:layout_width="@dimen/width_0"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@null"
+                android:text="@string/cancel"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/normal_textsize"/>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

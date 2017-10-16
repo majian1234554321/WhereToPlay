@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="com.fanc.wheretoplay.util.DateFormatUtil"/>
+
+        <variable
+            name="date"
+            type="java.util.Date"/>
+
+    </data>
+
+    <LinearLayout
+        android:id="@+id/ll_date"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/my_bg"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_15"
+            android:gravity="center_horizontal"
+            android:text="@{String.valueOf(DateFormatUtil.getCustomDay(date))}"
+            android:textColor="@drawable/selector_date"
+            android:textSize="@dimen/textsize_level4"/>
+
+        <TextView
+            android:id="@+id/tv_week"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_5"
+            android:gravity="center_horizontal"
+            android:text="@{DateFormatUtil.getCustomDayOfWeek(date)}"
+            android:textColor="@drawable/selector_date"
+            android:textSize="@dimen/textsize_levelsmall"/>
+    </LinearLayout>
+
+</layout>

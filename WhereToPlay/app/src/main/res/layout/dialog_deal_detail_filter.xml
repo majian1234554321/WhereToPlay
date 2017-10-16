@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <View
+            android:layout_width="@dimen/width_0"
+            android:layout_height="match_parent"
+            android:layout_weight="0.2"/>
+
+        <LinearLayout
+            android:layout_width="@dimen/width_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.8"
+            android:background="@drawable/shape_white"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_30"
+                android:background="@color/dialog_filter_title_bg"
+                android:gravity="center"
+                android:text="@string/filter"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <LinearLayout
+                android:id="@+id/ll_deal_detail_filter_store_name"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_45"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/padding_10"
+                    android:paddingRight="@dimen/padding_10"
+                    android:text="@string/store_name"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/normal_textsize"/>
+
+                <EditText
+                    android:id="@+id/et_dialog_deal_detail_filter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="@dimen/margin_5"
+                    android:layout_marginLeft="@dimen/margin_5"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_weight="0.5"
+                    android:background="@drawable/shape_mine_info_sign"
+                    android:gravity="center_vertical"
+                    android:hint="@string/hint_store_name"
+                    android:paddingLeft="@dimen/padding_10"
+                    android:textSize="@dimen/normal_textsize"/>
+
+                <View
+                    android:layout_width="@dimen/width_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.5"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:background="@color/line_bg"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_45"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/padding_10"
+                    android:paddingRight="@dimen/padding_10"
+                    android:text="@string/consume_time"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/normal_textsize"/>
+
+                <TextView
+                    android:id="@+id/tv_dialog_deal_detail_consume_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:gravity="right|center_vertical"
+                    android:text="2017-07-08"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/normal_textsize"/>
+
+                <ImageView
+                    android:id="@+id/iv_dialog_deal_detail_filter"
+                    android:layout_width="@dimen/width_30"
+                    android:layout_height="@dimen/height_30"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginRight="@dimen/margin_10"
+                    android:padding="@dimen/padding_10"
+                    android:src="@drawable/pull_up"/>
+            </LinearLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height_1px"
+                android:background="@color/line_bg2"/>
+
+            <com.fanc.wheretoplay.view.DatePicker
+                android:id="@+id/dp_dialog_filter_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/margin_50"
+                android:layout_marginRight="@dimen/margin_50"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height_1px"
+                android:background="@color/line_bg2"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_45"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_dialog_filter_confirm"
+                    android:layout_width="@dimen/width_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:text="@string/confirm_1"
+                    android:textColor="@color/text_and_buttor_orange"
+                    android:textSize="@dimen/normal_textsize"/>
+
+                <View
+                    android:layout_width="@dimen/line_width"
+                    android:layout_height="match_parent"
+                    android:background="@color/line_bg"/>
+
+                <Button
+                    android:id="@+id/btn_dialog_filter_cancel"
+                    android:layout_width="@dimen/width_0"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:background="@null"
+                    android:text="@string/cancel"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/normal_textsize"/>
+            </LinearLayout>
+        </LinearLayout>
+    </LinearLayout>
+</layout>

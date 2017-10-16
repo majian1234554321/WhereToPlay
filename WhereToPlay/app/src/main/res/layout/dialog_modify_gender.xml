@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data >
+        <variable
+            name="select"
+            type="com.fanc.wheretoplay.view.ModifyGenderDialog"/>
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape_white"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_marginTop="@dimen/margin_10"
+            android:text="@string/please_choose"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/normal_textsize"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_width"
+            android:background="@color/line_bg"/>
+
+        <RadioGroup
+            android:id="@+id/rg_dialog_gender"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onCheckedChanged="@{select.onCheckedChanged}"
+            android:orientation="vertical">
+
+            <RadioButton
+                android:id="@+id/rb_dialog_male"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableRight="@drawable/selector_gender"
+                android:paddingBottom="@dimen/padding_10"
+                android:paddingLeft="@dimen/padding_20"
+                android:paddingRight="@dimen/padding_15"
+                android:paddingTop="@dimen/padding_10"
+                android:text="@string/gender_male"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_width"
+                android:background="@color/line_bg"/>
+
+            <RadioButton
+                android:id="@+id/rb_dialog_female"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:button="@null"
+                android:drawableRight="@drawable/selector_gender"
+                android:paddingBottom="@dimen/padding_10"
+                android:paddingLeft="@dimen/padding_20"
+                android:paddingRight="@dimen/padding_15"
+                android:paddingTop="@dimen/padding_10"
+                android:text="@string/gender_female"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/normal_textsize"/>
+
+        </RadioGroup>
+
+    </LinearLayout>
+</layout>

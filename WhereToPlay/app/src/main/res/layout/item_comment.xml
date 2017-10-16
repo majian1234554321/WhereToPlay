@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.fanc.wheretoplay.util.DateFormatUtil"/>
+
+        <import type="android.view.View"/>
+
+        <variable
+            name="comment"
+            type="com.fanc.wheretoplay.datamodel.CommentDetail.Comment"/>
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.fanc.wheretoplay.view.CircleImageView
+            android:id="@+id/civ_item_comment"
+            android:layout_width="@dimen/width_30"
+            android:layout_height="@dimen/height_30"
+            android:layout_margin="@dimen/margin_10"
+            android:src="@drawable/default_square"
+            app:url="@{comment.avatar}"/>
+
+        <TextView
+            android:id="@+id/tv_item_comment_nickname"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/civ_item_comment"
+            android:layout_marginTop="@dimen/margin_6"
+            android:layout_toRightOf="@+id/civ_item_comment"
+            android:text="@{comment.nickname}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normal_textsize"/>
+
+        <TextView
+            android:id="@+id/tv_item_comment_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/tv_item_comment_nickname"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:layout_toRightOf="@+id/tv_item_comment_nickname"
+            android:text="@{DateFormatUtil.getYYYY_MM_DDString(comment.created_time)}"
+            android:textColor="@color/pay_reserve_list_text"
+            android:textSize="@dimen/normal_textsize"/>
+
+        <TextView
+            android:id="@+id/tv_item_comment_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_item_comment_nickname"
+            android:layout_below="@+id/civ_item_comment"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:background="@drawable/shape_btn_orange"
+            android:paddingBottom="@dimen/padding_3"
+            android:paddingLeft="@dimen/padding_10"
+            android:paddingRight="@dimen/padding_10"
+            android:paddingTop="@dimen/padding_3"
+            android:text="@{comment.sys}"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/normal_textsize"
+            android:visibility='@{"".equals(comment.sys)?View.GONE:View.VISIBLE}'/>
+
+        <TextView
+            android:id="@+id/tv_item_comment_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/tv_item_comment_nickname"
+            android:layout_below="@+id/tv_item_comment_label"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:layout_marginRight="@dimen/margin_10"
+            android:lineSpacingExtra="@dimen/padding_3"
+            android:text="@{comment.cus}"
+            android:textColor="@color/white"
+            android:textSize="@dimen/normal_textsize"
+            android:visibility='@{"".equals(comment.cus)?View.GONE:View.VISIBLE}'/>
+
+    </RelativeLayout>
+
+</layout>

@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <array name="filter">
+        <!--<item>台房类型</item>-->
+        <item>装修风格</item>
+        <!--<item>装修档次</item>
+        <item>活动专场</item>
+        <item>优惠折扣</item>-->
+    </array>
+    <array name="filter_en">
+        <!--<item>room</item>-->
+        <item>decorate</item>
+        <!--<item>grade</item>
+        <item>activity</item>
+        <item>discount</item>-->
+    </array>
+    <array name="filter_condition">
+        <item>距离最近</item>
+        <item>消费水平</item>
+        <item>人气</item>
+        <item>优惠</item>
+    </array>
+    <array name="environment">
+        <item>装修豪华</item>
+        <item>环境优美</item>
+        <item>有格调</item>
+        <item>设备高档</item>
+        <item>设备高档</item>
+        <item>设备高档</item>
+    </array>
+    <array name="atmosphere">
+        <item>气氛好</item>
+        <item>气氛一般</item>
+        <item>气氛差</item>
+    </array>
+    <array name="service">
+        <item>服务可以</item>
+        <item>周到</item>
+        <item>贴心</item>
+    </array>
+    <array name="other">
+        <item>好玩</item>
+        <item>不错</item>
+        <item>开心</item>
+    </array>
+
+    <array name="reserve_time">
+        <item>18:00</item>
+        <item>18:30</item>
+        <item>19:00</item>
+        <item>19:30</item>
+        <item>20:00</item>
+        <item>20:30</item>
+        <item>21:00</item>
+        <item>21:30</item>
+        <item>22:00</item>
+        <item>22:30</item>
+        <item>23:00</item>
+        <item>23:30</item>
+        <item>00:00</item>
+        <item>00:30</item>
+        <item>01:00</item>
+        <item>01:30</item>
+        <item>02:00</item>
+        <item>02:30</item>
+        <item>03:00</item>
+        <item>03:30</item>
+    </array>
+</resources>

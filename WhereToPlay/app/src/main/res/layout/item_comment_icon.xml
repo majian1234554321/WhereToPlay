@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <com.fanc.wheretoplay.view.CircleImageView
+        android:id="@+id/civ_item_comment_icon"
+        android:layout_width="@dimen/width_36"
+        android:layout_height="@dimen/height_36"/>
+</layout>
