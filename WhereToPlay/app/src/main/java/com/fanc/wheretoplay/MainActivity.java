@@ -221,7 +221,7 @@ public class MainActivity extends BaseFragmentActivity {
                     if (reserveFragment.filterStoreType.size() > 0) {
                         reserveFragment.setStoreType(reserveFragment.filterStoreType.get(position).getId());
                     }
-                    ToastUtils.makePicTextShortToast(MainActivity.this, title);
+                    ToastUtils.makePicTextShortToast(MainActivity.this, title);    //弹出一个时间较短的图文Toast
                     mDlSideslip.closeDrawer(Gravity.START);
                 }
             }
