@@ -277,6 +277,7 @@ public class MainActivity extends BaseFragmentActivity {
         mMvpMain.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                //设置图片透明度
                 if (positionOffset == 0) {
                     switch (position) {
                         case 0:
@@ -293,6 +294,7 @@ public class MainActivity extends BaseFragmentActivity {
                             break;
                     }
                 }
+                TextView myTextView = new TextView(MainActivity.this);
                 ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) mFlMainTab.getLayoutParams();
                 layoutParams.leftMargin = (int) (screenWidth / 3 * (position + positionOffset));
                 mFlMainTab.setLayoutParams(layoutParams);
