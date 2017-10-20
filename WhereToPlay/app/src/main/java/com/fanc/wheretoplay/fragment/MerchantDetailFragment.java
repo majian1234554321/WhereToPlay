@@ -244,10 +244,12 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
     }
 
     private void initTabLayout() {
+        //添加4个fragment
         merchant_fragments.add(new MerchantBriefFragment());
         merchant_fragments.add(new MerchantBriefFragment());
         merchant_fragments.add(new MerchantBriefFragment());
         merchant_fragments.add(new MerchantBriefFragment());
+        //添加4个标题
         fragment_name.add("简介");
         fragment_name.add("房型");
         fragment_name.add("酒水");
