@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:id="@+id/rl_img"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+<!--        <com.fanc.wheretoplay.view.TopMenu
+            android:id="@+id/tm_large_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>-->
+
+        <com.fanc.wheretoplay.view.PhotoViewPager
+            android:id="@+id/vp_large_image"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"/>
+
+        <!--<android.support.v4.view.ViewPager
+            android:id="@+id/vp_large_image_in_film"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_180"
+            android:layout_centerVertical="true" />-->
+
+        <LinearLayout
+            android:id="@+id/ll_dots_large_Image"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/margin_50"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</layout>
