@@ -100,7 +100,7 @@ public class ReuseActivity extends BaseFragmentActivity {
                 break;
         }
     }
-
+    //初始化fragment
     private void initFragment(Fragment fragment) {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();

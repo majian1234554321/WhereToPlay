@@ -535,7 +535,7 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
      *
      * @param store
      */
-    private void showStoreDetail(StoreDetail.Store store) {
+    private void showStoreDetail(final StoreDetail.Store store) {
         mTvMerchantDetailTitle.setText(store.getName());
 
         if (store.getDiscount().length() > 0) {
@@ -585,14 +585,29 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
         }
         mTvMerchantDetailAddress.setText(store.getAddress() + "    " + d);
 
-        mWvDetail.loadUrl(Network.BASE + "/" + store.getRemark());
-        mWvDetail.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                Log.d("aaa", "onPageFinished: url = " + url);
-            }
-        });
+        //把之前布局中的webview放到briefFragment中去
+//        mWvDetail.loadUrl(Network.BASE + "/" + store.getRemark());
+//        mWvDetail.setWebViewClient(new WebViewClient() {
+//            @Override
+//            public void onPageFinished(WebView view, String url) {
+//                super.onPageFinished(view, url);
+//                Log.d("aaa", "onPageFinished: url = " + url);
+//            }
+//        });
+//        new MerchantBriefFragment().setLoadWebviewListener(new MerchantBriefFragment.LoadWebview() {
+//            @Override
+//            public void loadWebview(WebView webView) {
+//                webView.loadUrl(Network.BASE + "/" + store.getRemark());
+//                webView.setWebViewClient(new WebViewClient() {
+//                    @Override
+//                    public void onPageFinished(WebView view, String url) {
+//                        super.onPageFinished(view, url);
+//                        Log.d("Jordan1", "onPageFinished: url = " + store.getRemark());
+//                    }
+//                });
+//            }
+//        });
+
         if (store.getList() != null) {
             showRecommend(store.getList());
         }

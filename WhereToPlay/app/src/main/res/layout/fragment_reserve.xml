@@ -90,6 +90,7 @@
                             android:orientation="horizontal">
 
                             <LinearLayout
+                                android:id="@+id/ll_reserve_commercial_ktv"
                                 android:layout_width="0dp"
                                 android:layout_height="match_parent"
                                 android:layout_weight="1"
@@ -114,6 +115,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/ll_reserve_volume_sales"
                                 android:layout_width="@dimen/width_0"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"
@@ -138,6 +140,7 @@
                             </LinearLayout>
 
                             <LinearLayout
+                                android:id="@+id/ll_reserve_bar"
                                 android:layout_width="@dimen/width_0"
                                 android:layout_height="match_parent"
                                 android:orientation="vertical"

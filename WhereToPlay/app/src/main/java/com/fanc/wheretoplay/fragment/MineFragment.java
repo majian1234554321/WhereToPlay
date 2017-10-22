@@ -86,7 +86,7 @@ public class MineFragment extends BaseFragment {
     }
 
     private void init() {
-        mTmMine.setLeftIcon(R.drawable.left);
+//        mTmMine.setLeftIcon(R.drawable.left);
         mTmMine.setTitle(R.string.mine);
         mTmMine.setRightIcon(R.drawable.settings);
 
@@ -121,12 +121,13 @@ public class MineFragment extends BaseFragment {
     }
 
     private void setListeners() {
-        mTmMine.setLeftIconOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mContext.finish();
-            }
-        });
+        //去掉左边箭头的点击事件
+//        mTmMine.setLeftIconOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mContext.finish();
+//            }
+//        });
         mTmMine.setRightIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

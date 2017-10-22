@@ -52,6 +52,10 @@ public class DetailActivity extends BaseFragmentActivity {
         initPage(intent.getStringExtra(Constants.PAGE));
     }
 
+    public String getStringExtra(){
+        return intent.getStringExtra(Constants.STORE_ID);
+    }
+
     private void initPage(String page) {
         switch (page) {
             case Constants.MERCHANT_DETAIL:
