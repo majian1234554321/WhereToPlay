@@ -150,6 +150,10 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
 //    private LinearLayout mEntertainment;
     private LinearLayout mFilterSuspend;
     private TextView mTvReserveTitle;
+    //娱乐分类
+    private LinearLayout mLlCommercialKtv;
+    private LinearLayout mLlBar;
+    private LinearLayout mLlVolumeSales;
 
     @Nullable
     @Override
@@ -200,6 +204,10 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
         mLlReserveFilterRealSuspend = reserveBinding.llReserveFilterRealSuspend;
 //        mLlReserveCategory = reserveBinding.llReserveCategory;
 //        mLlReserveCategorySuspend = reserveBinding.llReserveCategorySuspend;
+        //娱乐分类
+        mLlCommercialKtv = reserveBinding.llReserveCommercialKtv;
+        mLlBar = reserveBinding.llReserveBar;
+        mLlVolumeSales = reserveBinding.llReserveVolumeSales;
     }
 
     private void init() {
@@ -372,9 +380,29 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
                 setImageViewRotateAnimation(mIvReserveCategory, mIvReserveCategorySuspend, false);
             }
         });*/
+
+        //娱乐分栏点击事件
+        entertainment(mLlBar, 3, "酒吧");
+        entertainment(mLlVolumeSales, 1, "量贩KTV");
+        entertainment(mLlCommercialKtv, 0, "商务KTV");
+
         // 筛选栏弹出窗点击和隐藏监听
         setPopupWindowClickListener();
         setPopupWindowDismissListener();
+    }
+
+    private void entertainment(LinearLayout linearLayout, final int num, final String name) {
+        linearLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (filterStoreType.size() > 0) {
+                    setStoreType(filterStoreType.get(num).getId());
+                    ToastUtils.makePicTextShortToast(getActivity(), name);
+                } else {
+                    ToastUtils.makePicTextShortToast(getActivity(), "没有数据");
+                }
+            }
+        });
     }
 
     private void newPopupWindow() {
