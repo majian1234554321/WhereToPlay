@@ -13,6 +13,7 @@ import android.support.v4.content.LocalBroadcastManager;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.BaseFragmentActivity;
 import com.fanc.wheretoplay.fragment.ActionFragment;
+import com.fanc.wheretoplay.fragment.BriefFragment;
 import com.fanc.wheretoplay.fragment.CommentFragment;
 import com.fanc.wheretoplay.fragment.DateFragment;
 import com.fanc.wheretoplay.fragment.DrinksFragment;
@@ -47,7 +48,7 @@ public class ReuseActivity extends BaseFragmentActivity {
         registerBroadcastReceiver();
     }
 
-    private void initPage(String page) {
+    private void  initPage(String page) {
         switch (page) {
             case Constants.SEARCH:
                 initFragment(new SearchFragment());
@@ -96,6 +97,8 @@ public class ReuseActivity extends BaseFragmentActivity {
             case Constants.ORDER_TO_COMPLETE:
                 initFragment(new OrderToCompleteFragment().setOrderId(intent.getStringExtra(Constants.ORDER_ID)));
                 break;
+            case Constants.BRIEF:
+                initFragment(new BriefFragment().setBriefUrl(intent.getStringExtra(Constants.DATA)));
             default:
                 break;
         }

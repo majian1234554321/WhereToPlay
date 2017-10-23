@@ -493,7 +493,7 @@
                     </LinearLayout>
 -->
 
-                <RelativeLayout
+                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="@dimen/padding_25"
@@ -501,15 +501,16 @@
                     android:paddingStart="@dimen/padding_32"
                     android:paddingEnd="@dimen/padding_32"
                     android:background="@color/white"
+                    android:orientation="horizontal"
                     >
 
                     <LinearLayout
-                        android:id="@+id/ll_merchant_detail_waiter"
-                        android:layout_width="wrap_content"
+                        android:id="@+id/ll_merchant_brief"
+                        android:layout_width="@dimen/width_0"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
                         android:orientation="vertical"
-                        android:layout_alignParentStart="true"
                         >
 
                         <ImageView
@@ -528,12 +529,11 @@
 
                     <LinearLayout
                         android:id="@+id/ll_merchant_detail_room"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/width_0"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
+                        android:layout_weight="1"
+                        android:gravity="center_vertical"
                         android:orientation="vertical"
-                        android:layout_marginRight="@dimen/margin_65"
-                        android:layout_toEndOf="@+id/ll_merchant_detail_waiter"
                         >
 
                         <ImageView
@@ -562,12 +562,11 @@
 
                     <LinearLayout
                         android:id="@+id/ll_merchant_detail_drinks"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/width_0"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:layout_marginRight="@dimen/margin_65"
-                        android:layout_toEndOf="@+id/ll_merchant_detail_room"
                         >
 
                         <ImageView
@@ -586,12 +585,11 @@
 
                     <LinearLayout
                         android:id="@+id/ll_merchant_detail_active"
-                        android:layout_width="wrap_content"
+                        android:layout_width="@dimen/width_0"
                         android:layout_height="wrap_content"
+                        android:layout_weight="1"
                         android:gravity="center"
                         android:orientation="vertical"
-                        android:layout_marginRight="@dimen/margin_65"
-                        android:layout_toEndOf="@+id/ll_merchant_detail_drinks"
                         >
 
                         <ImageView
@@ -679,7 +677,7 @@
                             android:textSize="@dimen/normal_textsize"/>
                     </LinearLayout>-->
 
-                </RelativeLayout>
+                </LinearLayout>
 
                 <!--去掉新加的tablayout 和 viewpager 组合-->
 <!--                <LinearLayout

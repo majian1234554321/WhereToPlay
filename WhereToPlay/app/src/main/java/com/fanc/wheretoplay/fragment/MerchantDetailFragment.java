@@ -114,11 +114,13 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
     TextView mTvMerchantDetailTel;
     LinearLayout mLlMerchantDetailAddress;
     TextView mTvMerchantDetailAddress;
-    // 房型、酒水、活动、服务员
+    // 房型、酒水、活动、简介
     LinearLayout mLlMerchantDetailRoom;
     LinearLayout mLlMerchantDetailDrinks;
     LinearLayout mLlMerchantDetailAction;
-    LinearLayout mLlMerchantDetailWaiter;
+    //    LinearLayout mLlMerchantDetailWaiter;
+    private LinearLayout mLlMerchantBrief;
+
 
     // 详情
     WebView mWvDetail;
@@ -145,11 +147,12 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
     String address, lat, lng;
     // 店铺信息
     StoreDetail.Store mStore;
-//    private Banner mBannerDetail;
+    //    private Banner mBannerDetail;
     private ArrayList<Object> bannerArrayList;
     private ArrayList<String> imgs;
     private FragmentManager fragmentManager;
     private MerchantTablayoutAdapter adpter;
+    private String briefUrl;
 
 
     @Nullable
@@ -191,7 +194,8 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
         mLlMerchantDetailRoom = detailBinding.llMerchantDetailRoom;
         mLlMerchantDetailDrinks = detailBinding.llMerchantDetailDrinks;
         mLlMerchantDetailAction = detailBinding.llMerchantDetailActive;
-        mLlMerchantDetailWaiter = detailBinding.llMerchantDetailWaiter;
+//        mLlMerchantDetailWaiter = detailBinding.llMerchantDetailWaiter;
+        mLlMerchantBrief = detailBinding.llMerchantBrief;
         mWvDetail = detailBinding.wvMerchantDetail;
         mRvMerchantDetailRecommend = detailBinding.rvMerchantDetailRecommend;
 //        mRvMerchantDetailRoomPrice = detailBinding.rvMerchantDetailRoomPrice;
@@ -383,15 +387,25 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
                 startActivity(intent);
             }
         });
-        mLlMerchantDetailWaiter.setOnClickListener(new View.OnClickListener() {
+        mLlMerchantBrief.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, DetailActivity.class);
-                intent.putExtra(Constants.PAGE, Constants.WAITER_INFO);
-                intent.putExtra(Constants.STORE_ID, mStoreId);
+                Intent intent = new Intent(mContext, ReuseActivity.class);
+                intent.putExtra(Constants.PAGE, Constants.BRIEF);
+                intent.putExtra(Constants.DATA, briefUrl);
                 startActivity(intent);
             }
         });
+        //去掉服务页跳转
+//        mLlMerchantDetailWaiter.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(mContext, DetailActivity.class);
+//                intent.putExtra(Constants.PAGE, Constants.WAITER_INFO);
+//                intent.putExtra(Constants.STORE_ID, mStoreId);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     private void initImageLayout() {
@@ -577,6 +591,7 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
         }
         mTvMerchantDetailAddress.setText(store.getAddress() + "    " + d);
 
+        briefUrl = Network.BASE + "/" + store.getRemark();
         //把之前布局中的webview放到briefFragment中去
 //        mWvDetail.loadUrl(Network.BASE + "/" + store.getRemark());
 //        mWvDetail.setWebViewClient(new WebViewClient() {
@@ -740,6 +755,7 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
                 })
                 .open();
     }
+
     /*顶部轮播图点击事件*/
     @Override
     public void OnBannerClick(int position) {

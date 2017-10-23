@@ -72,6 +72,7 @@ public interface Constants {
     String DRINKS = "drinks";// 酒水
     String MONEY = "money";// 金额
     String ACTION = "action";// 活动
+    String BRIEF = "简介";   //简介
     String ORDER_TO_COMPLETE = "order_to_complete";// 下单完成界面
 
 
@@ -123,7 +124,7 @@ public interface Constants {
     String MOBILE = "mobile";
     String CREDIT_RESERVE = "credit_reserve";// 信誉预订
     String TYPE = "type";
-
+    String DATA = "data";   //数据
 
     /**
      * 请求权限码
