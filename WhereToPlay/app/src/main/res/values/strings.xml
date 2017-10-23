@@ -259,6 +259,8 @@
     <string name="drinks">酒水</string>
     <string name="action">活动</string>
     <string name="pay_down_payment">支付订金</string>
+    <string name="merchant_brief">简介</string>
+    <string name="merchant_housenews">房态</string>
 
     <!--waiter info-->
     <string name="check_explain">查看说明:</string>

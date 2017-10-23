@@ -119,8 +119,7 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
     LinearLayout mLlMerchantDetailDrinks;
     LinearLayout mLlMerchantDetailAction;
     LinearLayout mLlMerchantDetailWaiter;
-    private TabLayout mTablayout;
-    private ViewPager mViewPager;
+
     // 详情
     WebView mWvDetail;
     // 推荐店铺
@@ -146,11 +145,9 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
     String address, lat, lng;
     // 店铺信息
     StoreDetail.Store mStore;
-    private Banner mBannerDetail;
+//    private Banner mBannerDetail;
     private ArrayList<Object> bannerArrayList;
     private ArrayList<String> imgs;
-    private ArrayList<Fragment> merchant_fragments;
-    private ArrayList<String> fragment_name;
     private FragmentManager fragmentManager;
     private MerchantTablayoutAdapter adpter;
 
@@ -168,13 +165,11 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
 
     private void initViews() {
         mTmDetail = detailBinding.tmMerchantDetail;
-        mBannerDetail = detailBinding.bannerDetail;
+//        mBannerDetail = detailBinding.bannerDetail;
         mIvService = detailBinding.ivMerchantDetailService;
         mTvMerchantDetailTitle = detailBinding.tvMerchantDetailTitle;
         mRbMerchantDetailGrade = detailBinding.rbMerchant;
         mTvMerchantDetailDiscountSum = detailBinding.tvMerchantDetailDiscountSum;
-        mTablayout = detailBinding.llMerchantDetailTablayout;
-        mViewPager = detailBinding.llMerchantDetailViewpager;
 //        mTvMerchantDetailDiscount = detailBinding.tvMerchantDetailDiscount;
         mTvMerchantDetailGrade = detailBinding.tvMerchantDetailGrade;
         mTvMerchantDetailCommentNo = detailBinding.tvMerchantDetailComment;
@@ -204,15 +199,17 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
 
     private void init() {
         //banner轮播图
-        imgs = new ArrayList<>();
-        bannerArrayList = new ArrayList<>();
-        mBannerDetail.setImageLoader(new GlideImageLoader());
-        mBannerDetail.setOnBannerListener(this);
-        mBannerDetail.setBannerStyle(BannerConfig.NUM_INDICATOR);
+//        imgs = new ArrayList<>();
+//        bannerArrayList = new ArrayList<>();
+//        mBannerDetail.setImageLoader(new GlideImageLoader());
+//        mBannerDetail.setOnBannerListener(this);
+//        mBannerDetail.setBannerStyle(BannerConfig.NUM_INDICATOR);
 
         mTmDetail.setLeftIcon(R.drawable.left);
         mTmDetail.setRightIcon(R.drawable.merchant_detail_sheard);
-        int color = App.getContext().getResources().getColor(R.color.tran);
+        mTmDetail.setTitleColor(R.color.white);
+        mTmDetail.setTitle(R.string.merchant_detail);
+        int color = App.getContext().getResources().getColor(R.color.text_red);
         mTmDetail.setBackgroundColor(color);
 //        getShearedUrl(this.mStoreId);
         getMerchantDetail();
@@ -227,11 +224,6 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
         iconAdapter = new CommentIconAdapter(mContext, mCommentIcons);
         mRvMerchantDetailCommentHeadImage.setAdapter(iconAdapter);
 
-        //简介 房型 酒水 房态
-        merchant_fragments = new ArrayList<>();
-        fragment_name = new ArrayList<>();
-        initTabLayout();
-
         // 推荐店铺
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -244,25 +236,25 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
         mRvMerchantDetailRecommend.setAdapter(recommendAdapter);
     }
 
-    private void initTabLayout() {
-        //添加4个fragment
-        merchant_fragments.add(new MerchantBriefFragment());
-        merchant_fragments.add(new MerchantHouseTypeFragment());
-        merchant_fragments.add(new MerchantBriefFragment());
-        merchant_fragments.add(new MerchantBriefFragment());
-        //添加4个标题
-        fragment_name.add("简介");
-        fragment_name.add("房型");
-        fragment_name.add("酒水");
-        fragment_name.add("房态");
-        fragmentManager = getActivity().getSupportFragmentManager();
-        adpter = new MerchantTablayoutAdapter(fragmentManager, merchant_fragments, fragment_name);
-        //标题文字均匀分配
-        mTablayout.setTabMode(TabLayout.MODE_FIXED);
-        mViewPager.setAdapter(adpter);
-//        //这两个方法是将Tablayout和Viewpager联合起来
-        mTablayout.setupWithViewPager(mViewPager);
-    }
+//    private void initTabLayout() {
+//        //添加4个fragment
+//        merchant_fragments.add(new MerchantBriefFragment());
+//        merchant_fragments.add(new MerchantHouseTypeFragment());
+//        merchant_fragments.add(new MerchantBriefFragment());
+//        merchant_fragments.add(new MerchantBriefFragment());
+//        //添加4个标题
+//        fragment_name.add("简介");
+//        fragment_name.add("房型");
+//        fragment_name.add("酒水");
+//        fragment_name.add("房态");
+//        fragmentManager = getActivity().getSupportFragmentManager();
+//        adpter = new MerchantTablayoutAdapter(fragmentManager, merchant_fragments, fragment_name);
+//        //标题文字均匀分配
+//        mTablayout.setTabMode(TabLayout.MODE_FIXED);
+//        mViewPager.setAdapter(adpter);
+////        //这两个方法是将Tablayout和Viewpager联合起来
+//        mTablayout.setupWithViewPager(mViewPager);
+//    }
 
     private void setListeners() {
         mTmDetail.setLeftIconOnClickListener(new View.OnClickListener() {
@@ -667,17 +659,17 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
 //            });
 //        }
         /*新版图片展示*/
-        if (pictures == null) {
-            return;
-        }
-        bannerArrayList.clear();
-        imgs.clear();
-        for (int i = 0; i < pictures.size(); i++) {
-            imgs.add(pictures.get(i).getPicture_path());
-            bannerArrayList.add(Network.IMAGE + pictures.get(i).getPicture_path());
-        }
-        mBannerDetail.setImages(bannerArrayList);
-        mBannerDetail.start();
+//        if (pictures == null) {
+//            return;
+//        }
+//        bannerArrayList.clear();
+//        imgs.clear();
+//        for (int i = 0; i < pictures.size(); i++) {
+//            imgs.add(pictures.get(i).getPicture_path());
+//            bannerArrayList.add(Network.IMAGE + pictures.get(i).getPicture_path());
+//        }
+//        mBannerDetail.setImages(bannerArrayList);
+//        mBannerDetail.start();
     }
 
     /**

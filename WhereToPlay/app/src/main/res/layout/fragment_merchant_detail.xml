@@ -7,13 +7,27 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <!--标题栏，放在scrollview布局上面-->
+        <com.fanc.wheretoplay.view.TopMenu
+            android:id="@+id/tm_merchant_detail"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
 
+        <ImageView
+            android:id="@+id/iv_merchant_detail_service"
+            android:layout_width="@dimen/width_48"
+            android:layout_height="@dimen/height_48"
+            android:layout_alignBottom="@+id/tm_merchant_detail"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="@dimen/margin_40"
+            android:padding="@dimen/padding_12"
+            android:src="@drawable/service_black"/>
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_above="@+id/cl_reserve"
-
+            android:layout_below="@+id/tm_merchant_detail"
             >
 
             <LinearLayout
@@ -22,20 +36,157 @@
                 android:orientation="vertical"
                 android:background="@color/bg_gray"
                 >
+                <!--去掉新版的图片展示区-->
+                <!--<com.youth.banner.Banner-->
+                    <!--android:id="@+id/banner_detail"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="@dimen/height_190"-->
 
-                <com.youth.banner.Banner
-                    android:id="@+id/banner_detail"
+                    <!--/>-->
+
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_190"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white">
 
-                    />
-                <!--去掉原来的展示图片区域-->
+                    <TextView
+                        android:id="@+id/tv_merchant_detail_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/margin_12"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:gravity="center_vertical"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textsize_level4"/>
+
+                    <RatingBar
+                        android:id="@+id/rb_merchant"
+                        style="@style/star"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/tv_merchant_detail_title"
+                        android:layout_below="@+id/tv_merchant_detail_title"
+                        android:layout_marginBottom="@dimen/margin_10"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:numStars="5"
+                        android:rating="3.5"
+                        android:stepSize="0.2"/>
+
+                    <!--<TextView
+                        android:id="@+id/tv_merchant_detail_discount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/margin_15"
+                        android:gravity="center"
+                        android:text="@string/discount"
+                        android:textColor="@color/text_and_buttor_orange"
+                        android:textSize="@dimen/textsize_levelsmall"/>-->
+
+                    <TextView
+                        android:id="@+id/tv_merchant_detail_discount_sum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignBottom="@+id/tv_merchant_detail_title"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/margin_10"
+                        android:background="@drawable/discount"
+                        android:gravity="center"
+                        android:paddingLeft="@dimen/padding_20"
+                        android:paddingRight="@dimen/padding_5"
+                        android:textColor="@color/text_white"
+                        android:textSize="@dimen/textsize_level4"/>
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:background="@color/pay_reserve_list_divider_white"/>
+
+                <!--查看全部评价-->
+                <LinearLayout
+                    android:id="@+id/ll_merchant_detail_comment"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:orientation="horizontal"
+                    android:background="@color/white"
+                    >
+
+                    <TextView
+                        android:id="@+id/tv_merchant_detail_grade"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:text="0"
+                        android:textColor="@color/text_red"
+                        android:textSize="@dimen/textsize_level4"
+                        android:layout_marginLeft="15dp"
+                        />
+
+
+                    <TextView
+                        android:id="@+id/tv_merchant_detail_comment"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:gravity="center_vertical"
+                        android:text="条评价"
+                        android:textColor="@color/text_black"/>
+
+                    <!--<View
+                        android:layout_width="@dimen/line_height"
+                        android:layout_height="match_parent"
+                        android:background="@color/pay_reserve_list_divider_white"/>-->
+
+                    <View
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"/>
+
+                    <android.support.v7.widget.RecyclerView
+                        android:id="@+id/rv_merchant_detail_head_image"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_gravity="center_vertical"
+                        android:focusable="false"
+                        android:paddingTop="@dimen/padding_2"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:layout_marginRight="@dimen/margin_10"
+                        android:text="@string/all_comment"
+                        android:textColor="@color/text_gray"/>
+
+                    <ImageView
+                        android:id="@+id/iv_merchant_detail_right"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="@dimen/margin_5"
+                        android:paddingLeft="@dimen/margin_10"
+                        android:paddingRight="@dimen/margin_10"
+                        android:src="@drawable/right"/>
+                </LinearLayout>
+                <!--查看全部评价-->
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:background="@color/pay_reserve_list_divider_white"/>
+
+                <!--原来的展示图片区域-->
                 <LinearLayout
                     android:id="@+id/ll_merchant_detail_image"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_190"
                     android:orientation="horizontal"
-                    android:visibility="gone"
+                    android:paddingStart="@dimen/margin_15"
+                    android:paddingEnd="@dimen/margin_15"
+                    android:paddingTop="@dimen/margin_20"
+                    android:paddingBottom="@dimen/margin_20"
+                    android:background="@color/white"
                     >
 
                     <HorizontalScrollView
@@ -121,60 +272,8 @@
                         </LinearLayout>
                     </LinearLayout>
                 </LinearLayout>
+                <!--原来的展示图片区域-->
 
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@color/white">
-
-                    <TextView
-                        android:id="@+id/tv_merchant_detail_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/margin_12"
-                        android:layout_marginTop="@dimen/margin_10"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/text_black"
-                        android:textSize="@dimen/textsize_level4"/>
-
-                    <RatingBar
-                        android:id="@+id/rb_merchant"
-                        style="@style/star"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignLeft="@+id/tv_merchant_detail_title"
-                        android:layout_below="@+id/tv_merchant_detail_title"
-                        android:layout_marginBottom="@dimen/margin_10"
-                        android:layout_marginTop="@dimen/margin_5"
-                        android:numStars="5"
-                        android:rating="3.5"
-                        android:stepSize="0.2"/>
-
-                    <!--<TextView
-                        android:id="@+id/tv_merchant_detail_discount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/margin_15"
-                        android:gravity="center"
-                        android:text="@string/discount"
-                        android:textColor="@color/text_and_buttor_orange"
-                        android:textSize="@dimen/textsize_levelsmall"/>-->
-
-                    <TextView
-                        android:id="@+id/tv_merchant_detail_discount_sum"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignBottom="@+id/tv_merchant_detail_title"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/margin_10"
-                        android:background="@drawable/discount"
-                        android:gravity="center"
-                        android:paddingLeft="@dimen/padding_20"
-                        android:paddingRight="@dimen/padding_5"
-                        android:textColor="@color/text_white"
-                        android:textSize="@dimen/textsize_level4"/>
-                </RelativeLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -216,77 +315,6 @@
                         android:layout_marginRight="@dimen/margin_15"
                         android:src="@drawable/right"/>
 
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/line_height"
-                    android:background="@color/pay_reserve_list_divider_white"/>
-
-                <LinearLayout
-                    android:id="@+id/ll_merchant_detail_comment"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_40"
-                    android:orientation="horizontal"
-                    android:layout_marginTop="@dimen/margin_10"
-                    android:background="@color/white"
-                    >
-
-                    <TextView
-                        android:id="@+id/tv_merchant_detail_grade"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:text="0"
-                        android:textColor="@color/text_red"
-                        android:textSize="@dimen/textsize_level4"
-                        android:layout_marginLeft="15dp"
-                        />
-
-
-                    <TextView
-                        android:id="@+id/tv_merchant_detail_comment"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="@dimen/margin_10"
-                        android:gravity="center_vertical"
-                        android:text="条评价"
-                        android:textColor="@color/text_black"/>
-
-                    <!--<View
-                        android:layout_width="@dimen/line_height"
-                        android:layout_height="match_parent"
-                        android:background="@color/pay_reserve_list_divider_white"/>-->
-
-                    <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"/>
-
-                    <android.support.v7.widget.RecyclerView
-                        android:id="@+id/rv_merchant_detail_head_image"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_gravity="center_vertical"
-                        android:focusable="false"
-                        android:paddingTop="@dimen/padding_2"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:gravity="center_vertical"
-                        android:layout_marginRight="@dimen/margin_10"
-                        android:text="@string/all_comment"
-                        android:textColor="@color/text_gray"/>
-
-                    <ImageView
-                        android:id="@+id/iv_merchant_detail_right"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="@dimen/margin_5"
-                        android:paddingLeft="@dimen/margin_10"
-                        android:paddingRight="@dimen/margin_10"
-                        android:src="@drawable/right"/>
                 </LinearLayout>
 
                 <View
@@ -344,15 +372,40 @@
                     android:background="@color/pay_reserve_list_divider"/>-->
 
                 <!--去掉中间象征着“简介 酒水 房态 。。。”的图标-->
-                <android.support.constraint.ConstraintLayout
+                <!--<android.support.constraint.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="@dimen/padding_5"
-                    android:paddingTop="@dimen/padding_10"
-                    android:layout_marginTop="@dimen/margin_10"
+                    android:paddingBottom="@dimen/padding_25"
+                    android:paddingTop="@dimen/padding_25"
+                    android:paddingStart="@dimen/padding_32"
+                    android:paddingEnd="@dimen/padding_32"
                     android:background="@color/white"
-                    android:visibility="gone"
                     >
+
+                    <LinearLayout
+                        android:id="@+id/ll_merchant_detail_waiter"
+                        android:layout_width="@dimen/width_0"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/padding_10"
+                        android:paddingTop="@dimen/padding_10"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        >
+
+                        <ImageView
+                            android:layout_width="@dimen/width_30"
+                            android:layout_height="@dimen/height_30"
+                            android:src="@drawable/merchant_brief"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:text="@string/merchant_brief"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/normal_textsize"/>
+                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/ll_merchant_detail_room"
@@ -362,24 +415,24 @@
                         android:orientation="vertical"
                         android:paddingBottom="@dimen/padding_10"
                         android:paddingTop="@dimen/padding_10"
-                        app:layout_constraintLeft_toLeftOf="parent"
-                        app:layout_constraintRight_toLeftOf="@+id/line_room">
+                        app:layout_constraintLeft_toRightOf="@+id/ll_merchant_detail_waiter"
+                        >
 
                         <ImageView
                             android:layout_width="@dimen/width_30"
                             android:layout_height="@dimen/height_30"
-                            android:src="@drawable/room_type"/>
+                            android:src="@drawable/merchant_housetype"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5"
                             android:text="@string/room_category"
-                            android:textColor="@color/white"
+                            android:textColor="@color/text_black"
                             android:textSize="@dimen/normal_textsize"/>
                     </LinearLayout>
 
-                    <View
+                    &lt;!&ndash;<View
                         android:id="@+id/line_room"
                         android:layout_width="@dimen/line_width"
                         android:layout_height="@dimen/height_30"
@@ -387,7 +440,7 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toRightOf="@+id/ll_merchant_detail_room"
                         app:layout_constraintRight_toLeftOf="@+id/ll_merchant_detail_drinks"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent"/>&ndash;&gt;
 
                     <LinearLayout
                         android:id="@+id/ll_merchant_detail_drinks"
@@ -397,32 +450,22 @@
                         android:orientation="vertical"
                         android:paddingBottom="@dimen/padding_10"
                         android:paddingTop="@dimen/padding_10"
-                        app:layout_constraintLeft_toRightOf="@+id/line_room"
-                        app:layout_constraintRight_toLeftOf="@+id/line_drinks">
+                        app:layout_constraintLeft_toRightOf="@+id/ll_merchant_detail_room"
+                        >
 
                         <ImageView
                             android:layout_width="@dimen/width_30"
                             android:layout_height="@dimen/height_30"
-                            android:src="@drawable/drinks"/>
+                            android:src="@drawable/merchant_drink"/>
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="@dimen/margin_5"
                             android:text="@string/drinks"
-                            android:textColor="@color/white"
+                            android:textColor="@color/text_black"
                             android:textSize="@dimen/normal_textsize"/>
                     </LinearLayout>
-
-                    <View
-                        android:id="@+id/line_drinks"
-                        android:layout_width="@dimen/line_width"
-                        android:layout_height="@dimen/height_30"
-                        android:background="@color/pay_reserve_list_divider"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toRightOf="@+id/ll_merchant_detail_drinks"
-                        app:layout_constraintRight_toLeftOf="@+id/ll_merchant_detail_active"
-                        app:layout_constraintTop_toTopOf="parent"/>
 
                     <LinearLayout
                         android:id="@+id/ll_merchant_detail_active"
@@ -432,8 +475,160 @@
                         android:orientation="vertical"
                         android:paddingBottom="@dimen/padding_10"
                         android:paddingTop="@dimen/padding_10"
-                        app:layout_constraintLeft_toRightOf="@+id/line_drinks"
-                        app:layout_constraintRight_toLeftOf="@+id/line_action">
+                        app:layout_constraintLeft_toRightOf="ll_merchant_detail_drinks"
+                        >
+
+                        <ImageView
+                            android:layout_width="@dimen/width_30"
+                            android:layout_height="@dimen/height_30"
+                            android:src="@drawable/merchant_housenews"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:text="@string/action"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/normal_textsize"/>
+                    </LinearLayout>
+-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/padding_25"
+                    android:paddingTop="@dimen/padding_25"
+                    android:paddingStart="@dimen/padding_32"
+                    android:paddingEnd="@dimen/padding_32"
+                    android:background="@color/white"
+                    >
+
+                    <LinearLayout
+                        android:id="@+id/ll_merchant_detail_waiter"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_alignParentStart="true"
+                        >
+
+                        <ImageView
+                            android:layout_width="@dimen/width_30"
+                            android:layout_height="@dimen/height_30"
+                            android:src="@drawable/merchant_brief"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:text="@string/merchant_brief"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/normal_textsize"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_merchant_detail_room"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_marginRight="@dimen/margin_65"
+                        android:layout_toEndOf="@+id/ll_merchant_detail_waiter"
+                        >
+
+                        <ImageView
+                            android:layout_width="@dimen/width_30"
+                            android:layout_height="@dimen/height_30"
+                            android:src="@drawable/merchant_housetype"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:text="@string/room_category"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/normal_textsize"/>
+                    </LinearLayout>
+
+                    <!--<View
+                        android:id="@+id/line_room"
+                        android:layout_width="@dimen/line_width"
+                        android:layout_height="@dimen/height_30"
+                        android:background="@color/pay_reserve_list_divider"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toRightOf="@+id/ll_merchant_detail_room"
+                        app:layout_constraintRight_toLeftOf="@+id/ll_merchant_detail_drinks"
+                        app:layout_constraintTop_toTopOf="parent"/>-->
+
+                    <LinearLayout
+                        android:id="@+id/ll_merchant_detail_drinks"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_marginRight="@dimen/margin_65"
+                        android:layout_toEndOf="@+id/ll_merchant_detail_room"
+                        >
+
+                        <ImageView
+                            android:layout_width="@dimen/width_30"
+                            android:layout_height="@dimen/height_30"
+                            android:src="@drawable/merchant_drink"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:text="@string/drinks"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/normal_textsize"/>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_merchant_detail_active"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:layout_marginRight="@dimen/margin_65"
+                        android:layout_toEndOf="@+id/ll_merchant_detail_drinks"
+                        >
+
+                        <ImageView
+                            android:layout_width="@dimen/width_30"
+                            android:layout_height="@dimen/height_30"
+                            android:src="@drawable/merchant_housenews"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/margin_5"
+                            android:text="@string/action"
+                            android:textColor="@color/text_black"
+                            android:textSize="@dimen/normal_textsize"/>
+                    </LinearLayout> 
+
+
+                    <!--<View
+                        android:id="@+id/line_drinks"
+                        android:layout_width="@dimen/line_width"
+                        android:layout_height="@dimen/height_30"
+                        android:background="@color/pay_reserve_list_divider"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintLeft_toRightOf="@+id/ll_merchant_detail_drinks"
+                        app:layout_constraintRight_toLeftOf="@+id/ll_merchant_detail_active"
+                        app:layout_constraintTop_toTopOf="parent"/>-->
+
+                    <!--活动-->
+                    <!--<LinearLayout
+                        android:id="@+id/ll_merchant_detail_active"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:orientation="vertical"
+                        android:paddingBottom="@dimen/padding_10"
+                        android:paddingTop="@dimen/padding_10"
+                        >
 
                         <ImageView
                             android:layout_width="@dimen/width_30"
@@ -447,9 +642,9 @@
                             android:text="@string/action"
                             android:textColor="@color/white"
                             android:textSize="@dimen/normal_textsize"/>
-                    </LinearLayout>
+                    </LinearLayout>-->
 
-                    <View
+                   <!-- <View
                         android:id="@+id/line_action"
                         android:layout_width="@dimen/line_width"
                         android:layout_height="@dimen/height_30"
@@ -457,9 +652,10 @@
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintLeft_toRightOf="@+id/ll_merchant_detail_active"
                         app:layout_constraintRight_toLeftOf="@+id/ll_merchant_detail_waiter"
-                        app:layout_constraintTop_toTopOf="parent"/>
+                        app:layout_constraintTop_toTopOf="parent"/>-->
 
-                    <LinearLayout
+                   <!--服务员-->
+                   <!-- <LinearLayout
                         android:id="@+id/ll_merchant_detail_waiter"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -467,7 +663,6 @@
                         android:orientation="vertical"
                         android:paddingBottom="@dimen/padding_10"
                         android:paddingTop="@dimen/padding_10"
-                        app:layout_constraintLeft_toRightOf="@+id/line_action"
                         app:layout_constraintRight_toRightOf="parent">
 
                         <ImageView
@@ -482,11 +677,12 @@
                             android:text="@string/waiter"
                             android:textColor="@color/white"
                             android:textSize="@dimen/normal_textsize"/>
-                    </LinearLayout>
+                    </LinearLayout>-->
 
-                </android.support.constraint.ConstraintLayout>
+                </RelativeLayout>
 
-                <LinearLayout
+                <!--去掉新加的tablayout 和 viewpager 组合-->
+<!--                <LinearLayout
                     xmlns:app="http://schemas.android.com/apk/res-auto"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -512,7 +708,7 @@
                         android:layout_height="@dimen/height_411"
                         />
 
-                </LinearLayout>
+                </LinearLayout>-->
 
 
                 <View
@@ -545,21 +741,7 @@
             </LinearLayout>
         </ScrollView>
 
-        <!--标题栏，放在scrollview布局上面-->
-        <com.fanc.wheretoplay.view.TopMenu
-            android:id="@+id/tm_merchant_detail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
 
-        <ImageView
-            android:id="@+id/iv_merchant_detail_service"
-            android:layout_width="@dimen/width_48"
-            android:layout_height="@dimen/height_48"
-            android:layout_alignBottom="@+id/tm_merchant_detail"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/margin_40"
-            android:padding="@dimen/padding_12"
-            android:src="@drawable/service_black"/>
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/cl_reserve"
