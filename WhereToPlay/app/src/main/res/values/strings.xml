@@ -315,4 +315,7 @@
 
     <!--reserved list-->
     <string name="buy">买单</string>
+
+    <!--房型-->
+    <string name="housetype" >小包（2-5人）</string>
 </resources>

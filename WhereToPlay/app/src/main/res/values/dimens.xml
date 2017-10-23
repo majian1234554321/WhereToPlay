@@ -7,6 +7,7 @@
     <dimen name="stroke_width">1dp</dimen>
     <dimen name="line_width">1dp</dimen>
     <dimen name="textsize_10">10sp</dimen>
+    <dimen name="textsize_11">11sp</dimen>
     <dimen name="textsize_28">28sp</dimen>
     <dimen name="textsize_levelsmall">12sp</dimen>
     <dimen name="normal_textsize">14sp</dimen>
@@ -104,10 +105,12 @@
     <dimen name="margin_18">18dp</dimen>
     <dimen name="margin_19">19dp</dimen>
     <dimen name="margin_20">20dp</dimen>
+    <dimen name="margin_21">21dp</dimen>
     <dimen name="margin_22">22dp</dimen>
     <dimen name="margin_24">24dp</dimen>
     <dimen name="margin_26">26dp</dimen>
     <dimen name="margin_30">30dp</dimen>
+    <dimen name="margin_33">33dp</dimen>
     <dimen name="margin_35">35dp</dimen>
     <dimen name="margin_36">36dp</dimen>
     <dimen name="margin_40">40dp</dimen>

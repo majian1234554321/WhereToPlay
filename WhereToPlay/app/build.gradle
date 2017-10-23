@@ -27,8 +27,8 @@ android {
         applicationId "com.fanc.wheretoplay"
         minSdkVersion 17
         targetSdkVersion 23
-        versionCode 22
-        versionName "1.0.18"
+        versionCode 20171023
+        versionName "1.0.19"
 
         ndk {
             //选择要添加的对应cpu类型的.so库。

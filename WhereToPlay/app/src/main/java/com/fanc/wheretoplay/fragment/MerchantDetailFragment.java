@@ -237,7 +237,7 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRvMerchantDetailRecommend.setLayoutManager(linearLayoutManager);
         //去掉自定义的recyclerview分割线
-//        RecycleViewDivider divider1 = new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL, UIUtils.dp2Px(10), UIUtils.getColor(R.color.tran));
+//        RecycleViewDivider divider1 = new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL, UIUtils.dp2Px(1), UIUtils.getColor(R.color.bg));
 //        mRvMerchantDetailRecommend.addItemDecoration(divider1);
         stores = new ArrayList<>();
         recommendAdapter = new ReserveAdapter(mContext, stores);

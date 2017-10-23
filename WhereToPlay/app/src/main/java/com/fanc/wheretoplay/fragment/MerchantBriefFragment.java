@@ -44,7 +44,7 @@ public class MerchantBriefFragment extends BaseFragment {
     }
 
     private void initView() {
-        mWv= mBriefBinding.wvMerchantBrief;
+        mWv = mBriefBinding.wvMerchantBrief;
     }
 
     @Override
@@ -59,54 +59,58 @@ public class MerchantBriefFragment extends BaseFragment {
         init();
     }
 
-    private void init(){
+    private void init() {
 //        if (loadWebviewListener != null) {
 //            loadWebviewListener.loadWebview(mWv);
 //        }
         DetailActivity detailActivity = (DetailActivity) getActivity();
-        if (stringExtra == null) {
+//        if (stringExtra == null) {
             stringExtra = detailActivity.getStringExtra();
-        showProgress();
-        OkHttpUtils.post()
-                .url(Network.User.PUBLIC_STORE_DETAIL)
-                .addParams(Network.Param.ID, stringExtra)
-                .addParams(Network.Param.LAT, String.valueOf(LocationUtils.location.getLatitude()))
-                .addParams(Network.Param.LNG, String.valueOf( LocationUtils.location.getLongitude()))
-                .build()
-                .execute(new DCallback<StoreDetail>() {
-                    @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
-                    }
+            showProgress();
+            if (LocationUtils.location == null || LocationUtils.location.getLatitude() == 0) {
+                closeProgress();
+                return;
+            }
+            OkHttpUtils.post()
+                    .url(Network.User.PUBLIC_STORE_DETAIL)
+                    .addParams(Network.Param.ID, stringExtra)
+                    .addParams(Network.Param.LAT, String.valueOf(LocationUtils.location.getLatitude()))
+                    .addParams(Network.Param.LNG, String.valueOf(LocationUtils.location.getLongitude()))
+                    .build()
+                    .execute(new DCallback<StoreDetail>() {
+                        @Override
+                        public void onError(Call call, Exception e) {
+                            connectError();
+                        }
 
-                    @Override
-                    public void onResponse(StoreDetail response) {
-                        if (isSuccess(response)) {
-                            if (response.getStore() != null) {
-                                response.getStore();
-                                Log.d("Jordan", "onPageFinished: url = " + response.getStore().getRemark());
-                                mWv.loadUrl(Network.BASE + "/" + response.getStore().getRemark());
-                                mWv.setWebViewClient(new WebViewClient() {
-                                    @Override
-                                    public void onPageFinished(WebView view, String url) {
-                                        super.onPageFinished(view, url);
-                                        Log.d("Jordan", "onPageFinished: url = " + url + "\n加载完成了");
-                                    }
-                                });
+                        @Override
+                        public void onResponse(StoreDetail response) {
+                            if (isSuccess(response)) {
+                                if (response.getStore() != null) {
+                                    response.getStore();
+                                    Log.d("Jordan", "onPageFinished: url = " + response.getStore().getRemark());
+                                    mWv.loadUrl(Network.BASE + "/" + response.getStore().getRemark());
+                                    mWv.setWebViewClient(new WebViewClient() {
+                                        @Override
+                                        public void onPageFinished(WebView view, String url) {
+                                            super.onPageFinished(view, url);
+                                            Log.d("Jordan", "onPageFinished: url = " + url + "\n加载完成了");
+                                        }
+                                    });
+                                }
                             }
                         }
-                    }
-                });
+                    });
 
-        }
+//        }
     }
 
-    public void setLoadWebviewListener(LoadWebview loadWebviewListener){
+    public void setLoadWebviewListener(LoadWebview loadWebviewListener) {
         this.loadWebviewListener = loadWebviewListener;
         return;
     }
 
-    public interface LoadWebview{
-         void loadWebview(WebView webView);
+    public interface LoadWebview {
+        void loadWebview(WebView webView);
     }
 }

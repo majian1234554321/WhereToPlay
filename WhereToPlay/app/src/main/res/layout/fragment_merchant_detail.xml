@@ -502,6 +502,7 @@
                         app:tabMode="scrollable"
                         app:tabSelectedTextColor="@color/text_red"
                         app:tabIndicatorHeight="@dimen/height_2"
+                        app:tabTextAppearance="@style/MyTabLayoutTextStyle"
                         android:background="@color/white"
                         />
 

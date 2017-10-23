@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="store"
+            type="com.fanc.wheretoplay.datamodel.StoreList.Store" />
+    </data>
+
+    <!--<android.support.constraint.ConstraintLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+
+        <!--<ImageView-->
+            <!--android:id="@+id/iv_housetype"-->
+            <!--android:layout_width="@dimen/width_40"-->
+            <!--android:layout_height="@dimen/height_40"-->
+            <!--android:layout_marginBottom="@dimen/margin_21"-->
+            <!--android:layout_marginLeft="@dimen/margin_15"-->
+            <!--android:layout_marginTop="@dimen/margin_21"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:scaleType="fitXY"-->
+            <!--android:src="@drawable/item_baoxiang"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_housetype_name"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="@dimen/margin_33"-->
+            <!--android:layout_marginLeft="@dimen/margin_20"-->
+            <!--android:layout_marginTop="@dimen/margin_33"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:text="@string/housetype"-->
+            <!--android:textColor="@color/text_black"-->
+            <!--android:textSize="@dimen/textsize_level5"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="iv_housetype"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+        <!--&lt;!&ndash; android:text="@{store.name}"&ndash;&gt;-->
+
+        <!--<TextView-->
+            <!--android:id="@+id/tv_housetype_price"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginBottom="@dimen/margin_33"-->
+            <!--android:layout_marginRight="@dimen/margin_15"-->
+            <!--android:layout_marginTop="@dimen/margin_33"-->
+            <!--android:gravity="center_vertical"-->
+            <!--android:text="1300元"-->
+            <!--android:textColor="@color/text_black"-->
+            <!--android:textSize="@dimen/textsize_level5"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+    <!--</android.support.constraint.ConstraintLayout>-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/iv_housetype"
+            android:layout_width="@dimen/width_40"
+            android:layout_height="@dimen/height_40"
+            android:layout_marginBottom="@dimen/margin_21"
+            android:layout_marginLeft="@dimen/margin_15"
+            android:layout_marginTop="@dimen/margin_21"
+            android:gravity="center_vertical"
+            android:scaleType="fitXY"
+            android:src="@drawable/item_baoxiang" />
+
+        <TextView
+            android:id="@+id/tv_housetype_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_33"
+            android:layout_marginStart="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_33"
+            android:layout_toEndOf="@+id/iv_housetype"
+            android:gravity="center_vertical"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/textsize_levelmedium" />
+        <!-- android:text="@{store.name}"-->
+
+        <TextView
+            android:id="@+id/tv_housetype_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_33"
+            android:layout_marginTop="@dimen/margin_33"
+            android:layout_toLeftOf="@+id/tv_housetype_prive_qi"
+            android:gravity="center_vertical"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/textsize_levelmedium" />
+
+        <TextView
+            android:id="@+id/tv_housetype_prive_qi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_housetype_price"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/margin_15"
+            android:gravity="center_vertical"
+            android:text="起"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/textsize_11" />
+
+    </RelativeLayout>
+</layout>
