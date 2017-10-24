@@ -448,7 +448,7 @@
                     android:textSize="@dimen/textsize_level3"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"/>
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <!--标题名称-->
                 <TextView
