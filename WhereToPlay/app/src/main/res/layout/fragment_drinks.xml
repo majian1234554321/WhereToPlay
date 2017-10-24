@@ -94,11 +94,11 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/tv_drinks_price"
+                app:layout_constraintRight_toLeftOf="@+id/tv_housenews_housename"
                 />
 
             <TextView
-                android:id="@+id/tv_drinks_price"
+                android:id="@+id/tv_housenews_housename"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/drinks_price"
@@ -118,7 +118,7 @@
                 android:textColor="@color/text_gray"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/tv_drinks_price"
+                app:layout_constraintLeft_toRightOf="@+id/tv_housenews_housename"
                 app:layout_constraintRight_toRightOf="parent"/>
 
         </android.support.constraint.ConstraintLayout>
