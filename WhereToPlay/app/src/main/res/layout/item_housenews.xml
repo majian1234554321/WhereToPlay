@@ -25,12 +25,17 @@
             android:textColor="@color/text_black"
             android:layout_marginTop="@dimen/margin_16"
             android:layout_marginBottom="@dimen/margin_16"
-            app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toLeftOf="@+id/tv_housenews_housename"
             />
+        
+        <android.support.constraint.Guideline
+            android:id="@+id/gl_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="97dp"/>
 
         <TextView
             android:id="@+id/tv_housenews_housename"
@@ -41,8 +46,22 @@
             android:textColor="@color/text_black"
             app:layout_constraintTop_toTopOf="@+id/tv_housenews_type"
             app:layout_constraintBottom_toBottomOf="@+id/tv_housenews_type"
-            app:layout_constraintLeft_toRightOf="@+id/tv_housenews_type"
-            app:layout_constraintRight_toLeftOf="@+id/tv_housenews_lowest"/>
+            app:layout_constraintLeft_toLeftOf="@+id/gl_1"
+            app:layout_constraintRight_toRightOf="@+id/gl_2"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gl_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="149dp"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gl_3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="192dp"/>
 
         <TextView
             android:id="@+id/tv_housenews_lowest"
@@ -53,8 +72,21 @@
             android:textColor="@color/text_black"
             app:layout_constraintTop_toTopOf="@+id/tv_housenews_type"
             app:layout_constraintBottom_toBottomOf="@+id/tv_housenews_type"
-            app:layout_constraintLeft_toRightOf="@+id/tv_housenews_housename"
-            app:layout_constraintRight_toLeftOf="@+id/iv_housenews_use_detail"/>
+            app:layout_constraintLeft_toLeftOf="@+id/gl_3"
+            app:layout_constraintRight_toLeftOf="@+id/gl_4"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gl_4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="243dp"/>
+        <android.support.constraint.Guideline
+            android:id="@+id/gl_5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="298dp"/>
 
         <ImageView
             android:id="@+id/iv_housenews_use_detail"
@@ -64,8 +96,16 @@
             android:layout_marginEnd="@dimen/margin_43"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/tv_housenews_lowest"
-            app:layout_constraintRight_toRightOf="parent"/>
+            app:layout_constraintLeft_toLeftOf="@+id/gl_5"
+            app:layout_constraintRight_toRightOf="@+id/gl_6"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gl_6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="324dp"/>
+
 
         <ImageView
             android:id="@+id/iv_housenews_arrow"
@@ -78,6 +118,7 @@
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"/>
+
 
     </android.support.constraint.ConstraintLayout>
 
