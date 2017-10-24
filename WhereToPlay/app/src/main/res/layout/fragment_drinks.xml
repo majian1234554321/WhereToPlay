@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -15,7 +17,7 @@
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/reserve_info_title"
+            android:background="@color/white"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:paddingBottom="@dimen/padding_10"
@@ -27,7 +29,7 @@
                 android:id="@+id/tv_drinks_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/textsize_level4"/>
 
             <TextView
@@ -40,7 +42,7 @@
                 android:background="@drawable/discount"
                 android:paddingLeft="@dimen/padding_20"
                 android:paddingRight="@dimen/padding_5"
-                android:textColor="@color/text_black"
+                android:textColor="@color/white"
                 android:textSize="@dimen/textsize_level3"/>
 
             <TextView
@@ -52,8 +54,10 @@
                 android:drawableLeft="@drawable/reserve_address"
                 android:drawablePadding="@dimen/padding_10"
                 android:maxWidth="@dimen/width_260"
-                android:textColor="@color/white"
-                android:textSize="@dimen/textsize_levelsmall"/>
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textsize_levelsmall"
+                android:singleLine="true"
+                android:ellipsize="end"/>
 
             <TextView
                 android:id="@+id/tv_drinks_distance"
@@ -62,51 +66,74 @@
                 android:layout_alignBaseline="@+id/tv_drinks_address"
                 android:layout_marginLeft="@dimen/margin_40"
                 android:layout_toRightOf="@+id/tv_drinks_address"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/textsize_levelsmall"/>
         </RelativeLayout>
 
-        <com.zhy.android.percent.support.PercentLinearLayout
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/bg"
-            android:orientation="horizontal"
-            android:paddingBottom="@dimen/padding_10"
-            android:paddingTop="@dimen/padding_10">
+            android:layout_height="@dimen/line_height"
+            android:background="@color/pay_reserve_list_divider_white" />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_54"
+            android:paddingLeft="@dimen/margin_15"
+            android:paddingRight="@dimen/margin_15"
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/margin_10">
 
             <TextView
                 android:id="@+id/tv_drinks_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:gravity="center_horizontal"
                 android:text="@string/drinks_name"
-                android:textColor="@color/text_detail_white_bc"
-                android:textSize="@dimen/normal_textsize"
-                app:layout_widthPercent="50%w"/>
+                android:textSize="@dimen/textsize_levelmedium"
+                android:textColor="@color/text_gray"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/tv_drinks_price"
+                />
 
             <TextView
+                android:id="@+id/tv_drinks_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:gravity="center_horizontal"
                 android:text="@string/drinks_price"
-                android:textColor="@color/text_detail_white_bc"
-                android:textSize="@dimen/normal_textsize"
-                app:layout_widthPercent="50%w"/>
+                android:textSize="@dimen/textsize_levelmedium"
+                android:textColor="@color/text_gray"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/tv_drinks_name"
+                app:layout_constraintRight_toLeftOf="@+id/tv_drinks_action"/>
 
+            <TextView
+                android:id="@+id/tv_drinks_action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/drinks_action"
+                android:textSize="@dimen/textsize_levelmedium"
+                android:textColor="@color/text_gray"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/tv_drinks_price"
+                app:layout_constraintRight_toRightOf="parent"/>
 
-        </com.zhy.android.percent.support.PercentLinearLayout>
+        </android.support.constraint.ConstraintLayout>
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/line_height_1px"
-            android:background="@color/discover_divider"/>
+            android:layout_height="@dimen/line_height"
+            android:background="@color/pay_reserve_list_divider_white" />
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_drinks"
+            android:id="@+id/rc_merchant_drinks"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@color/bg"/>
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+        </android.support.v7.widget.RecyclerView>
     </LinearLayout>
 </layout>

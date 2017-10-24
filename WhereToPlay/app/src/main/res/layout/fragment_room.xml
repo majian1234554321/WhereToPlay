@@ -4,7 +4,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/bg_gray">
 
         <com.fanc.wheretoplay.view.TopMenu
             android:id="@+id/tm_room"
@@ -15,7 +16,7 @@
             android:id="@+id/relativeLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/reserve_info_title"
+            android:background="@color/text_white"
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:paddingBottom="@dimen/padding_10"
@@ -27,7 +28,7 @@
                 android:id="@+id/tv_room_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/textsize_level4"/>
 
             <TextView
@@ -40,7 +41,7 @@
                 android:background="@drawable/discount"
                 android:paddingLeft="@dimen/padding_20"
                 android:paddingRight="@dimen/padding_5"
-                android:textColor="@color/text_black"
+                android:textColor="@color/white"
                 android:textSize="@dimen/textsize_level3"/>
 
             <TextView
@@ -52,7 +53,7 @@
                 android:drawableLeft="@drawable/reserve_address"
                 android:drawablePadding="@dimen/padding_10"
                 android:maxWidth="@dimen/width_260"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/textsize_levelsmall"/>
 
             <TextView
@@ -62,11 +63,33 @@
                 android:layout_alignBaseline="@+id/tv_room_address"
                 android:layout_marginLeft="@dimen/margin_40"
                 android:layout_toRightOf="@+id/tv_reserve_info_address"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/textsize_levelsmall"/>
         </RelativeLayout>
 
-        <com.zhy.android.percent.support.PercentLinearLayout
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/pay_reserve_list_divider_white" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_10"
+            android:orientation="vertical"
+            android:background="@color/white">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rc_merchant_housetype"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+            </android.support.v7.widget.RecyclerView>
+
+        </LinearLayout>
+
+        <!--旧版块-->
+        <!--<com.zhy.android.percent.support.PercentLinearLayout
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -142,7 +165,7 @@
             android:id="@+id/rv_room"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/bg"/>
+            android:background="@color/bg"/>-->
 
     </LinearLayout>
 </layout>

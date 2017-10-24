@@ -308,6 +308,8 @@
     <!--drinks-->
     <string name="drinks_name">酒水名称</string>
     <string name="drinks_price">酒水价格</string>
+    <string name="drinks_action">商家活动</string>
+    <string name="drinks_action_detail">买一送一</string>
 
     <!--order to complete-->
     <string name="order_to_complete">预订进行中...</string>

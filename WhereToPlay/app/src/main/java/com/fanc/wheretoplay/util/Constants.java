@@ -73,6 +73,7 @@ public interface Constants {
     String MONEY = "money";// 金额
     String ACTION = "action";// 活动
     String BRIEF = "简介";   //简介
+    String HOUSENEWS = "房态";   //房态
     String ORDER_TO_COMPLETE = "order_to_complete";// 下单完成界面
 
 

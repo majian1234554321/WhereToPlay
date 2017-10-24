@@ -35,8 +35,6 @@ public class HouseTypeAdapter extends RecyclerView.Adapter<HouseTypeAdapter.View
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         ItemHousetypeBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.item_housetype, parent, false);
         ViewHolder holder = new ViewHolder(binding);
-//        View view = LayoutInflater.from(mContext).inflate(R.layout.item_housetype, parent, false);
-//        ViewHolder holder = new ViewHolder(view);
         return holder;
     }
 
@@ -75,7 +73,6 @@ public class HouseTypeAdapter extends RecyclerView.Adapter<HouseTypeAdapter.View
 
     static class ViewHolder extends RecyclerView.ViewHolder {
 
-        private  View view;
         private  ItemHousetypeBinding binding;
         private ImageView mIv;
         private TextView mTvName;
@@ -87,15 +84,7 @@ public class HouseTypeAdapter extends RecyclerView.Adapter<HouseTypeAdapter.View
             initViews();
         }
 
-        public ViewHolder(View view) {
-            super(view);
-            this.view = view;
-        }
-
         private void initViews() {
-//            mIv = (ImageView)view.findViewById(R.id.iv_housetype);
-//            mTvPrice = (TextView)view.findViewById(R.id.tv_housetype_price);
-//            mTvName = (TextView)view.findViewById(R.id.tv_housetype_name);
             mIv = binding.ivHousetype;
             mTvName = binding.tvHousetypeName;
             mTvPrice = binding.tvHousetypePrice;

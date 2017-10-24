@@ -32,6 +32,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
+import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.CheckCommentActivity;
 import com.fanc.wheretoplay.activity.DetailActivity;
@@ -82,7 +83,7 @@ import okhttp3.Call;
  * Created by Administrator on 2017/6/14.
  */
 
-public class MerchantDetailFragment extends BaseFragment implements OnBannerListener {
+public class MerchantDetailFragment extends BaseFragment {
 
     FragmentMerchantDetailBinding detailBinding;
 
@@ -211,7 +212,7 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
 
         mTmDetail.setLeftIcon(R.drawable.left);
         mTmDetail.setRightIcon(R.drawable.merchant_detail_sheard);
-        mTmDetail.setTitleColor(R.color.white);
+        mTmDetail.setTitleColor(getResources().getColor(R.color.white));
         mTmDetail.setTitle(R.string.merchant_detail);
         int color = App.getContext().getResources().getColor(R.color.text_red);
         mTmDetail.setBackgroundColor(color);
@@ -240,25 +241,6 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
         mRvMerchantDetailRecommend.setAdapter(recommendAdapter);
     }
 
-//    private void initTabLayout() {
-//        //添加4个fragment
-//        merchant_fragments.add(new MerchantBriefFragment());
-//        merchant_fragments.add(new MerchantHouseTypeFragment());
-//        merchant_fragments.add(new MerchantBriefFragment());
-//        merchant_fragments.add(new MerchantBriefFragment());
-//        //添加4个标题
-//        fragment_name.add("简介");
-//        fragment_name.add("房型");
-//        fragment_name.add("酒水");
-//        fragment_name.add("房态");
-//        fragmentManager = getActivity().getSupportFragmentManager();
-//        adpter = new MerchantTablayoutAdapter(fragmentManager, merchant_fragments, fragment_name);
-//        //标题文字均匀分配
-//        mTablayout.setTabMode(TabLayout.MODE_FIXED);
-//        mViewPager.setAdapter(adpter);
-////        //这两个方法是将Tablayout和Viewpager联合起来
-//        mTablayout.setupWithViewPager(mViewPager);
-//    }
 
     private void setListeners() {
         mTmDetail.setLeftIconOnClickListener(new View.OnClickListener() {
@@ -354,6 +336,7 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
                 }
             }
         });
+        //房型
         mLlMerchantDetailRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -366,6 +349,7 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
                 startActivity(intent);
             }
         });
+        //酒水
         mLlMerchantDetailDrinks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -378,15 +362,31 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
                 startActivity(intent);
             }
         });
+        //活动
+        //去掉原有活动界面跳转，改成房态界面跳转
+//        mLlMerchantDetailAction.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(mContext, ReuseActivity.class);
+//                intent.putExtra(Constants.PAGE, Constants.ACTION);
+//                intent.putExtra(Constants.STORE_ID, mStoreId);
+//                startActivity(intent);
+//            }
+//        });
+        //房态界面跳转
         mLlMerchantDetailAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ReuseActivity.class);
-                intent.putExtra(Constants.PAGE, Constants.ACTION);
+                intent.putExtra(Constants.PAGE, Constants.HOUSENEWS);
                 intent.putExtra(Constants.STORE_ID, mStoreId);
+                intent.putExtra(Constants.STORE_NAME, mTvMerchantDetailTitle.getText().toString());
+                intent.putExtra(Constants.DISCOUNT_COUPON, mTvMerchantDetailDiscountSum.getText().toString());
+                intent.putExtra(Constants.ADDRESS, mTvMerchantDetailAddress.getText().toString());
                 startActivity(intent);
             }
         });
+        //简介
         mLlMerchantBrief.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -528,6 +528,7 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
                         if (isSuccess(response)) {
                             if (response.getStore() != null) {
                                 mStore = response.getStore();
+                                Log.e("Kobe",mStore.getRemark());
                                 showStoreDetail(mStore);
                                 shearedUrl = Network.BASE + "/" + response.getStore().getUrl();
                             }
@@ -648,31 +649,31 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
      * @param pictures
      */
     private void showPicture(final ArrayList<StoreDetail.Picture> pictures) {
-/*旧版图片展示*/
-//        int defaultImage = 0;
-//        final ArrayList<String> imgs = new ArrayList<>();
-//        for (int i = 0; i < pictures.size(); i++) {
-//            if (i >= 6) {
-//                return;
-//            }
-//            if (i < 2) {
-//                defaultImage = R.drawable.default_rect;
-//            } else {
-//                defaultImage = R.drawable.default_square;
-//            }
-//            imgs.add(pictures.get(i).getPicture_path());
-//            Glide.with(mContext).load(Network.IMAGE + pictures.get(i).getPicture_path()).placeholder(defaultImage).into(mImageViews.get(i));
-//            final int finalI = i;
-//            mImageViews.get(i).setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent intent = new Intent(mContext, LargeImageActivity.class);
-//                    intent.putExtra(Constants.URL, imgs);
-//                    intent.putExtra(Constants.POSITION, finalI);
-//                    startActivity(intent);
-//                }
-//            });
-//        }
+        /*旧版图片展示*/
+        int defaultImage = 0;
+        final ArrayList<String> imgs = new ArrayList<>();
+        for (int i = 0; i < pictures.size(); i++) {
+            if (i >= 6) {
+                return;
+            }
+            if (i < 2) {
+                defaultImage = R.drawable.default_rect;
+            } else {
+                defaultImage = R.drawable.default_square;
+            }
+            imgs.add(pictures.get(i).getPicture_path());
+            Glide.with(mContext).load(Network.IMAGE + pictures.get(i).getPicture_path()).placeholder(defaultImage).into(mImageViews.get(i));
+            final int finalI = i;
+            mImageViews.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, LargeImageActivity.class);
+                    intent.putExtra(Constants.URL, imgs);
+                    intent.putExtra(Constants.POSITION, finalI);
+                    startActivity(intent);
+                }
+            });
+        }
         /*新版图片展示*/
 //        if (pictures == null) {
 //            return;
@@ -756,12 +757,13 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
                 .open();
     }
 
+    //去掉了
     /*顶部轮播图点击事件*/
-    @Override
-    public void OnBannerClick(int position) {
-        Intent intent = new Intent(mContext, LargeImageActivity.class);
-        intent.putExtra(Constants.URL, imgs);
-        intent.putExtra(Constants.POSITION, position);
-        startActivity(intent);
-    }
+//    @Override
+//    public void OnBannerClick(int position) {
+//        Intent intent = new Intent(mContext, LargeImageActivity.class);
+//        intent.putExtra(Constants.URL, imgs);
+//        intent.putExtra(Constants.POSITION, position);
+//        startActivity(intent);
+//    }
 }

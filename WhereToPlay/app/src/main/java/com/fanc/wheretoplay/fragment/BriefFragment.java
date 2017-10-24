@@ -22,7 +22,7 @@ import com.fanc.wheretoplay.view.TopMenu;
 
 public class BriefFragment extends BaseFragment {
     FragmentBriefBinding binding;
-    TopMenu mTmAction;
+    TopMenu mBrief;
     WebView mWv;
 
     String mStoreId;
@@ -39,14 +39,18 @@ public class BriefFragment extends BaseFragment {
     }
 
     private void initViews() {
-        mTmAction = binding.tmBrief;
+        mBrief = binding.tmBrief;
+        mBrief.setBackgroundColor(getResources().getColor(R.color.text_red));
         mWv = binding.wvBrief;
     }
 
     private void init() {
-        mTmAction.setLeftIcon(R.drawable.left);
-        mTmAction.setTitle(R.string.merchant_brief);
-
+        mBrief.setLeftIcon(R.drawable.left);
+        mBrief.setTitle("hanimei ");
+        mBrief.setTitleColor(getResources().getColor(R.color.white));
+        if (briefUrl == null) {
+            return;
+        }
         mWv.loadUrl(briefUrl);
         mWv.setWebViewClient(new WebViewClient() {
             @Override
@@ -55,10 +59,11 @@ public class BriefFragment extends BaseFragment {
                 Log.d("aaa", "onPageFinished: url = " + url);
             }
         });
+
     }
 
     private void initListener() {
-        mTmAction.setLeftIconOnClickListener(new View.OnClickListener() {
+        mBrief.setLeftIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 mContext.finish();
@@ -68,6 +73,7 @@ public class BriefFragment extends BaseFragment {
 
     public Fragment setBriefUrl(String briefUrl) {
         this.briefUrl = briefUrl;
+        Log.e("Iverson", "llllllllllllllllllllll" + briefUrl);
         return this;
     }
 }
