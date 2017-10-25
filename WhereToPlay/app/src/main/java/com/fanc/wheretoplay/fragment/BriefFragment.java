@@ -4,12 +4,16 @@ import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.TextAppearanceSpan;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.BaseFragment;
@@ -27,6 +31,9 @@ public class BriefFragment extends BaseFragment {
 
     String mStoreId;
     private String briefUrl;
+    private String mStoreName;
+    private String mStoreAddress;
+    private String mStoreDiscount;
 
     @Nullable
     @Override
@@ -40,14 +47,23 @@ public class BriefFragment extends BaseFragment {
 
     private void initViews() {
         mBrief = binding.tmBrief;
-        mBrief.setBackgroundColor(getResources().getColor(R.color.text_red));
         mWv = binding.wvBrief;
     }
 
     private void init() {
+        //标题栏
+        mBrief.setBackgroundColor(getResources().getColor(R.color.text_red));
         mBrief.setLeftIcon(R.drawable.left);
-        mBrief.setTitle("hanimei ");
+        mBrief.setTitle("简介");
         mBrief.setTitleColor(getResources().getColor(R.color.white));
+        //地址、打折栏
+//        binding.tvRoomAddress.setText(mStoreAddress);
+//        binding.tvRoomTitle.setText(mStoreName);
+//        SpannableString text = new SpannableString(mStoreDiscount);
+//        text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+//        binding.tvRoomDiscountReal.setText(text, TextView.BufferType.SPANNABLE);
+
         if (briefUrl == null) {
             return;
         }
@@ -71,9 +87,29 @@ public class BriefFragment extends BaseFragment {
         });
     }
 
-    public Fragment setBriefUrl(String briefUrl) {
+    public BriefFragment setBriefUrl(String briefUrl) {
         this.briefUrl = briefUrl;
         Log.e("Iverson", "llllllllllllllllllllll" + briefUrl);
+        return this;
+    }
+
+    public BriefFragment setStoreId(String mStoreId) {
+        this.mStoreId = mStoreId;
+        return this;
+    }
+
+    public BriefFragment setStoreName(String mStoreName) {
+        this.mStoreName = mStoreName;
+        return this;
+    }
+
+    public BriefFragment setStoreAddress(String mStoreAddress) {
+        this.mStoreAddress = mStoreAddress;
+        return this;
+    }
+
+    public BriefFragment setStoreDiscount(String mStoreDiscount) {
+        this.mStoreDiscount = mStoreDiscount;
         return this;
     }
 }

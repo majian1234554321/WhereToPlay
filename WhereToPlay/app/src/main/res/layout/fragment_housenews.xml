@@ -95,7 +95,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_above="@+id/tv_room_address"
-                android:layout_marginRight="@dimen/margin_15"
+                android:layout_marginRight="@dimen/margin_5"
                 android:background="@drawable/discount"
                 android:paddingLeft="@dimen/padding_20"
                 android:paddingRight="@dimen/padding_5"

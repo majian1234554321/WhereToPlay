@@ -25,7 +25,14 @@
             app:layout_constraintRight_toLeftOf="@+id/tv_drinks_action"
             />
 
-      <!--  <TextView
+        <android.support.constraint.Guideline
+            android:id="@+id/gl_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.33"/>
+
+        <TextView
             android:id="@+id/tv_drinks_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -34,8 +41,15 @@
             android:textColor="@color/text_black"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toRightOf="@+id/tv_drinks_name"
-            app:layout_constraintRight_toLeftOf="@+id/tv_drinks_action"/>-->
+            app:layout_constraintLeft_toRightOf="@+id/gl_1"
+            app:layout_constraintRight_toLeftOf="@+id/gl_2"/>
+
+        <android.support.constraint.Guideline
+            android:id="@+id/gl_2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_percent="0.67"/>
 
         <TextView
             android:id="@+id/tv_drinks_action"

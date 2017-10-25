@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.TextAppearanceSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -150,28 +151,28 @@ public class RoomFragment extends BaseFragment {
     /**
      * 获取房型列表
      */
-//    private void getRoomList() {
-//        showProgress();
-//        OkHttpUtils.post()
-//                .url(Network.User.PUBLIC_ROOM_TYPE)
-//                .addParams(Network.Param.STORE_ID, mStoreId)
-//                .build()
-//                .execute(new DCallback<RoomCategory>() {
-//                    @Override
-//                    public void onError(Call call, Exception e) {
-//                        connectError();
-//                    }
-//
-//                    @Override
-//                    public void onResponse(RoomCategory response) {
-//                        if (isSuccess(response)) {
-//                            if (response.room != null) {
-//                                showRoomList(response.room);
-//                            }
-//                        }
-//                    }
-//                });
-//    }
+    private void getRoomList() {
+        showProgress();
+        OkHttpUtils.post()
+                .url(Network.User.PUBLIC_HOUSE_TYPE)
+                .addParams(Network.Param.STORE_ID, mStoreId)
+                .build()
+                .execute(new DCallback<RoomCategory>() {
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        connectError();
+                    }
+
+                    @Override
+                    public void onResponse(RoomCategory response) {
+                        if (isSuccess(response)) {
+                            if (response.room != null) {
+                                showRoomList(response.room);
+                            }
+                        }
+                    }
+                });
+    }
 
     private void showRoomList(List<RoomCategory.Room> rooms) {
         this.rooms.addAll(rooms);

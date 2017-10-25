@@ -23,11 +23,19 @@ import com.fanc.wheretoplay.adapter.HouseTypeAdapter;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentBriefBinding;
 import com.fanc.wheretoplay.databinding.FragmentHousenewsBinding;
+import com.fanc.wheretoplay.datamodel.HousenewsBean;
+import com.fanc.wheretoplay.datamodel.StoreDetail;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
+import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.TopMenu;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.DCallback;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.Call;
 
 /**
  * Created by Administrator on 2017/9/14.
@@ -47,6 +55,7 @@ public class MerchantHouseNewsFragment extends BaseFragment {
     //集合
     private ArrayList<String> typeName;
     private ArrayList<String> price;
+    private List<HousenewsBean.ContentBean.StatusBean> housenews;
 
     @Nullable
     @Override
@@ -88,13 +97,14 @@ public class MerchantHouseNewsFragment extends BaseFragment {
         price.add("5800");
         price.add("1000");
         price.add("500");
+        getMerchantDetail(mStoreId);   //
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRc.setLayoutManager(linearLayoutManager);
         //自定义的recyclerview分割线
         RecycleViewDivider divider1 = new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL, UIUtils.dp2Px(1), UIUtils.getColor(R.color.btn_pressed));
         mRc.addItemDecoration(divider1);
-        HouseNewsAdapter houseTypeAdapter = new HouseNewsAdapter(mContext, typeName, price);
+        HouseNewsAdapter houseTypeAdapter = new HouseNewsAdapter(mContext, housenews);
         mRc.setAdapter(houseTypeAdapter);
     }
 
@@ -125,4 +135,30 @@ public class MerchantHouseNewsFragment extends BaseFragment {
         this.mStoreDiscount = mStoreDiscount;
         return this;
     }
+
+    private void getMerchantDetail(String id) {
+//        showProgress();
+        OkHttpUtils.post()
+                .url(Network.User.PUBLIC_HOUSENEWS)
+                .addParams(Network.Param.STORE_ID, id)
+                .build()
+                .execute(new DCallback<HousenewsBean>() {
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        connectError();
+                    }
+
+                    @Override
+                    public void onResponse(HousenewsBean response) {
+                        Log.e("Kobe","??????????????????????????" +(response.getContent()!=null));
+                        if (isSuccess(response)) {
+                            if (response.getContent() != null ) {
+                                housenews = response.getContent().getStatus();
+                                Log.e("Kobe","==========================" +  response.getContent().getStatus().size());
+                            }
+                        }
+                    }
+                });
+    }
+
 }

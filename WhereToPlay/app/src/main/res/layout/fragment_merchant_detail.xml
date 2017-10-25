@@ -145,7 +145,8 @@
                         android:layout_height="match_parent"
                         android:layout_gravity="center_vertical"
                         android:focusable="false"
-                        android:paddingTop="@dimen/padding_2" />
+                        android:paddingTop="@dimen/padding_2"
+                        android:visibility="gone"/>
 
                     <TextView
                         android:layout_width="wrap_content"

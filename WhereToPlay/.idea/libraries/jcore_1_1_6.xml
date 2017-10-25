@@ -1,8 +1,8 @@
 <component name="libraryTable">
   <library name="jcore-1.1.6">
     <CLASSES>
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jcore-1.1.6.aar/e8feade101df6e5d3e43ae9efb63e300/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jcore-1.1.6.aar/e8feade101df6e5d3e43ae9efb63e300/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jcore-1.1.6.aar/36c25fab059a2633773431150a6962b6/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/jcore-1.1.6.aar/36c25fab059a2633773431150a6962b6/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

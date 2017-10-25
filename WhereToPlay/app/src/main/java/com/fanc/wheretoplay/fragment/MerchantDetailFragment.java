@@ -528,7 +528,6 @@ public class MerchantDetailFragment extends BaseFragment {
                         if (isSuccess(response)) {
                             if (response.getStore() != null) {
                                 mStore = response.getStore();
-                                Log.e("Kobe",mStore.getRemark());
                                 showStoreDetail(mStore);
                                 shearedUrl = Network.BASE + "/" + response.getStore().getUrl();
                             }
