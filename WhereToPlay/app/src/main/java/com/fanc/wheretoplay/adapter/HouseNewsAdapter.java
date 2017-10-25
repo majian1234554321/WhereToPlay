@@ -31,7 +31,7 @@ public class HouseNewsAdapter extends RecyclerView.Adapter<HouseNewsAdapter.View
     public HouseNewsAdapter(Activity mContext, List<HousenewsBean.ContentBean.StatusBean> housenews) {
         this.mContext = mContext;
         this.housenews = housenews;
-        Log.e("Kobe","》》》》》》》》》》》》》》》》》" +  "静来了吗");
+        Log.e("Kobe", "》》》》》》》》》》》》》》》》》" + "静来了吗");
     }
 
     @Override
@@ -56,15 +56,17 @@ public class HouseNewsAdapter extends RecyclerView.Adapter<HouseNewsAdapter.View
             case 3:
                 holder.mIv.setImageResource(R.drawable.merchant_housenews_use_big);
                 break;
+            default:
+                break;
         }
     }
 
     @Override
     public int getItemCount() {
-        if (housenews == null ) {
-           return 0;
+        if (housenews == null) {
+            return 0;
         }
-        Log.e("Kobe","==========================" +  housenews.size());
+        Log.e("Kobe", "==========================" + housenews.size());
         return housenews.size();
     }
 

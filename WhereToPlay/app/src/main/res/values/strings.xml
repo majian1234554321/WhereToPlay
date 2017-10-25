@@ -123,6 +123,7 @@
     <string name="order">订单</string>
     <string name="collection">收藏</string>
     <string name="referral">推荐</string>
+    <string name="drive">代价</string>
 
     <!--mine info-->
     <string name="mine_info">我的资料</string>

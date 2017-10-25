@@ -393,6 +393,10 @@ public class MerchantDetailFragment extends BaseFragment {
                 Intent intent = new Intent(mContext, ReuseActivity.class);
                 intent.putExtra(Constants.PAGE, Constants.BRIEF);
                 intent.putExtra(Constants.DATA, briefUrl);
+                intent.putExtra(Constants.STORE_ID, mStoreId);
+                intent.putExtra(Constants.STORE_NAME, mTvMerchantDetailTitle.getText().toString());
+                intent.putExtra(Constants.DISCOUNT_COUPON, mTvMerchantDetailDiscountSum.getText().toString());
+                intent.putExtra(Constants.ADDRESS, mTvMerchantDetailAddress.getText().toString());
                 startActivity(intent);
             }
         });

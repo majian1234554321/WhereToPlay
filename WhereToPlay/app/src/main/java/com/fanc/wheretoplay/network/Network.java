@@ -35,7 +35,7 @@ public interface Network {
         String PUBLIC_WINE = USER + "Public/wine";// 酒水
         String PUBLIC_ROOM_TYPE = USER + "Public/roomtype";// 房型列表
         String PUBLIC_HOUSENEWS = USER + "Public/roomstatus";// 房态（新）
-        String PUBLIC_HOUSE_TYPE = USER + "Public/roomList";// 房型列表（新）
+        String PUBLIC_HOUSE_TYPE = USER + "Public/roomtype";// 房型列表（新）
 
         String COMMON_STORE_LIST = USER + "Common/storeList";//主页列表
         String COMMON_FILTER = USER + "Common/filter";// 筛选列表

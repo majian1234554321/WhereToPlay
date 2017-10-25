@@ -89,6 +89,8 @@
     <dimen name="view_margin">12dp</dimen>
     <dimen name="view_line_margin">20dp</dimen>
     <dimen name="indicator_height">2dp</dimen>
+    <dimen name="item_width_18">18dp</dimen>
+    <dimen name="item_height_18">18dp</dimen>
 
     <!--nice spinner-->
     <dimen name="three_grid_unit">0dp</dimen>
@@ -250,5 +252,8 @@
     <dimen name="custom_ev_border_radius">10dp</dimen>
     <dimen name="custom_ev_password_width">10dp</dimen>
     <integer name="default_ev_password_length">6</integer>
+
+    <!--mine-->
+    <dimen name="mine_text_13">13sp</dimen>
 
 </resources>

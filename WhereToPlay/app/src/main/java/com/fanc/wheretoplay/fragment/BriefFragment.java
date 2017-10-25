@@ -34,6 +34,10 @@ public class BriefFragment extends BaseFragment {
     private String mStoreName;
     private String mStoreAddress;
     private String mStoreDiscount;
+    private TextView mTvAddress;
+    private TextView mTvDiscount;
+    private TextView mTvDistance;
+    private TextView mTvTitle;
 
     @Nullable
     @Override
@@ -48,6 +52,11 @@ public class BriefFragment extends BaseFragment {
     private void initViews() {
         mBrief = binding.tmBrief;
         mWv = binding.wvBrief;
+        mTvAddress = binding.tvBriefAddress;
+        mTvDiscount = binding.tvBriefDiscountReal;
+        mTvDistance = binding.tvBriefDistance;
+        mTvTitle = binding.tvBriefTitle;
+
     }
 
     private void init() {
@@ -57,12 +66,12 @@ public class BriefFragment extends BaseFragment {
         mBrief.setTitle("简介");
         mBrief.setTitleColor(getResources().getColor(R.color.white));
         //地址、打折栏
-//        binding.tvRoomAddress.setText(mStoreAddress);
-//        binding.tvRoomTitle.setText(mStoreName);
-//        SpannableString text = new SpannableString(mStoreDiscount);
-//        text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-//        binding.tvRoomDiscountReal.setText(text, TextView.BufferType.SPANNABLE);
+        mTvAddress.setText(mStoreAddress);
+        mTvTitle.setText(mStoreName);
+        SpannableString text = new SpannableString(mStoreDiscount);
+        text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        mTvDiscount.setText(text, TextView.BufferType.SPANNABLE);
 
         if (briefUrl == null) {
             return;
@@ -89,7 +98,6 @@ public class BriefFragment extends BaseFragment {
 
     public BriefFragment setBriefUrl(String briefUrl) {
         this.briefUrl = briefUrl;
-        Log.e("Iverson", "llllllllllllllllllllll" + briefUrl);
         return this;
     }
 

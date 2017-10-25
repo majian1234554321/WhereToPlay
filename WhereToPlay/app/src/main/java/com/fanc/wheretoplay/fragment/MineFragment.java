@@ -45,7 +45,7 @@ public class MineFragment extends BaseFragment {
     CircleImageView mCivMine;
     TextView mTvMimeNickname;
     TextView mTvMimeId;
-    TextView mTvMimeMobile;
+//    TextView mTvMimeMobile;
     TextView mTvMimeIntegral;
     ItemView mIvMineMessage;
     ItemView mIvMineWallet;
@@ -54,10 +54,9 @@ public class MineFragment extends BaseFragment {
     ItemView mIvMineOrder;
     ItemView mIvMineCollection;
     ItemView mIvMineReferral;
-
+    private ItemView mTvMineDrive;
 
     Receiver receiver;
-
 
     @Nullable
     @Override
@@ -74,7 +73,7 @@ public class MineFragment extends BaseFragment {
         mCivMine = mineBinding.civMine;
         mTvMimeNickname = mineBinding.tvMineNickname;
         mTvMimeId = mineBinding.tvMineId;
-        mTvMimeMobile = mineBinding.tvMineMobile;
+//        mTvMimeMobile = mineBinding.tvMineMobile;
         mTvMimeIntegral = mineBinding.tvMineIntegral;
         mIvMineMessage = mineBinding.ivMineMessage;
         mIvMineWallet = mineBinding.ivMineWallet;
@@ -83,11 +82,13 @@ public class MineFragment extends BaseFragment {
         mIvMineOrder = mineBinding.ivMineOrder;
         mIvMineCollection = mineBinding.ivMineCollection;
         mIvMineReferral = mineBinding.ivMineReferral;
+        mTvMineDrive = mineBinding.ivMineDrive;
     }
 
     private void init() {
 //        mTmMine.setLeftIcon(R.drawable.left);
         mTmMine.setTitle(R.string.mine);
+        mTmMine.setTitleColor(getResources().getColor(R.color.white));
         mTmMine.setRightIcon(R.drawable.settings);
 
         mineBinding.setClick(this);
@@ -116,6 +117,9 @@ public class MineFragment extends BaseFragment {
         mIvMineReferral.setIcon(R.drawable.mine_referral);
         mIvMineReferral.setText(R.string.referral);
         mIvMineReferral.setRightIcon(R.drawable.right);
+        mTvMineDrive.setIcon(R.drawable.mine_driver);
+        mTvMineDrive.setText(R.string.drive);
+        mTvMineDrive.setRightIcon(R.drawable.right);
 
         registerBroadcastReceiver();
     }
@@ -145,7 +149,7 @@ public class MineFragment extends BaseFragment {
             mTvMimeNickname.setText(mUser.getNickname());
         }
         mTvMimeId.setText("ID:" + mUser.getShare_code());
-        mTvMimeMobile.setText(mUser.getMobile());
+//        mTvMimeMobile.setText(mUser.getMobile());
     }
 
     /**
@@ -194,7 +198,7 @@ public class MineFragment extends BaseFragment {
                 Glide.with(mContext).load(intent.getStringExtra(Constants.URL)).into(mCivMine);
             } else if (Constants.ACTION_MINE_INFO_MODIFY_SUCCESS.equals(action)) {
                 mTvMimeNickname.setText(intent.getStringExtra(Constants.NAME));
-                mTvMimeMobile.setText(intent.getStringExtra(Constants.MOBILE));
+//                mTvMimeMobile.setText(intent.getStringExtra(Constants.MOBILE));
             }
         }
     }
@@ -224,6 +228,9 @@ public class MineFragment extends BaseFragment {
                 break;
             case R.id.iv_mine_referral:
                 goToNewPage(Constants.REFERRAL);
+                break;
+            case R.id.iv_mine_drive:
+                goToNewPage(Constants.DRIVE);
                 break;
             default:
                 break;

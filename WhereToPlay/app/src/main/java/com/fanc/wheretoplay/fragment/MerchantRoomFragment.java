@@ -19,6 +19,7 @@ import com.fanc.wheretoplay.adapter.HouseTypeAdapter;
 import com.fanc.wheretoplay.adapter.RoomTypeAdapter;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentRoomBinding;
+import com.fanc.wheretoplay.datamodel.HouseTypeCategoryBean;
 import com.fanc.wheretoplay.datamodel.RoomCategory;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
 import com.fanc.wheretoplay.network.Network;
@@ -36,7 +37,7 @@ import okhttp3.Call;
  * Created by Administrator on 2017/9/14.
  */
 
-public class RoomFragment extends BaseFragment {
+public class MerchantRoomFragment extends BaseFragment {
     FragmentRoomBinding binding;
     /**
      * UI控件
@@ -57,7 +58,7 @@ public class RoomFragment extends BaseFragment {
     /**
      * 房型列表
      */
-    List<RoomCategory.Room> rooms;
+    List<HouseTypeCategoryBean.ContentBean.RoomBean> rooms;
     RoomTypeAdapter roomTypeAdapter;
     //  是否选择房型
     boolean isSelect;
@@ -121,21 +122,14 @@ public class RoomFragment extends BaseFragment {
         HouseTypeAdapter houseTypeAdapter = new HouseTypeAdapter(mContext, typeName, price);
         mRC.setAdapter(houseTypeAdapter);
 
-        //旧板块
-//        // 房型列表
-//        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
-//        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-//        mRvRoom.setLayoutManager(linearLayoutManager);
-//        RecycleViewDivider divider = new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL);
-//        mRvRoom.addItemDecoration(divider);
-//        rooms = new ArrayList<>();
-//        roomTypeAdapter = new RoomTypeAdapter(mContext, rooms);
+        // 房型列表
+        rooms = new ArrayList<>();
 //        if (isSelect) {
 //            roomTypeAdapter.setSelect(true);
 //        }
 //        mRvRoom.setAdapter(roomTypeAdapter);
-//        // 获取列表
-//        getRoomList();
+        // 获取列表
+        getRoomList();
 
     }
 
@@ -157,49 +151,51 @@ public class RoomFragment extends BaseFragment {
                 .url(Network.User.PUBLIC_HOUSE_TYPE)
                 .addParams(Network.Param.STORE_ID, mStoreId)
                 .build()
-                .execute(new DCallback<RoomCategory>() {
+                .execute(new DCallback<HouseTypeCategoryBean>() {
                     @Override
                     public void onError(Call call, Exception e) {
                         connectError();
                     }
 
                     @Override
-                    public void onResponse(RoomCategory response) {
+                    public void onResponse(HouseTypeCategoryBean response) {
+                        Log.e("Weda","??????????????????????????");
                         if (isSuccess(response)) {
-                            if (response.room != null) {
-                                showRoomList(response.room);
+                            if (response.getContent() != null) {
+
+                                showRoomList(response.getContent().getRoom());
                             }
                         }
                     }
                 });
     }
 
-    private void showRoomList(List<RoomCategory.Room> rooms) {
+    private void showRoomList(List<HouseTypeCategoryBean.ContentBean.RoomBean> rooms) {
         this.rooms.addAll(rooms);
         roomTypeAdapter.notifyDataSetChanged();
     }
 
-    public RoomFragment setStoreId(String mStoreId) {
+    public MerchantRoomFragment setStoreId(String mStoreId) {
         this.mStoreId = mStoreId;
         return this;
     }
 
-    public RoomFragment setStoreName(String mStoreName) {
+    public MerchantRoomFragment setStoreName(String mStoreName) {
         this.mStoreName = mStoreName;
         return this;
     }
 
-    public RoomFragment setStoreAddress(String mStoreAddress) {
+    public MerchantRoomFragment setStoreAddress(String mStoreAddress) {
         this.mStoreAddress = mStoreAddress;
         return this;
     }
 
-    public RoomFragment setStoreDiscount(String mStoreDiscount) {
+    public MerchantRoomFragment setStoreDiscount(String mStoreDiscount) {
         this.mStoreDiscount = mStoreDiscount;
         return this;
     }
 
-    public RoomFragment setSelect(boolean select) {
+    public MerchantRoomFragment setSelect(boolean select) {
         isSelect = select;
         return this;
     }

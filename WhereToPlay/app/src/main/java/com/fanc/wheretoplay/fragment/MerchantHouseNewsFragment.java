@@ -150,8 +150,8 @@ public class MerchantHouseNewsFragment extends BaseFragment {
 
                     @Override
                     public void onResponse(HousenewsBean response) {
-                        Log.e("Kobe","??????????????????????????" +(response.getContent()!=null));
                         if (isSuccess(response)) {
+                            Log.e("Kobe","??????????????????????????" +(response.getContent()!=null));
                             if (response.getContent() != null ) {
                                 housenews = response.getContent().getStatus();
                                 Log.e("Kobe","==========================" +  response.getContent().getStatus().size());

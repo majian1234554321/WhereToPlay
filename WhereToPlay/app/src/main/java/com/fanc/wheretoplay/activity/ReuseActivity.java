@@ -9,21 +9,18 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.LocalBroadcastManager;
-import android.util.Log;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.BaseFragmentActivity;
-import com.fanc.wheretoplay.fragment.ActionFragment;
 import com.fanc.wheretoplay.fragment.BriefFragment;
 import com.fanc.wheretoplay.fragment.CommentFragment;
 import com.fanc.wheretoplay.fragment.DateFragment;
 import com.fanc.wheretoplay.fragment.DrinksFragment;
 import com.fanc.wheretoplay.fragment.ListFragment;
 import com.fanc.wheretoplay.fragment.MerchantHouseNewsFragment;
-import com.fanc.wheretoplay.fragment.MineFragment;
 import com.fanc.wheretoplay.fragment.OrderToCompleteFragment;
 import com.fanc.wheretoplay.fragment.ReserveInfoFragment;
-import com.fanc.wheretoplay.fragment.RoomFragment;
+import com.fanc.wheretoplay.fragment.MerchantRoomFragment;
 import com.fanc.wheretoplay.fragment.SearchFragment;
 import com.fanc.wheretoplay.fragment.ToEvaluateFragment;
 import com.fanc.wheretoplay.util.Constants;
@@ -96,14 +93,14 @@ public class ReuseActivity extends BaseFragmentActivity {
                         .setStoreDiscount(intent.getStringExtra(Constants.DISCOUNT_COUPON)));
                 break;
             case Constants.ROOM:   //房型
-                initFragment(new RoomFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID))
+                initFragment(new MerchantRoomFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID))
                         .setStoreName(intent.getStringExtra(Constants.STORE_NAME))
                         .setStoreAddress(intent.getStringExtra(Constants.ADDRESS))
                         .setStoreDiscount(intent.getStringExtra(Constants.DISCOUNT_COUPON))
                         .setSelect(intent.getBooleanExtra(Constants.IS_CHOOSE, false)));
                 break;
             case Constants.BRIEF:   //简介
-                initFragment(new BriefFragment().setBriefUrl(intent.getStringExtra(Constants.DATA))
+                initFragment(new BriefFragment().setBriefUrl(intent.getStringExtra(Constants.STORE_ID))
                         .setStoreName(intent.getStringExtra(Constants.STORE_NAME))
                         .setStoreAddress(intent.getStringExtra(Constants.ADDRESS))
                         .setStoreDiscount(intent.getStringExtra(Constants.DISCOUNT_COUPON)));

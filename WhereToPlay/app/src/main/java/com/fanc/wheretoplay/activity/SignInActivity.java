@@ -45,6 +45,7 @@ public class SignInActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         DataBindingUtil.setContentView(this, R.layout.activity_signin);
         App.addActivity(this);
         init();

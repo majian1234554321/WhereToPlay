@@ -49,6 +49,7 @@ public interface Constants {
     String ORDER = "order";// 订单
     String COLLECTION = "collection";
     String REFERRAL = "referral";// 推荐
+    String DRIVE = "drive";// 代驾
     String DEAL_DETAIL = "deal_detail";
     String CONSUME_DETAIL = "consume_detail";
     String RECHARGE_DETAIL = "recharge_detail";

@@ -73,6 +73,7 @@ public class DiscoverFragment extends BaseFragment {
 
     private void init() {
         mTmDiscover.setTitle(R.string.discover);
+        mTmDiscover.setTitleColor(getResources().getColor(R.color.white));
         discoverBinding.setClick(this);
 
         final LinearLayoutManager lm = new LinearLayoutManager(mContext);

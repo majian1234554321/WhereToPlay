@@ -244,4 +244,9 @@
 
     <!--alter city-->
     <dimen name="side_letter_bar_letter_size">12sp</dimen>
+
+    <!--mine-->
+    <dimen name="item_width_18">18dp</dimen>
+    <dimen name="item_height_18">18dp</dimen>
+    <dimen name="mine_text_13">13sp</dimen>
 </resources>

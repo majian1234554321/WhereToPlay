@@ -97,6 +97,7 @@ public class RegisterFragment extends BaseFragment {
     private void init() {
         mTmRegister.setLeftIcon(R.drawable.left);
         mTmRegister.setTitle(R.string.register);
+        mTmRegister.setTitleColor(getResources().getColor(R.color.white));
         mTmRegister.setLeftIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

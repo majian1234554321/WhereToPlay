@@ -30,6 +30,7 @@ import com.fanc.wheretoplay.fragment.WaiterInfoFragment;
 import com.fanc.wheretoplay.fragment.WalletFragment;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LogUtils;
+import com.fanc.wheretoplay.util.ToastUtils;
 import com.umeng.socialize.UMShareAPI;
 
 /**
@@ -52,18 +53,18 @@ public class DetailActivity extends BaseFragmentActivity {
         initPage(intent.getStringExtra(Constants.PAGE));
     }
 
-    public String getStringExtra(){
+    public String getStringExtra() {
         return intent.getStringExtra(Constants.STORE_ID);
     }
 
     private void initPage(String page) {
         switch (page) {
             case Constants.MERCHANT_DETAIL:
-                Log.e("Iverson","MERCHANT_DETAIL");
+                Log.e("Iverson", "MERCHANT_DETAIL");
                 initFragment(new MerchantDetailFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID)));
                 break;
             case Constants.MINE_INFO:
-                Log.e("Iverson","MINE_INFO");
+                Log.e("Iverson", "MINE_INFO");
                 initFragment(new MineInfoFragment());
                 break;
             case Constants.MESSAGE:
@@ -79,7 +80,7 @@ public class DetailActivity extends BaseFragmentActivity {
                 initFragment(new DiscountCouponFragment().setChoose(intent.getBooleanExtra(Constants.IS_CHOOSE, false)));
                 break;
             case Constants.INTEGRAL:
-                Log.e("Iverson","INTEGRAL");
+                Log.e("Iverson", "INTEGRAL");
                 initFragment(new IntegralFragment());
                 break;
             case Constants.ORDER:
@@ -101,14 +102,14 @@ public class DetailActivity extends BaseFragmentActivity {
                 initFragment(new SystemNotifyFragment());
                 break;
             case Constants.ABOUT_US:
-                Log.e("Iverson","ABOUT_US");
+                Log.e("Iverson", "ABOUT_US");
                 initFragment(new AboutUsFragment());
                 break;
             case Constants.WAITER_INFO:
-                Log.e("Iverson","WAITER_INFO");
+                Log.e("Iverson", "WAITER_INFO");
 
                 initFragment(new WaiterInfoFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID))
-                .setSelect(intent.getBooleanExtra(Constants.IS_CHOOSE,false)));
+                        .setSelect(intent.getBooleanExtra(Constants.IS_CHOOSE, false)));
                 break;
 //            case Constants.WAITER_PHOTO:
 //                initFragment(new WaiterPhotoFragment().setBundle(intent.getExtras()), Constants.WAITER_PHOTO);
@@ -118,6 +119,10 @@ public class DetailActivity extends BaseFragmentActivity {
                 break;
             case Constants.COMMENT_DETAIL:
                 initFragment(new CommentDetailFragment());
+                break;
+            case Constants.DRIVE:
+                ToastUtils.makePicTextShortToast(this,"修复中，敬请期待！");
+//                initFragment(new CommentDetailFragment());
                 break;
             default:
                 break;

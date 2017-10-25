@@ -78,6 +78,8 @@
     <color name="color_eb">#EBEBEB</color>
     <color name="my_bg">#FFD204</color>
     <color name="my_bg_trans">#7E5D00</color>
+    <color name="editText">#BBBBBB</color>
+
 
     <!--按钮背景颜色-->
     <color name="btn_normal">#FCBA00</color>

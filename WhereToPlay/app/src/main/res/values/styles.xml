@@ -25,7 +25,7 @@
     <style name="line_style">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">@dimen/line_height</item>
-        <item name="android:background">@color/black</item>
+        <item name="android:background">@color/pay_reserve_list_divider_white</item>
     </style>
 
     <style name="line_style_1px">
