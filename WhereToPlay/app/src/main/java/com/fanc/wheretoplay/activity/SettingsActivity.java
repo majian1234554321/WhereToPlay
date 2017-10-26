@@ -90,31 +90,26 @@ public class SettingsActivity extends BaseActivity {
     private void init() {
         mTmSettings.setLeftIcon(R.drawable.left);
         mTmSettings.setTitle(R.string.settings);
+        mTmSettings.setTitleColor(getResources().getColor(R.color.white));
 
         mIvSettingSetPayPwd.isShowIcon(false);
         mIvSettingSetPayPwd.setText(R.string.set_pay_pwd);
         mIvSettingSetPayPwd.setRightIcon(R.drawable.right);
-        mIvSettingSetPayPwd.setLineColor(mContext.getResources().getColor(R.color.pay_reserve_list_divider));
         mIvSettingAdviceFeedback.isShowIcon(false);
         mIvSettingAdviceFeedback.setText(R.string.advice_feedback);
         mIvSettingAdviceFeedback.setRightIcon(R.drawable.right);
-        mIvSettingAdviceFeedback.setLineColor(mContext.getResources().getColor(R.color.pay_reserve_list_divider));
         mIvSettingSystemNotify.isShowIcon(false);
         mIvSettingSystemNotify.setText(R.string.system_notify);
         mIvSettingSystemNotify.setRightIcon(R.drawable.right);
-        mIvSettingSystemNotify.setLineColor(mContext.getResources().getColor(R.color.pay_reserve_list_divider));
         mIvSettingCheckToUpdate.isShowIcon(false);
         mIvSettingCheckToUpdate.setText(R.string.check_to_update);
         mIvSettingCheckToUpdate.setRightIcon(R.drawable.right);
-        mIvSettingCheckToUpdate.setLineColor(mContext.getResources().getColor(R.color.pay_reserve_list_divider));
         mIvSettingClearCache.isShowIcon(false);
         mIvSettingClearCache.setText(R.string.clear_cache);
         mIvSettingClearCache.setRightIcon(R.drawable.right);
-        mIvSettingClearCache.setLineColor(mContext.getResources().getColor(R.color.pay_reserve_list_divider));
         mIvSettingAboutUs.isShowIcon(false);
         mIvSettingAboutUs.setText(R.string.about_us);
         mIvSettingAboutUs.setRightIcon(R.drawable.right);
-        mIvSettingAboutUs.setLineColor(mContext.getResources().getColor(R.color.pay_reserve_list_divider));
 
         mIvSettingCheckToUpdate.setRightText(UIUtils.getAppVersionName());
         mDialog = new ProgressDialog(this);

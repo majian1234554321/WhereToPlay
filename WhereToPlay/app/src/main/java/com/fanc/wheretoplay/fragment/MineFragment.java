@@ -24,6 +24,7 @@ import com.fanc.wheretoplay.databinding.FragmentMineBinding;
 import com.fanc.wheretoplay.datamodel.Score;
 import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.Constants;
+import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.CircleImageView;
 import com.fanc.wheretoplay.view.ItemView;
@@ -230,7 +231,8 @@ public class MineFragment extends BaseFragment {
                 goToNewPage(Constants.REFERRAL);
                 break;
             case R.id.iv_mine_drive:
-                goToNewPage(Constants.DRIVE);
+                ToastUtils.makePicTextShortToast(mContext,"修复中，敬请期待！");
+//                goToNewPage(Constants.DRIVE);
                 break;
             default:
                 break;

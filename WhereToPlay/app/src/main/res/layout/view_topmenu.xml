@@ -23,7 +23,9 @@
                 android:layout_width="@dimen/menu_height"
                 android:layout_height="@dimen/menu_height"
                 android:layout_centerVertical="true"
-                android:scaleType="center"/>
+                android:scaleType="center"
+                android:layout_alignParentStart="true"
+                />
 
             <TextView
                 android:id="@+id/menu_tv_lefttext"

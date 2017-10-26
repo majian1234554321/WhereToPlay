@@ -38,8 +38,10 @@
     <string name="mobile">手机号</string>
     <string name="mobile1">手机</string>
     <string name="password">密码</string>
+    <string name="register_nickname">昵称</string>
     <string name="hint_mobile">请输入手机号</string>
     <string name="hint_password">请输入密码</string>
+    <string name="hint_nickname">请输入姓名或昵称</string>
     <string name="forget_password">忘记密码？</string>
     <string name="mobile_register">手机注册</string>
     <string name="signin">登录</string>
@@ -52,6 +54,8 @@
     <string name="immediately_experience">立即体验</string>
     <string name="redeem_code">推广码</string>
     <string name="hint_redeem_code">请输入推广码</string>
+    <string name="agreement_left">注册即表示同意</string>
+    <string name="agreement_right">《乐互网用户协议》</string>
 
     <!--Tab-->
     <string name="reserve">预订</string>

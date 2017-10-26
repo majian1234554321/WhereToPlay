@@ -31,7 +31,6 @@ public class HouseNewsAdapter extends RecyclerView.Adapter<HouseNewsAdapter.View
     public HouseNewsAdapter(Activity mContext, List<HousenewsBean.ContentBean.StatusBean> housenews) {
         this.mContext = mContext;
         this.housenews = housenews;
-        Log.e("Kobe", "》》》》》》》》》》》》》》》》》" + "静来了吗");
     }
 
     @Override
@@ -66,7 +65,6 @@ public class HouseNewsAdapter extends RecyclerView.Adapter<HouseNewsAdapter.View
         if (housenews == null) {
             return 0;
         }
-        Log.e("Kobe", "==========================" + housenews.size());
         return housenews.size();
     }
 

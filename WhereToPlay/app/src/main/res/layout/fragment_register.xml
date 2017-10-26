@@ -57,7 +57,7 @@
                 android:gravity="center"
                 android:onClick="@{doClick.onClick}"
                 android:text="@string/city"
-                android:textColor="@color/text_black"
+                android:textColor="@color/editText"
                 android:textSize="@dimen/normal_textsize"/>
 
             <TextView
@@ -86,10 +86,35 @@
                 android:textSize="@dimen/normal_textsize"/>
 
             <TextView
-                android:id="@+id/tv_register_password"
+                android:id="@+id/tv_register_nickname"
                 android:layout_width="@dimen/width_80"
                 android:layout_height="@dimen/height_40"
                 android:layout_below="@+id/tv_register_mobile"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/margin_15"
+                android:text="@string/register_nickname"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <EditText
+                android:id="@+id/et_register_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_40"
+                android:layout_alignBottom="@+id/tv_register_nickname"
+                android:layout_toRightOf="@+id/tv_register_nickname"
+                android:background="@null"
+                android:hint="@string/hint_nickname"
+                android:inputType="textPassword"
+                android:maxLength="20"
+                android:textColor="@color/text_black"
+                android:textColorHint="@color/editText"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <TextView
+                android:id="@+id/tv_register_password"
+                android:layout_width="@dimen/width_80"
+                android:layout_height="@dimen/height_40"
+                android:layout_below="@+id/tv_register_nickname"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/margin_15"
                 android:text="@string/password"
@@ -188,6 +213,12 @@
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height_1px"
+                android:layout_below="@+id/tv_register_nickname"
+                android:background="@color/pay_reserve_list_divider_white"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height_1px"
                 android:layout_below="@+id/tv_register_password"
                 android:background="@color/pay_reserve_list_divider_white"/>
 
@@ -214,5 +245,29 @@
             app:layout_constraintStart_toStartOf="@+id/rl_register_user_input"
             app:layout_constraintTop_toBottomOf="@+id/rl_register_user_input"/>
 
+        <TextView
+            android:id="@+id/tv_agreement_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_15"
+            android:text="@string/agreement_left"
+            android:textColor="@color/editText"
+            app:layout_constraintTop_toBottomOf="@+id/btn_register"
+            app:layout_constraintStart_toStartOf="@+id/rl_register_user_input"
+            app:layout_constraintEnd_toStartOf="@+id/tv_agreement_right"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:textSize="@dimen/normal_textsize"
+            />
+        <TextView
+            android:id="@+id/tv_agreement_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/agreement_right"
+            android:textColor="@color/text_red"
+            app:layout_constraintTop_toTopOf="@+id/tv_agreement_left"
+            app:layout_constraintEnd_toEndOf="@+id/rl_register_user_input"
+            app:layout_constraintStart_toEndOf="@+id/tv_agreement_left"
+            android:textSize="@dimen/normal_textsize"
+            />
     </android.support.constraint.ConstraintLayout>
 </layout>

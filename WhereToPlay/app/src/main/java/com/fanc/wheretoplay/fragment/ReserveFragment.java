@@ -154,6 +154,17 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
     private LinearLayout mLlCommercialKtv;
     private LinearLayout mLlBar;
     private LinearLayout mLlVolumeSales;
+    private ImageView mIvCommericalKtv;
+    private ImageView mIvVolumeSales;
+    private ImageView mIvReserveBar;
+    private TextView mTvCommercialKtv;
+    private TextView mTvVolumeSales;
+    private TextView mTvReserveBar;
+
+    /**
+     * 选中的娱乐分栏图标
+     */
+    int selectedId;
 
     @Nullable
     @Override
@@ -208,9 +219,17 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
         mLlCommercialKtv = reserveBinding.llReserveCommercialKtv;
         mLlBar = reserveBinding.llReserveBar;
         mLlVolumeSales = reserveBinding.llReserveVolumeSales;
+        mIvCommericalKtv = reserveBinding.ivReserveCommercialKtv;
+        mIvVolumeSales = reserveBinding.ivReserveVolumeSales;
+        mIvReserveBar = reserveBinding.ivReserveReserveBar;
+        mTvCommercialKtv = reserveBinding.tvReserveCommercialKtv;
+        mTvVolumeSales = reserveBinding.tvReserveVolumeSales;
+        mTvReserveBar = reserveBinding.tvReserveReserveBar;
+
     }
 
     private void init() {
+        clickToChange(0);
         //设置字体
         AssetManager assets = App.getContext().getAssets();
         Typeface font = Typeface.createFromAsset(assets, "fonts/trends .ttf");
@@ -395,6 +414,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mClick(num);
                 if (filterStoreType.size() > 0) {
                     setStoreType(filterStoreType.get(num).getId());
                     ToastUtils.makePicTextShortToast(getActivity(), name);
@@ -403,6 +423,81 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
                 }
             }
         });
+    }
+
+    /**
+     * 点击同一个图标不会改变第二次
+     * @param num
+     */
+    private void mClick(int num) {
+        switch (num) {
+            case 0:
+                if (selectedId != 0) {
+                    clickToChange(0);
+                }
+                break;
+            case 1:
+                if (selectedId != 1) {
+                    clickToChange(1);
+                }
+                break;
+            case 3:
+                if (selectedId != 3) {
+                    clickToChange(3);
+                }
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void clickToChange(int num) {
+        clickToPress(num);
+        setSelectedId(num);
+    }
+
+    private void clickToPress(int num) {
+
+        //不按时
+        mIvCommericalKtv.setImageResource(R.drawable.reserve_commercial_ktv);
+        mTvCommercialKtv.setTextColor(getResources().getColor(R.color.text_black));
+        mIvVolumeSales.setImageResource(R.drawable.reserve_volume_sales);
+        mTvVolumeSales.setTextColor(getResources().getColor(R.color.text_black));
+        mIvReserveBar.setImageResource(R.drawable.reserve_bar);
+        mTvReserveBar.setTextColor(getResources().getColor(R.color.text_black));
+        //按下时
+        switch (num) {
+            case 0:
+                    mIvCommericalKtv.setImageResource(R.drawable.reserve_commercial_ktv_in);
+                    mTvCommercialKtv.setTextColor(getResources().getColor(R.color.text_red));
+                    setSelectedId(num);
+                break;
+            case 1:
+                    mIvVolumeSales.setImageResource(R.drawable.reserve_volume_sales_in);
+                    mTvVolumeSales.setTextColor(getResources().getColor(R.color.text_red));
+                break;
+            case 3:
+                    mIvReserveBar.setImageResource(R.drawable.reserve_bar_in);
+                    mTvReserveBar.setTextColor(getResources().getColor(R.color.text_red));
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void setSelectedId(int num) {
+        switch (num) {
+            case 0:
+                selectedId = 0;
+                break;
+            case 1:
+                selectedId = 1;
+                break;
+            case 3:
+                selectedId = 3;
+            default:
+                break;
+        }
     }
 
     private void newPopupWindow() {

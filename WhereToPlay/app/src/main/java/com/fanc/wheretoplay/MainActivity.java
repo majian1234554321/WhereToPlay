@@ -86,6 +86,11 @@ public class MainActivity extends BaseFragmentActivity {
     LinearLayout mLlTabPay;
     LinearLayout mLlTabDiscover;
     private LinearLayout mLlMine;
+    private TextView tvMainTabDiscover;
+    private TextView tvMainTabMine;
+    private TextView tvMainTabPay;
+    private TextView tvMainTabReserve;
+
     /**
      * 选中的导航栏
      */
@@ -125,6 +130,7 @@ public class MainActivity extends BaseFragmentActivity {
     public boolean isOpen;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -159,6 +165,10 @@ public class MainActivity extends BaseFragmentActivity {
         mLlTabPay = mainBinding.llMainTabPay;
         mLlTabDiscover = mainBinding.llMainTabDiscover;
         mLlMine = mainBinding.llMainTabMine;
+        tvMainTabDiscover = mainBinding.tvMainTabDiscover;
+        tvMainTabMine = mainBinding.tvMainTabMine;
+        tvMainTabPay = mainBinding.tvMainTabPay;
+        tvMainTabReserve = mainBinding.tvMainTabReserve;
         Log.w("llm", "MainActivity（133）：RegistrationID =  " + JPushInterface.getRegistrationID(this));
     }
 
@@ -263,6 +273,10 @@ public class MainActivity extends BaseFragmentActivity {
         mIvPay.setImageResource(R.drawable.reserve_pay);
         mIvDiscover.setImageResource(R.drawable.discover);
         mIvMine.setImageResource(R.drawable.mine);
+        tvMainTabDiscover.setTextColor(getResources().getColor(R.color.reserve_unpress));
+        tvMainTabMine.setTextColor(getResources().getColor(R.color.reserve_unpress));
+        tvMainTabPay.setTextColor(getResources().getColor(R.color.reserve_unpress));
+        tvMainTabReserve.setTextColor(getResources().getColor(R.color.reserve_unpress));
 
         // 选中的大图标显示，小图标隐藏
         switch (position) {
@@ -270,19 +284,23 @@ public class MainActivity extends BaseFragmentActivity {
 //                mIvReserve.setAlpha(0F);
 //                mIvReserveBig.setAlpha(1F);
                 mIvReserve.setImageResource(R.drawable.reserve_book_in);
+                tvMainTabReserve.setTextColor(getResources().getColor(R.color.text_red));
                 break;
             case 1:
 //                mIvPay.setAlpha(0F);
 //                mIvPayBig.setAlpha(1F);
                 mIvPay.setImageResource(R.drawable.reserve_pay_in);
+                tvMainTabPay.setTextColor(getResources().getColor(R.color.text_red));
                 break;
             case 2:
 //                mIvDiscover.setAlpha(0F);
 //                mIvDiscoverBig.setAlpha(1F);
                 mIvDiscover.setImageResource(R.drawable.discover_in);
+                tvMainTabDiscover.setTextColor(getResources().getColor(R.color.text_red));
                 break;
             case 3:
                 mIvMine.setImageResource(R.drawable.mine_in);
+                tvMainTabMine.setTextColor(getResources().getColor(R.color.text_red));
                 break;
             default:
                 break;

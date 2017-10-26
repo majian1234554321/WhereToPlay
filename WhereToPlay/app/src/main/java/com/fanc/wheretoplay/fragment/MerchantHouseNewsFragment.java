@@ -27,15 +27,28 @@ import com.fanc.wheretoplay.datamodel.HousenewsBean;
 import com.fanc.wheretoplay.datamodel.StoreDetail;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.util.LogUtils;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.TopMenu;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
+import org.json.JSONObject;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.FormBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
 
 /**
  * Created by Administrator on 2017/9/14.
@@ -55,7 +68,7 @@ public class MerchantHouseNewsFragment extends BaseFragment {
     //集合
     private ArrayList<String> typeName;
     private ArrayList<String> price;
-    private List<HousenewsBean.ContentBean.StatusBean> housenews;
+    private HousenewsBean housenews;
 
     @Nullable
     @Override
@@ -104,8 +117,7 @@ public class MerchantHouseNewsFragment extends BaseFragment {
         //自定义的recyclerview分割线
         RecycleViewDivider divider1 = new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL, UIUtils.dp2Px(1), UIUtils.getColor(R.color.btn_pressed));
         mRc.addItemDecoration(divider1);
-        HouseNewsAdapter houseTypeAdapter = new HouseNewsAdapter(mContext, housenews);
-        mRc.setAdapter(houseTypeAdapter);
+
     }
 
     private void initListener() {
@@ -138,27 +150,59 @@ public class MerchantHouseNewsFragment extends BaseFragment {
 
     private void getMerchantDetail(String id) {
 //        showProgress();
-        OkHttpUtils.post()
+//        OkHttpUtils.post()
+//                .url(Network.User.PUBLIC_HOUSENEWS)
+//                .addParams(Network.Param.STORE_ID, id)
+//                .build()
+//                .execute(new DCallback<HousenewsBean>() {
+//                    @Override
+//                    public void onError(Call call, Exception e) {
+//                        connectError();
+//                    }
+//
+//                    @Override
+//                    public void onResponse(HousenewsBean response) {
+//                        if (isSuccess(response)) {
+//                            Log.e("Kobe","??????????????????????????" +(response.getContent()!=null));
+//                            if (response.getContent() != null ) {
+//                                housenews = response.getContent().getStatus();
+//                                Log.e("Kobe","==========================" +  response.getContent().getStatus().size());
+//                            }
+//                        }
+//                    }
+//                });
+        OkHttpClient okHttpClient = new OkHttpClient();
+        RequestBody body = new FormBody.Builder()
+                .add(Network.Param.STORE_ID, id)
+                .build();
+        Request request = new Request.Builder()
                 .url(Network.User.PUBLIC_HOUSENEWS)
-                .addParams(Network.Param.STORE_ID, id)
-                .build()
-                .execute(new DCallback<HousenewsBean>() {
-                    @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
-                    }
+                .post(body)
+                .build();
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(Call call, IOException e) {
 
-                    @Override
-                    public void onResponse(HousenewsBean response) {
-                        if (isSuccess(response)) {
-                            Log.e("Kobe","??????????????????????????" +(response.getContent()!=null));
-                            if (response.getContent() != null ) {
-                                housenews = response.getContent().getStatus();
-                                Log.e("Kobe","==========================" +  response.getContent().getStatus().size());
+            }
+
+            @Override
+            public void onResponse(Call call, Response response) throws IOException {
+                if (response.isSuccessful()) {
+                    Gson gson = new Gson();
+                    housenews = gson.fromJson(response.body().string(), HousenewsBean.class);
+                    mContext.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (housenews != null) {
+                                HouseNewsAdapter houseTypeAdapter = new HouseNewsAdapter(mContext, housenews.getContent().getStatus());
+                                mRc.setAdapter(houseTypeAdapter);
                             }
                         }
-                    }
-                });
+                    });
+                }
+            }
+        });
+
     }
 
 }

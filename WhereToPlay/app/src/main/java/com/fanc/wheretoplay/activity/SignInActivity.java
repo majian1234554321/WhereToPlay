@@ -174,6 +174,19 @@ public class SignInActivity extends BaseFragmentActivity {
     }
 
     /**
+     * 验证昵称
+     * @param nickname
+     * @return
+     */
+    public boolean nicknameFormat(String nickname) {
+        if (TextUtils.isEmpty(nickname)) {
+            ToastUtils.showShortToast(mContext, "请输入昵称");
+            return false;
+        }
+        return true;
+    }
+
+    /**
      * 跳转主页
      */
     public void startActivityToHome() {

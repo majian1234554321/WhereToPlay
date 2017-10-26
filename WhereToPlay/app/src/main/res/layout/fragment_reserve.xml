@@ -81,6 +81,7 @@
                                 android:text="@string/reserve_entertainment"
                                 android:textSize="@dimen/textsize_levelmedium"
                                 android:layout_marginTop="@dimen/margin_10"
+                                android:textColor="@color/text_black"
                                 />
                         </LinearLayout>
 
@@ -98,19 +99,23 @@
                                 >
 
                                 <ImageView
+                                    android:id="@+id/iv_reserve_commercial_ktv"
                                     android:layout_width="@dimen/width_50"
                                     android:layout_height="@dimen/height_50"
                                     android:src="@drawable/reserve_commercial_ktv"
                                     android:layout_marginTop="@dimen/margin_15"
-                                    android:layout_gravity="center_horizontal"/>
+                                    android:layout_gravity="center_horizontal"
+                                    />
 
                                 <TextView
+                                    android:id="@+id/tv_reserve_commercial_ktv"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/reserve_commercial_ktv"
                                     android:textSize="@dimen/textsize_levelmedium"
                                     android:layout_marginTop="@dimen/margin_10"
-                                    android:layout_gravity="center_horizontal"/>
+                                    android:layout_gravity="center_horizontal"
+                                    android:textColor="@color/text_black"/>
 
                             </LinearLayout>
 
@@ -123,19 +128,23 @@
                                 >
 
                                 <ImageView
+                                    android:id="@+id/iv_reserve_volume_sales"
                                     android:layout_width="@dimen/width_50"
                                     android:layout_height="@dimen/height_50"
                                     android:src="@drawable/reserve_volume_sales"
                                     android:layout_marginTop="@dimen/margin_15"
-                                    android:layout_gravity="center_horizontal"/>
+                                    android:layout_gravity="center_horizontal"
+                                    />
 
                                 <TextView
+                                    android:id="@+id/tv_reserve_volume_sales"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/reserve_volume_sales"
                                     android:layout_marginTop="@dimen/margin_10"
                                     android:textSize="@dimen/textsize_levelmedium"
-                                    android:layout_gravity="center_horizontal"/>
+                                    android:layout_gravity="center_horizontal"
+                                    android:textColor="@color/text_black"/>
 
                             </LinearLayout>
 
@@ -148,6 +157,7 @@
                                 >
 
                                 <ImageView
+                                    android:id="@+id/iv_reserve_reserve_bar"
                                     android:layout_width="@dimen/width_50"
                                     android:layout_height="@dimen/height_50"
                                     android:src="@drawable/reserve_bar"
@@ -155,12 +165,14 @@
                                     android:layout_gravity="center_horizontal"/>
 
                                 <TextView
+                                    android:id="@+id/tv_reserve_reserve_bar"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:text="@string/reserve_bar"
                                     android:layout_marginTop="@dimen/margin_10"
                                     android:layout_gravity="center_horizontal"
                                     android:textSize="@dimen/textsize_levelmedium"
+                                    android:textColor="@color/text_black"
                                     />
 
                             </LinearLayout>
@@ -243,118 +255,6 @@
 
                     </LinearLayout>
 
-                    <!--
-                                        <LinearLayout
-                                            android:id="@+id/ll_reserve_filter"
-                                            android:layout_width="match_parent"
-                                            android:layout_height="@dimen/height_40"
-                                            android:background="@color/filter"
-                                            android:gravity="center_vertical"
-                                            android:orientation="horizontal">
-
-                                            <LinearLayout
-                                                android:id="@+id/ll_reserve_area"
-                                                android:layout_width="@dimen/width_0"
-                                                android:layout_height="match_parent"
-                                                android:layout_weight="1"
-                                                android:gravity="center"
-                                                android:orientation="horizontal">
-
-                                                <TextView
-                                                    android:id="@+id/tv_reserve_area"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="match_parent"
-                                                    android:gravity="center"
-                                                    android:text="@string/area_filter"
-                                                    android:textColor="@color/white"
-                                                    android:textSize="@dimen/textsize_levelsmall"/>
-
-                                                <ImageView
-                                                    android:id="@+id/iv_reserve_area"
-                                                    android:layout_width="@dimen/width_20"
-                                                    android:layout_height="@dimen/height_36"
-                                                    android:padding="@dimen/padding_5"
-                                                    android:src="@drawable/pull_down_3"/>
-                                            </LinearLayout>
-
-
-                                            <View
-                                                android:id="@+id/v_reserve_divider1"
-                                                android:layout_width="@dimen/line_height"
-                                                android:layout_height="@dimen/height_15"
-                                                android:background="@color/white"
-                                                app:layout_constraintBottom_toBottomOf="parent"
-                                                app:layout_constraintEnd_toStartOf="@+id/tv_reserve_filter"
-                                                app:layout_constraintHorizontal_bias="0.5"
-                                                app:layout_constraintStart_toEndOf="@+id/tv_reserve_area"
-                                                app:layout_constraintTop_toTopOf="parent"
-                                                app:layout_constraintVertical_bias="0.52"/>
-
-                                            <LinearLayout
-                                                android:id="@+id/ll_reserve_filter_real"
-                                                android:layout_width="@dimen/width_0"
-                                                android:layout_height="match_parent"
-                                                android:layout_weight="1"
-                                                android:gravity="center"
-                                                android:orientation="horizontal">
-
-                                                <TextView
-                                                    android:id="@+id/tv_reserve_filter"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="match_parent"
-                                                    android:gravity="center"
-                                                    android:text="@string/filter"
-                                                    android:textColor="@color/white"
-                                                    android:textSize="@dimen/textsize_levelsmall"/>
-
-                                                <ImageView
-                                                    android:id="@+id/iv_reserve_filter"
-                                                    android:layout_width="@dimen/width_20"
-                                                    android:layout_height="@dimen/height_36"
-                                                    android:padding="@dimen/padding_5"
-                                                    android:src="@drawable/pull_down_3"/>
-                                            </LinearLayout>
-
-
-                                            <View
-                                                android:id="@+id/v_reserve_divider2"
-                                                android:layout_width="@dimen/line_height"
-                                                android:layout_height="@dimen/height_15"
-                                                android:background="@color/white"
-                                                app:layout_constraintBottom_toBottomOf="parent"
-                                                app:layout_constraintEnd_toStartOf="@+id/tv_reserve_category"
-                                                app:layout_constraintHorizontal_bias="0.5"
-                                                app:layout_constraintStart_toEndOf="@+id/tv_reserve_filter"
-                                                app:layout_constraintTop_toTopOf="parent"
-                                                app:layout_constraintVertical_bias="0.52"/>
-
-                                            <LinearLayout
-                                                android:id="@+id/ll_reserve_category"
-                                                android:layout_width="@dimen/width_0"
-                                                android:layout_height="match_parent"
-                                                android:layout_weight="1"
-                                                android:gravity="center"
-                                                android:orientation="horizontal">
-
-                                                <TextView
-                                                    android:id="@+id/tv_reserve_category"
-                                                    android:layout_width="wrap_content"
-                                                    android:layout_height="match_parent"
-                                                    android:gravity="center"
-                                                    android:text="@string/all"
-                                                    android:textColor="@color/white"
-                                                    android:textSize="@dimen/textsize_levelsmall"/>
-
-                                                <ImageView
-                                                    android:id="@+id/iv_reserve_category"
-                                                    android:layout_width="@dimen/width_20"
-                                                    android:layout_height="@dimen/height_36"
-                                                    android:padding="@dimen/padding_5"
-                                                    android:src="@drawable/pull_down_3"/>
-                                            </LinearLayout>
-
-                                        </LinearLayout>
-                    -->
 
                     <com.fanc.wheretoplay.view.MyRecycleView
                         android:id="@+id/rv_reserve"
