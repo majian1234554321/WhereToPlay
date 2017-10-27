@@ -100,7 +100,7 @@ public class ReuseActivity extends BaseFragmentActivity {
                         .setSelect(intent.getBooleanExtra(Constants.IS_CHOOSE, false)));
                 break;
             case Constants.BRIEF:   //简介
-                initFragment(new BriefFragment().setBriefUrl(intent.getStringExtra(Constants.STORE_ID))
+                initFragment(new BriefFragment().setBriefUrl(intent.getStringExtra(Constants.DATA))
                         .setStoreName(intent.getStringExtra(Constants.STORE_NAME))
                         .setStoreAddress(intent.getStringExtra(Constants.ADDRESS))
                         .setStoreDiscount(intent.getStringExtra(Constants.DISCOUNT_COUPON)));

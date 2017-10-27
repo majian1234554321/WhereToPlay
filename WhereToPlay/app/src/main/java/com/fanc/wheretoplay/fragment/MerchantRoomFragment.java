@@ -95,10 +95,15 @@ public class MerchantRoomFragment extends BaseFragment {
         // 店铺信息
         mTvRoomTitle.setText(mStoreName);
         mTvRoomAddress.setText(mStoreAddress);
-        SpannableString text = new SpannableString(mStoreDiscount);
-        text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        mTvRoomDiscount.setText(text, TextView.BufferType.SPANNABLE);
+        //打折
+        if (mStoreDiscount.length() == 0) {
+            mTvRoomDiscount.setVisibility(View.GONE);
+        } else {
+            SpannableString text = new SpannableString(mStoreDiscount);
+            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            mTvRoomDiscount.setText(text, TextView.BufferType.SPANNABLE);
+        }
 
         //列表
         typeName = new ArrayList<>();

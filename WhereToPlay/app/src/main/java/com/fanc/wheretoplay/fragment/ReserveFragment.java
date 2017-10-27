@@ -417,7 +417,6 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
                 mClick(num);
                 if (filterStoreType.size() > 0) {
                     setStoreType(filterStoreType.get(num).getId());
-                    ToastUtils.makePicTextShortToast(getActivity(), name);
                 } else {
                     ToastUtils.makePicTextShortToast(getActivity(), "没有数据");
                 }
@@ -1124,9 +1123,10 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
         if (hasFocus) {
             if (mLlSuspendTop == 0 || mLlSuspendBottom == 0) {
                 //"区域 风格" 栏的测量
-                mLlSuspendTop = mLlReserveFilter.getTop();
-                mLlSuspendBottom = mLlReserveFilter.getBottom();
-
+                if (mLlReserveFilter != null) {
+                    mLlSuspendTop = mLlReserveFilter.getTop();
+                    mLlSuspendBottom = mLlReserveFilter.getBottom();
+                }
             }
         }
     }

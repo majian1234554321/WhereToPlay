@@ -21,7 +21,14 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="0dp"/>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:background="@color/pay_reserve_list_divider_white"
+                app:layout_constraintBottom_toTopOf="@+id/ll_main_tab"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
             <!--底部选择栏-->
             <LinearLayout
                 android:id="@+id/ll_main_tab"

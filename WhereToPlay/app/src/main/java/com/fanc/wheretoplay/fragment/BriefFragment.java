@@ -38,6 +38,7 @@ public class BriefFragment extends BaseFragment {
     private TextView mTvDiscount;
     private TextView mTvDistance;
     private TextView mTvTitle;
+    private int length;
 
     @Nullable
     @Override
@@ -68,10 +69,15 @@ public class BriefFragment extends BaseFragment {
         //地址、打折栏
         mTvAddress.setText(mStoreAddress);
         mTvTitle.setText(mStoreName);
-        SpannableString text = new SpannableString(mStoreDiscount);
-        text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        mTvDiscount.setText(text, TextView.BufferType.SPANNABLE);
+        //打折
+        if (mStoreDiscount.length() == 0) {
+            mTvDiscount.setVisibility(View.GONE);
+        } else {
+            SpannableString text = new SpannableString(mStoreDiscount);
+            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            mTvDiscount.setText(text, TextView.BufferType.SPANNABLE);
+        }
 
         if (briefUrl == null) {
             return;
