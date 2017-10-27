@@ -19,10 +19,11 @@
 
             <ImageView
                 android:id="@+id/pull_icon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="@dimen/width_18"
+                android:layout_height="@dimen/height_30"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="60dp"
+                android:layout_marginEnd="@dimen/margin_8"
+                android:layout_toStartOf="@+id/state_tv"
                 android:background="@drawable/pull_icon_big" />
 
             <ImageView
@@ -30,7 +31,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:layout_marginLeft="60dp"
+                android:layout_marginEnd="@dimen/margin_8"
+                android:layout_toStartOf="@+id/state_tv"
                 android:background="@drawable/refreshing"
                 android:visibility="gone" />
 

@@ -11,24 +11,21 @@ import android.text.style.TextAppearanceSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
+import com.fanc.wheretoplay.adapter.DrinkAdapter;
 import com.fanc.wheretoplay.adapter.DrinksAdapter;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentDrinksBinding;
 import com.fanc.wheretoplay.datamodel.Drinks;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
-import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.TopMenu;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.DCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.Call;
 
 /**
  * Created by Administrator on 2017/9/14.
@@ -38,7 +35,6 @@ public class DrinksFragment extends BaseFragment {
     FragmentDrinksBinding binding;
 
     TopMenu mTmDrinks;
-    RecyclerView mRvDrinks;
     TextView mTvDrinksTitle;
     TextView mTvDrinksDiscount;
     TextView mTvDrinksAddress;
@@ -56,6 +52,9 @@ public class DrinksFragment extends BaseFragment {
      */
     List<Drinks.Wine> wines;
     DrinksAdapter mDrinksAdapter;
+    private RecyclerView mRc;
+    private ArrayList<String> typeName;
+    private ArrayList<String> price;
 
     @Nullable
     @Override
@@ -69,33 +68,54 @@ public class DrinksFragment extends BaseFragment {
 
     private void initView() {
         mTmDrinks = binding.tmDrinks;
-        mRvDrinks = binding.rvDrinks;
         mTvDrinksTitle = binding.tvDrinksTitle;
         mTvDrinksDiscount = binding.tvDrinksDiscountReal;
         mTvDrinksAddress = binding.tvDrinksAddress;
+        mRc = binding.rcMerchantDrinks;
     }
 
     private void init() {
         mTmDrinks.setLeftIcon(R.drawable.left);
         mTmDrinks.setTitle(R.string.drinks);
+        mTmDrinks.setTitleColor(getResources().getColor(R.color.white));
         // 店铺信息
         mTvDrinksTitle.setText(mStoreName);
         mTvDrinksAddress.setText(mStoreAddress);
-        SpannableString text = new SpannableString(mStoreDiscount);
-        text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        mTvDrinksDiscount.setText(text, TextView.BufferType.SPANNABLE);
-        // 酒水列表
-        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-        layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRvDrinks.setLayoutManager(layoutManager);
-        RecycleViewDivider divider = new RecycleViewDivider(mContext, LinearLayout.HORIZONTAL);
-        mRvDrinks.addItemDecoration(divider);
-        wines = new ArrayList<>();
-        mDrinksAdapter = new DrinksAdapter(mContext, wines);
-        mRvDrinks.setAdapter(mDrinksAdapter);
+        //打折
+        if (mStoreDiscount.length() == 0) {
+            mTvDrinksDiscount.setVisibility(View.GONE);
+        } else {
+            SpannableString text = new SpannableString(mStoreDiscount);
+            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            mTvDrinksDiscount.setText(text, TextView.BufferType.SPANNABLE);
+        }
 
-        getDrinksList();
+        //列表
+        typeName = new ArrayList<>();
+        price = new ArrayList<>();
+        typeName.add("黑方");
+        typeName.add("皇家礼炮");
+        typeName.add("张裕干红");
+        typeName.add("卡萨玛利亚");
+        typeName.add("小贵妇");
+        typeName.add("百威");
+        typeName.add("青岛纯生");
+        typeName.add("嘉士伯");
+        price.add("1300");
+        price.add("3800");
+        price.add("5800");
+        price.add("1000");
+        price.add("500");
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
+        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
+        mRc.setLayoutManager(linearLayoutManager);
+        //自定义的recyclerview分割线
+        RecycleViewDivider divider1 = new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL, UIUtils.dp2Px(1), UIUtils.getColor(R.color.btn_pressed));
+        mRc.addItemDecoration(divider1);
+        DrinkAdapter houseTypeAdapter = new DrinkAdapter(mContext, typeName, price);
+        mRc.setAdapter(houseTypeAdapter);
+
     }
 
     private void initListener() {
@@ -127,37 +147,5 @@ public class DrinksFragment extends BaseFragment {
         return this;
     }
 
-    /**
-     * 获取酒水列表
-     */
-    private void getDrinksList() {
-        showProgress();
-        OkHttpUtils.post()
-                .url(Network.User.PUBLIC_WINE)
-                .addParams(Network.Param.STORE_ID, mStoreId)
-                .build()
-                .execute(new DCallback<Drinks>() {
-                    @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
-                    }
 
-                    @Override
-                    public void onResponse(Drinks response) {
-                        if (isSuccess(response)) {
-                            if (response.list != null) {
-                                showDrinksList(response.list);
-                            }
-                        }
-                    }
-                });
-    }
-
-    /**
-     * 展示酒水列表
-     */
-    private void showDrinksList(List<Drinks.Wine> wines) {
-        this.wines.addAll(wines);
-        mDrinksAdapter.notifyDataSetChanged();
-    }
 }

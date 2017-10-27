@@ -85,6 +85,16 @@ public class PostFormBuilder extends OkHttpRequestBuilder implements HasParamsab
         return this;
     }
 
+    //int类型
+    public PostFormBuilder addParams(String key, int val)
+    {
+        if (this.params == null)
+        {
+            params = new LinkedHashMap<>();
+        }
+        return this;
+    }
+
     @Override
     public PostFormBuilder headers(Map<String, String> headers)
     {

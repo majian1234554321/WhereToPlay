@@ -21,13 +21,20 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteX="0dp"/>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:background="@color/pay_reserve_list_divider_white"
+                app:layout_constraintBottom_toTopOf="@+id/ll_main_tab"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
             <!--底部选择栏-->
             <LinearLayout
                 android:id="@+id/ll_main_tab"
                 android:layout_width="0dp"
                 android:layout_height="50dp"
-                android:background="@color/bg_white"
+                android:background="@color/white"
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -40,27 +47,26 @@
                     android:layout_width="@dimen/width_0"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center_horizontal"
+                    android:gravity="center"
                     android:onClick="doClick"
                     android:orientation="vertical"
-                    android:paddingTop="@dimen/padding_5">
+
+                    >
 
                     <ImageView
                         android:id="@+id/iv_main_tab_reserve"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_7"
-                        android:layout_marginBottom="@dimen/margin_7"
+                        android:layout_width="@dimen/width_20"
+                        android:layout_height="@dimen/height_20"
                         android:src="@drawable/reserve_book"/>
 
-                    <!--<TextView
+                    <TextView
                         android:id="@+id/tv_main_tab_reserve"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/height_20"
                         android:gravity="center"
                         android:text="@string/reserve"
-                        android:textColor="@color/text_black"
-                        android:textSize="@dimen/textsize_10"/>-->
+                        android:textColor="@color/reserve_unpress"
+                        android:textSize="@dimen/textsize_10"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -68,27 +74,26 @@
                     android:layout_width="@dimen/width_0"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center_horizontal"
+                    android:gravity="center"
                     android:onClick="doClick"
                     android:orientation="vertical"
-                    android:paddingTop="@dimen/padding_5">
+
+                    >
 
                     <ImageView
                         android:id="@+id/iv_main_tab_pay"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_7"
-                        android:layout_marginBottom="@dimen/margin_7"
+                        android:layout_width="@dimen/width_20"
+                        android:layout_height="@dimen/height_20"
                         android:src="@drawable/reserve_pay"/>
 
-                   <!-- <TextView
+                    <TextView
                         android:id="@+id/tv_main_tab_pay"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
+                        android:layout_height="@dimen/height_20"
                         android:gravity="center"
                         android:text="@string/pay"
-                        android:textColor="@color/text_black"
-                        android:textSize="@dimen/textsize_levelsmall"/>-->
+                        android:textColor="@color/reserve_unpress"
+                        android:textSize="@dimen/textsize_10"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -96,54 +101,55 @@
                     android:layout_width="@dimen/width_0"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center_horizontal"
+                    android:gravity="center"
                     android:onClick="doClick"
                     android:orientation="vertical"
-                    android:paddingTop="@dimen/padding_5">
+
+                    >
 
                     <ImageView
                         android:id="@+id/iv_main_tab_discover"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_7"
-                        android:layout_marginBottom="@dimen/margin_7"
+                        android:layout_width="@dimen/width_20"
+                        android:layout_height="@dimen/height_20"
                         android:src="@drawable/discover"/>
 
-                    <!--<TextView
+                    <TextView
                         android:id="@+id/tv_main_tab_discover"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/height_20"
                         android:gravity="center"
                         android:text="@string/discover"
-                        android:textColor="@color/text_black"
-                        android:textSize="@dimen/textsize_levelsmall"/>-->
+                        android:textColor="@color/reserve_unpress"
+                        android:textSize="@dimen/textsize_10"/>
 
 
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/ll_main_tab_mine"
                     android:layout_width="@dimen/width_0"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
-                    android:gravity="center_horizontal"
+                    android:gravity="center"
                     android:onClick="doClick"
                     android:orientation="vertical"
-                    android:paddingTop="@dimen/padding_5">
+
+                    >
 
                     <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="@dimen/margin_7"
-                        android:layout_marginBottom="@dimen/margin_7"
+                        android:id="@+id/iv_main_tab_mine"
+                        android:layout_width="@dimen/width_20"
+                        android:layout_height="@dimen/height_20"
                         android:src="@drawable/mine"/>
 
-                   <!-- <TextView
+                    <TextView
+                        android:id="@+id/tv_main_tab_mine"
                         android:layout_width="wrap_content"
                         android:layout_height="@dimen/height_20"
                         android:gravity="center"
-                        android:text="@string/discover"
-                        android:textColor="@color/text_black"
-                        android:textSize="@dimen/textsize_levelsmall"/>-->
+                        android:text="@string/mine"
+                        android:textColor="@color/reserve_unpress"
+                        android:textSize="@dimen/textsize_10"/>
 
                 </LinearLayout>
 

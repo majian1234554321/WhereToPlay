@@ -8,18 +8,22 @@ import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.TextAppearanceSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
+import com.fanc.wheretoplay.adapter.HouseTypeAdapter;
 import com.fanc.wheretoplay.adapter.RoomTypeAdapter;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentRoomBinding;
+import com.fanc.wheretoplay.datamodel.HouseTypeCategoryBean;
 import com.fanc.wheretoplay.datamodel.RoomCategory;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.TopMenu;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
@@ -33,7 +37,7 @@ import okhttp3.Call;
  * Created by Administrator on 2017/9/14.
  */
 
-public class RoomFragment extends BaseFragment {
+public class MerchantRoomFragment extends BaseFragment {
     FragmentRoomBinding binding;
     /**
      * UI控件
@@ -54,10 +58,15 @@ public class RoomFragment extends BaseFragment {
     /**
      * 房型列表
      */
-    List<RoomCategory.Room> rooms;
+    List<HouseTypeCategoryBean.ContentBean.RoomBean> rooms;
     RoomTypeAdapter roomTypeAdapter;
     //  是否选择房型
     boolean isSelect;
+    //列表图
+    private RecyclerView mRC;
+    //集合
+    private ArrayList<String> typeName;
+    private ArrayList<String> price;
 
     @Nullable
     @Override
@@ -75,32 +84,55 @@ public class RoomFragment extends BaseFragment {
         mTvRoomDiscount = binding.tvRoomDiscountReal;
 //        mTvRoomDistance = binding.tvRoomDistance;
         mTvRoomTitle = binding.tvRoomTitle;
-        mRvRoom = binding.rvRoom;
+        mRC = binding.rcMerchantHousetype;
+
     }
 
     private void init() {
         mTmRoom.setLeftIcon(R.drawable.left);
         mTmRoom.setTitle(R.string.room_category);
+        mTmRoom.setTitleColor(getResources().getColor(R.color.white));
         // 店铺信息
         mTvRoomTitle.setText(mStoreName);
         mTvRoomAddress.setText(mStoreAddress);
-        SpannableString text = new SpannableString(mStoreDiscount);
-        text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        mTvRoomDiscount.setText(text, TextView.BufferType.SPANNABLE);
+        //打折
+        if (mStoreDiscount.length() == 0) {
+            mTvRoomDiscount.setVisibility(View.GONE);
+        } else {
+            SpannableString text = new SpannableString(mStoreDiscount);
+            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            mTvRoomDiscount.setText(text, TextView.BufferType.SPANNABLE);
+        }
 
-        // 房型列表
+        //列表
+        typeName = new ArrayList<>();
+        price = new ArrayList<>();
+        typeName.add("小包(2-5人)");
+        typeName.add("中包(6-10人)");
+        typeName.add("大包(11-15人)");
+        typeName.add("卡座");
+        typeName.add("散台");
+        price.add("1300");
+        price.add("3800");
+        price.add("5800");
+        price.add("1000");
+        price.add("500");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRvRoom.setLayoutManager(linearLayoutManager);
-        RecycleViewDivider divider = new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL);
-        mRvRoom.addItemDecoration(divider);
+        mRC.setLayoutManager(linearLayoutManager);
+        //自定义的recyclerview分割线
+        RecycleViewDivider divider1 = new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL, UIUtils.dp2Px(1), UIUtils.getColor(R.color.btn_pressed));
+        mRC.addItemDecoration(divider1);
+        HouseTypeAdapter houseTypeAdapter = new HouseTypeAdapter(mContext, typeName, price);
+        mRC.setAdapter(houseTypeAdapter);
+
+        // 房型列表
         rooms = new ArrayList<>();
-        roomTypeAdapter = new RoomTypeAdapter(mContext, rooms);
-        if (isSelect) {
-            roomTypeAdapter.setSelect(true);
-        }
-        mRvRoom.setAdapter(roomTypeAdapter);
+//        if (isSelect) {
+//            roomTypeAdapter.setSelect(true);
+//        }
+//        mRvRoom.setAdapter(roomTypeAdapter);
         // 获取列表
         getRoomList();
 
@@ -121,52 +153,54 @@ public class RoomFragment extends BaseFragment {
     private void getRoomList() {
         showProgress();
         OkHttpUtils.post()
-                .url(Network.User.PUBLIC_ROOM_TYPE)
+                .url(Network.User.PUBLIC_HOUSE_TYPE)
                 .addParams(Network.Param.STORE_ID, mStoreId)
                 .build()
-                .execute(new DCallback<RoomCategory>() {
+                .execute(new DCallback<HouseTypeCategoryBean>() {
                     @Override
                     public void onError(Call call, Exception e) {
                         connectError();
                     }
 
                     @Override
-                    public void onResponse(RoomCategory response) {
+                    public void onResponse(HouseTypeCategoryBean response) {
+                        Log.e("Weda","??????????????????????????");
                         if (isSuccess(response)) {
-                            if (response.room != null) {
-                                showRoomList(response.room);
+                            if (response.getContent() != null) {
+
+                                showRoomList(response.getContent().getRoom());
                             }
                         }
                     }
                 });
     }
 
-    private void showRoomList(List<RoomCategory.Room> rooms) {
+    private void showRoomList(List<HouseTypeCategoryBean.ContentBean.RoomBean> rooms) {
         this.rooms.addAll(rooms);
         roomTypeAdapter.notifyDataSetChanged();
     }
 
-    public RoomFragment setStoreId(String mStoreId) {
+    public MerchantRoomFragment setStoreId(String mStoreId) {
         this.mStoreId = mStoreId;
         return this;
     }
 
-    public RoomFragment setStoreName(String mStoreName) {
+    public MerchantRoomFragment setStoreName(String mStoreName) {
         this.mStoreName = mStoreName;
         return this;
     }
 
-    public RoomFragment setStoreAddress(String mStoreAddress) {
+    public MerchantRoomFragment setStoreAddress(String mStoreAddress) {
         this.mStoreAddress = mStoreAddress;
         return this;
     }
 
-    public RoomFragment setStoreDiscount(String mStoreDiscount) {
+    public MerchantRoomFragment setStoreDiscount(String mStoreDiscount) {
         this.mStoreDiscount = mStoreDiscount;
         return this;
     }
 
-    public RoomFragment setSelect(boolean select) {
+    public MerchantRoomFragment setSelect(boolean select) {
         isSelect = select;
         return this;
     }

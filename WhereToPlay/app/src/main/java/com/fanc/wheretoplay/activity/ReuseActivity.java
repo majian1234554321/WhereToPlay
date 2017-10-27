@@ -12,15 +12,15 @@ import android.support.v4.content.LocalBroadcastManager;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.BaseFragmentActivity;
-import com.fanc.wheretoplay.fragment.ActionFragment;
+import com.fanc.wheretoplay.fragment.BriefFragment;
 import com.fanc.wheretoplay.fragment.CommentFragment;
 import com.fanc.wheretoplay.fragment.DateFragment;
 import com.fanc.wheretoplay.fragment.DrinksFragment;
 import com.fanc.wheretoplay.fragment.ListFragment;
-import com.fanc.wheretoplay.fragment.MineFragment;
+import com.fanc.wheretoplay.fragment.MerchantHouseNewsFragment;
 import com.fanc.wheretoplay.fragment.OrderToCompleteFragment;
 import com.fanc.wheretoplay.fragment.ReserveInfoFragment;
-import com.fanc.wheretoplay.fragment.RoomFragment;
+import com.fanc.wheretoplay.fragment.MerchantRoomFragment;
 import com.fanc.wheretoplay.fragment.SearchFragment;
 import com.fanc.wheretoplay.fragment.ToEvaluateFragment;
 import com.fanc.wheretoplay.util.Constants;
@@ -73,21 +73,37 @@ public class ReuseActivity extends BaseFragmentActivity {
             case Constants.LIST_PAGE:
                 initFragment(new ListFragment().setListPage(intent.getIntExtra(Constants.PARAM, 0)));
                 break;
-            case Constants.ACTION:
-                initFragment(new ActionFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID)));
+
+
+                //去掉活动界面跳转
+//            case Constants.ACTION:   //活动
+//                initFragment(new ActionFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID)));
+//                break;
+            case Constants.HOUSENEWS:   //房态
+                initFragment(new MerchantHouseNewsFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID))
+                .setStoreAddress(intent.getStringExtra(Constants.ADDRESS))
+                .setStoreName(intent.getStringExtra(Constants.STORE_NAME))
+                .setStoreDiscount(intent.getStringExtra(Constants.DISCOUNT_COUPON))
+                );
                 break;
-            case Constants.DRINKS:
+            case Constants.DRINKS:   //酒水
                 initFragment(new DrinksFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID))
                         .setStoreName(intent.getStringExtra(Constants.STORE_NAME))
                         .setStoreAddress(intent.getStringExtra(Constants.ADDRESS))
                         .setStoreDiscount(intent.getStringExtra(Constants.DISCOUNT_COUPON)));
                 break;
-            case Constants.ROOM:
-                initFragment(new RoomFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID))
+            case Constants.ROOM:   //房型
+                initFragment(new MerchantRoomFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID))
                         .setStoreName(intent.getStringExtra(Constants.STORE_NAME))
                         .setStoreAddress(intent.getStringExtra(Constants.ADDRESS))
                         .setStoreDiscount(intent.getStringExtra(Constants.DISCOUNT_COUPON))
                         .setSelect(intent.getBooleanExtra(Constants.IS_CHOOSE, false)));
+                break;
+            case Constants.BRIEF:   //简介
+                initFragment(new BriefFragment().setBriefUrl(intent.getStringExtra(Constants.DATA))
+                        .setStoreName(intent.getStringExtra(Constants.STORE_NAME))
+                        .setStoreAddress(intent.getStringExtra(Constants.ADDRESS))
+                        .setStoreDiscount(intent.getStringExtra(Constants.DISCOUNT_COUPON)));
                 break;
             case Constants.DATE:
                 initFragment(new DateFragment().setReserveWay(intent.getStringExtra(Constants.TYPE))
@@ -101,6 +117,7 @@ public class ReuseActivity extends BaseFragmentActivity {
         }
     }
 
+    //初始化fragment
     private void initFragment(Fragment fragment) {
         FragmentManager manager = getSupportFragmentManager();
         FragmentTransaction transaction = manager.beginTransaction();

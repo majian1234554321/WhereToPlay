@@ -45,6 +45,7 @@ public class SignInActivity extends BaseFragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         DataBindingUtil.setContentView(this, R.layout.activity_signin);
         App.addActivity(this);
         init();
@@ -167,6 +168,19 @@ public class SignInActivity extends BaseFragmentActivity {
         }
         if (!TextUtils.equals(input, verifyCode)) {
             ToastUtils.showShortToast(mContext, "验证码错误");
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * 验证昵称
+     * @param nickname
+     * @return
+     */
+    public boolean nicknameFormat(String nickname) {
+        if (TextUtils.isEmpty(nickname)) {
+            ToastUtils.showShortToast(mContext, "请输入昵称");
             return false;
         }
         return true;

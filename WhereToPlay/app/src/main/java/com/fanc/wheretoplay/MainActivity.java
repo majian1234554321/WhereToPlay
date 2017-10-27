@@ -35,6 +35,7 @@ import com.fanc.wheretoplay.base.BaseFragmentActivity;
 import com.fanc.wheretoplay.callback.IOnFocusListener;
 import com.fanc.wheretoplay.databinding.ActivityMainBinding;
 import com.fanc.wheretoplay.fragment.DiscoverFragment;
+import com.fanc.wheretoplay.fragment.MineFragment;
 import com.fanc.wheretoplay.fragment.PayFragment;
 import com.fanc.wheretoplay.fragment.ReserveFragment;
 import com.fanc.wheretoplay.util.Constants;
@@ -77,12 +78,19 @@ public class MainActivity extends BaseFragmentActivity {
     ImageView mIvReserve;
     ImageView mIvPay;
     ImageView mIvDiscover;
+    private ImageView mIvMine;
     /**
      * 底部导航
      */
     LinearLayout mLlTabReserve;
     LinearLayout mLlTabPay;
     LinearLayout mLlTabDiscover;
+    private LinearLayout mLlMine;
+    private TextView tvMainTabDiscover;
+    private TextView tvMainTabMine;
+    private TextView tvMainTabPay;
+    private TextView tvMainTabReserve;
+
     /**
      * 选中的导航栏
      */
@@ -121,6 +129,8 @@ public class MainActivity extends BaseFragmentActivity {
      */
     public boolean isOpen;
 
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -146,12 +156,19 @@ public class MainActivity extends BaseFragmentActivity {
 //        mIvReserveBig = mainBinding.ivReserveBig;
 //        mIvPayBig = mainBinding.ivPayBig;
 //        mIvDiscoverBig = mainBinding.ivDiscoverBig;
+        //底部选择栏
         mIvReserve = mainBinding.ivMainTabReserve;
         mIvPay = mainBinding.ivMainTabPay;
         mIvDiscover = mainBinding.ivMainTabDiscover;
+        mIvMine = mainBinding.ivMainTabMine;
         mLlTabReserve = mainBinding.llMaintabReserve;
         mLlTabPay = mainBinding.llMainTabPay;
         mLlTabDiscover = mainBinding.llMainTabDiscover;
+        mLlMine = mainBinding.llMainTabMine;
+        tvMainTabDiscover = mainBinding.tvMainTabDiscover;
+        tvMainTabMine = mainBinding.tvMainTabMine;
+        tvMainTabPay = mainBinding.tvMainTabPay;
+        tvMainTabReserve = mainBinding.tvMainTabReserve;
         Log.w("llm", "MainActivity（133）：RegistrationID =  " + JPushInterface.getRegistrationID(this));
     }
 
@@ -163,6 +180,7 @@ public class MainActivity extends BaseFragmentActivity {
         fragments.add(reserveFragment = new ReserveFragment());   //添加预定Fragment
         fragments.add(new PayFragment());   //添加支付Fragment
         fragments.add(new DiscoverFragment());   //添加发现Fragment
+        fragments.add(new MineFragment());   //添加我的Fragment
     }
 
     /**
@@ -181,7 +199,7 @@ public class MainActivity extends BaseFragmentActivity {
             }
         });
         mMvpMain.setCurrentItem(0);
-        mMvpMain.setOffscreenPageLimit(2);
+        mMvpMain.setOffscreenPageLimit(3);
 
         // 获取屏幕宽度
         DisplayMetrics displayMetrics = new DisplayMetrics();
@@ -254,6 +272,11 @@ public class MainActivity extends BaseFragmentActivity {
         mIvReserve.setImageResource(R.drawable.reserve_book);
         mIvPay.setImageResource(R.drawable.reserve_pay);
         mIvDiscover.setImageResource(R.drawable.discover);
+        mIvMine.setImageResource(R.drawable.mine);
+        tvMainTabDiscover.setTextColor(getResources().getColor(R.color.reserve_unpress));
+        tvMainTabMine.setTextColor(getResources().getColor(R.color.reserve_unpress));
+        tvMainTabPay.setTextColor(getResources().getColor(R.color.reserve_unpress));
+        tvMainTabReserve.setTextColor(getResources().getColor(R.color.reserve_unpress));
 
         // 选中的大图标显示，小图标隐藏
         switch (position) {
@@ -261,16 +284,23 @@ public class MainActivity extends BaseFragmentActivity {
 //                mIvReserve.setAlpha(0F);
 //                mIvReserveBig.setAlpha(1F);
                 mIvReserve.setImageResource(R.drawable.reserve_book_in);
+                tvMainTabReserve.setTextColor(getResources().getColor(R.color.text_red));
                 break;
             case 1:
 //                mIvPay.setAlpha(0F);
 //                mIvPayBig.setAlpha(1F);
                 mIvPay.setImageResource(R.drawable.reserve_pay_in);
+                tvMainTabPay.setTextColor(getResources().getColor(R.color.text_red));
                 break;
             case 2:
 //                mIvDiscover.setAlpha(0F);
 //                mIvDiscoverBig.setAlpha(1F);
                 mIvDiscover.setImageResource(R.drawable.discover_in);
+                tvMainTabDiscover.setTextColor(getResources().getColor(R.color.text_red));
+                break;
+            case 3:
+                mIvMine.setImageResource(R.drawable.mine_in);
+                tvMainTabMine.setTextColor(getResources().getColor(R.color.text_red));
                 break;
             default:
                 break;
@@ -388,6 +418,11 @@ public class MainActivity extends BaseFragmentActivity {
                     setSelectedPage(2);
                 }
                 break;
+            case R.id.ll_main_tab_mine:
+                if (selectedId != R.id.ll_main_tab_mine) {
+                    mMvpMain.setCurrentItem(3);
+                    setSelectedPage(3);
+                }
             case R.id.cl_sideslip:
             default:
                 break;
@@ -410,6 +445,8 @@ public class MainActivity extends BaseFragmentActivity {
             case 2:
                 selectedId = R.id.ll_main_tab_discover;
                 break;
+            case 3:
+                selectedId = R.id.ll_main_tab_mine;
             default:
                 break;
         }

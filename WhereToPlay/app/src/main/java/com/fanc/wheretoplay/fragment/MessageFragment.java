@@ -27,6 +27,7 @@ import com.fanc.wheretoplay.divider.RecycleViewDivider;
 import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.ToastUtils;
+import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.TopMenu;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
@@ -97,14 +98,16 @@ public class MessageFragment extends BaseFragment {
     private void init() {
         mTmMessage.setLeftIcon(R.drawable.left);
         mTmMessage.setTitle(R.string.message);
+        mTmMessage.setTitleColor(getResources().getColor(R.color.white));
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRvMessage.setLayoutManager(layoutManager);
         messages = new ArrayList<>();
         adapter = new MessageAdapter(mContext, messages);
-        RecycleViewDivider viewDivider = new RecycleViewDivider(mContext, LinearLayout.HORIZONTAL);
-        mRvMessage.addItemDecoration(viewDivider);
+        RecycleViewDivider divider = new RecycleViewDivider(mContext,
+                LinearLayoutManager.HORIZONTAL, UIUtils.dp2Px(1), UIUtils.getColor(R.color.bg_gray));
+        mRvMessage.addItemDecoration(divider);
         mRvMessage.setItemAnimator(new DefaultItemAnimator());
         mRvMessage.setHasFixedSize(true);
         mRvMessage.setAdapter(adapter);

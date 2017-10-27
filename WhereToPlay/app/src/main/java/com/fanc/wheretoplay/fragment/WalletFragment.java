@@ -112,7 +112,9 @@ public class WalletFragment extends BaseFragment {
     private void init() {
         mTmWallet.setLeftIcon(R.drawable.left);
         mTmWallet.setTitle(R.string.mine_wallet);
+        mTmWallet.setTitleColor(getResources().getColor(R.color.white));
         mTmWallet.setRightText(R.string.deal_detail);
+        mTmWallet.setRightTextColor(getResources().getColor(R.color.white));
 
         walletBinding.setClick(this);
 

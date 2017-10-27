@@ -32,6 +32,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
+import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.CheckCommentActivity;
 import com.fanc.wheretoplay.activity.DetailActivity;
@@ -82,7 +83,7 @@ import okhttp3.Call;
  * Created by Administrator on 2017/6/14.
  */
 
-public class MerchantDetailFragment extends BaseFragment implements OnBannerListener {
+public class MerchantDetailFragment extends BaseFragment {
 
     FragmentMerchantDetailBinding detailBinding;
 
@@ -114,13 +115,14 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
     TextView mTvMerchantDetailTel;
     LinearLayout mLlMerchantDetailAddress;
     TextView mTvMerchantDetailAddress;
-    // 房型、酒水、活动、服务员
+    // 房型、酒水、活动、简介
     LinearLayout mLlMerchantDetailRoom;
     LinearLayout mLlMerchantDetailDrinks;
     LinearLayout mLlMerchantDetailAction;
-    LinearLayout mLlMerchantDetailWaiter;
-    private TabLayout mTablayout;
-    private ViewPager mViewPager;
+    //    LinearLayout mLlMerchantDetailWaiter;
+    private LinearLayout mLlMerchantBrief;
+
+
     // 详情
     WebView mWvDetail;
     // 推荐店铺
@@ -146,13 +148,12 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
     String address, lat, lng;
     // 店铺信息
     StoreDetail.Store mStore;
-    private Banner mBannerDetail;
+    //    private Banner mBannerDetail;
     private ArrayList<Object> bannerArrayList;
     private ArrayList<String> imgs;
-    private ArrayList<Fragment> merchant_fragments;
-    private ArrayList<String> fragment_name;
     private FragmentManager fragmentManager;
     private MerchantTablayoutAdapter adpter;
+    private String briefUrl;
 
 
     @Nullable
@@ -168,13 +169,11 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
 
     private void initViews() {
         mTmDetail = detailBinding.tmMerchantDetail;
-        mBannerDetail = detailBinding.bannerDetail;
+//        mBannerDetail = detailBinding.bannerDetail;
         mIvService = detailBinding.ivMerchantDetailService;
         mTvMerchantDetailTitle = detailBinding.tvMerchantDetailTitle;
         mRbMerchantDetailGrade = detailBinding.rbMerchant;
         mTvMerchantDetailDiscountSum = detailBinding.tvMerchantDetailDiscountSum;
-        mTablayout = detailBinding.llMerchantDetailTablayout;
-        mViewPager = detailBinding.llMerchantDetailViewpager;
 //        mTvMerchantDetailDiscount = detailBinding.tvMerchantDetailDiscount;
         mTvMerchantDetailGrade = detailBinding.tvMerchantDetailGrade;
         mTvMerchantDetailCommentNo = detailBinding.tvMerchantDetailComment;
@@ -196,7 +195,8 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
         mLlMerchantDetailRoom = detailBinding.llMerchantDetailRoom;
         mLlMerchantDetailDrinks = detailBinding.llMerchantDetailDrinks;
         mLlMerchantDetailAction = detailBinding.llMerchantDetailActive;
-        mLlMerchantDetailWaiter = detailBinding.llMerchantDetailWaiter;
+//        mLlMerchantDetailWaiter = detailBinding.llMerchantDetailWaiter;
+        mLlMerchantBrief = detailBinding.llMerchantBrief;
         mWvDetail = detailBinding.wvMerchantDetail;
         mRvMerchantDetailRecommend = detailBinding.rvMerchantDetailRecommend;
 //        mRvMerchantDetailRoomPrice = detailBinding.rvMerchantDetailRoomPrice;
@@ -204,15 +204,17 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
 
     private void init() {
         //banner轮播图
-        imgs = new ArrayList<>();
-        bannerArrayList = new ArrayList<>();
-        mBannerDetail.setImageLoader(new GlideImageLoader());
-        mBannerDetail.setOnBannerListener(this);
-        mBannerDetail.setBannerStyle(BannerConfig.NUM_INDICATOR);
+//        imgs = new ArrayList<>();
+//        bannerArrayList = new ArrayList<>();
+//        mBannerDetail.setImageLoader(new GlideImageLoader());
+//        mBannerDetail.setOnBannerListener(this);
+//        mBannerDetail.setBannerStyle(BannerConfig.NUM_INDICATOR);
 
         mTmDetail.setLeftIcon(R.drawable.left);
         mTmDetail.setRightIcon(R.drawable.merchant_detail_sheard);
-        int color = App.getContext().getResources().getColor(R.color.tran);
+        mTmDetail.setTitleColor(getResources().getColor(R.color.white));
+        mTmDetail.setTitle(R.string.merchant_detail);
+        int color = App.getContext().getResources().getColor(R.color.text_red);
         mTmDetail.setBackgroundColor(color);
 //        getShearedUrl(this.mStoreId);
         getMerchantDetail();
@@ -227,41 +229,18 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
         iconAdapter = new CommentIconAdapter(mContext, mCommentIcons);
         mRvMerchantDetailCommentHeadImage.setAdapter(iconAdapter);
 
-        //简介 房型 酒水 房态
-        merchant_fragments = new ArrayList<>();
-        fragment_name = new ArrayList<>();
-        initTabLayout();
-
         // 推荐店铺
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRvMerchantDetailRecommend.setLayoutManager(linearLayoutManager);
-        RecycleViewDivider divider1 = new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL, UIUtils.dp2Px(10), UIUtils.getColor(R.color.tran));
-        mRvMerchantDetailRecommend.addItemDecoration(divider1);
+        //去掉自定义的recyclerview分割线
+//        RecycleViewDivider divider1 = new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL, UIUtils.dp2Px(1), UIUtils.getColor(R.color.bg));
+//        mRvMerchantDetailRecommend.addItemDecoration(divider1);
         stores = new ArrayList<>();
         recommendAdapter = new ReserveAdapter(mContext, stores);
         mRvMerchantDetailRecommend.setAdapter(recommendAdapter);
     }
 
-    private void initTabLayout() {
-        //添加4个fragment
-        merchant_fragments.add(new MerchantBriefFragment());
-        merchant_fragments.add(new MerchantBriefFragment());
-        merchant_fragments.add(new MerchantBriefFragment());
-        merchant_fragments.add(new MerchantBriefFragment());
-        //添加4个标题
-        fragment_name.add("简介");
-        fragment_name.add("房型");
-        fragment_name.add("酒水");
-        fragment_name.add("房态");
-        fragmentManager = getActivity().getSupportFragmentManager();
-        adpter = new MerchantTablayoutAdapter(fragmentManager, merchant_fragments, fragment_name);
-        //标题文字均匀分配
-        mTablayout.setTabMode(TabLayout.MODE_FIXED);
-        mViewPager.setAdapter(adpter);
-//        //这两个方法是将Tablayout和Viewpager联合起来
-        mTablayout.setupWithViewPager(mViewPager);
-    }
 
     private void setListeners() {
         mTmDetail.setLeftIconOnClickListener(new View.OnClickListener() {
@@ -357,6 +336,7 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
                 }
             }
         });
+        //房型
         mLlMerchantDetailRoom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -369,6 +349,7 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
                 startActivity(intent);
             }
         });
+        //酒水
         mLlMerchantDetailDrinks.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -381,24 +362,54 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
                 startActivity(intent);
             }
         });
+        //活动
+        //去掉原有活动界面跳转，改成房态界面跳转
+//        mLlMerchantDetailAction.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(mContext, ReuseActivity.class);
+//                intent.putExtra(Constants.PAGE, Constants.ACTION);
+//                intent.putExtra(Constants.STORE_ID, mStoreId);
+//                startActivity(intent);
+//            }
+//        });
+        //房态界面跳转
         mLlMerchantDetailAction.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, ReuseActivity.class);
-                intent.putExtra(Constants.PAGE, Constants.ACTION);
+                intent.putExtra(Constants.PAGE, Constants.HOUSENEWS);
                 intent.putExtra(Constants.STORE_ID, mStoreId);
+                intent.putExtra(Constants.STORE_NAME, mTvMerchantDetailTitle.getText().toString());
+                intent.putExtra(Constants.DISCOUNT_COUPON, mTvMerchantDetailDiscountSum.getText().toString());
+                intent.putExtra(Constants.ADDRESS, mTvMerchantDetailAddress.getText().toString());
                 startActivity(intent);
             }
         });
-        mLlMerchantDetailWaiter.setOnClickListener(new View.OnClickListener() {
+        //简介
+        mLlMerchantBrief.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, DetailActivity.class);
-                intent.putExtra(Constants.PAGE, Constants.WAITER_INFO);
+                Intent intent = new Intent(mContext, ReuseActivity.class);
+                intent.putExtra(Constants.PAGE, Constants.BRIEF);
+                intent.putExtra(Constants.DATA, briefUrl);
                 intent.putExtra(Constants.STORE_ID, mStoreId);
+                intent.putExtra(Constants.STORE_NAME, mTvMerchantDetailTitle.getText().toString());
+                intent.putExtra(Constants.DISCOUNT_COUPON, mTvMerchantDetailDiscountSum.getText().toString());
+                intent.putExtra(Constants.ADDRESS, mTvMerchantDetailAddress.getText().toString());
                 startActivity(intent);
             }
         });
+        //去掉服务页跳转
+//        mLlMerchantDetailWaiter.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(mContext, DetailActivity.class);
+//                intent.putExtra(Constants.PAGE, Constants.WAITER_INFO);
+//                intent.putExtra(Constants.STORE_ID, mStoreId);
+//                startActivity(intent);
+//            }
+//        });
     }
 
     private void initImageLayout() {
@@ -534,15 +545,17 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
      *
      * @param store
      */
-    private void showStoreDetail(StoreDetail.Store store) {
+    private void showStoreDetail(final StoreDetail.Store store) {
         mTvMerchantDetailTitle.setText(store.getName());
-
+        Log.e("what","2\n" +store.getDiscount());
         if (store.getDiscount().length() > 0) {
             SpannableString text = new SpannableString(store.getDiscount() + "折");
             text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             mTvMerchantDetailDiscountSum.setText(text, TextView.BufferType.SPANNABLE);
             mTvMerchantDetailDiscountSum.setVisibility(View.VISIBLE);
+        } else {
+            mTvMerchantDetailDiscountSum.setVisibility(View.GONE);
         }
 
 //        mTvMerchantDetailDiscountSum.setText(store.getDiscount());
@@ -584,14 +597,30 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
         }
         mTvMerchantDetailAddress.setText(store.getAddress() + "    " + d);
 
-        mWvDetail.loadUrl(Network.BASE + "/" + store.getRemark());
-        mWvDetail.setWebViewClient(new WebViewClient() {
-            @Override
-            public void onPageFinished(WebView view, String url) {
-                super.onPageFinished(view, url);
-                Log.d("aaa", "onPageFinished: url = " + url);
-            }
-        });
+        briefUrl = Network.BASE + "/" + store.getRemark();
+        //把之前布局中的webview放到briefFragment中去
+//        mWvDetail.loadUrl(Network.BASE + "/" + store.getRemark());
+//        mWvDetail.setWebViewClient(new WebViewClient() {
+//            @Override
+//            public void onPageFinished(WebView view, String url) {
+//                super.onPageFinished(view, url);
+//                Log.d("aaa", "onPageFinished: url = " + url);
+//            }
+//        });
+//        new MerchantBriefFragment().setLoadWebviewListener(new MerchantBriefFragment.LoadWebview() {
+//            @Override
+//            public void loadWebview(WebView webView) {
+//                webView.loadUrl(Network.BASE + "/" + store.getRemark());
+//                webView.setWebViewClient(new WebViewClient() {
+//                    @Override
+//                    public void onPageFinished(WebView view, String url) {
+//                        super.onPageFinished(view, url);
+//                        Log.d("Jordan1", "onPageFinished: url = " + store.getRemark());
+//                    }
+//                });
+//            }
+//        });
+
         if (store.getList() != null) {
             showRecommend(store.getList());
         }
@@ -625,43 +654,43 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
      * @param pictures
      */
     private void showPicture(final ArrayList<StoreDetail.Picture> pictures) {
-/*旧版图片展示*/
-//        int defaultImage = 0;
-//        final ArrayList<String> imgs = new ArrayList<>();
-//        for (int i = 0; i < pictures.size(); i++) {
-//            if (i >= 6) {
-//                return;
-//            }
-//            if (i < 2) {
-//                defaultImage = R.drawable.default_rect;
-//            } else {
-//                defaultImage = R.drawable.default_square;
-//            }
-//            imgs.add(pictures.get(i).getPicture_path());
-//            Glide.with(mContext).load(Network.IMAGE + pictures.get(i).getPicture_path()).placeholder(defaultImage).into(mImageViews.get(i));
-//            final int finalI = i;
-//            mImageViews.get(i).setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    Intent intent = new Intent(mContext, LargeImageActivity.class);
-//                    intent.putExtra(Constants.URL, imgs);
-//                    intent.putExtra(Constants.POSITION, finalI);
-//                    startActivity(intent);
-//                }
-//            });
-//        }
-        /*新版图片展示*/
-        if (pictures == null) {
-            return;
-        }
-        bannerArrayList.clear();
-        imgs.clear();
+        /*旧版图片展示*/
+        int defaultImage = 0;
+        final ArrayList<String> imgs = new ArrayList<>();
         for (int i = 0; i < pictures.size(); i++) {
+            if (i >= 6) {
+                return;
+            }
+            if (i < 2) {
+                defaultImage = R.drawable.default_rect;
+            } else {
+                defaultImage = R.drawable.default_square;
+            }
             imgs.add(pictures.get(i).getPicture_path());
-            bannerArrayList.add(Network.IMAGE + pictures.get(i).getPicture_path());
+            Glide.with(mContext).load(Network.IMAGE + pictures.get(i).getPicture_path()).placeholder(defaultImage).into(mImageViews.get(i));
+            final int finalI = i;
+            mImageViews.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(mContext, LargeImageActivity.class);
+                    intent.putExtra(Constants.URL, imgs);
+                    intent.putExtra(Constants.POSITION, finalI);
+                    startActivity(intent);
+                }
+            });
         }
-        mBannerDetail.setImages(bannerArrayList);
-        mBannerDetail.start();
+        /*新版图片展示*/
+//        if (pictures == null) {
+//            return;
+//        }
+//        bannerArrayList.clear();
+//        imgs.clear();
+//        for (int i = 0; i < pictures.size(); i++) {
+//            imgs.add(pictures.get(i).getPicture_path());
+//            bannerArrayList.add(Network.IMAGE + pictures.get(i).getPicture_path());
+//        }
+//        mBannerDetail.setImages(bannerArrayList);
+//        mBannerDetail.start();
     }
 
     /**
@@ -732,12 +761,14 @@ public class MerchantDetailFragment extends BaseFragment implements OnBannerList
                 })
                 .open();
     }
+
+    //去掉了
     /*顶部轮播图点击事件*/
-    @Override
-    public void OnBannerClick(int position) {
-        Intent intent = new Intent(mContext, LargeImageActivity.class);
-        intent.putExtra(Constants.URL, imgs);
-        intent.putExtra(Constants.POSITION, position);
-        startActivity(intent);
-    }
+//    @Override
+//    public void OnBannerClick(int position) {
+//        Intent intent = new Intent(mContext, LargeImageActivity.class);
+//        intent.putExtra(Constants.URL, imgs);
+//        intent.putExtra(Constants.POSITION, position);
+//        startActivity(intent);
+//    }
 }

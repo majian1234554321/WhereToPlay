@@ -38,8 +38,10 @@
     <string name="mobile">手机号</string>
     <string name="mobile1">手机</string>
     <string name="password">密码</string>
+    <string name="register_nickname">昵称</string>
     <string name="hint_mobile">请输入手机号</string>
     <string name="hint_password">请输入密码</string>
+    <string name="hint_nickname">请输入姓名或昵称</string>
     <string name="forget_password">忘记密码？</string>
     <string name="mobile_register">手机注册</string>
     <string name="signin">登录</string>
@@ -52,6 +54,8 @@
     <string name="immediately_experience">立即体验</string>
     <string name="redeem_code">推广码</string>
     <string name="hint_redeem_code">请输入推广码</string>
+    <string name="agreement_left">注册即表示同意</string>
+    <string name="agreement_right">《乐互网用户协议》</string>
 
     <!--Tab-->
     <string name="reserve">预订</string>
@@ -123,6 +127,7 @@
     <string name="order">订单</string>
     <string name="collection">收藏</string>
     <string name="referral">推荐</string>
+    <string name="drive">代驾</string>
 
     <!--mine info-->
     <string name="mine_info">我的资料</string>
@@ -259,6 +264,8 @@
     <string name="drinks">酒水</string>
     <string name="action">活动</string>
     <string name="pay_down_payment">支付订金</string>
+    <string name="merchant_brief">简介</string>
+    <string name="merchant_housenews">房态</string>
 
     <!--waiter info-->
     <string name="check_explain">查看说明:</string>
@@ -271,6 +278,7 @@
     <string name="hot_city">热门城市</string>
     <string name="search_city_error">搜索无结果</string>
     <string name="city">城市</string>
+    <string name="all_city">所有城市</string>
 
     <!--message detail-->
     <string name="message_detail">消息详情</string>
@@ -306,6 +314,8 @@
     <!--drinks-->
     <string name="drinks_name">酒水名称</string>
     <string name="drinks_price">酒水价格</string>
+    <string name="drinks_action">商家活动</string>
+    <string name="drinks_action_detail">买一送一</string>
 
     <!--order to complete-->
     <string name="order_to_complete">预订进行中...</string>
@@ -315,4 +325,16 @@
 
     <!--reserved list-->
     <string name="buy">买单</string>
+
+    <!--房型-->
+    <string name="housetype" >小包（2-5人）</string>
+
+    <!--房态-->
+    <string name="housenews_use" >使用</string>
+    <string name="housenews_book" >已定</string>
+    <string name="housenews_free" >空闲</string>
+    <string name="housenews_typename" >类型</string>
+    <string name="housenews_housename" >房间名称</string>
+    <string name="housenews_lowest" >最低消费</string>
+    <string name="housenews_housenews" >房态</string>
 </resources>

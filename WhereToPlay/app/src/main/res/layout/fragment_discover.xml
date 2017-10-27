@@ -10,7 +10,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/bg_gray">
 
         <com.fanc.wheretoplay.view.TopMenu
             android:id="@+id/tm_discover"
@@ -20,7 +21,8 @@
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_80"
-            android:background="@color/bg">
+            android:background="@color/white"
+            >
 
             <LinearLayout
                 android:id="@+id/ll_discover_near"
@@ -29,9 +31,13 @@
                 android:gravity="center"
                 android:orientation="vertical"
                 android:onClick="@{click.onViewClick}"
+                android:layout_marginStart="@dimen/margin_35"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/ll_discover_hottest"
-                tools:layout_editor_absoluteY="8dp">
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteY="8dp"
+                app:layout_constraintHorizontal_chainStyle="spread_inside">
 
                 <ImageView
                     android:id="@+id/iv_discover_near"
@@ -45,7 +51,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_2"
                     android:text="@string/near"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/normal_textsize"/>
             </LinearLayout>
 
@@ -58,6 +64,8 @@
                 android:orientation="vertical"
                 app:layout_constraintLeft_toRightOf="@+id/ll_discover_near"
                 app:layout_constraintRight_toLeftOf="@+id/ll_discover_new_store"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteY="8dp">
 
                 <ImageView
@@ -72,7 +80,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_2"
                     android:text="@string/hottest"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/normal_textsize"/>
             </LinearLayout>
 
@@ -85,6 +93,8 @@
                 android:orientation="vertical"
                 app:layout_constraintLeft_toRightOf="@+id/ll_discover_hottest"
                 app:layout_constraintRight_toLeftOf="@+id/ll_discover_most_discount"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteY="8dp">
 
                 <ImageView
@@ -99,7 +109,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_2"
                     android:text="@string/new_store"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/normal_textsize"/>
             </LinearLayout>
 
@@ -110,8 +120,11 @@
                 android:gravity="center"
                 android:onClick="@{click.onViewClick}"
                 android:orientation="vertical"
+                android:layout_marginEnd="@dimen/margin_35"
                 app:layout_constraintLeft_toRightOf="@+id/ll_discover_new_store"
                 app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
                 tools:layout_editor_absoluteY="8dp">
 
                 <ImageView
@@ -126,7 +139,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_2"
                     android:text="@string/most_discount"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/normal_textsize"/>
             </LinearLayout>
 
@@ -134,14 +147,15 @@
 
         <View
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_10"
-            android:background="@color/discover_divider"/>
+            android:layout_height="@dimen/line_height"
+            android:background="@color/pay_reserve_list_divider_white" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_discover"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/bg"/>
+            android:layout_marginTop="@dimen/margin_10"
+            android:background="@color/white"/>
 
     </LinearLayout>
 

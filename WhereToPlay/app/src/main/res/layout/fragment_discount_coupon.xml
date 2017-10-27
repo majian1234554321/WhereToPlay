@@ -15,7 +15,7 @@
             android:id="@+id/rv_discount_coupon"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_0"
-            android:background="@color/bg"
+            android:background="@color/white"
             android:layout_weight="1"/>
     </LinearLayout>
 </layout>

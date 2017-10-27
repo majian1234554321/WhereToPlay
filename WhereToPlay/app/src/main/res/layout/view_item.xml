@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
-                android:layout_height="@dimen/view_item_height">
+                android:layout_height="@dimen/view_item_height"
+                android:background="@color/white">
 
     <ImageView
         android:id="@+id/item_view_icon"
-        android:layout_width="@dimen/view_icon_size"
-        android:layout_height="@dimen/view_icon_size"
+        android:layout_width="@dimen/item_width_18"
+        android:layout_height="@dimen/item_height_18"
         android:layout_centerVertical="true"
-        android:layout_marginLeft="@dimen/view_margin"
-        android:padding="@dimen/padding_3"/>
+        android:layout_marginLeft="@dimen/margin_15"
+        />
 
     <TextView
         android:id="@+id/item_view_text"
@@ -18,7 +19,7 @@
         android:layout_marginLeft="@dimen/view_margin"
         android:layout_toRightOf="@id/item_view_icon"
         android:gravity="center"
-        android:textColor="@color/white"
+        android:textColor="@color/black"
         android:textSize="@dimen/textsize_level2"/>
     <!--中间的文字-->
     <LinearLayout

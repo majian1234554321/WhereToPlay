@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/bg_gray"
+        >
+
+        <com.fanc.wheretoplay.view.TopMenu
+            android:id="@+id/tm_brief"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            />
+
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:paddingBottom="@dimen/padding_10"
+            android:paddingLeft="@dimen/padding_15"
+            android:paddingRight="@dimen/padding_10"
+            android:paddingTop="@dimen/padding_15"
+            >
+
+            <TextView
+                android:id="@+id/tv_brief_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textsize_level4"
+                />
+
+            <TextView
+                android:id="@+id/tv_brief_discount_real"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_above="@+id/tv_brief_address"
+                android:layout_marginRight="@dimen/margin_5"
+                android:background="@drawable/discount"
+                android:paddingLeft="@dimen/padding_20"
+                android:paddingRight="@dimen/padding_5"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/textsize_level3"
+                />
+
+            <TextView
+                android:id="@+id/tv_brief_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_brief_title"
+                android:layout_marginTop="@dimen/margin_5"
+                android:drawableStart="@drawable/reserve_address"
+                android:drawablePadding="@dimen/padding_10"
+                android:maxWidth="@dimen/width_260"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textsize_levelsmall"
+                android:singleLine="true"
+                android:ellipsize="end"/>
+
+            <TextView
+                android:id="@+id/tv_brief_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tv_brief_address"
+                android:layout_marginStart="@dimen/margin_40"
+                android:layout_toRightOf="@+id/tv_reserve_info_address"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textsize_levelsmall"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/pay_reserve_list_divider_white" />
+
+        <WebView
+            android:id="@+id/wv_brief"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_10"
+            android:paddingTop="@dimen/padding_25"
+            android:paddingStart="@dimen/padding_15"
+            android:paddingEnd="@dimen/padding_15"
+            android:background="@color/white"/>
+    </LinearLayout>
+</layout>

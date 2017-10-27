@@ -59,6 +59,7 @@ public class MessageDetailFragment extends BaseFragment {
     private void init() {
         mTmMessageDetail.setTitle(R.string.message_detail);
         mTmMessageDetail.setLeftIcon(R.drawable.left);
+        mTmMessageDetail.setTitleColor(getResources().getColor(R.color.white));
 
     }
 

@@ -78,6 +78,8 @@
     <color name="color_eb">#EBEBEB</color>
     <color name="my_bg">#FFD204</color>
     <color name="my_bg_trans">#7E5D00</color>
+    <color name="editText">#BBBBBB</color>
+
 
     <!--按钮背景颜色-->
     <color name="btn_normal">#FCBA00</color>
@@ -144,6 +146,8 @@
     <!--reserve info-->
     <color name="reserve_info_title">#3A3A3A</color>
     <color name="reserve_info_unchecked">#3D3D3D</color>
+    <color name="reserve_unpress">#888888</color>
+
 
     <!--alter city-->
     <color name="gray">#8c8c8c</color>

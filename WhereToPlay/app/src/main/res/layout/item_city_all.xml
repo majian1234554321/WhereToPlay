@@ -13,18 +13,19 @@
         android:id="@+id/ll_item_city_all"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/bg"
+        android:background="@color/white"
         android:orientation="vertical"
         android:paddingLeft="@dimen/padding_15"
         tools:ignore="RtlHardcoded">
 
         <TextView
             android:id="@+id/tv_item_city_all_letter"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:clickable="false"
-            android:textColor="@color/pay_reserve_list_text"
-            android:textSize="@dimen/normal_textsize"/>
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/normal_textsize"
+            android:background="@drawable/shape_gray"/>
 
         <TextView
             android:id="@+id/tv_item_city_all_name"
@@ -35,12 +36,13 @@
             android:clickable="true"
             android:gravity="center_vertical"
             android:text="@{city.name}"
-            android:textColor="@color/white"
+            android:textColor="@color/text_black"
             android:textSize="@dimen/textsize_level2"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1px"
-            android:background="@color/pay_reserve_list_divider"/>
+            android:background="@color/pay_reserve_list_divider_white"
+            android:layout_marginEnd="@dimen/margin_15"/>
     </LinearLayout>
 </layout>

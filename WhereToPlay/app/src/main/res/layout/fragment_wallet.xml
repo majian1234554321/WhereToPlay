@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg"
+        android:background="@color/bg_gray"
         android:orientation="vertical">
 
         <com.fanc.wheretoplay.view.TopMenu
@@ -19,16 +19,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <View
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/height_10"
-            android:background="@color/pay_reserve_list_divider"/>
-
         <LinearLayout
             android:id="@+id/ll_pay_bill_balance"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginTop="@dimen/margin_10"
+            android:background="@color/white">
 
             <ImageView
                 android:layout_width="@dimen/width_50"
@@ -41,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_vertical"
                 android:text="@string/mine_balance"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/normal_textsize"/>
 
             <TextView
@@ -54,7 +51,7 @@
                 android:focusable="true"
                 android:gravity="right"
                 android:text="0元"
-                android:textColor="@color/text_and_buttor_orange"
+                android:textColor="@color/text_red"
                 android:textSize="@dimen/normal_textsize"/>
 
         </LinearLayout>
@@ -62,7 +59,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_height"
-            android:background="@color/pay_reserve_list_divider"/>
+            android:background="@color/pay_reserve_list_divider_white"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -72,24 +69,26 @@
             android:paddingTop="@dimen/padding_15"
             android:text="@string/recharge_sum"
             android:textColor="@color/pay_reserve_list_text"
-            android:textSize="@dimen/normal_textsize"/>
+            android:textSize="@dimen/normal_textsize"
+            android:background="@color/white"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_height"
-            android:background="@color/pay_reserve_list_divider"/>
+            android:background="@color/pay_reserve_list_divider_white"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:padding="@dimen/padding_15">
+            android:padding="@dimen/padding_15"
+            android:background="@color/white">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/sum_1"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/textsize_level2"/>
 
             <EditText
@@ -98,27 +97,31 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="@dimen/margin_30"
                 android:layout_weight="1"
-                android:background="@null"
                 android:hint="@string/hint_consume_sum"
                 android:inputType="numberDecimal"
                 android:maxLength="6"
-                android:textColor="@color/text_and_buttor_orange"
-                android:textColorHint="@color/text_down_payment_and_way"
-                android:textSize="@dimen/textsize_level2"/>
+                android:textColor="@color/text_red"
+                android:textColorHint="@color/text_gray"
+                android:textSize="@dimen/textsize_level2"
+                android:paddingTop="@dimen/padding_5"
+                android:paddingBottom="@dimen/padding_5"
+                android:paddingStart="@dimen/margin_8"
+                android:background="@drawable/shape_city_choose_gray"/>
         </LinearLayout>
 
         <View
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/height_10"
-            android:background="@color/pay_reserve_list_divider"/>
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/pay_reserve_list_divider_white"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/bg"
+            android:background="@color/white"
             android:paddingBottom="@dimen/padding_10"
             android:paddingLeft="@dimen/padding_20"
             android:paddingTop="@dimen/padding_15"
+            android:layout_marginTop="@dimen/margin_10"
             android:text="@string/recharge_way"
             android:textColor="@color/pay_reserve_list_text"
             android:textSize="@dimen/normal_textsize"/>
@@ -126,7 +129,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_height"
-            android:background="@color/pay_reserve_list_divider"/>
+            android:background="@color/pay_reserve_list_divider_white"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -137,7 +140,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:onClick="@{click.onViewClick}"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@color/white">
 
                 <ImageView
                     android:layout_width="@dimen/width_50"
@@ -150,7 +154,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/pay_by_weixin"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/normal_textsize"/>
 
             </LinearLayout>
@@ -161,7 +165,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/ll_wallet_weixin"
                 android:onClick="@{click.onViewClick}"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@color/white">
 
                 <ImageView
                     android:layout_width="@dimen/width_50"
@@ -174,7 +179,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/pay_by_ali"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_black"
                     android:textSize="@dimen/normal_textsize"/>
 
             </LinearLayout>
@@ -209,13 +214,13 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
                 android:layout_alignBottom="@+id/ll_wallet_weixin"
-                android:background="@color/down_payment_divider"/>
+                android:background="@color/pay_reserve_list_divider_white"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
                 android:layout_alignBottom="@+id/ll_wallet_ali"
-                android:background="@color/down_payment_divider"/>
+                android:background="@color/pay_reserve_list_divider_white"/>
         </RelativeLayout>
 
         <View
@@ -233,7 +238,7 @@
             android:background="@drawable/shape_btn_signin"
             android:onClick="@{click.onViewClick}"
             android:text="@string/recharge"
-            android:textColor="@color/text_black"
+            android:textColor="@color/white"
             android:textSize="@dimen/textsize_level2"/>
     </LinearLayout>
 </layout>

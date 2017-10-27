@@ -73,6 +73,7 @@ public class DiscoverFragment extends BaseFragment {
 
     private void init() {
         mTmDiscover.setTitle(R.string.discover);
+        mTmDiscover.setTitleColor(getResources().getColor(R.color.white));
         discoverBinding.setClick(this);
 
         final LinearLayoutManager lm = new LinearLayoutManager(mContext);
@@ -92,7 +93,7 @@ public class DiscoverFragment extends BaseFragment {
         mRvDiscover.setAdapter(mDiscoverAdapter);
         // 分割线
         RecycleViewDivider divider = new RecycleViewDivider(mContext,
-                LinearLayoutManager.HORIZONTAL, UIUtils.dp2Px(10), UIUtils.getColor(R.color.discover_divider));
+                LinearLayoutManager.HORIZONTAL, UIUtils.dp2Px(10), UIUtils.getColor(R.color.bg_gray));
         mRvDiscover.addItemDecoration(divider);
 
 //        mTmDiscover.setRightText("切换");

@@ -13,7 +13,7 @@ import com.fanc.wheretoplay.R;
 
 
 public class SideLetterBar extends View {
-    private static final String[] b = {"定位", "热门", "A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
+    private static final String[] b = {"A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"};
     private int choose = -1;
     private Paint paint = new Paint();
     private boolean showBg = false;
@@ -53,10 +53,10 @@ public class SideLetterBar extends View {
         int singleHeight = height / b.length;
         for (int i = 0; i < b.length; i++) {
             paint.setTextSize(getResources().getDimension(R.dimen.side_letter_bar_letter_size));
-            paint.setColor(getResources().getColor(R.color.gray));
+            paint.setColor(getResources().getColor(R.color.text_red));
             paint.setAntiAlias(true);
             if (i == choose) {
-                paint.setColor(getResources().getColor(R.color.gray_deep));
+                paint.setColor(getResources().getColor(R.color.text_black));
 //                paint.setFakeBoldText(true);  //加粗
             }
             float xPos = width / 2 - paint.measureText(b[i]) / 2;

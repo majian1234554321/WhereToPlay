@@ -84,6 +84,7 @@ public class OrderFragment extends BaseFragment {
         mTmOrder.setLeftIcon(R.drawable.left);
         mTmOrder.setTitle(R.string.order);
         mTmOrder.setRightIcon(R.drawable.delete);
+        mTmOrder.setTitleColor(getResources().getColor(R.color.white));
 
         LinearLayoutManager lm = new LinearLayoutManager(mContext);
         lm.setOrientation(LinearLayoutManager.VERTICAL);

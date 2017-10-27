@@ -13,7 +13,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg">
+        android:background="@color/bg_gray">
 
         <com.fanc.wheretoplay.view.TopMenu
             android:id="@+id/tm_register"
@@ -30,7 +30,7 @@
             android:layout_marginLeft="@dimen/margin_20"
             android:layout_marginRight="@dimen/margin_20"
             android:layout_marginTop="@dimen/margin_30"
-            android:background="@drawable/shape_signin_user_input"
+            android:background="@color/white"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -43,7 +43,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/margin_15"
                 android:text="@string/area"
-                android:textColor="@color/text_and_buttor_orange"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/normal_textsize"/>
 
             <TextView
@@ -53,11 +53,11 @@
                 android:layout_alignBottom="@+id/tv_register_area"
                 android:layout_toRightOf="@+id/tv_register_area"
                 android:drawablePadding="@dimen/padding_5"
-                android:drawableRight="@drawable/pull_down"
+                android:drawableRight="@drawable/triangle_down"
                 android:gravity="center"
                 android:onClick="@{doClick.onClick}"
                 android:text="@string/city"
-                android:textColor="@color/text_and_buttor_orange"
+                android:textColor="@color/editText"
                 android:textSize="@dimen/normal_textsize"/>
 
             <TextView
@@ -68,7 +68,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/margin_15"
                 android:text="@string/mobile"
-                android:textColor="@color/text_and_buttor_orange"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/normal_textsize"/>
 
             <EditText
@@ -81,19 +81,44 @@
                 android:hint="@string/hint_mobile"
                 android:inputType="numberDecimal"
                 android:maxLength="11"
-                android:textColor="@color/white"
-                android:textColorHint="@color/text_hint"
+                android:textColor="@color/text_black"
+                android:textColorHint="@color/editText"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <TextView
+                android:id="@+id/tv_register_nickname"
+                android:layout_width="@dimen/width_80"
+                android:layout_height="@dimen/height_40"
+                android:layout_below="@+id/tv_register_mobile"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/margin_15"
+                android:text="@string/register_nickname"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <EditText
+                android:id="@+id/et_register_nickname"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_40"
+                android:layout_alignBottom="@+id/tv_register_nickname"
+                android:layout_toRightOf="@+id/tv_register_nickname"
+                android:background="@null"
+                android:hint="@string/hint_nickname"
+                android:inputType="textPassword"
+                android:maxLength="20"
+                android:textColor="@color/text_black"
+                android:textColorHint="@color/editText"
                 android:textSize="@dimen/normal_textsize"/>
 
             <TextView
                 android:id="@+id/tv_register_password"
                 android:layout_width="@dimen/width_80"
                 android:layout_height="@dimen/height_40"
-                android:layout_below="@+id/tv_register_mobile"
+                android:layout_below="@+id/tv_register_nickname"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/margin_15"
                 android:text="@string/password"
-                android:textColor="@color/text_and_buttor_orange"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/normal_textsize"/>
 
             <EditText
@@ -106,8 +131,8 @@
                 android:hint="@string/hint_password"
                 android:inputType="textPassword"
                 android:maxLength="20"
-                android:textColor="@color/white"
-                android:textColorHint="@color/text_hint"
+                android:textColor="@color/text_black"
+                android:textColorHint="@color/editText"
                 android:textSize="@dimen/normal_textsize"/>
 
             <TextView
@@ -118,7 +143,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/margin_15"
                 android:text="@string/verification"
-                android:textColor="@color/text_and_buttor_orange"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/normal_textsize"/>
 
             <EditText
@@ -130,8 +155,8 @@
                 android:layout_toRightOf="@+id/tv_register_verification"
                 android:background="@null"
                 android:hint="@string/hint_verification"
-                android:textColor="@color/white"
-                android:textColorHint="@color/text_hint"
+                android:textColor="@color/text_black"
+                android:textColorHint="@color/editText"
                 android:textSize="@dimen/normal_textsize"/>
 
             <Button
@@ -145,7 +170,7 @@
                 android:background="@drawable/shape_btn_verification"
                 android:onClick="@{doClick.onClick}"
                 android:text="@string/get_verification"
-                android:textColor="@color/text_black"
+                android:textColor="@color/white"
                 android:textSize="@dimen/normal_textsize"/>
 
             <TextView
@@ -156,7 +181,7 @@
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/margin_15"
                 android:text="@string/redeem_code"
-                android:textColor="@color/text_and_buttor_orange"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/normal_textsize"/>
 
             <EditText
@@ -169,33 +194,39 @@
                 android:hint="@string/hint_redeem_code"
                 android:inputType="textPassword"
                 android:maxLength="20"
-                android:textColor="@color/white"
-                android:textColorHint="@color/text_hint"
+                android:textColor="@color/text_black"
+                android:textColorHint="@color/editText"
                 android:textSize="@dimen/normal_textsize"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height_1px"
                 android:layout_below="@+id/tv_register_area"
-                android:background="@color/signin_line_divider"/>
+                android:background="@color/pay_reserve_list_divider_white"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height_1px"
                 android:layout_below="@+id/tv_register_mobile"
-                android:background="@color/signin_line_divider"/>
+                android:background="@color/pay_reserve_list_divider_white"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height_1px"
+                android:layout_below="@+id/tv_register_nickname"
+                android:background="@color/pay_reserve_list_divider_white"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height_1px"
                 android:layout_below="@+id/tv_register_password"
-                android:background="@color/signin_line_divider"/>
+                android:background="@color/pay_reserve_list_divider_white"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height_1px"
                 android:layout_below="@+id/tv_register_verification"
-                android:background="@color/signin_line_divider"/>
+                android:background="@color/pay_reserve_list_divider_white"/>
 
         </RelativeLayout>
 
@@ -207,12 +238,36 @@
             android:background="@drawable/shape_btn_signin"
             android:onClick="@{doClick.onClick}"
             android:text="@string/register"
-            android:textColor="@color/text_black"
+            android:textColor="@color/white"
             android:textSize="@dimen/textsize_level2"
             app:layout_constraintEnd_toEndOf="@+id/rl_register_user_input"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/rl_register_user_input"
             app:layout_constraintTop_toBottomOf="@+id/rl_register_user_input"/>
 
+        <TextView
+            android:id="@+id/tv_agreement_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_15"
+            android:text="@string/agreement_left"
+            android:textColor="@color/editText"
+            app:layout_constraintTop_toBottomOf="@+id/btn_register"
+            app:layout_constraintStart_toStartOf="@+id/rl_register_user_input"
+            app:layout_constraintEnd_toStartOf="@+id/tv_agreement_right"
+            app:layout_constraintHorizontal_chainStyle="packed"
+            android:textSize="@dimen/normal_textsize"
+            />
+        <TextView
+            android:id="@+id/tv_agreement_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/agreement_right"
+            android:textColor="@color/text_red"
+            app:layout_constraintTop_toTopOf="@+id/tv_agreement_left"
+            app:layout_constraintEnd_toEndOf="@+id/rl_register_user_input"
+            app:layout_constraintStart_toEndOf="@+id/tv_agreement_left"
+            android:textSize="@dimen/normal_textsize"
+            />
     </android.support.constraint.ConstraintLayout>
 </layout>

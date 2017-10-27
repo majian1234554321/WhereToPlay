@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -42,6 +43,8 @@ import java.util.List;
 
 import okhttp3.Call;
 
+import static com.fanc.wheretoplay.base.App.mContext;
+
 /**
  * Created by Administrator on 2017/6/12.
  */
@@ -58,10 +61,11 @@ public class RegisterFragment extends BaseFragment {
     EditText mEtRegisterMobile;
     EditText mEtRegisterPwd;
     EditText mEtRegisterVerification;
+    private EditText mEtReisterNickname;
     Button mBtnRegisterVerification;
     EditText mEtRegisterRedeemCode;
-    Button mBtnRegister;
 
+    Button mBtnRegister;
     Receiver receiver;
     CityResource.City mCity;
     // 验证码定时器
@@ -86,6 +90,7 @@ public class RegisterFragment extends BaseFragment {
         mEtRegisterMobile = registerBinding.etRegisterMobile;
         mEtRegisterPwd = registerBinding.etRegisterPassword;
         mEtRegisterVerification = registerBinding.etRegisterVerification;
+        mEtReisterNickname = registerBinding.etRegisterNickname;
         mBtnRegisterVerification = registerBinding.btnRegisterVerification;
         mEtRegisterRedeemCode = registerBinding.etRedeemCode;
         mBtnRegister = registerBinding.btnRegister;
@@ -97,6 +102,7 @@ public class RegisterFragment extends BaseFragment {
     private void init() {
         mTmRegister.setLeftIcon(R.drawable.left);
         mTmRegister.setTitle(R.string.register);
+        mTmRegister.setTitleColor(getResources().getColor(R.color.white));
         mTmRegister.setLeftIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -221,22 +227,34 @@ public class RegisterFragment extends BaseFragment {
             return;
         }
 
+        //手机号
         String mobile = mEtRegisterMobile.getText().toString().trim();
         if (!((SignInActivity) mContext).mobileFormat(mobile)) {
             return;
         }
 
+        //密码
         String password = mEtRegisterPwd.getText().toString();
         if (!((SignInActivity) mContext).passwordFormat(password)) {
             return;
         }
+
+        //验证码
         String inputVerifyCode = mEtRegisterVerification.getText().toString().trim();
         if (!((SignInActivity) mContext).verifyCodeFormat(inputVerifyCode, verifyCode)) {
             return;
         }
+
+        //推广码
         String redeemCode = mEtRegisterRedeemCode.getText().toString().trim();
         if (redeemCode.isEmpty()) {
             redeemCode = String.valueOf(-1);
+        }
+
+        //昵称
+        String nickName = mEtReisterNickname.getText().toString().trim();
+        if (!((SignInActivity) mContext).nicknameFormat(nickName)) {
+            return;
         }
         register(mobile, password, inputVerifyCode, mCity.getId(), mCity.getLat(), mCity.getLng(), redeemCode);
     }

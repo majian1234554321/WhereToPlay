@@ -4,7 +4,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg"
+        android:background="@color/bg_gray"
         android:orientation="vertical">
 
         <com.fanc.wheretoplay.view.TopMenu
@@ -63,7 +63,7 @@
             android:background="@drawable/shape_btn_signin"
             android:onClick="onViewClick"
             android:text="@string/sign_out"
-            android:textColor="@color/black"
+            android:textColor="@color/white"
             android:textSize="@dimen/textsize_level2"/>
 
     </LinearLayout>
