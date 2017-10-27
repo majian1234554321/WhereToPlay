@@ -91,6 +91,7 @@ public class AlterCityActivity extends BaseActivity {
     private void init() {
         mTmAlterCity.setLeftIcon(R.drawable.left);
         mTmAlterCity.setTitle(R.string.alter_city);
+        mTmAlterCity.setTitleColor(getResources().getColor(R.color.white));
 
         //选中字母的显示控件
         mSlbAlterCity.setOverlay(mTvAlterCitySelectedLetter);

@@ -84,7 +84,7 @@ public class PayFragment extends BaseFragment {
     }
 
     private void init() {
-        mTmPay.setTitle(R.string.consume);
+        mTmPay.setTitle(R.string.pay);
         mTmPay.setTitleColor(getResources().getColor(R.color.white));
         LinearLayoutManager lm = new LinearLayoutManager(mContext);
         lm.setOrientation(LinearLayoutManager.VERTICAL);

@@ -203,6 +203,7 @@
     <dimen name="height_15">15dp</dimen>
     <dimen name="height_20">20dp</dimen>
     <dimen name="height_25">25dp</dimen>
+    <dimen name="height_26">26dp</dimen>
     <dimen name="height_30">30dp</dimen>
     <dimen name="height_36">36dp</dimen>
     <dimen name="height_38">38dp</dimen>

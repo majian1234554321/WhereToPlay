@@ -42,7 +42,7 @@
                     android:layout_marginLeft="@dimen/margin_10"
                     android:layout_marginTop="@dimen/margin_10"
                     android:text='@{String.valueOf(((int) Double.parseDouble(discount.getPrice())))}'
-                    android:textColor="@color/text_and_buttor_orange"
+                    android:textColor="@color/text_red"
                     android:textSize="50sp"/>
 
                 <TextView
@@ -51,7 +51,7 @@
                     android:layout_alignTop="@+id/tv_item_discount_coupon_sum"
                     android:layout_marginTop="@dimen/margin_10"
                     android:text="@string/currency_char"
-                    android:textColor="@color/text_and_buttor_orange"
+                    android:textColor="@color/text_red"
                     android:textSize="@dimen/textsize_levelsmall"/>
 
                 <TextView
@@ -62,7 +62,7 @@
                     android:layout_marginTop="@dimen/margin_12"
                     android:layout_toRightOf="@+id/tv_item_discount_coupon_sum"
                     android:text="@string/rmb"
-                    android:textColor="@color/text_and_buttor_orange"/>
+                    android:textColor="@color/text_red"/>
 
                 <TextView
                     android:id="@+id/tv_item_discount_coupon_text"
@@ -72,7 +72,7 @@
                     android:layout_marginLeft="@dimen/margin_5"
                     android:layout_toRightOf="@+id/tv_item_discount_coupon_sum"
                     android:text="@string/where_to_play_discount_coupon"
-                    android:textColor="@color/text_and_buttor_orange"
+                    android:textColor="@color/text_red"
                     android:textSize="@dimen/textsize_level4"/>
 
                 <TextView
@@ -82,7 +82,7 @@
                     android:layout_marginLeft="@dimen/margin_5"
                     android:layout_toRightOf="@+id/tv_item_discount_coupon_text"
                     android:text="@string/arrive_with_cash"
-                    android:textColor="@color/text_and_buttor_orange"
+                    android:textColor="@color/text_red"
                     android:textSize="@dimen/textsize_levelsmall"/>
             </RelativeLayout>
 
@@ -99,7 +99,7 @@
                     android:layout_height="wrap_content"
                     android:layout_toLeftOf="@+id/tv_item_discount_coupon_deadline"
                     android:text="@string/use_deadline"
-                    android:textColor="@color/text_black"
+                    android:textColor="@color/text_white"
                     android:textSize="@dimen/normal_textsize"/>
 
                 <TextView
@@ -108,7 +108,7 @@
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
                     android:text='@{DateFormatUtil.getDateFormatString(discount.getStart_time())+"-"+DateFormatUtil.getDateFormatString(discount.getEnd_time())}'
-                    android:textColor="@color/text_black"
+                    android:textColor="@color/text_white"
                     android:textSize="@dimen/normal_textsize"/>
 
             </RelativeLayout>

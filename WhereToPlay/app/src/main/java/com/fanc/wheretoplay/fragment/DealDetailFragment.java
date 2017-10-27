@@ -66,6 +66,8 @@ public class DealDetailFragment extends BaseFragment {
         mTmDealDetail.setLeftIcon(R.drawable.left);
         mTmDealDetail.setTitle(R.string.deal_detail);
         mTmDealDetail.setRightText(R.string.filter);
+        mTmDealDetail.setTitleColor(getResources().getColor(R.color.white));
+        mTmDealDetail.setRightTextColor(getResources().getColor(R.color.white));
 
         dealDetailBinding.setClcik(this);
         initPage();

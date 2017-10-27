@@ -5,5 +5,5 @@
         android:topRightRadius="@dimen/radius_small"/>
     <stroke
         android:width="@dimen/line_height"
-        android:color="@color/text_and_buttor_orange"/>
+        android:color="@color/text_red"/>
 </shape>

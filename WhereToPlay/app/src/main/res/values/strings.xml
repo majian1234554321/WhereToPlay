@@ -127,7 +127,7 @@
     <string name="order">订单</string>
     <string name="collection">收藏</string>
     <string name="referral">推荐</string>
-    <string name="drive">代价</string>
+    <string name="drive">代驾</string>
 
     <!--mine info-->
     <string name="mine_info">我的资料</string>
@@ -278,6 +278,7 @@
     <string name="hot_city">热门城市</string>
     <string name="search_city_error">搜索无结果</string>
     <string name="city">城市</string>
+    <string name="all_city">所有城市</string>
 
     <!--message detail-->
     <string name="message_detail">消息详情</string>

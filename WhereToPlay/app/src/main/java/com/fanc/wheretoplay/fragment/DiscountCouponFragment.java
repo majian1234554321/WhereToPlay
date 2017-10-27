@@ -69,6 +69,7 @@ public class DiscountCouponFragment extends BaseFragment {
     private void init() {
         mTmDiscountCoupon.setLeftIcon(R.drawable.left);
         mTmDiscountCoupon.setTitle(R.string.discount_coupon);
+        mTmDiscountCoupon.setTitleColor(getResources().getColor(R.color.white));
         // 是否是选择优惠券
         if (isChoose) {
             chooseDiscountCoupon();
