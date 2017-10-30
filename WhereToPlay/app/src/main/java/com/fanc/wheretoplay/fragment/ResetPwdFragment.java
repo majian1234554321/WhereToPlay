@@ -67,6 +67,7 @@ public class ResetPwdFragment extends BaseFragment {
     private void init() {
         mTmResetPwd.setLeftIcon(R.drawable.left);
         mTmResetPwd.setTitle(R.string.reset_password);
+        mTmResetPwd.setTitleColor(getResources().getColor(R.color.white));
         mTmResetPwd.setLeftIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

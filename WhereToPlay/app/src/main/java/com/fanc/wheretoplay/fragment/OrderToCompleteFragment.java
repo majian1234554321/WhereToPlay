@@ -67,6 +67,7 @@ public class OrderToCompleteFragment extends BaseFragment {
     private void init() {
         mTmOrderToComplete.setLeftIcon(R.drawable.left);
         mTmOrderToComplete.setTitle(R.string.reserve_submit);
+        mTmOrderToComplete.setTitleColor(getResources().getColor(R.color.white));
         getOrderInfo();
     }
 

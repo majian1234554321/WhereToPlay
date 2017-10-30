@@ -82,6 +82,7 @@ public class WaiterInfoFragment extends BaseFragment {
     private void init() {
         mTmWaiterInfo.setLeftIcon(R.drawable.left);
         mTmWaiterInfo.setTitle(R.string.detail);
+        mTmWaiterInfo.setTitleColor(getResources().getColor(R.color.white));
 
         GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 3);
         mRvWaiterInfo.setLayoutManager(gridLayoutManager);

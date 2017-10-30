@@ -98,7 +98,7 @@ public class MerchantDetailFragment extends BaseFragment {
     TextView mTvMerchantDetailGrade;
     TextView mTvMerchantDetailCommentNo;
     LinearLayout mLlMerchantDetailComment;
-    RecyclerView mRvMerchantDetailCommentHeadImage;
+//    RecyclerView mRvMerchantDetailCommentHeadImage;
     // 图片
     LinearLayout mLlMerchantDetailImage;
     ImageView mIvMerchantDetail1;
@@ -178,7 +178,7 @@ public class MerchantDetailFragment extends BaseFragment {
         mTvMerchantDetailGrade = detailBinding.tvMerchantDetailGrade;
         mTvMerchantDetailCommentNo = detailBinding.tvMerchantDetailComment;
         mLlMerchantDetailComment = detailBinding.llMerchantDetailComment;
-        mRvMerchantDetailCommentHeadImage = detailBinding.rvMerchantDetailHeadImage;
+//        mRvMerchantDetailCommentHeadImage = detailBinding.rvMerchantDetailHeadImage;
         mLlMerchantDetailImage = detailBinding.llMerchantDetailImage;
         mIvMerchantDetail1 = detailBinding.ivMerchantDetail1;
         mIvMerchantDetail2 = detailBinding.ivMerchantDetail2;
@@ -220,14 +220,14 @@ public class MerchantDetailFragment extends BaseFragment {
         getMerchantDetail();
         getCollected(this.mStoreId);
         // 评论
-        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
-        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
-        mRvMerchantDetailCommentHeadImage.setLayoutManager(layoutManager);
-        RecycleViewDivider divider = new RecycleViewDivider(mContext, LinearLayout.VERTICAL, UIUtils.dp2Px(2), UIUtils.getColor(R.color.bg));
-        mRvMerchantDetailCommentHeadImage.addItemDecoration(divider);
-        mCommentIcons = new ArrayList<>();
-        iconAdapter = new CommentIconAdapter(mContext, mCommentIcons);
-        mRvMerchantDetailCommentHeadImage.setAdapter(iconAdapter);
+//        LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
+//        layoutManager.setOrientation(LinearLayoutManager.HORIZONTAL);
+//        mRvMerchantDetailCommentHeadImage.setLayoutManager(layoutManager);
+//        RecycleViewDivider divider = new RecycleViewDivider(mContext, LinearLayout.VERTICAL, UIUtils.dp2Px(2), UIUtils.getColor(R.color.bg));
+//        mRvMerchantDetailCommentHeadImage.addItemDecoration(divider);
+//        mCommentIcons = new ArrayList<>();
+//        iconAdapter = new CommentIconAdapter(mContext, mCommentIcons);
+//        mRvMerchantDetailCommentHeadImage.setAdapter(iconAdapter);
 
         // 推荐店铺
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);

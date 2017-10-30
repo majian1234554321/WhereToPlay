@@ -54,7 +54,6 @@ public class MerchantRoomFragment extends BaseFragment {
     /**
      * 房型列表
      */
-    RoomTypeAdapter roomTypeAdapter;
     //  是否选择房型
     boolean isSelect;
     //列表图
@@ -107,10 +106,6 @@ public class MerchantRoomFragment extends BaseFragment {
         RecycleViewDivider divider1 = new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL, UIUtils.dp2Px(1), UIUtils.getColor(R.color.btn_pressed));
         mRC.addItemDecoration(divider1);
 
-//        if (isSelect) {
-//            roomTypeAdapter.setSelect(true);
-//        }
-//        mRvRoom.setAdapter(roomTypeAdapter);
         // 获取列表
         getRoomList();
 
@@ -154,6 +149,10 @@ public class MerchantRoomFragment extends BaseFragment {
 
     private void showRoomList(List<HouseTypeList.RoomBean> rooms) {
         HouseTypeAdapter houseTypeAdapter = new HouseTypeAdapter(mContext, rooms);
+        //如果进入在线预订界面进行房型选择，则为true
+        if (isSelect) {
+            houseTypeAdapter.setSelect(true);
+        }
         mRC.setAdapter(houseTypeAdapter);
     }
 

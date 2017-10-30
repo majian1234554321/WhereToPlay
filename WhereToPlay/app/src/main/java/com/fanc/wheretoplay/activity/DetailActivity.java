@@ -102,12 +102,9 @@ public class DetailActivity extends BaseFragmentActivity {
                 initFragment(new SystemNotifyFragment());
                 break;
             case Constants.ABOUT_US:   //关于我们
-                Log.e("Iverson", "ABOUT_US");
                 initFragment(new AboutUsFragment());
                 break;
-            case Constants.WAITER_INFO:
-                Log.e("Iverson", "WAITER_INFO");
-
+            case Constants.WAITER_INFO:   //
                 initFragment(new WaiterInfoFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID))
                         .setSelect(intent.getBooleanExtra(Constants.IS_CHOOSE, false)));
                 break;

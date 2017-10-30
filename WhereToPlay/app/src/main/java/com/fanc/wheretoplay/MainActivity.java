@@ -1,15 +1,11 @@
 package com.fanc.wheretoplay;
 
-import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
-import android.graphics.Typeface;
 import android.os.Bundle;
-import android.os.Environment;
-import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.LocalBroadcastManager;
@@ -19,17 +15,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.fanc.wheretoplay.adapter.SideslipAdapter;
 import com.fanc.wheretoplay.base.App;
 import com.fanc.wheretoplay.base.BaseFragmentActivity;
 import com.fanc.wheretoplay.callback.IOnFocusListener;
@@ -50,28 +42,10 @@ import cn.jpush.android.api.JPushInterface;
 
 public class MainActivity extends BaseFragmentActivity {
     ActivityMainBinding mainBinding;
-
-    public DrawerLayout mDlSideslip;
-    /**
-     * 侧边菜单
-     */
-    RecyclerView mRvSideslip;
-    /**
-     * 代驾
-     */
-    ImageView mIvSidesliipSubstitute;
-    TextView mTvSidesliipSubstitute;
     /**
      * 主页
      */
     MyViewPager mMvpMain;
-//    FrameLayout mFlMainTab;
-    /**
-     * 选中时大图
-     */
-//    ImageView mIvReserveBig;
-//    ImageView mIvPayBig;
-//    ImageView mIvDiscoverBig;
     /**
      * 未选中时小图
      */
@@ -106,7 +80,6 @@ public class MainActivity extends BaseFragmentActivity {
     /**
      * 选中状态的LayoutParams
      */
-//    ConstraintLayout.LayoutParams lp;
     /**
      * 预定
      */
@@ -124,10 +97,6 @@ public class MainActivity extends BaseFragmentActivity {
      */
     private ArrayList<MyOnTouchListener> onTouchListeners = new ArrayList<MyOnTouchListener>();
 
-    /**
-     * 侧滑菜单是否打开
-     */
-    public boolean isOpen;
 
 
 
@@ -138,7 +107,6 @@ public class MainActivity extends BaseFragmentActivity {
         init();
         initFragments();
         initPage();
-        initSideslip();
         setListeners();
         registerBroadcastReceiver();
     }
@@ -147,15 +115,7 @@ public class MainActivity extends BaseFragmentActivity {
      * init views
      */
     private void init() {
-        mDlSideslip = mainBinding.dlSideslip;
-        mRvSideslip = mainBinding.rvSideslip;
-        mIvSidesliipSubstitute = mainBinding.ivSideslip;
-        mTvSidesliipSubstitute = mainBinding.tvSideslip;
         mMvpMain = mainBinding.mvpMain;
-//        mFlMainTab = mainBinding.flMainTab;
-//        mIvReserveBig = mainBinding.ivReserveBig;
-//        mIvPayBig = mainBinding.ivPayBig;
-//        mIvDiscoverBig = mainBinding.ivDiscoverBig;
         //底部选择栏
         mIvReserve = mainBinding.ivMainTabReserve;
         mIvPay = mainBinding.ivMainTabPay;
@@ -205,46 +165,9 @@ public class MainActivity extends BaseFragmentActivity {
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         screenWidth = displayMetrics.widthPixels;
-        // 默认选中的tab，预定
-//        lp = (ConstraintLayout.LayoutParams) mFlMainTab.getLayoutParams();
-//        lp.width = screenWidth / 3;
-//        mFlMainTab.setLayoutParams(lp);
-
         setSelectedPage(0);
-//        mIvReserveBig.setAlpha(1F);
-//        mIvPayBig.setAlpha(0F);
-//        mIvDiscoverBig.setAlpha(0F);
-//
-//        mIvReserve.setAlpha(0F);
     }
 
-    /**
-     * 侧滑菜单
-     */
-    private void initSideslip() {
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        mRvSideslip.setLayoutManager(linearLayoutManager);
-        List sideslips = new ArrayList();
-        sideslips.add("商务KTV");
-        sideslips.add("量贩KTV");
-        sideslips.add("演绎吧");
-        sideslips.add("酒吧");
-        SideslipAdapter sideslipAdapter = new SideslipAdapter(this, sideslips);
-        mRvSideslip.setAdapter(sideslipAdapter);
-        sideslipAdapter.setOnItemClickListener(new SideslipAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(String title, int position) {
-                if (reserveFragment != null) {
-                    if (reserveFragment.filterStoreType.size() > 0) {
-                        reserveFragment.setStoreType(reserveFragment.filterStoreType.get(position).getId());
-                    }
-                    ToastUtils.makePicTextShortToast(MainActivity.this, title);
-                    mDlSideslip.closeDrawer(Gravity.START);
-                }
-            }
-        });
-    }
 
 
     private void setSelectedPage(int position) {
@@ -258,17 +181,6 @@ public class MainActivity extends BaseFragmentActivity {
      * @param position
      */
     private void setSelectedButton(int position) {
-        // 大图标左边距
-//        lp.leftMargin = (screenWidth / 3) * position;
-//        mFlMainTab.setLayoutParams(lp);
-        // 大图标
-//        mIvReserveBig.setAlpha(0F);
-//        mIvPayBig.setAlpha(0F);
-//        mIvDiscoverBig.setAlpha(0F);
-        // 小图标
-//        mIvReserve.setAlpha(1F);
-//        mIvPay.setAlpha(1F);
-//        mIvDiscover.setAlpha(1F);
         mIvReserve.setImageResource(R.drawable.reserve_book);
         mIvPay.setImageResource(R.drawable.reserve_pay);
         mIvDiscover.setImageResource(R.drawable.discover);
@@ -281,20 +193,14 @@ public class MainActivity extends BaseFragmentActivity {
         // 选中的大图标显示，小图标隐藏
         switch (position) {
             case 0:
-//                mIvReserve.setAlpha(0F);
-//                mIvReserveBig.setAlpha(1F);
                 mIvReserve.setImageResource(R.drawable.reserve_book_in);
                 tvMainTabReserve.setTextColor(getResources().getColor(R.color.text_red));
                 break;
             case 1:
-//                mIvPay.setAlpha(0F);
-//                mIvPayBig.setAlpha(1F);
                 mIvPay.setImageResource(R.drawable.reserve_pay_in);
                 tvMainTabPay.setTextColor(getResources().getColor(R.color.text_red));
                 break;
             case 2:
-//                mIvDiscover.setAlpha(0F);
-//                mIvDiscoverBig.setAlpha(1F);
                 mIvDiscover.setImageResource(R.drawable.discover_in);
                 tvMainTabDiscover.setTextColor(getResources().getColor(R.color.text_red));
                 break;
@@ -366,35 +272,6 @@ public class MainActivity extends BaseFragmentActivity {
             }
         });
 
-        mTvSidesliipSubstitute.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastUtils.makePicTextShortToast(MainActivity.this, "该功能暂未开放，敬请期待");
-                mDlSideslip.closeDrawer(Gravity.START);
-            }
-        });
-        // 侧滑菜单监听器
-        mDlSideslip.addDrawerListener(new DrawerLayout.DrawerListener() {
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-                isOpen = false;
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {
-
-            }
-        });
     }
 
     public void doClick(View view) {
@@ -423,7 +300,7 @@ public class MainActivity extends BaseFragmentActivity {
                     mMvpMain.setCurrentItem(3);
                     setSelectedPage(3);
                 }
-            case R.id.cl_sideslip:
+//            case R.id.cl_sideslip:
             default:
                 break;
         }
@@ -464,9 +341,6 @@ public class MainActivity extends BaseFragmentActivity {
 
     @Override
     public void onBackPressed() {
-        if (mDlSideslip.isDrawerOpen(Gravity.START)) {
-            mDlSideslip.closeDrawer(Gravity.START);
-        } else {
             if (System.currentTimeMillis() - preClickTime > 2000) {
                 ToastUtils.showShortToast(this, UIUtils.getString(R.string.exit_app));
                 preClickTime = System.currentTimeMillis();
@@ -474,7 +348,6 @@ public class MainActivity extends BaseFragmentActivity {
                 App.closeApplication();
                 super.onBackPressed();
             }
-        }
     }
 
     private void registerBroadcastReceiver() {

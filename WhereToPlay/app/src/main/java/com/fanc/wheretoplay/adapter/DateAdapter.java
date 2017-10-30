@@ -49,7 +49,7 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.binding.setDate((Date) mData.get(position));
         if (getItemStatus(position)) {
-            holder.mLlDate.setBackgroundColor(UIUtils.getColor(R.color.my_bg));
+            holder.mLlDate.setBackgroundColor(UIUtils.getColor(R.color.text_red));
             holder.mTvItemDate.setSelected(true);
             holder.mTvItemWeek.setSelected(true);
         } else {
