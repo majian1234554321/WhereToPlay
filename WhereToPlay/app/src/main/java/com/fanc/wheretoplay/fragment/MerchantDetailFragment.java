@@ -679,18 +679,6 @@ public class MerchantDetailFragment extends BaseFragment {
                 }
             });
         }
-        /*新版图片展示*/
-//        if (pictures == null) {
-//            return;
-//        }
-//        bannerArrayList.clear();
-//        imgs.clear();
-//        for (int i = 0; i < pictures.size(); i++) {
-//            imgs.add(pictures.get(i).getPicture_path());
-//            bannerArrayList.add(Network.IMAGE + pictures.get(i).getPicture_path());
-//        }
-//        mBannerDetail.setImages(bannerArrayList);
-//        mBannerDetail.start();
     }
 
     /**
@@ -762,13 +750,4 @@ public class MerchantDetailFragment extends BaseFragment {
                 .open();
     }
 
-    //去掉了
-    /*顶部轮播图点击事件*/
-//    @Override
-//    public void OnBannerClick(int position) {
-//        Intent intent = new Intent(mContext, LargeImageActivity.class);
-//        intent.putExtra(Constants.URL, imgs);
-//        intent.putExtra(Constants.POSITION, position);
-//        startActivity(intent);
-//    }
 }

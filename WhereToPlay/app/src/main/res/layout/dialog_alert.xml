@@ -14,7 +14,7 @@
             android:layout_marginLeft="@dimen/margin_10"
             android:layout_marginRight="@dimen/margin_10"
             android:layout_marginTop="@dimen/margin_10"
-            android:textColor="@color/text_and_buttor_orange"
+            android:textColor="@color/text_red"
             android:textSize="@dimen/normal_textsize"/>
 
         <TextView

@@ -30,7 +30,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="@dimen/margin_15"
             android:text="@string/system_notify"
-            android:textColor="@color/text_and_buttor_orange"
+            android:textColor="@color/text_red"
             android:textSize="@dimen/normal_textsize"
             app:layout_constraintStart_toEndOf="@+id/iv_item_system_notify"
             app:layout_constraintTop_toTopOf="@+id/iv_item_system_notify"/>

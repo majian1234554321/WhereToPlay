@@ -67,7 +67,7 @@ public class ReuseActivity extends BaseFragmentActivity {
                 initFragment(new CommentFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID))
                         .setOrderId(intent.getStringExtra(Constants.ORDER_ID)));
                 break;
-            case Constants.RESERVE_INFO:
+            case Constants.RESERVE_INFO:   //在线预订
                 initFragment(new ReserveInfoFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID)));
                 break;
             case Constants.LIST_PAGE:

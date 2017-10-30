@@ -15,7 +15,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center_vertical"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
 
         <CheckBox
             android:id="@+id/cb_pay_item_status"
@@ -47,7 +48,7 @@
                 android:layout_alignTop="@+id/iv_pay_item"
                 android:layout_toRightOf="@+id/iv_pay_item"
                 android:text="@{order.name}"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/textsize_level2"/>
 
             <TextView
@@ -57,7 +58,7 @@
                 android:layout_alignBottom="@+id/tv_pay_item_title"
                 android:layout_marginLeft="@dimen/margin_15"
                 android:layout_toRightOf="@+id/tv_pay_item_title"
-                android:textColor="@color/text_and_buttor_orange"
+                android:textColor="@color/text_red"
                 android:textSize="@dimen/textsize_levelsmall"/>
 
             <TextView
@@ -201,7 +202,8 @@
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/iv_pay_item"
                 android:gravity="right"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@color/white">
 
                 <Button
                     android:id="@+id/btn_check_comment"
@@ -233,9 +235,9 @@
                     android:layout_height="@dimen/height_25"
                     android:layout_marginBottom="@dimen/margin_10"
                     android:layout_marginRight="@dimen/margin_10"
-                    android:background="@drawable/shape_btn_white"
+                    android:background="@drawable/shape_btn_signin"
                     android:text="@string/cancel_reverse"
-                    android:textColor="@color/text_black"
+                    android:textColor="@color/text_white"
                     android:textSize="@dimen/normal_textsize"/>
 
                 <Button

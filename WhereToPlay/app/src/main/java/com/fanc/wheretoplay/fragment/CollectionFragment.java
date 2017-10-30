@@ -74,6 +74,8 @@ public class CollectionFragment extends BaseFragment {
         mTmCollection.setLeftIcon(R.drawable.left);
         mTmCollection.setTitle(R.string.collection);
         mTmCollection.setRightText(R.string.delete);
+        mTmCollection.setTitleColor(getResources().getColor(R.color.white));
+        mTmCollection.setRightTextColor(getResources().getColor(R.color.white));
 
         // 列表
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
@@ -81,7 +83,7 @@ public class CollectionFragment extends BaseFragment {
         mRvCollection.setLayoutManager(layoutManager);
         collections = new ArrayList<>();
         collectionAdapter = new CollectionAdapter(mContext, collections);
-        RecycleViewDivider viewDivider = new RecycleViewDivider(mContext, LinearLayout.HORIZONTAL, UIUtils.dp2Px(1), UIUtils.getColor(R.color.pay_reserve_list_divider));
+        RecycleViewDivider viewDivider = new RecycleViewDivider(mContext, LinearLayout.HORIZONTAL, UIUtils.dp2Px(1), UIUtils.getColor(R.color.pay_reserve_list_divider_white));
         mRvCollection.addItemDecoration(viewDivider);
         mRvCollection.setAdapter(collectionAdapter);
         if (LocationUtils.location != null) {

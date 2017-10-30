@@ -82,6 +82,7 @@ public class ReferralFragment extends BaseFragment {
     private void init() {
         mTmReferrals.setLeftIcon(R.drawable.left);
         mTmReferrals.setTitle(R.string.referral);
+        mTmReferrals.setTitleColor(getResources().getColor(R.color.white));
         referralsBinding.setClick(this);
 
         mTvMineNickname.setText(TextUtils.isEmpty(mUser.getNickname()) ? UIUtils.getString(R.string.nickname) : mUser.getNickname());

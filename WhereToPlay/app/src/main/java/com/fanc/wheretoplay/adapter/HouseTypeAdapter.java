@@ -1,5 +1,6 @@
 package com.fanc.wheretoplay.adapter;
 
+import android.app.Activity;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
@@ -12,8 +13,10 @@ import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.databinding.ItemHousetypeBinding;
+import com.fanc.wheretoplay.datamodel.HouseTypeList;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/6/13.
@@ -21,14 +24,12 @@ import java.util.ArrayList;
 
 public class HouseTypeAdapter extends RecyclerView.Adapter<HouseTypeAdapter.ViewHolder> {
 
-    private final ArrayList<String> price;
-    private final ArrayList<String> typeName;
+    List<HouseTypeList.RoomBean> mRoom;
     Context mContext;
 
-    public HouseTypeAdapter(Context mContext, ArrayList<String> typeName, ArrayList<String> price) {
+    public HouseTypeAdapter(Activity mContext, List<HouseTypeList.RoomBean> room) {
         this.mContext = mContext;
-        this.typeName = typeName;
-        this.price = price;
+        this.mRoom = room;
     }
 
     @Override
@@ -59,14 +60,14 @@ public class HouseTypeAdapter extends RecyclerView.Adapter<HouseTypeAdapter.View
             default:
                 break;
         }
-            holder.mTvName.setText(typeName.get(position));
-            holder.mTvPrice.setText(price.get(position));
+            holder.mTvName.setText(mRoom.get(position).getName());
+            holder.mTvPrice.setText(mRoom.get(position).getMin_price());
     }
 
     @Override
     public int getItemCount() {
-        if (typeName != null) {
-            return typeName.size();
+        if (mRoom != null) {
+            return mRoom.size();
         }
         return 0;
     }

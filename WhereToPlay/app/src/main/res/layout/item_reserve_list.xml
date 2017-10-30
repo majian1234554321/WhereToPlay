@@ -11,7 +11,9 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/padding_10">
+        android:padding="@dimen/height_1"
+        android:layout_margin="@dimen/margin_10"
+        android:background="@drawable/shape_pay">
 
         <View
             android:id="@+id/v_bg_top"
@@ -24,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_120"
             android:layout_below="@+id/v_bg_top"
-            android:background="@drawable/shape_reserve_list_item_bottom"/>
+            />
 
         <TextView
             android:id="@+id/tv_reserve_list_item_title"
@@ -35,7 +37,7 @@
             android:layout_marginLeft="@dimen/margin_10"
             android:gravity="center_vertical"
             android:text="@{order.store_name}"
-            android:textColor="@color/white"
+            android:textColor="@color/textcolor_5a"
             android:textSize="@dimen/textsize_level2"/>
 
         <TextView
@@ -48,7 +50,7 @@
             android:background="@drawable/discount"
             android:paddingLeft="@dimen/padding_20"
             android:paddingRight="@dimen/padding_5"
-            android:textColor="@color/text_black"/>
+            android:textColor="@color/text_white"/>
 
         <TextView
             android:id="@+id/tv_reserve_list_item_room"
@@ -58,7 +60,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/margin_10"
             android:text='@{order.room_type+" "+order.room_number}'
-            android:textColor="@color/textcolor_d2"
+            android:textColor="@color/textcolor_5a"
             android:textSize="@dimen/normal_textsize"/>
 
         <TextView
@@ -69,7 +71,7 @@
             android:layout_marginLeft="@dimen/margin_10"
             android:layout_marginTop="@dimen/margin_15"
             android:text="@{order.nickname}"
-            android:textColor="@color/textcolor_d2"
+            android:textColor="@color/textcolor_btn_normal"
             android:textSize="@dimen/normal_textsize"/>
 
         <TextView
@@ -80,7 +82,7 @@
             android:layout_below="@+id/tv_reserve_list_item_name"
             android:layout_marginTop="@dimen/margin_10"
             android:text="@{order.mobile}"
-            android:textColor="@color/textcolor_d2"
+            android:textColor="@color/textcolor_btn_normal"
             android:textSize="@dimen/normal_textsize"/>
 
         <TextView
@@ -91,7 +93,7 @@
             android:layout_below="@+id/tv_reserve_list_item_mobile"
             android:layout_marginTop="@dimen/margin_10"
             android:text="到店 09-10 22:00"
-            android:textColor="@color/textcolor_d2"
+            android:textColor="@color/textcolor_btn_normal"
             android:textSize="@dimen/normal_textsize"/>
 
         <ImageView
@@ -111,7 +113,7 @@
             android:layout_marginRight="@dimen/margin_40"
             android:layout_marginTop="@dimen/margin_2"
             android:text="@string/reserving"
-            android:textColor="@color/text_and_buttor_orange"
+            android:textColor="@color/text_red"
             android:textSize="@dimen/textsize_level2"/>
 
         <ImageView
@@ -121,7 +123,7 @@
             android:layout_alignTop="@+id/tv_reserve_list_item_name"
             android:layout_marginRight="@dimen/margin_5"
             android:layout_toLeftOf="@+id/tv_reserve_list_item_state"
-            android:src="@drawable/reserving"/>
+            android:src="@drawable/reserve_book_in"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -149,9 +151,9 @@
                 android:layout_height="@dimen/height_30"
                 android:layout_marginBottom="@dimen/margin_10"
                 android:layout_marginRight="@dimen/margin_10"
-                android:background="@drawable/shape_white"
+                android:background="@drawable/shape_btn_signin"
                 android:text="@string/cancel_reverse"
-                android:textColor="@color/text_black"
+                android:textColor="@color/text_white"
                 android:textSize="@dimen/normal_textsize"
                 android:visibility="gone"/>
 
@@ -162,9 +164,9 @@
                 android:layout_height="@dimen/height_30"
                 android:layout_marginBottom="@dimen/margin_10"
                 android:layout_marginRight="@dimen/margin_10"
-                android:background="@drawable/shape_btn_orange"
+                android:background="@drawable/shape_btn_signin"
                 android:text="@string/buy"
-                android:textColor="@color/text_black"
+                android:textColor="@color/text_white"
                 android:textSize="@dimen/normal_textsize"
                 android:visibility="gone"/>
         </LinearLayout>

@@ -62,6 +62,7 @@ public class SystemNotifyFragment extends BaseFragment {
     private void init() {
         mTmSystemNotify.setLeftIcon(R.drawable.left);
         mTmSystemNotify.setTitle(R.string.system_notify);
+        mTmSystemNotify.setTitleColor(getResources().getColor(R.color.white));
         // 列表
         LinearLayoutManager layoutManager = new LinearLayoutManager(mContext);
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);

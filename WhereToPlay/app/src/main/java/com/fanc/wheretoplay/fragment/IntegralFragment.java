@@ -60,6 +60,7 @@ public class IntegralFragment extends BaseFragment {
     private void init() {
         mTmIntegral.setLeftIcon(R.drawable.left);
         mTmIntegral.setTitle(R.string.integral);
+        mTmIntegral.setTitleColor(getResources().getColor(R.color.white));
         // 列表
         LinearLayoutManager manager = new LinearLayoutManager(mContext);
         manager.setOrientation(LinearLayoutManager.VERTICAL);

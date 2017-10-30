@@ -5,7 +5,6 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,10 +12,8 @@ import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.databinding.ItemHousenewsBinding;
-import com.fanc.wheretoplay.databinding.ItemHousetypeBinding;
-import com.fanc.wheretoplay.datamodel.HousenewsBean;
+import com.fanc.wheretoplay.datamodel.HousenewsList;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -25,10 +22,10 @@ import java.util.List;
 
 public class HouseNewsAdapter extends RecyclerView.Adapter<HouseNewsAdapter.ViewHolder> {
 
-    private final List<HousenewsBean.ContentBean.StatusBean> housenews;
+    private final List<HousenewsList.StatusBean> housenews;
     Context mContext;
 
-    public HouseNewsAdapter(Activity mContext, List<HousenewsBean.ContentBean.StatusBean> housenews) {
+    public HouseNewsAdapter(Activity mContext, List<HousenewsList.StatusBean> housenews) {
         this.mContext = mContext;
         this.housenews = housenews;
     }

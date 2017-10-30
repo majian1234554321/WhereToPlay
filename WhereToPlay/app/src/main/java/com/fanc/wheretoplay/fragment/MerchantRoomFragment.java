@@ -19,18 +19,14 @@ import com.fanc.wheretoplay.adapter.HouseTypeAdapter;
 import com.fanc.wheretoplay.adapter.RoomTypeAdapter;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentRoomBinding;
-import com.fanc.wheretoplay.datamodel.HouseTypeCategoryBean;
-import com.fanc.wheretoplay.datamodel.RoomCategory;
+import com.fanc.wheretoplay.datamodel.HouseTypeList;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
 import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.TopMenu;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
-
-import java.util.ArrayList;
 import java.util.List;
-
 import okhttp3.Call;
 
 /**
@@ -58,15 +54,13 @@ public class MerchantRoomFragment extends BaseFragment {
     /**
      * 房型列表
      */
-    List<HouseTypeCategoryBean.ContentBean.RoomBean> rooms;
     RoomTypeAdapter roomTypeAdapter;
     //  是否选择房型
     boolean isSelect;
     //列表图
     private RecyclerView mRC;
-    //集合
-    private ArrayList<String> typeName;
-    private ArrayList<String> price;
+    private List<HouseTypeList.RoomBean> roomBean;
+
 
     @Nullable
     @Override
@@ -106,29 +100,13 @@ public class MerchantRoomFragment extends BaseFragment {
         }
 
         //列表
-        typeName = new ArrayList<>();
-        price = new ArrayList<>();
-        typeName.add("小包(2-5人)");
-        typeName.add("中包(6-10人)");
-        typeName.add("大包(11-15人)");
-        typeName.add("卡座");
-        typeName.add("散台");
-        price.add("1300");
-        price.add("3800");
-        price.add("5800");
-        price.add("1000");
-        price.add("500");
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRC.setLayoutManager(linearLayoutManager);
         //自定义的recyclerview分割线
         RecycleViewDivider divider1 = new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL, UIUtils.dp2Px(1), UIUtils.getColor(R.color.btn_pressed));
         mRC.addItemDecoration(divider1);
-        HouseTypeAdapter houseTypeAdapter = new HouseTypeAdapter(mContext, typeName, price);
-        mRC.setAdapter(houseTypeAdapter);
 
-        // 房型列表
-        rooms = new ArrayList<>();
 //        if (isSelect) {
 //            roomTypeAdapter.setSelect(true);
 //        }
@@ -156,28 +134,27 @@ public class MerchantRoomFragment extends BaseFragment {
                 .url(Network.User.PUBLIC_HOUSE_TYPE)
                 .addParams(Network.Param.STORE_ID, mStoreId)
                 .build()
-                .execute(new DCallback<HouseTypeCategoryBean>() {
+                .execute(new DCallback<HouseTypeList>() {
                     @Override
                     public void onError(Call call, Exception e) {
                         connectError();
                     }
 
                     @Override
-                    public void onResponse(HouseTypeCategoryBean response) {
-                        Log.e("Weda","??????????????????????????");
+                    public void onResponse(HouseTypeList response) {
                         if (isSuccess(response)) {
-                            if (response.getContent() != null) {
-
-                                showRoomList(response.getContent().getRoom());
+                            if (response.getRoom() != null) {
+                                roomBean = response.getRoom();
+                                showRoomList(roomBean);
                             }
                         }
                     }
                 });
     }
 
-    private void showRoomList(List<HouseTypeCategoryBean.ContentBean.RoomBean> rooms) {
-        this.rooms.addAll(rooms);
-        roomTypeAdapter.notifyDataSetChanged();
+    private void showRoomList(List<HouseTypeList.RoomBean> rooms) {
+        HouseTypeAdapter houseTypeAdapter = new HouseTypeAdapter(mContext, rooms);
+        mRC.setAdapter(houseTypeAdapter);
     }
 
     public MerchantRoomFragment setStoreId(String mStoreId) {

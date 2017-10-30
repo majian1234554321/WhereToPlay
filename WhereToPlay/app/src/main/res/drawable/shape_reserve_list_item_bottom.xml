@@ -3,5 +3,5 @@
     <corners
         android:bottomRightRadius="@dimen/radius_small"
         android:bottomLeftRadius="@dimen/radius_small"/>
-    <solid android:color="@color/signin_user_input"/>
+    <solid android:color="@color/pay_reserve_list_divider_white"/>
 </shape>

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <corners
+        android:radius="@dimen/padding_5"/>
+    <stroke
+        android:width="@dimen/line_height"
+        android:color="@color/pay_reserve_list_divider_white"/>
+    <solid android:color="@color/white"/>
+</shape>

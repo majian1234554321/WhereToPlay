@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -92,7 +93,7 @@ public class OrderFragment extends BaseFragment {
         orders = new ArrayList<>();
         orderAdapter = new OrderAdapter(mContext, orders);
         mRvOrder.addItemDecoration(new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL,
-                UIUtils.dp2Px(1), mContext.getResources().getColor(R.color.pay_reserve_list_divider)));
+                UIUtils.dp2Px(1), mContext.getResources().getColor(R.color.pay_reserve_list_divider_white)));
         mRvOrder.setAdapter(orderAdapter);
         mRvOrder.setItemAnimator(new DefaultItemAnimator());
 

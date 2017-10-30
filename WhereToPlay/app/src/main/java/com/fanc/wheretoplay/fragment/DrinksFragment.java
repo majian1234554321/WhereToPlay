@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.TextAppearanceSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,16 +16,20 @@ import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.adapter.DrinkAdapter;
-import com.fanc.wheretoplay.adapter.DrinksAdapter;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentDrinksBinding;
 import com.fanc.wheretoplay.datamodel.Drinks;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
+import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.TopMenu;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.DCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
 
 
 /**
@@ -50,11 +55,10 @@ public class DrinksFragment extends BaseFragment {
     /**
      * 酒水列表
      */
-    List<Drinks.Wine> wines;
-    DrinksAdapter mDrinksAdapter;
     private RecyclerView mRc;
     private ArrayList<String> typeName;
     private ArrayList<String> price;
+    private List<Drinks.ListBean> housenews;
 
     @Nullable
     @Override
@@ -90,31 +94,13 @@ public class DrinksFragment extends BaseFragment {
             text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             mTvDrinksDiscount.setText(text, TextView.BufferType.SPANNABLE);
         }
-
-        //列表
-        typeName = new ArrayList<>();
-        price = new ArrayList<>();
-        typeName.add("黑方");
-        typeName.add("皇家礼炮");
-        typeName.add("张裕干红");
-        typeName.add("卡萨玛利亚");
-        typeName.add("小贵妇");
-        typeName.add("百威");
-        typeName.add("青岛纯生");
-        typeName.add("嘉士伯");
-        price.add("1300");
-        price.add("3800");
-        price.add("5800");
-        price.add("1000");
-        price.add("500");
+        getMerchantDetail(mStoreId);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRc.setLayoutManager(linearLayoutManager);
         //自定义的recyclerview分割线
         RecycleViewDivider divider1 = new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL, UIUtils.dp2Px(1), UIUtils.getColor(R.color.btn_pressed));
         mRc.addItemDecoration(divider1);
-        DrinkAdapter houseTypeAdapter = new DrinkAdapter(mContext, typeName, price);
-        mRc.setAdapter(houseTypeAdapter);
 
     }
 
@@ -147,5 +133,33 @@ public class DrinksFragment extends BaseFragment {
         return this;
     }
 
+    private void getMerchantDetail(String id) {
+        showProgress();
+        OkHttpUtils.post()
+                .url(Network.User.PUBLIC_WINE)
+                .addParams(Network.Param.STORE_ID, id)
+                .build()
+                .execute(new DCallback<Drinks>() {
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        connectError();
+                    }
+
+                    @Override
+                    public void onResponse(Drinks response) {
+                        if (isSuccess(response)) {
+                            if (response.getList() != null ) {
+                                housenews = response.getList();
+                                showHouseNewsList(housenews);
+                            }
+                        }
+                    }
+                });
+    }
+
+    private void showHouseNewsList(List<Drinks.ListBean> housenews) {
+        DrinkAdapter houseTypeAdapter = new DrinkAdapter(mContext,housenews);
+        mRc.setAdapter(houseTypeAdapter);
+    }
 
 }

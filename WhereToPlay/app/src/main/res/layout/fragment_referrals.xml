@@ -11,7 +11,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg"
+        android:background="@color/bg_gray"
         android:gravity="center_horizontal"
         android:orientation="vertical">
 
@@ -39,7 +39,7 @@
                 android:layout_marginLeft="@dimen/margin_10"
                 android:layout_toRightOf="@+id/iv_referral_logo"
                 android:text="@string/where_to_play_recreation_terrace"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/textsize_level2"/>
 
         </RelativeLayout>
@@ -71,7 +71,7 @@
                 android:layout_marginLeft="@dimen/margin_10"
                 android:layout_toRightOf="@+id/civ_referral_mine_header"
                 android:text="JoJo"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/normal_textsize"/>
         </RelativeLayout>
 
@@ -81,7 +81,7 @@
             android:layout_marginBottom="@dimen/margin_15"
             android:layout_marginTop="@dimen/margin_15"
             android:text="@string/mine_invitation_code"
-            android:textColor="@color/white"
+            android:textColor="@color/text_black"
             android:textSize="@dimen/normal_textsize"/>
 
         <TextView
@@ -93,7 +93,7 @@
             android:padding="@dimen/padding_5"
             android:paddingTop="@dimen/padding_5"
             android:text="HL12"
-            android:textColor="@color/text_and_buttor_orange"/>
+            android:textColor="@color/text_red"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -115,7 +115,7 @@
             android:background="@drawable/shape_btn_signin"
             android:onClick="@{click.onViewClick}"
             android:text="@string/sheared"
-            android:textColor="@color/text_black"
+            android:textColor="@color/text_white"
             android:textSize="@dimen/textsize_level2"/>
     </LinearLayout>
 </layout>
