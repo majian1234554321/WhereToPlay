@@ -152,6 +152,9 @@ public class PageHorizontalScrollView extends HorizontalScrollView {
     private void smoothScrollToNextPage() {
         if (currentPage < subChildCount - 1) {
             currentPage++;
+            if (pointList.size()==0) {
+                return;
+            }
             smoothScrollTo(pointList.get(currentPage) - UIUtils.dp2Px(10), 0);
             // 选中item的背景
             setSelectedBackGround(currentPage);
@@ -165,6 +168,9 @@ public class PageHorizontalScrollView extends HorizontalScrollView {
     private void smoothScrollToPrePage() {
         if (currentPage > 0) {
             currentPage--;
+            if (pointList.size()==0) {
+                return;
+            }
             smoothScrollTo(pointList.get(currentPage) - UIUtils.dp2Px(10), 0);
             // 选中item的背景
             setSelectedBackGround(currentPage);

@@ -132,6 +132,7 @@ public class ReserveInfoFragment extends BaseFragment {
     private void init() {
         mTmReserveInfo.setLeftIcon(R.drawable.left);
         mTmReserveInfo.setTitle(R.string.reserve);
+        mTmReserveInfo.setTitleColor(getResources().getColor(R.color.white));
 
         reserveInfoBinding.setClick(this);
         // 联系人信息

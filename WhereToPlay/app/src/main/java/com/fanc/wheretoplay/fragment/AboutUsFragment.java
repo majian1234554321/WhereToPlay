@@ -42,6 +42,7 @@ public class AboutUsFragment extends BaseFragment {
     private void init() {
         mTmAboutUs.setLeftIcon(R.drawable.left);
         mTmAboutUs.setTitle(R.string.about_us);
+        mTmAboutUs.setTitleColor(getResources().getColor(R.color.white));
 
         displayCurrentVersion();
 

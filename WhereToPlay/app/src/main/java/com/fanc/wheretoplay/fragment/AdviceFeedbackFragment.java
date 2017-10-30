@@ -60,6 +60,7 @@ public class AdviceFeedbackFragment extends BaseFragment {
     private void init() {
         mTmAdviceFeedback.setLeftIcon(R.drawable.left);
         mTmAdviceFeedback.setTitle(R.string.advice_feedback);
+        mTmAdviceFeedback.setTitleColor(getResources().getColor(R.color.white));
 
         adviceBinding.setClick(this);
     }

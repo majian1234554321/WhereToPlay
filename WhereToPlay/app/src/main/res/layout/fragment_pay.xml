@@ -4,7 +4,9 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/bg_gray"
+       >
 
         <com.fanc.wheretoplay.view.TopMenu
             android:id="@+id/tm_pay"
@@ -30,7 +32,8 @@
         <com.fanc.wheretoplay.view.PullToRefreshLayout
             android:id="@+id/ptrl_pay_reserve"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/bg_gray">
 
             <include layout="@layout/refresh_head"/>
 
@@ -38,7 +41,7 @@
                 android:id="@+id/rv_pay"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/white"/>
+                />
 
             <include layout="@layout/load_more"/>
         </com.fanc.wheretoplay.view.PullToRefreshLayout>

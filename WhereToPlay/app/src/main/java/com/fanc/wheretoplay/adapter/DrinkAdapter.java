@@ -6,29 +6,23 @@ import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.databinding.ItemDrinkBinding;
-import com.fanc.wheretoplay.databinding.ItemHousetypeBinding;
-
-import java.util.ArrayList;
+import com.fanc.wheretoplay.datamodel.Drinks;
+import java.util.List;
 
 /**
  * Created by Administrator on 2017/6/13.
  */
 
 public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> {
-
-    private final ArrayList<String> price;
-    private final ArrayList<String> typeName;
+    List<Drinks.ListBean> mHouseNews;
     Context mContext;
 
-    public DrinkAdapter(Context mContext, ArrayList<String> typeName, ArrayList<String> price) {
+    public DrinkAdapter(Context mContext,List<Drinks.ListBean> housenews) {
         this.mContext = mContext;
-        this.typeName = typeName;
-        this.price = price;
+        this.mHouseNews = housenews;
     }
 
     @Override
@@ -40,13 +34,14 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mTvDrinkName.setText(typeName.get(position));
+        holder.mTvDrinkName.setText(mHouseNews.get(position).getName());
+        holder.mTvDrinkPrice.setText(mHouseNews.get(position).getPrice());
     }
 
     @Override
     public int getItemCount() {
-        if (typeName != null) {
-            return typeName.size();
+        if (mHouseNews != null) {
+            return mHouseNews.size();
         }
         return 0;
     }
@@ -55,6 +50,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
 
         private  ItemDrinkBinding binding;
         private TextView mTvDrinkName;
+        private TextView mTvDrinkPrice;
 
 
         public ViewHolder(ViewDataBinding binding) {
@@ -65,6 +61,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
 
         private void initViews() {
             mTvDrinkName = binding.tvDrinksName;
+            mTvDrinkPrice = binding.tvDrinksPrice;
         }
     }
 }

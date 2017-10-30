@@ -59,6 +59,7 @@ public class SetPayPwdFragment extends BaseFragment {
     private void init() {
         mTmSetPayPwd.setLeftIcon(R.drawable.left);
         mTmSetPayPwd.setTitle(R.string.set_pay_pwd);
+        mTmSetPayPwd.setTitleColor(getResources().getColor(R.color.white));
 
         payPwdBinding.setClick(this);
 

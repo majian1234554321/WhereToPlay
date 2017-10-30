@@ -83,31 +83,28 @@ public class DetailActivity extends BaseFragmentActivity {
                 Log.e("Iverson", "INTEGRAL");
                 initFragment(new IntegralFragment());
                 break;
-            case Constants.ORDER:
+            case Constants.ORDER:   //订单
                 initFragment(new OrderFragment());
                 break;
-            case Constants.COLLECTION:
+            case Constants.COLLECTION:   //收藏
                 initFragment(new CollectionFragment());
                 break;
-            case Constants.REFERRAL:
+            case Constants.REFERRAL:   //推荐
                 initFragment(new ReferralFragment());
                 break;
-            case Constants.SET_PAY_PWD:
+            case Constants.SET_PAY_PWD:   //设置密码
                 initFragment(new SetPayPwdFragment());
                 break;
-            case Constants.ADVICE_FEEDBACK:
+            case Constants.ADVICE_FEEDBACK:   //意见反馈
                 initFragment(new AdviceFeedbackFragment());
                 break;
-            case Constants.SYSTEM_NOTIFY:
+            case Constants.SYSTEM_NOTIFY:   //系统通知
                 initFragment(new SystemNotifyFragment());
                 break;
-            case Constants.ABOUT_US:
-                Log.e("Iverson", "ABOUT_US");
+            case Constants.ABOUT_US:   //关于我们
                 initFragment(new AboutUsFragment());
                 break;
-            case Constants.WAITER_INFO:
-                Log.e("Iverson", "WAITER_INFO");
-
+            case Constants.WAITER_INFO:   //
                 initFragment(new WaiterInfoFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID))
                         .setSelect(intent.getBooleanExtra(Constants.IS_CHOOSE, false)));
                 break;

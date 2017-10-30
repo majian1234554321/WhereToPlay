@@ -10,17 +10,54 @@ import java.util.List;
 
 public class Drinks extends BaseModel {
 
-    public List<Wine> list;
 
-    public static class Wine {
+    /**
+     * content : {"list":[{"id":"1","name":"皇家礼炮700ML","price":"2380.00"},{"id":"2","name":"芝华士12年","price":"1280.00"}]}
+     */
+    private List<ListBean> list;
+
+    public List<ListBean> getList() {
+        return list;
+    }
+
+    public void setList(List<ListBean> list) {
+        this.list = list;
+    }
+
+    public static class ListBean {
         /**
          * id : 1
-         * name : 酒水
-         * price : 120.50
+         * name : 皇家礼炮700ML
+         * price : 2380.00
          */
 
-        public String id;
-        public String name;
-        public String price;
+        private String id;
+        private String name;
+        private String price;
+
+        public String getId() {
+            return id;
+        }
+
+        public void setId(String id) {
+            this.id = id;
+        }
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public String getPrice() {
+            return price;
+        }
+
+        public void setPrice(String price) {
+            this.price = price;
+        }
     }
 }
+

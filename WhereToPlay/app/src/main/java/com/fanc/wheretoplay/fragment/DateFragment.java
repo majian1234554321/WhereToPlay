@@ -121,6 +121,7 @@ public class DateFragment extends BaseFragment {
     private void init() {
         mTmDate.setLeftIcon(R.drawable.left);
         mTmDate.setTitle(R.string.choose_date);
+        mTmDate.setTitleColor(getResources().getColor(R.color.white));
         // 最晚时间
         last = DateFormatUtil.parseStringTolong("03:30", DateFormatUtil.HHmm);
 
