@@ -288,18 +288,19 @@ public class MerchantDetailFragment extends BaseFragment {
                 mContext.overridePendingTransition(R.anim.anim_enter_bottom, R.anim.anim_out_top_right);
             }
         });
-        iconAdapter.setOnItemClickListener(new CommentIconAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick() {
-//                Intent intent = new Intent(mContext, DetailActivity.class);
-//                intent.putExtra(Constants.PAGE, Constants.COMMENT_DETAIL);
+//        iconAdapter.setOnItemClickListener(new CommentIconAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick() {
+////                Intent intent = new Intent(mContext, DetailActivity.class);
+////                intent.putExtra(Constants.PAGE, Constants.COMMENT_DETAIL);
+////                startActivity(intent);
+//
+//                Intent intent = new Intent(mContext, CheckCommentActivity.class);
+//                intent.putExtra(Constants.STORE_ID, mStoreId);
 //                startActivity(intent);
-
-                Intent intent = new Intent(mContext, CheckCommentActivity.class);
-                intent.putExtra(Constants.STORE_ID, mStoreId);
-                startActivity(intent);
-            }
-        });
+//            }
+//        });
+        //查看评论
         mLlMerchantDetailComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -644,8 +645,8 @@ public class MerchantDetailFragment extends BaseFragment {
      * 评论
      */
     private void showComment(List<StoreDetail.CommentBean> commentIcons) {
-        mCommentIcons.addAll(commentIcons);
-        iconAdapter.notifyDataSetChanged();
+//        mCommentIcons.addAll(commentIcons);
+//        iconAdapter.notifyDataSetChanged();
     }
 
     /**

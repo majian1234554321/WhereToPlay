@@ -81,6 +81,7 @@ public class CheckCommentActivity extends BaseFragmentActivity {
     private void init() {
         mTmCheckComment.setLeftIcon(R.drawable.left);
         mTmCheckComment.setTitle(R.string.check_comment);
+        mTmCheckComment.setTitleColor(getResources().getColor(R.color.white));
         storeId = getIntent().getStringExtra(Constants.STORE_ID);
 
         initFragmentPage();
