@@ -525,12 +525,15 @@ public class MerchantDetailFragment extends BaseFragment {
                 .execute(new DCallback<StoreDetail>() {
                     @Override
                     public void onError(Call call, Exception e) {
+                        Log.i("AAAAAAA","AAAAAAA");
                         connectError();
                     }
 
                     @Override
                     public void onResponse(StoreDetail response) {
+                        Log.i("AAAAAAA","response");
                         if (isSuccess(response)) {
+                            Log.i("AAAAAAA","responseB");
                             if (response.getStore() != null) {
                                 mStore = response.getStore();
                                 showStoreDetail(mStore);

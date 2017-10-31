@@ -1,12 +1,10 @@
 <component name="libraryTable">
   <library name="galleryfinal-1.4.8.7">
     <CLASSES>
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/galleryfinal-1.4.8.7.aar/17c064777bdef1403ff7db8105c6bd69/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/galleryfinal-1.4.8.7.aar/17c064777bdef1403ff7db8105c6bd69/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/787b0d347a12f97beced2458aaddf6e2bde6e322/output/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.android/build-cache/787b0d347a12f97beced2458aaddf6e2bde6e322/output/res" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES>
-      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/cn.finalteam/galleryfinal/1.4.8.7/86b91d8ba4a62bf515c0e345aa48cd9f744930de/galleryfinal-1.4.8.7-sources.jar!/" />
-    </SOURCES>
+    <SOURCES />
   </library>
 </component>

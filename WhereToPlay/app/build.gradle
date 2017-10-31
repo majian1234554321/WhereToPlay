@@ -17,8 +17,8 @@ android {
             storePassword 'android'
         }
     }
-    compileSdkVersion 25
-    buildToolsVersion '26.0.2'
+    compileSdkVersion 27
+    buildToolsVersion '27.0.0'
     //recommend
     dexOptions {
         jumboMode = true
@@ -26,7 +26,7 @@ android {
     defaultConfig {
         applicationId "com.fanc.wheretoplay"
         minSdkVersion 17
-        targetSdkVersion 23
+        targetSdkVersion 27
         versionCode 20171027
         versionName "1.0.3"
 
@@ -83,27 +83,25 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    compile 'com.android.support:appcompat-v7:25.0.0'
-    compile 'com.android.support:design:25.0.0'
-    compile 'com.android.support.constraint:constraint-layout:1.0.0-beta4'
     testCompile 'junit:junit:4.12'
-//    compile 'com.tencent.tinker:tinker-android-lib:1.7.10'
-//                { changing = true }
-//    provided 'com.tencent.tinker:tinker-android-anno:1.7.10'
-//                { changing = true }
+    //    compile 'com.tencent.tinker:tinker-android-lib:1.7.10'
+
+    //                { changing = true }
+
+    //    provided 'com.tencent.tinker:tinker-android-anno:1.7.10'
+
+    //                { changing = true }
     compile 'com.android.support:multidex:1.0.1'
-    compile 'com.android.support:support-v4:25.0.0'
-    compile 'com.android.support:recyclerview-v7:25.0.0'
     compile 'com.youth.banner:banner:1.4.10'
     compile files('libs/glide-3.7.0.jar')
-    compile 'com.google.code.gson:gson:2.3.1'
+    compile 'com.google.code.gson:gson:2.7'
     compile 'com.orhanobut:logger:1.15'
     compile 'cn.finalteam:galleryfinal:1.4.8.7'
     compile project(':okhttputils')
     compile 'com.uwetrottmann.photoview:library:1.2.4'
     compile files('libs/alipaySdk-20170623-proguard.jar')
     compile files('libs/BaiduLBS_Android.jar')
-//    compile project(':datetimepicker')
+    //    compile project(':datetimepicker')
     compile files('libs/SocialSDK_QQ_Simplify.jar')
     compile files('libs/umeng_social_api.jar')
     compile files('libs/umeng_social_net.jar')
@@ -116,6 +114,10 @@ dependencies {
     compile 'cn.jiguang.sdk:jpush:3.0.8'
     compile 'cn.jiguang.sdk:jcore:1.1.6'
     compile 'com.zhy:percent-support-extends:1.1.1'
+    compile 'com.android.support.constraint:constraint-layout:1.0.2'
+    compile 'com.android.support:support-annotations:26.0.0-alpha1'
+    compile 'com.android.support:support-v4:26.0.0-alpha1'
+    compile 'com.android.support:design:26.0.0-alpha1'
 }
 
 //def gitSha() {
