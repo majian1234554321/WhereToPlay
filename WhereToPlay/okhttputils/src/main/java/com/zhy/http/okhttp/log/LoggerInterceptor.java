@@ -38,13 +38,11 @@ public class LoggerInterceptor implements Interceptor {
     public Response intercept(Chain chain) throws IOException {
         Request request = chain.request();
         logForRequest(request);
-        Response response = null;
-        try {
-            response = chain.proceed(request);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (chain.proceed(request)!=null) {
+            return logForResponse(chain.proceed(request));
+        }else {
+            return chain.proceed(request);
         }
-        return logForResponse(response);
     }
 
     private Response logForResponse(Response response) {
