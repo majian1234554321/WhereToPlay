@@ -35,6 +35,7 @@ import com.baidu.location.BDLocation;
 import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.CheckCommentActivity;
+import com.fanc.wheretoplay.activity.CheckCommentsActivity;
 import com.fanc.wheretoplay.activity.DetailActivity;
 import com.fanc.wheretoplay.activity.LargeImageActivity;
 import com.fanc.wheretoplay.activity.ReuseActivity;
@@ -304,9 +305,11 @@ public class MerchantDetailFragment extends BaseFragment {
         mLlMerchantDetailComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, CheckCommentActivity.class);
+//                Intent intent = new Intent(mContext, CheckCommentActivity.class);
+                Intent intent = new Intent(mContext, CheckCommentsActivity.class);
                 intent.putExtra(Constants.STORE_ID, mStoreId);
                 startActivity(intent);
+                mContext.overridePendingTransition(R.anim.anim_in_top_right, R.anim.anim_close_top);
             }
         });
         mVTel.setOnClickListener(new View.OnClickListener() {

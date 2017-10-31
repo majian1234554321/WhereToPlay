@@ -159,6 +159,7 @@
     <string name="service">服务</string>
     <string name="other">其他</string>
     <string name="hint_input_comment">请输入评价</string>
+    <string name="topmenu_comment">全部评价</string>
 
     <!--pay the bill-->
     <string name="bill">账单</string>

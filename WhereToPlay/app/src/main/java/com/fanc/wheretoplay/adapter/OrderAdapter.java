@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.CheckCommentActivity;
+import com.fanc.wheretoplay.activity.CheckCommentsActivity;
 import com.fanc.wheretoplay.activity.PayBillActivity;
 import com.fanc.wheretoplay.activity.ReuseActivity;
 import com.fanc.wheretoplay.databinding.ItemPayBinding;
@@ -185,7 +186,8 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.mBtnCheckComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, CheckCommentActivity.class);
+//                Intent intent = new Intent(mContext, CheckCommentActivity.class);
+                Intent intent = new Intent(mContext, CheckCommentsActivity.class);
                 intent.putExtra(Constants.STORE_ID, order.getStore_id());
                 mContext.startActivity(intent);
             }
