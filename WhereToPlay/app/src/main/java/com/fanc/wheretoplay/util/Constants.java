@@ -10,6 +10,10 @@ public interface Constants {
     /**
      * 分享
      */
+
+    public final static String WXAPPID = "wx424026eca78d03e6";
+    public final static String QQAPPID = "1105021586";
+
     String WX_APP_ID = "wx424026eca78d03e6";
     String WX_APP_SECRET = "f41673f89c694467745d16b81a13f212";
     String QQ_APP_ID = "1106322444";

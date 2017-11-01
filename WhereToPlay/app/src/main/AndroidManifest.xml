@@ -130,11 +130,7 @@
             android:exported="false"
             android:screenOrientation="behind">
         </activity>
-        <!-- 友盟 -->
-        <meta-data
-            android:name="UMENG_APPKEY"
-            android:value="59827d851061d2782200174f">
-        </meta-data>
+
         <!-- 微信分享和支付 -->
         <activity
             android:name=".wxapi.WXEntryActivity"
@@ -157,24 +153,31 @@
             android:launchMode="singleTop"
             android:theme="@style/Translucence"/>
         <!-- qq分享 -->
+
+        <!-- QQ登陆 -->
         <activity
-            android:name="com.umeng.qq.tencent.AuthActivity"
+            android:name="com.tencent.tauth.AuthActivity"
             android:launchMode="singleTask"
             android:noHistory="true">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
 
-                <data android:scheme="tencent1106322444"/>
+                <data android:scheme="tencent1105021586" />
             </intent-filter>
         </activity>
+
+
+
+
+
+
         <activity
-            android:name="com.umeng.qq.tencent.AssistActivity"
+            android:name="com.tencent.connect.common.AssistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
-            android:screenOrientation="portrait"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"/>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <!-- 百度定位 -->
         <service
@@ -195,6 +198,23 @@
         </activity>
         <activity android:name=".activity.ListOrderActivity"/>
         <activity android:name=".activity.DetailsOrderActivity"/>
+        <activity
+            android:name=".activity.ShareActivity"
+            android:screenOrientation="sensor">
+
+            <!-- 新浪微博请求监听 -->
+            <intent-filter>
+                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
+            android:configChanges="keyboardHidden|orientation"
+            android:exported="false"
+            android:windowSoftInputMode="adjustResize" />
+
     </application>
 
 </manifest>

@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
-    <com.fanc.wheretoplay.view.TopMenu
-        android:id="@+id/tm_pay"
+    <com.fanc.wheretoplay.view.TitleBarView
+        android:id="@+id/tbv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"></com.fanc.wheretoplay.view.TitleBarView>
 
     <LinearLayout
         android:id="@+id/ll"
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@+id/ll"
-        android:layout_below="@+id/tm_pay">
+        android:layout_below="@+id/tbv">
 
         <LinearLayout
             android:layout_width="match_parent"

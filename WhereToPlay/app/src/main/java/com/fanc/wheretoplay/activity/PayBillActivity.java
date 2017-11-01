@@ -39,9 +39,10 @@ import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.AlertDialog;
 import com.fanc.wheretoplay.view.TopMenu;
 import com.orhanobut.logger.Logger;
-import com.tencent.mm.opensdk.modelpay.PayReq;
-import com.tencent.mm.opensdk.openapi.IWXAPI;
-import com.tencent.mm.opensdk.openapi.WXAPIFactory;
+
+import com.tencent.mm.sdk.modelpay.PayReq;
+import com.tencent.mm.sdk.openapi.IWXAPI;
+import com.tencent.mm.sdk.openapi.WXAPIFactory;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 import com.zhy.http.okhttp.callback.StringCallback;

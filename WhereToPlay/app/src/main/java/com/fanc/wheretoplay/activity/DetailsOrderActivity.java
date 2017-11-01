@@ -7,6 +7,7 @@ import android.widget.TextView;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.BaseActivity;
 import com.fanc.wheretoplay.view.OrderetailsItemView;
+import com.fanc.wheretoplay.view.TitleBarView;
 import com.fanc.wheretoplay.view.TopMenu;
 
 import butterknife.BindView;
@@ -15,8 +16,7 @@ import butterknife.OnClick;
 
 public class DetailsOrderActivity extends BaseActivity {
 
-    @BindView(R.id.tm_pay)
-    TopMenu tmPay;
+
     @BindView(R.id.tv_release)
     TextView tvRelease;
     @BindView(R.id.tv_cancel)
@@ -55,13 +55,15 @@ public class DetailsOrderActivity extends BaseActivity {
     TextView tv3;
     @BindView(R.id.tv4)
     TextView tv4;
+    @BindView(R.id.tbv)
+    TitleBarView tbv;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detaels_order);
         ButterKnife.bind(this);
-
+        tbv.setTv_title("订单详情");
         oi1.setTv_left("订单状态");
         oi2.setTv_left("姓名");
         oi3.setTv_left("手机");
@@ -75,10 +77,10 @@ public class DetailsOrderActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tm_pay, R.id.tv_release, R.id.tv_cancel})
+    @OnClick({R.id.tv_pay, R.id.tv_release, R.id.tv_cancel})
     public void onViewClicked(View view) {
         switch (view.getId()) {
-            case R.id.tm_pay:
+            case R.id.tv_pay:
                 break;
             case R.id.tv_release:
                 break;

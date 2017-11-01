@@ -20,7 +20,6 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.BaseFragment;
-import com.fanc.wheretoplay.callback.UMShareListener;
 import com.fanc.wheretoplay.databinding.FragmentReferralsBinding;
 import com.fanc.wheretoplay.datamodel.ShearedAD;
 import com.fanc.wheretoplay.datamodel.Url;
@@ -29,12 +28,7 @@ import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.CircleImageView;
 import com.fanc.wheretoplay.view.TopMenu;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.media.UMWeb;
-import com.umeng.socialize.shareboard.SnsPlatform;
-import com.umeng.socialize.utils.ShareBoardlistener;
+
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
@@ -119,25 +113,7 @@ public class ReferralFragment extends BaseFragment {
                 }
             }
         }
-        new ShareAction(mContext)
-//                .withText("hello")
-                .setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
-                .setShareboardclickCallback(new ShareBoardlistener() {
-                    @Override
-                    public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
-                        // 分享内容
-                        UMWeb web = new UMWeb(shearedUrl);
-                        web.setTitle("偷着乐娱乐平台");//标题
-                        web.setThumb(new UMImage(mContext, R.mipmap.ic_launcher));  //缩略图
-                        web.setDescription("我的专属邀请码");//描述
-                        new ShareAction(mContext)
-                                .setPlatform(share_media)
-                                .setCallback(new UMShareListener())
-                                .withMedia(web)
-                                .share();
-                    }
-                })
-                .open();
+
     }
 
     private void getShearedAD() {

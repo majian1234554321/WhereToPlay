@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.DetailsOrderActivity;
+import com.fanc.wheretoplay.adapter.OrdersAdapter;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
 import com.fanc.wheretoplay.util.UIUtils;
@@ -38,8 +39,7 @@ public class OrderBookFragment extends BaseFragment implements PullToRefreshLayo
     Unbinder unbinder;
     @BindView(R.id.ptrl_pay_reserve)
     PullToRefreshLayout ptrlPayReserve;
-    @BindView(R.id.bt_comments_four)
-    Button btCommentsFour;
+
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = View.inflate(inflater.getContext(), R.layout.orderlistallfragment, null);
@@ -49,10 +49,10 @@ public class OrderBookFragment extends BaseFragment implements PullToRefreshLayo
         lm.setOrientation(LinearLayoutManager.VERTICAL);
         mRvOrder.setLayoutManager(lm);
         List orders = new ArrayList<>();
-        //OrderAdapter orderAdapter = new OrderAdapter(mContext, orders,this);
+        OrdersAdapter orderAdapter = new OrdersAdapter(mContext,this);
         mRvOrder.addItemDecoration(new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL,
                 UIUtils.dp2Px(1), mContext.getResources().getColor(R.color.pay_reserve_list_divider_white)));
-        // mRvOrder.setAdapter(orderAdapter);
+         mRvOrder.setAdapter(orderAdapter);
         mRvOrder.setItemAnimator(new DefaultItemAnimator());
 
         mRvOrder.setCanPullDown(true);
@@ -87,15 +87,5 @@ public class OrderBookFragment extends BaseFragment implements PullToRefreshLayo
         if (requestCode==1001){
             Toast.makeText(mContext, "1001", Toast.LENGTH_SHORT).show();
         }
-
-
-
-    }
-
-    @OnClick(R.id.bt_comments_four)
-    public void onViewClicked() {
-        Intent intent = new Intent();
-        intent.setClass(mContext, DetailsOrderActivity.class);
-        startActivityForResult(intent, 1001);
     }
 }

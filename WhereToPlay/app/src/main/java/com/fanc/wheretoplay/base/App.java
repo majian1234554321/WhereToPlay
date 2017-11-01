@@ -12,7 +12,7 @@ import android.util.Log;
 import com.fanc.wheretoplay.image.GlideGalleryImageLoader;
 import com.fanc.wheretoplay.util.FileUtils;
 import com.fanc.wheretoplay.util.LocationUtils;
-import com.umeng.socialize.UMShareAPI;
+
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.io.File;
@@ -63,7 +63,7 @@ public class App extends Application {
                 JPushInterface.init(mContext);
 //                initGallery();
                 // 注册友盟
-                UMShareAPI.get(mContext);
+
 //                initTbsX5();
             }
         }).start();

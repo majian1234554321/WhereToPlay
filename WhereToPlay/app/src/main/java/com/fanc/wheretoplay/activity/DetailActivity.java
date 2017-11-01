@@ -32,7 +32,7 @@ import com.fanc.wheretoplay.fragment.WalletFragment;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LogUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
-import com.umeng.socialize.UMShareAPI;
+
 
 /**
  * Created by Administrator on 2017/6/16.
@@ -148,6 +148,6 @@ public class DetailActivity extends BaseFragmentActivity {
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         // 友盟分享回调
-        UMShareAPI.get(this).onActivityResult(requestCode, resultCode, data);
+
     }
 }

@@ -1,6 +1,8 @@
 package com.fanc.wheretoplay.adapter;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
+import com.fanc.wheretoplay.activity.DetailsOrderActivity;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -20,10 +23,12 @@ import butterknife.ButterKnife;
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
     public Context context;
+    public Fragment fragment;
 
 
-    public OrdersAdapter(Context context) {
+    public OrdersAdapter(Context context, Fragment fragment) {
         this.context = context;
+        this.fragment = fragment;
     }
 
     @Override
@@ -37,14 +42,16 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent();
+                intent.setClass(context, DetailsOrderActivity.class);
+                fragment.startActivityForResult(intent, 1001);
             }
         });
     }
 
     @Override
     public int getItemCount() {
-        return 0;
+        return 6;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
@@ -82,6 +89,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         Button btnPayCancelReserve;
         @BindView(R.id.btn_pay_consume)
         Button btnPayConsume;
+
         public ViewHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);

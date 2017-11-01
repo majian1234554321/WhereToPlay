@@ -1,7 +1,7 @@
 <component name="libraryTable">
-  <library name="umeng_social_tool">
+  <library name="weiboSDKCore_3.1.4">
     <CLASSES>
-      <root url="jar://$PROJECT_DIR$/app/libs/umeng_social_tool.jar!/" />
+      <root url="jar://$PROJECT_DIR$/app/libs/weiboSDKCore_3.1.4.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
