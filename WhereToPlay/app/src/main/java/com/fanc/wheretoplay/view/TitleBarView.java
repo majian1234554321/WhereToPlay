@@ -4,6 +4,7 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
 
@@ -12,6 +13,9 @@ import com.fanc.wheretoplay.R;
  */
 
 public class TitleBarView  extends RelativeLayout {
+
+    private TextView tv_title;
+
     public TitleBarView(Context context) {
         super(context);
         initView(context);
@@ -29,5 +33,10 @@ public class TitleBarView  extends RelativeLayout {
 
     private void initView(Context context) {
       View view  =   View.inflate(context, R.layout.titlebarview,this);
+        tv_title = (TextView) view.findViewById(R.id.tv_title);
+    }
+
+    public void setTv_title(String value){
+        tv_title.setText(value);
     }
 }

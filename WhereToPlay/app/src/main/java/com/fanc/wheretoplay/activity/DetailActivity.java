@@ -23,6 +23,7 @@ import com.fanc.wheretoplay.fragment.MessageDetailFragment;
 import com.fanc.wheretoplay.fragment.MessageFragment;
 import com.fanc.wheretoplay.fragment.MineInfoFragment;
 import com.fanc.wheretoplay.fragment.OrderFragment;
+import com.fanc.wheretoplay.fragment.OrderFragments;
 import com.fanc.wheretoplay.fragment.ReferralFragment;
 import com.fanc.wheretoplay.fragment.SetPayPwdFragment;
 import com.fanc.wheretoplay.fragment.SystemNotifyFragment;
@@ -84,9 +85,9 @@ public class DetailActivity extends BaseFragmentActivity {
                 initFragment(new IntegralFragment());
                 break;
             case Constants.ORDER:   //订单
-                //initFragment(new OrderFragment());
+                initFragment(new OrderFragments());
 
-                startActivity(new Intent(this,ListOrderActivity.class));
+                //startActivity(new Intent(this,ListOrderActivity.class));
 
                 break;
             case Constants.COLLECTION:   //收藏

@@ -738,7 +738,7 @@ public class MerchantDetailFragment extends BaseFragment {
         }
         new ShareAction(mContext)
 //                .withText("hello")
-                .setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
+                .setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.SINA)
                 .setShareboardclickCallback(new ShareBoardlistener() {
                     @Override
                     public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {

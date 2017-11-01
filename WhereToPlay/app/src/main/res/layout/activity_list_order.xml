@@ -14,6 +14,9 @@
     <android.support.design.widget.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
+        app:tabSelectedTextColor="#C4483C"
+        app:tabTextColor="#333333"
+        app:tabIndicatorColor="#C4483C"
         android:layout_height="wrap_content"
         android:layout_below="@+id/tbv"></android.support.design.widget.TabLayout>
 
