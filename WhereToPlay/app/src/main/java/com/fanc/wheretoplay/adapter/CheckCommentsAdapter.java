@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.databinding.ItemCheckCommentsBinding;
 import com.fanc.wheretoplay.databinding.ItemHousenewsBinding;
+import com.fanc.wheretoplay.datamodel.CheckComments;
 import com.fanc.wheretoplay.datamodel.HousenewsList;
 import com.fanc.wheretoplay.divider.GridDivider;
 import com.fanc.wheretoplay.util.UIUtils;
@@ -25,11 +26,12 @@ import java.util.List;
  */
 
 public class CheckCommentsAdapter extends RecyclerView.Adapter<CheckCommentsAdapter.ViewHolder> {
+    private  CheckComments mResponse;
     Context mContext;
 
-    public CheckCommentsAdapter(Activity mContext) {
+    public CheckCommentsAdapter(Activity mContext, CheckComments response) {
         this.mContext = mContext;
-
+        this.mResponse = response;
     }
 
     @Override
@@ -48,6 +50,7 @@ public class CheckCommentsAdapter extends RecyclerView.Adapter<CheckCommentsAdap
          holder.rv_grid.setVisibility(View.GONE);
          }
          */
+        
         CardViewAdapter cardViewAdapter = new CardViewAdapter(mContext);
         holder.mRcCardView.setLayoutManager(new GridLayoutManager(mContext, 4));
         //设置图片间距

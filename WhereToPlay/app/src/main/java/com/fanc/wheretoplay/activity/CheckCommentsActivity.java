@@ -3,8 +3,10 @@ package com.fanc.wheretoplay.activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 
@@ -17,6 +19,7 @@ import com.fanc.wheretoplay.datamodel.IsOk;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
 import com.fanc.wheretoplay.fragment.MerchantDetailFragment;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
@@ -64,9 +67,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
         //自定义的recyclerview分割线
         RecycleViewDivider divider1 = new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL, UIUtils.dp2Px(1), UIUtils.getColor(R.color.btn_pressed));
         mRc.addItemDecoration(divider1);
-        CheckCommentsAdapter checkCommentsAdapter = new CheckCommentsAdapter(this);
-        mRc.setAdapter(checkCommentsAdapter);
-//        requestComments();
+        requestComments(1, 1, 2);
     }
 
     private void setListener() {
@@ -82,47 +83,63 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
     public void comments(View view) {   //不能把权限设置为私有
         switch (view.getId()) {
             case R.id.bt_comments_one:
-//                requestComments();
-                Log.e("wade", mSPUtils.getUser().getToken());
-                ToastUtils.makePicTextShortToast(this, "1");
+                requestComments(1, 1, 2);
+//                Log.e("wade", mSPUtils.getUser().getToken() + "\n" +intent.getStringExtra(Constants.STORE_ID));
                 break;
             case R.id.bt_comments_two:
-                ToastUtils.makePicTextShortToast(this, "2");
+                requestComments(2, 1, 2);
                 break;
             case R.id.bt_comments_three:
-                ToastUtils.makePicTextShortToast(this, "3");
+                requestComments(3, 1, 2);
                 break;
             case R.id.bt_comments_four:
-                ToastUtils.makePicTextShortToast(this, "4");
+                requestComments(4, 1, 2);
                 break;
             default:
                 break;
         }
     }
 
-    private void requestComments() {
+    private void requestComments(int type, int pageIndex, int pageSize) {
         OkHttpUtils.post()
                 .url(Network.User.PUBLIC_COMMENTS)
-                .addParams(Network.Param.TYPE, 1)
-                .addParams(Network.Param.PAGEINDEX, 1)
-                .addParams(Network.Param.PAGEINDEX, 1)
+                .addParams(Network.Param.STORE_ID, intent.getStringExtra(Constants.STORE_ID))
+                .addParams(Network.Param.TYPE, String.valueOf(type))
+                .addParams(Network.Param.PAGEINDEX, String.valueOf(pageIndex))
+                .addParams(Network.Param.PAGESIZE, String.valueOf(pageSize))
                 .addParams(Network.Param.TOKEN,  mSPUtils.getUser().getToken())
                 .build()
                 .execute(new DCallback<CheckComments>() {
                     @Override
                     public void onError(Call call, Exception e) {
-//                        connectError();
+                        ToastUtils.showShortToast(CheckCommentsActivity.this, getResources().getString(R.string.connect_net_error));
                     }
 
                     @Override
                     public void onResponse(CheckComments response) {
-//                        if (isSuccess(response)) {
-//                            if (response.isResult()) {
-//                                isCollected = true;
-//                            }
-//                        }
+                        //判断拿到的数据是否正常
+                        if (response.getComment_list() == null) {
+                            ToastUtils.showShortToast(CheckCommentsActivity.this, getResources().getString(R.string.no_data));
+                            return;
+                        }
+                        if (response.code != 0 || !TextUtils.isEmpty(response.message)) {
+                            ToastUtils.showShortToast(CheckCommentsActivity.this, response.message);
+                            if (response.code == 50003) {
+                                Intent intent = new Intent(Constants.ACTION_RESIGN_IN);
+                                LocalBroadcastManager.getInstance(CheckCommentsActivity.this).sendBroadcast(intent);
+                            }
+                            return;
+                        } else {
+                            showCheckComments(response);
+
+                        }
                     }
                 });
+    }
+
+    private void showCheckComments(CheckComments response) {
+        CheckCommentsAdapter checkCommentsAdapter = new CheckCommentsAdapter(this, response);
+        mRc.setAdapter(checkCommentsAdapter);
     }
 
     @Override

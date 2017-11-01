@@ -1,5 +1,7 @@
 package com.fanc.wheretoplay.datamodel;
 
+import android.databinding.BaseObservable;
+
 import com.fanc.wheretoplay.base.BaseModel;
 
 import java.util.List;
@@ -10,10 +12,10 @@ import java.util.List;
 
 public class CheckComments extends BaseModel {
 
-    /**
-     * content : {"comment_environment":"4.8","comment_atmosphere":"4.9","comment_server":"5.0","average_comment":"4.9","all_count":"1000","pleasure_count":"990","displeasure_count":"10","picture_count":"600","comment_list":[{"id":"1","nickname":"hoye","avatar":"/Upload/user/avatar/images/20171017/20171017132806_22312.jpg","average_comment":"9","comment":"服务态度棒","created_time":"1501558168","picture":["/Upload/image/20170922/20170922205941_74305.jpg","/Upload/image/20170922/20170922205941_74305.jpg","/Upload/image/20170922/20170922205950_33240.jpg","/Upload/image/20170922/20170922210006_79122.jpg"]},{"id":"4","nickname":"红豆薏米","avatar":"/Upload/user/avatar/images/20171009/20171009084539_41651.jpg","average_comment":"1","comment":"哎呦不错","created_time":"1501548168","picture":[]}]}
-     */
 
+    /**
+     * content : {"comment_environment":"4.8","comment_atmosphere":"4.9","comment_server":"5.0","average_comment":"4.9","all_count":"1000","pleasure_count":"990","displeasure_count":"10","picture_count":"600","comment_list":[{"id":"1","nickname":"hoye","avatar":"/Upload/user/avatar/images/20171017/20171017132806_22312.jpg","average_comment":"9","comment":"服务态度棒","created_time":"1501558168","picture":["/Upload/image/20170922/20170922205941_74305.jpg","/Upload/image/20170922/20170922205941_74305.jpg","/Upload/image/20170922/20170922205950_33240.jpg","/Upload/image/20170922/20170922210006_79122.jpg"]}]}
+     */
     /**
      * comment_environment : 4.8
      * comment_atmosphere : 4.9
@@ -23,7 +25,7 @@ public class CheckComments extends BaseModel {
      * pleasure_count : 990
      * displeasure_count : 10
      * picture_count : 600
-     * comment_list : [{"id":"1","nickname":"hoye","avatar":"/Upload/user/avatar/images/20171017/20171017132806_22312.jpg","average_comment":"9","comment":"服务态度棒","created_time":"1501558168","picture":["/Upload/image/20170922/20170922205941_74305.jpg","/Upload/image/20170922/20170922205941_74305.jpg","/Upload/image/20170922/20170922205950_33240.jpg","/Upload/image/20170922/20170922210006_79122.jpg"]},{"id":"4","nickname":"红豆薏米","avatar":"/Upload/user/avatar/images/20171009/20171009084539_41651.jpg","average_comment":"1","comment":"哎呦不错","created_time":"1501548168","picture":[]}]
+     * comment_list : [{"id":"1","nickname":"hoye","avatar":"/Upload/user/avatar/images/20171017/20171017132806_22312.jpg","average_comment":"9","comment":"服务态度棒","created_time":"1501558168","picture":["/Upload/image/20170922/20170922205941_74305.jpg","/Upload/image/20170922/20170922205941_74305.jpg","/Upload/image/20170922/20170922205950_33240.jpg","/Upload/image/20170922/20170922210006_79122.jpg"]}]
      */
 
     private String comment_environment;
@@ -108,7 +110,7 @@ public class CheckComments extends BaseModel {
         this.comment_list = comment_list;
     }
 
-    public static class CommentListBean {
+    public static class CommentListBean extends BaseObservable {
         /**
          * id : 1
          * nickname : hoye
@@ -183,5 +185,4 @@ public class CheckComments extends BaseModel {
             this.picture = picture;
         }
     }
-
 }

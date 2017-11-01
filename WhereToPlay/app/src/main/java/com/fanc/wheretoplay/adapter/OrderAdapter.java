@@ -183,6 +183,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 }
             }
         });
+        //评价
         holder.mBtnCheckComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

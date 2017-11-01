@@ -13,6 +13,7 @@
     <string name="search">搜索</string>
     <string name="empty">清空</string>
     <string name="all_comment">查看全部评价</string>
+    <string name="no_data">没有数据</string>
 
     <!--上拉加载，下拉刷新-->
     <string name="head">这里是HeadView</string>
