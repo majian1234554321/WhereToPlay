@@ -13,6 +13,7 @@
     <string name="search">搜索</string>
     <string name="empty">清空</string>
     <string name="all_comment">查看全部评价</string>
+    <string name="no_data">没有数据</string>
 
     <!--上拉加载，下拉刷新-->
     <string name="head">这里是HeadView</string>
@@ -159,6 +160,7 @@
     <string name="service">服务</string>
     <string name="other">其他</string>
     <string name="hint_input_comment">请输入评价</string>
+    <string name="topmenu_comment">全部评价</string>
 
     <!--pay the bill-->
     <string name="bill">账单</string>

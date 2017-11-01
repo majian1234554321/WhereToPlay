@@ -36,6 +36,7 @@ public interface Network {
         String PUBLIC_ROOM_TYPE = USER + "Public/roomtype";// 房型列表
         String PUBLIC_HOUSENEWS = USER + "Public/roomstatus";// 房态（新）
         String PUBLIC_HOUSE_TYPE = USER + "Public/roomtype";// 房型列表（新）
+        String PUBLIC_COMMENTS = USER + "Public/storecomment";// 全部评论
 
         String COMMON_STORE_LIST = USER + "Common/storeList";//主页列表
         String COMMON_FILTER = USER + "Common/filter";// 筛选列表
@@ -155,6 +156,8 @@ public interface Network {
         String REMAIN = "remain";// 剩余订金
         String DISPLAY_BALANCE = "display_balance";
         String FEE = "fee";//不参与优惠的金额
+        String PAGEINDEX = "pageindex";   // 当前页码
+        String PAGESIZE = "pagesize";   // 当前显示的评论用户个数
     }
 
 }

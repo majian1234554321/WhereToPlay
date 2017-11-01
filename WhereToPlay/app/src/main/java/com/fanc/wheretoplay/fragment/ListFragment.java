@@ -90,6 +90,7 @@ public class ListFragment extends BaseFragment {
                 mTm.setTitle(R.string.most_discount);
                 break;
         }
+        mTm.setTitleColor(getResources().getColor(R.color.white));
         // 列表
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);

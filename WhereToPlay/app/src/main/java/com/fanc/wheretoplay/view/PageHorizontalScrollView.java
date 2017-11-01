@@ -216,6 +216,9 @@ public class PageHorizontalScrollView extends HorizontalScrollView {
      */
     public boolean gotoPage(int page) {
         if (page >= 0 && page <= subChildCount - 1) {
+            if (pointList.size() == 0) {
+                return false;
+            }
             smoothScrollTo(pointList.get(page) - UIUtils.dp2Px(10), 0);
             currentPage = page;
             // 选中item的背景
