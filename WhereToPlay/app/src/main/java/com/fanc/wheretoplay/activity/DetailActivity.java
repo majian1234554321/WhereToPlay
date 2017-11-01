@@ -84,7 +84,10 @@ public class DetailActivity extends BaseFragmentActivity {
                 initFragment(new IntegralFragment());
                 break;
             case Constants.ORDER:   //订单
-                initFragment(new OrderFragment());
+                //initFragment(new OrderFragment());
+
+                startActivity(new Intent(this,ListOrderActivity.class));
+
                 break;
             case Constants.COLLECTION:   //收藏
                 initFragment(new CollectionFragment());

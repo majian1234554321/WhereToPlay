@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.fanc.wheretoplay.view.PullToRefreshLayout
+        android:id="@+id/ptrl_pay_reserve"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_gray">
+
+        <include layout="@layout/refresh_head"/>
+
+        <com.fanc.wheretoplay.view.PullableRecyclerView
+            android:id="@+id/rv_pay"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            />
+
+        <include layout="@layout/load_more"/>
+    </com.fanc.wheretoplay.view.PullToRefreshLayout>
+
+</RelativeLayout>
