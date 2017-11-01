@@ -50,7 +50,7 @@ public class CheckCommentsAdapter extends RecyclerView.Adapter<CheckCommentsAdap
          holder.rv_grid.setVisibility(View.GONE);
          }
          */
-        
+
         CardViewAdapter cardViewAdapter = new CardViewAdapter(mContext);
         holder.mRcCardView.setLayoutManager(new GridLayoutManager(mContext, 4));
         //设置图片间距
