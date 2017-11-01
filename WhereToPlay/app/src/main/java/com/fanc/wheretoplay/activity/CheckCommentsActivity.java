@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.adapter.CheckCommentsAdapter;
@@ -40,6 +42,22 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
     private RecyclerView mRc;
     private String mStoreId;
     private Intent intent;
+    //顶部4个分数
+    private TextView mTvScoreEnvironment;
+    private TextView mTvScoreatmosphere;
+    private TextView mTvScoreservice;
+    private TextView mTvAverageScore;
+    //顶部3个星星
+    private RatingBar mRbEnvironment;
+    private RatingBar mRbAtmosphere;
+    private RatingBar mRbService;
+    //中部四个文字按钮
+    private TextView mBtAll;
+    private TextView mBtPleasure;
+    private TextView mBtDispleasure;
+    private TextView mBtpicture;
+    private int mID = R.id.bt_comments_one;
+    private CheckComments mResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

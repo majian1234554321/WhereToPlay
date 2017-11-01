@@ -25,6 +25,7 @@ public class LoggerInterceptor implements Interceptor {
     public LoggerInterceptor(String tag, boolean showResponse) {
         if (TextUtils.isEmpty(tag)) {
             tag = TAG;
+            //
         }
         this.showResponse = showResponse;
         this.tag = tag;

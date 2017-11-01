@@ -16,11 +16,12 @@ import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.CheckCommentActivity;
-import com.fanc.wheretoplay.activity.CheckCommentsActivity;
+import com.fanc.wheretoplay.activity.DetailsOrderActivity;
 import com.fanc.wheretoplay.activity.PayBillActivity;
 import com.fanc.wheretoplay.activity.ReuseActivity;
 import com.fanc.wheretoplay.databinding.ItemPayBinding;
 import com.fanc.wheretoplay.datamodel.BookList;
+import com.fanc.wheretoplay.fragment.OrderFragment;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.UIUtils;
 
@@ -39,10 +40,12 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     boolean isDeleting;
     public HashMap<Integer, Boolean> status;
     OnCancelClickListener listener;
+    OrderFragment  orderFragment;
 
-    public OrderAdapter(Context mContext, List mData) {
+    public OrderAdapter(Context mContext, List mData, OrderFragment  orderFragment) {
         this.mContext = mContext;
         this.mData = mData;
+        this.orderFragment = orderFragment;
     }
 
     @Override
@@ -58,6 +61,17 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
         holder.binding.setOrder(order);
 //        Glide.with(mContext).load(Network.IMAGE + order.getCover()).into(holder.mIvOrderItem);
         holder.mCbItemStatus.setVisibility(View.GONE);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(mContext, DetailsOrderActivity.class);
+                orderFragment.startActivityForResult(intent, 1000);
+            }
+        });
+
+
 
         String sum = "";
         if (Double.parseDouble(order.getPrepay()) == 0D) {// 订金为0
@@ -183,12 +197,10 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
                 }
             }
         });
-        //评价
         holder.mBtnCheckComment.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(mContext, CheckCommentActivity.class);
-                Intent intent = new Intent(mContext, CheckCommentsActivity.class);
+                Intent intent = new Intent(mContext, CheckCommentActivity.class);
                 intent.putExtra(Constants.STORE_ID, order.getStore_id());
                 mContext.startActivity(intent);
             }

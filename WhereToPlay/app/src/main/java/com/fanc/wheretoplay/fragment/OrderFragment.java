@@ -91,7 +91,7 @@ public class OrderFragment extends BaseFragment {
         lm.setOrientation(LinearLayoutManager.VERTICAL);
         mRvOrder.setLayoutManager(lm);
         orders = new ArrayList<>();
-        orderAdapter = new OrderAdapter(mContext, orders);
+        orderAdapter = new OrderAdapter(mContext, orders,this);
         mRvOrder.addItemDecoration(new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL,
                 UIUtils.dp2Px(1), mContext.getResources().getColor(R.color.pay_reserve_list_divider_white)));
         mRvOrder.setAdapter(orderAdapter);

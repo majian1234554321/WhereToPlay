@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/cb_pay_item_status"
+            android:layout_width="@dimen/width_30"
+            android:layout_height="@dimen/height_30"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:button="@drawable/selector_pay_way"
+            android:visibility="gone" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/iv_pay_item"
+                android:layout_width="@dimen/width_100"
+                android:layout_height="@dimen/height_120"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginRight="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_15"
+                android:scaleType="fitXY" />
+
+            <TextView
+                android:id="@+id/tv_pay_item_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/iv_pay_item"
+                android:layout_toRightOf="@+id/iv_pay_item"
+                android:text="上海天地会所"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textsize_level2" />
+
+            <TextView
+                android:id="@+id/tv_pay_item_reserved"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tv_pay_item_title"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:layout_toRightOf="@+id/tv_pay_item_title"
+                android:gravity="right"
+                android:text="预订方式"
+                android:textColor="@color/text_red"
+                android:textSize="@dimen/textsize_levelsmall" />
+
+            <TextView
+                android:id="@+id/tv_pay_item_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tv_pay_item_title"
+                android:layout_below="@+id/tv_pay_item_title"
+                android:layout_marginTop="@dimen/margin_5"
+                android:text="@string/pay_reserve_time"
+                android:textColor="@color/pay_reserve_list_text"
+                android:textSize="@dimen/textsize_levelsmall" />
+
+            <TextView
+                android:id="@+id/tv_pay_item_real_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tv_pay_item_time"
+                android:layout_below="@+id/tv_pay_item_time"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_toRightOf="@+id/tv_pay_item_time"
+                android:text="text"
+                android:textColor="@color/pay_reserve_list_text"
+                android:textSize="@dimen/textsize_levelsmall" />
+
+            <TextView
+                android:id="@+id/tv_pay_item_room_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tv_pay_item_title"
+                android:layout_below="@+id/tv_pay_item_time"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="@dimen/margin_10"
+                android:text="@string/pay_reserve_room_category"
+                android:textColor="@color/pay_reserve_list_text"
+                android:textSize="@dimen/textsize_levelsmall" />
+
+            <TextView
+                android:id="@+id/tv_pay_item_room"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tv_pay_item_room_category"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_toRightOf="@+id/tv_pay_item_room_category"
+                android:text="text"
+                android:textColor="@color/pay_reserve_list_text"
+                android:textSize="@dimen/textsize_levelsmall" />
+
+            <TextView
+                android:id="@+id/tv_pay_item_decorate_category"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_pay_item_time"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_10"
+                android:layout_toRightOf="@+id/tv_pay_item_room"
+                android:text="@string/pay_reserve_decorate_category"
+                android:textColor="@color/pay_reserve_list_text"
+                android:textSize="@dimen/textsize_levelsmall" />
+
+            <TextView
+                android:id="@+id/tv_pay_item_decorate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tv_pay_item_decorate_category"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_toRightOf="@+id/tv_pay_item_decorate_category"
+                android:text="text"
+                android:textColor="@color/pay_reserve_list_text"
+                android:textSize="@dimen/textsize_levelsmall" />
+
+            <TextView
+                android:id="@+id/tv_pay_item_reserve_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tv_pay_item_title"
+                android:layout_below="@+id/tv_pay_item_room_category"
+                android:layout_marginTop="@dimen/margin_10"
+                android:text="@string/pay_reserve_code"
+                android:textColor="@color/pay_reserve_list_text"
+                android:textSize="@dimen/textsize_levelsmall" />
+
+            <TextView
+                android:id="@+id/tv_pay_item_reserve_real_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/tv_pay_item_reserve_code"
+                android:layout_marginLeft="@dimen/margin_10"
+                android:layout_toRightOf="@+id/tv_pay_item_reserve_code"
+                android:text="text"
+                android:textColor="@color/pay_reserve_list_text"
+                android:textSize="@dimen/textsize_levelsmall" />
+
+            <TextView
+                android:id="@+id/tv_pay_item_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@+id/tv_pay_item_title"
+                android:layout_below="@+id/tv_pay_item_reserve_code"
+                android:layout_marginTop="@dimen/margin_10"
+                android:text="@string/pay_reserve_price"
+                android:textColor="@color/pay_reserve_list_text"
+                android:textSize="@dimen/textsize_levelsmall" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/iv_pay_item"
+                android:background="@color/white"
+                android:gravity="right"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/btn_check_comment"
+                    android:layout_width="@dimen/width_70"
+                    android:layout_height="@dimen/height_25"
+                    android:layout_marginBottom="@dimen/margin_10"
+                    android:layout_marginRight="@dimen/margin_10"
+                    android:background="@drawable/shape_btn_white"
+                    android:text="@string/check_comment_1"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/normal_textsize"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btn_to_comment"
+                    android:layout_width="@dimen/width_50"
+                    android:layout_height="@dimen/height_25"
+                    android:layout_marginBottom="@dimen/margin_10"
+                    android:layout_marginRight="@dimen/margin_10"
+                    android:background="@drawable/shape_btn_white"
+                    android:text="@string/to_evaluate"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/normal_textsize"
+                    android:visibility="gone" />
+
+                <Button
+                    android:id="@+id/btn_pay_cancel_reserve"
+                    android:layout_width="@dimen/width_70"
+                    android:layout_height="@dimen/height_25"
+                    android:layout_marginBottom="@dimen/margin_10"
+                    android:layout_marginRight="@dimen/margin_10"
+                    android:background="@drawable/shape_btn_signin"
+                    android:text="@string/cancel_reverse"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/normal_textsize" />
+
+                <Button
+                    android:id="@+id/btn_pay_consume"
+                    android:layout_width="@dimen/width_60"
+                    android:layout_height="@dimen/height_25"
+                    android:layout_marginBottom="@dimen/margin_10"
+                    android:layout_marginRight="@dimen/margin_10"
+                    android:background="@drawable/shape_btn_orange"
+                    android:text="@string/paying_the_bill"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/normal_textsize" />
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+    </LinearLayout>
+
+</LinearLayout>

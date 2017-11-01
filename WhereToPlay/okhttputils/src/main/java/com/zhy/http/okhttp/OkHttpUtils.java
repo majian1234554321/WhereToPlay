@@ -76,7 +76,9 @@ public class OkHttpUtils
 
     public OkHttpUtils debug(String tag)
     {
-        mOkHttpClient = getOkHttpClient().newBuilder().addInterceptor(new LoggerInterceptor(tag, false)).build();
+        mOkHttpClient = getOkHttpClient().newBuilder()
+                .addInterceptor(new LoggerInterceptor(tag, false))
+                .build();
         return this;
     }
 
@@ -89,7 +91,9 @@ public class OkHttpUtils
      */
     public OkHttpUtils debug(String tag, boolean showResponse)
     {
-        mOkHttpClient = getOkHttpClient().newBuilder().addInterceptor(new LoggerInterceptor(tag, showResponse)).build();
+        mOkHttpClient = getOkHttpClient().newBuilder()
+               .addInterceptor(new LoggerInterceptor(tag, showResponse))
+                .build();
         return this;
     }
 

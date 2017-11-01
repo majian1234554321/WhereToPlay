@@ -8,14 +8,10 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.widget.TabLayout;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -25,7 +21,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebView;
-import android.webkit.WebViewClient;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -34,25 +29,21 @@ import android.widget.TextView;
 import com.baidu.location.BDLocation;
 import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
-import com.fanc.wheretoplay.activity.CheckCommentActivity;
 import com.fanc.wheretoplay.activity.CheckCommentsActivity;
-import com.fanc.wheretoplay.activity.DetailActivity;
 import com.fanc.wheretoplay.activity.LargeImageActivity;
 import com.fanc.wheretoplay.activity.ReuseActivity;
 import com.fanc.wheretoplay.activity.ServiceActivity;
+import com.fanc.wheretoplay.activity.ShareActivity;
 import com.fanc.wheretoplay.adapter.CommentIconAdapter;
 import com.fanc.wheretoplay.adapter.MerchantTablayoutAdapter;
 import com.fanc.wheretoplay.adapter.ReserveAdapter;
 import com.fanc.wheretoplay.base.App;
 import com.fanc.wheretoplay.base.BaseFragment;
-import com.fanc.wheretoplay.callback.UMShareListener;
 import com.fanc.wheretoplay.databinding.FragmentMerchantDetailBinding;
 import com.fanc.wheretoplay.datamodel.IsOk;
 import com.fanc.wheretoplay.datamodel.StoreDetail;
 import com.fanc.wheretoplay.datamodel.StoreList;
 import com.fanc.wheretoplay.datamodel.Url;
-import com.fanc.wheretoplay.divider.RecycleViewDivider;
-import com.fanc.wheretoplay.image.GlideImageLoader;
 import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LocationUtils;
@@ -62,15 +53,7 @@ import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.MyRecycleView;
 import com.fanc.wheretoplay.view.ShearedPopDialog;
 import com.fanc.wheretoplay.view.TopMenu;
-import com.umeng.socialize.ShareAction;
-import com.umeng.socialize.bean.SHARE_MEDIA;
-import com.umeng.socialize.media.UMImage;
-import com.umeng.socialize.media.UMWeb;
-import com.umeng.socialize.shareboard.SnsPlatform;
-import com.umeng.socialize.utils.ShareBoardlistener;
-import com.youth.banner.Banner;
-import com.youth.banner.BannerConfig;
-import com.youth.banner.listener.OnBannerListener;
+
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
@@ -528,12 +511,15 @@ public class MerchantDetailFragment extends BaseFragment {
                 .execute(new DCallback<StoreDetail>() {
                     @Override
                     public void onError(Call call, Exception e) {
+                        Log.i("AAAAAAA","AAAAAAA");
                         connectError();
                     }
 
                     @Override
                     public void onResponse(StoreDetail response) {
+                        Log.i("AAAAAAA","response");
                         if (isSuccess(response)) {
+                            Log.i("AAAAAAA","responseB");
                             if (response.getStore() != null) {
                                 mStore = response.getStore();
                                 showStoreDetail(mStore);
@@ -733,9 +719,10 @@ public class MerchantDetailFragment extends BaseFragment {
                 }
             }
         }
-        new ShareAction(mContext)
-//                .withText("hello")
-                .setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE)
+        startActivity(new Intent(mContext, ShareActivity.class));
+
+  /*      new ShareAction(mContext)
+                .setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.SINA)
                 .setShareboardclickCallback(new ShareBoardlistener() {
                     @Override
                     public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
@@ -751,7 +738,7 @@ public class MerchantDetailFragment extends BaseFragment {
                                 .share();
                     }
                 })
-                .open();
+                .open();*/
     }
 
 }
