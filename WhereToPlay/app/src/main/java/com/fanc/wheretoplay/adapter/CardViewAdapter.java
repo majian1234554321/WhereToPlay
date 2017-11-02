@@ -19,6 +19,7 @@ import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.App;
 import com.fanc.wheretoplay.databinding.ItemCheckCommentsBinding;
 import com.fanc.wheretoplay.databinding.ItemCheckCommentsCardviewBinding;
+import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
 
@@ -54,7 +55,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Glide.with(mContext).load(mPictureList.get(position)).placeholder(R.drawable.default_rect).into(holder.mIvCardView);
+        Glide.with(mContext).load(Network.IMAGE + mPictureList.get(position)).placeholder(R.drawable.default_rect).into(holder.mIvCardView);
         //点击事件
         holder.mIvCardView.setOnClickListener(new View.OnClickListener() {
             @Override

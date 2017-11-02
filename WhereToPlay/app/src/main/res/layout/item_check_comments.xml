@@ -17,7 +17,7 @@
         android:layout_marginEnd="@dimen/margin_15"
         >
         <!--头像-->
-        <ImageView
+        <com.fanc.wheretoplay.view.CircleImageView
             android:id="@+id/iv_check_comments_avatar"
             android:layout_width="@dimen/width_34"
             android:layout_height="@dimen/width_34"

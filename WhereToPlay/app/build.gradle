@@ -13,10 +13,10 @@ android {
 //            } catch (ex) {
 //                throw new InvalidUserDataException(ex.toString())
 //            }
-            keyAlias 'androiddebugkey'
-            keyPassword 'android'
-            storeFile file('/debug.keystore')
-            storePassword 'android'
+            keyAlias 'ktv_key'
+            keyPassword 'adminhpzl'
+            storeFile file('D:/keystore/hpzl_keystore')
+            storePassword 'adminhpzl'
         }
     }
     compileSdkVersion 27

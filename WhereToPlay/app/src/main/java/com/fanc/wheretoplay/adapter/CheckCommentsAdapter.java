@@ -20,6 +20,7 @@ import com.fanc.wheretoplay.databinding.ItemHousenewsBinding;
 import com.fanc.wheretoplay.datamodel.CheckComments;
 import com.fanc.wheretoplay.datamodel.HousenewsList;
 import com.fanc.wheretoplay.divider.GridDivider;
+import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.DateFormatUtil;
 import com.fanc.wheretoplay.util.UIUtils;
 
@@ -48,7 +49,7 @@ public class CheckCommentsAdapter extends RecyclerView.Adapter<CheckCommentsAdap
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
         //头像
-        Glide.with(mContext).load(mResponse.getComment_list().get(position).getAvatar()).placeholder(R.drawable.default_rect).into(holder.mIvAvatar);
+        Glide.with(mContext).load(Network.IMAGE + mResponse.getComment_list().get(position).getAvatar()).placeholder(R.drawable.default_rect).into(holder.mIvAvatar);
         //评论
         holder.mTvContent.setText(mResponse.getComment_list().get(position).getComment());
         //时间
