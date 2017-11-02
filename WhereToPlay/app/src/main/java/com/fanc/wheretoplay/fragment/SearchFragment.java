@@ -123,7 +123,7 @@ public class SearchFragment extends BaseFragment {
         mRvSearchHistory.setLayoutManager(historyLayoutManager);
         historyAdapter = new SearchAdapter(mContext, histories);
         mRvSearchHistory.setAdapter(historyAdapter);
-        RecycleViewDivider historyDivider = new RecycleViewDivider(mContext, LinearLayout.HORIZONTAL);
+        RecycleViewDivider historyDivider = new RecycleViewDivider(mContext, LinearLayout.HORIZONTAL, UIUtils.dp2Px(1), getResources().getColor(R.color.pay_reserve_list_divider_white));
         mRvSearchHistory.addItemDecoration(historyDivider);
 
         mTvSearchHistory.setText(R.string.search_history);

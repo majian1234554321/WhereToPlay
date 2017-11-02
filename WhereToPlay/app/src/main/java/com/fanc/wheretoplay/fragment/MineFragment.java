@@ -45,8 +45,7 @@ public class MineFragment extends BaseFragment {
     TopMenu mTmMine;
     CircleImageView mCivMine;
     TextView mTvMimeNickname;
-    TextView mTvMimeId;
-//    TextView mTvMimeMobile;
+    TextView mTvMimeMobile;
     TextView mTvMimeIntegral;
     ItemView mIvMineMessage;
     ItemView mIvMineWallet;
@@ -73,8 +72,7 @@ public class MineFragment extends BaseFragment {
         mTmMine = mineBinding.tmMine;
         mCivMine = mineBinding.civMine;
         mTvMimeNickname = mineBinding.tvMineNickname;
-        mTvMimeId = mineBinding.tvMineId;
-//        mTvMimeMobile = mineBinding.tvMineMobile;
+        mTvMimeMobile = mineBinding.tvMineMobile;
         mTvMimeIntegral = mineBinding.tvMineIntegral;
         mIvMineMessage = mineBinding.ivMineMessage;
         mIvMineWallet = mineBinding.ivMineWallet;
@@ -149,8 +147,7 @@ public class MineFragment extends BaseFragment {
         } else {
             mTvMimeNickname.setText(mUser.getNickname());
         }
-        mTvMimeId.setText("ID:" + mUser.getShare_code());
-//        mTvMimeMobile.setText(mUser.getMobile());
+        mTvMimeMobile.setText(mUser.getMobile());
     }
 
     /**
@@ -199,7 +196,7 @@ public class MineFragment extends BaseFragment {
                 Glide.with(mContext).load(intent.getStringExtra(Constants.URL)).into(mCivMine);
             } else if (Constants.ACTION_MINE_INFO_MODIFY_SUCCESS.equals(action)) {
                 mTvMimeNickname.setText(intent.getStringExtra(Constants.NAME));
-//                mTvMimeMobile.setText(intent.getStringExtra(Constants.MOBILE));
+                mTvMimeMobile.setText(intent.getStringExtra(Constants.MOBILE));
             }
         }
     }

@@ -453,7 +453,7 @@ public class ReserveInfoFragment extends BaseFragment {
 
     /**
      * 构造下单参数
-     *
+     *判断传入参数的正确性
      * @param storeId
      * @param nickname
      * @param mobile

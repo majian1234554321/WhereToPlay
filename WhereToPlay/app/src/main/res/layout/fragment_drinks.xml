@@ -44,7 +44,7 @@
                 android:paddingRight="@dimen/padding_5"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textsize_level3"/>
-
+            <!--地址-->
             <TextView
                 android:id="@+id/tv_drinks_address"
                 android:layout_width="wrap_content"
@@ -54,11 +54,11 @@
                 android:drawableLeft="@drawable/reserve_address"
                 android:drawablePadding="@dimen/padding_10"
                 android:maxWidth="@dimen/width_260"
-                android:textColor="@color/text_black"
+                android:textColor="@color/text_gray"
                 android:textSize="@dimen/textsize_levelsmall"
                 android:singleLine="true"
                 android:ellipsize="end"/>
-
+            <!--距离-->
             <TextView
                 android:id="@+id/tv_drinks_distance"
                 android:layout_width="wrap_content"
@@ -66,7 +66,7 @@
                 android:layout_alignBaseline="@+id/tv_drinks_address"
                 android:layout_marginLeft="@dimen/margin_40"
                 android:layout_toRightOf="@+id/tv_drinks_address"
-                android:textColor="@color/text_black"
+                android:textColor="@color/text_gray"
                 android:textSize="@dimen/textsize_levelsmall"/>
         </RelativeLayout>
 
@@ -89,7 +89,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/drinks_name"
                 android:textSize="@dimen/textsize_levelmedium"
-                android:textColor="@color/text_gray"
+                android:textColor="@color/text_black"
                 app:layout_constraintHorizontal_chainStyle="spread_inside"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -103,7 +103,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/drinks_price"
                 android:textSize="@dimen/textsize_levelmedium"
-                android:textColor="@color/text_gray"
+                android:textColor="@color/text_black"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/tv_drinks_name"
@@ -115,7 +115,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/drinks_action"
                 android:textSize="@dimen/textsize_levelmedium"
-                android:textColor="@color/text_gray"
+                android:textColor="@color/text_black"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toRightOf="@+id/tv_housenews_housename"

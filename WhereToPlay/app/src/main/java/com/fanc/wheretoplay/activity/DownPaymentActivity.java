@@ -115,7 +115,7 @@ public class DownPaymentActivity extends BaseActivity {
             mRlPayWay.setVisibility(View.GONE);
             mBtnPay.setText(R.string.confirm);
         }
-
+        mTmDownPayment.setTitleColor(getResources().getColor(R.color.white));
         getOrderInfo(params);
 
         registerBroadcastReceiver();

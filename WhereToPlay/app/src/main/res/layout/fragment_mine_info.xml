@@ -12,7 +12,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@color/bg"
+        android:background="@color/white"
         android:orientation="vertical">
 
         <com.fanc.wheretoplay.view.TopMenu
@@ -20,12 +20,12 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_15"
-            android:background="@color/pay_reserve_list_divider"
-            android:focusable="true"
-            android:focusableInTouchMode="true"/>
+        <!--<View-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="@dimen/height_15"-->
+            <!--android:background="@color/pay_reserve_list_divider_white"-->
+            <!--android:focusable="true"-->
+            <!--android:focusableInTouchMode="true"/>-->
 
         <LinearLayout
             android:id="@+id/ll_mine_info_photo"
@@ -43,7 +43,7 @@
                 android:layout_centerVertical="true"
                 android:layout_weight="1"
                 android:text="头像"
-                android:textColor="@color/pay_reserve_list_text"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/normal_textsize"/>
 
             <com.fanc.wheretoplay.view.CircleImageView
@@ -54,7 +54,10 @@
 
         </LinearLayout>
 
-        <View style="@style/line_style_1px"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/pay_reserve_list_divider_white" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -66,7 +69,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/nickname"
-                android:textColor="@color/pay_reserve_list_text"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/normal_textsize"/>
 
             <EditText
@@ -78,13 +81,16 @@
                 android:gravity="right|center_vertical"
                 android:maxLength="20"
                 android:paddingRight="@dimen/padding_15"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/textsize_levelsmall"/>
 
         </RelativeLayout>
 
-        <View style="@style/line_style_1px"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/pay_reserve_list_divider_white" />
 
 
         <RelativeLayout
@@ -100,7 +106,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/gender"
-                android:textColor="@color/pay_reserve_list_text"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/normal_textsize"/>
 
             <ImageView
@@ -123,12 +129,15 @@
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:text="@string/please_choose"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/textsize_levelsmall"/>
 
         </RelativeLayout>
 
-        <View style="@style/line_style_1px"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/pay_reserve_list_divider_white" />
 
         <RelativeLayout
             android:id="@+id/rl_mine_info_birthday"
@@ -145,7 +154,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginRight="@dimen/margin_5"
                 android:text="@string/birthday"
-                android:textColor="@color/pay_reserve_list_text"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/normal_textsize"/>
 
             <ImageView
@@ -168,12 +177,15 @@
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:text="@string/please_choose"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/textsize_levelsmall"/>
 
         </RelativeLayout>
 
-        <View style="@style/line_style_1px"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/pay_reserve_list_divider_white" />
 
         <RelativeLayout
             android:id="@+id/rl_mine_info_location"
@@ -191,7 +203,7 @@
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:text="@string/location"
-                android:textColor="@color/pay_reserve_list_text"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/normal_textsize"/>
 
             <ImageView
@@ -214,12 +226,15 @@
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:text="@string/please_choose"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/textsize_levelsmall"/>
 
         </RelativeLayout>
 
-        <View style="@style/line_style_1px"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/pay_reserve_list_divider_white" />
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -231,7 +246,7 @@
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
                 android:text="@string/mobile"
-                android:textColor="@color/pay_reserve_list_text"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/normal_textsize"/>
 
             <EditText
@@ -244,13 +259,16 @@
                 android:paddingRight="@dimen/padding_15"
                 android:inputType="number"
                 android:maxLength="11"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/textsize_levelsmall"/>
 
         </RelativeLayout>
 
-        <View style="@style/line_style_1px"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/pay_reserve_list_divider_white" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -266,7 +284,7 @@
                 android:layout_marginRight="@dimen/margin_10"
                 android:layout_marginTop="@dimen/margin_15"
                 android:text="@string/signing"
-                android:textColor="@color/pay_reserve_list_text"
+                android:textColor="@color/text_black"
                 android:textSize="@dimen/normal_textsize"/>
 
             <EditText
@@ -280,13 +298,16 @@
                 android:background="@drawable/shape_mine_info_sign"
                 android:gravity="top"
                 android:padding="@dimen/padding_5"
-                android:textColor="@color/pay_reserve_list_text"
+                android:textColor="@color/text_black"
                 android:textCursorDrawable="@drawable/color_cursor"
                 android:textSize="@dimen/normal_textsize"/>
 
         </LinearLayout>
 
-        <View style="@style/line_style_1px"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:background="@color/pay_reserve_list_divider_white" />
 
         <View
             android:layout_width="match_parent"
@@ -303,7 +324,7 @@
             android:background="@drawable/shape_btn_signin"
             android:onClick="@{click.onViewClick}"
             android:text="@string/confirm_1"
-            android:textColor="@color/text_black"
+            android:textColor="@color/text_white"
             android:textSize="@dimen/textsize_level2"/>
 
     </LinearLayout>
