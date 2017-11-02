@@ -86,6 +86,7 @@
     <color name="btn_normal">#FCBA00</color>
     <color name="btn_pressed">#E5E5E5</color>
     <color name="btn_presell">#0097EB</color>
+    <color name="select_gray">#AAAAAA</color>
 
     <!--nice spinner-->
     <color name="light_gray">#fff5f5f5</color>
