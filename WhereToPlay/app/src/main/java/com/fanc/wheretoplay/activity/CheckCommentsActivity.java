@@ -9,6 +9,8 @@ import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.RatingBar;
+import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.adapter.CheckCommentsAdapter;
@@ -40,6 +42,22 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
     private RecyclerView mRc;
     private String mStoreId;
     private Intent intent;
+    //顶部4个分数
+    private TextView mTvScoreEnvironment;
+    private TextView mTvScoreatmosphere;
+    private TextView mTvScoreservice;
+    private TextView mTvAverageScore;
+    //顶部3个星星
+    private RatingBar mRbEnvironment;
+    private RatingBar mRbAtmosphere;
+    private RatingBar mRbService;
+    //中部四个文字按钮
+    private TextView mBtAll;
+    private TextView mBtPleasure;
+    private TextView mBtDispleasure;
+    private TextView mBtpicture;
+    private int mID = R.id.bt_comments_one;
+    private CheckComments mResponse;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,6 +71,17 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
     private void initView() {
         mTopMenu = mCheckCommentsBinding.tmCheckComments;
         mRc = mCheckCommentsBinding.rcComments;
+        mTvAverageScore = mCheckCommentsBinding.tvCommentsScore;
+        mTvScoreEnvironment = mCheckCommentsBinding.tvCommentsScoreOne;
+        mTvScoreatmosphere = mCheckCommentsBinding.tvCommentsScoreTwo;
+        mTvScoreservice = mCheckCommentsBinding.tvCommentsScoreThree;
+        mRbEnvironment = mCheckCommentsBinding.rbCommentsOne;
+        mRbAtmosphere = mCheckCommentsBinding.rbCommentsTwo;
+        mRbService = mCheckCommentsBinding.rbCommentsThree;
+        mBtAll = mCheckCommentsBinding.btCommentsOne;
+        mBtPleasure = mCheckCommentsBinding.btCommentsTwo;
+        mBtDispleasure = mCheckCommentsBinding.btCommentsThree;
+        mBtpicture = mCheckCommentsBinding.btCommentsFour;
     }
 
     private void init() {
@@ -60,6 +89,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
         mTopMenu.setTitleColor(getResources().getColor(R.color.white));
         mTopMenu.setTitle(R.string.topmenu_comment);
         mTopMenu.setLeftIcon(R.drawable.left);
+        clickPress(R.id.bt_comments_one);
         //评论列表
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -80,26 +110,88 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
         });
     }
 
+    /**
+     * 点击中部四个按钮
+     * @param view
+     */
     public void comments(View view) {   //不能把权限设置为私有
         switch (view.getId()) {
             case R.id.bt_comments_one:
-                requestComments(1, 1, 2);
-//                Log.e("wade", mSPUtils.getUser().getToken() + "\n" +intent.getStringExtra(Constants.STORE_ID));
+                if (mID != R.id.bt_comments_one) {
+                    clickPress(R.id.bt_comments_one);
+                    requestComments(1, 1, 5);
+                }
                 break;
             case R.id.bt_comments_two:
-                requestComments(2, 1, 2);
+                if (mID != R.id.bt_comments_two) {
+                    clickPress(R.id.bt_comments_two);
+                    requestComments(2, 1, 5);
+                }
                 break;
             case R.id.bt_comments_three:
-                requestComments(3, 1, 2);
+                if (mID != R.id.bt_comments_three) {
+                    clickPress(R.id.bt_comments_three);
+                    requestComments(3, 1, 5);
+                }
                 break;
             case R.id.bt_comments_four:
-                requestComments(4, 1, 2);
+                if (mID != R.id.bt_comments_four) {
+                    clickPress(R.id.bt_comments_four);
+                    requestComments(4, 1, 5);
+                }
                 break;
             default:
                 break;
         }
     }
 
+    //点击按钮改变颜色
+    private void clickPress(int id) {
+        recordId(id);
+        pressChange(id);
+    }
+    //改变颜色
+    private void pressChange(int id) {
+        mBtAll.setBackground(getResources().getDrawable(R.drawable.shape_pink));
+        mBtAll.setTextColor(getResources().getColor(R.color.text_black_sec));
+        mBtPleasure.setBackground(getResources().getDrawable(R.drawable.shape_pink));
+        mBtPleasure.setTextColor(getResources().getColor(R.color.text_black_sec));
+        mBtDispleasure.setBackground(getResources().getDrawable(R.drawable.shape_unselect_gray));
+        mBtDispleasure.setTextColor(getResources().getColor(R.color.text_gray));
+        mBtpicture.setBackground(getResources().getDrawable(R.drawable.shape_pink));
+        mBtpicture.setTextColor(getResources().getColor(R.color.text_black_sec));
+        switch (id) {
+            case R.id.bt_comments_one:
+                mBtAll.setBackground(getResources().getDrawable(R.drawable.shape_reserve_info_checked));
+                mBtAll.setTextColor(getResources().getColor(R.color.text_white));
+                break;
+            case R.id.bt_comments_two:
+                mBtPleasure.setBackground(getResources().getDrawable(R.drawable.shape_reserve_info_checked));
+                mBtPleasure.setTextColor(getResources().getColor(R.color.text_white));
+                break;
+            case R.id.bt_comments_three:
+                mBtDispleasure.setBackground(getResources().getDrawable(R.drawable.shape_select_gray));
+                mBtDispleasure.setTextColor(getResources().getColor(R.color.text_white));
+                break;
+            case R.id.bt_comments_four:
+                mBtpicture.setBackground(getResources().getDrawable(R.drawable.shape_reserve_info_checked));
+                mBtpicture.setTextColor(getResources().getColor(R.color.text_white));
+                break;
+            default:
+                break;
+        }
+    }
+    //记录点下的id值
+    private void recordId(int id) {
+        mID = id;
+    }
+
+    /**
+     * 请求评论数据
+     * @param type
+     * @param pageIndex
+     * @param pageSize
+     */
     private void requestComments(int type, int pageIndex, int pageSize) {
         OkHttpUtils.post()
                 .url(Network.User.PUBLIC_COMMENTS)
@@ -130,6 +222,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
                             }
                             return;
                         } else {
+                            mResponse = response;
                             showCheckComments(response);
 
                         }
@@ -137,7 +230,26 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
                 });
     }
 
+    /**
+     * 展示获取的数据
+     * @param response
+     */
     private void showCheckComments(CheckComments response) {
+        //顶部分数显示
+        mTvAverageScore.setText(response.getAverage_comment());
+        mTvScoreEnvironment.setText(response.getComment_environment());
+        mTvScoreatmosphere.setText(response.getComment_atmosphere());
+        mTvScoreservice.setText(response.getComment_server());
+        //顶部3个星星
+        mRbEnvironment.setRating(Float.parseFloat(response.getComment_environment()));
+        mRbAtmosphere.setRating(Float.parseFloat(response.getComment_atmosphere()));
+        mRbService.setRating(Float.parseFloat(response.getComment_server()));
+        //中部四个文字按钮
+        mBtAll.setText(getResources().getText(R.string.check_comment_all) + "(" + response.getAll_count() +")");
+        mBtPleasure.setText(getResources().getText(R.string.check_comment_pleasure) + "(" + response.getPleasure_count() +")");
+        mBtDispleasure.setText(getResources().getText(R.string.check_comment_displeasure) + "(" + response.getDispleasure_count() +")");
+        mBtpicture.setText(getResources().getText(R.string.check_comment_picture) + "(" + response.getPicture_count() +")");
+        //底部评论
         CheckCommentsAdapter checkCommentsAdapter = new CheckCommentsAdapter(this, response);
         mRc.setAdapter(checkCommentsAdapter);
     }

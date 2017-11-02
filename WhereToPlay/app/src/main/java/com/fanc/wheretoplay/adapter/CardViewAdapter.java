@@ -14,6 +14,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.App;
 import com.fanc.wheretoplay.databinding.ItemCheckCommentsBinding;
@@ -21,6 +22,7 @@ import com.fanc.wheretoplay.databinding.ItemCheckCommentsCardviewBinding;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
 
+import java.util.List;
 import java.util.zip.Inflater;
 
 /**
@@ -29,11 +31,12 @@ import java.util.zip.Inflater;
 
 public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHolder> {
 
-
+    private List<String> mPictureList;
     Context mContext;
 
-    public CardViewAdapter(Context mContext) {
+    public CardViewAdapter(Context mContext, List<String> picture) {
         this.mContext = mContext;
+        this.mPictureList = picture;
     }
 
     @Override
@@ -51,7 +54,8 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mIvCardView.setImageResource(R.drawable.jt);
+        Glide.with(mContext).load(mPictureList.get(position)).placeholder(R.drawable.default_rect).into(holder.mIvCardView);
+        //点击事件
         holder.mIvCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -62,10 +66,10 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
 
     @Override
     public int getItemCount() {
-//        if ( == null) {
-//            return 0;
-//        }
-        return 7;
+        if (mPictureList == null) {
+            return 0;
+        }
+        return mPictureList.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

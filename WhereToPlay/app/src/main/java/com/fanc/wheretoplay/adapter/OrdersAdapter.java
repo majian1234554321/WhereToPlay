@@ -55,40 +55,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        @BindView(R.id.cb_pay_item_status)
-        CheckBox cbPayItemStatus;
-        @BindView(R.id.iv_pay_item)
-        ImageView ivPayItem;
-        @BindView(R.id.tv_pay_item_title)
-        TextView tvPayItemTitle;
-        @BindView(R.id.tv_pay_item_reserved)
-        TextView tvPayItemReserved;
-        @BindView(R.id.tv_pay_item_time)
-        TextView tvPayItemTime;
-        @BindView(R.id.tv_pay_item_real_time)
-        TextView tvPayItemRealTime;
-        @BindView(R.id.tv_pay_item_room_category)
-        TextView tvPayItemRoomCategory;
-        @BindView(R.id.tv_pay_item_room)
-        TextView tvPayItemRoom;
-        @BindView(R.id.tv_pay_item_decorate_category)
-        TextView tvPayItemDecorateCategory;
-        @BindView(R.id.tv_pay_item_decorate)
-        TextView tvPayItemDecorate;
-        @BindView(R.id.tv_pay_item_reserve_code)
-        TextView tvPayItemReserveCode;
-        @BindView(R.id.tv_pay_item_reserve_real_code)
-        TextView tvPayItemReserveRealCode;
-        @BindView(R.id.tv_pay_item_price)
-        TextView tvPayItemPrice;
-        @BindView(R.id.btn_check_comment)
-        Button btnCheckComment;
-        @BindView(R.id.btn_to_comment)
-        Button btnToComment;
-        @BindView(R.id.btn_pay_cancel_reserve)
-        Button btnPayCancelReserve;
-        @BindView(R.id.btn_pay_consume)
-        Button btnPayConsume;
+
 
         public ViewHolder(View itemView) {
             super(itemView);

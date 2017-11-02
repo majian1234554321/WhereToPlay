@@ -298,6 +298,11 @@
     <!--check comment-->
     <string name="check_comment">评价查看</string>
     <string name="check_comment_1">查看评价</string>
+    <string name="check_comment_all">全部</string>
+    <string name="check_comment_pleasure">满意</string>
+    <string name="check_comment_displeasure">不满意</string>
+    <string name="check_comment_picture">有图</string>
+
 
     <!--dialog room type-->
     <string name="please_choose_room_type">请选择房型</string>

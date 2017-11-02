@@ -74,6 +74,12 @@
         <item name="android:minHeight">10dp</item>
     </style>
 
+    <style name="star2" parent="@android:style/Widget.RatingBar">
+        <item name="android:progressDrawable">@drawable/drawable_star_small</item>
+        <item name="android:maxHeight">54dp</item>
+        <item name="android:minHeight">36dp</item>
+    </style>
+
     <style name="star_large" parent="@android:style/Widget.RatingBar">
         <!--<item name="android:progressDrawable">@drawable/drawable_star_large</item>-->
         <item name="android:maxHeight">54dp</item>

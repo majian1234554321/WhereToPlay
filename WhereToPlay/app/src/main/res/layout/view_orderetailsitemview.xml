@@ -6,11 +6,15 @@
     <TextView
         android:id="@+id/tv_left"
         android:textColor="#333333"
+
+        android:layout_marginLeft="16dp"
         android:gravity="center"
         android:layout_width="wrap_content"
         android:layout_height="match_parent" />
     <TextView
         android:id="@+id/tv_right"
+        android:gravity="center"
+        android:layout_marginRight="12dp"
         android:layout_alignParentRight="true"
         android:layout_width="wrap_content"
         android:layout_height="match_parent" />

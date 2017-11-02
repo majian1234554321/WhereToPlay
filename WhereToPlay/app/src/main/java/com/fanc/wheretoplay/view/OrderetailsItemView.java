@@ -41,4 +41,8 @@ public class OrderetailsItemView extends RelativeLayout {
         tv_right.setText(value);
     }
 
+    public void setTv_rightTextColor(int i){
+        tv_right.setTextColor(i);
+    }
+
 }

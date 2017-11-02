@@ -1,39 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          xmlns:tools="http://schemas.android.com/tools"
-          package="com.fanc.wheretoplay">
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.fanc.wheretoplay">
 
-    <!--<supports-screens
+    <!--
+        <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
         android:normalScreens="true"
         android:resizeable="true"
         android:smallScreens="true"
         android:xlargeScreens="true"
-        />-->
+        />
+    -->
 
-    <uses-permission android:name="android.permission.INTERNET"/>
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
-    <uses-permission android:name="android.permission.CAMERA"/>
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <!-- 这个权限用于进行网络定位 -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <!-- 这个权限用于访问GPS定位 -->
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- 这个权限用于获取wifi的获取权限，wifi信息会用来进行网络定位 -->
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
     <!-- 用于读取手机当前的状态 -->
-    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <!-- SD卡读取权限，用户写入离线定位数据 -->
-    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS"/>
-    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS"/>
-    <uses-permission android:name="android.permission.GET_ACCOUNTS"/>
-    <uses-permission android:name="android.permission.SET_DEBUG_APP"/>
-    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.READ_LOGS"/>
-    <uses-permission android:name="android.permission.CALL_PHONE"/>
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.ACCESS_LOCATION_EXTRA_COMMANDS" />
+    <uses-permission android:name="android.permission.GET_ACCOUNTS" />
+    <uses-permission android:name="android.permission.SET_DEBUG_APP" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <!--
     &lt;!&ndash;Required &ndash;&gt;
@@ -53,83 +55,80 @@
     <uses-permission android:name="android.permission.GET_TASKS"/>
     -->
     <application
-        tools:replace="android:allowBackup"
         android:name=".base.App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:allowBackup">
         <activity
             android:name=".activity.LaunchActivity"
             android:screenOrientation="portrait"
             android:theme="@style/StartAppTheme">
             <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
+                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER"/>
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".activity.SignInActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait">
-        </activity>
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name=".activity.ReuseActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".activity.DownPaymentActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.PayBillActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.DetailActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".activity.SettingsActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.AlterCityActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden"/>
+            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
             android:name=".activity.CheckCommentActivity"
-            android:screenOrientation="portrait"/>
-        <!--查看评论-->
-        <activity android:name=".activity.CheckCommentsActivity"
+            android:screenOrientation="portrait" />
+        <!-- 查看评论 -->
+        <activity
+            android:name=".activity.CheckCommentsActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnspecified|adjustPan"/>
+            android:windowSoftInputMode="stateUnspecified|adjustPan" />
         <activity
             android:name=".activity.LargeImageActivity"
             android:screenOrientation="portrait"
-            android:theme="@style/Translucence"/>
+            android:theme="@style/Translucence" />
         <activity
             android:name=".activity.WaiterPhotoActivity"
-            android:screenOrientation="portrait"/>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ServiceActivity"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateUnspecified|adjustPan"/>
+            android:windowSoftInputMode="stateUnspecified|adjustPan" />
         <!-- 支付宝支付 -->
         <activity
             android:name="com.alipay.sdk.app.H5PayActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind">
-        </activity>
+            android:screenOrientation="behind"></activity>
         <activity
             android:name="com.alipay.sdk.auth.AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
-            android:screenOrientation="behind">
-        </activity>
+            android:screenOrientation="behind"></activity>
 
         <!-- 微信分享和支付 -->
         <activity
@@ -140,19 +139,20 @@
             android:screenOrientation="portrait"
             android:theme="@style/Translucence">
             <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
+                <action android:name="android.intent.action.VIEW" />
 
-                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.DEFAULT" />
 
-                <data android:scheme="wx424026eca78d03e6"/>
+                <data android:scheme="wx424026eca78d03e6" />
             </intent-filter>
         </activity>
         <activity
             android:name=".wxapi.WXPayEntryActivity"
             android:exported="true"
             android:launchMode="singleTop"
-            android:theme="@style/Translucence"/>
+            android:theme="@style/Translucence" />
         <!-- qq分享 -->
+
 
         <!-- QQ登陆 -->
         <activity
@@ -168,12 +168,6 @@
                 <data android:scheme="tencent1105021586" />
             </intent-filter>
         </activity>
-
-
-
-
-
-
         <activity
             android:name="com.tencent.connect.common.AssistActivity"
             android:configChanges="orientation|keyboardHidden|screenSize"
@@ -183,24 +177,23 @@
         <service
             android:name="com.baidu.location.f"
             android:enabled="true"
-            android:process=":remote">
-        </service>
+            android:process=":remote"></service>
 
         <meta-data
             android:name="com.baidu.lbsapi.API_KEY"
-            android:value="H3sGc7uvHsmwwLbEnXpDSDmXeNqVENkL"/>
+            android:value="H3sGc7uvHsmwwLbEnXpDSDmXeNqVENkL" />
         <!-- Tinker热修复 -->
         <service
             android:name=".service.TinkerResultService"
-            android:exported="false"/>
+            android:exported="false" />
 
-        <activity android:name=".activity.DiscoverImageActivity">
-        </activity>
-        <activity android:name=".activity.ListOrderActivity"/>
-        <activity android:name=".activity.DetailsOrderActivity"/>
+        <activity android:name=".activity.DiscoverImageActivity"></activity>
+        <activity android:name=".activity.ListOrderActivity" />
+        <activity android:name=".activity.DetailsOrderActivity" />
         <activity
             android:name=".activity.ShareActivity"
-            android:screenOrientation="sensor">
+            android:screenOrientation="sensor"
+            android:theme="@android:style/Theme.Translucent.NoTitleBar">
 
             <!-- 新浪微博请求监听 -->
             <intent-filter>
@@ -224,9 +217,9 @@
 
         <service
             android:name="com.sina.weibo.sdk.net.DownloadService"
-            android:exported="false" >
-        </service>
+            android:exported="false"></service>
 
+        <activity android:name=".activity.PublicationEvaluationActivity"></activity>
     </application>
 
 </manifest>
