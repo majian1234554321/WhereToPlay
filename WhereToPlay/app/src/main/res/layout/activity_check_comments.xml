@@ -221,7 +221,7 @@
                 />
             <TextView
                 android:id="@+id/bt_comments_one"
-                android:layout_width="83dp"
+                android:layout_width="@dimen/height_83"
                 android:layout_height="@dimen/height_30"
                 android:background="@drawable/shape_reserve_info_checked"
                 android:layout_marginStart="@dimen/margin_15"
@@ -239,7 +239,7 @@
                 />
             <TextView
                 android:id="@+id/bt_comments_two"
-                android:layout_width="83dp"
+                android:layout_width="@dimen/height_83"
                 android:layout_height="@dimen/height_30"
                 android:background="@drawable/shape_pink"
                 android:text="满意"
@@ -255,7 +255,7 @@
                 />
             <TextView
                 android:id="@+id/bt_comments_three"
-                android:layout_width="83dp"
+                android:layout_width="@dimen/height_83"
                 android:layout_height="@dimen/height_30"
                 android:background="@drawable/selector_red_gray"
                 android:layout_marginTop="@dimen/margin_10"
@@ -271,7 +271,7 @@
                 />
             <TextView
                 android:id="@+id/bt_comments_four"
-                android:layout_width="83dp"
+                android:layout_width="@dimen/height_83"
                 android:layout_height="@dimen/height_30"
                 android:background="@drawable/shape_pink"
                 android:layout_marginEnd="@dimen/margin_15"

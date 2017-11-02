@@ -97,7 +97,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
         //自定义的recyclerview分割线
         RecycleViewDivider divider1 = new RecycleViewDivider(this, LinearLayoutManager.HORIZONTAL, UIUtils.dp2Px(1), UIUtils.getColor(R.color.btn_pressed));
         mRc.addItemDecoration(divider1);
-        requestComments(1, 1, 2);
+        requestComments(1, 1, 5);
     }
 
     private void setListener() {
