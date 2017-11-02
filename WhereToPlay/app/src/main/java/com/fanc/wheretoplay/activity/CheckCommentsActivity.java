@@ -89,6 +89,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
         mTopMenu.setTitleColor(getResources().getColor(R.color.white));
         mTopMenu.setTitle(R.string.topmenu_comment);
         mTopMenu.setLeftIcon(R.drawable.left);
+        clickPress(R.id.bt_comments_one);
         //评论列表
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
