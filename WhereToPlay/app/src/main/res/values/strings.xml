@@ -14,6 +14,7 @@
     <string name="empty">清空</string>
     <string name="all_comment">查看全部评价</string>
     <string name="no_data">没有数据</string>
+    <string name="city_select">请选择</string>
 
     <!--上拉加载，下拉刷新-->
     <string name="head">这里是HeadView</string>
@@ -259,7 +260,7 @@
     <string name="hint_carport">请输入车数</string>
     <string name="hint_number_of_people">请输入人数</string>
     <string name="hint_input">请输入</string>
-    <string name="cellphone">手机</string>
+    <string name="cellphone">手机号</string>
     <string name="room_category">房型</string>
     <string name="choose_room_category">选择房型</string>
     <string name="please_choose_room_category">选择房型</string>

@@ -137,4 +137,5 @@
 
 -dontwarn cn.jiguang.**
 -keep class cn.jiguang.** { *; }
+-keep class com.sina.weibo.sdk.** { *; }
 

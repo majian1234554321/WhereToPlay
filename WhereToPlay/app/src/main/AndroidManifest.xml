@@ -215,6 +215,18 @@
             android:exported="false"
             android:windowSoftInputMode="adjustResize" />
 
+        <meta-data
+            android:name="WEIBO_APPKEY"
+            android:value="2045436852" />
+        <meta-data
+            android:name="WEIBO_CHANNEL"
+            android:value="weibo" />
+
+        <service
+            android:name="com.sina.weibo.sdk.net.DownloadService"
+            android:exported="false" >
+        </service>
+
     </application>
 
 </manifest>
