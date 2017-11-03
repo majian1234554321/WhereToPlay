@@ -34,8 +34,10 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        StringBuilder stringBuilder = new StringBuilder();
+        holder.mTvDrinkPrice.setText(stringBuilder.append(mContext.getResources().getString(R.string.drinks_price_1)).append(mHouseNews.get(position).getPrice()).append( mContext.getResources().getString(R.string.drinks_price_2)));
         holder.mTvDrinkName.setText(mHouseNews.get(position).getName());
-        holder.mTvDrinkPrice.setText(mHouseNews.get(position).getPrice());
+//        holder.mTvDrinkAction.setText(mHouseNews.get(position).);
     }
 
     @Override
@@ -51,6 +53,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
         private  ItemDrinkBinding binding;
         private TextView mTvDrinkName;
         private TextView mTvDrinkPrice;
+        private TextView mTvDrinkAction;
 
 
         public ViewHolder(ViewDataBinding binding) {
@@ -62,6 +65,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
         private void initViews() {
             mTvDrinkName = binding.tvDrinksName;
             mTvDrinkPrice = binding.tvDrinksPrice;
+            mTvDrinkAction = binding.tvDrinksAction;
         }
     }
 }

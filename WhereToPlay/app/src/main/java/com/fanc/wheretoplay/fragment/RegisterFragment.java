@@ -118,8 +118,11 @@ public class RegisterFragment extends BaseFragment {
             List<CityResource.Province> provinces = getProvinceList();
             for (CityResource.Province province:provinces){
                 for (CityResource.City city:province.getChild()){
-                    if (LocationUtils.location.getCity().contains(city.getName())){
+                    if (LocationUtils.location.getCity() != null && LocationUtils.location.getCity().contains(city.getName())) {
                         this.mCity = city;
+                    } else {
+                        //没有数据时设置文字为”请选择“
+                        mTvRegisterCity.setText(getResources().getString(R.string.city_select));
                     }
                 }
             }

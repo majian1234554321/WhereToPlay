@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
@@ -82,6 +83,8 @@ public class BriefFragment extends BaseFragment {
         if (briefUrl == null) {
             return;
         }
+        mWv.getSettings().setJavaScriptEnabled(true);
+        mWv.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
         mWv.loadUrl(briefUrl);
         mWv.setWebViewClient(new WebViewClient() {
             @Override

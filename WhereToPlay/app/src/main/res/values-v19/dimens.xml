@@ -10,6 +10,7 @@
     <dimen name="textsize_10">10sp</dimen>
     <dimen name="textsize_11">11sp</dimen>
     <dimen name="textsize_12">12sp</dimen>
+    <dimen name="textsize_13">13sp</dimen>
     <dimen name="textsize_28">28sp</dimen>
     <dimen name="textsize_levelsmall">12sp</dimen>
     <dimen name="normal_textsize">14sp</dimen>
@@ -137,6 +138,7 @@
     <dimen name="margin_60">60dp</dimen>
     <dimen name="margin_65">65dp</dimen>
     <dimen name="margin_80">80dp</dimen>
+    <dimen name="margin_90">90dp</dimen>
     <dimen name="margin_92">92dp</dimen>
     <dimen name="margin_94">94dp</dimen>
     <dimen name="margin_95">95dp</dimen>
@@ -188,6 +190,7 @@
     <dimen name="width_57">57dp</dimen>
     <dimen name="width_60">60dp</dimen>
     <dimen name="width_70">70dp</dimen>
+    <dimen name="width_75">75dp</dimen>
     <dimen name="width_80">80dp</dimen>
     <dimen name="width_82">82dp</dimen>
     <dimen name="width_90">90dp</dimen>

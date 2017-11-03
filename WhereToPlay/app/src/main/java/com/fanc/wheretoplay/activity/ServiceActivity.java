@@ -60,7 +60,7 @@ public class ServiceActivity extends BaseActivity {
     private void init() {
         mTmService.setLeftIcon(R.drawable.left);
         mTmService.setTitle(getIntent().getStringExtra(Constants.STORE_NAME) + "客服");
-
+        mTmService.setTitleColor(getResources().getColor(R.color.white));
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRvService.setLayoutManager(linearLayoutManager);

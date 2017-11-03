@@ -147,6 +147,7 @@ public class MineInfoFragment extends BaseFragment {
     private void init() {
         mTmMineInfo.setLeftIcon(R.drawable.left);
         mTmMineInfo.setTitle(R.string.mine_info);
+        mTmMineInfo.setTitleColor(getResources().getColor(R.color.white));
         mineInfoBinding.setClick(this);
         loadCityList();
     }

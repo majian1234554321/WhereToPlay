@@ -23,29 +23,29 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_10"
-            android:background="@color/down_payment_divider"/>
+            android:background="@color/white"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/bg"
+            android:background="@color/white"
             android:gravity="center_vertical"
             android:paddingBottom="@dimen/padding_5"
             android:paddingLeft="@dimen/padding_15"
             android:paddingTop="@dimen/height_10"
             android:text="@string/earnest"
-            android:textColor="@color/text_down_payment_and_way"
+            android:textColor="@color/text_black_sec"
             android:textSize="@dimen/normal_textsize"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_height"
-            android:background="@color/down_payment_divider"/>
+            android:background="@color/pay_reserve_list_divider_white"/>
 
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/bg"
+            android:background="@color/white"
             android:padding="@dimen/padding_15">
 
             <TextView
@@ -53,7 +53,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{order.store_name}"
-                android:textColor="@color/white"
+                android:textColor="@color/text_black_sec"
                 android:textSize="@dimen/textsize_level2"/>
 
             <TextView
@@ -63,7 +63,7 @@
                 android:layout_below="@+id/tv_down_payment_title"
                 android:layout_marginTop="@dimen/margin_5"
                 android:text="@string/pay_reserve_time"
-                android:textColor="@color/pay_reserve_list_text"
+                android:textColor="@color/text_black_sec"
                 android:textSize="@dimen/textsize_levelsmall"/>
 
             <TextView
@@ -74,7 +74,7 @@
                 android:layout_marginLeft="@dimen/margin_5"
                 android:layout_toRightOf="@+id/tv_down_payment_time_1"
                 android:text='@{DateFormatUtil.getYYYYMMDDHHmm(order.arrival_time)+@string/before}'
-                android:textColor="@color/pay_reserve_list_text"
+                android:textColor="@color/text_black_sec"
                 android:textSize="@dimen/textsize_levelsmall"/>
 
             <TextView
@@ -84,7 +84,7 @@
                 android:layout_below="@+id/tv_down_payment_time_1"
                 android:layout_marginTop="@dimen/margin_5"
                 android:text="@string/pay_reserve_room_category"
-                android:textColor="@color/pay_reserve_list_text"
+                android:textColor="@color/text_black_sec"
                 android:textSize="@dimen/textsize_levelsmall"/>
 
             <TextView
@@ -95,7 +95,7 @@
                 android:layout_marginLeft="@dimen/margin_5"
                 android:layout_toRightOf="@+id/tv_down_payment_room_category"
                 android:text="@{order.room_type}"
-                android:textColor="@color/pay_reserve_list_text"
+                android:textColor="@color/text_black_sec"
                 android:textSize="@dimen/textsize_levelsmall"/>
 
             <TextView
@@ -105,7 +105,7 @@
                 android:layout_below="@+id/tv_down_payment_room_category"
                 android:layout_marginTop="@dimen/margin_5"
                 android:text="@string/down_payment_sum_1"
-                android:textColor="@color/pay_reserve_list_text"
+                android:textColor="@color/text_black_sec"
                 android:textSize="@dimen/textsize_levelsmall"/>
 
             <TextView
@@ -116,37 +116,37 @@
                 android:layout_marginLeft="@dimen/margin_5"
                 android:layout_toRightOf="@+id/tv_down_payment_1"
                 android:text='@{@string/currency_char+order.prepay}'
-                android:textColor="@color/text_and_buttor_orange"
+                android:textColor="@color/text_red"
                 android:textSize="@dimen/textsize_levelsmall"/>
         </RelativeLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_10"
-            android:background="@color/down_payment_divider"/>
+            android:background="@color/pay_reserve_list_divider_white"/>
 
         <TextView
             android:id="@+id/tv_down_payment_pay_way"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/bg"
+            android:background="@color/white"
             android:paddingBottom="@dimen/padding_10"
             android:paddingLeft="@dimen/padding_20"
             android:paddingTop="@dimen/padding_15"
             android:text="@string/pay_way"
-            android:textColor="@color/text_down_payment_and_way"
+            android:textColor="@color/text_black_sec"
             android:textSize="@dimen/normal_textsize"/>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_height"
-            android:background="@color/down_payment_divider"/>
+            android:background="@color/pay_reserve_list_divider_white"/>
 
         <RelativeLayout
             android:id="@+id/rl_down_payment_pay_way"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_150"
-            android:background="@color/bg">
+            android:background="@color/white">
 
             <LinearLayout
                 android:id="@+id/ll_down_payment_weixin"
@@ -166,7 +166,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/pay_by_weixin"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_black_sec"
                     android:textSize="@dimen/normal_textsize"/>
 
             </LinearLayout>
@@ -190,7 +190,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/pay_by_ali"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_black_sec"
                     android:textSize="@dimen/normal_textsize"/>
 
             </LinearLayout>
@@ -214,7 +214,7 @@
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical"
                     android:text="@string/pay_by_balance"
-                    android:textColor="@color/white"
+                    android:textColor="@color/text_black_sec"
                     android:textSize="@dimen/normal_textsize"/>
 
             </LinearLayout>
@@ -254,26 +254,26 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
                 android:layout_alignBottom="@+id/ll_down_payment_weixin"
-                android:background="@color/down_payment_divider"/>
+                android:background="@color/pay_reserve_list_divider_white"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
                 android:layout_alignBottom="@+id/ll_down_payment_ali"
-                android:background="@color/down_payment_divider"/>
+                android:background="@color/pay_reserve_list_divider_white"/>
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
                 android:layout_alignBottom="@+id/ll_down_payment_balance"
-                android:background="@color/down_payment_divider"/>
+                android:background="@color/pay_reserve_list_divider_white"/>
         </RelativeLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_0"
             android:layout_weight="1"
-            android:background="@color/bg"
+            android:background="@color/white"
             android:orientation="vertical">
 
             <Button
@@ -286,7 +286,7 @@
                 android:background="@drawable/shape_btn_orange"
                 android:onClick="onViewClick"
                 android:text="@string/pay"
-                android:textColor="@color/black"
+                android:textColor="@color/text_white"
                 android:textSize="@dimen/textsize_level2"/>
         </LinearLayout>
 
