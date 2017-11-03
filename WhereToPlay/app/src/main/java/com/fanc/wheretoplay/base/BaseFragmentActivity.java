@@ -31,6 +31,7 @@ import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
+import com.fanc.wheretoplay.view.PullToRefreshLayout;
 
 import java.util.Arrays;
 
@@ -49,6 +50,9 @@ public class BaseFragmentActivity extends FragmentActivity {
     public SPUtils mSPUtils;
     public com.fanc.wheretoplay.view.AlertDialog mAlertDialog;
     private Receiver receiver;
+    //刷新
+    public PullToRefreshLayout mPtrl;
+    public boolean isPullDown, isPullUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -242,6 +246,38 @@ public class BaseFragmentActivity extends FragmentActivity {
             if (mAlertDialog == null) {
                 Log.d("llm", "收到广播");
                 alertReSignIn();
+            }
+        }
+    }
+
+    /**
+     * 刷新加载失败
+     */
+    public void refreshOrLoadFail() {
+        if (mPtrl != null) {
+            if (isPullDown) {
+                isPullDown = false;
+                mPtrl.refreshFinish(PullToRefreshLayout.FAIL);
+            }
+            if (isPullUp) {
+                isPullUp = false;
+                mPtrl.loadmoreFinish(PullToRefreshLayout.FAIL);
+            }
+        }
+    }
+
+    /**
+     * 刷新/加载成功
+     */
+    public void refreshAndLoadMoreSuccess() {
+        if (mPtrl != null) {
+            if (isPullDown) {
+                mPtrl.refreshFinish(PullToRefreshLayout.SUCCEED);
+                isPullDown = false;
+            }
+            if (isPullUp) {
+                mPtrl.loadmoreFinish(PullToRefreshLayout.SUCCEED);
+                isPullUp = false;
             }
         }
     }

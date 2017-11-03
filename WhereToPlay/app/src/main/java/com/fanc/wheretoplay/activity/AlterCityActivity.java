@@ -283,7 +283,7 @@ public class AlterCityActivity extends BaseActivity {
                     mCityAdapter.setOnCityClickListener(new CityAdapter.OnCityClickListener() {
                         @Override
                         public void onCityClick(CityResource.City city) {
-                            ToastUtils.showShortToast(mContext, city.getName());
+//                            ToastUtils.showShortToast(mContext, city.getName());
                             Intent intent = new Intent(Constants.ACTION_CITY_SELECTED);
                             intent.putExtra(Constants.CITY, city);
                             LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);

@@ -74,7 +74,7 @@ public class ReserveInfoFragment extends BaseFragment {
     RadioButton mRbReserveInfoRepay;
     RadioButton mRbReserveInfoCredit;
     TextView mTvReserveInfoTime;
-    TextView mTvReserveInfoWaiterInfo;
+//    TextView mTvReserveInfoWaiterInfo;
     EditText mEtReserveInfoCarport;
     EditText mEtReserveInfoNumberOfPeople;
     EditText mEtReserveInfoRemark;
@@ -122,7 +122,7 @@ public class ReserveInfoFragment extends BaseFragment {
         mRbReserveInfoRepay = reserveInfoBinding.rbReserveInfoPrepay;
         mRbReserveInfoCredit = reserveInfoBinding.rbReserveInfoCredit;
         mTvReserveInfoTime = reserveInfoBinding.tvReserveInfoTime;
-        mTvReserveInfoWaiterInfo = reserveInfoBinding.tvReserveInfoWaiterInfo;
+//        mTvReserveInfoWaiterInfo = reserveInfoBinding.tvReserveInfoWaiterInfo;
         mEtReserveInfoCarport = reserveInfoBinding.etReserveInfoCarport;
         mEtReserveInfoNumberOfPeople = reserveInfoBinding.etReserveInfoNumberOfPeople;
         mEtReserveInfoRemark = reserveInfoBinding.etReserveInfoRemark;
@@ -186,13 +186,13 @@ public class ReserveInfoFragment extends BaseFragment {
             case R.id.iv_reserve_info_date:
                 showReserveDateTime();
                 break;
-            case R.id.tv_reserve_info_waiter_info:
-                Intent intent = new Intent(mContext, DetailActivity.class);
-                intent.putExtra(Constants.PAGE, Constants.WAITER_INFO);
-                intent.putExtra(Constants.STORE_ID, storeId);
-                intent.putExtra(Constants.IS_CHOOSE, true);
-                startActivity(intent);
-                break;
+//            case R.id.tv_reserve_info_waiter_info:
+//                Intent intent = new Intent(mContext, DetailActivity.class);
+//                intent.putExtra(Constants.PAGE, Constants.WAITER_INFO);
+//                intent.putExtra(Constants.STORE_ID, storeId);
+//                intent.putExtra(Constants.IS_CHOOSE, true);
+//                startActivity(intent);
+//                break;
             case R.id.btn_reserve_info_pay:
                 goToPay();
                 break;
@@ -437,7 +437,7 @@ public class ReserveInfoFragment extends BaseFragment {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (Constants.ACTION_WAITER_PHOTO_CONFIRM.equals(action)) {
-                mTvReserveInfoWaiterInfo.setText(intent.getStringExtra(Constants.WAITER_NAME));
+//                mTvReserveInfoWaiterInfo.setText(intent.getStringExtra(Constants.WAITER_NAME));
                 waiterId = intent.getStringExtra(Constants.WAITER_ID);
             } else if (Constants.ACTION_PAY_SUCCESS.equals(action) || Constants.ACTION_WXPAY_SUCCESS.equals(action)) {
                 mContext.finish();
@@ -453,7 +453,7 @@ public class ReserveInfoFragment extends BaseFragment {
 
     /**
      * 构造下单参数
-     *
+     *判断传入参数的正确性
      * @param storeId
      * @param nickname
      * @param mobile

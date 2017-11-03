@@ -34,6 +34,9 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
 
     private List<String> mPictureList;
     Context mContext;
+    private DisplayMetrics dm;
+    private RelativeLayout.LayoutParams lp;
+    private ItemCheckCommentsCardviewBinding binding;
 
     public CardViewAdapter(Context mContext, List<String> picture) {
         this.mContext = mContext;
@@ -42,19 +45,20 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        ItemCheckCommentsCardviewBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.item_check_comments_cardview, parent, false);
+        binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.item_check_comments_cardview, parent, false);
         ViewHolder holder = new ViewHolder(binding);
         //获取屏幕宽度,再减去一行中的空白部分最后除于一行的条目数就等于一个条目的宽高
         WindowManager windowManager = ((Activity) mContext).getWindowManager();
-        DisplayMetrics dm = new DisplayMetrics();
+        dm = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(dm);
-        RelativeLayout.LayoutParams lp = new RelativeLayout.LayoutParams((dm.widthPixels - UIUtils.dp2Px(45)) / 4, (dm.widthPixels - UIUtils.dp2Px(45)) / 4);
-        binding.cl.setLayoutParams(lp);
+        lp = new RelativeLayout.LayoutParams((dm.widthPixels - UIUtils.dp2Px(45)) / 4, (dm.widthPixels - UIUtils.dp2Px(45)) / 4);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        binding.cl.setLayoutParams(lp);
+//        holder.mIvCardView.setLayoutParams(lp);
         Glide.with(mContext).load(Network.IMAGE + mPictureList.get(position)).placeholder(R.drawable.default_rect).into(holder.mIvCardView);
         //点击事件
         holder.mIvCardView.setOnClickListener(new View.OnClickListener() {

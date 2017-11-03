@@ -16,14 +16,14 @@
             android:layout_height="wrap_content"
             android:layout_above="@+id/ll_service_menu"
             android:layout_below="@+id/tm_service"
-            android:background="@color/bg"/>
+            android:background="@color/white"/>
 
         <LinearLayout
             android:id="@+id/ll_service_menu"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_50"
             android:layout_alignParentBottom="true"
-            android:background="@color/my_bg"
+            android:background="@color/text_red"
             android:orientation="horizontal">
 
             <ImageButton

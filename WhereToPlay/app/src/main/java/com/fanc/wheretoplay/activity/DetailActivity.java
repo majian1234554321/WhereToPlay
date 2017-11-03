@@ -108,10 +108,10 @@ public class DetailActivity extends BaseFragmentActivity {
             case Constants.ABOUT_US:   //关于我们
                 initFragment(new AboutUsFragment());
                 break;
-            case Constants.WAITER_INFO:   //
-                initFragment(new WaiterInfoFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID))
-                        .setSelect(intent.getBooleanExtra(Constants.IS_CHOOSE, false)));
-                break;
+//            case Constants.WAITER_INFO:   //
+//                initFragment(new WaiterInfoFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID))
+//                        .setSelect(intent.getBooleanExtra(Constants.IS_CHOOSE, false)));
+//                break;
 //            case Constants.WAITER_PHOTO:
 //                initFragment(new WaiterPhotoFragment().setBundle(intent.getExtras()), Constants.WAITER_PHOTO);
 //                break;

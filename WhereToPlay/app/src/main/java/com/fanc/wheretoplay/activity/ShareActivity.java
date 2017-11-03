@@ -25,15 +25,16 @@ import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.Constants_sina;
 import com.fanc.wheretoplay.util.ImageUtils;
 import com.fanc.wheretoplay.util.LogUtils;
+import com.sina.weibo.sdk.WbSdk;
 import com.sina.weibo.sdk.api.ImageObject;
 import com.sina.weibo.sdk.api.TextObject;
 import com.sina.weibo.sdk.api.WeiboMultiMessage;
-import com.sina.weibo.sdk.api.share.BaseResponse;
-import com.sina.weibo.sdk.api.share.IWeiboHandler;
-import com.sina.weibo.sdk.api.share.IWeiboShareAPI;
-import com.sina.weibo.sdk.api.share.SendMultiMessageToWeiboRequest;
-import com.sina.weibo.sdk.api.share.WeiboShareSDK;
+
+
+import com.sina.weibo.sdk.auth.AuthInfo;
 import com.sina.weibo.sdk.constant.WBConstants;
+import com.sina.weibo.sdk.share.WbShareCallback;
+import com.sina.weibo.sdk.share.WbShareHandler;
 import com.tencent.connect.share.QQShare;
 import com.tencent.connect.share.QzoneShare;
 import com.tencent.mm.sdk.constants.ConstantsAPI;
@@ -68,7 +69,7 @@ import butterknife.OnClick;
 
 
 
-public class ShareActivity extends BaseActivity implements IWeiboHandler.Response, IWXAPIEventHandler {
+public class ShareActivity extends BaseActivity implements  IWXAPIEventHandler, WbShareCallback {
     @BindView(R.id.btn_share_wechat)
     TextView btnShareWechat;
     @BindView(R.id.btn_share_pyq)
@@ -84,7 +85,7 @@ public class ShareActivity extends BaseActivity implements IWeiboHandler.Respons
     @BindView(R.id.pop_layout)
     LinearLayout popLayout;
     private Tencent mTencent;
-    private IWeiboShareAPI weiboAPI;
+
     private IWXAPI api;
     private Bitmap bmp;
     private String url = "www.baidu.com";
@@ -95,8 +96,7 @@ public class ShareActivity extends BaseActivity implements IWeiboHandler.Respons
     private String shareUrl = "www.baidu.com";
     private String imgUrl = "www.baidushare.com";
     private Bitmap thumb;
-
-
+    private WbShareHandler shareHandler;
 
 
     /**
@@ -108,17 +108,18 @@ public class ShareActivity extends BaseActivity implements IWeiboHandler.Respons
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_dialog_share);
+        ButterKnife.bind(this);
         // 注册应用到微信
         String APP_ID = "wx424026eca78d03e6";
         // 注册应用到QQ
         api = WXAPIFactory.createWXAPI(this, APP_ID, true);
         mTencent = Tencent.createInstance(Constants.QQAPPID, this);
         // 注册应用到新浪微博
-        weiboAPI = WeiboShareSDK.createWeiboAPI(this, Constants_sina.APP_KEY);
-        weiboAPI.registerApp();
 
+        WbSdk.install(this,new AuthInfo(this, Constants_sina.APP_KEY, Constants_sina.REDIRECT_URL, Constants_sina.SCOPE));
+        shareHandler = new WbShareHandler(this);
+        shareHandler.registerApp();
 
-        ButterKnife.bind(this);
 
         getWindow().getDecorView().setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -258,6 +259,29 @@ public class ShareActivity extends BaseActivity implements IWeiboHandler.Respons
 
     }
 
+    /**
+     * 创建文本消息对象。
+     * @return 文本消息对象。
+     */
+    private TextObject getTextObj() {
+        TextObject textObject = new TextObject();
+        textObject.text = getSharedText();
+        textObject.title = "xxxx";
+        textObject.actionUrl = "http://www.baidu.com";
+        return textObject;
+    }
+
+    /**
+     * 获取分享的文本模板。
+     */
+    private String getSharedText() {
+
+        String text = "@大屁老师，这是一个很漂亮的小狗，朕甚是喜欢-_-!! #大屁老师#http://weibo.com/p/1005052052202067/home?from=page_100505&mod=TAB&is_all=1#place";
+
+        return text;
+    }
+
+
 
     /**
      * 分享纯图片到微博
@@ -265,18 +289,17 @@ public class ShareActivity extends BaseActivity implements IWeiboHandler.Respons
     private void shareWeiBo() {
         switch (type) {
             case 1:
-                sendMultiMessage(true, true);
+
                 break;
             case 2:
-                TextObject textObject = new TextObject();
-                textObject.text = "【乐互】" + contentTitle + " " + desc + " " + shareUrl;
+                WeiboMultiMessage weiboMessage = new WeiboMultiMessage();
+                weiboMessage.textObject = getTextObj();
+                shareHandler.shareMessage(weiboMessage, false);
 
-                WeiboMultiMessage weiboMultiMessage = new WeiboMultiMessage();
-                weiboMultiMessage.textObject = textObject;
-                SendMultiMessageToWeiboRequest request = new SendMultiMessageToWeiboRequest();
-                request.transaction = String.valueOf(System.currentTimeMillis());
-                request.multiMessage = weiboMultiMessage;
-                weiboAPI.sendRequest(this, request);
+
+
+
+
                 break;
         }
     }
@@ -346,41 +369,12 @@ public class ShareActivity extends BaseActivity implements IWeiboHandler.Respons
         setIntent(intent);
         // 当前应用唤起微博并进行分享后，需要在此调用该函数
         // 来接收微博客户端返回的数据；执行成功，返回true,并调用
-        weiboAPI.handleWeiboResponse(intent, this);
+        shareHandler.doResultIntent(intent,this);
         ShareActivity.this.setResult(100, getIntent());
     }
 
-    private void sendMultiMessage(boolean hasText, boolean hasImg) {
-        WeiboMultiMessage weiboMessage = new WeiboMultiMessage();//初始化微博的分享消息
-        if (hasText) {
-            weiboMessage.textObject = getTextObject();
-        }
-        if (hasImg) {
-            weiboMessage.imageObject = getImgObject();
-        }
-        SendMultiMessageToWeiboRequest request = new SendMultiMessageToWeiboRequest();  // 初始化第三方微博的消息请求
-        request.transaction = String.valueOf(System.currentTimeMillis());
-        request.multiMessage = weiboMessage;
-        weiboAPI.sendRequest(this, request); //发送请求消息到微博，唤起微博分享界面
-    }
 
-    /**
-     * @return
-     */
-    private ImageObject getImgObject() {
-        ImageObject imageObject = new ImageObject();
-        imageObject.imagePath = url;
-        return imageObject;
-    }
 
-    /**
-     * @return
-     */
-    private TextObject getTextObject() {
-        TextObject textObj = new TextObject();
-        textObj.text = "乐互";
-        return textObj;
-    }
 
     @Override
     public void onReq(BaseReq baseReq) {
@@ -418,6 +412,23 @@ public class ShareActivity extends BaseActivity implements IWeiboHandler.Respons
         }
     }
 
+    @Override
+    public void onWbShareSuccess() {
+        Toast.makeText(this, "分享成功", Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onWbShareFail() {
+        Toast.makeText(this,
+                "分享失败",
+                Toast.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void onWbShareCancel() {
+        Toast.makeText(this, "取消分享", Toast.LENGTH_LONG).show();
+    }
+
     private class BaseUiListener implements IUiListener {
         @Override
         public void onComplete(Object o) {
@@ -452,7 +463,7 @@ public class ShareActivity extends BaseActivity implements IWeiboHandler.Respons
             Tencent.onActivityResultData(requestCode, resultCode, data, new BaseUiListener());
     }
 
-    @Override
+/*    @Override
     public void onResponse(BaseResponse baseResponse) {
         // 接收微博客户端的请求数据
         switch (baseResponse.errCode) {
@@ -473,7 +484,7 @@ public class ShareActivity extends BaseActivity implements IWeiboHandler.Respons
                 break;
         }
 
-    }
+    }*/
 
     private String buildTransaction(final String type) {
 

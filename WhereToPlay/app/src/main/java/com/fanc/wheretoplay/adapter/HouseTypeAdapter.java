@@ -47,26 +47,23 @@ public class HouseTypeAdapter extends RecyclerView.Adapter<HouseTypeAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        switch (position) {
-            case 0:
-//                holder.mIv.setImageResource(R.drawable.item_baoxiang);
-//                break;
-            case 1:
-//                holder.mIv.setImageResource(R.drawable.item_baoxiang);
-//                break;
-            case 2:
+        switch (mRoom.get(position).getName()) {
+            case "小包":
+            case "中包":
+            case "大包":
                 holder.mIv.setImageResource(R.drawable.item_baoxiang);
                 break;
-            case 3:
-                holder.mIv.setImageResource(R.drawable.item_kazuo);
-                break;
-            case 4:
+            case "VIP包":
                 holder.mIv.setImageResource(R.drawable.item_santai);
+                break;
+            case "卡座":
+                holder.mIv.setImageResource(R.drawable.item_kazuo);
                 break;
             default:
                 break;
         }
-            holder.mTvName.setText(mRoom.get(position).getName());
+
+            holder.mTvName.setText(String.valueOf(mRoom.get(position).getName()+ mContext.getResources().getString(R.string.housetype_symbol) + mRoom.get(position).getMans()+mContext.getResources().getString(R.string.housetype_symbol2)));
             holder.mTvPrice.setText(mRoom.get(position).getMin_price());
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

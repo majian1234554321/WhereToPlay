@@ -56,7 +56,7 @@
                         android:textSize="@dimen/menu_title_size"/>
 
                     <TextView
-                        android:id="@+id/tv_mine_id"
+                        android:id="@+id/tv_mine_mobile"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignLeft="@+id/tv_mine_nickname"
@@ -70,7 +70,7 @@
                         android:id="@+id/tv_mine_integral"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/tv_mine_id"
+                        android:layout_alignBaseline="@+id/tv_mine_mobile"
                         android:layout_alignParentRight="true"
                         android:text="86分"
                         android:textColor="@color/text_white"
@@ -80,7 +80,7 @@
                         android:id="@+id/tv_mine_integral_1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignBaseline="@+id/tv_mine_id"
+                        android:layout_alignBaseline="@+id/tv_mine_mobile"
                         android:layout_toLeftOf="@+id/tv_mine_integral"
                         android:text="@string/integral_1"
                         android:textColor="@color/text_white"

@@ -55,7 +55,6 @@
             android:id="@+id/tv_drinks_action"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/drinks_action_detail"
             android:textSize="@dimen/textsize_levelmedium"
             android:textColor="@color/text_red"
             app:layout_constraintTop_toTopOf="parent"

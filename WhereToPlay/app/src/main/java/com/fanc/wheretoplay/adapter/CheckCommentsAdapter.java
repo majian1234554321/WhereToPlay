@@ -32,11 +32,12 @@ import java.util.List;
 
 public class CheckCommentsAdapter extends RecyclerView.Adapter<CheckCommentsAdapter.ViewHolder> {
     private  CheckComments mResponse;
+    private List mList;
     Context mContext;
 
-    public CheckCommentsAdapter(Activity mContext, CheckComments response) {
+    public CheckCommentsAdapter(Activity mContext, List list) {
         this.mContext = mContext;
-        this.mResponse = response;
+        this.mList = list;
     }
 
     @Override
@@ -48,21 +49,22 @@ public class CheckCommentsAdapter extends RecyclerView.Adapter<CheckCommentsAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        CheckComments.CommentListBean commentListBean = (CheckComments.CommentListBean)mList.get(position);
         //头像
-        Glide.with(mContext).load(Network.IMAGE + mResponse.getComment_list().get(position).getAvatar()).placeholder(R.drawable.default_rect).into(holder.mIvAvatar);
+        Glide.with(mContext).load(Network.IMAGE + commentListBean.getAvatar()).placeholder(R.drawable.default_rect).into(holder.mIvAvatar);
         //评论
-        holder.mTvContent.setText(mResponse.getComment_list().get(position).getComment());
+        holder.mTvContent.setText(commentListBean.getComment());
         //时间
-        holder.mTvTime.setText(DateFormatUtil.getDateFormatString(mResponse.getComment_list().get(position).getCreated_time()));
+        holder.mTvTime.setText(DateFormatUtil.getDateFormatString(commentListBean.getCreated_time()));
         //昵称
-        holder.mTvNickName.setText(mResponse.getComment_list().get(position).getNickname());
+        holder.mTvNickName.setText(commentListBean.getNickname());
         //平均分星星
-        holder.mRbComments.setRating(Float.parseFloat(mResponse.getComment_list().get(position).getAverage_comment()));
+        holder.mRbComments.setRating(Float.parseFloat(commentListBean.getAverage_comment()));
 
         //评论中的图片
-        if (mResponse.getComment_list().get(position).getPicture() != null && mResponse.getComment_list().get(position).getPicture().size() > 0) {
+        if (commentListBean.getPicture() != null && commentListBean.getPicture().size() > 0) {
             holder.mRcCardView.setVisibility(View.VISIBLE);
-            CardViewAdapter cardViewAdapter = new CardViewAdapter(mContext, mResponse.getComment_list().get(position).getPicture());
+            CardViewAdapter cardViewAdapter = new CardViewAdapter(mContext, commentListBean.getPicture());
             holder.mRcCardView.setLayoutManager(new GridLayoutManager(mContext, 4));
             //设置图片间距
             holder.mRcCardView.addItemDecoration(new GridDivider(mContext,4, UIUtils.dp2Px(5), mContext.getResources().getColor(R.color.white)));
@@ -74,7 +76,7 @@ public class CheckCommentsAdapter extends RecyclerView.Adapter<CheckCommentsAdap
 
     @Override
     public int getItemCount() {
-        return mResponse.getComment_list().size();
+        return mList.size();
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

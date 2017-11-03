@@ -101,7 +101,7 @@ public class PickerDialog {
         mDpBirthday.setLineRatio(0);
         mDpBirthday.setLineAlpha(100);
         mDpBirthday.setLineColor(mContext.getResources().getColor(R.color.gray));
-        mDpBirthday.setTextColor(mContext.getResources().getColor(R.color.text_and_buttor_orange));
+        mDpBirthday.setTextColor(mContext.getResources().getColor(R.color.text_red));
 
         setOnDateSelected();
         return this;
@@ -124,11 +124,11 @@ public class PickerDialog {
         config.setColor(mContext.getResources().getColor(R.color.gray));
         mWvProvince.setOffset(1);
         mWvProvince.setLineConfig(config);
-        mWvProvince.setTextColor(mContext.getResources().getColor(R.color.text_and_buttor_orange));
+        mWvProvince.setTextColor(mContext.getResources().getColor(R.color.text_red));
 
         mWvCity.setOffset(1);
         mWvCity.setLineConfig(config);
-        mWvCity.setTextColor(mContext.getResources().getColor(R.color.text_and_buttor_orange));
+        mWvCity.setTextColor(mContext.getResources().getColor(R.color.text_red));
 
         // 省市选择器
         setCityPickerData();

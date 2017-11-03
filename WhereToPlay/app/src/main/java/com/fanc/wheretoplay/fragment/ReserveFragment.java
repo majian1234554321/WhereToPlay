@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -287,6 +288,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
         mPtrl.setOnRefreshListener(new PullToRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
+                Log.e("wade","来到mPtrl监听中");
                 isPullDown = true;
                 page = 0;
                 size = 0;
