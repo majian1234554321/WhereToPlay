@@ -220,6 +220,9 @@
             android:exported="false"></service>
 
         <activity android:name=".activity.PublicationEvaluationActivity"></activity>
+
+        <activity android:name=".imagepink.ImageSelectorActivity"/>
+        <activity android:name=".imagepink.ClipImageActivity"/>
     </application>
 
 </manifest>

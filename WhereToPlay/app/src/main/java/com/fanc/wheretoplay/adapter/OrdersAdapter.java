@@ -54,6 +54,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
+                intent.putExtra("order_id",dataBean.list.get(position).order_id);
                 intent.putExtra("store_id",dataBean.list.get(position).store_id);
                 intent.setClass(context, DetailsOrderActivity.class);
                 fragment.startActivityForResult(intent, 1001);

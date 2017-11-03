@@ -90,10 +90,13 @@
 
 
 
-                    <!--<View
-                        android:layout_width="@dimen/line_height"
-                        android:layout_height="match_parent"
-                        android:background="@color/pay_reserve_list_divider_white"/>-->
+                    <TextView
+                        android:layout_width="match_parent"
+                       android:layout_margin="12dp"
+                        android:textColor="#999999"
+                        android:text="商家满足你的期待吗？说说它的优点和不足的地方吧"
+                        android:layout_height="wrap_content"
+                        />
 
                     <View
                         android:layout_width="wrap_content"
@@ -101,12 +104,15 @@
                         android:layout_weight="1" />
 
 
-
-
-
-
                 </LinearLayout>
                 <!--查看全部评价-->
+
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_image"
+                    android:layout_width="match_parent"
+                    android:layout_height="100dp"
+                    android:layout_marginTop="10dp" />
 
 
                 <View
@@ -135,7 +141,7 @@
 
 
                 <RelativeLayout
-                    android:paddingTop="8dp"
+                    android:padding="8dp"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
                     <CheckBox
@@ -258,9 +264,17 @@
 
 
 
-
-
-
-
+    <Button
+        android:id="@+id/btn_commit"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_40"
+        android:layout_marginBottom="@dimen/margin_50"
+        android:layout_marginLeft="@dimen/margin_15"
+        android:layout_marginRight="@dimen/margin_15"
+        android:background="@drawable/shape_btn_signin"
+        android:layout_alignParentBottom="true"
+        android:text="发布"
+        android:textColor="@color/white"
+        android:textSize="@dimen/textsize_level2"/>
 
 </RelativeLayout>

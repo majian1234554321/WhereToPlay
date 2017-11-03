@@ -19,7 +19,7 @@
            android:layout_width="match_parent"
            android:background="@color/about_us_version"
            android:id="@+id/view"
-           android:layout_marginBottom="2dp"
+
            android:layout_height="1dp"/>
 
 
@@ -90,6 +90,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_marginRight="8dp"
+                android:id="@+id/rl"
                 android:layout_marginLeft="12dp"
 
                 android:layout_height="wrap_content">
@@ -201,6 +202,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:id="@+id/tv_msn"
                     android:drawableLeft="@drawable/icon_kefu"
                   android:drawablePadding="8dp"
                     android:layout_gravity="center"
@@ -209,8 +211,8 @@
                 <View
                     android:layout_width="1dp"
                     android:layout_gravity="center"
-                    android:background="@color/about_us_version"
-                    android:layout_height="35dp"/>
+                    android:background="#999999"
+                    android:layout_height="25dp"/>
 
                 <com.fanc.wheretoplay.view.DrawableCenterLeftTextView
                     android:layout_width="match_parent"
@@ -219,7 +221,7 @@
                     android:drawablePadding="8dp"
                     android:layout_gravity="center"
                     android:drawableLeft="@drawable/icon_phone"
-
+android:id="@+id/tv_call"
                     android:text="拨打电话" />
 
             </LinearLayout>
@@ -240,7 +242,8 @@
                     android:id="@+id/tv1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="订单编号：171020888" />
+                    android:textColor="#999999"
+                    android:text="订单编号：" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -255,27 +258,30 @@
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="8dp"
                 android:id="@+id/tv2"
+                android:textColor="#999999"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="创建时间：2017-10-20 08:20:20" />
+                android:text="创建时间：" />
 
             <TextView
                 android:layout_marginLeft="16dp"
             android:layout_marginRight="12dp"
                 android:id="@+id/tv3"
+                android:textColor="#999999"
                 android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="预订时间：2017-10-20 08:20:20" />
+                android:text="预订时间：" />
 
             <TextView
                 android:layout_marginLeft="16dp"
             android:layout_marginRight="12dp"
                 android:layout_marginTop="8dp"
+                android:textColor="#999999"
                 android:id="@+id/tv4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="成交时间：2017-10-20 08:20:20" />
+                android:text="成交时间：" />
 
 
         </LinearLayout>
