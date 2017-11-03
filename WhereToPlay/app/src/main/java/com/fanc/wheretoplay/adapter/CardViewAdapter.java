@@ -2,9 +2,11 @@ package com.fanc.wheretoplay.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +18,17 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
+import com.fanc.wheretoplay.activity.CheckCommentsActivity;
+import com.fanc.wheretoplay.activity.LargeImageActivity;
 import com.fanc.wheretoplay.base.App;
 import com.fanc.wheretoplay.databinding.ItemCheckCommentsBinding;
 import com.fanc.wheretoplay.databinding.ItemCheckCommentsCardviewBinding;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.zip.Inflater;
 
@@ -37,10 +43,12 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
     private DisplayMetrics dm;
     private RelativeLayout.LayoutParams lp;
     private ItemCheckCommentsCardviewBinding binding;
+    private  ArrayList<String> imgs = new ArrayList<>();
 
     public CardViewAdapter(Context mContext, List<String> picture) {
         this.mContext = mContext;
         this.mPictureList = picture;
+
     }
 
     @Override
@@ -48,7 +56,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
         binding = DataBindingUtil.inflate(LayoutInflater.from(mContext), R.layout.item_check_comments_cardview, parent, false);
         ViewHolder holder = new ViewHolder(binding);
         //获取屏幕宽度,再减去一行中的空白部分最后除于一行的条目数就等于一个条目的宽高
-        WindowManager windowManager = ((Activity) mContext).getWindowManager();
+        WindowManager windowManager = ((CheckCommentsActivity) mContext).getWindowManager();
         dm = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(dm);
         lp = new RelativeLayout.LayoutParams((dm.widthPixels - UIUtils.dp2Px(45)) / 4, (dm.widthPixels - UIUtils.dp2Px(45)) / 4);
@@ -56,15 +64,21 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         binding.cl.setLayoutParams(lp);
 //        holder.mIvCardView.setLayoutParams(lp);
+        Log.e("wade", "onBindViewHolder: "+ holder.mIvCardView.getWidth() +"\t" + holder.mIvCardView.getHeight());
         Glide.with(mContext).load(Network.IMAGE + mPictureList.get(position)).placeholder(R.drawable.default_rect).into(holder.mIvCardView);
+        imgs.add(mPictureList.get(position));
         //点击事件
         holder.mIvCardView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ToastUtils.makePicTextShortToast(mContext,"点击了");
+                Intent intent = new Intent(mContext, LargeImageActivity.class);
+                intent.putExtra(Constants.URL, imgs);
+                intent.putExtra(Constants.POSITION, position);
+                mContext.startActivity(intent);
+
             }
         });
     }

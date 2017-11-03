@@ -4,6 +4,7 @@ import android.databinding.BaseObservable;
 
 import com.fanc.wheretoplay.base.BaseModel;
 
+import java.io.Serializable;
 import java.util.List;
 
 /**
@@ -110,7 +111,7 @@ public class CheckComments extends BaseModel {
         this.comment_list = comment_list;
     }
 
-    public static class CommentListBean extends BaseObservable {
+    public static class CommentListBean extends BaseObservable implements Serializable {
         /**
          * id : 1
          * nickname : hoye
