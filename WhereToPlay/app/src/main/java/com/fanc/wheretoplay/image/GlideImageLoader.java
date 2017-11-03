@@ -4,6 +4,7 @@ import android.content.Context;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.youth.banner.loader.ImageLoader;
 
@@ -12,6 +13,18 @@ import com.youth.banner.loader.ImageLoader;
  */
 
 public class GlideImageLoader extends ImageLoader {
+
+
+
+    public static void display(Context context, ImageView imageView, String url) {
+        if(imageView == null) {
+            throw new IllegalArgumentException("argument error");
+        }
+        Glide.with(context).load(url).error(R.mipmap.ic_launcher)
+                .into(imageView);
+    }
+
+
     @Override
     public void displayImage(Context context, Object path, ImageView imageView) {
         /**

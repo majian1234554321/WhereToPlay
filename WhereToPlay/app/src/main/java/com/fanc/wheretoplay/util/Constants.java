@@ -18,6 +18,8 @@ public interface Constants {
     String WX_APP_SECRET = "f41673f89c694467745d16b81a13f212";
     String QQ_APP_ID = "1106322444";
     String QQ_APP_KEY = "XiKU9RCVa0SPvNTA";
+
+
     /**
      * constants
      */

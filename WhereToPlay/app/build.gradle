@@ -2,23 +2,6 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.jakewharton.butterknife'
 android {
 
-
-    signingConfigs {
-        config {
-//            try {
-//                keyAlias 'andoriddebugkey'
-//                keyPassword 'android'
-//                storeFile file('F:/keyStore/debug.keystore')
-//                storePassword 'android'
-//            } catch (ex) {
-//                throw new InvalidUserDataException(ex.toString())
-//            }
-            keyAlias 'ktv_key'
-            keyPassword 'adminhpzl'
-            storeFile file('D:/keystore/hpzl_keystore')
-            storePassword 'adminhpzl'
-        }
-    }
     compileSdkVersion 27
     buildToolsVersion '27.0.0'
     //recommend
@@ -40,7 +23,7 @@ android {
         }
         ndk {
             //选择要添加的对应cpu类型的.so库。
-            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'x86_64'
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86', 'x86_64','x86', 'x86_64', 'mips', 'mips64'
             // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
         }
 
@@ -74,11 +57,11 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.config
+
         }
         debug {
             debuggable true
-            signingConfig signingConfigs.config
+
         }
     }
     dataBinding {
@@ -123,6 +106,12 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.8.1'
     testCompile 'junit:junit:4.12'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'io.reactivex:rxjava:1.2.0'
+    compile 'com.artemzin.rxjava:proguard-rules:1.2.0.0'
 }
 
 //def gitSha() {

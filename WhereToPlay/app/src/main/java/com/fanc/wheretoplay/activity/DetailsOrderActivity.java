@@ -91,6 +91,8 @@ public class DetailsOrderActivity extends BaseActivity {
         oi9.setTv_right("信用预订");
         oi10.setTv_right("暂无备注");
 
+      String store_idValue =   getIntent().getStringExtra("store_id");
+
     }
 
     @OnClick({R.id.tv_pay, R.id.tv_release, R.id.tv_cancel})

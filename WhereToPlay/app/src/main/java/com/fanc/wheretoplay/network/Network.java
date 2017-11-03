@@ -1,5 +1,14 @@
 package com.fanc.wheretoplay.network;
 
+import com.fanc.wheretoplay.datamodel.BookListModel;
+
+import okhttp3.MultipartBody;
+import retrofit2.http.Multipart;
+import retrofit2.http.POST;
+import retrofit2.http.Part;
+import com.fanc.wheretoplay.rx.BaseResponseModel;
+import rx.Observable;
+
 /**
  * Created by Administrator on 2017/6/29.
  */
@@ -93,6 +102,8 @@ public interface Network {
         String USER_IS_DISPLAY = USER + "User/is_display";// 信誉预订是否显示
         String USER_WAITING = USER + "User/waiting";// 下单成功
         String USER_NEW_ORDERLIST = USER + "User/new_orderList";// 订单新接口
+
+
     }
 
     interface Param {
@@ -158,6 +169,18 @@ public interface Network {
         String FEE = "fee";//不参与优惠的金额
         String PAGEINDEX = "pageindex";   // 当前页码
         String PAGESIZE = "pagesize";   // 当前显示的评论用户个数
+    }
+
+
+    interface  LH_API {
+
+        //登录
+        @Multipart
+        @POST("User/bookList")
+        Observable<BaseResponseModel<BookListModel.ContentBean>> bookList(@Part MultipartBody.Part file, @Part MultipartBody.Part fileB, @Part MultipartBody.Part filec);
+
+
+
     }
 
 }
