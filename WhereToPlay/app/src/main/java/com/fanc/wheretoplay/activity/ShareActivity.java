@@ -415,6 +415,7 @@ public class ShareActivity extends BaseActivity implements  IWXAPIEventHandler, 
     @Override
     public void onWbShareSuccess() {
         Toast.makeText(this, "分享成功", Toast.LENGTH_LONG).show();
+        this.finish();
     }
 
     @Override
@@ -422,11 +423,13 @@ public class ShareActivity extends BaseActivity implements  IWXAPIEventHandler, 
         Toast.makeText(this,
                 "分享失败",
                 Toast.LENGTH_LONG).show();
+        this.finish();
     }
 
     @Override
     public void onWbShareCancel() {
         Toast.makeText(this, "取消分享", Toast.LENGTH_LONG).show();
+        this.finish();
     }
 
     private class BaseUiListener implements IUiListener {

@@ -49,10 +49,10 @@ public class OrderBookFragment extends BaseFragment implements PullToRefreshLayo
         lm.setOrientation(LinearLayoutManager.VERTICAL);
         mRvOrder.setLayoutManager(lm);
         List orders = new ArrayList<>();
-        OrdersAdapter orderAdapter = new OrdersAdapter(mContext,this);
+       // OrdersAdapter orderAdapter = new OrdersAdapter(mContext,this);
         mRvOrder.addItemDecoration(new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL,
                 UIUtils.dp2Px(1), mContext.getResources().getColor(R.color.pay_reserve_list_divider_white)));
-         mRvOrder.setAdapter(orderAdapter);
+       //  mRvOrder.setAdapter(orderAdapter);
         mRvOrder.setItemAnimator(new DefaultItemAnimator());
 
         mRvOrder.setCanPullDown(true);

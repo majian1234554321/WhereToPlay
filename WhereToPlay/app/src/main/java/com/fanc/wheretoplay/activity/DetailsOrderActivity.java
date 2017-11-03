@@ -1,5 +1,7 @@
 package com.fanc.wheretoplay.activity;
 
+import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
@@ -75,6 +77,22 @@ public class DetailsOrderActivity extends BaseActivity {
         oi9.setTv_left("预订方式");
         oi10.setTv_left("备注");
 
+        oi1.setTv_rightTextColor(Color.parseColor("#C4483C"));
+        oi5.setTv_rightTextColor(Color.parseColor("#C4483C"));
+
+        oi1.setTv_right("信用预订成功");
+        oi2.setTv_right("188****8888");
+        oi3.setTv_right("18888888888");
+        oi4.setTv_right("豪华小房");
+        oi5.setTv_right("A808");
+        oi6.setTv_right("2017-10-20 18:00");
+        oi7.setTv_right("0");
+        oi8.setTv_right("1");
+        oi9.setTv_right("信用预订");
+        oi10.setTv_right("暂无备注");
+
+      String store_idValue =   getIntent().getStringExtra("store_id");
+
     }
 
     @OnClick({R.id.tv_pay, R.id.tv_release, R.id.tv_cancel})
@@ -83,6 +101,7 @@ public class DetailsOrderActivity extends BaseActivity {
             case R.id.tv_pay:
                 break;
             case R.id.tv_release:
+                startActivity(new Intent(this,PublicationEvaluationActivity.class));
                 break;
             case R.id.tv_cancel:
                 break;

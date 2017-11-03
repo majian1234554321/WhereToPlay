@@ -11,11 +11,19 @@ import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.DetailsOrderActivity;
+import com.fanc.wheretoplay.datamodel.BookListModel;
+import com.fanc.wheretoplay.fragment.OrderListAllFragment;
+import com.fanc.wheretoplay.image.GlideCatchUtil;
+import com.fanc.wheretoplay.image.GlideImageLoader;
+import com.fanc.wheretoplay.util.DateFormatUtil;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+
+import static com.fanc.wheretoplay.network.Network.IMAGE;
 
 /**
  * Created by admin on 2017/11/1.
@@ -24,11 +32,14 @@ import butterknife.ButterKnife;
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
     public Context context;
     public Fragment fragment;
+    public BookListModel.ContentBean dataBean;
 
 
-    public OrdersAdapter(Context context, Fragment fragment) {
+
+    public OrdersAdapter(Context context, OrderListAllFragment fragment, BookListModel.ContentBean dataBean) {
         this.context = context;
         this.fragment = fragment;
+        this.dataBean = dataBean;
     }
 
     @Override
@@ -38,31 +49,86 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
+                intent.putExtra("store_id",dataBean.list.get(position).store_id);
                 intent.setClass(context, DetailsOrderActivity.class);
                 fragment.startActivityForResult(intent, 1001);
             }
         });
+
+
+        holder.tv_storeName.setText(dataBean.list.get(position).name);
+        holder.tvPayItemRoom.setText(dataBean.list.get(position).room_type);
+        holder.tvPayItemDecorate.setText(dataBean.list.get(position).decorate_type);
+        holder.tvPayItemReserveRealCode.setText(dataBean.list.get(position).book_sn);
+        holder.tvPayItemPrice.setText("总价："+dataBean.list.get(position).total);
+        GlideImageLoader.display(context,holder.ivPayItem,IMAGE+ dataBean.list.get(position).cover);
+
+        holder.tvPayItemRealTime.setText(DateFormatUtil.stampToDate(dataBean.list.get(position).arrival_time)+" 前");
+
+
+        //status：string，订单状态：1已取消,2预订成功,4已结单，5或6已支付订金
+        switch (dataBean.list.get(position).status) {
+
+            case "1":
+                holder.tv_payState.setText("已取消");
+                break;
+            case "2":
+                holder.tv_payState.setText("预订成功");
+                break;
+            case "3":
+                holder.tv_payState.setText("已取消");
+                break;
+            case "4":
+                holder.tv_payState.setText("已结单");
+                break;
+            case "5":
+                holder.tv_payState.setText("已支付订金");
+                break;
+            case "6":
+                holder.tv_payState.setText("已支付订金");
+                break;
+            default:
+                holder.tv_payState.setText("....");
+                break;
+        }
+
+//book_type：string，预订类型 1-订金预订 2-信誉预订 3-充值
+        switch (dataBean.list.get(position).book_type) {
+            case "1":
+                holder.tvPayItemTitle.setText("预订方式：订金预订");
+                break;
+            case "2":
+                holder.tvPayItemTitle.setText("预订方式：信誉预订");
+                break;
+            case "3":
+                holder.tvPayItemTitle.setText("预订方式：充值");
+                break;
+           default:
+               holder.tvPayItemTitle.setText("预订方式：...");
+                break;
+        }
+
+
     }
 
     @Override
     public int getItemCount() {
-        return 6;
+        return dataBean.list.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+
         @BindView(R.id.cb_pay_item_status)
         CheckBox cbPayItemStatus;
         @BindView(R.id.iv_pay_item)
         ImageView ivPayItem;
         @BindView(R.id.tv_pay_item_title)
         TextView tvPayItemTitle;
-        @BindView(R.id.tv_pay_item_reserved)
-        TextView tvPayItemReserved;
         @BindView(R.id.tv_pay_item_time)
         TextView tvPayItemTime;
         @BindView(R.id.tv_pay_item_real_time)
@@ -89,6 +155,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         Button btnPayCancelReserve;
         @BindView(R.id.btn_pay_consume)
         Button btnPayConsume;
+
+        @BindView(R.id.tv_storeName)
+        TextView tv_storeName;
+        @BindView(R.id.tv_payState)
+        TextView tv_payState;
+
 
         public ViewHolder(View itemView) {
             super(itemView);
