@@ -25,6 +25,7 @@ import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
+import com.fanc.wheretoplay.view.MyScrollView;
 import com.fanc.wheretoplay.view.PullToRefreshLayout;
 import com.fanc.wheretoplay.view.TopMenu;
 import com.zhy.http.okhttp.OkHttpUtils;
@@ -66,13 +67,12 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
     private int mID = R.id.bt_comments_one;
     private CheckComments mResponse;
 
-    private boolean isPullDown;
     private int page = 1;
-    private int size = 6;
-    private boolean isPullUp;
+    private int size = 1;
     private int mType = 1;
     private List mStores;
     private CheckCommentsAdapter checkCommentsAdapter;
+    private MyScrollView mSvReserve;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -98,6 +98,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
         mBtDispleasure = mCheckCommentsBinding.btCommentsThree;
         mBtpicture = mCheckCommentsBinding.btCommentsFour;
         mPtrl = mCheckCommentsBinding.ptrlReserve;
+        mSvReserve = mCheckCommentsBinding.svReserve;
     }
 
     private void init() {
@@ -118,9 +119,18 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
         //底部评论
         checkCommentsAdapter = new CheckCommentsAdapter(this,  mStores);
         mRc.setAdapter(checkCommentsAdapter);
+        // 是否可以上下拉
+        mSvReserve.setCanPullDown(true);
+        mSvReserve.setCanPullUp(true);
     }
 
     private void setListener() {
+        mTopMenu.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 空实现，防止滑动后，点击传递到后面
+            }
+        });
         mTopMenu.setLeftIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,8 +151,8 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
             @Override
             public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
                 isPullUp = true;
-                size = 6;
-                if (mStores.size() < 6) {
+                size = 1;
+                if (mStores.size() < 1) {
                     page = 0;
                 } else {
                     page++;
@@ -161,7 +171,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
             case R.id.bt_comments_one:
                 if (mID != R.id.bt_comments_one) {
                     clickPress(R.id.bt_comments_one);
-                    requestComments(1, 1, 6);
+                    requestComments(1, 1, 1);
                 }
                 break;
             case R.id.bt_comments_two:
@@ -342,7 +352,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
                 refreshOrLoadFail();
                 return;
             }
-            if (mStores.size() < 6) {
+            if (mStores.size() < 1) {
                 mStores.clear();
             }
             mStores.addAll(commentList);

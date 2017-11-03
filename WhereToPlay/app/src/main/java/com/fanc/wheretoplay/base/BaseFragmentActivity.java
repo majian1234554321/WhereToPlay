@@ -50,9 +50,9 @@ public class BaseFragmentActivity extends FragmentActivity {
     public SPUtils mSPUtils;
     public com.fanc.wheretoplay.view.AlertDialog mAlertDialog;
     private Receiver receiver;
-    private boolean isPullDown;
-    private boolean isPullUp;
+    //刷新
     public PullToRefreshLayout mPtrl;
+    public boolean isPullDown, isPullUp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
