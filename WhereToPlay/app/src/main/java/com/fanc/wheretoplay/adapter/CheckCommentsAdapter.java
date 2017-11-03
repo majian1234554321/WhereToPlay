@@ -34,10 +34,11 @@ public class CheckCommentsAdapter extends RecyclerView.Adapter<CheckCommentsAdap
     private  CheckComments mResponse;
     private List mList;
     Context mContext;
-
+    GridDivider gridDivider ;
     public CheckCommentsAdapter(Activity mContext, List list) {
         this.mContext = mContext;
         this.mList = list;
+        gridDivider = new GridDivider(mContext, 4, UIUtils.dp2Px(5), mContext.getResources().getColor(R.color.white));
     }
 
     @Override
@@ -67,7 +68,8 @@ public class CheckCommentsAdapter extends RecyclerView.Adapter<CheckCommentsAdap
             CardViewAdapter cardViewAdapter = new CardViewAdapter(mContext, commentListBean.getPicture());
             holder.mRcCardView.setLayoutManager(new GridLayoutManager(mContext, 4));
             //设置图片间距
-            holder.mRcCardView.addItemDecoration(new GridDivider(mContext,4, UIUtils.dp2Px(5), mContext.getResources().getColor(R.color.white)));
+            holder.mRcCardView.removeItemDecoration(gridDivider);   //ItemDecoration会持续叠加在一个recyclerview上面，所以每次添加ItemDecoration之前要先删除ItemDecoration
+            holder.mRcCardView.addItemDecoration(gridDivider);
             holder.mRcCardView.setAdapter(cardViewAdapter);
         } else {
             holder.mRcCardView.setVisibility(View.GONE);

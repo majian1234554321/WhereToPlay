@@ -180,7 +180,7 @@ public interface Network {
         //订单列表
         @Multipart
         @POST("User/bookList")
-        Observable<BaseResponseModel<BookListModel.ContentBean>> bookList(@Part MultipartBody.Part file, @Part MultipartBody.Part fileB, @Part MultipartBody.Part filec);
+        Observable<BaseResponseModel<BookListModel.ContentBean>> bookList(@Part MultipartBody.Part file, @Part MultipartBody.Part fileB, @Part MultipartBody.Part filec, @Part MultipartBody.Part filed);
 
 
         //订单详情

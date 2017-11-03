@@ -68,7 +68,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
     private CheckComments mResponse;
 
     private int page = 1;
-    private int size = 1;
+    private int size = 6;
     private int mType = 1;
     private List mStores;
     private CheckCommentsAdapter checkCommentsAdapter;
@@ -151,8 +151,8 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
             @Override
             public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
                 isPullUp = true;
-                size = 1;
-                if (mStores.size() < 1) {
+                size = 0;
+                if (mStores.size() < 6) {
                     page = 0;
                 } else {
                     page++;
@@ -171,7 +171,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
             case R.id.bt_comments_one:
                 if (mID != R.id.bt_comments_one) {
                     clickPress(R.id.bt_comments_one);
-                    requestComments(1, 1, 1);
+                    requestComments(1, 1, 6);
                 }
                 break;
             case R.id.bt_comments_two:
@@ -342,6 +342,11 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
 
     private void storeList(List<CheckComments.CommentListBean> commentList) {
         if (isPullDown) {// 下拉刷新
+//            if (commentList.size() == 0) {
+//                ToastUtils.makePicTextShortToast(CheckCommentsActivity.this, "没有评论");
+//                refreshAndLoadMoreSuccess();
+//                return;
+//            }
             mStores.clear();
             mStores.addAll(commentList);
             checkCommentsAdapter.notifyDataSetChanged();
@@ -352,7 +357,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
                 refreshOrLoadFail();
                 return;
             }
-            if (mStores.size() < 1) {
+            if (mStores.size() < 6) {
                 mStores.clear();
             }
             mStores.addAll(commentList);

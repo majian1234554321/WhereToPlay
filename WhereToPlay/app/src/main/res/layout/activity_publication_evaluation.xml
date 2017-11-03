@@ -111,7 +111,7 @@
                 <android.support.v7.widget.RecyclerView
                     android:id="@+id/rv_image"
                     android:layout_width="match_parent"
-                    android:layout_height="100dp"
+                    android:layout_height="wrap_content"
                     android:layout_marginTop="10dp" />
 
 
@@ -257,24 +257,24 @@
 
 
 
-
+                <Button
+                    android:id="@+id/btn_commit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginBottom="@dimen/margin_50"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:background="@drawable/shape_btn_signin"
+                    android:layout_alignParentBottom="true"
+                    android:text="发布"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textsize_level2"/>
 
             </LinearLayout>
         </ScrollView>
 
 
 
-    <Button
-        android:id="@+id/btn_commit"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/height_40"
-        android:layout_marginBottom="@dimen/margin_50"
-        android:layout_marginLeft="@dimen/margin_15"
-        android:layout_marginRight="@dimen/margin_15"
-        android:background="@drawable/shape_btn_signin"
-        android:layout_alignParentBottom="true"
-        android:text="发布"
-        android:textColor="@color/white"
-        android:textSize="@dimen/textsize_level2"/>
+
 
 </RelativeLayout>
