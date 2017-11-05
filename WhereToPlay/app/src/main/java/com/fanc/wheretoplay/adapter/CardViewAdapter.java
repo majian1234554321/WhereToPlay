@@ -60,12 +60,13 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
         dm = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(dm);
         lp = new RelativeLayout.LayoutParams((dm.widthPixels - UIUtils.dp2Px(45)) / 4, (dm.widthPixels - UIUtils.dp2Px(45)) / 4);
+        binding.cl.setLayoutParams(lp);
         return holder;
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        binding.cl.setLayoutParams(lp);
+//        binding.cl.setLayoutParams(lp);
 //        holder.mIvCardView.setLayoutParams(lp);
         Log.e("wade", "onBindViewHolder: "+ holder.mIvCardView.getWidth() +"\t" + holder.mIvCardView.getHeight());
         Glide.with(mContext).load(Network.IMAGE + mPictureList.get(position)).placeholder(R.drawable.default_rect).into(holder.mIvCardView);
