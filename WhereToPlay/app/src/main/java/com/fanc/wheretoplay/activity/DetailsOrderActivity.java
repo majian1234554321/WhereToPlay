@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.PermissionChecker;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -260,12 +261,22 @@ public class DetailsOrderActivity extends BaseActivity {
 
                 break;
             case R.id.tv_pay:
-                intent.setClass(this, OrderPayActivity.class);
-                intent.putExtra("order_id", order_idValue);
-                intent.putExtra("store_id", store_idValue);
-                intent.putExtra("store_name", storeNameValue);
+//                intent.setClass(this, PayBillActivity.class);
+//                intent.putExtra("order_id", order_idValue);
+//                intent.putExtra("store_id", store_idValue);
+//                intent.putExtra("store_name", storeNameValue);
+//                startActivity(intent);
 
-                startActivity(intent);
+                intent.setClass(this, PayBillActivity.class);
+                intent.putExtra(Constants.ORDER_ID, order_idValue);
+                intent.putExtra(Constants.STORE_ID, store_idValue);
+                if (TextUtils.equals("4", statusValue)) {// 去消费
+                    intent.putExtra(Constants.PAGE, Constants.CONSUME);
+                }
+                if (TextUtils.equals("2", statusValue)) {// 去结账
+                    intent.putExtra(Constants.PAGE, Constants.PAYING_THE_BILL);
+                }
+                mContext.startActivity(intent);
 
 
                 break;
