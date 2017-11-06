@@ -54,6 +54,10 @@ import com.fanc.wheretoplay.view.MyRecycleView;
 import com.fanc.wheretoplay.view.ShearedPopDialog;
 import com.fanc.wheretoplay.view.TopMenu;
 
+import com.qiyukf.nimlib.sdk.NimIntent;
+import com.qiyukf.unicorn.api.ConsultSource;
+import com.qiyukf.unicorn.api.Unicorn;
+import com.qiyukf.unicorn.api.UnreadCountChangeListener;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
@@ -223,10 +227,28 @@ public class MerchantDetailFragment extends BaseFragment {
         stores = new ArrayList<>();
         recommendAdapter = new ReserveAdapter(mContext, stores);
         mRvMerchantDetailRecommend.setAdapter(recommendAdapter);
+        //点击商家后台传来的消息可以进入聊天界面
+        parseIntent();
     }
 
-
+    private void parseIntent() {
+        Intent intent = mContext.getIntent();
+        if (intent.hasExtra(NimIntent.EXTRA_NOTIFY_CONTENT)) {
+            Unicorn.openServiceActivity(mContext, "去哪儿客服", new ConsultSource(null, null, null));
+            // 最好将intent清掉，以免从堆栈恢复时又打开客服窗口
+            mContext.setIntent(new Intent());
+        }
+    }
     private void setListeners() {
+        //商家后台传来的未读消息数量
+        UnreadCountChangeListener listener = new UnreadCountChangeListener() {
+            @Override
+            public void onUnreadCountChange(int count) {
+                Log.e("wade",count + "");
+            }
+        };
+        Unicorn.addUnreadCountChangeListener(listener, true);
+
         mTmDetail.setLeftIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -254,12 +276,16 @@ public class MerchantDetailFragment extends BaseFragment {
                         .show(mTmDetail.getIvRightIcon());
             }
         });
+        //客服
         mIvService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ServiceActivity.class);
-                intent.putExtra(Constants.STORE_NAME, mStore.getName());
-                startActivity(intent);
+//                Intent intent = new Intent(mContext, ServiceActivity.class);
+//                intent.putExtra(Constants.STORE_NAME, mStore.getName());
+//                startActivity(intent);
+                // 启动聊天界面
+                ConsultSource source = new ConsultSource(null, null, null);
+                Unicorn.openServiceActivity(mContext, getResources().getString(R.string.app_name), source);
             }
         });
         mTvReservePromptly.setOnClickListener(new View.OnClickListener() {

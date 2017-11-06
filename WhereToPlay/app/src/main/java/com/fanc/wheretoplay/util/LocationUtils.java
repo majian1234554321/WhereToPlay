@@ -135,9 +135,9 @@ public class LocationUtils {
                 Log.v("aaa", "bdLocation:" + bdLocation.toString());
             }
             location = bdLocation;
-            Log.d("aaa", "onReceiveLocation: City = " + bdLocation.getCity());
-            Log.i("aaa", "onReceiveLocation: Address = " + bdLocation.getAddrStr());
-            Log.w("aaa", "onReceiveLocation: \n lat = " + bdLocation.getLatitude() + "\n lnt = " + bdLocation.getLongitude());
+            Log.d("haaa", "onReceiveLocation: City = " + bdLocation.getCity());
+            Log.i("haaa", "onReceiveLocation: Address = " + bdLocation.getAddrStr());
+            Log.w("haaa", "onReceiveLocation: \n lat = " + bdLocation.getLatitude() + "\n lnt = " + bdLocation.getLongitude());
         }
 
         @Override

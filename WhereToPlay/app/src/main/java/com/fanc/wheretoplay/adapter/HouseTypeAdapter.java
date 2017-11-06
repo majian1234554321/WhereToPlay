@@ -54,10 +54,13 @@ public class HouseTypeAdapter extends RecyclerView.Adapter<HouseTypeAdapter.View
                 holder.mIv.setImageResource(R.drawable.item_baoxiang);
                 break;
             case "VIP包":
-                holder.mIv.setImageResource(R.drawable.item_santai);
+                holder.mIv.setImageResource(R.drawable.vip);
                 break;
             case "卡座":
                 holder.mIv.setImageResource(R.drawable.item_kazuo);
+                break;
+            case "台位":
+                holder.mIv.setImageResource(R.drawable.item_santai);
                 break;
             default:
                 break;

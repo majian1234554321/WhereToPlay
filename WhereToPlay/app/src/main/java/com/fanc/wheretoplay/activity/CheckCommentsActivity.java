@@ -151,7 +151,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
             @Override
             public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
                 isPullUp = true;
-                size = 0;
+                size = 6;
                 if (mStores.size() < 6) {
                     page = 0;
                 } else {

@@ -9,10 +9,18 @@ import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 
+import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.image.GlideGalleryImageLoader;
+import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.FileUtils;
+import com.fanc.wheretoplay.util.GlideImageLoader;
 import com.fanc.wheretoplay.util.LocationUtils;
 
+import com.qiyukf.unicorn.api.SavePowerConfig;
+import com.qiyukf.unicorn.api.StatusBarNotificationConfig;
+import com.qiyukf.unicorn.api.UICustomization;
+import com.qiyukf.unicorn.api.Unicorn;
+import com.qiyukf.unicorn.api.YSFOptions;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.io.File;
@@ -29,7 +37,6 @@ import cn.finalteam.galleryfinal.ImageLoader;
 import cn.finalteam.galleryfinal.ThemeConfig;
 import cn.jpush.android.api.JPushInterface;
 
-import static com.fanc.wheretoplay.base.App.mContext;
 
 /**
  * Created by eliang on 2017-09-07.
@@ -50,7 +57,6 @@ public class App extends Application {
         // 小米手机中出java.lang.RuntimeException，无法启动
         // 华为手机无异常
         init();
-
         // 加快APP启动速度1
         // 1 把耗时操作的初始化过程放在子线程中
         // 2 把耗时操作的初始化过程IntentService中
@@ -67,6 +73,23 @@ public class App extends Application {
 //                initTbsX5();
             }
         }).start();
+
+        //七鱼
+        Unicorn.init(this, Constants.QIYU_APPKEY, options(), new GlideImageLoader(mContext));
+        
+    }
+
+    // 如果返回值为null，则全部使用默认参数。
+    private YSFOptions options() {
+        YSFOptions options = new YSFOptions();
+        options.statusBarNotificationConfig = new StatusBarNotificationConfig();
+        options.savePowerConfig = new SavePowerConfig();
+        options.uiCustomization = new UICustomization();
+        options.uiCustomization.topTipBarBackgroundColor = getResources().getColor(R.color.text_red);
+        options.uiCustomization.titleBackgroundColor = getResources().getColor(R.color.text_red);
+        options.uiCustomization.titleCenter = true;
+        options.uiCustomization.topTipBarTextColor = getResources().getColor(R.color.white);
+        return options;
     }
 
     private void initOkHttp() {
