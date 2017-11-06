@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.fanc.wheretoplay.activity.OrderPayActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
+
+        <com.fanc.wheretoplay.view.TopMenu
+            android:id="@+id/tm_pay_bill"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_0"
+            android:layout_weight="1"
+            android:background="@color/white">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:id="@+id/relativeLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#FFFFFF"
+                    android:focusable="true"
+                    android:focusableInTouchMode="true"
+                    android:paddingBottom="@dimen/padding_10"
+                    android:paddingLeft="@dimen/padding_15"
+                    android:paddingRight="@dimen/padding_10"
+                    android:paddingTop="@dimen/padding_15">
+
+                    <TextView
+                        android:id="@+id/tv_pay_bill_store"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2121212121"
+                        android:textColor="#333333"
+                        android:textSize="@dimen/textsize_level4"/>
+
+                    <TextView
+                        android:id="@+id/tv_pay_bill_discount_real"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@+id/tv_pay_bill_address"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginRight="@dimen/margin_15"
+                        android:background="@drawable/discount"
+                        android:paddingLeft="@dimen/padding_20"
+                        android:paddingRight="@dimen/padding_5"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textsize_level3"/>
+
+                    <TextView
+                        android:id="@+id/tv_pay_bill_address"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/tv_pay_bill_store"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:drawableLeft="@drawable/reserve_address"
+                        android:drawablePadding="@dimen/padding_10"
+                        android:maxWidth="@dimen/width_260"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textsize_levelsmall"/>
+
+                    <TextView
+                        android:id="@+id/tv_pay_bill_distance"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/tv_pay_bill_address"
+                        android:layout_marginLeft="@dimen/margin_20"
+                        android:layout_toRightOf="@+id/tv_pay_bill_address"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textsize_levelsmall"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_50"
+                    android:layout_margin="@dimen/margin_10"
+                    android:background="@drawable/shape_mine_info_sign"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/padding_15"
+                    android:paddingRight="@dimen/padding_15">
+
+                    <TextView
+                        android:layout_width="@dimen/width_70"
+                        android:layout_height="wrap_content"
+                        android:text="@string/consume_sum"
+                        android:textColor="#333333"
+                        android:textSize="@dimen/textsize_level2"/>
+
+                    <EditText
+                        android:id="@+id/et_pay_bill_consume_sum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/margin_15"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center_vertical|right"
+                        android:hint="@string/hint_consume_sum"
+                        android:inputType="numberDecimal"
+                        android:maxLength="12"
+                        android:paddingRight="@dimen/padding_10"
+                        android:textColor="@color/text_and_buttor_orange"
+                        android:textColorHint="@color/pay_reserve_list_text"
+                        android:textSize="@dimen/normal_textsize"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/currency"
+                        android:textColor="#C4483C"
+                        android:textSize="@dimen/normal_textsize"/>
+
+                </LinearLayout>
+
+                <CheckBox
+                    android:id="@+id/cb_not_participation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:button="@drawable/selector_cb_not_discount"
+                    android:paddingLeft="@dimen/padding_5"
+                    android:text="@string/input_not_participation_discount_sum"
+                    android:textColor="@color/text_down_payment_and_way"
+                    android:textSize="@dimen/textsize_levelsmall"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_not_participation"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_50"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:layout_marginRight="@dimen/margin_10"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:background="@drawable/shape_mine_info_sign"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/padding_15"
+                    android:paddingRight="@dimen/padding_15"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/not_participation_discount_sum"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textsize_level2"/>
+
+                    <EditText
+                        android:id="@+id/et_pay_bill_not_participation_discount_sum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="@dimen/margin_15"
+                        android:layout_weight="1"
+                        android:background="@null"
+                        android:gravity="center_vertical|right"
+                        android:hint="@string/hint_consume_sum"
+                        android:inputType="numberDecimal"
+                        android:maxLength="12"
+                        android:paddingRight="@dimen/padding_10"
+                        android:textColor="@color/text_and_buttor_orange"
+                        android:textColorHint="@color/pay_reserve_list_text"
+                        android:textSize="@dimen/normal_textsize"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/currency"
+                        android:textColor="@color/text_and_buttor_orange"
+                        android:textSize="@dimen/normal_textsize"/>
+
+                </LinearLayout>
+
+                <!-- <View
+                     android:layout_width="match_parent"
+                     android:layout_height="@dimen/height_10"
+                     android:background="@color/pay_reserve_list_divider"/>-->
+
+                <!--<TextView
+                    android:id="@+id/tv_pay_bill_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_15"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:text="@{order.name}"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/textsize_level2"
+                    android:visibility="gone"/>-->
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:background="#E5E5E5"/>
+
+                <!--<LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_50"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/padding_15"
+                    android:paddingRight="@dimen/padding_15"
+                    android:visibility="gone">
+
+                    <TextView
+                        android:layout_width="@dimen/width_0"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/discount1"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textsize_level2"/>
+
+                    <TextView
+                        android:id="@+id/tv_pay_bill_discount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@{order.discount}"
+                        android:textColor="@color/text_and_buttor_orange"
+                        android:textSize="@dimen/textsize_level3"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/discount"
+                        android:textColor="@color/text_and_buttor_orange"
+                        android:textSize="@dimen/normal_textsize"/>
+
+                </LinearLayout>-->
+
+                <!--<View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:background="@color/pay_reserve_list_divider"/>-->
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_50"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/padding_15"
+                    android:paddingRight="@dimen/padding_15">
+
+                    <TextView
+                        android:layout_width="@dimen/width_0"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/earnest"
+                        android:textColor="#333333"
+                        android:textSize="@dimen/textsize_level2"/>
+
+                    <TextView
+                        android:id="@+id/tv_pay_bill_down_payment_sum"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text=""
+                        android:textColor="@color/text_and_buttor_orange"
+                        android:textSize="@dimen/textsize_level2"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/currency"
+                        android:textColor="#333333"
+                        android:textSize="@dimen/normal_textsize"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:background="#E5E5E5"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_pay_bill_discount_coupon"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_50"
+                    android:gravity="center_vertical"
+                    android:onClick="onViewClick"
+                    android:orientation="horizontal"
+                    android:paddingLeft="@dimen/padding_15">
+
+                    <TextView
+                        android:layout_width="@dimen/width_0"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/discount_coupon"
+                        android:textColor="@color/white"
+                        android:textSize="@dimen/textsize_level2"/>
+
+                    <TextView
+                        android:id="@+id/tv_pay_bill_discount_coupon"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_and_buttor_orange"
+                        android:textSize="@dimen/textsize_level3"/>
+
+                    <ImageView
+                        android:id="@+id/iv_pay_bill_discount_coupon"
+                        android:layout_width="@dimen/width_40"
+                        android:layout_height="@dimen/height_40"
+                        android:layout_marginRight="@dimen/margin_1"
+                        android:padding="@dimen/padding_14"
+                        android:src="@drawable/right"/>
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:background="#E5E5E5"/>
+
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:background="#E5E5E5"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_10"
+                    android:background="#E5E5E5"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/padding_10"
+                    android:paddingLeft="@dimen/padding_20"
+                    android:paddingTop="@dimen/padding_15"
+                    android:text="@string/pay_way"
+                    android:textColor="@color/text_down_payment_and_way"
+                    android:textSize="@dimen/normal_textsize"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:background="#E5E5E5"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_150">
+
+                    <LinearLayout
+                        android:id="@+id/ll_pay_bill_weixin"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:onClick="onViewClick"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/width_50"
+                            android:layout_height="@dimen/height_50"
+                            android:padding="@dimen/padding_14"
+                            android:src="@drawable/pay_by_weixin"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/pay_by_weixin"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/normal_textsize"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_pay_bill_ali"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ll_pay_bill_weixin"
+                        android:onClick="onViewClick"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/width_50"
+                            android:layout_height="@dimen/height_50"
+                            android:padding="@dimen/padding_14"
+                            android:src="@drawable/pay_by_ali"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/pay_by_ali"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/normal_textsize"/>
+
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_pay_bill_balance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ll_pay_bill_ali"
+                        android:onClick="onViewClick"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/width_50"
+                            android:layout_height="@dimen/height_50"
+                            android:padding="@dimen/padding_14"
+                            android:src="@drawable/pay_by_balance"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/pay_by_balance"
+                            android:textColor="#333333"
+                            android:textSize="@dimen/normal_textsize"/>
+
+                    </LinearLayout>
+
+                    <RadioGroup
+                        android:id="@+id/rg_pay_bill"
+                        android:layout_width="@dimen/width_50"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+
+                        android:orientation="vertical"
+                        android:paddingLeft="@dimen/padding_10">
+
+                        <RadioButton
+                            android:id="@+id/rb_pay_bill_weixin"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_0"
+                            android:layout_weight="1"
+                            android:button="@drawable/selector_pay_way"
+                            android:checked="true"/>
+
+                        <RadioButton
+                            android:id="@+id/rb_pay_bill_ali"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_0"
+                            android:layout_weight="1"
+                            android:button="@drawable/selector_pay_way"/>
+
+                        <RadioButton
+                            android:id="@+id/rb_pay_bill_balance"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_0"
+                            android:layout_weight="1"
+                            android:button="@drawable/selector_pay_way"/>
+                    </RadioGroup>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_height"
+                        android:layout_alignBottom="@+id/ll_pay_bill_weixin"
+                        android:background="#E5E5E5"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_height"
+                        android:layout_alignBottom="@+id/ll_pay_bill_ali"
+                        android:background="#E5E5E5"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_height"
+                        android:layout_alignBottom="@+id/ll_pay_bill_balance"
+                        android:background="#E5E5E5"/>
+                </RelativeLayout>
+
+
+            </LinearLayout>
+        </ScrollView>
+
+        <com.zhy.android.percent.support.PercentLinearLayout
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_50"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="#FFFFFF"
+                android:gravity="center_vertical"
+                android:paddingLeft="12dp"
+                android:orientation="horizontal"
+                app:layout_widthPercent="66%w">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/pay_sum_really"
+                    android:textColor="#C4483C"
+                    android:textSize="@dimen/normal_textsize"/>
+
+                <TextView
+                    android:id="@+id/tv_pay_bill_pay_sum_real"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:gravity="center_vertical"
+                    android:text="0"
+                    android:textColor="#C4483C"
+                    android:textSize="@dimen/textsize_level3"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="元"
+                    android:textColor="#C4483C"
+                    android:textSize="@dimen/textsize_level3"/>
+            </LinearLayout>
+
+            <Button
+                android:id="@+id/btn_pay_bill"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#C4483C"
+                android:onClick="onViewClick"
+                android:text="确认支付"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_level3"
+                app:layout_widthPercent="34%w"/>
+        </com.zhy.android.percent.support.PercentLinearLayout>
+    </LinearLayout>
+
+</RelativeLayout>
