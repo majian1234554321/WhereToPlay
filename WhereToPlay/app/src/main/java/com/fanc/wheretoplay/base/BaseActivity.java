@@ -35,6 +35,9 @@ import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.view.DProgressDialog;
+import com.qiyukf.nimlib.sdk.NimIntent;
+import com.qiyukf.unicorn.api.ConsultSource;
+import com.qiyukf.unicorn.api.Unicorn;
 
 import java.util.Arrays;
 
@@ -75,6 +78,8 @@ public class BaseActivity
         }
         registerBroadcastReceiver();
     }
+
+
 
     // 状态栏透明
     private void translucent() {
