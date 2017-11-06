@@ -103,7 +103,7 @@ public class OrderList1Fragment extends BaseFragment implements PullToRefreshLay
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==1001){
-            Toast.makeText(mContext, "1001", Toast.LENGTH_SHORT).show();
+            //Toast.makeText(mContext, "1001", Toast.LENGTH_SHORT).show();
         }
     }
 

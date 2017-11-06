@@ -12,10 +12,11 @@
         android:layout_height="wrap_content"></com.fanc.wheretoplay.view.TitleBarView>
 
     <ScrollView
+        android:layout_below="@+id/tbv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_above="@+id/cl_reserve"
-        android:layout_below="@+id/tbv">
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -77,9 +78,11 @@
                 android:background="@color/pay_reserve_list_divider_white" />
 
             <EditText
+                android:id="@+id/et_content"
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_margin="12dp"
+                android:padding="8dp"
                 android:background="@drawable/shape_btn_999999_stoke"
                 android:gravity="left|top"
                 android:hint="商家满足你的期待吗？说说它的优点和不足的地方吧"
@@ -172,18 +175,19 @@
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="22dp"
                     android:text="环境"
+                    android:layout_gravity="center"
                     android:textColor="#666666"
                     android:textSize="16sp" />
 
                 <RatingBar
                     android:id="@+id/ratingbar1"
-                    style="@style/star"
+                    style="@style/star2"
+                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_10"
-                    android:layout_marginTop="@dimen/margin_5"
+                    android:layout_height="22dp"
+
                     android:numStars="5"
                     android:rating="3.5"
                     android:stepSize="0.2" />
@@ -199,16 +203,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="气氛"
+                    android:layout_gravity="center"
                     android:textColor="#666666"
                     android:textSize="16sp" />
 
                 <RatingBar
                     android:id="@+id/ratingbar2"
-                    style="@style/star"
+                    style="@style/star2"
+                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_10"
-                    android:layout_marginTop="@dimen/margin_5"
                     android:numStars="5"
                     android:rating="3.5"
                     android:stepSize="0.2" />
@@ -224,16 +228,16 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="服务"
+                   android:layout_gravity="center"
                     android:textColor="#666666"
                     android:textSize="16sp" />
 
                 <RatingBar
                     android:id="@+id/ratingbar3"
-                    style="@style/star"
+                    style="@style/star2"
+                    android:layout_gravity="center"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_10"
-                    android:layout_marginTop="@dimen/margin_5"
                     android:numStars="5"
                     android:rating="3.5"
                     android:stepSize="0.2" />

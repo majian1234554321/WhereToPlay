@@ -41,7 +41,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
         if (imagesfinal.get(position).endsWith("这不是图片")) {
-            Glide.with(mContext).load(R.mipmap.ic_launcher).into(holder.ivImage);
+            Glide.with(mContext).load(R.drawable.addjpg).into(holder.ivImage);
         } else {
             final String image = imagesfinal.get(position);
             Glide.with(mContext).load(new File(image)).into(holder.ivImage);

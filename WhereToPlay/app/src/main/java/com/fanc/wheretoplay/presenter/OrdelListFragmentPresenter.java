@@ -104,7 +104,10 @@ public class OrdelListFragmentPresenter implements BasePresenter {
 
                     @Override
                     protected void _onError(String message) {
-                        ptrlPayReserve.refreshFinish(PullToRefreshLayout.FAIL);
+                        if (ptrlPayReserve!=null){
+                            ptrlPayReserve.refreshFinish(PullToRefreshLayout.FAIL);
+                        }
+
                     }
                 }));
     }

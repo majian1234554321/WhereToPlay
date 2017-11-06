@@ -160,7 +160,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
 
         @BindView(R.id.btn_pay_cancel_reserve)
-        Button btnPayCancelReserve;
+        TextView btnPayCancelReserve;
         @BindView(R.id.btn_pay_consume)
         Button btnPayConsume;
 

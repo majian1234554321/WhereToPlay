@@ -31,7 +31,8 @@ public class Retrofit_RequestUtils {
                 if (request==null){
                     OkHttpClient okHttpClient = new OkHttpClient.Builder()
 //                    .cache(cache)
-                            .connectTimeout(10, TimeUnit.SECONDS)
+                            .connectTimeout(20, TimeUnit.SECONDS)
+                            .readTimeout(20,TimeUnit.SECONDS)
                             .build();
                     request = new Retrofit.Builder()
                             .baseUrl("http://ktv.51tzl.cn/Api/")

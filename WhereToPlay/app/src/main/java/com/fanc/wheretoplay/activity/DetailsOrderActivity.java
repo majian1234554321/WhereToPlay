@@ -220,9 +220,18 @@ public class DetailsOrderActivity extends BaseActivity {
         Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.tv_pay:
+                intent.setClass(this,OrderPayActivity.class);
+                intent.putExtra("order_id",order_idValue);
+                intent.putExtra("store_id",store_idValue);
+
+                startActivity(intent);
+
+
                 break;
             case R.id.tv_release:
 
+                intent.putExtra("order_id",order_idValue);
+                intent.putExtra("store_id",store_idValue);
                 intent.setClass(this,PublicationEvaluationActivity.class);
                 startActivity(intent);
                 break;

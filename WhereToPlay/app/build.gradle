@@ -111,7 +111,9 @@ dependencies {
     compile 'io.reactivex:rxjava:1.2.0'
     compile 'com.artemzin.rxjava:proguard-rules:1.2.0.0'
     testCompile 'junit:junit:4.12'
+    compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+    compile 'com.qiyukf.unicorn:unicorn:3.11.1'
 }
 
 //def gitSha() {

@@ -159,7 +159,8 @@
                 android:layout_marginLeft="@dimen/margin_10"
                 android:layout_toRightOf="@+id/tv_pay_item_reserve_code"
                 android:text="text"
-                android:textColor="@color/pay_reserve_list_text"
+                android:textColor="#333333"
+
                 android:textSize="@dimen/textsize_levelsmall" />
 
             <TextView
@@ -184,7 +185,7 @@
 
 
 
-                <Button
+                <TextView
                     android:id="@+id/btn_pay_cancel_reserve"
                     android:layout_width="@dimen/width_80"
                     android:layout_height="@dimen/height_25"
@@ -192,6 +193,8 @@
                     android:layout_marginRight="@dimen/margin_10"
                     android:background="@drawable/shape_btn_black_stoke"
                     android:text="@string/cancel_reverse"
+                    android:padding="4dp"
+                    android:gravity="center"
                     android:textColor="#333333"
                     android:textSize="@dimen/normal_textsize" />
 
