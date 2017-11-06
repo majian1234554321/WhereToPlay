@@ -15,10 +15,12 @@ import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.DetailsOrderActivity;
 import com.fanc.wheretoplay.datamodel.BookListModel;
-import com.fanc.wheretoplay.fragment.OrderListAllFragment;
+
 import com.fanc.wheretoplay.image.GlideCatchUtil;
 import com.fanc.wheretoplay.image.GlideImageLoader;
 import com.fanc.wheretoplay.util.DateFormatUtil;
+
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -36,7 +38,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
 
 
-    public OrdersAdapter(Context context, OrderListAllFragment fragment, BookListModel.ContentBean dataBean) {
+    public OrdersAdapter(Context context, Fragment fragment, BookListModel.ContentBean dataBean) {
         this.context = context;
         this.fragment = fragment;
         this.dataBean = dataBean;
@@ -54,6 +56,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
+                intent.putExtra("order_id",dataBean.list.get(position).order_id);
                 intent.putExtra("store_id",dataBean.list.get(position).store_id);
                 intent.setClass(context, DetailsOrderActivity.class);
                 fragment.startActivityForResult(intent, 1001);
@@ -72,8 +75,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
 
         //status：string，订单状态：1已取消,2预订成功,4已结单，5或6已支付订金
+        if (dataBean.list!=null&&dataBean.list.get(position).status!=null){
         switch (dataBean.list.get(position).status) {
-
             case "1":
                 holder.tv_payState.setText("已取消");
                 break;
@@ -95,30 +98,37 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
             default:
                 holder.tv_payState.setText("....");
                 break;
-        }
+        }}
 
 //book_type：string，预订类型 1-订金预订 2-信誉预订 3-充值
-        switch (dataBean.list.get(position).book_type) {
-            case "1":
-                holder.tvPayItemTitle.setText("预订方式：订金预订");
-                break;
-            case "2":
-                holder.tvPayItemTitle.setText("预订方式：信誉预订");
-                break;
-            case "3":
-                holder.tvPayItemTitle.setText("预订方式：充值");
-                break;
-           default:
-               holder.tvPayItemTitle.setText("预订方式：...");
-                break;
-        }
 
+        if (dataBean.list!=null&&dataBean.list.get(position).book_type!=null) {
+            switch (dataBean.list.get(position).book_type) {
+                case "1":
+                    holder.tvPayItemTitle.setText("预订方式：订金预订");
+                    break;
+                case "2":
+                    holder.tvPayItemTitle.setText("预订方式：信誉预订");
+                    break;
+                case "3":
+                    holder.tvPayItemTitle.setText("预订方式：充值");
+                    break;
+                default:
+                    holder.tvPayItemTitle.setText("预订方式：...");
+                    break;
+            }
+        }
 
     }
 
     @Override
     public int getItemCount() {
         return dataBean.list.size();
+    }
+
+    public void append(List<BookListModel.ContentBean.ListBean> list) {
+        this.dataBean.list.addAll(list);
+        notifyDataSetChanged();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {

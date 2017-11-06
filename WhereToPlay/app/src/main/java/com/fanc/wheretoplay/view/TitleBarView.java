@@ -1,8 +1,10 @@
 package com.fanc.wheretoplay.view;
 
+import android.app.Activity;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -31,9 +33,19 @@ public class TitleBarView  extends RelativeLayout {
         initView(context);
     }
 
-    private void initView(Context context) {
+    private void initView(final Context context) {
       View view  =   View.inflate(context, R.layout.titlebarview,this);
         tv_title = (TextView) view.findViewById(R.id.tv_title);
+
+        ImageView  menu_iv_lefticon = (ImageView) view.findViewById(R.id.menu_iv_lefticon);
+
+        menu_iv_lefticon.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ((Activity)context).finish();
+            }
+        });
+
     }
 
     public void setTv_title(String value){

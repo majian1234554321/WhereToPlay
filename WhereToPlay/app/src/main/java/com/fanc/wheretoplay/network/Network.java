@@ -6,6 +6,9 @@ import okhttp3.MultipartBody;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+
+import com.fanc.wheretoplay.datamodel.CancleOrderModel;
+import com.fanc.wheretoplay.datamodel.OrderDetailModel;
 import com.fanc.wheretoplay.rx.BaseResponseModel;
 import rx.Observable;
 
@@ -21,8 +24,12 @@ public interface Network {
 
 //    String BASE = "http://ktv.ctkey.com.cn";// 测试
 //    String IMAGE = "http://ktv.ctkey.com.cn";
-    String BASE = "http://ktv.51tzl.cn";// 测试
+
+    String BASE = "http://ktv.51tzl.cn";//
     String IMAGE = "http://ktv.51tzl.cn";
+
+//    String BASE = "http://testapi.51tzl.cn";// 测试
+//    String IMAGE = "http://testapi.51tzl.cn";
 
     // 模块
     String API = "/Api/";// 用户模块
@@ -174,10 +181,23 @@ public interface Network {
 
     interface  LH_API {
 
-        //登录
+        //订单列表
         @Multipart
         @POST("User/bookList")
-        Observable<BaseResponseModel<BookListModel.ContentBean>> bookList(@Part MultipartBody.Part file, @Part MultipartBody.Part fileB, @Part MultipartBody.Part filec);
+        Observable<BaseResponseModel<BookListModel.ContentBean>> bookList(@Part MultipartBody.Part file, @Part MultipartBody.Part fileB, @Part MultipartBody.Part filec, @Part MultipartBody.Part filed);
+
+
+        //订单详情
+        @Multipart
+        @POST("User/orderDetail")
+        Observable<BaseResponseModel<OrderDetailModel.ContentBean>> orderDetail(@Part MultipartBody.Part file, @Part MultipartBody.Part fileB);
+
+        //取消预订
+        @Multipart
+        @POST("User/cancle_order")
+        Observable<BaseResponseModel<CancleOrderModel.ContentBean>> cancle_order(@Part MultipartBody.Part file, @Part MultipartBody.Part fileB);
+
+
 
 
 

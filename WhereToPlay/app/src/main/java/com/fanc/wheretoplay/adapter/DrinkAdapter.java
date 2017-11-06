@@ -37,7 +37,7 @@ public class DrinkAdapter extends RecyclerView.Adapter<DrinkAdapter.ViewHolder> 
         StringBuilder stringBuilder = new StringBuilder();
         holder.mTvDrinkPrice.setText(stringBuilder.append(mContext.getResources().getString(R.string.drinks_price_1)).append(mHouseNews.get(position).getPrice()).append( mContext.getResources().getString(R.string.drinks_price_2)));
         holder.mTvDrinkName.setText(mHouseNews.get(position).getName());
-//        holder.mTvDrinkAction.setText(mHouseNews.get(position).);
+        holder.mTvDrinkAction.setText(mHouseNews.get(position).getActivity());
     }
 
     @Override

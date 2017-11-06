@@ -351,4 +351,9 @@
     <string name="housenews_lowest">最低消费</string>
     <string name="housenews_housenews">房态</string>
     <string name="order_details">订单详情</string>
+
+
+    <string name="image">图片</string>
+    <string name="preview">预览</string>
+    <string name="select">选择</string>
 </resources>

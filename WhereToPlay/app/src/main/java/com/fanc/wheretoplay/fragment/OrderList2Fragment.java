@@ -16,8 +16,11 @@ import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.DetailsOrderActivity;
 import com.fanc.wheretoplay.adapter.OrdersAdapter;
 import com.fanc.wheretoplay.base.BaseFragment;
+import com.fanc.wheretoplay.datamodel.BookListModel;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
+import com.fanc.wheretoplay.presenter.OrdelListFragmentPresenter;
 import com.fanc.wheretoplay.util.UIUtils;
+import com.fanc.wheretoplay.view.OrderListFragmentView;
 import com.fanc.wheretoplay.view.PullToRefreshLayout;
 import com.fanc.wheretoplay.view.PullableRecyclerView;
 
@@ -33,13 +36,17 @@ import butterknife.Unbinder;
  * Created by admin on 2017/11/1.
  */
 
-public class OrderBookFragment extends BaseFragment implements PullToRefreshLayout.OnRefreshListener {
+public class OrderList2Fragment extends BaseFragment implements PullToRefreshLayout.OnRefreshListener,OrderListFragmentView {
     @BindView(R.id.rv_pay)
     PullableRecyclerView mRvOrder;
     Unbinder unbinder;
     @BindView(R.id.ptrl_pay_reserve)
     PullToRefreshLayout ptrlPayReserve;
+    public static final String TYPE = "2";
 
+    public int currentPage ;
+    private OrdelListFragmentPresenter ordelListFragmentPresenter;
+    private OrdersAdapter myAdapter;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = View.inflate(inflater.getContext(), R.layout.orderlistallfragment, null);
@@ -48,17 +55,19 @@ public class OrderBookFragment extends BaseFragment implements PullToRefreshLayo
         LinearLayoutManager lm = new LinearLayoutManager(mContext);
         lm.setOrientation(LinearLayoutManager.VERTICAL);
         mRvOrder.setLayoutManager(lm);
-        List orders = new ArrayList<>();
-       // OrdersAdapter orderAdapter = new OrdersAdapter(mContext,this);
+
+
         mRvOrder.addItemDecoration(new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL,
                 UIUtils.dp2Px(1), mContext.getResources().getColor(R.color.pay_reserve_list_divider_white)));
-       //  mRvOrder.setAdapter(orderAdapter);
         mRvOrder.setItemAnimator(new DefaultItemAnimator());
-
         mRvOrder.setCanPullDown(true);
         mRvOrder.setCanPullUp(true);
 
         ptrlPayReserve.setOnRefreshListener(this);
+        currentPage = 0;
+
+        ordelListFragmentPresenter = new OrdelListFragmentPresenter(mContext,this);
+        ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
 
 
         return view;
@@ -73,12 +82,16 @@ public class OrderBookFragment extends BaseFragment implements PullToRefreshLayo
 
     @Override
     public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
-
+        currentPage=0;
+        ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
     }
 
     @Override
     public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
-
+        if (myAdapter.getItemCount() >= 10) {
+            currentPage++;
+            ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onLoadMore");
+        }
     }
 
     @Override
@@ -87,5 +100,37 @@ public class OrderBookFragment extends BaseFragment implements PullToRefreshLayo
         if (requestCode==1001){
             Toast.makeText(mContext, "1001", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void setOrderListFragmentData(BookListModel.ContentBean contentBean, String action) {
+
+
+
+        if (contentBean.list != null) {
+            if ("onRefresh".equals(action)) {
+                if ("onLoadMore".equals(action) && myAdapter != null) {
+                    myAdapter.notifyDataSetChanged();
+                } else {
+                    myAdapter = new OrdersAdapter(mContext,OrderList2Fragment.this,contentBean);
+                    mRvOrder.setAdapter(myAdapter);
+                }
+            } else if ("onLoadMore".equals(action)) {
+                if (contentBean.list.size() > 0) {
+                 //   loadMoreFooterView.setStatus(LoadMoreFooterView.Status.GONE);
+                    myAdapter.append(contentBean.list);
+
+                } else {
+               //     loadMoreFooterView.setStatus(LoadMoreFooterView.Status.THE_END);
+                }
+
+            }
+        } else {
+            //loadMoreFooterView.setStatus(LoadMoreFooterView.Status.THE_END);
+        }
+
+
+
+
     }
 }

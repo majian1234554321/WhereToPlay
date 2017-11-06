@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
+import android.graphics.Matrix;
+import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -13,10 +16,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.animation.GlideAnimation;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.target.Target;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.CheckCommentsActivity;
 import com.fanc.wheretoplay.activity.LargeImageActivity;
@@ -59,17 +66,26 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
         WindowManager windowManager = ((CheckCommentsActivity) mContext).getWindowManager();
         dm = new DisplayMetrics();
         windowManager.getDefaultDisplay().getMetrics(dm);
-        lp = new RelativeLayout.LayoutParams((dm.widthPixels - UIUtils.dp2Px(45)) / 4, (dm.widthPixels - UIUtils.dp2Px(45)) / 4);
-        binding.cl.setLayoutParams(lp);
         return holder;
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
-//        binding.cl.setLayoutParams(lp);
-//        holder.mIvCardView.setLayoutParams(lp);
-        Log.e("wade", "onBindViewHolder: "+ holder.mIvCardView.getWidth() +"\t" + holder.mIvCardView.getHeight());
-        Glide.with(mContext).load(Network.IMAGE + mPictureList.get(position)).placeholder(R.drawable.default_rect).into(holder.mIvCardView);
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
+        Glide.with(mContext).load(Network.IMAGE + mPictureList.get(position)).asBitmap().placeholder(R.drawable.default_rect).into(new SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL,Target.SIZE_ORIGINAL) {
+            @Override
+            public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
+                //这个bitmap就是你图片url加载得到的结果
+                //获取bitmap信息，可赋值给外部变量操作，也可在此时行操作。
+                ViewGroup.LayoutParams layoutParams =  binding.cl.getLayoutParams();//获取你要填充图片的布局的layoutParam
+                layoutParams.height = (dm.widthPixels - UIUtils.dp2Px(45)) / 4;
+                //因为是2列,所以宽度是屏幕的一半,高度是根据bitmap的高/宽*屏幕宽的一半
+                layoutParams.width =  (dm.widthPixels - UIUtils.dp2Px(45)) / 4;//这个是布局的宽度
+                binding.cl.setLayoutParams(layoutParams);//容器的宽高设置好了
+                bitmap = zoomImg(bitmap, layoutParams.width, layoutParams.height);
+                // 然后在改变一下bitmap的宽高
+                holder.mIvCardView.setImageBitmap(bitmap);
+            }
+        });
         imgs.add(mPictureList.get(position));
         //点击事件
         holder.mIvCardView.setOnClickListener(new View.OnClickListener() {
@@ -82,6 +98,22 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
 
             }
         });
+    }
+
+    //改变bitmap尺寸的方法
+    public static Bitmap zoomImg(Bitmap bm, int newWidth, int newHeight) {
+        // 获得图片的宽高
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        // 计算缩放比例
+        float scaleWidth = ((float) newWidth) / width;
+        float scaleHeight = ((float) newHeight) / height;
+        // 取得想要缩放的matrix参数
+        Matrix matrix = new Matrix();
+        matrix.postScale(scaleWidth, scaleHeight);
+        // 得到新的图片
+        Bitmap newbm = Bitmap.createBitmap(bm, 0, 0, width, height, matrix, true);
+        return newbm;
     }
 
     @Override
