@@ -12,8 +12,10 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.alipay.sdk.app.PayTask;
@@ -80,9 +82,21 @@ public class OrderPayActivity extends BaseActivity implements RadioGroup.OnCheck
     TextView tvPayBillPaySumReal;
     @BindView(R.id.btn_pay_bill)
     Button btnPayBill;
+    @BindView(R.id.relativeLayout)
+    RelativeLayout relativeLayout;
+    @BindView(R.id.ll_not_participation)
+    LinearLayout llNotParticipation;
+    @BindView(R.id.ll_pay_bill_discount_coupon)
+    LinearLayout llPayBillDiscountCoupon;
+    @BindView(R.id.ll_pay_bill_weixin)
+    LinearLayout llPayBillWeixin;
+    @BindView(R.id.ll_pay_bill_ali)
+    LinearLayout llPayBillAli;
+    @BindView(R.id.ll_pay_bill_balance)
+    LinearLayout llPayBillBalance;
     private IWXAPI wxApi;
     private String order_idValue;
-    private String store_idValue;
+    private String store_idValue, store_nameValue, store_addressValue;
 
     String discountId;
 
@@ -98,30 +112,14 @@ public class OrderPayActivity extends BaseActivity implements RadioGroup.OnCheck
 
         order_idValue = getIntent().getStringExtra("order_id");
         store_idValue = getIntent().getStringExtra("store_id");
+        store_addressValue = getIntent().getStringExtra("store_address");
+        store_nameValue = getIntent().getStringExtra("store_name");
 
+        tvPayBillStore.setText(store_nameValue);
+        tvPayBillAddress.setText(store_addressValue);
 
 
     }
-
-    @OnClick(R.id.btn_pay_bill)
-    public void onViewClicked(View view) {
-        switch (view.getId()) {
-            case R.id.btn_pay_bill:
-                switch (payWay) {
-                    case 1:
-                        payOrder();
-                        break;
-                    case 2:
-                        payOrder();
-                        break;
-                    case 3:
-                        break;
-                }
-                break;
-
-        }
-    }
-
 
     private void payOrder() {
         Map<String, String> params = new HashMap<>();
@@ -157,7 +155,7 @@ public class OrderPayActivity extends BaseActivity implements RadioGroup.OnCheck
                         try {
                             JSONObject object = new JSONObject(response);
                             JSONObject json = object.getJSONObject("content");
-                            if (payWay==1) {// 支付宝
+                            if (payWay == 1) {// 支付宝
                                 order_idValue = json.getString("orderform_id");
                                 discountId = json.getString("coupon_id");
                                 // 唤起支付宝
@@ -165,7 +163,7 @@ public class OrderPayActivity extends BaseActivity implements RadioGroup.OnCheck
 
                                 aliPay(json.getString("orderString"));
                             }
-                            if (payWay ==2) {// 微信
+                            if (payWay == 2) {// 微信
                                 wxPay(json);
                             }
                         } catch (JSONException e) {
@@ -200,7 +198,6 @@ public class OrderPayActivity extends BaseActivity implements RadioGroup.OnCheck
         Thread payThread = new Thread(payRunnable);
         payThread.start();
     }
-
 
 
     private final int ALI_PAY = 1;
@@ -260,7 +257,6 @@ public class OrderPayActivity extends BaseActivity implements RadioGroup.OnCheck
     }
 
 
-
     // 支付成功去评价
     private void paySuccess() {
         // 去评价
@@ -276,11 +272,6 @@ public class OrderPayActivity extends BaseActivity implements RadioGroup.OnCheck
         LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent1);
         finish();
     }
-
-
-
-
-
 
 
     /**
@@ -306,15 +297,6 @@ public class OrderPayActivity extends BaseActivity implements RadioGroup.OnCheck
     }
 
 
-
-
-
-
-
-
-
-
-
     public int payWay = Constants.PAY_WAY_WEIXIN;
 
     @Override
@@ -330,6 +312,32 @@ public class OrderPayActivity extends BaseActivity implements RadioGroup.OnCheck
                 payWay = Constants.PAY_WAY_BALANCE;
                 break;
 
+        }
+    }
+
+    @OnClick({R.id.ll_pay_bill_discount_coupon, R.id.ll_pay_bill_weixin, R.id.ll_pay_bill_ali, R.id.ll_pay_bill_balance,R.id.btn_pay_bill})
+    public void onViewClicked(View view) {
+        switch (view.getId()) {
+            case R.id.ll_pay_bill_discount_coupon:
+                break;
+            case R.id.ll_pay_bill_weixin:
+                break;
+            case R.id.ll_pay_bill_ali:
+                break;
+            case R.id.ll_pay_bill_balance:
+                break;
+            case R.id.btn_pay_bill:
+                switch (payWay) {
+                    case 1:
+                        payOrder();
+                        break;
+                    case 2:
+                        payOrder();
+                        break;
+                    case 3:
+                        break;
+                }
+                break;
         }
     }
 }

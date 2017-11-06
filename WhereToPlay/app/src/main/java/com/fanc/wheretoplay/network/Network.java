@@ -26,7 +26,6 @@ public interface Network {
 //    String BASE = "http://ktv.ctkey.com.cn";// 测试
 //    String IMAGE = "http://ktv.ctkey.com.cn";
 
-
     String BASE = "http://testapi.51tzl.cn";
     //String BASE = "http://ktv.51tzl.cn";// 测试
     String IMAGE = "http://ktv.51tzl.cn";

@@ -13,7 +13,7 @@ android {
         minSdkVersion 17
         targetSdkVersion 27
         versionCode 20171103
-        versionName "1.1.0"
+        versionName "1.1.1"
 
 
         sourceSets.main {
@@ -88,8 +88,6 @@ dependencies {
     //    compile project(':datetimepicker')
     compile 'com.sina.weibo.sdk:core:4.1.0:openDefaultRelease@aar'
     compile files('libs/libammsdk.jar')
-
-
     compile 'com.android.support:multidex:1.0.1'
     compile 'com.youth.banner:banner:1.4.10'
     compile 'com.google.code.gson:gson:2.7'
@@ -114,6 +112,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'com.qiyukf.unicorn:unicorn:3.11.1'
+    compile files('libs/open_sdk_r5886_lite.jar')
 }
 
 //def gitSha() {

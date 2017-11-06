@@ -10,6 +10,7 @@ import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 
@@ -18,6 +19,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.fanc.wheretoplay.R;
 
 import com.fanc.wheretoplay.base.BaseActivity;
@@ -36,6 +38,7 @@ import com.sina.weibo.sdk.constant.WBConstants;
 import com.sina.weibo.sdk.share.WbShareCallback;
 import com.sina.weibo.sdk.share.WbShareHandler;
 import com.tencent.connect.share.QQShare;
+import com.tencent.connect.share.QzonePublish;
 import com.tencent.connect.share.QzoneShare;
 import com.tencent.mm.sdk.constants.ConstantsAPI;
 import com.tencent.mm.sdk.modelbase.BaseReq;
@@ -67,9 +70,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 
-
-
-public class ShareActivity extends BaseActivity implements  IWXAPIEventHandler, WbShareCallback {
+public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, WbShareCallback {
     @BindView(R.id.btn_share_wechat)
     TextView btnShareWechat;
     @BindView(R.id.btn_share_pyq)
@@ -89,10 +90,10 @@ public class ShareActivity extends BaseActivity implements  IWXAPIEventHandler, 
     private IWXAPI api;
     private Bitmap bmp;
     private String url = "www.baidu.com";
-    private int type =2;
+    private int type = 2;
 
     private String desc = "乐互详情";
-    private String contentTitle= "乐互" ;
+    private String contentTitle = "乐互";
     private String shareUrl = "www.baidu.com";
     private String imgUrl = "www.baidushare.com";
     private Bitmap thumb;
@@ -113,10 +114,10 @@ public class ShareActivity extends BaseActivity implements  IWXAPIEventHandler, 
         String APP_ID = "wx424026eca78d03e6";
         // 注册应用到QQ
         api = WXAPIFactory.createWXAPI(this, APP_ID, true);
-        mTencent = Tencent.createInstance(Constants.QQAPPID, this);
+        mTencent = Tencent.createInstance(Constants.QQAPPID, this.getApplicationContext());
         // 注册应用到新浪微博
 
-        WbSdk.install(this,new AuthInfo(this, Constants_sina.APP_KEY, Constants_sina.REDIRECT_URL, Constants_sina.SCOPE));
+        WbSdk.install(this, new AuthInfo(this, Constants_sina.APP_KEY, Constants_sina.REDIRECT_URL, Constants_sina.SCOPE));
         shareHandler = new WbShareHandler(this);
         shareHandler.registerApp();
 
@@ -153,11 +154,26 @@ public class ShareActivity extends BaseActivity implements  IWXAPIEventHandler, 
 
     }
 
+    private void sendSMS(String webUrl) {
+        String smsBody = "我正在浏览这个,觉得真不错,推荐给你哦~ 地址:" + webUrl;
+        Uri smsToUri = Uri.parse("smsto:");
+        Intent sendIntent = new Intent(Intent.ACTION_VIEW, smsToUri);
+        //sendIntent.putExtra("address", "123456"); // 电话号码，这行去掉的话，默认就没有电话
+        //短信内容
+        sendIntent.putExtra("sms_body", smsBody);
+        sendIntent.setType("vnd.android-dir/mms-sms");
+        startActivityForResult(sendIntent, 1002);
+    }
 
 
-    @OnClick({R.id.btn_share_wechat, R.id.btn_share_pyq, R.id.btn_share_weibo, R.id.btn_share_qq, R.id.btn_share_qzone})
+    @OnClick({R.id.btn_share_wechat, R.id.btn_share_pyq, R.id.btn_share_weibo, R.id.btn_share_qq, R.id.btn_share_qzone,R.id.btn_sms})
     public void onClick(View view) {
         switch (view.getId()) {
+
+            case R.id.btn_sms:
+                sendSMS("121212121");
+                break;
+
             case R.id.btn_share_wechat:
                 if (!isApkAvilible(this, "com.tencent.mm")) {
                     Toast.makeText(this, "没有安装微信", Toast.LENGTH_SHORT).show();
@@ -239,7 +255,7 @@ public class ShareActivity extends BaseActivity implements  IWXAPIEventHandler, 
                 WXMediaMessage msg1 = new WXMediaMessage(webpage);
                 msg1.title = contentTitle;
                 msg1.description = desc;
-                 Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
+                Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
                 if (thumb != null) {
                     Bitmap thumb2 = Bitmap.createScaledBitmap(thumb, 120, 120, true);//压缩Bitmap
                     msg1.thumbData = ImageUtils.bmpToByteArray(thumb2, true);
@@ -261,6 +277,7 @@ public class ShareActivity extends BaseActivity implements  IWXAPIEventHandler, 
 
     /**
      * 创建文本消息对象。
+     *
      * @return 文本消息对象。
      */
     private TextObject getTextObj() {
@@ -282,7 +299,6 @@ public class ShareActivity extends BaseActivity implements  IWXAPIEventHandler, 
     }
 
 
-
     /**
      * 分享纯图片到微博
      */
@@ -297,9 +313,6 @@ public class ShareActivity extends BaseActivity implements  IWXAPIEventHandler, 
                 shareHandler.shareMessage(weiboMessage, false);
 
 
-
-
-
                 break;
         }
     }
@@ -308,30 +321,15 @@ public class ShareActivity extends BaseActivity implements  IWXAPIEventHandler, 
      * 分享纯图片到QQ空间
      */
     private void shareQzone() {
-        switch (type) {
-            case 1:
-                Bundle params = new Bundle();
-                params.putString(QzoneShare.SHARE_TO_QQ_TITLE, "乐互");
-                params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, "乐互");
-                params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL, "http://www.weibo.com/champdas");
-                ArrayList<String> imgUrls = new ArrayList<>();
-                imgUrls.add(url);
-                params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, imgUrls);
-                mTencent.shareToQzone(this, params, new BaseUiListener());
-                break;
-            case 2:
-                final Bundle paramsQzone = new Bundle();
-                paramsQzone.putInt(QzoneShare.SHARE_TO_QZONE_KEY_TYPE, QzoneShare.SHARE_TO_QZONE_TYPE_IMAGE_TEXT);
-                paramsQzone.putString(QzoneShare.SHARE_TO_QQ_TITLE, contentTitle);
-                paramsQzone.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, desc);
-                paramsQzone.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL, shareUrl);
-                ArrayList imageUrls = new ArrayList();
-                imageUrls.add(imgUrl);
-                paramsQzone.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, imageUrls);
-                paramsQzone.putInt(QzoneShare.SHARE_TO_QQ_EXT_INT, QQShare.SHARE_TO_QQ_FLAG_QZONE_AUTO_OPEN);
-                mTencent.shareToQzone(this, paramsQzone, new BaseUiListener());
-                break;
-        }
+        final Bundle params = new Bundle();
+        params.putInt(QzoneShare.SHARE_TO_QZONE_KEY_TYPE, QzoneShare.SHARE_TO_QZONE_TYPE_IMAGE_TEXT);
+        params.putString(QzoneShare.SHARE_TO_QQ_TITLE, "标题");// 标题
+        params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, "要分享的摘要");// 摘要
+        params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL, "http://www.qq.com/news/1.html");// 内容地址
+        ArrayList<String> imgUrlList = new ArrayList<>();
+        imgUrlList.add("http://f.hiphotos.baidu.com/image/h%3D200/sign=6f05c5f929738bd4db21b531918a876c/6a600c338744ebf8affdde1bdef9d72a6059a702.jpg");
+        params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, imgUrlList);// 图片地址
+        mTencent.shareToQzone(this, params, new BaseUiListener());
 
     }
 
@@ -339,9 +337,10 @@ public class ShareActivity extends BaseActivity implements  IWXAPIEventHandler, 
      * 分享纯图片到QQ好友
      */
     private void shareQQ() {
+        Bundle params = new Bundle();
         switch (type) {
             case 1:
-                Bundle params = new Bundle();
+
                 params.putString(QQShare.SHARE_TO_QQ_IMAGE_LOCAL_URL, url);
                 params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "乐互");
                 params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_IMAGE);
@@ -349,15 +348,14 @@ public class ShareActivity extends BaseActivity implements  IWXAPIEventHandler, 
                 mTencent.shareToQQ(this, params, new BaseUiListener());
                 break;
             case 2:
-                final Bundle params2 = new Bundle();
-                params2.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
-                params2.putString(QQShare.SHARE_TO_QQ_TITLE, contentTitle);
-                params2.putString(QQShare.SHARE_TO_QQ_SUMMARY, desc);
-                params2.putString(QQShare.SHARE_TO_QQ_TARGET_URL, shareUrl);
-                params2.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, imgUrl);
-                params2.putString(QQShare.SHARE_TO_QQ_APP_NAME, "乐互");
-                params2.putInt(QQShare.SHARE_TO_QQ_EXT_INT, 123);
-                mTencent.shareToQQ(this, params2, new BaseUiListener());
+                params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
+                params.putString(QQShare.SHARE_TO_QQ_TITLE, "要分享的标题");
+                params.putString(QQShare.SHARE_TO_QQ_SUMMARY, "要分享的摘要");
+                params.putString(QQShare.SHARE_TO_QQ_TARGET_URL, "http://www.qq.com/news/1.html");
+                params.putString(QQShare.SHARE_TO_QQ_IMAGE_URL, "http://imgcache.qq.com/qzone/space_item/pre/0/66768.gif");
+                params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "测试应用222222");
+                mTencent.shareToQQ(this, params, new BaseUiListener());
+
                 break;
         }
 
@@ -369,11 +367,9 @@ public class ShareActivity extends BaseActivity implements  IWXAPIEventHandler, 
         setIntent(intent);
         // 当前应用唤起微博并进行分享后，需要在此调用该函数
         // 来接收微博客户端返回的数据；执行成功，返回true,并调用
-        shareHandler.doResultIntent(intent,this);
+        shareHandler.doResultIntent(intent, this);
         ShareActivity.this.setResult(100, getIntent());
     }
-
-
 
 
     @Override
@@ -432,12 +428,15 @@ public class ShareActivity extends BaseActivity implements  IWXAPIEventHandler, 
         this.finish();
     }
 
+
     private class BaseUiListener implements IUiListener {
         @Override
-        public void onComplete(Object o) {
+        public void onComplete(Object response) {
 //            ToastUtils.showToastOnUiThread(ShareActivity.this,"分享成功！");
             ShareActivity.this.setResult(100, getIntent());
             ShareActivity.this.finish();
+
+            doComplete((JSONObject) response);
         }
 
         protected void doComplete(JSONObject values) {
@@ -458,12 +457,13 @@ public class ShareActivity extends BaseActivity implements  IWXAPIEventHandler, 
     }
 
 
-
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (null != mTencent)
             Tencent.onActivityResultData(requestCode, resultCode, data, new BaseUiListener());
+
+
     }
 
 /*    @Override
