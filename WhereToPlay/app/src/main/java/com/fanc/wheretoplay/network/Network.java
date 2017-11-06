@@ -36,6 +36,8 @@ public interface Network {
     // 手机系统
     String PHONE_ANDROID = "android";
 
+    public void chang();
+
     interface User {
         String USER = BASE + API;
 

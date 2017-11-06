@@ -3,8 +3,10 @@ package com.fanc.wheretoplay.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
@@ -26,6 +28,8 @@ public class ItemView extends RelativeLayout {
     View mViewLine;
     TextView mTvRightText;
     TextView mTvContent;
+    private Switch mIvSwitch;
+    private CheckStatus mCheckListener;
 
     public ItemView(Context context) {
         super(context);
@@ -35,13 +39,16 @@ public class ItemView extends RelativeLayout {
     public ItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView();
+        setListener();
     }
+
 
     private void initView() {
         View view = View.inflate(getContext(), R.layout.view_item, this);
         mIvIcon = (ImageView) view.findViewById(R.id.item_view_icon);
         mTvText = (TextView) view.findViewById(R.id.item_view_text);
         mIvArrow = (ImageView) view.findViewById(R.id.item_view_arrow);
+        mIvSwitch = (Switch) view.findViewById(R.id.item_view_switch);
         mViewLine = view.findViewById(R.id.item_view_line);
         mTvRightText = (TextView) view.findViewById(R.id.item_view_right_text);
         mTvContent = (TextView) view.findViewById(R.id.item_view_content);
@@ -132,6 +139,12 @@ public class ItemView extends RelativeLayout {
 
     }
 
+    public void setSwitchToShow(boolean isShow){
+        if (isShow) {
+            mIvSwitch.setVisibility(View.VISIBLE);
+        }
+    }
+
     /**
      * 设置右侧文本的颜色
      *
@@ -208,5 +221,23 @@ public class ItemView extends RelativeLayout {
      */
     public void setContentText(int resId) {
         mTvContent.setText(UIUtils.getString(resId));
+    }
+
+
+    private void setListener() {
+       mIvSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+           @Override
+           public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+               mCheckListener.statusChange(b);
+           }
+       });
+    }
+
+    public void setCheckListener(CheckStatus checkListener){
+        this.mCheckListener = checkListener;
+    }
+
+    public interface CheckStatus{
+        public void statusChange(boolean b);
     }
 }

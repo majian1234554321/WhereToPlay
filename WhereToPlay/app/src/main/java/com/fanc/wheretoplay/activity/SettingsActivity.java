@@ -19,6 +19,7 @@ import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -59,6 +60,7 @@ public class SettingsActivity extends BaseActivity {
     ItemView mIvSettingCheckToUpdate;
     ItemView mIvSettingClearCache;
     ItemView mIvSettingAboutUs;
+    private ItemView mIvChangeEnvironment;
     Button mBtnSettingsSignOut;
     // 缓存清理工具
     GlideCatchUtil catchUtil;
@@ -66,6 +68,7 @@ public class SettingsActivity extends BaseActivity {
     ProgressDialog mDialog;
     // 下载完成后的广播
     Receiver receiver;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,6 +88,7 @@ public class SettingsActivity extends BaseActivity {
         mIvSettingClearCache = settingsBinding.ivSettingsClearCache;
         mIvSettingAboutUs = settingsBinding.ivSettingsAboutUs;
         mBtnSettingsSignOut = settingsBinding.btnSettingsSignOut;
+        mIvChangeEnvironment = settingsBinding.ivChangeEnvironment;
     }
 
     private void init() {
@@ -92,6 +96,9 @@ public class SettingsActivity extends BaseActivity {
         mTmSettings.setTitle(R.string.settings);
         mTmSettings.setTitleColor(getResources().getColor(R.color.white));
 
+        mIvChangeEnvironment.isShowIcon(false);
+        mIvChangeEnvironment.setText(R.string.changeEnv);
+        mIvChangeEnvironment.setSwitchToShow(true);
         mIvSettingSetPayPwd.isShowIcon(false);
         mIvSettingSetPayPwd.setText(R.string.set_pay_pwd);
         mIvSettingSetPayPwd.setRightIcon(R.drawable.right);
@@ -131,6 +138,16 @@ public class SettingsActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        mIvChangeEnvironment.setCheckListener(new ItemView.CheckStatus() {
+            @Override
+            public void statusChange(boolean isopen) {
+                if (isopen) {
+
+                } else {
+
+                }
             }
         });
     }
