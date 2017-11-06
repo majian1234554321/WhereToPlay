@@ -267,6 +267,8 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
         // 是否可以上下拉
         mSvReserve.setCanPullDown(true);
         mSvReserve.setCanPullUp(true);
+
+
     }
 
     private void setListener() {

@@ -25,11 +25,11 @@ public interface Network {
 //    String BASE = "http://ktv.ctkey.com.cn";// 测试
 //    String IMAGE = "http://ktv.ctkey.com.cn";
 
-    String BASE = "http://ktv.51tzl.cn";//
-    String IMAGE = "http://ktv.51tzl.cn";
+//    String BASE = "http://ktv.51tzl.cn";//
+//    String IMAGE = "http://ktv.51tzl.cn";
 
-//    String BASE = "http://testapi.51tzl.cn";// 测试
-//    String IMAGE = "http://testapi.51tzl.cn";
+    String BASE = "http://testapi.51tzl.cn";// 测试
+    String IMAGE = "http://testapi.51tzl.cn";
 
     // 模块
     String API = "/Api/";// 用户模块

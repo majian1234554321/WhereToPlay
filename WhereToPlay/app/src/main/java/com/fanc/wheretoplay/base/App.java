@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 
+import com.fanc.wheretoplay.MainActivity;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.image.GlideGalleryImageLoader;
 import com.fanc.wheretoplay.util.Constants;
@@ -83,6 +84,7 @@ public class App extends Application {
     private YSFOptions options() {
         YSFOptions options = new YSFOptions();
         options.statusBarNotificationConfig = new StatusBarNotificationConfig();
+//        options.statusBarNotificationConfig.notificationEntrance = new MainActivity();
         options.savePowerConfig = new SavePowerConfig();
         options.uiCustomization = new UICustomization();
         options.uiCustomization.topTipBarBackgroundColor = getResources().getColor(R.color.text_red);

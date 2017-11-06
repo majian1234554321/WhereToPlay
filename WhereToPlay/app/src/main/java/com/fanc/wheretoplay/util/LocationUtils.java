@@ -132,12 +132,12 @@ public class LocationUtils {
             // GPS 定位 61，离线定位 66，网络定位成功 161
             if (callback != null) {
                 callback.onReceiveLocation(bdLocation);
-                Log.v("aaa", "bdLocation:" + bdLocation.toString());
+                Log.e("hpzl", "bdLocation:" + bdLocation.toString());
             }
             location = bdLocation;
-            Log.d("haaa", "onReceiveLocation: City = " + bdLocation.getCity());
-            Log.i("haaa", "onReceiveLocation: Address = " + bdLocation.getAddrStr());
-            Log.w("haaa", "onReceiveLocation: \n lat = " + bdLocation.getLatitude() + "\n lnt = " + bdLocation.getLongitude());
+            Log.e("hpzl", "onReceiveLocation: City = " + bdLocation.getCity() + "\t" + bdLocation.getLocType());
+            Log.e("hpzl", "onReceiveLocation: Address = " + bdLocation.getAddrStr());
+            Log.e("hpzl", "onReceiveLocation: \n lat = " + bdLocation.getLatitude() + "\n lnt = " + bdLocation.getLongitude());
         }
 
         @Override

@@ -4,6 +4,7 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -128,7 +129,7 @@ public class CityAdapter extends BaseAdapter<CityResource.City> {
                 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTvCurrentCity.getLayoutParams();
                 lp.width = (screenWidth - UIUtils.dp2Px(86)) / 3;
                 mTvCurrentCity.setLayoutParams(lp);
-                switch (locateState) {
+                switch (locateState) {   //结果
                     case LocationUtils.LOCATING:
                         mTvCurrentCity.setText("定位中");
                         break;
@@ -139,10 +140,11 @@ public class CityAdapter extends BaseAdapter<CityResource.City> {
                         mTvCurrentCity.setText("定位失败");
                         break;
                 }
+                //定位text点击事件
                 mTvCurrentCity.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (locateState == LocationUtils.FAIL) {
+                        if (locateState == LocationUtils.FAIL) {   //如果显示失败就再定位，刷新之后会显示结果如何
                             getLocation();
                             mTvCurrentCity.setText("定位中");
                         } else if (locateState == LocationUtils.SUCCESS) {
@@ -242,6 +244,7 @@ public class CityAdapter extends BaseAdapter<CityResource.City> {
             public void onReceiveLocation(BDLocation bdLocation) {
                 currentCity = bdLocation.getCity();
                 locateState = bdLocation.getLocType();
+                Log.e("hpzl",""+locateState);
                 // GPS定位61，离线定位成功66，网络定位成功161
                 if (locateState == 61) {
                     if (bdLocation.getLatitude() < 0) {// 定位失败
