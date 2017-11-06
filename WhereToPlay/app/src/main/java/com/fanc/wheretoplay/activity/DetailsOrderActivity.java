@@ -12,9 +12,9 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.PermissionChecker;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -31,16 +31,11 @@ import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.view.OrderetailsItemView;
 import com.fanc.wheretoplay.view.TitleBarView;
-import com.fanc.wheretoplay.view.TopMenu;
-
-import java.text.DecimalFormat;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.MultipartBody;
-import rx.Subscriber;
-import rx.subjects.Subject;
 
 public class DetailsOrderActivity extends BaseActivity {
 
@@ -91,7 +86,17 @@ public class DetailsOrderActivity extends BaseActivity {
 
     @BindView(R.id.tbv)
     TitleBarView tbv;
-    private String order_idValue, store_idValue;
+    @BindView(R.id.ll_buttom)
+    LinearLayout llButtom;
+    @BindView(R.id.tv_back)
+    TextView tvBack;
+    @BindView(R.id.ll)
+    RelativeLayout ll;
+    @BindView(R.id.item_view_line)
+    View itemViewLine;
+    @BindView(R.id.item_view_line2)
+    View itemViewLine2;
+    private String order_idValue, store_idValue, storeNameValue, statusValue;
 
     @BindView(R.id.rl)
     RelativeLayout rl;
@@ -120,6 +125,38 @@ public class DetailsOrderActivity extends BaseActivity {
 
         order_idValue = getIntent().getStringExtra("order_id");
         store_idValue = getIntent().getStringExtra("store_id");
+        storeNameValue = getIntent().getStringExtra("storeName");
+        statusValue = getIntent().getStringExtra("status");
+
+        if (statusValue != null) {
+            switch (statusValue) {
+                case "1":
+                    //("已取消");
+                    tv3.setVisibility(View.GONE);
+                    tv4.setVisibility(View.GONE);
+                    llButtom.setVisibility(View.GONE);
+                    tvBack.setVisibility(View.VISIBLE);
+                    break;
+                case "2":
+                    // holder.tv_payState.setText("预订成功");
+                    break;
+                case "3":
+                    // holder.tv_payState.setText("已取消");
+                    break;
+                case "4":
+                    // holder.tv_payState.setText("已结单");
+                    break;
+                case "5":
+                    //  holder.tv_payState.setText("已支付订金");
+                    break;
+                case "6":
+                    //  holder.tv_payState.setText("已支付订金");
+                    break;
+                default:
+                    break;
+            }
+        }
+
 
         loadData();
 
@@ -215,15 +252,28 @@ public class DetailsOrderActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_pay, R.id.tv_release, R.id.tv_cancel, R.id.rl, R.id.tv_call, R.id.tv_msn})
+    @OnClick({R.id.tv_pay, R.id.tv_release, R.id.tv_cancel, R.id.rl, R.id.tv_call, R.id.tv_msn,R.id.tv_back})
     public void onViewClicked(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
+            case R.id.tv_back:
+
+                break;
             case R.id.tv_pay:
+                intent.setClass(this, OrderPayActivity.class);
+                intent.putExtra("order_id", order_idValue);
+                intent.putExtra("store_id", store_idValue);
+                intent.putExtra("store_name", storeNameValue);
+
+                startActivity(intent);
+
+
                 break;
             case R.id.tv_release:
 
-                intent.setClass(this,PublicationEvaluationActivity.class);
+                intent.putExtra("order_id", order_idValue);
+                intent.putExtra("store_id", store_idValue);
+                intent.setClass(this, PublicationEvaluationActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_cancel:
@@ -232,17 +282,18 @@ public class DetailsOrderActivity extends BaseActivity {
 
                 MultipartBody.Part requestFileC =
                         MultipartBody.Part.createFormData("order_id", order_idValue);
-                Retrofit_RequestUtils.getRequest().cancle_order(requestFileA,requestFileC)
+                Retrofit_RequestUtils.getRequest().cancle_order(requestFileA, requestFileC)
                         .compose(RxHelper.<CancleOrderModel.ContentBean>handleResult())
                         .subscribe(new RxSubscribe<CancleOrderModel.ContentBean>() {
                             @Override
                             protected void _onNext(CancleOrderModel.ContentBean contentBean) {
-                                if (contentBean.is_cancle){
+                                if (contentBean.is_cancle) {
                                     finish();
-                                }else {
-                                    ToastUtils.showShortToast(DetailsOrderActivity.this,"取消订单失败");
+                                } else {
+                                    ToastUtils.showShortToast(DetailsOrderActivity.this, "取消订单失败");
                                 }
                             }
+
                             @Override
                             protected void _onError(String message) {
 
@@ -253,7 +304,7 @@ public class DetailsOrderActivity extends BaseActivity {
             case R.id.rl:
                 intent.putExtra(Constants.PAGE, Constants.MERCHANT_DETAIL);
                 intent.putExtra(Constants.STORE_ID, store_idValue);
-                intent.setClass(this,DetailActivity.class);
+                intent.setClass(this, DetailActivity.class);
                 startActivity(intent);
                 break;
             case R.id.tv_call:

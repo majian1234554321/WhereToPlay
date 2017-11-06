@@ -31,6 +31,7 @@ import com.fanc.wheretoplay.rx.RxHelper;
 import com.fanc.wheretoplay.rx.RxSubscribe;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.view.OrderListFragmentView;
+import com.fanc.wheretoplay.view.PullToRefreshLayout;
 
 import rx.Subscriber;
 import rx.subscriptions.CompositeSubscription;
@@ -43,14 +44,16 @@ public class OrdelListFragmentPresenter implements BasePresenter {
     public Context context;
     public OrderListFragmentView orderListFragmentView;
     private final CompositeSubscription mSubscriptions;
+    PullToRefreshLayout ptrlPayReserve;
 
 
 
 
-    public OrdelListFragmentPresenter(Context context, OrderListFragmentView orderListFragmentView) {
+    public OrdelListFragmentPresenter(Context context, OrderListFragmentView orderListFragmentView,PullToRefreshLayout ptrlPayReserve) {
         mSubscriptions = new CompositeSubscription();
         this.context = context;
         this.orderListFragmentView = orderListFragmentView;
+        this.ptrlPayReserve = ptrlPayReserve;
 
 
     }
@@ -88,25 +91,28 @@ public class OrdelListFragmentPresenter implements BasePresenter {
                 .subscribe(new RxSubscribe<BookListModel.ContentBean>() {
                     @Override
                     protected void _onNext(BookListModel.ContentBean contentBean) {
-                       /* if (iRecyclerView != null) {
-                            iRecyclerView.setRefreshing(false);
-                        }*/
+
 
 
                         if (contentBean!=null) {
+                            ptrlPayReserve.refreshFinish(PullToRefreshLayout.SUCCEED);
                             orderListFragmentView.setOrderListFragmentData(contentBean, action);
                         } else {
-
+                            ptrlPayReserve.refreshFinish(PullToRefreshLayout.FAIL);
                         }
                     }
 
                     @Override
                     protected void _onError(String message) {
-                       /* if (iRecyclerView != null) {
-                            iRecyclerView.setRefreshing(false);
-                        }*/
+                        if (ptrlPayReserve!=null){
+                            ptrlPayReserve.refreshFinish(PullToRefreshLayout.FAIL);
+                        }
+
                     }
                 }));
-
     }
+
+
+
+
 }

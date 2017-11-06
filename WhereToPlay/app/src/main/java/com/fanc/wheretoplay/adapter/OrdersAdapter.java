@@ -37,7 +37,6 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     public BookListModel.ContentBean dataBean;
 
 
-
     public OrdersAdapter(Context context, Fragment fragment, BookListModel.ContentBean dataBean) {
         this.context = context;
         this.fragment = fragment;
@@ -56,8 +55,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.putExtra("order_id",dataBean.list.get(position).order_id);
-                intent.putExtra("store_id",dataBean.list.get(position).store_id);
+                intent.putExtra("order_id", dataBean.list.get(position).order_id);
+                intent.putExtra("store_id", dataBean.list.get(position).store_id);
+                intent.putExtra("storeName", dataBean.list.get(position).name);
+                if (dataBean.list != null && dataBean.list.get(position).status != null) {
+                    intent.putExtra("status", dataBean.list.get(position).status);
+                }
                 intent.setClass(context, DetailsOrderActivity.class);
                 fragment.startActivityForResult(intent, 1001);
             }
@@ -68,41 +71,42 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         holder.tvPayItemRoom.setText(dataBean.list.get(position).room_type);
         holder.tvPayItemDecorate.setText(dataBean.list.get(position).decorate_type);
         holder.tvPayItemReserveRealCode.setText(dataBean.list.get(position).book_sn);
-        holder.tvPayItemPrice.setText("总价："+dataBean.list.get(position).total);
-        GlideImageLoader.display(context,holder.ivPayItem,IMAGE+ dataBean.list.get(position).cover);
+        holder.tvPayItemPrice.setText("总价：" + dataBean.list.get(position).total);
+        GlideImageLoader.display(context, holder.ivPayItem, IMAGE + dataBean.list.get(position).cover);
 
-        holder.tvPayItemRealTime.setText(DateFormatUtil.stampToDate(dataBean.list.get(position).arrival_time)+" 前");
+        holder.tvPayItemRealTime.setText(DateFormatUtil.stampToDate(dataBean.list.get(position).arrival_time) + " 前");
 
 
         //status：string，订单状态：1已取消,2预订成功,4已结单，5或6已支付订金
-        if (dataBean.list!=null&&dataBean.list.get(position).status!=null){
-        switch (dataBean.list.get(position).status) {
-            case "1":
-                holder.tv_payState.setText("已取消");
-                break;
-            case "2":
-                holder.tv_payState.setText("预订成功");
-                break;
-            case "3":
-                holder.tv_payState.setText("已取消");
-                break;
-            case "4":
-                holder.tv_payState.setText("已结单");
-                break;
-            case "5":
-                holder.tv_payState.setText("已支付订金");
-                break;
-            case "6":
-                holder.tv_payState.setText("已支付订金");
-                break;
-            default:
-                holder.tv_payState.setText("....");
-                break;
-        }}
+        if (dataBean.list != null && dataBean.list.get(position).status != null) {
+            switch (dataBean.list.get(position).status) {
+                case "1":
+                    holder.tv_payState.setText("已取消");
+                    break;
+                case "2":
+                    holder.tv_payState.setText("预订成功");
+                    break;
+                case "3":
+                    holder.tv_payState.setText("已取消");
+                    break;
+                case "4":
+                    holder.tv_payState.setText("已结单");
+                    break;
+                case "5":
+                    holder.tv_payState.setText("已支付订金");
+                    break;
+                case "6":
+                    holder.tv_payState.setText("已支付订金");
+                    break;
+                default:
+                    holder.tv_payState.setText("....");
+                    break;
+            }
+        }
 
 //book_type：string，预订类型 1-订金预订 2-信誉预订 3-充值
 
-        if (dataBean.list!=null&&dataBean.list.get(position).book_type!=null) {
+        if (dataBean.list != null && dataBean.list.get(position).book_type != null) {
             switch (dataBean.list.get(position).book_type) {
                 case "1":
                     holder.tvPayItemTitle.setText("预订方式：订金预订");
@@ -157,12 +161,10 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         TextView tvPayItemReserveRealCode;
         @BindView(R.id.tv_pay_item_price)
         TextView tvPayItemPrice;
-        @BindView(R.id.btn_check_comment)
-        Button btnCheckComment;
-        @BindView(R.id.btn_to_comment)
-        Button btnToComment;
+
+
         @BindView(R.id.btn_pay_cancel_reserve)
-        Button btnPayCancelReserve;
+        TextView btnPayCancelReserve;
         @BindView(R.id.btn_pay_consume)
         Button btnPayConsume;
 

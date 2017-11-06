@@ -12,7 +12,7 @@ public interface Constants {
      */
 
     public final static String WXAPPID = "wx424026eca78d03e6";
-    public final static String QQAPPID = "1105021586";
+    public final static String QQAPPID = "1106415195";
 
     String WX_APP_ID = "wx424026eca78d03e6";
     String WX_APP_SECRET = "f41673f89c694467745d16b81a13f212";
