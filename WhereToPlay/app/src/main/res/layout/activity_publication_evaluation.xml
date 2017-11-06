@@ -5,276 +5,253 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.fanc.wheretoplay.activity.PublicationEvaluationActivity">
+
     <com.fanc.wheretoplay.view.TitleBarView
-        android:layout_width="wrap_content"
         android:id="@+id/tbv"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"></com.fanc.wheretoplay.view.TitleBarView>
 
-        <ScrollView
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/cl_reserve"
+        android:layout_below="@+id/tbv">
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_above="@+id/cl_reserve"
-            android:layout_below="@+id/tbv">
+            android:background="@color/bg_gray"
+            android:orientation="vertical">
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@color/bg_gray"
-                android:orientation="vertical">
+                android:layout_height="wrap_content"
+                android:background="@color/white">
 
-                <RelativeLayout
+                <TextView
+                    android:id="@+id/tv_merchant_detail_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginBottom="8dp"
+                    android:layout_marginLeft="@dimen/margin_12"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:gravity="center_vertical"
+                    android:text="上海天地汇会所"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/textsize_level4" />
+
+                <TextView
+                    android:id="@+id/tv_merchant_reserve_address"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/white">
-
-                    <TextView
-                        android:id="@+id/tv_merchant_detail_title"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:text="上海天地汇会所"
-                        android:layout_marginLeft="@dimen/margin_12"
-                        android:layout_marginTop="@dimen/margin_10"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/text_black"
-                        android:textSize="@dimen/textsize_level4" />
-
-
-
-
-                    <TextView
-                        android:layout_below="@+id/tv_merchant_detail_title"
-                        android:drawableLeft="@drawable/reserve_address"
-                        android:drawablePadding="8dp"
-                        android:id="@+id/tv_merchant_reserve_address"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="@dimen/margin_10"
-                        android:layout_marginRight="@dimen/margin_20"
-                       android:text="上海市黄浦区嵩山路嵩山路嵩山路79号-2-f 1188.8km"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/text_black"
-                        android:textSize="14sp" />
-
-
-
-
-                    <TextView
-                        android:id="@+id/tv_merchant_detail_discount_sum"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignBottom="@+id/tv_merchant_detail_title"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/margin_10"
-                        android:background="@drawable/discount"
-                        android:gravity="center"
-                        android:paddingLeft="@dimen/padding_20"
-                        android:paddingRight="@dimen/padding_5"
-                        android:textColor="@color/text_white"
-                        android:textSize="@dimen/textsize_level4" />
-                </RelativeLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/line_height"
-                    android:background="@color/pay_reserve_list_divider_white" />
-
-                <!--查看全部评价-->
-                <LinearLayout
-                    android:id="@+id/ll_merchant_detail_comment"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_40"
-                    android:background="@color/white"
-                    android:orientation="horizontal">
-
-
-
-
-
-                    <TextView
-                        android:layout_width="match_parent"
-                       android:layout_margin="12dp"
-                        android:textColor="#999999"
-                        android:text="商家满足你的期待吗？说说它的优点和不足的地方吧"
-                        android:layout_height="wrap_content"
-                        />
-
-                    <View
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1" />
-
-
-                </LinearLayout>
-                <!--查看全部评价-->
-
-
-                <android.support.v7.widget.RecyclerView
-                    android:id="@+id/rv_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="10dp" />
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/line_height"
-                    android:background="@color/pay_reserve_list_divider_white" />
-
-
-                <!--原来的展示图片区域-->
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/line_height"
-                    android:background="@color/pay_reserve_list_divider_white" />
-
-
-
-
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/line_height"
-                    android:background="@color/pay_reserve_list_divider_white" />
-
-
-                <RelativeLayout
-                    android:padding="8dp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
-                    <CheckBox
-                        android:background="@drawable/selector_pay_way"
-                        android:layout_centerVertical="true"
-                        android:layout_width="wrap_content"
-                      android:id="@+id/checkbox"
-                        android:button="@null"
-                        android:gravity="center"
-                        android:layout_marginRight="8dp"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:layout_centerVertical="true"
-                        android:layout_toRightOf="@+id/checkbox"
-                        android:layout_width="wrap_content"
-                        android:text="匿名"
-                        android:layout_height="wrap_content" />
-
-                    <TextView
-                        android:layout_centerVertical="true"
-                        android:layout_alignParentRight="true"
-                        android:layout_width="wrap_content"
-                        android:text="您的评价将以匿名的形式展现"
-                        android:layout_height="wrap_content" />
-                </RelativeLayout>
-
-
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1px"
-                    android:background="#E5E5E5" />
+                    android:layout_below="@+id/tv_merchant_detail_title"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:layout_marginRight="@dimen/margin_20"
+                    android:drawableLeft="@drawable/reserve_address"
+                    android:drawablePadding="8dp"
+                    android:gravity="center_vertical"
+                    android:text="上海市黄浦区嵩山路嵩山路嵩山路79号-2-f 1188.8km"
+                    android:textColor="@color/text_black"
+                    android:textSize="14sp" />
 
 
                 <TextView
-    android:drawableLeft="@drawable/icon_shangjia"
-    android:layout_width="wrap_content"
-    android:text="商家评分"
-    android:layout_margin="12dp"
-    android:textSize="18sp"
-    android:drawablePadding="6dp"
-    android:textColor="#333333"
-    android:layout_height="wrap_content" />
+                    android:id="@+id/tv_merchant_detail_discount_sum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignBottom="@+id/tv_merchant_detail_title"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/margin_10"
+                    android:background="@drawable/discount"
+                    android:gravity="center"
+                    android:paddingLeft="@dimen/padding_20"
+                    android:paddingRight="@dimen/padding_5"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/textsize_level4" />
+            </RelativeLayout>
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="12dp"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:text="环境"
-                        android:textSize="16sp"
-                        android:textColor="#666666"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <RatingBar
-                        android:id="@+id/ratingbar1"
-                        style="@style/star"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_10"
-                        android:layout_marginTop="@dimen/margin_5"
-                        android:numStars="5"
-                        android:rating="3.5"
-                        android:stepSize="0.2" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="12dp"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:text="气氛"
-                        android:textSize="16sp"
-                        android:textColor="#666666"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <RatingBar
-                        android:id="@+id/ratingbar2"
-                        style="@style/star"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_10"
-                        android:layout_marginTop="@dimen/margin_5"
-                        android:numStars="5"
-                        android:rating="3.5"
-                        android:stepSize="0.2" />
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="12dp"
-                    android:layout_height="wrap_content">
-                    <TextView
-                        android:text="服务"
-                        android:textSize="16sp"
-                        android:textColor="#666666"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
-                    <RatingBar
-                        android:id="@+id/ratingbar3"
-                        style="@style/star"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginBottom="@dimen/margin_10"
-                        android:layout_marginTop="@dimen/margin_5"
-                        android:numStars="5"
-                        android:rating="3.5"
-                        android:stepSize="0.2" />
-                </LinearLayout>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:layout_marginTop="12dp"
+                android:background="@color/pay_reserve_list_divider_white" />
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="120dp"
+                android:layout_margin="12dp"
+                android:background="@drawable/shape_btn_999999_stoke"
+                android:gravity="left|top"
+                android:hint="商家满足你的期待吗？说说它的优点和不足的地方吧"
+                android:textColor="#333333"
+                android:textColorHint="#999999"
+                android:textSize="14sp" />
 
 
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="10dp" />
 
 
-                <Button
-                    android:id="@+id/btn_commit"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_40"
-                    android:layout_marginBottom="@dimen/margin_50"
-                    android:layout_marginLeft="@dimen/margin_15"
-                    android:layout_marginRight="@dimen/margin_15"
-                    android:background="@drawable/shape_btn_signin"
-                    android:layout_alignParentBottom="true"
-                    android:text="发布"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/textsize_level2"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:background="@color/pay_reserve_list_divider_white" />
 
+
+            <!--原来的展示图片区域-->
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:background="@color/pay_reserve_list_divider_white" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:background="@color/pay_reserve_list_divider_white" />
+
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="8dp">
+
+                <CheckBox
+                    android:id="@+id/checkbox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/selector_pay_way"
+                    android:button="@null"
+                    android:gravity="center" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/checkbox"
+                    android:text="匿名" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:text="您的评价将以匿名的形式展现" />
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1px"
+                android:background="#E5E5E5" />
+
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:drawableLeft="@drawable/icon_shangjia"
+                android:drawablePadding="6dp"
+                android:text="商家评分"
+                android:textColor="#333333"
+                android:textSize="18sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="环境"
+                    android:textColor="#666666"
+                    android:textSize="16sp" />
+
+                <RatingBar
+                    android:id="@+id/ratingbar1"
+                    style="@style/star"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_10"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:numStars="5"
+                    android:rating="3.5"
+                    android:stepSize="0.2" />
             </LinearLayout>
-        </ScrollView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="气氛"
+                    android:textColor="#666666"
+                    android:textSize="16sp" />
+
+                <RatingBar
+                    android:id="@+id/ratingbar2"
+                    style="@style/star"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_10"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:numStars="5"
+                    android:rating="3.5"
+                    android:stepSize="0.2" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="服务"
+                    android:textColor="#666666"
+                    android:textSize="16sp" />
+
+                <RatingBar
+                    android:id="@+id/ratingbar3"
+                    style="@style/star"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_10"
+                    android:layout_marginTop="@dimen/margin_5"
+                    android:numStars="5"
+                    android:rating="3.5"
+                    android:stepSize="0.2" />
+            </LinearLayout>
 
 
+            <Button
+                android:id="@+id/btn_commit"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_40"
+                android:layout_margin="15dp"
+                android:background="@drawable/shape_btn_signin"
+                android:text="发布"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_level2" />
 
+        </LinearLayout>
+    </ScrollView>
 
 
 </RelativeLayout>

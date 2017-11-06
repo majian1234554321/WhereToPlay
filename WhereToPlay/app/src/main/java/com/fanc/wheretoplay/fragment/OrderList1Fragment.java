@@ -28,6 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import okhttp3.MultipartBody;
+
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.rx.RxHelper;
 import com.fanc.wheretoplay.rx.RxSubscribe;
@@ -60,16 +61,8 @@ public class OrderList1Fragment extends BaseFragment implements PullToRefreshLay
 
         mRvOrder.setCanPullDown(true);
         mRvOrder.setCanPullUp(true);
-
         ptrlPayReserve.setOnRefreshListener(this);
-
-
-
         loadData();
-
-
-
-
         return view;
 
     }
@@ -87,15 +80,15 @@ public class OrderList1Fragment extends BaseFragment implements PullToRefreshLay
                 MultipartBody.Part.createFormData("type", "1");
 
         Retrofit_RequestUtils.getRequest()
-                .bookList(requestFileA,requestFileC,requestFileD,requestFileB)
+                .bookList(requestFileA, requestFileC, requestFileD, requestFileB)
                 .compose(RxHelper.<BookListModel.ContentBean>handleResult())
                 .subscribe(new RxSubscribe<BookListModel.ContentBean>() {
                     @Override
                     protected void _onNext(BookListModel.ContentBean dataBean) {
 
                         Log.i("MODEL", "ERRCODE" + dataBean.list.get(0).book_sn);
-                        if (dataBean.list!=null&&dataBean.list.size()>0){
-                            OrdersAdapter orderAdapter = new OrdersAdapter(mContext,OrderList1Fragment.this,dataBean);
+                        if (dataBean.list != null && dataBean.list.size() > 0) {
+                            OrdersAdapter orderAdapter = new OrdersAdapter(mContext, OrderList1Fragment.this, dataBean);
                             mRvOrder.setAdapter(orderAdapter);
                         }
 
@@ -128,10 +121,9 @@ public class OrderList1Fragment extends BaseFragment implements PullToRefreshLay
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==1000){
+        if (requestCode == 1000) {
             Toast.makeText(mContext, "12121121", Toast.LENGTH_SHORT).show();
         }
-
 
 
     }

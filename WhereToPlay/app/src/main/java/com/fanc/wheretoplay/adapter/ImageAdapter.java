@@ -27,7 +27,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     public ImageAdapter(Context context, ArrayList<String> imagesfinal) {
         mContext = context;
         this.mInflater = LayoutInflater.from(mContext);
-        this.imagesfinal= imagesfinal;
+        this.imagesfinal = imagesfinal;
     }
 
     @Override
@@ -40,22 +40,21 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
 
-            if (imagesfinal.get(position).endsWith("这不是图片")){
-                Glide.with(mContext).load(R.mipmap.ic_launcher).into(holder.ivImage);
-            }else {
-                final String image = imagesfinal.get(position);
-                Glide.with(mContext).load(new File(image)).into(holder.ivImage);
-            }
-
+        if (imagesfinal.get(position).endsWith("这不是图片")) {
+            Glide.with(mContext).load(R.mipmap.ic_launcher).into(holder.ivImage);
+        } else {
+            final String image = imagesfinal.get(position);
+            Glide.with(mContext).load(new File(image)).into(holder.ivImage);
+        }
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (imagesfinal.get(position).endsWith("这不是图片")){
+                if (imagesfinal.get(position).endsWith("这不是图片")) {
                     ImageSelectorUtils.openPhoto((Activity) mContext, 0x00000011, false, 9);
-                }else {
-                    Toast.makeText(mContext, position+"AAAAA", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(mContext, position + "AAAAA", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -64,8 +63,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
     @Override
     public int getItemCount() {
-
-        return imagesfinal .size()>=9 ? 9 : imagesfinal.size();
+        return imagesfinal.size() >= 9 ? 9 : imagesfinal.size();
     }
 
     public void refresh(ArrayList<String> images) {
@@ -74,7 +72,6 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {
-
         ImageView ivImage;
 
         public ViewHolder(View itemView) {

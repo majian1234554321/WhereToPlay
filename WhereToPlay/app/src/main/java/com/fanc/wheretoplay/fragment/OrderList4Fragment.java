@@ -61,7 +61,7 @@ public class OrderList4Fragment extends BaseFragment implements PullToRefreshLay
         ptrlPayReserve.setOnRefreshListener(this);
         currentPage = 0;
 
-        ordelListFragmentPresenter = new OrdelListFragmentPresenter(mContext,this);
+        ordelListFragmentPresenter = new OrdelListFragmentPresenter(mContext,this,ptrlPayReserve);
         ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
 
 
@@ -83,9 +83,11 @@ public class OrderList4Fragment extends BaseFragment implements PullToRefreshLay
 
     @Override
     public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
-        if (myAdapter.getItemCount() >= 10) {
+        if (myAdapter!=null&&myAdapter.getItemCount() >= 10) {
             currentPage++;
             ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onLoadMore");
+        }else {
+            ptrlPayReserve.refreshFinish(PullToRefreshLayout.SUCCEED);
         }
     }
 

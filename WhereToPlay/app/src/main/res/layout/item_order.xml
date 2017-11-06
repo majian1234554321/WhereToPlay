@@ -6,25 +6,27 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_margin="10dp"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp">
+
         <TextView
             android:id="@+id/tv_storeName"
             android:layout_width="wrap_content"
-            android:text="上海天地汇会所"
+            android:layout_height="wrap_content"
             android:drawableLeft="@drawable/icon_shangjia"
             android:drawablePadding="8dp"
-            android:textSize="18sp"
-            android:layout_height="wrap_content" />
+            android:text="上海天地汇会所"
+            android:textSize="18sp" />
+
         <TextView
             android:id="@+id/tv_payState"
             android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
             android:text="待支付"
             android:textColor="#C4483C"
-            android:textSize="14sp"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentRight="true"
-            android:layout_height="wrap_content" />
+            android:textSize="14sp" />
 
     </RelativeLayout>
 
@@ -61,12 +63,11 @@
                 android:id="@+id/tv_pay_item_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_alignTop="@+id/iv_pay_item"
+                android:layout_toEndOf="@+id/iv_pay_item"
                 android:text="预订方式"
                 android:textColor="#333333"
-                android:textSize="@dimen/textsize_levelsmall"
-                android:layout_alignTop="@+id/iv_pay_item"
-                android:layout_toEndOf="@+id/iv_pay_item" />
-
+                android:textSize="@dimen/textsize_levelsmall" />
 
 
             <TextView
@@ -181,35 +182,12 @@
                 android:gravity="right"
                 android:orientation="horizontal">
 
-                <Button
-                    android:id="@+id/btn_check_comment"
-                    android:layout_width="@dimen/width_70"
-                    android:layout_height="@dimen/height_25"
-                    android:layout_marginBottom="@dimen/margin_10"
-                    android:layout_marginRight="@dimen/margin_10"
-                    android:background="@drawable/shape_btn_white"
-                    android:text="@string/check_comment_1"
-                    android:textColor="@color/text_black"
-                    android:textSize="@dimen/normal_textsize"
-                    android:visibility="gone" />
 
-                <Button
-                    android:id="@+id/btn_to_comment"
-                    android:layout_width="@dimen/width_50"
-                    android:layout_height="@dimen/height_25"
-                    android:layout_marginBottom="@dimen/margin_10"
-                    android:layout_marginRight="@dimen/margin_10"
-                    android:background="@drawable/shape_btn_white"
-                    android:text="@string/to_evaluate"
-                    android:textColor="@color/text_black"
-                    android:textSize="@dimen/normal_textsize"
-                    android:visibility="gone" />
 
                 <Button
                     android:id="@+id/btn_pay_cancel_reserve"
                     android:layout_width="@dimen/width_80"
                     android:layout_height="@dimen/height_25"
-                    android:gravity="center"
                     android:layout_marginBottom="@dimen/margin_10"
                     android:layout_marginRight="@dimen/margin_10"
                     android:background="@drawable/shape_btn_black_stoke"
@@ -219,14 +197,13 @@
 
                 <Button
                     android:id="@+id/btn_pay_consume"
-android:gravity="center"
                     android:layout_width="@dimen/width_80"
                     android:layout_height="@dimen/height_25"
                     android:layout_marginBottom="@dimen/margin_10"
                     android:layout_marginRight="@dimen/margin_10"
-                    android:textColor="@color/text_white"
                     android:background="@drawable/shape_btn_signin"
                     android:text="@string/paying_the_bill"
+                    android:textColor="@color/text_white"
                     android:textSize="@dimen/normal_textsize" />
 
 
