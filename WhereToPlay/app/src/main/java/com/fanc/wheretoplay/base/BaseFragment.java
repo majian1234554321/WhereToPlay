@@ -18,6 +18,9 @@ import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.view.AlertDialog;
 import com.fanc.wheretoplay.view.DProgressDialog;
 import com.fanc.wheretoplay.view.PullToRefreshLayout;
+import com.qiyukf.nimlib.sdk.NimIntent;
+import com.qiyukf.unicorn.api.ConsultSource;
+import com.qiyukf.unicorn.api.Unicorn;
 
 
 /**
@@ -49,6 +52,7 @@ public abstract class BaseFragment
         mSpUtils = new SPUtils(getActivity());
         mUser = mSpUtils.getUser();
         mLayoutInflater = LayoutInflater.from(mContext);
+        //点击商家后台传来的消息可以进入聊天界面
     }
 
     @Override

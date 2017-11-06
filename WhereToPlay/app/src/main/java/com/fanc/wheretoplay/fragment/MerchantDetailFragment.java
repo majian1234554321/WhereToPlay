@@ -227,18 +227,10 @@ public class MerchantDetailFragment extends BaseFragment {
         stores = new ArrayList<>();
         recommendAdapter = new ReserveAdapter(mContext, stores);
         mRvMerchantDetailRecommend.setAdapter(recommendAdapter);
-        //点击商家后台传来的消息可以进入聊天界面
-        parseIntent();
+
     }
 
-    private void parseIntent() {
-        Intent intent = mContext.getIntent();
-        if (intent.hasExtra(NimIntent.EXTRA_NOTIFY_CONTENT)) {
-            Unicorn.openServiceActivity(mContext, "去哪儿客服", new ConsultSource(null, null, null));
-            // 最好将intent清掉，以免从堆栈恢复时又打开客服窗口
-            mContext.setIntent(new Intent());
-        }
-    }
+
     private void setListeners() {
         //商家后台传来的未读消息数量
         UnreadCountChangeListener listener = new UnreadCountChangeListener() {
