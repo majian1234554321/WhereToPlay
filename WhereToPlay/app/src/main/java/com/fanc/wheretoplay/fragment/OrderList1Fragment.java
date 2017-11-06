@@ -16,8 +16,10 @@ import com.fanc.wheretoplay.adapter.OrdersAdapter;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.datamodel.BookListModel;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
+import com.fanc.wheretoplay.presenter.OrdelListFragmentPresenter;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.UIUtils;
+import com.fanc.wheretoplay.view.OrderListFragmentView;
 import com.fanc.wheretoplay.view.PullToRefreshLayout;
 import com.fanc.wheretoplay.view.PullableRecyclerView;
 
@@ -37,13 +39,17 @@ import com.fanc.wheretoplay.rx.RxSubscribe;
  * Created by admin on 2017/11/1.
  */
 
-public class OrderList1Fragment extends BaseFragment implements PullToRefreshLayout.OnRefreshListener {
+public class OrderList1Fragment extends BaseFragment implements PullToRefreshLayout.OnRefreshListener ,OrderListFragmentView {
     @BindView(R.id.rv_pay)
     PullableRecyclerView mRvOrder;
     Unbinder unbinder;
     @BindView(R.id.ptrl_pay_reserve)
     PullToRefreshLayout ptrlPayReserve;
+    public static final String TYPE = "1";
 
+    public int currentPage ;
+    private OrdelListFragmentPresenter ordelListFragmentPresenter;
+    private OrdersAdapter myAdapter;
 
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = View.inflate(inflater.getContext(), R.layout.orderlistallfragment, null);
@@ -52,54 +58,23 @@ public class OrderList1Fragment extends BaseFragment implements PullToRefreshLay
         LinearLayoutManager lm = new LinearLayoutManager(mContext);
         lm.setOrientation(LinearLayoutManager.VERTICAL);
         mRvOrder.setLayoutManager(lm);
-        List orders = new ArrayList<>();
+
 
         mRvOrder.addItemDecoration(new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL,
                 UIUtils.dp2Px(1), mContext.getResources().getColor(R.color.pay_reserve_list_divider_white)));
-
         mRvOrder.setItemAnimator(new DefaultItemAnimator());
-
         mRvOrder.setCanPullDown(true);
         mRvOrder.setCanPullUp(true);
+
         ptrlPayReserve.setOnRefreshListener(this);
-        loadData();
+        currentPage = 0;
+
+        ordelListFragmentPresenter = new OrdelListFragmentPresenter(mContext,this,ptrlPayReserve);
+        ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
+
+
         return view;
 
-    }
-
-    private void loadData() {
-        MultipartBody.Part requestFileA =
-                MultipartBody.Part.createFormData("token", new SPUtils(mContext).getUser().getToken());
-
-        MultipartBody.Part requestFileC =
-                MultipartBody.Part.createFormData("page", "0");
-        MultipartBody.Part requestFileD =
-                MultipartBody.Part.createFormData("size", "10");
-
-        MultipartBody.Part requestFileB =
-                MultipartBody.Part.createFormData("type", "1");
-
-        Retrofit_RequestUtils.getRequest()
-                .bookList(requestFileA, requestFileC, requestFileD, requestFileB)
-                .compose(RxHelper.<BookListModel.ContentBean>handleResult())
-                .subscribe(new RxSubscribe<BookListModel.ContentBean>() {
-                    @Override
-                    protected void _onNext(BookListModel.ContentBean dataBean) {
-
-                        Log.i("MODEL", "ERRCODE" + dataBean.list.get(0).book_sn);
-                        if (dataBean.list != null && dataBean.list.size() > 0) {
-                            OrdersAdapter orderAdapter = new OrdersAdapter(mContext, OrderList1Fragment.this, dataBean);
-                            mRvOrder.setAdapter(orderAdapter);
-                        }
-
-                    }
-
-                    @Override
-                    protected void _onError(String message) {
-                        Log.i("MODEL", "关闭dialog");
-                        Log.i("MODEL", "ERRCODE" + message);
-                    }
-                });
     }
 
     @Override
@@ -110,22 +85,54 @@ public class OrderList1Fragment extends BaseFragment implements PullToRefreshLay
 
     @Override
     public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
-
+        currentPage=0;
+        ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
     }
 
     @Override
     public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
-
+        if (myAdapter!=null&&myAdapter.getItemCount() >= 10) {
+            currentPage++;
+            ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onLoadMore");
+        }else {
+            ptrlPayReserve.refreshFinish(PullToRefreshLayout.SUCCEED);
+        }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1000) {
-            Toast.makeText(mContext, "12121121", Toast.LENGTH_SHORT).show();
+        if (requestCode==1001){
+            Toast.makeText(mContext, "1001", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    @Override
+    public void setOrderListFragmentData(BookListModel.ContentBean contentBean, String action) {
 
 
+
+        if (contentBean.list != null) {
+            if ("onRefresh".equals(action)) {
+                if ("onLoadMore".equals(action) && myAdapter != null) {
+                    myAdapter.notifyDataSetChanged();
+                } else {
+                    myAdapter = new OrdersAdapter(mContext,OrderList1Fragment.this,contentBean);
+                    mRvOrder.setAdapter(myAdapter);
+                }
+            } else if ("onLoadMore".equals(action)) {
+                if (contentBean.list.size() > 0) {
+                    //   loadMoreFooterView.setStatus(LoadMoreFooterView.Status.GONE);
+                    myAdapter.append(contentBean.list);
+
+                } else {
+                    //     loadMoreFooterView.setStatus(LoadMoreFooterView.Status.THE_END);
+                }
+
+            }
+        } else {
+            //loadMoreFooterView.setStatus(LoadMoreFooterView.Status.THE_END);
+        }
     }
 
 
