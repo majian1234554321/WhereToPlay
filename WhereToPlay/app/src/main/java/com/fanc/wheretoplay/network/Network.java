@@ -205,10 +205,6 @@ public interface Network {
         Observable<SubmitCommentModel> SubmitCommentModel(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB,@Part MultipartBody.Part fileC,@Part MultipartBody.Part fileD,@Part MultipartBody.Part fileE,@Part MultipartBody.Part filef,
                                                           @Part MultipartBody.Part fileX,@Part MultipartBody.Part fileZ);
 
-
-
-
-
     }
 
 }
