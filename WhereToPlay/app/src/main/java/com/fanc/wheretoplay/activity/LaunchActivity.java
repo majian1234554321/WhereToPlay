@@ -19,10 +19,14 @@ import android.widget.LinearLayout;
 import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.MainActivity;
 import com.fanc.wheretoplay.R;
+import com.fanc.wheretoplay.base.App;
 import com.fanc.wheretoplay.base.BaseActivity;
 import com.fanc.wheretoplay.databinding.ActivityLaunchBinding;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.UIUtils;
+import com.qiyukf.nimlib.sdk.NimIntent;
+import com.qiyukf.unicorn.api.ConsultSource;
+import com.qiyukf.unicorn.api.Unicorn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,8 +49,23 @@ public class LaunchActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         launchBinding = DataBindingUtil.setContentView(this, R.layout.activity_launch);
 //        initPermissions();
+        //七鱼
+//        ((App)getApplication()).setServiceEntranceActivity(getClass());
+//        parseIntent();
         init();
     }
+
+//    /**
+//     * 七鱼需要
+//     */
+//    private void parseIntent() {
+//        Intent intent = getIntent();
+//        if (intent.hasExtra(NimIntent.EXTRA_NOTIFY_CONTENT)) {
+//            Unicorn.openServiceActivity(this, getResources().getString(R.string.app_name), new ConsultSource(null, null, null)); //打开客服窗口的方法
+//            // 最好将intent清掉，以免从堆栈恢复时又打开客服窗口
+//            setIntent(new Intent());
+//        }
+//    }
 
     @Override
     public void onResume() {
