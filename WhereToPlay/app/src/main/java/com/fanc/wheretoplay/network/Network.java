@@ -199,6 +199,12 @@ public interface Network {
 
 
 
+//        //提交评论
+//        @Multipart
+//        @POST("Public/submitcomment")
+//        Observable<SubmitCommentModel> SubmitCommentModel(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB,@Part MultipartBody.Part fileC,@Part MultipartBody.Part fileD,@Part MultipartBody.Part fileE,@Part MultipartBody.Part filef,
+//                                                          @Part MultipartBody.Part fileX,@Part MultipartBody.Part fileZ);
+
         //提交评论
         @Multipart
         @POST("Public/submitcomment")

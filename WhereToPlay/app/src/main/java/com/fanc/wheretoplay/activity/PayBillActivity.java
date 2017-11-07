@@ -360,7 +360,6 @@ public class PayBillActivity extends BaseActivity {
                             PayBillActivity.this.orderId = response.order.order_id;
                             discount = Double.parseDouble(response.order.discount);
                             subscription = Double.parseDouble(response.order.prepay);
-
                         }
                     }
                 });

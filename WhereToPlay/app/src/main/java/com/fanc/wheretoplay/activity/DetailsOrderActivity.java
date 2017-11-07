@@ -271,6 +271,7 @@ public class DetailsOrderActivity extends BaseActivity {
                 if (TextUtils.equals("2", statusValue)) {// 去结账
                     intent.putExtra(Constants.PAGE, Constants.PAYING_THE_BILL);
                 }
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
                 
                 break;

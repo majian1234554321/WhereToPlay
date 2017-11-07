@@ -77,9 +77,9 @@ public class PublicationEvaluationActivity extends BaseActivity  {
     private String value;
     private String order_idValue;
     private String store_idValue;
-    float ratingValue1 =5f;
-    float ratingValue2 =5f;
-    float ratingValue3 =5f;
+    float ratingValue1 =10f;
+    float ratingValue2 =10f;
+    float ratingValue3 =10f;
 
 
     @Override

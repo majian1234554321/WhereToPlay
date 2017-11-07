@@ -12,11 +12,11 @@
         android:layout_height="wrap_content"></com.fanc.wheretoplay.view.TitleBarView>
 
     <ScrollView
-        android:layout_below="@+id/tbv"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentStart="true">
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/tbv">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,9 +27,9 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:focusable="true"
-                android:focusableInTouchMode="true"
-                android:background="@color/white">
+                android:focusableInTouchMode="true">
 
                 <TextView
                     android:id="@+id/tv_merchant_detail_title"
@@ -84,10 +84,10 @@
                 android:layout_width="match_parent"
                 android:layout_height="120dp"
                 android:layout_margin="12dp"
-                android:padding="8dp"
                 android:background="@drawable/shape_btn_999999_stoke"
                 android:gravity="left|top"
                 android:hint="商家满足你的期待吗？说说它的优点和不足的地方吧"
+                android:padding="8dp"
                 android:textColor="#333333"
                 android:textColorHint="#999999"
                 android:textSize="14sp" />
@@ -97,9 +97,7 @@
                 android:id="@+id/rv_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
-                 />
-
+                android:layout_margin="12dp" />
 
 
             <View
@@ -171,16 +169,46 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
+                    android:gravity="center"
                     android:text="环境"
-android:gravity="center"
                     android:textColor="#666666"
                     android:textSize="16sp" />
 
                 <com.fanc.wheretoplay.view.RatingBar
                     android:id="@+id/ratingbar1"
                     android:layout_width="360dp"
-android:gravity="center_vertical"
                     android:layout_height="50dp"
+                    android:gravity="center_vertical"
+                    app:starCount="5"
+                    app:starEmpty="@drawable/star_selectno"
+                    app:starFill="@drawable/star_selectyes"
+                    app:starHalf="@drawable/star_selectno"
+                    app:starImageSize="30dp"
+                    app:starPadding="15dp"
+                    app:starStep="0"
+                    app:stepSize="Half" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginLeft="12dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:gravity="center"
+
+                    android:text="气氛"
+                    android:textColor="#666666"
+                    android:textSize="16sp" />
+
+                <com.fanc.wheretoplay.view.RatingBar
+                    android:id="@+id/ratingbar2"
+                    android:layout_width="360dp"
+                    android:layout_height="50dp"
+                    android:gravity="center_vertical"
                     app:starCount="5"
                     app:starEmpty="@drawable/star_selectno"
                     app:starFill="@drawable/star_selectyes"
@@ -194,46 +222,15 @@ android:gravity="center_vertical"
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:layout_marginBottom="12dp"
                 android:layout_marginLeft="12dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="50dp"
-                    android:text="气氛"
-
-                    android:textColor="#666666"
                     android:gravity="center"
-                    android:textSize="16sp" />
-
-                <com.fanc.wheretoplay.view.RatingBar
-                    android:id="@+id/ratingbar2"
-                    android:layout_width="360dp"
-                    android:layout_height="50dp"
-                    app:starCount="5"
-                    android:gravity="center_vertical"
-                    app:starEmpty="@drawable/star_selectno"
-                    app:starFill="@drawable/star_selectyes"
-                    app:starHalf="@drawable/star_selectno"
-                    app:starImageSize="30dp"
-                    app:starPadding="15dp"
-                    app:starStep="1.5"
-                    app:stepSize="Half"
-                    />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-               android:layout_marginLeft="12dp"
-                android:layout_marginBottom="12dp"
-                android:orientation="horizontal">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="50dp"
                     android:text="服务"
-                   android:gravity="center"
                     android:textColor="#666666"
                     android:textSize="16sp" />
 
@@ -241,8 +238,8 @@ android:gravity="center_vertical"
                     android:id="@+id/ratingbar3"
                     android:layout_width="360dp"
                     android:layout_height="50dp"
-                    app:starCount="5"
                     android:gravity="center_vertical"
+                    app:starCount="5"
                     app:starEmpty="@drawable/star_selectno"
                     app:starFill="@drawable/star_selectyes"
                     app:starHalf="@drawable/star_selectno"
