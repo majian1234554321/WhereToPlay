@@ -81,35 +81,38 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.ViewHo
         holder.mBtnToComment.setVisibility(View.GONE);// 去评价
         holder.mBtnCancel.setVisibility(View.GONE);// 去掉订单
         holder.mBtnBuy.setVisibility(View.GONE);// 买单/消费
-        switch (order.status) {
-            case "1":// 已经取消状态，取消/消费按钮隐藏
-                holder.mIvState.setImageResource(R.drawable.order_cancel);
-                holder.mTvState.setTextColor(UIUtils.getColor(R.color.order_cancel));
-                holder.mTvState.setText(R.string.canceled);
-                break;
-            case "2":// 预定成功状态，取消按钮显示，消费按钮为结账
-                holder.mIvState.setImageResource(R.drawable.reserved);
-                holder.mTvState.setTextColor(UIUtils.getColor(R.color.order_reserved));
-                holder.mTvState.setText(R.string.pay_reserved);
-                holder.mBtnCancel.setVisibility(View.VISIBLE);
-                holder.mBtnBuy.setText(R.string.buy);
-                holder.mBtnBuy.setVisibility(View.VISIBLE);
-                break;
-            case "4":// 已经结账状态，取消按钮隐藏，消费按钮为消费
-                holder.mIvState.setImageResource(R.drawable.close_account);
-                holder.mTvState.setTextColor(UIUtils.getColor(R.color.close_account));
-                holder.mTvState.setText(R.string.payed_the_bill);
-                holder.mBtnBuy.setVisibility(View.VISIBLE);
-                holder.mBtnBuy.setText(R.string.consume);
-                holder.mBtnToComment.setVisibility(View.VISIBLE);// 去评价
-                break;
-            case "0":
-            case "5":// 已支付定金状态，取消按钮显示，消费按钮隐藏
-            case "6":
-                holder.mIvState.setImageResource(R.drawable.reserve_book_in);
-                holder.mTvState.setTextColor(UIUtils.getColor(R.color.text_red));
-                holder.mTvState.setText(R.string.reserving);
-                holder.mBtnCancel.setVisibility(View.VISIBLE);
+        if(order.status!=null) {
+
+
+            switch (order.status) {
+                case "1":// 已经取消状态，取消/消费按钮隐藏
+                    holder.mIvState.setImageResource(R.drawable.order_cancel);
+                    holder.mTvState.setTextColor(UIUtils.getColor(R.color.order_cancel));
+                    holder.mTvState.setText(R.string.canceled);
+                    break;
+                case "2":// 预定成功状态，取消按钮显示，消费按钮为结账
+                    holder.mIvState.setImageResource(R.drawable.reserved);
+                    holder.mTvState.setTextColor(UIUtils.getColor(R.color.order_reserved));
+                    holder.mTvState.setText(R.string.pay_reserved);
+                    holder.mBtnCancel.setVisibility(View.VISIBLE);
+                    holder.mBtnBuy.setText(R.string.buy);
+                    holder.mBtnBuy.setVisibility(View.VISIBLE);
+                    break;
+                case "4":// 已经结账状态，取消按钮隐藏，消费按钮为消费
+                    holder.mIvState.setImageResource(R.drawable.close_account);
+                    holder.mTvState.setTextColor(UIUtils.getColor(R.color.close_account));
+                    holder.mTvState.setText(R.string.payed_the_bill);
+                    holder.mBtnBuy.setVisibility(View.VISIBLE);
+                    holder.mBtnBuy.setText(R.string.consume);
+                    holder.mBtnToComment.setVisibility(View.VISIBLE);// 去评价
+                    break;
+                case "0":
+                case "5":// 已支付定金状态，取消按钮显示，消费按钮隐藏
+                case "6":
+                    holder.mIvState.setImageResource(R.drawable.reserve_book_in);
+                    holder.mTvState.setTextColor(UIUtils.getColor(R.color.text_red));
+                    holder.mTvState.setText(R.string.reserving);
+                    holder.mBtnCancel.setVisibility(View.VISIBLE);
 //                if (TextUtils.equals("1", order.getBook_type())) {
 //                    holder.mTvOrderStatus.setText(R.string.pay_reserve_earnest1);
 //                } else if (TextUtils.equals("2", order.getBook_type())) {
@@ -118,14 +121,14 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.ViewHo
 //                    holder.mTvOrderStatus.setText(R.string.recharge);
 //                    holder.mBtnCancel.setVisibility(View.GONE);
 //                }
-                break;
-            default:
-                holder.mIvState.setVisibility(View.GONE);
+                    break;
+                default:
+                    holder.mIvState.setVisibility(View.GONE);
 //                holder.mTvState.setTextColor(UIUtils.getColor(R.color.orange_text));
-                holder.mTvState.setText("");
-                break;
+                    holder.mTvState.setText("");
+                    break;
+            }
         }
-
         // 次日八点后所有订单不可用
         if (TextUtils.equals("0", order.consume_again)) {// 不可用
             holder.mBtnBuy.setVisibility(View.GONE);

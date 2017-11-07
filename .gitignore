@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 WhereToPlay/app/build/intermediates/data-binding-layout-out/debug/drawable/ysf_dialog_item_middle_selector.xml
 WhereToPlay/okhttputils/build/intermediates/classes/debug/com/orhanobut/logger/R.class
 WhereToPlay/okhttputils/build/*
@@ -5,3 +6,7 @@ WhereToPlay/build/android-profile/profile-2017-11-06-18-09-55-387.rawproto
 WhereToPlay/build/
 WhereToPlay/.gradle/4.2.1/fileHashes/fileHashes.bin
 WhereToPlay/.gradle/
+=======
+WhereToPlay/okhttputils/build/outputs/aar/okhttputils-release.aar
+WhereToPlay/
+>>>>>>> majin_dev

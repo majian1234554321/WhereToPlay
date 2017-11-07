@@ -11,9 +11,37 @@
     <option name="TOOL_WINDOW_CONFIGURED_FILTER" value="Show only selected application" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="43df2521-3ac3-4735-8aeb-42f7aea38af9" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+    <list default="true" id="43df2521-3ac3-4735-8aeb-42f7aea38af9" name="Default" comment="Merge branch 'majin_dev' into xxy_dev&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;WhereToPlay/.gradle/4.2.1/fileHashes/resourceHashesCache.bin&#10;#&#9;WhereToPlay/.gradle/4.2.1/javaCompile/taskHistory.bin&#10;#&#9;WhereToPlay/.gradle/4.2.1/javaCompile/taskJars.bin&#10;#&#9;WhereToPlay/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_BaiduLBS_Android_jar_unspecified_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_alipaySdk_20170623_proguard_jar_unspecified_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_glide_3_7_0_jar_unspecified_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_libammsdk_jar_unspecified_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_mta_sdk_1_6_2_jar_unspecified_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/com_google_code_findbugs_jsr305_2_0_1_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/com_squareup_retrofit2_adapter_rxjava_2_2_0_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/com_squareup_retrofit2_retrofit_2_2_0_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/io_reactivex_rxjava_1_2_0_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/junit_junit_4_12_jar.xml&#10;#&#9;WhereToPlay/app/src/main/java/com/fanc/wheretoplay/network/Network.java&#10;#&#9;WhereToPlay/local.properties&#10;">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/android-profile/profile-2017-11-06-19-20-49-665.rawproto" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/build/android-profile/profile-2017-11-06-19-21-05-940.rawproto" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.gradle/4.2.1/fileContent/annotation-processors.bin" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.2.1/fileHashes/fileHashes.bin" afterPath="$PROJECT_DIR$/.gradle/4.2.1/fileHashes/fileHashes.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.2.1/fileHashes/fileHashes.lock" afterPath="$PROJECT_DIR$/.gradle/4.2.1/fileHashes/fileHashes.lock" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.2.1/fileHashes/resourceHashesCache.bin" afterPath="$PROJECT_DIR$/.gradle/4.2.1/fileHashes/resourceHashesCache.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.2.1/javaCompile/taskHistory.bin" afterPath="$PROJECT_DIR$/.gradle/4.2.1/javaCompile/taskHistory.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.gradle/4.2.1/javaCompile/taskJars.bin" afterPath="$PROJECT_DIR$/.gradle/4.2.1/javaCompile/taskJars.bin" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../.gitignore" afterPath="$PROJECT_DIR$/../.gitignore" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_BaiduLBS_Android_jar_unspecified_jar.xml" afterPath="$PROJECT_DIR$/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_BaiduLBS_Android_jar_unspecified_jar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_alipaySdk_20170623_proguard_jar_unspecified_jar.xml" afterPath="$PROJECT_DIR$/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_alipaySdk_20170623_proguard_jar_unspecified_jar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_glide_3_7_0_jar_unspecified_jar.xml" afterPath="$PROJECT_DIR$/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_glide_3_7_0_jar_unspecified_jar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_libammsdk_jar_unspecified_jar.xml" afterPath="$PROJECT_DIR$/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_libammsdk_jar_unspecified_jar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_mta_sdk_1_6_2_jar_unspecified_jar.xml" afterPath="$PROJECT_DIR$/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_mta_sdk_1_6_2_jar_unspecified_jar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_google_code_findbugs_jsr305_2_0_1_jar.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_google_code_findbugs_jsr305_2_0_1_jar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_squareup_retrofit2_adapter_rxjava_2_2_0_jar.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_squareup_retrofit2_adapter_rxjava_2_2_0_jar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/com_squareup_retrofit2_retrofit_2_2_0_jar.xml" afterPath="$PROJECT_DIR$/.idea/libraries/com_squareup_retrofit2_retrofit_2_2_0_jar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/io_reactivex_rxjava_1_2_0_jar.xml" afterPath="$PROJECT_DIR$/.idea/libraries/io_reactivex_rxjava_1_2_0_jar.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/libraries/junit_junit_4_12_jar.xml" afterPath="$PROJECT_DIR$/.idea/libraries/junit_junit_4_12_jar.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/local.properties" afterPath="$PROJECT_DIR$/local.properties" />
+    </list>
+    <list id="698c8b3a-4edc-47e3-b38e-7a03e9b58510" name="Failed commit: Default" comment="Merge branch 'majin_dev' into xxy_dev&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;WhereToPlay/.gradle/4.2.1/fileHashes/resourceHashesCache.bin&#10;#&#9;WhereToPlay/.gradle/4.2.1/javaCompile/taskHistory.bin&#10;#&#9;WhereToPlay/.gradle/4.2.1/javaCompile/taskJars.bin&#10;#&#9;WhereToPlay/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_BaiduLBS_Android_jar_unspecified_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_alipaySdk_20170623_proguard_jar_unspecified_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_glide_3_7_0_jar_unspecified_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_libammsdk_jar_unspecified_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_mta_sdk_1_6_2_jar_unspecified_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/com_google_code_findbugs_jsr305_2_0_1_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/com_squareup_retrofit2_adapter_rxjava_2_2_0_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/com_squareup_retrofit2_retrofit_2_2_0_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/io_reactivex_rxjava_1_2_0_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/junit_junit_4_12_jar.xml&#10;#&#9;WhereToPlay/app/src/main/java/com/fanc/wheretoplay/network/Network.java&#10;#&#9;WhereToPlay/local.properties&#10;">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/activity/DetailsOrderActivity.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/activity/DetailsOrderActivity.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/adapter/OrderNewAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/adapter/OrderNewAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/adapter/OrdersAdapter.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/adapter/OrdersAdapter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/network/Network.java" afterPath="$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/network/Network.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/drawable/shape_mine_info_sign.xml" afterPath="$PROJECT_DIR$/app/src/main/res/drawable/shape_mine_info_sign.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/app/src/main/res/layout/activity_pay_bill.xml" afterPath="$PROJECT_DIR$/app/src/main/res/layout/activity_pay_bill.xml" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -117,7 +145,7 @@
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/activity/DetailsOrderActivity.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="96">
-              <caret line="39" column="13" selection-start-line="39" selection-start-column="13" selection-end-line="39" selection-end-column="13" />
+              <caret line="40" column="13" selection-start-line="40" selection-start-column="13" selection-end-line="40" selection-end-column="13" />
               <folding />
             </state>
           </provider>
@@ -126,8 +154,8 @@
       <file leaf-file-name="OrdersAdapter.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/adapter/OrdersAdapter.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="504">
-              <caret line="53" column="71" selection-start-line="53" selection-start-column="71" selection-end-line="53" selection-end-column="71" />
+            <state relative-caret-position="24">
+              <caret line="58" column="71" selection-start-line="58" selection-start-column="71" selection-end-line="58" selection-end-column="71" />
               <folding />
             </state>
           </provider>
@@ -146,8 +174,8 @@
       <file leaf-file-name="Network.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/network/Network.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="408">
-              <caret line="28" column="44" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
+            <state relative-caret-position="504">
+              <caret line="32" column="9" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
               <folding />
             </state>
           </provider>
@@ -2139,7 +2167,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_service.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/fragment/MerchantRoomFragment.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/fragment_drinks.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/item_drink.xml" />
@@ -2190,13 +2217,14 @@
         <option value="$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/view/ItemView.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/network/Network.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/activity/SettingsActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/adapter/OrdersAdapter.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-8" />
     <option name="y" value="-8" />
-    <option name="width" value="1932" />
+    <option name="width" value="1936" />
     <option name="height" value="1056" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -2274,6 +2302,176 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WhereToPlay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WhereToPlay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WhereToPlay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WhereToPlay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WhereToPlay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WhereToPlay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fanc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wheretoplay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WhereToPlay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WhereToPlay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fanc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wheretoplay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="adapter" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WhereToPlay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="WhereToPlay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="fanc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="wheretoplay" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="activity" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -2713,7 +2911,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1932" height="1056" extended-state="1" />
+    <frame x="-8" y="-8" width="1936" height="1056" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -2729,7 +2927,7 @@
       <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20833333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.20833333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
@@ -2750,6 +2948,41 @@
       <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889125" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3247768" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
     </layout>
+    <layout-to-restore>
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Profiler" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Build Variants" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="9" side_tool="true" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Logcat" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.51785713" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="true" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.39955357" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Device File Explorer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.48660713" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Image Layers" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32889125" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.328125" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32924107" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="Captures" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="12" side_tool="true" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.20833333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3247768" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32995737" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Theme Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="true" content_ui="tabs" />
+    </layout-to-restore>
   </component>
   <component name="Vcs.Log.UiProperties">
     <option name="RECENTLY_FILTERED_USER_GROUPS">
@@ -2763,8 +2996,10 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <confirmMoveToFailedCommit value="2" />
     <MESSAGE value="tesst" />
-    <option name="LAST_COMMIT_MESSAGE" value="tesst" />
+    <MESSAGE value="Merge branch 'majin_dev' into xxy_dev&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;WhereToPlay/.gradle/4.2.1/fileHashes/resourceHashesCache.bin&#10;#&#9;WhereToPlay/.gradle/4.2.1/javaCompile/taskHistory.bin&#10;#&#9;WhereToPlay/.gradle/4.2.1/javaCompile/taskJars.bin&#10;#&#9;WhereToPlay/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_BaiduLBS_Android_jar_unspecified_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_alipaySdk_20170623_proguard_jar_unspecified_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_glide_3_7_0_jar_unspecified_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_libammsdk_jar_unspecified_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_mta_sdk_1_6_2_jar_unspecified_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/com_google_code_findbugs_jsr305_2_0_1_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/com_squareup_retrofit2_adapter_rxjava_2_2_0_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/com_squareup_retrofit2_retrofit_2_2_0_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/io_reactivex_rxjava_1_2_0_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/junit_junit_4_12_jar.xml&#10;#&#9;WhereToPlay/app/src/main/java/com/fanc/wheretoplay/network/Network.java&#10;#&#9;WhereToPlay/local.properties&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Merge branch 'majin_dev' into xxy_dev&#10;&#10;# Conflicts:&#10;#&#9;.gitignore&#10;#&#9;WhereToPlay/.gradle/4.2.1/fileHashes/resourceHashesCache.bin&#10;#&#9;WhereToPlay/.gradle/4.2.1/javaCompile/taskHistory.bin&#10;#&#9;WhereToPlay/.gradle/4.2.1/javaCompile/taskJars.bin&#10;#&#9;WhereToPlay/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_BaiduLBS_Android_jar_unspecified_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_alipaySdk_20170623_proguard_jar_unspecified_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_glide_3_7_0_jar_unspecified_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_libammsdk_jar_unspecified_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/__local_aars___D__SourceGit_KtvGit_WhereToPlay_app_libs_mta_sdk_1_6_2_jar_unspecified_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/com_google_code_findbugs_jsr305_2_0_1_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/com_squareup_retrofit2_adapter_rxjava_2_2_0_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/com_squareup_retrofit2_retrofit_2_2_0_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/io_reactivex_rxjava_1_2_0_jar.xml&#10;#&#9;WhereToPlay/.idea/libraries/junit_junit_4_12_jar.xml&#10;#&#9;WhereToPlay/app/src/main/java/com/fanc/wheretoplay/network/Network.java&#10;#&#9;WhereToPlay/local.properties&#10;" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -2776,13 +3011,13 @@
     <entry file="jar://D:/software/Android_SDK_tools/platforms/android-27/android.jar!/java/util/List.class" />
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.okhttp3/okhttp/3.8.1/fc70ffa234e7e77741867d38b341d162ec1ec01e/okhttp-3.8.1-sources.jar!/okhttp3/FormBody.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_check_comments_cardview.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="483">
           <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/okhttputils/src/main/java/com/zhy/http/okhttp/request/PostFormRequest.java">
@@ -2800,13 +3035,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_check_comments.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1377">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/adapter/CheckCommentsAdapter.java">
@@ -2834,13 +3069,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_register.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-897">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/fragment/RegisterFragment.java">
@@ -2851,13 +3086,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_reserve.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1863">
           <caret line="81" column="52" selection-start-line="81" selection-start-column="37" selection-end-line="81" selection-end-column="52" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/util/LocationUtils.java">
@@ -2875,13 +3110,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/item_city_local.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="486">
           <caret line="22" column="20" selection-start-line="22" selection-start-column="20" selection-end-line="22" selection-end-column="20" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/datamodel/CityResource.java">
@@ -2914,13 +3149,13 @@
     </entry>
     <entry file="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.qiyukf.unicorn/unicorn/3.11.1/2bbeeef62199445c88d46ed57213d2c216a8dc85/unicorn-3.11.1-sources.jar!/com/qiyukf/unicorn/api/StatusBarNotificationConfig.java" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_launch.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/fragment/MerchantDetailFragment.java">
@@ -2975,13 +3210,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_check_comments.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/okhttputils/build.gradle">
@@ -3013,13 +3248,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/AndroidManifest.xml">
+      <provider editor-type-id="android-manifest">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1495">
           <caret line="65" column="42" selection-start-line="65" selection-start-column="42" selection-end-line="65" selection-end-column="42" />
         </state>
-      </provider>
-      <provider editor-type-id="android-manifest">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/MainActivity.java">
@@ -3041,13 +3276,13 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/fragment_mine.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3197">
           <caret line="139" column="51" selection-start-line="139" selection-start-column="51" selection-end-line="139" selection-end-column="51" />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/fragment/MineFragment.java">
@@ -3068,25 +3303,25 @@
     <entry file="jar://D:/software/Android_SDK_tools/platforms/android-27/android.jar!/android/view/View.class" />
     <entry file="jar://D:/software/Android_SDK_tools/platforms/android-27/android.jar!/android/widget/CompoundButton.class" />
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/view_item.xml">
+      <provider editor-type-id="android-designer2">
+        <state />
+      </provider>
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1560">
           <caret line="65" column="0" selection-start-line="65" selection-start-column="0" selection-end-line="65" selection-end-column="0" />
           <folding />
         </state>
       </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_settings.xml">
       <provider editor-type-id="android-designer2">
         <state />
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_settings.xml">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="528">
           <caret line="22" column="39" selection-start-line="22" selection-start-column="39" selection-end-line="22" selection-end-column="39" />
           <folding />
         </state>
-      </provider>
-      <provider editor-type-id="android-designer2">
-        <state />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/view/ItemView.java">
@@ -3107,8 +3342,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/fanc/wheretoplay/network/Network.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="28" column="44" selection-start-line="28" selection-start-column="44" selection-end-line="28" selection-end-column="44" />
+        <state relative-caret-position="504">
+          <caret line="32" column="9" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
           <folding />
         </state>
       </provider>
