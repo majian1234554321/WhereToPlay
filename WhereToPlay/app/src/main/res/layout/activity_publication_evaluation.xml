@@ -27,6 +27,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:background="@color/white">
 
                 <TextView
@@ -95,29 +97,22 @@
                 android:id="@+id/rv_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-                android:layout_marginRight="12dp"
-                android:layout_marginTop="10dp" />
+                android:layout_margin="12dp"
+                 />
+
 
 
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
-                android:background="@color/pay_reserve_list_divider_white" />
-
+                android:background="#FFFFFF" />
 
             <!--原来的展示图片区域-->
 
-
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
-                android:background="@color/pay_reserve_list_divider_white" />
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_height"
-                android:background="@color/pay_reserve_list_divider_white" />
+                android:background="#E5E5E5" />
 
 
             <RelativeLayout
@@ -169,78 +164,92 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginLeft="12dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="22dp"
+                    android:layout_height="50dp"
                     android:text="环境"
-                    android:layout_gravity="center"
+android:gravity="center"
                     android:textColor="#666666"
                     android:textSize="16sp" />
 
-                <RatingBar
+                <com.fanc.wheretoplay.view.RatingBar
                     android:id="@+id/ratingbar1"
-                    style="@style/star2"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="22dp"
-
-                    android:numStars="5"
-                    android:rating="3.5"
-                    android:stepSize="0.2" />
+                    android:layout_width="360dp"
+android:gravity="center_vertical"
+                    android:layout_height="50dp"
+                    app:starCount="5"
+                    app:starEmpty="@drawable/star_selectno"
+                    app:starFill="@drawable/star_selectyes"
+                    app:starHalf="@drawable/star_selectno"
+                    app:starImageSize="30dp"
+                    app:starPadding="15dp"
+                    app:starStep="1.5"
+                    app:stepSize="Half" />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_marginLeft="12dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:text="气氛"
-                    android:layout_gravity="center"
+
                     android:textColor="#666666"
+                    android:gravity="center"
                     android:textSize="16sp" />
 
-                <RatingBar
+                <com.fanc.wheretoplay.view.RatingBar
                     android:id="@+id/ratingbar2"
-                    style="@style/star2"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:numStars="5"
-                    android:rating="3.5"
-                    android:stepSize="0.2" />
+                    android:layout_width="360dp"
+                    android:layout_height="50dp"
+                    app:starCount="5"
+                    android:gravity="center_vertical"
+                    app:starEmpty="@drawable/star_selectno"
+                    app:starFill="@drawable/star_selectyes"
+                    app:starHalf="@drawable/star_selectno"
+                    app:starImageSize="30dp"
+                    app:starPadding="15dp"
+                    app:starStep="1.5"
+                    app:stepSize="Half"
+                    />
             </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
+                android:layout_height="50dp"
+               android:layout_marginLeft="12dp"
+                android:layout_marginBottom="12dp"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
                     android:text="服务"
-                   android:layout_gravity="center"
+                   android:gravity="center"
                     android:textColor="#666666"
                     android:textSize="16sp" />
 
-                <RatingBar
+                <com.fanc.wheretoplay.view.RatingBar
                     android:id="@+id/ratingbar3"
-                    style="@style/star2"
-                    android:layout_gravity="center"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:numStars="5"
-                    android:rating="3.5"
-                    android:stepSize="0.2" />
+                    android:layout_width="360dp"
+                    android:layout_height="50dp"
+                    app:starCount="5"
+                    android:gravity="center_vertical"
+                    app:starEmpty="@drawable/star_selectno"
+                    app:starFill="@drawable/star_selectyes"
+                    app:starHalf="@drawable/star_selectno"
+                    app:starImageSize="30dp"
+                    app:starPadding="15dp"
+                    app:starStep="1.5"
+                    app:stepSize="Half" />
             </LinearLayout>
 
 

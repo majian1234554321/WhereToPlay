@@ -110,6 +110,7 @@ dependencies {
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'com.qiyukf.unicorn:unicorn:3.11.1'
     compile files('libs/open_sdk_r5886_lite.jar')
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.1.6'
 }
 
 //def gitSha() {

@@ -28,40 +28,32 @@ import com.fanc.wheretoplay.util.Constants_sina;
 import com.fanc.wheretoplay.util.ImageUtils;
 import com.fanc.wheretoplay.util.LogUtils;
 import com.sina.weibo.sdk.WbSdk;
-import com.sina.weibo.sdk.api.ImageObject;
+
 import com.sina.weibo.sdk.api.TextObject;
 import com.sina.weibo.sdk.api.WeiboMultiMessage;
 
 
 import com.sina.weibo.sdk.auth.AuthInfo;
-import com.sina.weibo.sdk.constant.WBConstants;
+
 import com.sina.weibo.sdk.share.WbShareCallback;
 import com.sina.weibo.sdk.share.WbShareHandler;
 import com.tencent.connect.share.QQShare;
-import com.tencent.connect.share.QzonePublish;
+
 import com.tencent.connect.share.QzoneShare;
+import com.tencent.mm.opensdk.modelbase.BaseResp;
+import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
+import com.tencent.mm.opensdk.modelmsg.WXImageObject;
+import com.tencent.mm.opensdk.modelmsg.WXMediaMessage;
+import com.tencent.mm.opensdk.modelmsg.WXWebpageObject;
+import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
+import com.tencent.mm.opensdk.openapi.WXAPIFactory;
 import com.tencent.mm.sdk.constants.ConstantsAPI;
-import com.tencent.mm.sdk.modelbase.BaseReq;
-import com.tencent.mm.sdk.modelbase.BaseResp;
-import com.tencent.mm.sdk.modelmsg.SendMessageToWX;
-import com.tencent.mm.sdk.modelmsg.WXImageObject;
-import com.tencent.mm.sdk.modelmsg.WXMediaMessage;
-import com.tencent.mm.sdk.modelmsg.WXWebpageObject;
-import com.tencent.mm.sdk.openapi.IWXAPI;
-import com.tencent.mm.sdk.openapi.IWXAPIEventHandler;
-import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
-
-
-import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,9 +103,11 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
         setContentView(R.layout.layout_dialog_share);
         ButterKnife.bind(this);
         // 注册应用到微信
-        String APP_ID = "wx424026eca78d03e6";
+
+        api = WXAPIFactory.createWXAPI(this, Constants.WX_APP_ID, false);
+
         // 注册应用到QQ
-        api = WXAPIFactory.createWXAPI(this, APP_ID, true);
+
         mTencent = Tencent.createInstance(Constants.QQAPPID, this.getApplicationContext());
         // 注册应用到新浪微博
 
@@ -372,8 +366,31 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
     }
 
 
+
+
+
     @Override
-    public void onReq(BaseReq baseReq) {
+    public void onWbShareSuccess() {
+        Toast.makeText(this, "分享成功", Toast.LENGTH_LONG).show();
+        this.finish();
+    }
+
+    @Override
+    public void onWbShareFail() {
+        Toast.makeText(this,
+                "分享失败",
+                Toast.LENGTH_LONG).show();
+        this.finish();
+    }
+
+    @Override
+    public void onWbShareCancel() {
+        Toast.makeText(this, "取消分享", Toast.LENGTH_LONG).show();
+        this.finish();
+    }
+
+    @Override
+    public void onReq(com.tencent.mm.opensdk.modelbase.BaseReq baseReq) {
         switch (baseReq.getType()) {
             case ConstantsAPI.COMMAND_GETMESSAGE_FROM_WX:
                 break;
@@ -385,7 +402,7 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
     }
 
     @Override
-    public void onResp(BaseResp baseResp) {
+    public void onResp(com.tencent.mm.opensdk.modelbase.BaseResp baseResp) {
         switch (baseResp.errCode) {
 
             case BaseResp.ErrCode.ERR_OK:
@@ -406,26 +423,6 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
             default:
                 break;
         }
-    }
-
-    @Override
-    public void onWbShareSuccess() {
-        Toast.makeText(this, "分享成功", Toast.LENGTH_LONG).show();
-        this.finish();
-    }
-
-    @Override
-    public void onWbShareFail() {
-        Toast.makeText(this,
-                "分享失败",
-                Toast.LENGTH_LONG).show();
-        this.finish();
-    }
-
-    @Override
-    public void onWbShareCancel() {
-        Toast.makeText(this, "取消分享", Toast.LENGTH_LONG).show();
-        this.finish();
     }
 
 

@@ -11,79 +11,47 @@
         android:layout_height="wrap_content"></com.fanc.wheretoplay.view.TitleBarView>
 
     <RelativeLayout
-        android:layout_width="match_parent"
         android:id="@+id/ll"
-        android:layout_alignParentBottom="true"
-        android:layout_height="wrap_content">
-       <View
-           android:layout_width="match_parent"
-           android:background="@color/about_us_version"
-           android:id="@+id/view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
 
-           android:layout_height="1dp"/>
-
-
-        <RelativeLayout
-            android:layout_below="@+id/view"
+        <View
+            android:id="@+id/view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-            <LinearLayout
-android:id="@+id/ll_buttom"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal">
-                <TextView
-                    android:id="@+id/tv_release"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawablePadding="4dp"
-                    android:paddingTop="8dp"
-                    android:drawableTop="@drawable/icon_pingjia_bottom"
-                    android:gravity="center"
-                    android:text="发表评价" />
+            android:layout_height="1dp"
 
-                <View
-                    android:layout_width="1px"
-                    android:layout_gravity="center"
-                    android:layout_marginLeft="8dp"
-                    android:background="@color/about_us_version"
-                    android:layout_marginRight="8dp"
-                    android:layout_height="20dp"/>
-                <TextView
-                    android:id="@+id/tv_cancel"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:paddingTop="8dp"
-                    android:drawablePadding="4dp"
-                    android:gravity="center"
-                    android:drawableTop="@drawable/icon_delete_bottom"
-                    android:text="取消预定" />
+            android:background="@color/about_us_version" />
 
 
+        <LinearLayout
+            android:id="@+id/ll_buttom"
+            android:layout_width="match_parent"
+            android:layout_height="35dp"
+            android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/tv_pay"
-                    android:layout_width="0dp"
-                    android:textColor="#FFFFFF"
-                    android:layout_height="match_parent"
-                    android:layout_weight="2"
-                    android:background="#C4483C"
-                    android:gravity="center"
-                    android:text="立即支付" />
-            </LinearLayout>
             <TextView
-                android:visibility="gone"
-                android:id="@+id/tv_back"
-                android:layout_width="match_parent"
-                android:text="返回首页"
-                android:padding="12dp"
-                android:gravity="center"
-                android:textColor="#C4483C"
-                android:layout_height="wrap_content" />
+                android:id="@+id/tv_left"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
 
-        </RelativeLayout>
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:text="发表评价" />
+
+
+            <TextView
+                android:id="@+id/tv_right"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="#C4483C"
+                android:gravity="center"
+                android:text="立即支付"
+                android:textColor="#FFFFFF" />
+        </LinearLayout>
 
 
     </RelativeLayout>
@@ -104,12 +72,12 @@ android:id="@+id/ll_buttom"
 
 
             <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_marginRight="8dp"
                 android:id="@+id/rl"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
 
-                android:layout_height="wrap_content">
+                android:layout_marginRight="8dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -117,43 +85,42 @@ android:id="@+id/ll_buttom"
                     android:orientation="vertical">
 
                     <TextView
-                        android:text="上海国际会所"
-                        android:paddingTop="8dp"
                         android:id="@+id/tv_storeName"
-                        android:textSize="18sp"
-                        android:textColor="#333333"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:paddingTop="8dp"
+                        android:text="上海国际会所"
+                        android:textColor="#333333"
+                        android:textSize="18sp" />
 
                     <TextView
-                        android:paddingTop="8dp"
-                        android:drawablePadding="4dp"
-                        android:drawableLeft="@drawable/icon_address"
-                        android:text="静安区石门二路301号 10.1km"
                         android:id="@+id/tv_address"
                         android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" />
+                        android:layout_height="wrap_content"
+                        android:drawableLeft="@drawable/icon_address"
+                        android:drawablePadding="4dp"
+                        android:paddingTop="8dp"
+                        android:text="静安区石门二路301号 10.1km" />
 
                 </LinearLayout>
 
                 <ImageView
-                    android:layout_marginTop="1dp"
-                    android:layout_marginRight="4dp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icon_more"
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true" />
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="4dp"
+                    android:layout_marginTop="1dp"
+                    android:src="@drawable/icon_more" />
 
             </RelativeLayout>
 
 
             <View
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
                 android:id="@+id/item_view_line"
-                style="@style/line_style"/>
-
+                style="@style/line_style"
+                android:paddingBottom="2dp"
+                android:paddingTop="2dp" />
 
 
             <com.fanc.wheretoplay.view.OrderetailsItemView
@@ -215,51 +182,52 @@ android:id="@+id/ll_buttom"
                 android:orientation="horizontal">
 
                 <com.fanc.wheretoplay.view.DrawableCenterLeftTextView
+                    android:id="@+id/tv_msn"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:id="@+id/tv_msn"
-                    android:drawableLeft="@drawable/icon_kefu"
-                  android:drawablePadding="8dp"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
+                    android:drawableLeft="@drawable/icon_kefu"
+                    android:drawablePadding="8dp"
                     android:text="联系客服" />
 
                 <View
                     android:layout_width="1dp"
+                    android:layout_height="25dp"
                     android:layout_gravity="center"
-                    android:background="#999999"
-                    android:layout_height="25dp"/>
+                    android:background="#999999" />
 
                 <com.fanc.wheretoplay.view.DrawableCenterLeftTextView
+                    android:id="@+id/tv_call"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:drawablePadding="8dp"
                     android:layout_gravity="center"
+                    android:layout_weight="1"
                     android:drawableLeft="@drawable/icon_phone"
-android:id="@+id/tv_call"
+                    android:drawablePadding="8dp"
                     android:text="拨打电话" />
 
             </LinearLayout>
+
             <View
-                android:paddingTop="2dp"
-                android:paddingBottom="2dp"
                 android:id="@+id/item_view_line2"
-                style="@style/line_style"/>
+                style="@style/line_style"
+                android:paddingBottom="2dp"
+                android:paddingTop="2dp" />
 
             <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="12dp"
-                android:layout_marginTop="8dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_marginTop="8dp">
 
                 <TextView
                     android:id="@+id/tv1"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="#999999"
-                    android:text="订单编号：" />
+                    android:text="订单编号："
+                    android:textColor="#999999" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -270,34 +238,34 @@ android:id="@+id/tv_call"
             </RelativeLayout>
 
             <TextView
+                android:id="@+id/tv2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="8dp"
-                android:id="@+id/tv2"
-                android:textColor="#999999"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="创建时间：" />
+                android:text="创建时间："
+                android:textColor="#999999" />
 
             <TextView
-                android:layout_marginLeft="16dp"
-            android:layout_marginRight="12dp"
                 android:id="@+id/tv3"
-                android:textColor="#999999"
-                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="预订时间：" />
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="8dp"
+                android:text="预订时间："
+                android:textColor="#999999" />
 
             <TextView
-                android:layout_marginLeft="16dp"
-            android:layout_marginRight="12dp"
-                android:layout_marginTop="8dp"
-                android:textColor="#999999"
                 android:id="@+id/tv4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="成交时间：" />
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="12dp"
+                android:layout_marginTop="8dp"
+                android:text="成交时间："
+                android:textColor="#999999" />
 
 
         </LinearLayout>
