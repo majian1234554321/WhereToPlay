@@ -1,0 +1,468 @@
+<?xml version="1.0" encoding="utf-8"?>
+                                                                   
+
+    
+                                                                 
+                 
+                        
+                                                                     
+                 
+                        
+                                                                  
+           
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" android:tag="layout/fragment_comment_0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <com.fanc.wheretoplay.view.TopMenu
+            android:id="@+id/tm_comment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/padding_20">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="@dimen/padding_15"
+                    android:paddingLeft="@dimen/padding_20"
+                    android:paddingRight="@dimen/padding_15"
+                    android:paddingTop="@dimen/padding_10">
+
+                    <TextView
+                        android:id="@+id/tv_comment_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:tag="binding_1"           
+                        android:textColor="@color/text_and_buttor_orange"
+                        android:textSize="@dimen/textsize_level2"/>
+
+                    <TextView
+                        android:id="@+id/tv_comment_reserved"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBottom="@+id/tv_comment_title"
+                        android:layout_marginLeft="@dimen/margin_15"
+                        android:layout_toRightOf="@+id/tv_comment_title"
+                        android:text="已结单"
+                        android:textColor="@color/text_and_buttor_orange"
+                        android:textSize="@dimen/textsize_levelsmall"/>
+
+                    <TextView
+                        android:id="@+id/tv_comment_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/tv_comment_title"
+                        android:layout_below="@+id/tv_comment_title"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:text="@string/pay_reserve_time"
+                        android:textColor="@color/pay_reserve_list_text"
+                        android:textSize="@dimen/textsize_levelsmall"/>
+
+                    <TextView
+                        android:id="@+id/tv_comment_real_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/tv_comment_time"
+                        android:layout_below="@+id/tv_comment_time"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_toRightOf="@+id/tv_comment_time"
+                        android:tag="binding_2"                                                                  
+                        android:textColor="@color/pay_reserve_list_text"
+                        android:textSize="@dimen/textsize_levelsmall"/>
+
+                    <TextView
+                        android:id="@+id/tv_comment_room_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/tv_comment_title"
+                        android:layout_below="@+id/tv_comment_time"
+                        android:layout_centerVertical="true"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:text="@string/pay_reserve_room_category"
+                        android:textColor="@color/pay_reserve_list_text"
+                        android:textSize="@dimen/textsize_levelsmall"/>
+
+                    <TextView
+                        android:id="@+id/tv_comment_room"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/tv_comment_room_category"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_toRightOf="@+id/tv_comment_room_category"
+                        android:tag="binding_3"         
+                        android:textColor="@color/pay_reserve_list_text"
+                        android:textSize="@dimen/textsize_levelsmall"/>
+                    <TextView
+                        android:id="@+id/tv_comment_decorate_category"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@+id/tv_comment_room"
+                        android:layout_below="@+id/tv_comment_time"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:text="@string/pay_reserve_decorate_category"
+                        android:textColor="@color/pay_reserve_list_text"
+                        android:textSize="@dimen/textsize_levelsmall"/>
+
+                    <TextView
+                        android:id="@+id/tv_comment_decorate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/tv_comment_decorate_category"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_toRightOf="@+id/tv_comment_decorate_category"
+                        android:tag="binding_4"             
+                        android:textColor="@color/pay_reserve_list_text"
+                        android:textSize="@dimen/textsize_levelsmall"/>
+
+                    <TextView
+                        android:id="@+id/tv_comment_reserve_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/tv_comment_title"
+                        android:layout_below="@+id/tv_comment_room_category"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:text="@string/pay_reserve_code"
+                        android:textColor="@color/pay_reserve_list_text"
+                        android:textSize="@dimen/textsize_levelsmall"/>
+
+                    <TextView
+                        android:id="@+id/tv_comment_reserve_real_code"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/tv_comment_reserve_code"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_toRightOf="@+id/tv_comment_reserve_code"
+                        android:tag="binding_5"        
+                        android:textColor="@color/pay_reserve_list_text"
+                        android:textSize="@dimen/textsize_levelsmall"/>
+
+                    <TextView
+                        android:id="@+id/tv_comment_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/tv_comment_title"
+                        android:layout_below="@+id/tv_comment_reserve_code"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:text="@string/pay_reserve_price"
+                        android:textColor="@color/pay_reserve_list_text"
+                        android:textSize="@dimen/textsize_levelsmall"/>
+
+                    <TextView
+                        android:id="@+id/tv_comment_real_price"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/tv_comment_price"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_toRightOf="@+id/tv_comment_price"
+                        android:tag="binding_6"                            
+                        android:textColor="@color/pay_reserve_list_text"
+                        android:textSize="@dimen/textsize_levelsmall"/>
+
+                    <TextView
+                        android:id="@+id/tv_comment_earnest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/tv_comment_price"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_toRightOf="@+id/tv_comment_real_price"
+                        android:text="@string/pay_reserve_earnest"
+                        android:textColor="@color/pay_reserve_list_text"
+                        android:textSize="@dimen/textsize_levelsmall"/>
+
+                    <TextView
+                        android:id="@+id/tv_comment_real_earnest"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/tv_comment_price"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_toRightOf="@+id/tv_comment_earnest"
+                        android:tag="binding_7"                             
+                        android:textColor="@color/pay_reserve_list_text"
+                        android:textSize="@dimen/textsize_levelsmall"/>
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/pay_reserve_list_divider"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/width_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_5"
+                        android:layout_marginLeft="@dimen/margin_20"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:layout_weight="1"
+                        android:text="@string/environment"
+                        android:textColor="@color/text_comment_category"
+                        android:textSize="@dimen/normal_textsize"/>
+
+                    <ImageView
+                        android:id="@+id/iv_comment_environment"
+                        android:layout_width="@dimen/width_20"
+                        android:layout_height="@dimen/height_20"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/margin_15"
+                        android:tag="binding_8"               
+                        android:src="@drawable/comment_more"/>
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_comment_environment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_20"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:paddingBottom="@dimen/padding_10"
+                    android:paddingTop="@dimen/padding_10"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_comment_environment_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_50"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/padding_20"
+                    android:paddingRight="@dimen/padding_15"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_height"
+                        android:background="@color/pay_reserve_list_divider"/>
+
+                    <EditText
+                        android:id="@+id/et_comment_environment_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_0"
+                        android:layout_marginBottom="@dimen/margin_5"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_mine_info_sign"
+                        android:hint="@string/hint_input_comment"
+                        android:paddingLeft="@dimen/padding_10"
+                        android:textColor="@color/pay_reserve_list_text"
+                        android:textColorHint="@color/pay_reserve_list_text"
+                        android:textSize="@dimen/normal_textsize"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/pay_reserve_list_divider"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/width_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_5"
+                        android:layout_marginLeft="@dimen/margin_20"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:layout_weight="1"
+                        android:text="@string/atmosphere"
+                        android:textColor="@color/text_comment_category"
+                        android:textSize="@dimen/normal_textsize"/>
+
+                    <ImageView
+                        android:id="@+id/iv_comment_atmosphere"
+                        android:layout_width="@dimen/width_20"
+                        android:layout_height="@dimen/height_20"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/margin_15"
+                        android:tag="binding_9"               
+                        android:src="@drawable/comment_more"/>
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_comment_atmosphere"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_20"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:lineSpacingExtra="@dimen/padding_10"
+                    android:paddingBottom="@dimen/padding_10"
+                    android:paddingTop="@dimen/padding_10"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_comment_atmosphere_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_50"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/padding_20"
+                    android:paddingRight="@dimen/padding_15"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_height"
+                        android:background="@color/pay_reserve_list_divider"/>
+
+                    <EditText
+                        android:id="@+id/et_comment_atmosphere_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_0"
+                        android:layout_marginBottom="@dimen/margin_5"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_mine_info_sign"
+                        android:hint="@string/hint_input_comment"
+                        android:paddingLeft="@dimen/padding_10"
+                        android:textColor="@color/pay_reserve_list_text"
+                        android:textColorHint="@color/pay_reserve_list_text"
+                        android:textSize="@dimen/normal_textsize"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/pay_reserve_list_divider"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/width_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_5"
+                        android:layout_marginLeft="@dimen/margin_20"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:layout_weight="1"
+                        android:text="@string/service"
+                        android:textColor="@color/text_comment_category"
+                        android:textSize="@dimen/normal_textsize"/>
+
+                    <ImageView
+                        android:id="@+id/iv_comment_service"
+                        android:layout_width="@dimen/width_20"
+                        android:layout_height="@dimen/height_20"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/margin_15"
+                        android:tag="binding_10"              
+                        android:src="@drawable/comment_more"/>
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_comment_service"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_20"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:lineSpacingExtra="@dimen/padding_10"
+                    android:paddingBottom="@dimen/padding_10"
+                    android:paddingTop="@dimen/padding_10"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_comment_service_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_50"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/padding_20"
+                    android:paddingRight="@dimen/padding_15"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_height"
+                        android:background="@color/pay_reserve_list_divider"/>
+
+                    <EditText
+                        android:id="@+id/et_comment_service_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_0"
+                        android:layout_marginBottom="@dimen/margin_5"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_mine_info_sign"
+                        android:hint="@string/hint_input_comment"
+                        android:paddingLeft="@dimen/padding_10"
+                        android:textColor="@color/pay_reserve_list_text"
+                        android:textColorHint="@color/pay_reserve_list_text"
+                        android:textSize="@dimen/normal_textsize"/>
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/pay_reserve_list_divider"
+                    android:orientation="horizontal">
+
+                    <TextView
+                        android:layout_width="@dimen/width_0"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="@dimen/margin_5"
+                        android:layout_marginLeft="@dimen/margin_20"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:layout_weight="1"
+                        android:text="@string/other"
+                        android:textColor="@color/text_comment_category"
+                        android:textSize="@dimen/normal_textsize"/>
+
+                    <ImageView
+                        android:id="@+id/iv_comment_other"
+                        android:layout_width="@dimen/width_20"
+                        android:layout_height="@dimen/height_20"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginRight="@dimen/margin_15"
+                        android:tag="binding_11"              
+                        android:src="@drawable/comment_more"/>
+                </LinearLayout>
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_comment_other"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_20"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:lineSpacingExtra="@dimen/padding_10"
+                    android:paddingBottom="@dimen/padding_10"
+                    android:paddingTop="@dimen/padding_10"/>
+
+                <LinearLayout
+                    android:id="@+id/ll_comment_other_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_50"
+                    android:orientation="vertical"
+                    android:paddingLeft="@dimen/padding_20"
+                    android:paddingRight="@dimen/padding_15"
+                    android:visibility="gone">
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_height"
+                        android:background="@color/pay_reserve_list_divider"/>
+
+                    <EditText
+                        android:id="@+id/et_comment_other_edit"
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_0"
+                        android:layout_marginBottom="@dimen/margin_5"
+                        android:layout_marginTop="@dimen/margin_5"
+                        android:layout_weight="1"
+                        android:background="@drawable/shape_mine_info_sign"
+                        android:hint="@string/hint_input_comment"
+                        android:paddingLeft="@dimen/padding_10"
+                        android:textColor="@color/pay_reserve_list_text"
+                        android:textColorHint="@color/pay_reserve_list_text"
+                        android:textSize="@dimen/normal_textsize"/>
+
+                </LinearLayout>
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+
+         

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+                                                                   
+
+    
+
+                 
+                       
+                                                                     
+           
+
+    <com.zhy.android.percent.support.PercentLinearLayout
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/padding_10"
+        android:paddingTop="@dimen/padding_10" android:tag="layout/item_room_type_0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <TextView
+            android:id="@+id/tv_item_room_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="@dimen/padding_15"
+            android:tag="binding_1"    
+            android:textColor="@color/white"
+            android:textSize="@dimen/normal_textsize"
+            app:layout_widthPercent="20%w"/>
+
+        <TextView
+            android:id="@+id/tv_item_room_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:tag="binding_2"    
+            android:textColor="@color/my_bg"
+            android:textSize="@dimen/normal_textsize"
+            app:layout_widthPercent="16%w"/>
+
+        <TextView
+            android:id="@+id/tv_item_room_little_consume"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:tag="binding_3"         
+            android:textColor="@color/my_bg"
+            android:textSize="@dimen/normal_textsize"
+            app:layout_widthPercent="20%w"/>
+
+        <TextView
+            android:id="@+id/tv_item_room_can_reserve"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:tag="binding_4"            
+            android:textColor="@color/my_bg"
+            android:textSize="@dimen/normal_textsize"
+            app:layout_widthPercent="12%w"/>
+
+        <TextView
+            android:id="@+id/tv_item_room_acoustics"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:tag="binding_5"     
+            android:textColor="@color/my_bg"
+            android:textSize="@dimen/normal_textsize"
+            app:layout_widthPercent="16%w"/>
+
+        <TextView
+            android:id="@+id/tv_item_room_other"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="binding_6"     
+            android:textColor="@color/my_bg"
+            android:textSize="@dimen/normal_textsize"
+            app:layout_widthPercent="16%w"/>
+    </com.zhy.android.percent.support.PercentLinearLayout>
+         

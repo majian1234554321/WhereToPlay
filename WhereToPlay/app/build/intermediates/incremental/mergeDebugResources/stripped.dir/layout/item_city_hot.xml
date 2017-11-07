@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:tools="http://schemas.android.com/tools"
+              android:layout_width="match_parent"
+              android:layout_height="wrap_content"
+              android:orientation="vertical"
+              android:paddingBottom="@dimen/padding_10"
+              android:paddingLeft="@dimen/padding_15"
+              android:paddingRight="@dimen/padding_15"
+              tools:ignore="RtlHardcoded">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height"
+        android:background="@color/pay_reserve_list_divider_white"
+        android:layout_marginTop="@dimen/margin_10"/>
+
+    <TextView
+        android:id="@+id/tv_item_city_hot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_15"
+        android:layout_marginTop="@dimen/margin_15"
+        android:clickable="false"
+        android:text="@string/hot_city"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/normal_textsize"/>
+
+    <com.fanc.wheretoplay.view.WrapHeightGridView
+        android:id="@+id/whgv_hot_city"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:cacheColorHint="@android:color/transparent"
+        android:horizontalSpacing="@dimen/padding_10"
+        android:listSelector="@android:color/transparent"
+        android:numColumns="3"
+        android:scrollbars="none"
+        android:verticalSpacing="@dimen/padding_10"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height"
+        android:background="@color/pay_reserve_list_divider_white"
+        android:layout_marginTop="@dimen/margin_15"
+        android:layout_marginBottom="@dimen/margin_15"
+        />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_5"
+        android:clickable="false"
+        android:text="@string/all_city"
+        android:textColor="@color/text_black"
+        android:textSize="@dimen/normal_textsize"/>
+</LinearLayout>

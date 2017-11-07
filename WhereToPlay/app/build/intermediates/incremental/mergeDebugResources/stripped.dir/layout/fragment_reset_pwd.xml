@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+                                                            
+
+    
+
+                 
+                        
+                                                                   
+           
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_gray" android:tag="layout/fragment_reset_pwd_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <com.fanc.wheretoplay.view.TopMenu
+            android:id="@+id/tm_reset_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_reset_pwd_user_input"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_20"
+            android:layout_marginRight="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_30"
+            android:background="@drawable/shape_pay"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tm_reset_pwd">
+
+            <TextView
+                android:id="@+id/tv_reset_pwd_mobile"
+                android:layout_width="@dimen/width_80"
+                android:layout_height="@dimen/height_40"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/margin_15"
+                android:text="@string/mobile"
+                android:textColor="@color/shape_reserve_top_bg"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <EditText
+                android:id="@+id/et_reset_pwd_mobile"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_40"
+                android:layout_alignBottom="@+id/tv_reset_pwd_mobile"
+                android:layout_toRightOf="@+id/tv_reset_pwd_mobile"
+                android:background="@null"
+                android:hint="@string/hint_mobile"
+                android:inputType="phone"
+                android:textColor="@color/shape_reserve_top_bg"
+                android:textColorHint="@color/text_hint"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <TextView
+                android:id="@+id/tv_reset_pwd_password"
+                android:layout_width="@dimen/width_80"
+                android:layout_height="@dimen/height_40"
+                android:layout_below="@+id/tv_reset_pwd_mobile"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/margin_15"
+                android:text="@string/password"
+                android:textColor="@color/shape_reserve_top_bg"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <EditText
+                android:id="@+id/et_reset_pwd_password"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_40"
+                android:layout_alignBottom="@+id/tv_reset_pwd_password"
+                android:layout_toRightOf="@+id/tv_reset_pwd_password"
+                android:background="@null"
+                android:hint="@string/hint_password"
+                android:inputType="textPassword"
+                android:textColor="@color/shape_reserve_top_bg"
+                android:textColorHint="@color/text_hint"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <TextView
+                android:id="@+id/tv_reset_pwd_verification"
+                android:layout_width="@dimen/width_80"
+                android:layout_height="@dimen/height_40"
+                android:layout_below="@+id/tv_reset_pwd_password"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/margin_15"
+                android:text="@string/verification"
+                android:textColor="@color/shape_reserve_top_bg"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <EditText
+                android:id="@+id/et_reset_pwd_verification"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_40"
+                android:layout_alignBottom="@+id/tv_reset_pwd_verification"
+                android:layout_toLeftOf="@+id/btn_reset_pwd_verification"
+                android:layout_toRightOf="@+id/tv_reset_pwd_verification"
+                android:background="@null"
+                android:hint="@string/hint_verification"
+                android:textColor="@color/shape_reserve_top_bg"
+                android:textColorHint="@color/text_hint"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <Button
+                android:id="@+id/btn_reset_pwd_verification"
+                android:layout_width="@dimen/width_100"
+                android:layout_height="@dimen/height_30"
+                android:layout_alignBottom="@+id/tv_reset_pwd_verification"
+                android:layout_alignParentRight="true"
+                android:layout_marginBottom="@dimen/margin_5"
+                android:layout_marginRight="@dimen/margin_10"
+                android:background="@drawable/shape_btn_verification"
+                android:tag="binding_1"              
+                android:text="@string/get_verification"
+                android:textColor="@color/text_white"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height_1px"
+                android:layout_below="@+id/tv_reset_pwd_mobile"
+                android:background="@color/pay_reserve_list_divider_white"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height_1px"
+                android:layout_below="@+id/tv_reset_pwd_password"
+                android:background="@color/pay_reserve_list_divider_white"/>
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/btn_reset_pwd"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/height_40"
+            android:layout_marginTop="@dimen/margin_35"
+            android:background="@drawable/shape_btn_signin"
+            android:tag="binding_2"              
+            android:text="@string/submit"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/textsize_level2"
+            app:layout_constraintEnd_toEndOf="@+id/rl_reset_pwd_user_input"
+            app:layout_constraintStart_toStartOf="@+id/rl_reset_pwd_user_input"
+            app:layout_constraintTop_toBottomOf="@+id/rl_reset_pwd_user_input"/>
+    </android.support.constraint.ConstraintLayout>
+         

@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="utf-8"?>
+                                                                   
+
+    
+
+                                                                 
+
+                 
+                        
+                                                                           
+
+           
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" android:tag="layout/fragment_order_to_complete_0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <com.fanc.wheretoplay.view.TopMenu
+            android:id="@+id/tm_order_to_complete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:id="@+id/rl_store_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/reserve_info_title"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:paddingBottom="@dimen/padding_10"
+            android:paddingLeft="@dimen/padding_15"
+            android:paddingRight="@dimen/padding_10"
+            android:paddingTop="@dimen/padding_15"
+            android:visibility="invisible">
+
+            <TextView
+                android:id="@+id/tv_order_to_complete_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="binding_1"           
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_level4"/>
+
+            <TextView
+                android:id="@+id/tv_order_to_complete_discount_real"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/tv_order_to_complete_address"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_15"
+                android:background="@drawable/discount"
+                android:paddingLeft="@dimen/padding_20"
+                android:paddingRight="@dimen/padding_5"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textsize_level3"/>
+
+            <TextView
+                android:id="@+id/tv_order_to_complete_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_order_to_complete_title"
+                android:layout_marginTop="@dimen/margin_5"
+                android:drawableLeft="@drawable/reserve_address"
+                android:drawablePadding="@dimen/padding_10"
+                android:maxWidth="@dimen/width_260"
+                android:tag="binding_2"        
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_levelsmall"/>
+
+            <TextView
+                android:id="@+id/tv_order_to_complete_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tv_order_to_complete_address"
+                android:layout_marginLeft="@dimen/margin_20"
+                android:layout_toRightOf="@+id/tv_order_to_complete_address"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_levelsmall"/>
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_order_info"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/padding_15"
+            android:paddingRight="@dimen/padding_15"
+            android:visibility="invisible">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/shape_signin_user_input">
+
+                <TextView
+                    android:id="@+id/tv_order_to_complete_name_label"
+                    android:layout_width="@dimen/width_80"
+                    android:layout_height="wrap_content"
+                    android:padding="@dimen/padding_10"
+                    android:text="@string/name"
+                    android:textColor="@color/text_and_buttor_orange"
+                    android:textSize="@dimen/normal_textsize"/>
+
+                <TextView
+                    android:id="@+id/tv_order_to_complete_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_order_to_complete_name_label"
+                    android:layout_toRightOf="@+id/tv_order_to_complete_name_label"
+                    android:tag="binding_3"         
+                    android:textColor="@color/textcolor_d2"
+                    android:textSize="@dimen/textsize_level2"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height_1px"
+                    android:layout_below="@+id/tv_order_to_complete_name_label"
+                    android:background="@color/discover_divider"/>
+
+                <TextView
+                    android:id="@+id/tv_order_to_complete_mobile_label"
+                    android:layout_width="@dimen/width_80"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_order_to_complete_name_label"
+                    android:layout_marginTop="@dimen/line_height_1px"
+                    android:padding="@dimen/padding_10"
+                    android:text="@string/mobile1"
+                    android:textColor="@color/text_and_buttor_orange"
+                    android:textSize="@dimen/normal_textsize"/>
+
+                <TextView
+                    android:id="@+id/tv_order_to_complete_mobile"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_order_to_complete_mobile_label"
+                    android:layout_toRightOf="@+id/tv_order_to_complete_mobile_label"
+                    android:tag="binding_4"       
+                    android:textColor="@color/textcolor_d2"
+                    android:textSize="@dimen/textsize_level2"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height_1px"
+                    android:layout_below="@+id/tv_order_to_complete_mobile_label"
+                    android:background="@color/discover_divider"/>
+
+                <TextView
+                    android:id="@+id/tv_order_to_complete_room_label"
+                    android:layout_width="@dimen/width_80"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_order_to_complete_mobile_label"
+                    android:layout_marginTop="@dimen/line_height_1px"
+                    android:padding="@dimen/padding_10"
+                    android:text="@string/room_category"
+                    android:textColor="@color/text_and_buttor_orange"
+                    android:textSize="@dimen/normal_textsize"/>
+
+                <TextView
+                    android:id="@+id/tv_order_to_complete_room"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_order_to_complete_room_label"
+                    android:layout_toRightOf="@+id/tv_order_to_complete_room_label"
+                    android:tag="binding_5"          
+                    android:textColor="@color/textcolor_d2"
+                    android:textSize="@dimen/textsize_level2"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height_1px"
+                    android:layout_below="@+id/tv_order_to_complete_room_label"
+                    android:background="@color/discover_divider"/>
+
+                <TextView
+                    android:id="@+id/tv_order_to_complete_time_label"
+                    android:layout_width="@dimen/width_80"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_order_to_complete_room_label"
+                    android:layout_marginTop="@dimen/line_height_1px"
+                    android:padding="@dimen/padding_10"
+                    android:text="@string/arrive_time"
+                    android:textColor="@color/text_and_buttor_orange"
+                    android:textSize="@dimen/normal_textsize"/>
+
+                <TextView
+                    android:id="@+id/tv_order_to_complete_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_order_to_complete_time_label"
+                    android:layout_toRightOf="@+id/tv_order_to_complete_time_label"
+                    android:tag="binding_6"                                             
+                    android:textColor="@color/textcolor_d2"
+                    android:textSize="@dimen/textsize_level2"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height_1px"
+                    android:layout_below="@+id/tv_order_to_complete_time_label"
+                    android:background="@color/discover_divider"/>
+
+                <TextView
+                    android:id="@+id/tv_order_to_complete_car_label"
+                    android:layout_width="@dimen/width_80"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_order_to_complete_time_label"
+                    android:layout_marginTop="@dimen/line_height_1px"
+                    android:padding="@dimen/padding_10"
+                    android:text="@string/carport"
+                    android:textColor="@color/text_and_buttor_orange"
+                    android:textSize="@dimen/normal_textsize"/>
+
+                <TextView
+                    android:id="@+id/tv_order_to_complete_car"
+                    android:layout_width="@dimen/width_100"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_order_to_complete_car_label"
+                    android:layout_toRightOf="@+id/tv_order_to_complete_car_label"
+                    android:tag="binding_7"        
+                    android:textColor="@color/textcolor_d2"
+                    android:textSize="@dimen/textsize_level2"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height_1px"
+                    android:layout_below="@+id/tv_order_to_complete_car_label"
+                    android:background="@color/discover_divider"/>
+
+                <TextView
+                    android:id="@+id/tv_order_to_complete_number_label"
+                    android:layout_width="@dimen/width_80"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_order_to_complete_time_label"
+                    android:layout_marginTop="@dimen/line_height_1px"
+                    android:layout_toRightOf="@+id/tv_order_to_complete_car"
+                    android:padding="@dimen/padding_10"
+                    android:text="@string/number_of_people"
+                    android:textColor="@color/text_and_buttor_orange"
+                    android:textSize="@dimen/normal_textsize"/>
+
+                <TextView
+                    android:id="@+id/tv_order_to_complete_number"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_order_to_complete_number_label"
+                    android:layout_toRightOf="@+id/tv_order_to_complete_number_label"
+                    android:tag="binding_8"     
+                    android:textColor="@color/textcolor_d2"
+                    android:textSize="@dimen/textsize_level2"/>
+
+                <TextView
+                    android:id="@+id/tv_order_to_complete_waiter_label"
+                    android:layout_width="@dimen/width_80"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_order_to_complete_car_label"
+                    android:layout_marginTop="@dimen/line_height_1px"
+                    android:padding="@dimen/padding_10"
+                    android:text="@string/waiter"
+                    android:textColor="@color/text_and_buttor_orange"
+                    android:textSize="@dimen/normal_textsize"/>
+
+                <TextView
+                    android:id="@+id/tv_order_to_complete_waiter"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_order_to_complete_waiter_label"
+                    android:layout_toRightOf="@+id/tv_order_to_complete_waiter_label"
+                    android:tag="binding_9"            
+                    android:textColor="@color/textcolor_d2"
+                    android:textSize="@dimen/textsize_level2"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height_1px"
+                    android:layout_below="@+id/tv_order_to_complete_waiter_label"
+                    android:background="@color/discover_divider"/>
+
+                <TextView
+                    android:id="@+id/tv_order_to_complete_remark_label"
+                    android:layout_width="@dimen/width_80"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_order_to_complete_waiter_label"
+                    android:layout_marginTop="@dimen/line_height_1px"
+                    android:padding="@dimen/padding_10"
+                    android:text="@string/remark"
+                    android:textColor="@color/text_and_buttor_orange"
+                    android:textSize="@dimen/normal_textsize"/>
+
+                <TextView
+                    android:id="@+id/tv_order_to_complete_remark"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_order_to_complete_remark_label"
+                    android:layout_toRightOf="@+id/tv_order_to_complete_remark_label"
+                    android:tag="binding_10"                                                      
+                    android:textColor="@color/textcolor_d2"
+                    android:textSize="@dimen/textsize_level2"/>
+
+                <LinearLayout
+                    android:layout_width="@dimen/width_80"
+                    android:layout_height="@dimen/height_80"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:background="@drawable/shape_reserving_border"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/width_30"
+                        android:layout_height="@dimen/height_30"
+                        android:layout_marginBottom="@dimen/margin_5"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/reserving"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/reserving"
+                        android:textColor="@color/text_and_buttor_orange"
+                        android:textSize="@dimen/textsize_level3"/>
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_50"
+                android:text="@string/order_to_complete"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_level6"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/margin_20"
+                android:text="@string/link_merchant"
+                android:textColor="@color/white"
+                android:textSize="@dimen/normal_textsize"/>
+
+        </LinearLayout>
+    </LinearLayout>
+         

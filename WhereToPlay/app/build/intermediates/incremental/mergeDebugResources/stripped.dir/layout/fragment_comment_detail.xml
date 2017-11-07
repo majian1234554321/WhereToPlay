@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+                                                            
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" android:tag="layout/fragment_comment_detail_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <!--<android.support.design.widget.AppBarLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll"
+                android:text="button"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="
+this is tool bar child \n
+this is tool bar child \n
+this is tool bar child \n
+this is tool bar child \n
+this is tool bar child"
+                app:layout_scrollFlags="snap"/>-->
+
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rv_comment_detail"
+                android:layout_width="match_parent"
+                android:background="@color/bg"
+                android:layout_height="match_parent"/>
+        <!--</android.support.design.widget.AppBarLayout>-->
+
+
+    </RelativeLayout>
+
+         

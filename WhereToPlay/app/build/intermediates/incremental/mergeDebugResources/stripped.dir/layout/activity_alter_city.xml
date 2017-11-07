@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+                                                                   
+
+    
+
+                 
+                           
+                                                                    
+           
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/white" android:tag="layout/activity_alter_city_0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <com.fanc.wheretoplay.view.TopMenu
+            android:id="@+id/tm_alter_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/et_alter_city"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:tag="binding_1"                                
+            android:background="@drawable/shape_city_choose_gray"
+            android:drawableLeft="@drawable/search"
+            android:drawablePadding="@dimen/padding_10"
+            android:hint="@string/hint_alter_city"
+            android:padding="@dimen/padding_8"
+            android:textColor="@color/text_black"
+            android:textColorHint="@color/hint_advice_feedback"
+            android:textSize="@dimen/normal_textsize"
+            android:layout_marginTop="@dimen/margin_8"
+            android:layout_marginBottom="@dimen/margin_8"
+            android:layout_marginStart="@dimen/margin_15"
+            android:layout_marginEnd="@dimen/margin_15"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/pay_reserve_list_divider_white"
+            />
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ListView
+                android:id="@+id/lv_alter_city_all"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="@dimen/margin_36"
+                android:divider="@null"
+                android:dividerHeight="@dimen/height_0"/>
+
+            <TextView
+                android:id="@+id/tv_alter_city_selected_letter"
+                android:layout_width="@dimen/width_80"
+                android:layout_height="@dimen/height_80"
+                android:layout_gravity="center"
+                android:background="@drawable/shape_toast_bg"
+                android:gravity="center"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_level6"
+                android:visibility="gone"/>
+
+            <com.fanc.wheretoplay.view.SideLetterBar
+                android:id="@+id/slb_alter_city"
+                android:layout_width="@dimen/width_36"
+                android:layout_height="match_parent"
+                android:layout_gravity="right"
+                android:background="@color/white"/>
+
+            <ListView
+                android:id="@+id/lv_alter_city_result"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white"
+                android:divider="@null"
+                android:dividerHeight="@dimen/height_0"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tv_alter_city_search_error"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_40"
+                android:gravity="center"
+                android:text="@string/search_city_error"
+                android:textColor="@color/text_detail_white_bc"
+                android:textSize="@dimen/textsize_level3"
+                android:visibility="gone"/>
+
+            <TextView
+                android:id="@+id/tv_alter_city_loading"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="加载中..."
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_level3"/>
+        </FrameLayout>
+    </LinearLayout>
+
+         

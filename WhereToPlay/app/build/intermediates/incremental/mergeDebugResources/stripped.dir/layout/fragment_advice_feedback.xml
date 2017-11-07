@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+                                                                   
+
+    
+
+                 
+                        
+                                                                         
+           
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        android:orientation="vertical" android:tag="layout/fragment_advice_feedback_0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <com.fanc.wheretoplay.view.TopMenu
+            android:id="@+id/tm_advice_feedback"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <EditText
+            android:id="@+id/et_advice_feedback_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/bg_gray"
+            android:gravity="center_vertical"
+            android:hint="@string/hint_advice_title"
+            android:paddingBottom="@dimen/padding_15"
+            android:paddingLeft="@dimen/padding_15"
+            android:paddingTop="@dimen/padding_15"
+            android:textColor="@color/text_black"
+            android:textColorHint="@color/hint_advice_feedback"
+            android:textSize="@dimen/normal_textsize"/>
+
+        <EditText
+            android:id="@+id/et_advice_feedback_content"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_180"
+            android:layout_marginTop="@dimen/margin_15"
+            android:background="@color/bg_gray"
+            android:gravity="top"
+            android:hint="@string/hint_leave_words"
+            android:padding="@dimen/padding_15"
+            android:textColor="@color/text_black"
+            android:textColorHint="@color/hint_advice_feedback"
+            android:textSize="@dimen/normal_textsize"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:focusable="true"
+            android:paddingBottom="@dimen/padding_15"
+            android:paddingLeft="@dimen/padding_20"
+            android:paddingRight="@dimen/padding_20"
+            android:paddingTop="@dimen/padding_15"
+            android:text="@string/expect_your_advice"
+            android:textColor="@color/pay_reserve_list_text"
+            android:textSize="@dimen/textsize_levelsmall"/>
+
+        <Button
+            android:id="@+id/btn_advice_feedback_submit"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_40"
+            android:layout_marginLeft="@dimen/margin_20"
+            android:layout_marginRight="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_60"
+            android:background="@drawable/shape_btn_signin"
+            android:tag="binding_1"               
+            android:text="@string/submit"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/textsize_level2"/>
+
+    </LinearLayout>
+         

@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+                                                                   
+
+    
+
+                 
+                       
+                                                                 
+           
+
+    <LinearLayout
+        android:id="@+id/ll_item_dialog_room"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:descendantFocusability="blocksDescendants"
+        android:gravity="center_vertical"
+        android:orientation="horizontal" android:tag="layout/item_room_type_dialog_0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <TextView
+            android:id="@+id/tv_item_dialog_room"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_15"
+            android:layout_marginLeft="@dimen/margin_30"
+            android:layout_marginRight="@dimen/margin_30"
+            android:layout_marginTop="@dimen/margin_15"
+            android:tag="binding_1"    
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/normal_textsize"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/discount_price"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/textsize_levelsmall"/>
+
+        <TextView
+            android:id="@+id/tv_item_dialog_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_5"
+            android:layout_weight="1"
+            android:tag="binding_2"                                
+            android:textColor="@color/text_and_buttor_orange"
+            android:textSize="@dimen/textsize_levelsmall"/>
+
+        <RadioButton
+            android:id="@+id/rb_item_dialog_room"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginRight="@dimen/margin_15"
+            android:button="@drawable/selector_gender"/>
+    </LinearLayout>
+         

@@ -182,7 +182,11 @@ public interface Network {
 
     interface  LH_API {
 
+<<<<<<< HEAD
         //订单列表22
+=======
+        //订单列表222
+>>>>>>> majin_dev
         @Multipart
         @POST("User/bookList")
         Observable<BaseResponseModel<BookListModel.ContentBean>> bookList(@Part MultipartBody.Part file, @Part MultipartBody.Part fileB, @Part MultipartBody.Part filec, @Part MultipartBody.Part filed);

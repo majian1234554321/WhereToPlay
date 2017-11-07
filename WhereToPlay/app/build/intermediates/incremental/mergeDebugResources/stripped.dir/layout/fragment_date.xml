@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+                                                                   
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_gray"
+        android:orientation="vertical" android:tag="layout/fragment_date_0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <com.fanc.wheretoplay.view.TopMenu
+            android:id="@+id/tm_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:padding="@dimen/padding_10">
+
+            <TextView
+                android:id="@+id/tv_date_month"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="9月"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textsize_level4"/>
+
+            <TextView
+                android:id="@+id/tv_date_year"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@+id/tv_date_month"
+                android:layout_toRightOf="@+id/tv_date_month"
+                android:text="2017"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <TextView
+                android:id="@+id/tv_date_explain"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:text="@string/reserve_date_rang"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/normal_textsize"/>
+        </RelativeLayout>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <GridView
+            android:id="@+id/gv_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:horizontalSpacing="@dimen/padding_10"
+            android:numColumns="5"
+            android:paddingBottom="@dimen/padding_10"
+            android:paddingLeft="@dimen/padding_15"
+            android:paddingRight="@dimen/padding_15"
+            android:paddingTop="@dimen/padding_10"
+            android:verticalSpacing="@dimen/padding_10"/>
+
+        <Button
+            android:id="@+id/btn_date_confirm"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_40"
+            android:layout_marginLeft="@dimen/margin_15"
+            android:layout_marginRight="@dimen/margin_15"
+            android:layout_marginTop="@dimen/margin_30"
+            android:background="@drawable/shape_btn_signin"
+            android:text="@string/confirm"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/textsize_level2"/>
+    </LinearLayout>
+         

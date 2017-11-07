@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+                                                                   
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/bg_gray"
+        android:tag="layout/fragment_pay_0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <com.fanc.wheretoplay.view.TopMenu
+            android:id="@+id/tm_pay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <!--<TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_38"
+            android:background="@color/bg"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/padding_20"
+            android:text="@string/pay_reserve_list"
+            android:textColor="@color/white"
+            android:textSize="@dimen/textsize_levelsmall"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/pay_reserve_list_divider"/>-->
+
+        <com.fanc.wheretoplay.view.PullToRefreshLayout
+            android:id="@+id/ptrl_pay_reserve"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/bg_gray" android:tag="binding_1">
+
+            <include layout="@layout/refresh_head"/>
+
+            <com.fanc.wheretoplay.view.PullableRecyclerView
+                android:id="@+id/rv_pay"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                />
+
+            <include layout="@layout/load_more"/>
+        </com.fanc.wheretoplay.view.PullToRefreshLayout>
+    </LinearLayout>
+         

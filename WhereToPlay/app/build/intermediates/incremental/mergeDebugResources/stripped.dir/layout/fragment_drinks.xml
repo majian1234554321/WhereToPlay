@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+                                                       
+     
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical" android:tag="layout/fragment_drinks_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <com.fanc.wheretoplay.view.TopMenu
+            android:id="@+id/tm_drinks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:paddingBottom="@dimen/padding_10"
+            android:paddingLeft="@dimen/padding_15"
+            android:paddingRight="@dimen/padding_10"
+            android:paddingTop="@dimen/padding_15">
+
+            <TextView
+                android:id="@+id/tv_drinks_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textsize_level4"/>
+
+            <TextView
+                android:id="@+id/tv_drinks_discount_real"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/tv_drinks_address"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="@dimen/margin_5"
+                android:background="@drawable/discount"
+                android:paddingLeft="@dimen/padding_20"
+                android:paddingRight="@dimen/padding_5"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_level3"/>
+            <!--地址-->
+            <TextView
+                android:id="@+id/tv_drinks_address"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_drinks_title"
+                android:layout_marginTop="@dimen/margin_5"
+                android:drawableLeft="@drawable/reserve_address"
+                android:drawablePadding="@dimen/padding_10"
+                android:maxWidth="@dimen/width_260"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/textsize_levelsmall"
+                android:singleLine="true"
+                android:ellipsize="end"/>
+            <!--距离-->
+            <TextView
+                android:id="@+id/tv_drinks_distance"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@+id/tv_drinks_address"
+                android:layout_marginLeft="@dimen/margin_40"
+                android:layout_toRightOf="@+id/tv_drinks_address"
+                android:textColor="@color/text_gray"
+                android:textSize="@dimen/textsize_levelsmall"/>
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/pay_reserve_list_divider_white" />
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_54"
+            android:paddingLeft="@dimen/margin_15"
+            android:paddingRight="@dimen/margin_15"
+            android:background="@color/white"
+            android:layout_marginTop="@dimen/margin_10">
+
+            <TextView
+                android:id="@+id/tv_drinks_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/drinks_name"
+                android:textSize="@dimen/textsize_levelmedium"
+                android:textColor="@color/text_black"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/tv_housenews_housename"
+                />
+
+            <TextView
+                android:id="@+id/tv_housenews_housename"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/drinks_price"
+                android:textSize="@dimen/textsize_levelmedium"
+                android:textColor="@color/text_black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/tv_drinks_name"
+                app:layout_constraintRight_toLeftOf="@+id/tv_drinks_action"/>
+
+            <TextView
+                android:id="@+id/tv_drinks_action"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/drinks_action"
+                android:textSize="@dimen/textsize_levelmedium"
+                android:textColor="@color/text_black"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/tv_housenews_housename"
+                app:layout_constraintRight_toRightOf="parent"/>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/pay_reserve_list_divider_white" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rc_merchant_drinks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/white">
+
+        </android.support.v7.widget.RecyclerView>
+    </LinearLayout>
+         

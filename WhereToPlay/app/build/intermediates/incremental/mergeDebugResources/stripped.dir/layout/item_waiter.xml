@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+                                                            
+
+    
+
+                                          
+
+                 
+                         
+                                                                         
+           
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical" android:tag="layout/item_waiter_0" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <FrameLayout
+            android:id="@+id/fl_item_waiter"
+            android:layout_width="@dimen/width_120"
+            android:layout_height="@dimen/height_120"
+            android:layout_marginRight="@dimen/margin_5">
+
+            <ImageView
+                android:id="@+id/iv_item_waiter_distinct"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:tag="binding_1"                                      
+                                         />
+
+            <ImageView
+                android:id="@+id/iv_item_waiter_fuzzy"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:tag="binding_2"                                      
+                                         />
+
+            <ImageView
+                android:id="@+id/iv_item_waiter_lock"
+                android:layout_width="@dimen/width_30"
+                android:layout_height="@dimen/height_30"
+                android:layout_alignLeft="@+id/iv_item_waiter_fuzzy"
+                android:layout_alignTop="@+id/iv_item_waiter_fuzzy"
+                android:layout_gravity="center"
+                android:src="@drawable/lock"
+                android:tag="binding_3"                                      />
+
+            <CheckBox
+                android:id="@+id/cb_item_waiter_status"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="top|right"
+                android:layout_marginRight="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_10"
+                android:button="@drawable/selector_pay_way"
+                android:visibility='gone'/>
+        </FrameLayout>
+
+
+        <TextView
+            android:id="@+id/tv_item_waiter_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:layout_marginTop="@dimen/margin_2"
+            android:gravity="center_horizontal"
+            android:tag="binding_4"      
+            android:textColor="@color/white"
+            android:textSize="@dimen/normal_textsize"/>
+    </LinearLayout>
+
+         

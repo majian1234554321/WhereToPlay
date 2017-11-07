@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+                                                              
+                                                            
+    
+                 
+                        
+                                                                   
+           
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:background="@color/bg_gray" android:tag="layout/fragment_discover_0" xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <com.fanc.wheretoplay.view.TopMenu
+            android:id="@+id/tm_discover"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/height_80"
+            android:background="@color/white"
+            >
+
+            <LinearLayout
+                android:id="@+id/ll_discover_near"
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:tag="binding_1"               
+                android:layout_marginStart="@dimen/margin_35"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/ll_discover_hottest"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteY="8dp"
+                app:layout_constraintHorizontal_chainStyle="spread_inside">
+
+                <ImageView
+                    android:id="@+id/iv_discover_near"
+                    android:layout_width="@dimen/width_30"
+                    android:layout_height="@dimen/height_30"
+                    android:src="@drawable/near"/>
+
+                <TextView
+                    android:id="@+id/tv_discover_near"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_2"
+                    android:text="@string/near"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/normal_textsize"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_discover_hottest"
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
+                android:gravity="center"
+                android:tag="binding_2"               
+                android:orientation="vertical"
+                app:layout_constraintLeft_toRightOf="@+id/ll_discover_near"
+                app:layout_constraintRight_toLeftOf="@+id/ll_discover_new_store"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteY="8dp">
+
+                <ImageView
+                    android:id="@+id/iv_discover_hottest"
+                    android:layout_width="@dimen/width_30"
+                    android:layout_height="@dimen/height_30"
+                    android:src="@drawable/hottest"/>
+
+                <TextView
+                    android:id="@+id/tv_discover_hottest"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_2"
+                    android:text="@string/hottest"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/normal_textsize"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_discover_new_store"
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
+                android:gravity="center"
+                android:tag="binding_3"               
+                android:orientation="vertical"
+                app:layout_constraintLeft_toRightOf="@+id/ll_discover_hottest"
+                app:layout_constraintRight_toLeftOf="@+id/ll_discover_most_discount"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteY="8dp">
+
+                <ImageView
+                    android:id="@+id/iv_discover_new_store"
+                    android:layout_width="@dimen/width_30"
+                    android:layout_height="@dimen/height_30"
+                    android:src="@drawable/new_store"/>
+
+                <TextView
+                    android:id="@+id/tv_discover_new_store"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_2"
+                    android:text="@string/new_store"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/normal_textsize"/>
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_discover_most_discount"
+                android:layout_width="wrap_content"
+                android:layout_height="64dp"
+                android:gravity="center"
+                android:tag="binding_4"               
+                android:orientation="vertical"
+                android:layout_marginEnd="@dimen/margin_35"
+                app:layout_constraintLeft_toRightOf="@+id/ll_discover_new_store"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:layout_editor_absoluteY="8dp">
+
+                <ImageView
+                    android:id="@+id/iv_discover_most_discount"
+                    android:layout_width="@dimen/width_30"
+                    android:layout_height="@dimen/height_30"
+                    android:src="@drawable/most_discount"/>
+
+                <TextView
+                    android:id="@+id/tv_discover_most_discount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_2"
+                    android:text="@string/most_discount"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/normal_textsize"/>
+            </LinearLayout>
+
+        </android.support.constraint.ConstraintLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/pay_reserve_list_divider_white" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_discover"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/margin_10"
+            android:background="@color/white"/>
+
+    </LinearLayout>
+
+         

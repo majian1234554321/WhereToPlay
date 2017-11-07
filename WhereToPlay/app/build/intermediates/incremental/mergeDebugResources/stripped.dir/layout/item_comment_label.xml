@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+                                                                   
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_80"
+        android:background="@drawable/shape_comment_detail_label_unselected"
+        android:padding="@dimen/padding_10" android:tag="layout/item_comment_label_0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <TextView
+            android:id="@+id/tv_comment_tab_label"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/environment"
+            android:textColor="@color/text_black"
+            android:textSize="@dimen/textsize_level3"/>
+
+    </FrameLayout>
+
+         

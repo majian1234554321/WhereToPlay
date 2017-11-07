@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+                                                                   
+
+    
+
+                 
+                        
+                                                               
+           
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/bg_gray"
+        android:orientation="vertical" android:tag="layout/fragment_mine_0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <com.fanc.wheretoplay.view.TopMenu
+            android:id="@+id/tm_mine"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <com.fanc.wheretoplay.view.MyScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:id="@+id/rl_mine_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/text_red"
+                    android:tag="binding_1"               
+                    android:paddingBottom="@dimen/padding_20"
+                    android:paddingLeft="@dimen/padding_15"
+                    android:paddingRight="@dimen/padding_20"
+                    android:paddingTop="@dimen/width_0">
+
+                    <com.fanc.wheretoplay.view.CircleImageView
+                        android:id="@+id/civ_mine"
+                        android:layout_width="@dimen/width_60"
+                        android:layout_height="@dimen/height_60"
+                        android:src="@drawable/sign_in_top"/>
+
+                    <TextView
+                        android:id="@+id/tv_mine_nickname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignTop="@+id/civ_mine"
+                        android:layout_marginLeft="@dimen/margin_15"
+                        android:layout_marginTop="@dimen/margin_2"
+                        android:layout_toRightOf="@+id/civ_mine"
+                        android:text="@string/nickname"
+                        android:textColor="@color/text_white"
+                        android:textSize="@dimen/menu_title_size"/>
+
+                    <TextView
+                        android:id="@+id/tv_mine_mobile"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignLeft="@+id/tv_mine_nickname"
+                        android:layout_below="@+id/tv_mine_nickname"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:text="ID:10086"
+                        android:textColor="@color/text_white"
+                        android:textSize="@dimen/textsize_level2"/>
+
+                    <TextView
+                        android:id="@+id/tv_mine_integral"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/tv_mine_mobile"
+                        android:layout_alignParentRight="true"
+                        android:text="86分"
+                        android:textColor="@color/text_white"
+                        android:textSize="@dimen/textsize_level2"/>
+
+                    <TextView
+                        android:id="@+id/tv_mine_integral_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignBaseline="@+id/tv_mine_mobile"
+                        android:layout_toLeftOf="@+id/tv_mine_integral"
+                        android:text="@string/integral_1"
+                        android:textColor="@color/text_white"
+                        android:textSize="@dimen/textsize_level2"/>
+                </RelativeLayout>
+
+
+
+                <com.fanc.wheretoplay.view.ItemView
+                    android:id="@+id/iv_mine_message"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="binding_2"               
+                    android:layout_marginTop="@dimen/margin_10"/>
+
+                <com.fanc.wheretoplay.view.ItemView
+                    android:id="@+id/iv_mine_wallet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="binding_3"               />
+
+                <com.fanc.wheretoplay.view.ItemView
+                    android:id="@+id/iv_mine_discount_coupon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="binding_4"               />
+
+
+                <com.fanc.wheretoplay.view.ItemView
+                    android:id="@+id/iv_mine_integral"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="binding_5"               
+                    android:layout_marginTop="@dimen/margin_10"/>
+
+                <com.fanc.wheretoplay.view.ItemView
+                    android:id="@+id/iv_mine_order"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="binding_6"               />
+
+                <com.fanc.wheretoplay.view.ItemView
+                    android:id="@+id/iv_mine_collection"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="binding_7"               />
+
+
+                <com.fanc.wheretoplay.view.ItemView
+                    android:id="@+id/iv_mine_referral"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="binding_8"               
+                    android:layout_marginTop="@dimen/margin_10"/>
+
+                <com.fanc.wheretoplay.view.ItemView
+                    android:id="@+id/iv_mine_drive"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:tag="binding_9"               />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/height_0"
+                    android:layout_weight="1"/>
+            </LinearLayout>
+        </com.fanc.wheretoplay.view.MyScrollView>
+
+
+    </LinearLayout>
+
+         

@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+                                                                   
+
+    
+
+                 
+                         
+                                                                         
+           
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/padding_15" android:tag="layout/item_consume_detail_0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <TextView
+            android:id="@+id/tv_item_consume_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tag="binding_1"      
+            android:textColor="@color/white"
+            android:textSize="@dimen/normal_textsize"/>
+
+        <LinearLayout
+            android:id="@+id/ll_item_consume_subscription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_item_consume_subscription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/subscription_consume"
+                android:textColor="@color/text_detail_white_bc"
+                android:textSize="@dimen/textsize_levelsmall"/>
+
+            <TextView
+                android:id="@+id/tv_item_consume_subscription_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:layout_weight="1"
+                android:textColor="@color/text_down_payment_and_way"
+                android:textSize="@dimen/textsize_levelsmall"/>
+
+            <TextView
+                android:id="@+id/tv_item_consume_subscription_sum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="binding_2"        
+                android:textColor="@color/text_and_buttor_orange"
+                android:textSize="@dimen/normal_textsize"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_item_consume_order"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_item_consume_order"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/order_consume"
+                android:textColor="@color/text_detail_white_bc"
+                android:textSize="@dimen/textsize_levelsmall"/>
+
+            <TextView
+                android:id="@+id/tv_item_consume_order_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/margin_15"
+                android:layout_weight="1"
+                android:textColor="@color/text_down_payment_and_way"
+                android:textSize="@dimen/textsize_levelsmall"/>
+
+            <TextView
+                android:id="@+id/tv_item_consume_order_sum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="binding_3"         
+                android:textColor="@color/text_and_buttor_orange"
+                android:textSize="@dimen/normal_textsize"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_item_consume_discount"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_item_consume_discount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/discount_sum"
+                android:textColor="@color/text_detail_white_bc"
+                android:textSize="@dimen/textsize_levelsmall"/>
+
+            <TextView
+                android:id="@+id/tv_item_consume_discount_sum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="binding_4"          
+                android:textColor="@color/text_and_buttor_orange"
+                android:textSize="@dimen/normal_textsize"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_10"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_item_consume_total"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/total"
+                android:textColor="@color/text_detail_white_bc"
+                android:textSize="@dimen/textsize_levelsmall"/>
+
+            <TextView
+                android:id="@+id/tv_item_consume_total_sum"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tag="binding_5"                       
+                android:textColor="@color/text_and_buttor_orange"
+                android:textSize="@dimen/normal_textsize"/>
+        </LinearLayout>
+
+    </LinearLayout>
+         

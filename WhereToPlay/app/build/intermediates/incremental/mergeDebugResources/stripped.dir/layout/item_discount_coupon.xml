@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+                                                                   
+
+    
+
+                                                                 
+
+                 
+                           
+                                                                                     
+
+           
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:paddingBottom="@dimen/padding_15"
+        android:paddingLeft="@dimen/padding_20"
+        android:paddingRight="@dimen/padding_20"
+        android:paddingTop="@dimen/padding_15" android:tag="layout/item_discount_coupon_0" xmlns:android="http://schemas.android.com/apk/res/android">
+
+        <LinearLayout
+            android:layout_width="@dimen/width_0"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/shape_discount_coupon_top"
+                android:paddingBottom="@dimen/padding_10"
+                android:paddingLeft="@dimen/padding_15"
+                android:paddingRight="@dimen/padding_10">
+
+                <TextView
+                    android:id="@+id/tv_item_discount_coupon_sum"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/margin_10"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:tag="binding_1"                                                          
+                    android:textColor="@color/text_red"
+                    android:textSize="50sp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/tv_item_discount_coupon_sum"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:text="@string/currency_char"
+                    android:textColor="@color/text_red"
+                    android:textSize="@dimen/textsize_levelsmall"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/tv_item_discount_coupon_sum"
+                    android:layout_marginLeft="@dimen/margin_5"
+                    android:layout_marginTop="@dimen/margin_12"
+                    android:layout_toRightOf="@+id/tv_item_discount_coupon_sum"
+                    android:text="@string/rmb"
+                    android:textColor="@color/text_red"/>
+
+                <TextView
+                    android:id="@+id/tv_item_discount_coupon_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_item_discount_coupon_sum"
+                    android:layout_marginLeft="@dimen/margin_5"
+                    android:layout_toRightOf="@+id/tv_item_discount_coupon_sum"
+                    android:text="@string/where_to_play_discount_coupon"
+                    android:textColor="@color/text_red"
+                    android:textSize="@dimen/textsize_level4"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBaseline="@+id/tv_item_discount_coupon_text"
+                    android:layout_marginLeft="@dimen/margin_5"
+                    android:layout_toRightOf="@+id/tv_item_discount_coupon_text"
+                    android:text="@string/arrive_with_cash"
+                    android:textColor="@color/text_red"
+                    android:textSize="@dimen/textsize_levelsmall"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_30"
+                android:background="@drawable/shape_discount_coupon_bottom"
+                android:gravity="center"
+                android:paddingBottom="@dimen/padding_5"
+                android:paddingTop="@dimen/padding_5">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_toLeftOf="@+id/tv_item_discount_coupon_deadline"
+                    android:text="@string/use_deadline"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/normal_textsize"/>
+
+                <TextView
+                    android:id="@+id/tv_item_discount_coupon_deadline"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:tag="binding_2"                                                                                                                      
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/normal_textsize"/>
+
+            </RelativeLayout>
+        </LinearLayout>
+
+        <RadioButton
+            android:id="@+id/rb_item_discount_status"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_15"
+            android:button="@drawable/selector_pay_way"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+         
