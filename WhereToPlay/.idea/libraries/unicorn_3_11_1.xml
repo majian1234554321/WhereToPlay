@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="unicorn-3.11.1">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.android/build-cache/64b1e9d7dcdf35ac88aad8303d0c8bc80e7909c7/output/res" />
+      <root url="jar://$USER_HOME$/.android/build-cache/64b1e9d7dcdf35ac88aad8303d0c8bc80e7909c7/output/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>
