@@ -652,6 +652,7 @@ public class PayBillActivity extends BaseActivity {
             // 判断resultStatus 为9000则代表支付成功
             if (TextUtils.equals(resultStatus, "9000")) {
                 // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
+                ToastUtils.showShortToast(mContext, "支付成功");
                 checkAliPayResult(resultInfo, orderId, discountId);
             } else {
                 // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
@@ -711,9 +712,6 @@ public class PayBillActivity extends BaseActivity {
         req.timeStamp = json.getString("timestamp");
         req.packageValue = json.getString("package");
         req.sign = json.getString("sign");
-//        req.extData = "app data"; // optional
-//        Toast.makeText(PayActivity.this, "正常调起支付", Toast.LENGTH_SHORT).show();
-        // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
         wxApi.sendReq(req);
     }
 

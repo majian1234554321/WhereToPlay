@@ -8,6 +8,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.support.v4.content.LocalBroadcastManager;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.fanc.wheretoplay.MainActivity;
 import com.fanc.wheretoplay.base.BaseActivity;
@@ -47,37 +48,47 @@ public class WXPayEntryActivity extends BaseActivity implements IWXAPIEventHandl
     @Override
     public void onResp(BaseResp resp) {
         Log.d("aaa", "onPayFinish, errCode = " + resp.errCode);
-        String msg = "";
-        Intent intent = new Intent(this, MainActivity.class);
-        if (resp.errCode == 0) {
+
+        if (resp.errCode==0) {
+            Toast.makeText(mContext, "支付成功", Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(Constants.ACTION_WXPAY_SUCCESS);
+           LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
+        }else {
+            Toast.makeText(mContext, "支付失败"+resp.errCode, Toast.LENGTH_SHORT).show();
+        }
+
+
+//        String msg = "";
+//        Intent intent = new Intent(this, MainActivity.class);
+//        if (resp.errCode == 0) {
 //            Intent intent = new Intent(Constants.ACTION_WXPAY_SUCCESS);
 //            LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
-            msg = "支付成功";
-            intent.putExtra("pay_result", 1);
-            intent.putExtra("pay_method", "微信支付");
-            startActivity(intent);
-
-        } else if (resp.errCode == -1) {
-            msg = "已取消支付";
-            intent.putExtra("pay_result", -1);
-            intent.putExtra("pay_method", "微信支付");
-            startActivity(intent);
-        } else if (resp.errCode == -2) {
-            msg = "支付失败";
-            intent.putExtra("pay_result", -1);
-            intent.putExtra("pay_method", "微信支付");
-            startActivity(intent);
-        }
-
-
-
-        if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("提示");
-            builder.setMessage("支付结果" + String.valueOf(resp.errCode));
-            builder.show();
-        }
-
+//            msg = "支付成功";
+//            intent.putExtra("pay_result", 1);
+//            intent.putExtra("pay_method", "微信支付");
+//            startActivity(intent);
+//
+//        } else if (resp.errCode == -1) {
+//            msg = "已取消支付";
+//            intent.putExtra("pay_result", -1);
+//            intent.putExtra("pay_method", "微信支付");
+//            startActivity(intent);
+//        } else if (resp.errCode == -2) {
+//            msg = "支付失败";
+//            intent.putExtra("pay_result", -1);
+//            intent.putExtra("pay_method", "微信支付");
+//            startActivity(intent);
+//        }
+//
+//
+//
+//        if (resp.getType() == ConstantsAPI.COMMAND_PAY_BY_WX) {
+//            AlertDialog.Builder builder = new AlertDialog.Builder(this);
+//            builder.setTitle("提示");
+//            builder.setMessage("支付结果" + String.valueOf(resp.errCode));
+//            builder.show();
+//        }
+//
         finish();
 
 
