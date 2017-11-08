@@ -36,7 +36,6 @@ import java.util.List;
 
 import okhttp3.Call;
 
-import static com.fanc.wheretoplay.R2.string.category;
 
 /**
  * Created by peace on 2017/10/30.
