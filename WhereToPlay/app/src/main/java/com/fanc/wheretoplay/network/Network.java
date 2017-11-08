@@ -1,5 +1,7 @@
 package com.fanc.wheretoplay.network;
 
+import android.util.Log;
+
 import com.fanc.wheretoplay.datamodel.BookListModel;
 
 import okhttp3.MultipartBody;
@@ -17,7 +19,7 @@ import rx.Observable;
  * Created by Administrator on 2017/6/29.
  */
 
-public interface Network {
+public class Network{
 
     // 公共前缀
 //    String BASE = "http://192.168.1.96/ktv/index.php";// 开发
@@ -26,18 +28,26 @@ public interface Network {
 //    String BASE = "http://ktv.ctkey.com.cn";// 测试
 //    String IMAGE = "http://ktv.ctkey.com.cn";
 
-    String BASE = "http://testapi.51tzl.cn";
-    //String BASE = "http://ktv.51tzl.cn";// 测试
-    String IMAGE = "http://ktv.51tzl.cn";
-
+    public static String BASE = "http://testapi.51tzl.cn";   // 测试
+    public static String IMAGE = "http://http://testapi.51tzl.cn";   // 测试
     // 模块
-    String API = "/Api/";// 用户模块
+    public static String API = "/Api/";// 用户模块
 
     // 手机系统
-    String PHONE_ANDROID = "android";
+    public static String PHONE_ANDROID = "android";
 
-    interface User {
-        String USER = BASE + API;
+    //    public static String IMAGE = "http://ktv.51tzl.cn";
+//public static String BASE = "http://ktv.51tzl.cn";
+    public static String USER = BASE + API;
+
+    public static void changEnvironment(String url) {
+        BASE = url;
+        IMAGE = url;
+        USER = url + API;
+        Log.e("open","network里面的Network.BASE： " + Network.BASE + "   network里面的Network.BASE： " + USER);
+    }
+
+    public interface User {
 
         String PUBLIC_STORE_DETAIL = USER + "Public/storeDetail";// 店铺详情
         String PUBLIC_VERSION = USER + "Public/version";// 版本检测
@@ -112,7 +122,7 @@ public interface Network {
 
     }
 
-    interface Param {
+    public interface Param {
         String MOBILE = "mobile";// mobile
         String PASSWORD = "password";// string, 必须, 密码
         String CODE = "code";// int , 必须, 短信验证码
@@ -178,7 +188,7 @@ public interface Network {
     }
 
 
-    interface  LH_API {
+    public  interface  LH_API {
 
         //订单列表
         @Multipart

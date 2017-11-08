@@ -19,6 +19,7 @@ import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.LocalBroadcastManager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +33,7 @@ import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.DownloadUtils;
 import com.fanc.wheretoplay.util.FileUtils;
+import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.AlertDialog;
@@ -43,6 +45,8 @@ import com.zhy.http.okhttp.callback.DCallback;
 import java.io.File;
 
 import okhttp3.Call;
+
+import static com.fanc.wheretoplay.util.Constants.ACTION_SIGN_OUT;
 
 /**
  * Created by Administrator on 2017/6/19.
@@ -60,6 +64,7 @@ public class SettingsActivity extends BaseActivity {
     ItemView mIvSettingClearCache;
     ItemView mIvSettingAboutUs;
     Button mBtnSettingsSignOut;
+    public  ItemView mIvChangeEnvironment;
     // 缓存清理工具
     GlideCatchUtil catchUtil;
     // 清除缓存进度
@@ -85,6 +90,7 @@ public class SettingsActivity extends BaseActivity {
         mIvSettingClearCache = settingsBinding.ivSettingsClearCache;
         mIvSettingAboutUs = settingsBinding.ivSettingsAboutUs;
         mBtnSettingsSignOut = settingsBinding.btnSettingsSignOut;
+        mIvChangeEnvironment = settingsBinding.ivChangeEnvironment;
     }
 
     private void init() {
@@ -92,6 +98,9 @@ public class SettingsActivity extends BaseActivity {
         mTmSettings.setTitle(R.string.settings);
         mTmSettings.setTitleColor(getResources().getColor(R.color.white));
 
+        mIvChangeEnvironment.isShowIcon(false);
+        mIvChangeEnvironment.setText(R.string.changeEnv);
+        mIvChangeEnvironment.setSwitchToShow(true);
         mIvSettingSetPayPwd.isShowIcon(false);
         mIvSettingSetPayPwd.setText(R.string.set_pay_pwd);
         mIvSettingSetPayPwd.setRightIcon(R.drawable.right);
@@ -112,6 +121,9 @@ public class SettingsActivity extends BaseActivity {
         mIvSettingAboutUs.setRightIcon(R.drawable.right);
 
         mIvSettingCheckToUpdate.setRightText(UIUtils.getAppVersionName());
+
+        showSwitchStatus();
+
         mDialog = new ProgressDialog(this);
         mDialog.setMessage("正在清除缓存...");
         // 缓存工具类
@@ -126,11 +138,45 @@ public class SettingsActivity extends BaseActivity {
         registerReceiver();
     }
 
+    /**
+     * 测试环境改变
+     */
+    private void showSwitchStatus() {
+        String switchStatus = new SPUtils(mContext).getString("switchStatus", "");
+        switch (switchStatus) {
+            case "on":
+                mIvChangeEnvironment.changeEnvironment(true);
+                break;
+            case "off":
+                mIvChangeEnvironment.changeEnvironment(false);
+                break;
+            default:
+                break;
+        }
+    }
+    /**
+     * 测试环境改变
+     */
     private void setListener() {
         mTmSettings.setLeftIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+
+        mIvChangeEnvironment.setCheckListener(new ItemView.CheckStatus() {
+            @Override
+            public void statusChange(boolean isopen) {
+                if (isopen) {
+                    Log.e("open","打开开关");
+                    (new SPUtils(mContext)).putString("switchStatus","on");
+                    signOut();
+                } else {
+                    Log.e("open","关闭开关");
+                    (new SPUtils(mContext)).putString("switchStatus","off");
+                    signOut();
+                }
             }
         });
     }
@@ -228,7 +274,7 @@ public class SettingsActivity extends BaseActivity {
         Intent intent = new Intent(mContext, SignInActivity.class);
         startActivity(intent);
 
-        Intent intent1 = new Intent(Constants.ACTION_SIGN_OUT);
+        Intent intent1 = new Intent(ACTION_SIGN_OUT);
         LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent1);
 
         finish();

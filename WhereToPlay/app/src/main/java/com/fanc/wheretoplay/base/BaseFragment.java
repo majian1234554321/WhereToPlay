@@ -6,12 +6,14 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.SignInActivity;
 import com.fanc.wheretoplay.datamodel.User;
+import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
@@ -70,12 +72,15 @@ public abstract class BaseFragment
     @Override
     public void onResume() {
         super.onResume();
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
     }
+
+
 
 
     // 获取状态栏高度

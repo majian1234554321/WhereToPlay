@@ -3,6 +3,7 @@ package com.fanc.wheretoplay.base;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
+import android.app.LauncherActivity;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
@@ -50,6 +51,7 @@ public class App extends Application {
     public static Handler mMainThreadHandler;
     private static List<Activity> activitys = new LinkedList<Activity>();
     private static List<Service> services = new LinkedList<Service>();
+    private StatusBarNotificationConfig mStatusBarNotificationConfig;
 
     @Override
     public void onCreate() {
@@ -77,7 +79,7 @@ public class App extends Application {
 
         //七鱼
         Unicorn.init(this, Constants.QIYU_APPKEY, options(), new GlideImageLoader(mContext));
-        
+
     }
 
     // 如果返回值为null，则全部使用默认参数。
@@ -97,6 +99,7 @@ public class App extends Application {
     private void initOkHttp() {
         OkHttpUtils.getInstance().debug("OkHttpUtils",true).setConnectTimeout(100000, TimeUnit.MILLISECONDS);
     }
+
     private void init() {
         // 1.上下文
         mContext = this;
