@@ -78,6 +78,9 @@ public class App extends Application {
         }).start();
 
         //七鱼
+        mStatusBarNotificationConfig=new StatusBarNotificationConfig();
+        mStatusBarNotificationConfig.notificationEntrance= LauncherActivity.class;
+
         Unicorn.init(this, Constants.QIYU_APPKEY, options(), new GlideImageLoader(mContext));
 
     }
@@ -95,6 +98,15 @@ public class App extends Application {
         options.uiCustomization.topTipBarTextColor = getResources().getColor(R.color.white);
         return options;
     }
+
+    /**
+     * 设置点击Notification消息后进入的页面
+     * @param activity
+     */
+    public void setServiceEntranceActivity(Class<? extends Activity> activity){
+        mStatusBarNotificationConfig.notificationEntrance=activity;
+    }
+
 
     private void initOkHttp() {
         OkHttpUtils.getInstance().debug("OkHttpUtils",true).setConnectTimeout(100000, TimeUnit.MILLISECONDS);

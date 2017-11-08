@@ -51,7 +51,6 @@ public class LaunchActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e("door","come in");
         launchBinding = DataBindingUtil.setContentView(this, R.layout.activity_launch);
 //        initPermissions();
         init();

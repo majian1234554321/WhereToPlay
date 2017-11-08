@@ -274,7 +274,7 @@ public class SettingsActivity extends BaseActivity {
         Intent intent = new Intent(mContext, SignInActivity.class);
         startActivity(intent);
 
-        Intent intent1 = new Intent(ACTION_SIGN_OUT);
+        Intent intent1 = new Intent(Constants.ACTION_SIGN_OUT);
         LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent1);
 
         finish();

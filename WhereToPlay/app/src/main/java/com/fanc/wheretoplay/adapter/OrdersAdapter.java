@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -14,11 +15,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.DetailsOrderActivity;
+import com.fanc.wheretoplay.activity.PayBillActivity;
+import com.fanc.wheretoplay.activity.ReuseActivity;
 import com.fanc.wheretoplay.datamodel.BookListModel;
 
 import com.fanc.wheretoplay.image.GlideCatchUtil;
 import com.fanc.wheretoplay.image.GlideImageLoader;
+import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.DateFormatUtil;
+import com.fanc.wheretoplay.view.AlertDialog;
 
 import java.util.List;
 
@@ -122,6 +127,41 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                     break;
             }
         }
+
+        holder.btnPayConsume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setClass(context, PayBillActivity.class);
+                intent.putExtra(Constants.ORDER_ID, dataBean.list.get(position).order_id);
+                intent.putExtra(Constants.STORE_ID, dataBean.list.get(position).store_id);
+                if (TextUtils.equals("4", dataBean.list.get(position).status)) {// 去消费
+                    intent.putExtra(Constants.PAGE, Constants.CONSUME);
+                }
+                if (TextUtils.equals("2", dataBean.list.get(position).status)) {// 去结账
+                    intent.putExtra(Constants.PAGE, Constants.PAYING_THE_BILL);
+                }
+                context.startActivity(intent);
+            }
+        });
+
+
+        holder.btnPayCancelReserve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog(context)
+                        .setTitle("提示")
+                        .setContent("确定取消订单吗")
+                        .setBtnOnClickListener(new AlertDialog.OnBtnClickListener() {
+                            @Override
+                            public void onBtnClick(View view, String input) {
+                                //cancelOrder(order, position);
+                            }
+                        })
+                        .setCanceledOnTouchOutside(true)
+                        .show();
+            }
+        });
 
     }
 
