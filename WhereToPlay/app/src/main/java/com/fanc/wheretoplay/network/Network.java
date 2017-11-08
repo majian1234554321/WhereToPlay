@@ -44,7 +44,6 @@ public class Network{
         BASE = url;
         IMAGE = url;
         USER = url + API;
-        Log.e("open","network里面的Network.BASE： " + Network.BASE + "   network里面的Network.BASE： " + USER);
     }
 
     public interface User {
