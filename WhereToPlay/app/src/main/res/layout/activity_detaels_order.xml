@@ -21,13 +21,13 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
 
-            android:background="@color/about_us_version" />
+            android:background="#E5e5e5" />
 
 
         <LinearLayout
             android:id="@+id/ll_buttom"
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="50dp"
             android:orientation="horizontal">
 
             <TextView
@@ -74,9 +74,11 @@
                 android:id="@+id/rl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="12dp"
-
-                android:layout_marginRight="8dp">
+                android:background="#FFFFFF"
+                android:paddingBottom="12dp"
+                android:paddingLeft="12dp"
+                android:paddingRight="8dp"
+                android:paddingTop="8dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -172,6 +174,11 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"></com.fanc.wheretoplay.view.OrderetailsItemView>
 
+            <com.fanc.wheretoplay.view.OrderetailsItemView
+                android:id="@+id/oi11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></com.fanc.wheretoplay.view.OrderetailsItemView>
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -194,7 +201,7 @@
                     android:layout_width="1dp"
                     android:layout_height="25dp"
                     android:layout_gravity="center"
-                    android:background="#999999" />
+                    android:background="#33999999" />
 
                 <com.fanc.wheretoplay.view.DrawableCenterLeftTextView
                     android:id="@+id/tv_call"
@@ -223,6 +230,7 @@
 
                 <TextView
                     android:id="@+id/tv1"
+                    android:layout_centerVertical="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="订单编号："
@@ -231,7 +239,13 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
+                    android:background="@drawable/shape_btn_999999_stoke"
+                    android:paddingBottom="2dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="2dp"
                     android:text="复制" />
 
             </RelativeLayout>
@@ -260,6 +274,7 @@
                 android:id="@+id/tv4"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginRight="12dp"
                 android:layout_marginTop="8dp"
