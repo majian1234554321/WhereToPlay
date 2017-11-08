@@ -18,12 +18,15 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.fanc.wheretoplay.MainActivity;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.BaseActivity;
 import com.fanc.wheretoplay.datamodel.CancleOrderModel;
 import com.fanc.wheretoplay.datamodel.OrderDetailModel;
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
+import com.fanc.wheretoplay.rx.RxBus;
 import com.fanc.wheretoplay.rx.RxHelper;
 import com.fanc.wheretoplay.rx.RxSubscribe;
 import com.fanc.wheretoplay.util.Constants;
@@ -37,9 +40,10 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import okhttp3.MultipartBody;
+import rx.Subscription;
+import rx.functions.Action1;
 
 public class DetailsOrderActivity extends BaseActivity {
-
 
 
     @BindView(R.id.tv_storeName)
@@ -127,38 +131,25 @@ public class DetailsOrderActivity extends BaseActivity {
         storeNameValue = getIntent().getStringExtra("storeName");
         statusValue = getIntent().getStringExtra("status");
 
-        if (statusValue != null) {
-            switch (statusValue) {
-                case "1":
-                    //("已取消");
-                    tvLeft.setText("返回首页");
-                    tvRight.setVisibility(View.GONE);
+        displayButtom();
 
-                    break;
-                case "2":
-                    // holder.tv_payState.setText("预订成功");
-                    break;
-                case "3":
-                    // holder.tv_payState.setText("已取消");
-                    break;
-                case "4":
-                    // holder.tv_payState.setText("已结单");
-                    break;
-                case "5":
-                    //  holder.tv_payState.setText("已支付订金");
-                    break;
-                case "6":
-                    //  holder.tv_payState.setText("已支付订金");
-                    break;
-                default:
-                    break;
-            }
-        }
+        Subscription rxSbscription = RxBus.getDefault().toObservable(String.class)
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String s) {
+                        if (s != null && "提交评价成功".equals(s)) {
+                            statusValue = "1";
+                            displayButtom();
+                        }
+                    }
+                });
+        compositeSubscription.add(rxSbscription);
 
 
         loadData();
 
     }
+
 
     private void loadData() {
         MultipartBody.Part requestFileA =
@@ -166,7 +157,7 @@ public class DetailsOrderActivity extends BaseActivity {
 
         MultipartBody.Part requestFileC =
                 MultipartBody.Part.createFormData("order_id", order_idValue);
-        Retrofit_RequestUtils.getRequest()
+     Subscription subscription =    Retrofit_RequestUtils.getRequest()
                 .orderDetail(requestFileA, requestFileC)
                 .compose(RxHelper.<OrderDetailModel.ContentBean>handleResult())
                 .subscribe(new RxSubscribe<OrderDetailModel.ContentBean>() {
@@ -180,6 +171,7 @@ public class DetailsOrderActivity extends BaseActivity {
 
                     }
                 });
+     compositeSubscription.add(subscription);
     }
 
     private void setData(OrderDetailModel.ContentBean contentBean) {
@@ -255,9 +247,13 @@ public class DetailsOrderActivity extends BaseActivity {
         Intent intent = new Intent();
         switch (view.getId()) {
             case R.id.tv_left:
-                intent.putExtra("order_id", order_idValue);
-                intent.putExtra("store_id", store_idValue);
-                intent.setClass(this, PublicationEvaluationActivity.class);
+                if ("返回首页".equals(tvLeft.getText().toString().trim())) {
+                    intent.setClass(this, MainActivity.class);
+                } else {
+                    intent.putExtra("order_id", order_idValue);
+                    intent.putExtra("store_id", store_idValue);
+                    intent.setClass(this, PublicationEvaluationActivity.class);
+                }
                 startActivity(intent);
                 break;
             case R.id.tv_right:
@@ -273,7 +269,7 @@ public class DetailsOrderActivity extends BaseActivity {
                 }
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
-                
+
                 break;
 
             case R.id.tv_cancel:
@@ -353,4 +349,35 @@ public class DetailsOrderActivity extends BaseActivity {
     }
 
     private final int REQUEST_CODE = 0x1001;
+
+
+    private void displayButtom() {
+        if (statusValue != null) {
+            switch (statusValue) {
+                case "1":
+                    //("已取消");
+                    tvLeft.setText("返回首页");
+                    tvRight.setVisibility(View.GONE);
+
+                    break;
+                case "2":
+                    // holder.tv_payState.setText("预订成功");
+                    break;
+                case "3":
+                    // holder.tv_payState.setText("已取消");
+                    break;
+                case "4":
+                    // holder.tv_payState.setText("已结单");
+                    break;
+                case "5":
+                    //  holder.tv_payState.setText("已支付订金");
+                    break;
+                case "6":
+                    //  holder.tv_payState.setText("已支付订金");
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
 }
