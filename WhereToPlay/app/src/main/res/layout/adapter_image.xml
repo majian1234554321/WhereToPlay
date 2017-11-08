@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_gravity="center"
+
     android:layout_margin="1dp">
 
     <com.fanc.wheretoplay.imagepink.view.SquareImageView
@@ -10,7 +10,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:layout_margin="8dp"
         android:background="#FFFFFF"
         android:scaleType="centerCrop" />
 
-</FrameLayout>
+    <ImageView
+        android:id="@+id/iv_delete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="2dp"
+        android:src="@drawable/icon_delete" />
+
+</RelativeLayout>

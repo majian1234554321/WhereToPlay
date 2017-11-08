@@ -42,10 +42,20 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
         if (imagesfinal.get(position).endsWith("这不是图片")) {
             Glide.with(mContext).load(R.drawable.addjpg).into(holder.ivImage);
+            holder.iv_delete.setVisibility(View.GONE);
         } else {
             final String image = imagesfinal.get(position);
             Glide.with(mContext).load(new File(image)).into(holder.ivImage);
+            holder.iv_delete.setVisibility(View.VISIBLE);
         }
+
+        holder.iv_delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imagesfinal.remove(position);
+                notifyDataSetChanged();
+            }
+        });
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -54,7 +64,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
                 if (imagesfinal.get(position).endsWith("这不是图片")) {
                     ImageSelectorUtils.openPhoto((Activity) mContext, 0x00000011, false, 9);
                 } else {
-                    Toast.makeText(mContext, position + "AAAAA", Toast.LENGTH_SHORT).show();
+                   // Toast.makeText(mContext, position + "AAAAA", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -73,10 +83,12 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
     static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView ivImage;
+        ImageView iv_delete;
 
         public ViewHolder(View itemView) {
             super(itemView);
             ivImage = (ImageView) itemView.findViewById(R.id.iv_image);
+            iv_delete = (ImageView) itemView.findViewById(R.id.iv_delete);
         }
     }
 }
