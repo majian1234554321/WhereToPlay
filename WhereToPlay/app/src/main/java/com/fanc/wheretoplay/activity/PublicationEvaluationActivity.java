@@ -8,10 +8,11 @@ import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.RatingBar;
+
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ import com.fanc.wheretoplay.datamodel.SubmitCommentModel;
 import com.fanc.wheretoplay.imagepink.utils.ImageSelectorUtils;
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.util.SPUtils;
+import com.fanc.wheretoplay.view.RatingBar;
 import com.fanc.wheretoplay.view.TitleBarView;
 
 import java.io.ByteArrayOutputStream;
@@ -38,7 +40,7 @@ import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subjects.Subject;
 
-public class PublicationEvaluationActivity extends BaseActivity {
+public class PublicationEvaluationActivity extends BaseActivity  {
 
     @BindView(R.id.tbv)
     TitleBarView tbv;
@@ -75,6 +77,9 @@ public class PublicationEvaluationActivity extends BaseActivity {
     private String value;
     private String order_idValue;
     private String store_idValue;
+    float ratingValue1 =10f;
+    float ratingValue2 =10f;
+    float ratingValue3 =10f;
 
 
     @Override
@@ -92,6 +97,25 @@ public class PublicationEvaluationActivity extends BaseActivity {
         imagesfinal.add("这不是图片");
         mAdapter = new ImageAdapter(this,imagesfinal);
         rvImage.setAdapter(mAdapter);
+
+        ratingbar1.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
+            @Override
+            public void onRatingChange(float ratingCount) {
+                ratingValue1 = ratingCount;
+            }
+        });
+        ratingbar2.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
+            @Override
+            public void onRatingChange(float ratingCount) {
+                ratingValue2 = ratingCount;
+            }
+        });
+        ratingbar3.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
+            @Override
+            public void onRatingChange(float ratingCount) {
+                ratingValue3 = ratingCount;
+            }
+        });
 
     }
 
@@ -138,11 +162,12 @@ public class PublicationEvaluationActivity extends BaseActivity {
         MultipartBody.Part requestFileF =
                 MultipartBody.Part.createFormData("img", base64image.toString());
         MultipartBody.Part requestFileG =
-                MultipartBody.Part.createFormData("environment",ratingbar1.getNumStars()+"");
+                MultipartBody.Part.createFormData("environment",ratingValue1+"");
         MultipartBody.Part requestFileH =
-                MultipartBody.Part.createFormData("atmosphere", ratingbar2.getNumStars()+"");
+                MultipartBody.Part.createFormData("atmosphere", ratingValue2+"");
         MultipartBody.Part requestFileA =
-                MultipartBody.Part.createFormData("service", ratingbar3.getNumStars()+"");
+                MultipartBody.Part.createFormData("service", ratingValue3+"");
+
 
 
 
@@ -220,6 +245,7 @@ public class PublicationEvaluationActivity extends BaseActivity {
             mAdapter.refresh(imagesDisplay);
         }
     }
+
 
 
 }

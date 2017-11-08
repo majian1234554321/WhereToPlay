@@ -19,16 +19,24 @@ import com.fanc.wheretoplay.activity.PayBillActivity;
 import com.fanc.wheretoplay.activity.ReuseActivity;
 import com.fanc.wheretoplay.datamodel.BookListModel;
 
+import com.fanc.wheretoplay.datamodel.CancleOrderModel;
 import com.fanc.wheretoplay.image.GlideCatchUtil;
 import com.fanc.wheretoplay.image.GlideImageLoader;
+import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
+import com.fanc.wheretoplay.rx.RxHelper;
+import com.fanc.wheretoplay.rx.RxSubscribe;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.DateFormatUtil;
+import com.fanc.wheretoplay.util.SPUtils;
+import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.view.AlertDialog;
 
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.MultipartBody;
 
 import static com.fanc.wheretoplay.network.Network.IMAGE;
 
@@ -156,6 +164,32 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                             @Override
                             public void onBtnClick(View view, String input) {
                                 //cancelOrder(order, position);
+
+                                MultipartBody.Part requestFileA =
+                                        MultipartBody.Part.createFormData("token", new SPUtils(context).getUser().getToken());
+
+                                MultipartBody.Part requestFileC =
+                                        MultipartBody.Part.createFormData("id", dataBean.list.get(position).order_id);
+                                Retrofit_RequestUtils.getRequest().cancle_order(requestFileA, requestFileC)
+                                        .compose(RxHelper.<CancleOrderModel.ContentBean>handleResult())
+                                        .subscribe(new RxSubscribe<CancleOrderModel.ContentBean>() {
+                                            @Override
+                                            protected void _onNext(CancleOrderModel.ContentBean contentBean) {
+                                                if (contentBean.is_cancle) {
+                                                    ToastUtils.showShortToast(context, "取消订单成功");
+                                                    dataBean.list.remove(position);
+                                                    notifyDataSetChanged();
+                                                } else {
+                                                    ToastUtils.showShortToast(context, "取消订单失败");
+                                                }
+                                            }
+
+                                            @Override
+                                            protected void _onError(String message) {
+
+                                            }
+                                        });
+
                             }
                         })
                         .setCanceledOnTouchOutside(true)

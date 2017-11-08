@@ -41,12 +41,7 @@ import okhttp3.MultipartBody;
 public class DetailsOrderActivity extends BaseActivity {
 
 
-    @BindView(R.id.tv_release)
-    TextView tvRelease;
-    @BindView(R.id.tv_cancel)
-    TextView tvCancel;
-    @BindView(R.id.tv_pay)
-    TextView tvPay;
+
     @BindView(R.id.tv_storeName)
     TextView tvStoreName;
     @BindView(R.id.tv_address)
@@ -89,14 +84,17 @@ public class DetailsOrderActivity extends BaseActivity {
     TitleBarView tbv;
     @BindView(R.id.ll_buttom)
     LinearLayout llButtom;
-    @BindView(R.id.tv_back)
-    TextView tvBack;
+
     @BindView(R.id.ll)
     RelativeLayout ll;
     @BindView(R.id.item_view_line)
     View itemViewLine;
     @BindView(R.id.item_view_line2)
     View itemViewLine2;
+    @BindView(R.id.tv_left)
+    TextView tvLeft;
+    @BindView(R.id.tv_right)
+    TextView tvRight;
     private String order_idValue, store_idValue, storeNameValue, statusValue;
 
     @BindView(R.id.rl)
@@ -133,10 +131,9 @@ public class DetailsOrderActivity extends BaseActivity {
             switch (statusValue) {
                 case "1":
                     //("已取消");
-                    tv3.setVisibility(View.GONE);
-                    tv4.setVisibility(View.GONE);
-                    llButtom.setVisibility(View.GONE);
-                    tvBack.setVisibility(View.VISIBLE);
+                    tvLeft.setText("返回首页");
+                    tvRight.setVisibility(View.GONE);
+
                     break;
                 case "2":
                     // holder.tv_payState.setText("预订成功");
@@ -253,19 +250,17 @@ public class DetailsOrderActivity extends BaseActivity {
 
     }
 
-    @OnClick({R.id.tv_pay, R.id.tv_release, R.id.tv_cancel, R.id.rl, R.id.tv_call, R.id.tv_msn,R.id.tv_back})
+    @OnClick({R.id.tv_left, R.id.tv_right, R.id.rl, R.id.tv_call, R.id.tv_msn})
     public void onViewClicked(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
-            case R.id.tv_back:
-
+            case R.id.tv_left:
+                intent.putExtra("order_id", order_idValue);
+                intent.putExtra("store_id", store_idValue);
+                intent.setClass(this, PublicationEvaluationActivity.class);
+                startActivity(intent);
                 break;
-            case R.id.tv_pay:
-//                intent.setClass(this, PayBillActivity.class);
-//                intent.putExtra("order_id", order_idValue);
-//                intent.putExtra("store_id", store_idValue);
-//                intent.putExtra("store_name", storeNameValue);
-//                startActivity(intent);
+            case R.id.tv_right:
 
                 intent.setClass(this, PayBillActivity.class);
                 intent.putExtra(Constants.ORDER_ID, order_idValue);
@@ -276,17 +271,11 @@ public class DetailsOrderActivity extends BaseActivity {
                 if (TextUtils.equals("2", statusValue)) {// 去结账
                     intent.putExtra(Constants.PAGE, Constants.PAYING_THE_BILL);
                 }
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
-
-
+                
                 break;
-            case R.id.tv_release:
 
-                intent.putExtra("order_id", order_idValue);
-                intent.putExtra("store_id", store_idValue);
-                intent.setClass(this, PublicationEvaluationActivity.class);
-                startActivity(intent);
-                break;
             case R.id.tv_cancel:
                 MultipartBody.Part requestFileA =
                         MultipartBody.Part.createFormData("token", new SPUtils(mContext).getUser().getToken());
