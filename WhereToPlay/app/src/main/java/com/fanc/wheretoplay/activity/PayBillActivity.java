@@ -109,6 +109,7 @@ public class PayBillActivity extends BaseActivity {
     Receiver receiver;
 
     IWXAPI wxApi;
+    private DecimalFormat df;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -135,6 +136,7 @@ public class PayBillActivity extends BaseActivity {
         mRbPayBillWeixin = payBillBinding.rbPayBillWeixin;
         mRbPayBillAli = payBillBinding.rbPayBillAli;
         mRbPayBillBalance = payBillBinding.rbPayBillBalance;
+        df = new DecimalFormat("0.00");
     }
 
     private void init() {
@@ -201,7 +203,9 @@ public class PayBillActivity extends BaseActivity {
                         isUserSubscription = true;
                     }
                     if (lastPaySum > 0) {
-                        mTvPaySumReal.setText(String.valueOf(lastPaySum));
+                        String value = df.format(lastPaySum);
+                        mTvPaySumReal.setText(value);
+
                     } else {
                         mTvPaySumReal.setText("0");
                     }
@@ -209,9 +213,14 @@ public class PayBillActivity extends BaseActivity {
                 // 最终支付 = 消费支付金额 + 不参与优惠（+服务费）
                 if (!TextUtils.isEmpty(mEtNotParticipation.getText().toString()) && mCbNotParticipation.isChecked()) {
                     if (lastPaySum < 0) {
-                        mTvPaySumReal.setText(String.valueOf(Double.parseDouble(mEtNotParticipation.getText().toString()) * (1 + cashRate / 100)));
+
+                        String value = df.format(Double.parseDouble(mEtNotParticipation.getText().toString()) * (1 + cashRate / 100));
+                        mTvPaySumReal.setText(value);
+
                     } else {
-                        mTvPaySumReal.setText(String.valueOf(lastPaySum + Double.parseDouble(mEtNotParticipation.getText().toString()) * (1 + cashRate / 100)));
+
+                        String value = df.format(lastPaySum + Double.parseDouble(mEtNotParticipation.getText().toString()) * (1 + cashRate / 100));
+                        mTvPaySumReal.setText(value);
                     }
                 }
 //                Log.d("llm", "onTextChanged: ");
@@ -237,9 +246,11 @@ public class PayBillActivity extends BaseActivity {
                 }
                 // 最终支付 = 消费支付金额 + 不参与优惠（+服务费）
                 if (lastPaySum < 0) {
-                    mTvPaySumReal.setText(String.valueOf(Double.parseDouble(s.toString()) * (1 + cashRate / 100)));
+                    String value = df.format(Double.parseDouble(s.toString()) * (1 + cashRate / 100));
+                    mTvPaySumReal.setText(value);
                 } else {
-                    mTvPaySumReal.setText(String.valueOf(lastPaySum + Double.parseDouble(s.toString()) * (1 + cashRate / 100)));
+                    String value = df.format(lastPaySum + Double.parseDouble(s.toString()) * (1 + cashRate / 100));
+                    mTvPaySumReal.setText(value);
                 }
             }
 
