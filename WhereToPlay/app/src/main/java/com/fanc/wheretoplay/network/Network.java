@@ -28,16 +28,16 @@ public class Network{
 //    String BASE = "http://ktv.ctkey.com.cn";// 测试
 //    String IMAGE = "http://ktv.ctkey.com.cn";
 
-    public static String BASE = "http://testapi.51tzl.cn";   // 测试
-    public static String IMAGE = "http://http://testapi.51tzl.cn";   // 测试
+//    public static String BASE = "http://testapi.51tzl.cn";   // 测试
+//    public static String IMAGE = "http://http://testapi.51tzl.cn";   // 测试
     // 模块
     public static String API = "/Api/";// 用户模块
 
     // 手机系统
     public static String PHONE_ANDROID = "android";
 
-    //    public static String IMAGE = "http://ktv.51tzl.cn";
-//public static String BASE = "http://ktv.51tzl.cn";
+    public static String IMAGE = "http://ktv.51tzl.cn";
+    public static String BASE = "http://ktv.51tzl.cn";
     public static String USER = BASE + API;
 
     public static void changEnvironment(String url) {
