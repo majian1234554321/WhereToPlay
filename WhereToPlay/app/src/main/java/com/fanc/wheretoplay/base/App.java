@@ -89,7 +89,6 @@ public class App extends Application {
     private YSFOptions options() {
         YSFOptions options = new YSFOptions();
         options.statusBarNotificationConfig = new StatusBarNotificationConfig();
-//        options.statusBarNotificationConfig.notificationEntrance = new MainActivity();
         options.savePowerConfig = new SavePowerConfig();
         options.uiCustomization = new UICustomization();
         options.uiCustomization.topTipBarBackgroundColor = getResources().getColor(R.color.text_red);
