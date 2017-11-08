@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="com.qiyukf.unicorn:unicorn-3.11.1">
+    <CLASSES>
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/unicorn-3.11.1.aar/7331b7ee801132ad373d88750fb09ffa/res" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/unicorn-3.11.1.aar/7331b7ee801132ad373d88750fb09ffa/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.qiyukf.unicorn/unicorn/3.11.1/2bbeeef62199445c88d46ed57213d2c216a8dc85/unicorn-3.11.1-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

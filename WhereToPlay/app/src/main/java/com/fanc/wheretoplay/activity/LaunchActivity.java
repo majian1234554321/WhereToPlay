@@ -10,6 +10,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -19,10 +20,17 @@ import android.widget.LinearLayout;
 import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.MainActivity;
 import com.fanc.wheretoplay.R;
+import com.fanc.wheretoplay.base.App;
 import com.fanc.wheretoplay.base.BaseActivity;
 import com.fanc.wheretoplay.databinding.ActivityLaunchBinding;
+import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.Constants;
+import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.UIUtils;
+import com.fanc.wheretoplay.view.ItemView;
+import com.qiyukf.nimlib.sdk.NimIntent;
+import com.qiyukf.unicorn.api.ConsultSource;
+import com.qiyukf.unicorn.api.Unicorn;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,8 +54,20 @@ public class LaunchActivity extends BaseActivity {
         launchBinding = DataBindingUtil.setContentView(this, R.layout.activity_launch);
 //        initPermissions();
         init();
+        //七鱼需要
+        parseIntent();
     }
-
+    /**
+     * 七鱼需要
+     */
+    private void parseIntent() {
+        Intent intent = getIntent();
+        if (intent.hasExtra(NimIntent.EXTRA_NOTIFY_CONTENT)) {
+            Unicorn.openServiceActivity(this, "去哪儿客服", new ConsultSource(null, null, null));
+            // 最好将intent清掉，以免从堆栈恢复时又打开客服窗口
+            setIntent(new Intent());
+        }
+    }
     @Override
     public void onResume() {
         super.onResume();

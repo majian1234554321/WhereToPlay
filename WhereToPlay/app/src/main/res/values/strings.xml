@@ -228,6 +228,7 @@
     <string name="clear_cache">清除缓存</string>
     <string name="about_us">关于我们</string>
     <string name="sign_out">退出登录</string>
+    <string name="changeEnv">打开测试环境</string>
 
     <!--set pay pwd-->
     <string name="hint_set_pay_pwd_1">请输入支付密码</string>

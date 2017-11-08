@@ -30,11 +30,15 @@ import android.view.WindowManager;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.SignInActivity;
 import com.fanc.wheretoplay.datamodel.User;
+import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.view.DProgressDialog;
+import com.qiyukf.nimlib.sdk.NimIntent;
+import com.qiyukf.unicorn.api.ConsultSource;
+import com.qiyukf.unicorn.api.Unicorn;
 
 import java.util.Arrays;
 
@@ -74,7 +78,9 @@ public class BaseActivity
             LocationUtils.getLocation(this);
         }
         registerBroadcastReceiver();
+
     }
+
 
     // 状态栏透明
     private void translucent() {
@@ -144,8 +150,28 @@ public class BaseActivity
     public void onResume() {
         super.onResume();
 //        MobclickAgent.onResume(this);
+        changeConvironment();
     }
 
+    /**
+     * 测试环境改变
+     */
+    private void changeConvironment() {
+        String switchStatus = new SPUtils(mContext).getString("switchStatus", "");
+        switch (switchStatus) {
+            case "on":
+                Log.e("open","是打开的");
+                Network.changEnvironment("http://testapi.51tzl.cn");
+                break;
+            case "off":
+                Log.e("open","是关闭的");
+                Network.changEnvironment("http://ktv.51tzl.cn");
+                break;
+            default:
+                Log.e("open","没有判断");
+                break;
+        }
+    }
     @Override
     public void onPause() {
         super.onPause();

@@ -46,6 +46,7 @@ import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.LogUtils;
+import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.FilterPopupDialog;
@@ -171,6 +172,23 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         reserveBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_reserve, container, false);
+        String switchStatus = new SPUtils(mContext).getString("switchStatus", "");
+        switch (switchStatus) {
+            case "on":
+                Log.e("open","是打开的");
+//                Network.BASE = "http://testapi.51tzl.cn";
+//                Network.IMAGE = "http://testapi.51tzl.cn";
+                Network.changEnvironment("http://testapi.51tzl.cn");
+                break;
+            case "off":
+                Log.e("open","是关闭的");
+
+                Network.changEnvironment("http://ktv.51tzl.cn");
+                Log.e("open","很绝望   " + Network.BASE);
+                break;
+            default:
+                break;
+        }
         initViews();
         init();
         setListener();
@@ -844,6 +862,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
         if (lng != Constants.USELESS_NUMBER_PARAM) {
             param.put(Network.Param.LNG, String.valueOf(lng));
         }
+
         OkHttpUtils.post()
                 .url(Network.User.COMMON_FILTER)
                 .params(param)
