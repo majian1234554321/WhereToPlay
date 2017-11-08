@@ -29,7 +29,7 @@ public class Network{
 //    String IMAGE = "http://ktv.ctkey.com.cn";
 
     public static String BASE = "http://testapi.51tzl.cn";   // 测试
-    public static String IMAGE = "http://http://testapi.51tzl.cn";   // 测试
+    public static String IMAGE = "http://testapi.51tzl.cn";   // 测试
     // 模块
     public static String API = "/Api/";// 用户模块
 
