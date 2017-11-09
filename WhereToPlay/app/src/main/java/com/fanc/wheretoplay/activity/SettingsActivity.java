@@ -169,12 +169,16 @@ public class SettingsActivity extends BaseActivity {
             @Override
             public void statusChange(boolean isopen) {
                 if (isopen) {
-                    Log.e("open","打开开关");
                     (new SPUtils(mContext)).putString("switchStatus","on");
+                    Network.changEnvironment("http://testapi.51tzl.cn");
+                    Network.User.changeUserUrl(Network.USER );
+                   ToastUtils.showShortToast(SettingsActivity.this, "改变测试环境，重新登录");
                     signOut();
                 } else {
-                    Log.e("open","关闭开关");
                     (new SPUtils(mContext)).putString("switchStatus","off");
+                    Network.changEnvironment("http://ktv.51tzl.cn");
+                    Network.User.changeUserUrl(Network.USER);
+                    ToastUtils.showShortToast(SettingsActivity.this, "改变测试环境，重新登录");
                     signOut();
                 }
             }

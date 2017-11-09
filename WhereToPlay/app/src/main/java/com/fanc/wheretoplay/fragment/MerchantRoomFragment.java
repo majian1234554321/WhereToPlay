@@ -125,7 +125,6 @@ public class MerchantRoomFragment extends BaseFragment {
      */
     private void getRoomList() {
         showProgress();
-        Log.e("open",Network.User.PUBLIC_HOUSE_TYPE);
         OkHttpUtils.post()
                 .url(Network.User.PUBLIC_HOUSE_TYPE)
                 .addParams(Network.Param.STORE_ID, mStoreId)

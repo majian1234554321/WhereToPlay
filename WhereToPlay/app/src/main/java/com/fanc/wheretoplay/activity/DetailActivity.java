@@ -21,13 +21,14 @@ import com.fanc.wheretoplay.fragment.IntegralFragment;
 import com.fanc.wheretoplay.fragment.MerchantDetailFragment;
 import com.fanc.wheretoplay.fragment.MessageDetailFragment;
 import com.fanc.wheretoplay.fragment.MessageFragment;
+import com.fanc.wheretoplay.fragment.MineCommendMoneyFragment;
+import com.fanc.wheretoplay.fragment.MineFriendFragment;
 import com.fanc.wheretoplay.fragment.MineInfoFragment;
 import com.fanc.wheretoplay.fragment.OrderFragment;
 import com.fanc.wheretoplay.fragment.OrderFragments;
 import com.fanc.wheretoplay.fragment.ReferralFragment;
 import com.fanc.wheretoplay.fragment.SetPayPwdFragment;
 import com.fanc.wheretoplay.fragment.SystemNotifyFragment;
-import com.fanc.wheretoplay.fragment.WaiterInfoFragment;
 import com.fanc.wheretoplay.fragment.WalletFragment;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LogUtils;
@@ -108,13 +109,12 @@ public class DetailActivity extends BaseFragmentActivity {
             case Constants.ABOUT_US:   //关于我们
                 initFragment(new AboutUsFragment());
                 break;
-//            case Constants.WAITER_INFO:   //
-//                initFragment(new WaiterInfoFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID))
-//                        .setSelect(intent.getBooleanExtra(Constants.IS_CHOOSE, false)));
-//                break;
-//            case Constants.WAITER_PHOTO:
-//                initFragment(new WaiterPhotoFragment().setBundle(intent.getExtras()), Constants.WAITER_PHOTO);
-//                break;
+            case Constants.MINEFRIEND:   //推荐好友
+                initFragment(new MineFriendFragment());
+                break;
+            case Constants.MINEMONEY:   //推荐奖励
+                initFragment(new MineCommendMoneyFragment());
+                break;
             case Constants.MESSAGE_DETAIL:
                 initFragment(new MessageDetailFragment().setMessageId(intent.getStringExtra(Constants.ID)));
                 break;
