@@ -77,8 +77,7 @@
         <com.fanc.wheretoplay.view.MyViewPager
             android:id="@+id/mvp_deal_detail"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/rg_deal_detail"/>

@@ -62,11 +62,9 @@ public class DetailActivity extends BaseFragmentActivity {
     private void initPage(String page) {
         switch (page) {
             case Constants.MERCHANT_DETAIL:
-                Log.e("Iverson", "MERCHANT_DETAIL");
                 initFragment(new MerchantDetailFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID)));
                 break;
             case Constants.MINE_INFO:
-                Log.e("Iverson", "MINE_INFO");
                 initFragment(new MineInfoFragment());
                 break;
             case Constants.MESSAGE:
@@ -75,14 +73,13 @@ public class DetailActivity extends BaseFragmentActivity {
             case Constants.WALLET:
                 initFragment(new WalletFragment());
                 break;
-            case Constants.DEAL_DETAIL:
+            case Constants.DEAL_DETAIL:   //交易明细
                 initFragment(new DealDetailFragment());
                 break;
             case Constants.DISCOUNT_COUPON:
                 initFragment(new DiscountCouponFragment().setChoose(intent.getBooleanExtra(Constants.IS_CHOOSE, false)));
                 break;
             case Constants.INTEGRAL:
-                Log.e("Iverson", "INTEGRAL");
                 initFragment(new IntegralFragment());
                 break;
             case Constants.ORDER:   //订单
