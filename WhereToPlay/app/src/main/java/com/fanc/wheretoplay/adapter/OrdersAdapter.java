@@ -23,6 +23,7 @@ import com.fanc.wheretoplay.datamodel.CancleOrderModel;
 import com.fanc.wheretoplay.image.GlideCatchUtil;
 import com.fanc.wheretoplay.image.GlideImageLoader;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.rx.BaseResponseModel;
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.rx.RxHelper;
 import com.fanc.wheretoplay.rx.RxSubscribe;
@@ -37,6 +38,10 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.MultipartBody;
+import rx.Scheduler;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import static com.fanc.wheretoplay.network.Network.IMAGE;
 
@@ -170,12 +175,24 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
                                 MultipartBody.Part requestFileC =
                                         MultipartBody.Part.createFormData("id", dataBean.list.get(position).order_id);
+
                                 Retrofit_RequestUtils.getRequest().cancle_order(requestFileA, requestFileC)
-                                        .compose(RxHelper.<CancleOrderModel.ContentBean>handleResult())
-                                        .subscribe(new RxSubscribe<CancleOrderModel.ContentBean>() {
+                                        .subscribeOn(Schedulers.io())
+                                        .observeOn(AndroidSchedulers.mainThread())
+                                        .subscribe(new Subscriber<BaseResponseModel<CancleOrderModel.ContentBean>>() {
                                             @Override
-                                            protected void _onNext(CancleOrderModel.ContentBean contentBean) {
-                                                if (contentBean.is_cancle) {
+                                            public void onCompleted() {
+
+                                            }
+
+                                            @Override
+                                            public void onError(Throwable throwable) {
+
+                                            }
+
+                                            @Override
+                                            public void onNext(BaseResponseModel<CancleOrderModel.ContentBean> contentBean) {
+                                                if (contentBean.success()&&contentBean.content.is_cancle) {
                                                     ToastUtils.showShortToast(context, "取消订单成功");
                                                     dataBean.list.remove(position);
                                                     notifyDataSetChanged();
@@ -183,12 +200,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                                                     ToastUtils.showShortToast(context, "取消订单失败");
                                                 }
                                             }
-
-                                            @Override
-                                            protected void _onError(String message) {
-
-                                            }
                                         });
+
 
                             }
                         })

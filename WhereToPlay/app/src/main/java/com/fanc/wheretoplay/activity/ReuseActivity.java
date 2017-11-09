@@ -13,7 +13,6 @@ import android.support.v4.content.LocalBroadcastManager;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.BaseFragmentActivity;
 import com.fanc.wheretoplay.fragment.BriefFragment;
-import com.fanc.wheretoplay.fragment.CommentFragment;
 import com.fanc.wheretoplay.fragment.DateFragment;
 import com.fanc.wheretoplay.fragment.DrinksFragment;
 import com.fanc.wheretoplay.fragment.ListFragment;
@@ -62,10 +61,6 @@ public class ReuseActivity extends BaseFragmentActivity {
                         .setComment(intent.getBooleanExtra(Constants.IS_COMMENT, false))
                         .setPrice(intent.getStringExtra(Constants.PRICE))
                         .isCreditReserve(intent.getBooleanExtra(Constants.CREDIT_RESERVE, false)));
-                break;
-            case Constants.COMMENT:
-                initFragment(new CommentFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID))
-                        .setOrderId(intent.getStringExtra(Constants.ORDER_ID)));
                 break;
             case Constants.RESERVE_INFO:   //在线预订
                 initFragment(new ReserveInfoFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID)));

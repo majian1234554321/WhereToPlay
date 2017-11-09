@@ -56,6 +56,8 @@ public interface Constants {
     String COLLECTION = "collection";
     String REFERRAL = "referral";// 推荐
     String DRIVE = "drive";// 代驾
+    String MINEFRIEND = "friend";// 代驾
+    String MINEMONEY = "money";// 代驾
     String DEAL_DETAIL = "deal_detail";
     String CONSUME_DETAIL = "consume_detail";
     String RECHARGE_DETAIL = "recharge_detail";

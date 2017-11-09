@@ -66,66 +66,66 @@ public class WaiterList extends BaseModel {
         private String price;
         private int type;
 
-        @BindingAdapter(value = {"url"}, requireAll = false)
-        public static void setWaiterImage(final ImageView imageView, String url) {
-            int id = imageView.getId();
-            if (id == R.id.iv_item_waiter_distinct) {
-                Glide.with(imageView.getContext()).load(Network.IMAGE + url)
-                        .placeholder(R.drawable.default_square).error(R.drawable.default_square)
-                        .into(imageView);
-            } else if (id == R.id.iv_item_waiter_fuzzy) {
-                if (!TextUtils.isEmpty(url)) {
-                    try {
-                        String imageName = url.substring(url.lastIndexOf("/") + 1, url.length() - 1);
-                        final File image = new File(FileUtils.getCacheDir() + imageName);
-                        if (image.exists()) {// 图片已经存在
-                            imageView.setImageBitmap(BitmapFactory.decodeStream(new FileInputStream(image)));
-                        } else {// 不存在
-                            Glide.with(imageView.getContext()).load(Network.IMAGE + url).asBitmap()
-                                    .placeholder(R.drawable.default_square).error(R.drawable.default_square)
-                                    .into(new SimpleTarget<Bitmap>() {
-                                        @Override
-                                        public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
-                                            if (bitmap != null) {
-                                                // 模糊处理
-                                                Bitmap bm = BlurBitmap.fastblur(imageView.getContext(), bitmap, 25);
-                                                imageView.setImageBitmap(bm);
-                                                // 保存模糊后的图片
-                                                try {
-                                                    FileOutputStream fileOutputStream = new FileOutputStream(image);
-                                                    bm.compress(Bitmap.CompressFormat.JPEG, 90, fileOutputStream);
-                                                    fileOutputStream.flush();
-                                                    fileOutputStream.close();
-                                                } catch (FileNotFoundException e) {
-                                                    e.printStackTrace();
-                                                } catch (IOException e) {
-                                                    e.printStackTrace();
-                                                }
-                                            }
-                                        }
-
-                                        @Override
-                                        public void onLoadFailed(Exception e, Drawable errorDrawable) {
-                                            e.printStackTrace();
-                                            Bitmap bm = BlurBitmap.fastblur(imageView.getContext(),
-                                                    BitmapFactory.decodeResource(imageView.getContext().getResources(), R.drawable.default_square), 25);
-                                            imageView.setImageBitmap(bm);
-                                            super.onLoadFailed(e, errorDrawable);
-                                        }
-                                    });
-                        }
-                    } catch (FileNotFoundException e) {
-                        e.printStackTrace();
-                    }
-                } else {
-                    imageView.setImageResource(R.drawable.default_square);
-                }
-            } else {
-                Glide.with(imageView.getContext()).load(Network.IMAGE + url)
-                        .placeholder(R.drawable.default_rect)
-                        .into(imageView);
-            }
-        }
+//        @BindingAdapter(value = {"url"}, requireAll = false)
+//        public static void setWaiterImage(final ImageView imageView, String url) {
+//            int id = imageView.getId();
+//            if (id == R.id.iv_item_waiter_distinct) {
+//                Glide.with(imageView.getContext()).load(Network.IMAGE + url)
+//                        .placeholder(R.drawable.default_square).error(R.drawable.default_square)
+//                        .into(imageView);
+//            } else if (id == R.id.iv_item_waiter_fuzzy) {
+//                if (!TextUtils.isEmpty(url)) {
+//                    try {
+//                        String imageName = url.substring(url.lastIndexOf("/") + 1, url.length() - 1);
+//                        final File image = new File(FileUtils.getCacheDir() + imageName);
+//                        if (image.exists()) {// 图片已经存在
+//                            imageView.setImageBitmap(BitmapFactory.decodeStream(new FileInputStream(image)));
+//                        } else {// 不存在
+//                            Glide.with(imageView.getContext()).load(Network.IMAGE + url).asBitmap()
+//                                    .placeholder(R.drawable.default_square).error(R.drawable.default_square)
+//                                    .into(new SimpleTarget<Bitmap>() {
+//                                        @Override
+//                                        public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
+//                                            if (bitmap != null) {
+//                                                // 模糊处理
+//                                                Bitmap bm = BlurBitmap.fastblur(imageView.getContext(), bitmap, 25);
+//                                                imageView.setImageBitmap(bm);
+//                                                // 保存模糊后的图片
+//                                                try {
+//                                                    FileOutputStream fileOutputStream = new FileOutputStream(image);
+//                                                    bm.compress(Bitmap.CompressFormat.JPEG, 90, fileOutputStream);
+//                                                    fileOutputStream.flush();
+//                                                    fileOutputStream.close();
+//                                                } catch (FileNotFoundException e) {
+//                                                    e.printStackTrace();
+//                                                } catch (IOException e) {
+//                                                    e.printStackTrace();
+//                                                }
+//                                            }
+//                                        }
+//
+//                                        @Override
+//                                        public void onLoadFailed(Exception e, Drawable errorDrawable) {
+//                                            e.printStackTrace();
+//                                            Bitmap bm = BlurBitmap.fastblur(imageView.getContext(),
+//                                                    BitmapFactory.decodeResource(imageView.getContext().getResources(), R.drawable.default_square), 25);
+//                                            imageView.setImageBitmap(bm);
+//                                            super.onLoadFailed(e, errorDrawable);
+//                                        }
+//                                    });
+//                        }
+//                    } catch (FileNotFoundException e) {
+//                        e.printStackTrace();
+//                    }
+//                } else {
+//                    imageView.setImageResource(R.drawable.default_square);
+//                }
+//            } else {
+//                Glide.with(imageView.getContext()).load(Network.IMAGE + url)
+//                        .placeholder(R.drawable.default_rect)
+//                        .into(imageView);
+//            }
+//        }
 
         public String getId() {
             return id;

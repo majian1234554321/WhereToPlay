@@ -42,6 +42,8 @@ import com.qiyukf.unicorn.api.Unicorn;
 
 import java.util.Arrays;
 
+import rx.subscriptions.CompositeSubscription;
+
 import static com.fanc.wheretoplay.base.App.mContext;
 
 
@@ -62,6 +64,7 @@ public class BaseActivity
 
     private com.fanc.wheretoplay.view.AlertDialog mAlertDialog;
     private Receiver receiver;
+    public CompositeSubscription compositeSubscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,6 +80,9 @@ public class BaseActivity
         if (LocationUtils.location == null) {
             LocationUtils.getLocation(this);
         }
+
+        compositeSubscription = new CompositeSubscription();
+
         registerBroadcastReceiver();
 
     }
@@ -143,6 +149,10 @@ public class BaseActivity
         }
         if (mAlertDialog != null) {
             mAlertDialog = null;
+        }
+
+        if (compositeSubscription!=null) {
+            compositeSubscription.clear();
         }
     }
 

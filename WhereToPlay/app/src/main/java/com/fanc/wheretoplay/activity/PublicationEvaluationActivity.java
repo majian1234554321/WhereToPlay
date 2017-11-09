@@ -23,6 +23,7 @@ import com.fanc.wheretoplay.base.BaseActivity;
 import com.fanc.wheretoplay.datamodel.SubmitCommentModel;
 import com.fanc.wheretoplay.imagepink.utils.ImageSelectorUtils;
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
+import com.fanc.wheretoplay.rx.RxBus;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.view.RatingBar;
 import com.fanc.wheretoplay.view.TitleBarView;
@@ -36,11 +37,12 @@ import butterknife.OnClick;
 import okhttp3.MultipartBody;
 import rx.Scheduler;
 import rx.Subscriber;
+import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
 import rx.subjects.Subject;
 
-public class PublicationEvaluationActivity extends BaseActivity  {
+public class PublicationEvaluationActivity extends BaseActivity {
 
     @BindView(R.id.tbv)
     TitleBarView tbv;
@@ -77,9 +79,9 @@ public class PublicationEvaluationActivity extends BaseActivity  {
     private String value;
     private String order_idValue;
     private String store_idValue;
-    float ratingValue1 =10f;
-    float ratingValue2 =10f;
-    float ratingValue3 =10f;
+    float ratingValue1 = 10f;
+    float ratingValue2 = 10f;
+    float ratingValue3 = 10f;
 
 
     @Override
@@ -95,7 +97,7 @@ public class PublicationEvaluationActivity extends BaseActivity  {
         rvImage.setLayoutManager(new GridLayoutManager(this, 3));
         imagesfinal = new ArrayList<>();
         imagesfinal.add("这不是图片");
-        mAdapter = new ImageAdapter(this,imagesfinal);
+        mAdapter = new ImageAdapter(this, imagesfinal);
         rvImage.setAdapter(mAdapter);
 
         ratingbar1.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
@@ -120,37 +122,29 @@ public class PublicationEvaluationActivity extends BaseActivity  {
     }
 
 
-
-
     @OnClick(R.id.btn_commit)
     public void onViewClicked() {
 
-        StringBuilder base64image =new StringBuilder();
-            if (imagesDisplay!=null&&imagesDisplay.size()>1&&imagesDisplay.contains("这不是图片")){
-                imagesDisplay.remove("这不是图片");
-            }
+        StringBuilder base64image = new StringBuilder();
+        if (imagesDisplay != null && imagesDisplay.size() > 1 && imagesDisplay.contains("这不是图片")) {
+            imagesDisplay.remove("这不是图片");
+        }
 
-            if (imagesDisplay!=null&&imagesDisplay.size()>1){
-                for (int i = 0; i < imagesDisplay.size(); i++) {
-                    bitmap = getBitmap(imagesDisplay.get(i));
-                    value = Bitmap2StrByBase64(bitmap);
-                    Log.i("AAAAAAAAAAAAA",value);
-                    base64image.append(value);
-                    if (i!=imagesDisplay.size()){
-                        base64image.append("|");
-                    }
+        if (imagesDisplay != null && imagesDisplay.size() > 1) {
+            for (int i = 0; i < imagesDisplay.size(); i++) {
+                bitmap = getBitmap(imagesDisplay.get(i));
+                value = Bitmap2StrByBase64(bitmap);
+                Log.i("AAAAAAAAAAAAA", value);
+                base64image.append(value);
+                if (i != imagesDisplay.size()) {
+                    base64image.append("|");
                 }
             }
-
-
-
-
-
-
+        }
 
 
         MultipartBody.Part requestFileb =
-                MultipartBody.Part.createFormData("store_id",store_idValue);
+                MultipartBody.Part.createFormData("store_id", store_idValue);
         MultipartBody.Part requestFileC =
                 MultipartBody.Part.createFormData("token", new SPUtils(mContext).getUser().getToken());
 
@@ -162,17 +156,15 @@ public class PublicationEvaluationActivity extends BaseActivity  {
         MultipartBody.Part requestFileF =
                 MultipartBody.Part.createFormData("img", base64image.toString());
         MultipartBody.Part requestFileG =
-                MultipartBody.Part.createFormData("environment",ratingValue1+"");
+                MultipartBody.Part.createFormData("environment", ratingValue1 + "");
         MultipartBody.Part requestFileH =
-                MultipartBody.Part.createFormData("atmosphere", ratingValue2+"");
+                MultipartBody.Part.createFormData("atmosphere", ratingValue2 + "");
         MultipartBody.Part requestFileA =
-                MultipartBody.Part.createFormData("service", ratingValue3+"");
+                MultipartBody.Part.createFormData("service", ratingValue3 + "");
 
 
-
-
-
-        Retrofit_RequestUtils.getRequest().SubmitCommentModel(requestFileb,requestFileC,requestFileD,requestFileE,requestFileF,requestFileG,requestFileH,requestFileA)
+        Subscription subscription = Retrofit_RequestUtils.getRequest()
+                .SubmitCommentModel(requestFileb, requestFileC, requestFileD, requestFileE, requestFileF, requestFileG, requestFileH, requestFileA)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<SubmitCommentModel>() {
@@ -188,23 +180,24 @@ public class PublicationEvaluationActivity extends BaseActivity  {
 
                     @Override
                     public void onNext(SubmitCommentModel submitCommentModel) {
-                        if (submitCommentModel.code.equals("0")){
+                        if (submitCommentModel.code.equals("0")) {
                             Toast.makeText(mContext, "提交评论成功", Toast.LENGTH_SHORT).show();
+                            RxBus.getDefault().post("提交评价成功");
                             finish();
-                        }else {
+                        } else {
                             Toast.makeText(mContext, "提交评论失败", Toast.LENGTH_SHORT).show();
                         }
                     }
                 });
+        compositeSubscription.add(subscription);
     }
-
 
 
     private Bitmap getBitmap(String srcPath) {
         BitmapFactory.Options newOpts = new BitmapFactory.Options();
         // 开始是先把newOpts.inJustDecodeBounds 设回true了
         newOpts.inJustDecodeBounds = true;
-        Bitmap bitmap = BitmapFactory.decodeFile(srcPath,newOpts); // 此时返回bitmap为null
+        Bitmap bitmap = BitmapFactory.decodeFile(srcPath, newOpts); // 此时返回bitmap为null
 
         newOpts.inJustDecodeBounds = false;
         int w = newOpts.outWidth;
@@ -215,23 +208,24 @@ public class PublicationEvaluationActivity extends BaseActivity  {
         // 缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
         int scale = 1;  // be=1表示不缩放
         if (w > h && w > ww) {  // 如果宽度大的话根据宽度固定大小缩放
-            scale =  (int) (newOpts.outWidth / ww);
+            scale = (int) (newOpts.outWidth / ww);
         } else if (w < h && h > hh) { // 如果高度高的话根据宽度固定大小缩放
             scale = (int) (newOpts.outHeight / hh);
-        } if (scale <= 0) scale = 1; newOpts.inSampleSize = scale; // 设置缩放比例 // 重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了
-        bitmap = BitmapFactory.decodeFile(srcPath, newOpts); return bitmap;
+        }
+        if (scale <= 0) scale = 1;
+        newOpts.inSampleSize = scale; // 设置缩放比例 // 重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了
+        bitmap = BitmapFactory.decodeFile(srcPath, newOpts);
+        return bitmap;
     }
 
 
-    public String Bitmap2StrByBase64(Bitmap bit){
+    public String Bitmap2StrByBase64(Bitmap bit) {
 
-        ByteArrayOutputStream bos=new ByteArrayOutputStream();
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
         bit.compress(Bitmap.CompressFormat.JPEG, 40, bos);//参数100表示不压缩
-        byte[] bytes=bos.toByteArray();
+        byte[] bytes = bos.toByteArray();
         return Base64.encodeToString(bytes, Base64.DEFAULT);
     }
-
-
 
 
     @Override
@@ -239,13 +233,12 @@ public class PublicationEvaluationActivity extends BaseActivity  {
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode == REQUEST_CODE && data != null) {
             imagesDisplay = data.getStringArrayListExtra(ImageSelectorUtils.SELECT_RESULT);
-            if (imagesDisplay.size()<9){
+            if (imagesDisplay.size() < 9) {
                 imagesDisplay.add("这不是图片");
             }
             mAdapter.refresh(imagesDisplay);
         }
     }
-
 
 
 }
