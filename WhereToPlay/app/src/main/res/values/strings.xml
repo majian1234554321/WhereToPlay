@@ -59,6 +59,7 @@
     <string name="hint_redeem_code">请输入推广码</string>
     <string name="agreement_left">注册即表示同意</string>
     <string name="agreement_right">《乐互网用户协议》</string>
+    <string name="register_time">注册时间: </string>
 
     <!--Tab-->
     <string name="reserve">预订</string>
@@ -131,6 +132,8 @@
     <string name="collection">收藏</string>
     <string name="referral">推荐</string>
     <string name="drive">代驾</string>
+    <string name="friend">推荐好友</string>
+    <string name="money">推荐奖励</string>
 
     <!--mine info-->
     <string name="mine_info">我的资料</string>

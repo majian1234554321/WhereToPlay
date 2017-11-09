@@ -576,7 +576,6 @@ public class MerchantDetailFragment extends BaseFragment {
      */
     private void showStoreDetail(final StoreDetail.Store store) {
         mTvMerchantDetailTitle.setText(store.getName());
-        Log.e("what","2\n" +store.getDiscount());
         if (store.getDiscount().length() > 0) {
             SpannableString text = new SpannableString(store.getDiscount() + "折");
             text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

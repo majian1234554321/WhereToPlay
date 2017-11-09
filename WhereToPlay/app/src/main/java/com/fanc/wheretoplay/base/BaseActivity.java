@@ -160,28 +160,9 @@ public class BaseActivity
     public void onResume() {
         super.onResume();
 //        MobclickAgent.onResume(this);
-        changeConvironment();
+
     }
 
-    /**
-     * 测试环境改变
-     */
-    private void changeConvironment() {
-        String switchStatus = new SPUtils(mContext).getString("switchStatus", "");
-        switch (switchStatus) {
-            case "on":
-                Log.e("open","是打开的");
-                Network.changEnvironment("http://testapi.51tzl.cn");
-                break;
-            case "off":
-                Log.e("open","是关闭的");
-                Network.changEnvironment("http://ktv.51tzl.cn");
-                break;
-            default:
-                Log.e("open","没有判断");
-                break;
-        }
-    }
     @Override
     public void onPause() {
         super.onPause();
