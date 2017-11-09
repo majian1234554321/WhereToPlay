@@ -175,6 +175,7 @@
                 </RadioGroup>
 
             <android.support.constraint.ConstraintLayout
+                android:id="@+id/reserve_cl"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toBottomOf="@+id/rg_reserve_info"
@@ -308,7 +309,7 @@
                     android:layout_marginTop="@dimen/padding_5"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rg_reserve_info"/>
+                    app:layout_constraintTop_toTopOf="parent"/>
 
 
                 <TextView
@@ -357,40 +358,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/tv_reserve_info_reserve_time"/>
 
-                <!--<TextView-->
-                    <!--android:id="@+id/tv_reserve_info_waiter"-->
-                    <!--android:layout_width="wrap_content"-->
-                    <!--android:layout_height="@dimen/height_40"-->
-                    <!--android:layout_marginLeft="@dimen/margin_15"-->
-                    <!--android:layout_marginTop="@dimen/margin_5"-->
-                    <!--android:gravity="center_vertical"-->
-                    <!--android:text="@string/waiter"-->
-                    <!--android:textColor="@color/text_red"-->
-                    <!--android:textSize="@dimen/normal_textsize"-->
-                    <!--app:layout_constraintStart_toStartOf="parent"-->
-                    <!--app:layout_constraintTop_toBottomOf="@+id/tv_reserve_info_reserve_time"/>-->
-
-                <!--<TextView-->
-                    <!--android:id="@+id/tv_reserve_info_waiter_info"-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="@dimen/height_40"-->
-                    <!--android:background="@null"-->
-                    <!--android:gravity="center_vertical"-->
-                    <!--android:onClick="@{click.onViewClick}"-->
-                    <!--android:text="@string/please_choose"-->
-                    <!--android:textColor="@color/text_black"-->
-                    <!--android:textSize="@dimen/normal_textsize"-->
-                    <!--app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--app:layout_constraintStart_toStartOf="@+id/et_reserve_info_name"-->
-                    <!--app:layout_constraintTop_toTopOf="@+id/tv_reserve_info_waiter"/>-->
-
-                <!--<View-->
-                    <!--android:layout_width="match_parent"-->
-                    <!--android:layout_height="@dimen/line_height"-->
-                    <!--android:background="@color/pay_reserve_list_divider_white"-->
-                    <!--app:layout_constraintEnd_toEndOf="parent"-->
-                    <!--app:layout_constraintStart_toStartOf="parent"-->
-                    <!--app:layout_constraintTop_toBottomOf="@+id/tv_reserve_info_waiter"/>-->
 
 
                 <TextView
@@ -498,15 +465,6 @@
                     app:layout_constraintStart_toEndOf="@+id/tv_reserve_info_remark"
                     app:layout_constraintTop_toTopOf="@+id/tv_reserve_info_remark"/>
             </android.support.constraint.ConstraintLayout>
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="20dp"
-                    android:background="@color/pay_reserve_list_divider_white"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_reserve_info_remark"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    />
 
                 <Button
                     android:id="@+id/btn_reserve_info_pay"
@@ -524,7 +482,7 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv_reserve_info_remark"/>
+                    app:layout_constraintTop_toBottomOf="@+id/reserve_cl"/>
 
             </android.support.constraint.ConstraintLayout>
         </ScrollView>

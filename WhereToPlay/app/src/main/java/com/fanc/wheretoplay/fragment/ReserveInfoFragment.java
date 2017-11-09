@@ -443,10 +443,12 @@ public class ReserveInfoFragment extends BaseFragment {
                 mContext.finish();
             } else if (Constants.ACTION_SELECT_ROOM.equals(action)) {
                 mTvReserveInfoRoom.setText(intent.getStringExtra(Constants.NAME) + " (" + intent.getStringExtra(Constants.MONEY) + ")");
+                mTvReserveInfoRoom.setTextColor(getResources().getColor(R.color.text_black));
                 selectedRoomId = intent.getStringExtra(Constants.ROOM);
             } else if (Constants.ACTION_SELECT_DATE_TIME.equals(action)) {
                 reserveDate = intent.getStringExtra(Constants.TIMES);
                 mTvReserveInfoTime.setText(reserveDate);
+                mTvReserveInfoTime.setTextColor(getResources().getColor(R.color.text_black));
             }
         }
     }
