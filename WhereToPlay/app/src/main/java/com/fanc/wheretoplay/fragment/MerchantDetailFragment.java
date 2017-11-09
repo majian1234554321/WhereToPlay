@@ -31,6 +31,7 @@ import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.CheckCommentsActivity;
 import com.fanc.wheretoplay.activity.LargeImageActivity;
+import com.fanc.wheretoplay.activity.PayBillActivity;
 import com.fanc.wheretoplay.activity.ReuseActivity;
 import com.fanc.wheretoplay.activity.ServiceActivity;
 import com.fanc.wheretoplay.activity.ShareActivity;
@@ -45,11 +46,13 @@ import com.fanc.wheretoplay.datamodel.StoreDetail;
 import com.fanc.wheretoplay.datamodel.StoreList;
 import com.fanc.wheretoplay.datamodel.Url;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.rx.RxBus;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.NaviUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
+import com.fanc.wheretoplay.view.DrawableCenterLeftTextView;
 import com.fanc.wheretoplay.view.MyRecycleView;
 import com.fanc.wheretoplay.view.ShearedPopDialog;
 import com.fanc.wheretoplay.view.TopMenu;
@@ -66,6 +69,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
+import rx.functions.Action1;
 
 /**
  * Created by Administrator on 2017/6/14.
@@ -99,8 +103,8 @@ public class MerchantDetailFragment extends BaseFragment {
     TextView mTvReservePromptly;
     // 电话地址
 //    LinearLayout mLlMerchantDetailTel;
-    View mVTel;
-    TextView mTvMerchantDetailTel;
+    DrawableCenterLeftTextView tvTelReserve,tvPay;
+   // TextView mTvMerchantDetailTel;
     LinearLayout mLlMerchantDetailAddress;
     TextView mTvMerchantDetailAddress;
     // 房型、酒水、活动、简介
@@ -176,8 +180,8 @@ public class MerchantDetailFragment extends BaseFragment {
         mIvMerchantDetail6 = detailBinding.ivMerchantDetail6;
         mTvReservePromptly = detailBinding.tvReserveOnline;
 //        mLlMerchantDetailTel = detailBinding.llMerchantReserveTel;
-        mVTel = detailBinding.view;
-        mTvMerchantDetailTel = detailBinding.tvDetailTel;
+        tvTelReserve = detailBinding.tvTelReserve;
+      //  mTvMerchantDetailTel = detailBinding.tvDetailTel;
         mTvMerchantDetailAddress = detailBinding.tvMerchantReserveAddress;
         mLlMerchantDetailAddress = detailBinding.llMerchantReserveAddress;
         mLlMerchantDetailRoom = detailBinding.llMerchantDetailRoom;
@@ -187,6 +191,7 @@ public class MerchantDetailFragment extends BaseFragment {
         mLlMerchantBrief = detailBinding.llMerchantBrief;
         mWvDetail = detailBinding.wvMerchantDetail;
         mRvMerchantDetailRecommend = detailBinding.rvMerchantDetailRecommend;
+        tvPay = detailBinding.tvPay;
 //        mRvMerchantDetailRoomPrice = detailBinding.rvMerchantDetailRoomPrice;
     }
 
@@ -227,6 +232,13 @@ public class MerchantDetailFragment extends BaseFragment {
         stores = new ArrayList<>();
         recommendAdapter = new ReserveAdapter(mContext, stores);
         mRvMerchantDetailRecommend.setAdapter(recommendAdapter);
+        RxBus.getDefault().toObservable(String.class)
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String s) {
+
+                    }
+                });
 
     }
 
@@ -313,11 +325,11 @@ public class MerchantDetailFragment extends BaseFragment {
                 mContext.overridePendingTransition(R.anim.anim_in_top_right, R.anim.anim_close_top);
             }
         });
-        mVTel.setOnClickListener(new View.OnClickListener() {
+        tvTelReserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                Uri uri = Uri.parse("tel:" + mTvMerchantDetailTel.getText().toString());
+                Uri uri = Uri.parse("tel:" + tvTelReserve.getText().toString());
                 intent.setData(uri);
                 startActivity(intent);
             }
@@ -367,17 +379,26 @@ public class MerchantDetailFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
-        //活动
-        //去掉原有活动界面跳转，改成房态界面跳转
-//        mLlMerchantDetailAction.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(mContext, ReuseActivity.class);
-//                intent.putExtra(Constants.PAGE, Constants.ACTION);
-//                intent.putExtra(Constants.STORE_ID, mStoreId);
-//                startActivity(intent);
-//            }
-//        });
+
+        //支付
+        tvPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, PayBillActivity.class);
+                intent.putExtra(Constants.ORDER_ID, "210");
+                intent.putExtra(Constants.STORE_ID, "210");
+                String statusValue = "2";
+                if (TextUtils.equals("4", statusValue)) {// 去消费
+                    intent.putExtra(Constants.PAGE, Constants.CONSUME);
+                }
+                if (TextUtils.equals("2", statusValue)) {// 去结账
+                    intent.putExtra(Constants.PAGE, Constants.PAYING_THE_BILL);
+                }
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+
+            }
+        });
         //房态界面跳转
         mLlMerchantDetailAction.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -583,7 +604,7 @@ public class MerchantDetailFragment extends BaseFragment {
         if (store.getPicture() != null) {
             showPicture(store.getPicture());
         }
-        mTvMerchantDetailTel.setText(store.getPhone());
+      //  tvTelReserve.setText(store.getPhone());
         // 地址 距离
         String d = "";
         if (store.getDistance() != null && !TextUtils.isEmpty(store.getDistance()) && !TextUtils.equals("-1", store.getDistance())) {
