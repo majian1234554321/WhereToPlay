@@ -188,7 +188,7 @@ public class DatePicker extends LinearLayout {
                 int day = DateFormatUtil.getCurrentDay();
                 if (currentMonth >= current) {
                     if (currentMonth > current) {
-                        ToastUtils.showShortToast(mContext, "生日不能选择未来的时间");
+                        ToastUtils.showShortToast(mContext, "不能选择未来的日期");
                     }
                     mWvMonth.setSelectedIndex(current - 1);
                     postDelayed(new Runnable() {
@@ -200,7 +200,7 @@ public class DatePicker extends LinearLayout {
                     }, 500);
                     if (currentDay > day) {
                         if (currentMonth == current) {
-                            ToastUtils.showShortToast(mContext, "生日不能选择未来的时间");
+                            ToastUtils.showShortToast(mContext, "不能选择未来的日期");
                         }
                         mWvDay.setSelectedIndex(day - 1);
                         postDelayed(new Runnable() {
@@ -256,7 +256,7 @@ public class DatePicker extends LinearLayout {
                 int current = DateFormatUtil.getCurrentDay();
                 if (currentMonth >= DateFormatUtil.getCurrentMonth()) {
                     if (currentDay > current) {
-                        ToastUtils.showShortToast(mContext, "生日不能选择未来的时间");
+                        ToastUtils.showShortToast(mContext, "不能选择未来的日期");
                         mWvDay.setSelectedIndex(current - 1);
                         postDelayed(new Runnable() {
                             @Override

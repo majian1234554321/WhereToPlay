@@ -32,7 +32,7 @@ import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.CheckCommentsActivity;
 import com.fanc.wheretoplay.activity.LargeImageActivity;
 import com.fanc.wheretoplay.activity.ReuseActivity;
-import com.fanc.wheretoplay.activity.ServiceActivity;
+//import com.fanc.wheretoplay.activity.ServiceActivity;
 import com.fanc.wheretoplay.activity.ShareActivity;
 import com.fanc.wheretoplay.adapter.CommentIconAdapter;
 import com.fanc.wheretoplay.adapter.MerchantTablayoutAdapter;
