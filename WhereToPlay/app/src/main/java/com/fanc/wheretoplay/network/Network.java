@@ -21,7 +21,7 @@ import rx.Observable;
 
 public class Network{
 
-    // 公共前缀
+    // 公共前缀1234566
 //    String BASE = "http://192.168.1.96/ktv/index.php";// 开发
 //    String IMAGE = "http://192.168.1.96/ktv";// 图片
 

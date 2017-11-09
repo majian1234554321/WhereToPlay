@@ -177,7 +177,8 @@
             <android.support.constraint.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                app:layout_constraintTop_toBottomOf="@+id/"></android.support.constraint.ConstraintLayout>
+                app:layout_constraintTop_toBottomOf="@+id/rg_reserve_info"
+                android:background="@color/bg_gray">
                 <TextView
                     android:id="@+id/tv_reserve_info_name"
                     android:layout_width="@dimen/width_60"
@@ -188,7 +189,7 @@
                     android:textColor="@color/text_black"
                     android:textSize="@dimen/normal_textsize"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/rg_reserve_info" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/et_reserve_info_name"
@@ -496,7 +497,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/tv_reserve_info_remark"
                     app:layout_constraintTop_toTopOf="@+id/tv_reserve_info_remark"/>
-
+            </android.support.constraint.ConstraintLayout>
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="20dp"
