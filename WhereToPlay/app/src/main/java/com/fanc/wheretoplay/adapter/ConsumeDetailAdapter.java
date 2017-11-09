@@ -41,33 +41,34 @@ public class ConsumeDetailAdapter extends RecyclerView.Adapter<ConsumeDetailAdap
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Consume.ConsumeDetail consumeDetail = (Consume.ConsumeDetail) mData.get(position);
-        holder.detailBinding.setDetail(consumeDetail);
-        if (consumeDetail.getCreated_time() != null && !consumeDetail.getCreated_time().isEmpty() && !TextUtils.equals("0", consumeDetail.getCreated_time())) {
-            holder.mTvItemConsumeSubscriptionTime.setText(
-                    DateFormatUtil.getDateTimeStr(new Date(Long.parseLong(consumeDetail.getCreated_time()) * 1000)));
-        }
-        if (consumeDetail.getReserve_time() != null && !consumeDetail.getReserve_time().isEmpty() && !TextUtils.equals("0", consumeDetail.getReserve_time())) {
-            holder.mTvItemConsumeOrderTime.setText(
-                    DateFormatUtil.getDateTimeStr(new Date(Long.parseLong(consumeDetail.getReserve_time()) * 1000)));
-        }
-        if (Double.parseDouble(consumeDetail.getPrepay()) == 0D) {
-            holder.mLlTvItemConsumeSubscription.setVisibility(View.GONE);
-        }
-        if (Double.parseDouble(consumeDetail.getAccount()) == 0D) {
-            holder.mLlTvItemConsumeOrder.setVisibility(View.GONE);
-        }
-        if (Double.parseDouble(consumeDetail.getDiscount()) == 0D) {
-            holder.mLlTvItemConsumeDiscount.setVisibility(View.GONE);
-        }
+//        Consume.ConsumeDetail consumeDetail = (Consume.ConsumeDetail) mData.get(position);
+//        holder.detailBinding.setDetail(consumeDetail);
+//        if (consumeDetail.getCreated_time() != null && !consumeDetail.getCreated_time().isEmpty() && !TextUtils.equals("0", consumeDetail.getCreated_time())) {
+//            holder.mTvItemConsumeSubscriptionTime.setText(
+//                    DateFormatUtil.getDateTimeStr(new Date(Long.parseLong(consumeDetail.getCreated_time()) * 1000)));
+//        }
+//        if (consumeDetail.getReserve_time() != null && !consumeDetail.getReserve_time().isEmpty() && !TextUtils.equals("0", consumeDetail.getReserve_time())) {
+//            holder.mTvItemConsumeOrderTime.setText(
+//                    DateFormatUtil.getDateTimeStr(new Date(Long.parseLong(consumeDetail.getReserve_time()) * 1000)));
+//        }
+//        if (Double.parseDouble(consumeDetail.getPrepay()) == 0D) {
+//            holder.mLlTvItemConsumeSubscription.setVisibility(View.GONE);
+//        }
+//        if (Double.parseDouble(consumeDetail.getAccount()) == 0D) {
+//            holder.mLlTvItemConsumeOrder.setVisibility(View.GONE);
+//        }
+//        if (Double.parseDouble(consumeDetail.getDiscount()) == 0D) {
+//            holder.mLlTvItemConsumeDiscount.setVisibility(View.GONE);
+//        }
+        holder.mTvItemConsumeSubscriptionTime.setText("sdfjkjllllllllljsssssssssssssssssss");
     }
 
     @Override
     public int getItemCount() {
-        if (mData != null) {
-            return mData.size();
-        }
-        return 0;
+//        if (mData != null) {
+//            return mData.size();
+//        }
+        return 5;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder {

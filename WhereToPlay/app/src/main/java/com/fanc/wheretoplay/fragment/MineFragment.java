@@ -218,7 +218,7 @@ public class MineFragment extends BaseFragment {
             case R.id.iv_mine_message:
                 goToNewPage(Constants.MESSAGE);
                 break;
-            case R.id.iv_mine_wallet:
+            case R.id.iv_mine_wallet:   //钱包
                 goToNewPage(Constants.WALLET);
                 break;
             case R.id.iv_mine_discount_coupon:
