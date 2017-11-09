@@ -232,11 +232,10 @@ public class MerchantDetailFragment extends BaseFragment {
 
 
     private void setListeners() {
-        //商家后台传来的未读消息数量
+        //七鱼商家后台传来的未读消息数量
         UnreadCountChangeListener listener = new UnreadCountChangeListener() {
             @Override
             public void onUnreadCountChange(int count) {
-                Log.e("wade",count + "");
             }
         };
         Unicorn.addUnreadCountChangeListener(listener, true);
@@ -253,9 +252,15 @@ public class MerchantDetailFragment extends BaseFragment {
             public void onClick(View v) {
                 new ShearedPopDialog(mContext)
                         .setCollected(isCollected)
-                        .setOnCollectClickListener(new View.OnClickListener() {
+//                        .setOnCollectClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                collectStore(mStoreId);
+//                            }
+//                        })
+                        .setOnCollectClickListener(new ShearedPopDialog.MListener() {
                             @Override
-                            public void onClick(View v) {
+                            public void collect() {
                                 collectStore(mStoreId);
                             }
                         })
@@ -529,15 +534,12 @@ public class MerchantDetailFragment extends BaseFragment {
                 .execute(new DCallback<StoreDetail>() {
                     @Override
                     public void onError(Call call, Exception e) {
-                        Log.i("AAAAAAA","AAAAAAA");
                         connectError();
                     }
 
                     @Override
                     public void onResponse(StoreDetail response) {
-                        Log.i("AAAAAAA","response");
                         if (isSuccess(response)) {
-                            Log.i("AAAAAAA","responseB");
                             if (response.getStore() != null) {
                                 mStore = response.getStore();
                                 showStoreDetail(mStore);

@@ -57,13 +57,28 @@ public class ShearedPopDialog extends PopupWindow {
         showAsDropDown(view, -UIUtils.dp2Px(70), -UIUtils.dp2Px(6));
     }
 
-    public ShearedPopDialog setOnCollectClickListener(final View.OnClickListener listener) {
+//    public ShearedPopDialog setOnCollectClickListener(final View.OnClickListener listener) {
+//        mTvCollect.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (!isCollected) {
+//                    if (listener != null) {
+//                        listener.onClick(v);
+//                    }
+//                }
+//                dismiss();
+//            }
+//        });
+//        return this;
+//    }
+
+    public ShearedPopDialog setOnCollectClickListener(final MListener mListener) {
         mTvCollect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!isCollected) {
-                    if (listener != null) {
-                        listener.onClick(v);
+                    if (mListener != null) {
+                        mListener.collect();
                     }
                 }
                 dismiss();
@@ -91,5 +106,9 @@ public class ShearedPopDialog extends PopupWindow {
             mTvCollect.setText("已收藏");
         }
         return this;
+    }
+
+    public interface MListener{
+        public void collect();
     }
 }

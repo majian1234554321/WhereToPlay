@@ -8,12 +8,12 @@
         "source": "D:\\SourceGit\\KtvGit\\WhereToPlay\\app\\src\\main\\res\\layout\\item_date_time.xml"
     },
     {
-        "merged": "D:\\SourceGit\\KtvGit\\WhereToPlay\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_discover.xml",
-        "source": "D:\\SourceGit\\KtvGit\\WhereToPlay\\app\\src\\main\\res\\layout\\fragment_discover.xml"
-    },
-    {
         "merged": "D:\\SourceGit\\KtvGit\\WhereToPlay\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_order_to_complete.xml",
         "source": "D:\\SourceGit\\KtvGit\\WhereToPlay\\app\\src\\main\\res\\layout\\fragment_order_to_complete.xml"
+    },
+    {
+        "merged": "D:\\SourceGit\\KtvGit\\WhereToPlay\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_discover.xml",
+        "source": "D:\\SourceGit\\KtvGit\\WhereToPlay\\app\\src\\main\\res\\layout\\fragment_discover.xml"
     },
     {
         "merged": "D:\\SourceGit\\KtvGit\\WhereToPlay\\app\\build\\intermediates\\incremental\\mergeDebugResources\\stripped.dir\\layout\\fragment_referrals.xml",
