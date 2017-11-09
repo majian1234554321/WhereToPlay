@@ -76,6 +76,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 intent.putExtra("order_id", dataBean.list.get(position).order_id);
                 intent.putExtra("store_id", dataBean.list.get(position).store_id);
                 intent.putExtra("storeName", dataBean.list.get(position).name);
+                intent.putExtra("total", dataBean.list.get(position).total);
                 if (dataBean.list != null && dataBean.list.get(position).status != null) {
                     intent.putExtra("status", dataBean.list.get(position).status);
                 }
