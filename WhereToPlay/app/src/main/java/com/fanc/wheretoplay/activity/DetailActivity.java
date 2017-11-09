@@ -29,7 +29,6 @@ import com.fanc.wheretoplay.fragment.OrderFragments;
 import com.fanc.wheretoplay.fragment.ReferralFragment;
 import com.fanc.wheretoplay.fragment.SetPayPwdFragment;
 import com.fanc.wheretoplay.fragment.SystemNotifyFragment;
-import com.fanc.wheretoplay.fragment.WaiterInfoFragment;
 import com.fanc.wheretoplay.fragment.WalletFragment;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LogUtils;
@@ -116,13 +115,6 @@ public class DetailActivity extends BaseFragmentActivity {
             case Constants.MINEMONEY:   //推荐奖励
                 initFragment(new MineCommendMoneyFragment());
                 break;
-//            case Constants.WAITER_INFO:   //
-//                initFragment(new WaiterInfoFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID))
-//                        .setSelect(intent.getBooleanExtra(Constants.IS_CHOOSE, false)));
-//                break;
-//            case Constants.WAITER_PHOTO:
-//                initFragment(new WaiterPhotoFragment().setBundle(intent.getExtras()), Constants.WAITER_PHOTO);
-//                break;
             case Constants.MESSAGE_DETAIL:
                 initFragment(new MessageDetailFragment().setMessageId(intent.getStringExtra(Constants.ID)));
                 break;
