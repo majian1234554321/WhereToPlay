@@ -386,7 +386,9 @@ public class MerchantDetailFragment extends BaseFragment {
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, PayBillActivity.class);
                 intent.putExtra(Constants.STORE_ID, mStoreId);
-                //intent.putExtra("discount", Double.parseDouble(mTvMerchantDetailDiscountSum.getText().toString().trim()));
+                intent.putExtra("storeName", mTvMerchantDetailTitle.getText().toString());
+                intent.putExtra("address", mTvMerchantDetailAddress.getText().toString());
+                intent.putExtra("discount", mTvMerchantDetailDiscountSum.getText().toString());
                 intent.putExtra(Constants.PAGE, "商家详情支付");
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);

@@ -126,6 +126,7 @@ public class PayBillActivity extends BaseActivity {
     IWXAPI wxApi;
     private DecimalFormat df;
     private String statusTitle;
+    private TextView tvPayBillStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +139,7 @@ public class PayBillActivity extends BaseActivity {
 
     private void initViews() {
 
+        tvPayBillStore = payBillBinding.tvPayBillStore;
         mTmPayBill = payBillBinding.tmPayBill;
         mTvPayBillAddress = payBillBinding.tvPayBillAddress;
         mTvDiscount = payBillBinding.tvPayBillDiscountReal;//折扣
@@ -165,8 +167,20 @@ public class PayBillActivity extends BaseActivity {
         Intent intent = getIntent();
         String orderId = intent.getStringExtra(Constants.ORDER_ID);
         storeId = intent.getStringExtra(Constants.STORE_ID);
-        discount =  intent.getDoubleExtra("discount",10f);
+        String storeName = intent.getStringExtra("storeName");
+        String discountValue = intent.getStringExtra("discount");
+        String address = intent.getStringExtra("address");
+        if (discountValue!=null&&discountValue.length()>0) {
+            String value = discountValue.substring(0, discountValue.length() - 1);
+            discount = Double.parseDouble(value);
+        }else {
+            discount =  10f;
+        }
 
+
+        mTvDiscount.setText(discountValue);
+        mTvPayBillAddress.setText(address);
+        tvPayBillStore.setText(storeName);
 
         statusTitle = intent.getStringExtra(Constants.PAGE);
 
@@ -438,7 +452,7 @@ public class PayBillActivity extends BaseActivity {
             }
         }
         mTvPayBillAddress.setText(order.address + "    " + d);
-
+        tvPayBillStore.setText(order.name);
         // 服务费率
         if (!TextUtils.isEmpty(order.cash_rate)) {
             cashRate = Double.parseDouble(order.cash_rate);
@@ -496,7 +510,7 @@ public class PayBillActivity extends BaseActivity {
         MultipartBody.Part requestFileC =
                 MultipartBody.Part.createFormData("store_id", storeId);
 
-      Subscription subscription=   Retrofit_RequestUtils.getRequest()
+        Subscription subscription = Retrofit_RequestUtils.getRequest()
                 .immediatelyPay(requestFileA, requestFileB, requestFileC)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -505,6 +519,7 @@ public class PayBillActivity extends BaseActivity {
                     public void onCompleted() {
 
                     }
+
                     @Override
                     public void onError(Throwable e) {
                         Toast.makeText(mContext, e.toString(), Toast.LENGTH_SHORT).show();
@@ -535,7 +550,7 @@ public class PayBillActivity extends BaseActivity {
                         }
                     }
                 });
-         compositeSubscription.add(subscription);
+        compositeSubscription.add(subscription);
     }
 
     /**
@@ -685,7 +700,7 @@ public class PayBillActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(String response) {
-                        Log.i("response",response);
+                        Log.i("response", response);
                         try {
                             JSONObject object = new JSONObject(response);
                             JSONObject json = object.getJSONObject("content");

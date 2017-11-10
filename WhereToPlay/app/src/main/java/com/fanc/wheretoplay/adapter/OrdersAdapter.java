@@ -68,7 +68,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, final int position) {
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -101,15 +101,24 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
             switch (dataBean.list.get(position).order_action) {
                 case "1":
                     holder.tv_payState.setText("已取消");
+                    holder.tv_left.setVisibility(View.GONE);
+                    holder.tv_right.setVisibility(View.VISIBLE);
+                    holder.tv_right.setText("查看");
                     break;
                 case "2":
                     holder.tv_payState.setText("预订成功");
+                    holder.tv_left.setVisibility(View.VISIBLE);
+                    holder.tv_right.setVisibility(View.VISIBLE);
+                    holder.tv_right.setText("立即支付");
                     break;
                 case "3":
                     holder.tv_payState.setText("已取消");
                     break;
                 case "4":
                     holder.tv_payState.setText("已结单");
+                    holder.tv_left.setVisibility(View.VISIBLE);
+                    holder.tv_right.setVisibility(View.VISIBLE);
+                    holder.tv_right.setText("立即支付");
                     break;
                 case "5":
                     holder.tv_payState.setText("已支付订金");
@@ -142,25 +151,43 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 //            }
 //        }
 
-        holder.btnPayConsume.setOnClickListener(new View.OnClickListener() {
+        holder.tv_right.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent();
-                intent.setClass(context, PayBillActivity.class);
-                intent.putExtra(Constants.ORDER_ID, dataBean.list.get(position).order_id);
-                intent.putExtra(Constants.STORE_ID, dataBean.list.get(position).store_id);
-                if (TextUtils.equals("4", dataBean.list.get(position).order_action)) {// 去消费
-                    intent.putExtra(Constants.PAGE, Constants.CONSUME);
+                switch (holder.tv_right.getText().toString().trim()) {
+                    case "查看":
+                        intent.putExtra("order_id", dataBean.list.get(position).order_id);
+                        intent.putExtra("store_id", dataBean.list.get(position).store_id);
+                        intent.putExtra("storeName", dataBean.list.get(position).name);
+                        intent.putExtra("total", dataBean.list.get(position).total);
+                        if (dataBean.list != null && dataBean.list.get(position).order_action != null) {
+                            intent.putExtra("status", dataBean.list.get(position).order_action);
+                        }
+                        intent.setClass(context, DetailsOrderActivity.class);
+                        fragment.startActivityForResult(intent, 1001);
+                        break;
+                    case "立即支付":
+
+                        intent.setClass(context, PayBillActivity.class);
+                        intent.putExtra(Constants.ORDER_ID, dataBean.list.get(position).order_id);
+                        intent.putExtra(Constants.STORE_ID, dataBean.list.get(position).store_id);
+                        if (TextUtils.equals("4", dataBean.list.get(position).order_action)) {// 去消费
+                            intent.putExtra(Constants.PAGE, Constants.CONSUME);
+                        }
+                        if (TextUtils.equals("2", dataBean.list.get(position).order_action)) {// 去结账
+                            intent.putExtra(Constants.PAGE, Constants.PAYING_THE_BILL);
+                        }
+                        context.startActivity(intent);
+                        break;
                 }
-                if (TextUtils.equals("2", dataBean.list.get(position).order_action)) {// 去结账
-                    intent.putExtra(Constants.PAGE, Constants.PAYING_THE_BILL);
-                }
-                context.startActivity(intent);
+
+
             }
         });
 
 
-        holder.btnPayCancelReserve.setOnClickListener(new View.OnClickListener() {
+        holder.tv_left.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new AlertDialog(context)
@@ -193,7 +220,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
                                             @Override
                                             public void onNext(BaseResponseModel<CancleOrderModel.ContentBean> contentBean) {
-                                                if (contentBean.success()&&contentBean.content.is_cancle) {
+                                                if (contentBean.success() && contentBean.content.is_cancle) {
                                                     ToastUtils.showShortToast(context, "取消订单成功");
                                                     dataBean.list.remove(position);
                                                     notifyDataSetChanged();
@@ -250,11 +277,11 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         @BindView(R.id.tv_pay_item_price)
         TextView tvPayItemPrice;
 
+        @BindView(R.id.tv_left)
+        TextView tv_left;
+        @BindView(R.id.tv_right)
+        TextView tv_right;
 
-        @BindView(R.id.btn_pay_cancel_reserve)
-        TextView btnPayCancelReserve;
-        @BindView(R.id.btn_pay_consume)
-        Button btnPayConsume;
 
         @BindView(R.id.tv_storeName)
         TextView tv_storeName;

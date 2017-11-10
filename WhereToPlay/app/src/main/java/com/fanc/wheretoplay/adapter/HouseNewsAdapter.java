@@ -2,17 +2,22 @@ package com.fanc.wheretoplay.adapter;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fanc.wheretoplay.R;
+import com.fanc.wheretoplay.activity.ReuseActivity;
 import com.fanc.wheretoplay.databinding.ItemHousenewsBinding;
 import com.fanc.wheretoplay.datamodel.HousenewsList;
+import com.fanc.wheretoplay.util.Constants;
 
 import java.util.List;
 
@@ -24,11 +29,15 @@ public class HouseNewsAdapter extends RecyclerView.Adapter<HouseNewsAdapter.View
 
     private final List<HousenewsList.StatusBean> housenews;
     Context mContext;
+    public String mStoreId;
 
-    public HouseNewsAdapter(Activity mContext, List<HousenewsList.StatusBean> housenews) {
+    public HouseNewsAdapter(Activity mContext, List<HousenewsList.StatusBean> housenews, String mStoreId) {
         this.mContext = mContext;
         this.housenews = housenews;
+        this.mStoreId = mStoreId;
     }
+
+
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -38,7 +47,7 @@ public class HouseNewsAdapter extends RecyclerView.Adapter<HouseNewsAdapter.View
     }
 
     @Override
-    public void onBindViewHolder(ViewHolder holder, int position) {
+    public void onBindViewHolder(ViewHolder holder, final int position) {
         holder.mTvType.setText(housenews.get(position).getName());
         holder.mTvHouseName.setText(housenews.get(position).getNumber());
         holder.mTvLowest.setText(housenews.get(position).getMin_price());
@@ -55,6 +64,22 @@ public class HouseNewsAdapter extends RecyclerView.Adapter<HouseNewsAdapter.View
             default:
                 break;
         }
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if ("1".equals(housenews.get(position).getStatus())){
+                    Toast.makeText(mContext, "可以被预订", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(mContext, ReuseActivity.class);
+                    intent.putExtra(Constants.STORE_ID, mStoreId);
+                    intent.putExtra(Constants.PAGE, Constants.RESERVE_INFO);
+                    mContext. startActivity(intent);
+                }else {
+                    Toast.makeText(mContext, "该房间已被预订或者正在使用", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+
     }
 
     @Override
