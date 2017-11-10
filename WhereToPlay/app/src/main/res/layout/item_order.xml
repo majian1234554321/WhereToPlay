@@ -186,7 +186,7 @@
 
 
                 <TextView
-                    android:id="@+id/btn_pay_cancel_reserve"
+                    android:id="@+id/tv_left"
                     android:layout_width="@dimen/width_80"
                     android:layout_height="@dimen/height_25"
                     android:layout_marginBottom="@dimen/margin_10"
@@ -199,7 +199,7 @@
                     android:textSize="@dimen/normal_textsize" />
 
                 <Button
-                    android:id="@+id/btn_pay_consume"
+                    android:id="@+id/tv_right"
                     android:layout_width="@dimen/width_80"
                     android:layout_height="@dimen/height_25"
                     android:layout_marginBottom="@dimen/margin_10"

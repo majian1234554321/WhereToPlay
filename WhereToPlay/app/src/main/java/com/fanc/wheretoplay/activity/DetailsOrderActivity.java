@@ -269,12 +269,13 @@ public class DetailsOrderActivity extends BaseActivity {
                 intent.setClass(this, PayBillActivity.class);
                 intent.putExtra(Constants.ORDER_ID, order_idValue);
                 intent.putExtra(Constants.STORE_ID, store_idValue);
-                if (TextUtils.equals("4", statusValue)) {// 去消费
+                intent.putExtra(Constants.PAGE, Constants.CONSUME);
+               /* if (TextUtils.equals("4", statusValue)) {// 去消费
                     intent.putExtra(Constants.PAGE, Constants.CONSUME);
                 }
                 if (TextUtils.equals("2", statusValue)) {// 去结账
                     intent.putExtra(Constants.PAGE, Constants.PAYING_THE_BILL);
-                }
+                }*/
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
 

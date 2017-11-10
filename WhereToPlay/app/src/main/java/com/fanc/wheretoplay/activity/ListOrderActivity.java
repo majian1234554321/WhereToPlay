@@ -38,7 +38,7 @@ public class ListOrderActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_order);
         ButterKnife.bind(this);
-
+        tbv.setTv_title("订单列表");
         ArrayList<BaseFragment> fragments = new ArrayList<>();
         fragments.add(new OrderList1Fragment());
         fragments.add(new OrderList2Fragment());

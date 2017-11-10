@@ -49,7 +49,7 @@
                         android:id="@+id/tv_pay_bill_store"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{order.name}"
+
                         android:textColor="@color/bg"
                         android:textSize="@dimen/textsize_level4" />
 

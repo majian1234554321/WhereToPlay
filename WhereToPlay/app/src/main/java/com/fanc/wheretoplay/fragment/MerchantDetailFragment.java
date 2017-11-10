@@ -90,7 +90,7 @@ public class MerchantDetailFragment extends BaseFragment {
     TextView mTvMerchantDetailGrade;
     TextView mTvMerchantDetailCommentNo;
     LinearLayout mLlMerchantDetailComment;
-//    RecyclerView mRvMerchantDetailCommentHeadImage;
+    //    RecyclerView mRvMerchantDetailCommentHeadImage;
     // 图片
     LinearLayout mLlMerchantDetailImage;
     ImageView mIvMerchantDetail1;
@@ -103,8 +103,8 @@ public class MerchantDetailFragment extends BaseFragment {
     TextView mTvReservePromptly;
     // 电话地址
 //    LinearLayout mLlMerchantDetailTel;
-    DrawableCenterLeftTextView tvTelReserve,tvPay;
-   // TextView mTvMerchantDetailTel;
+    DrawableCenterLeftTextView tvTelReserve, tvPay;
+    // TextView mTvMerchantDetailTel;
     LinearLayout mLlMerchantDetailAddress;
     TextView mTvMerchantDetailAddress;
     // 房型、酒水、活动、简介
@@ -181,7 +181,7 @@ public class MerchantDetailFragment extends BaseFragment {
         mTvReservePromptly = detailBinding.tvReserveOnline;
 //        mLlMerchantDetailTel = detailBinding.llMerchantReserveTel;
         tvTelReserve = detailBinding.tvTelReserve;
-      //  mTvMerchantDetailTel = detailBinding.tvDetailTel;
+        //  mTvMerchantDetailTel = detailBinding.tvDetailTel;
         mTvMerchantDetailAddress = detailBinding.tvMerchantReserveAddress;
         mLlMerchantDetailAddress = detailBinding.llMerchantReserveAddress;
         mLlMerchantDetailRoom = detailBinding.llMerchantDetailRoom;
@@ -244,10 +244,11 @@ public class MerchantDetailFragment extends BaseFragment {
 
 
     private void setListeners() {
-        //七鱼商家后台传来的未读消息数量
+        //商家后台传来的未读消息数量
         UnreadCountChangeListener listener = new UnreadCountChangeListener() {
             @Override
             public void onUnreadCountChange(int count) {
+                Log.e("wade", count + "");
             }
         };
         Unicorn.addUnreadCountChangeListener(listener, true);
@@ -270,12 +271,6 @@ public class MerchantDetailFragment extends BaseFragment {
 //                                collectStore(mStoreId);
 //                            }
 //                        })
-                        .setOnCollectClickListener(new ShearedPopDialog.MListener() {
-                            @Override
-                            public void collect() {
-                                collectStore(mStoreId);
-                            }
-                        })
                         .setOnShearedClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -390,15 +385,11 @@ public class MerchantDetailFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, PayBillActivity.class);
-                intent.putExtra(Constants.ORDER_ID, "210");
-                intent.putExtra(Constants.STORE_ID, "210");
-                String statusValue = "2";
-                if (TextUtils.equals("4", statusValue)) {// 去消费
-                    intent.putExtra(Constants.PAGE, Constants.CONSUME);
-                }
-                if (TextUtils.equals("2", statusValue)) {// 去结账
-                    intent.putExtra(Constants.PAGE, Constants.PAYING_THE_BILL);
-                }
+                intent.putExtra(Constants.STORE_ID, mStoreId);
+                intent.putExtra("storeName", mTvMerchantDetailTitle.getText().toString());
+                intent.putExtra("address", mTvMerchantDetailAddress.getText().toString());
+                intent.putExtra("discount", mTvMerchantDetailDiscountSum.getText().toString());
+                intent.putExtra(Constants.PAGE, "商家详情支付");
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
 
@@ -555,12 +546,15 @@ public class MerchantDetailFragment extends BaseFragment {
                 .execute(new DCallback<StoreDetail>() {
                     @Override
                     public void onError(Call call, Exception e) {
+                        Log.i("AAAAAAA", "AAAAAAA");
                         connectError();
                     }
 
                     @Override
                     public void onResponse(StoreDetail response) {
+                        Log.i("AAAAAAA", "response");
                         if (isSuccess(response)) {
+                            Log.i("AAAAAAA", "responseB");
                             if (response.getStore() != null) {
                                 mStore = response.getStore();
                                 showStoreDetail(mStore);
@@ -605,7 +599,7 @@ public class MerchantDetailFragment extends BaseFragment {
         if (store.getPicture() != null) {
             showPicture(store.getPicture());
         }
-      //  tvTelReserve.setText(store.getPhone());
+        //  tvTelReserve.setText(store.getPhone());
         // 地址 距离
         String d = "";
         if (store.getDistance() != null && !TextUtils.isEmpty(store.getDistance()) && !TextUtils.equals("-1", store.getDistance())) {
@@ -758,8 +752,17 @@ public class MerchantDetailFragment extends BaseFragment {
 //                    ActivityCompat.requestPermissions(mContext, new String[]{permission}, Constants.REQUEST_PERMISSION_CODE);
 //                }
 //            }
-//        }
-        startActivity(new Intent(mContext, ShareActivity.class));
+
+
+        Intent intent = new Intent(mContext, ShareActivity.class);
+        intent.putExtra("title", "乐互网");
+        intent.putExtra("secondtitle", "商家详情");
+
+        intent.putExtra("shearedUrl", shearedUrl);
+
+        startActivity(intent);
+
+
 
   /*      new ShareAction(mContext)
                 .setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.SINA)

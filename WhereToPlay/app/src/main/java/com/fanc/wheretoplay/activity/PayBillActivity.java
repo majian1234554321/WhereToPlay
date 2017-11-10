@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
@@ -15,6 +16,7 @@ import android.text.Spanned;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.text.style.TextAppearanceSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
@@ -23,17 +25,22 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.BaseActivity;
 import com.fanc.wheretoplay.databinding.ActivityPayBillBinding;
+import com.fanc.wheretoplay.datamodel.AccessOrderIdModel;
 import com.fanc.wheretoplay.datamodel.IsOk;
 import com.fanc.wheretoplay.datamodel.OrderDone;
+import com.fanc.wheretoplay.datamodel.PayOrder;
 import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.pay.AliPayResult;
+import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LocationUtils;
+import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.AlertDialog;
@@ -55,6 +62,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 import okhttp3.Call;
+import okhttp3.MultipartBody;
+import rx.Observable;
+import rx.Scheduler;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Func1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2017/6/16.
@@ -110,6 +125,8 @@ public class PayBillActivity extends BaseActivity {
 
     IWXAPI wxApi;
     private DecimalFormat df;
+    private String statusTitle;
+    private TextView tvPayBillStore;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,9 +138,11 @@ public class PayBillActivity extends BaseActivity {
     }
 
     private void initViews() {
+
+        tvPayBillStore = payBillBinding.tvPayBillStore;
         mTmPayBill = payBillBinding.tmPayBill;
         mTvPayBillAddress = payBillBinding.tvPayBillAddress;
-        mTvDiscount = payBillBinding.tvPayBillDiscountReal;
+        mTvDiscount = payBillBinding.tvPayBillDiscountReal;//折扣
         mTvDownPaymentSum = payBillBinding.tvPayBillDownPaymentSum;
         mTvDiscountCoupon = payBillBinding.tvPayBillDiscountCoupon;
         mEtConsumeSum = payBillBinding.etPayBillConsumeSum;
@@ -137,21 +156,48 @@ public class PayBillActivity extends BaseActivity {
         mRbPayBillAli = payBillBinding.rbPayBillAli;
         mRbPayBillBalance = payBillBinding.rbPayBillBalance;
         df = new DecimalFormat("0.00");
+
+
     }
 
     private void init() {
         mTmPayBill.setLeftIcon(R.drawable.left);
+        mTmPayBill.setTitleColor(Color.WHITE);
         payWay = Constants.PAY_WAY_WEIXIN;
         Intent intent = getIntent();
         String orderId = intent.getStringExtra(Constants.ORDER_ID);
         storeId = intent.getStringExtra(Constants.STORE_ID);
-        if (Constants.CONSUME.equals(intent.getStringExtra(Constants.PAGE))) {
-            mTmPayBill.setTitle(R.string.consume);
-            getOrderInfo(Network.User.USER_CONSUME_AGAIN, orderId, storeId);
-        } else {
-            mTmPayBill.setTitle(R.string.buy);
-            getOrderInfo(Network.User.USER_ORDER_DONE, orderId, null);
+        String storeName = intent.getStringExtra("storeName");
+        String discountValue = intent.getStringExtra("discount");
+        String address = intent.getStringExtra("address");
+        if (discountValue!=null&&discountValue.length()>0) {
+            String value = discountValue.substring(0, discountValue.length() - 1);
+            discount = Double.parseDouble(value);
+        }else {
+            discount =  10f;
         }
+
+
+        mTvDiscount.setText(discountValue);
+        mTvPayBillAddress.setText(address);
+        tvPayBillStore.setText(storeName);
+
+        statusTitle = intent.getStringExtra(Constants.PAGE);
+
+        switch (statusTitle) {
+            case Constants.CONSUME:
+                mTmPayBill.setTitle(R.string.consume);
+                getOrderInfo(Network.User.USER_CONSUME_AGAIN, orderId, storeId);
+                break;
+            case "商家详情支付":
+                mTmPayBill.setTitle("商家详情支付");
+                break;
+            default:
+                mTmPayBill.setTitle(R.string.buy);
+                getOrderInfo(Network.User.USER_ORDER_DONE, orderId, null);
+                break;
+        }
+
 
         wxApi = WXAPIFactory.createWXAPI(mContext, Constants.WX_APP_ID);
         wxApi.registerApp(Constants.WX_APP_ID);
@@ -406,7 +452,7 @@ public class PayBillActivity extends BaseActivity {
             }
         }
         mTvPayBillAddress.setText(order.address + "    " + d);
-
+        tvPayBillStore.setText(order.name);
         // 服务费率
         if (!TextUtils.isEmpty(order.cash_rate)) {
             cashRate = Double.parseDouble(order.cash_rate);
@@ -425,26 +471,86 @@ public class PayBillActivity extends BaseActivity {
             ToastUtils.makePicTextShortToast(mContext, "消费金额不能小于 0");
             return;
         }
-        double paySum = Double.parseDouble(mTvPaySumReal.getText().toString());
-        if (paySum <= 0) {
-//            ToastUtils.makePicTextShortToast(mContext, "实际支付金额必须大于0");
-            payBillDeductTheDeposit();
+
+        if ("商家详情支付".equals(statusTitle)) {
+            storeDetailPay();
         } else {
-            switch (payWay) {
-                case 0:
-                    ToastUtils.makePicTextShortToast(mContext, "请选择支付方式");
-                    break;
-                case 1://支付宝支付
-                case 2:// 微信支付
-                    payOrder();
-                    break;
-                case 3:// 余额支付
-                    alertBalancePay();
-                    break;
-                default:
-                    break;
+
+            double paySum = Double.parseDouble(mTvPaySumReal.getText().toString());
+            if (paySum <= 0) {
+//            ToastUtils.makePicTextShortToast(mContext, "实际支付金额必须大于0");
+                payBillDeductTheDeposit();
+            } else {
+                switch (payWay) {
+                    case 0:
+                        ToastUtils.makePicTextShortToast(mContext, "请选择支付方式");
+                        break;
+                    case 1://支付宝支付
+                    case 2:// 微信支付
+                        payOrder();
+                        break;
+                    case 3:// 余额支付
+                        alertBalancePay();
+                        break;
+                    default:
+                        break;
+                }
             }
         }
+
+
+    }
+
+    //商家详情支付
+    private void storeDetailPay() {
+        MultipartBody.Part requestFileA =
+                MultipartBody.Part.createFormData("token", new SPUtils(mContext).getUser().getToken());
+        MultipartBody.Part requestFileB =
+                MultipartBody.Part.createFormData("amount", mEtConsumeSum.getText().toString().trim());
+        MultipartBody.Part requestFileC =
+                MultipartBody.Part.createFormData("store_id", storeId);
+
+        Subscription subscription = Retrofit_RequestUtils.getRequest()
+                .immediatelyPay(requestFileA, requestFileB, requestFileC)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<AccessOrderIdModel>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        Toast.makeText(mContext, e.toString(), Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onNext(AccessOrderIdModel accessOrderIdModel) {
+                        if ("0".equals(accessOrderIdModel.code)) {
+                            Toast.makeText(PayBillActivity.this, accessOrderIdModel.content.order_id, Toast.LENGTH_SHORT).show();
+                            orderId = accessOrderIdModel.content.order_id;
+                            switch (payWay) {
+                                case 0:
+                                    ToastUtils.makePicTextShortToast(mContext, "请选择支付方式");
+                                    break;
+                                case 1://支付宝支付
+                                case 2:// 微信支付
+                                    payOrder();
+                                    break;
+                                case 3:// 余额支付
+                                    alertBalancePay();
+                                    break;
+                                default:
+                                    break;
+                            }
+
+                        } else {
+                            Toast.makeText(mContext, "请求失败", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                });
+        compositeSubscription.add(subscription);
     }
 
     /**
@@ -563,6 +669,8 @@ public class PayBillActivity extends BaseActivity {
     }
 
     private void payOrder() {
+
+
         Map<String, String> params = new HashMap<>();
         params.put(Network.Param.TOKEN, mUser.getToken());
         params.put(Network.Param.ORDER_ID, orderId);
@@ -592,7 +700,7 @@ public class PayBillActivity extends BaseActivity {
 
                     @Override
                     public void onResponse(String response) {
-                        Logger.json(response);
+                        Log.i("response", response);
                         try {
                             JSONObject object = new JSONObject(response);
                             JSONObject json = object.getJSONObject("content");

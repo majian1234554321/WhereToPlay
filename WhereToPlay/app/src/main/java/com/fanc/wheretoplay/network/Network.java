@@ -2,6 +2,7 @@ package com.fanc.wheretoplay.network;
 
 import android.util.Log;
 
+import com.fanc.wheretoplay.datamodel.AccessOrderIdModel;
 import com.fanc.wheretoplay.datamodel.BookListModel;
 
 import okhttp3.MultipartBody;
@@ -11,6 +12,7 @@ import retrofit2.http.Part;
 
 import com.fanc.wheretoplay.datamodel.CancleOrderModel;
 import com.fanc.wheretoplay.datamodel.OrderDetailModel;
+import com.fanc.wheretoplay.datamodel.PayOrder;
 import com.fanc.wheretoplay.datamodel.SubmitCommentModel;
 import com.fanc.wheretoplay.rx.BaseResponseModel;
 import rx.Observable;
@@ -36,8 +38,8 @@ public class Network{
     // 手机系统
     public static String PHONE_ANDROID = "android";
 
-    //public static String IMAGE = "http://ktv.51tzl.cn";
-    //public static String BASE = "http://ktv.51tzl.cn";
+//    public static String IMAGE = "http://ktv.51tzl.cn";
+//    public static String BASE = "http://ktv.51tzl.cn";
     public static String USER = BASE + API;
 
     public static void changEnvironment(String url) {
@@ -285,8 +287,24 @@ public class Network{
         //提交评论
         @Multipart
         @POST("Public/submitcomment")
-        Observable<SubmitCommentModel> SubmitCommentModel(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB,@Part MultipartBody.Part fileC,@Part MultipartBody.Part fileD,@Part MultipartBody.Part fileE,@Part MultipartBody.Part filef,
-                                                          @Part MultipartBody.Part fileX,@Part MultipartBody.Part fileZ);
+        Observable<SubmitCommentModel> SubmitCommentModel(@Part MultipartBody.Part fileA);
+
+        //商家详情支付获取订单Id
+        @Multipart
+        @POST("User/immediatelyPay")
+        Observable<AccessOrderIdModel> immediatelyPay(@Part MultipartBody.Part fileA,@Part MultipartBody.Part fileB,@Part MultipartBody.Part fileC);
+
+
+
+
+        //商家详情支付获取支付信息
+        @Multipart
+        @POST("User/order_payoff")
+        Observable<PayOrder> order_payoff(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC, @Part MultipartBody.Part fileAA,
+                                          @Part MultipartBody.Part fileBB, @Part MultipartBody.Part fileCC,@Part MultipartBody.Part fileCCC,@Part MultipartBody.Part fileCCCC);
+
+
+
 
 
     }

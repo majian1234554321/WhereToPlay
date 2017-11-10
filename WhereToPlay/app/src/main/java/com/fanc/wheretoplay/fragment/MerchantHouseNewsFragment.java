@@ -154,7 +154,7 @@ public class MerchantHouseNewsFragment extends BaseFragment {
     }
 
     private void showHouseNewsList(List<HousenewsList.StatusBean> housenews) {
-        HouseNewsAdapter houseNewsAdapter = new HouseNewsAdapter(mContext, housenews);
+        HouseNewsAdapter houseNewsAdapter = new HouseNewsAdapter(mContext, housenews,mStoreId);
         mRc.setAdapter(houseNewsAdapter);
     }
 
