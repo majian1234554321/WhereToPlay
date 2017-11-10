@@ -56,7 +56,7 @@ public class LaunchActivity extends BaseActivity {
         init();
         //七鱼需要
         parseIntent();
-        changeConvironment();
+        changeConvironment();   //
     }
     /**
      * 七鱼需要
