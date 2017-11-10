@@ -1,21 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
-
-    <LinearLayout
+<RelativeLayout
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+    <com.fanc.wheretoplay.view.TopMenu
+        android:id="@+id/tm_mine_friend"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:background="@color/bg_gray">
+        android:layout_height="wrap_content" />
+    <com.fanc.wheretoplay.view.PullToRefreshLayout
+        android:id="@+id/ptrl_commend_friend"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tm_mine_friend"
+        >
 
-        <com.fanc.wheretoplay.view.TopMenu
-            android:id="@+id/tm_mine_friend"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+        <include layout="@layout/refresh_head" />
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/rv_mine_friend"
+        <com.fanc.wheretoplay.view.MyScrollView
+            android:id="@+id/sv_commend_friend"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/white"/>
-    </LinearLayout>
+            android:background="@color/bg_gray">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/bg_gray"
+                android:orientation="vertical">
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/rv_mine_friend"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/white" />
+            </LinearLayout>
+        </com.fanc.wheretoplay.view.MyScrollView>
+
+        <include layout="@layout/load_more" />
+    </com.fanc.wheretoplay.view.PullToRefreshLayout>
+</RelativeLayout>
+
 </layout>

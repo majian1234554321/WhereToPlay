@@ -16,7 +16,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/padding_15">
 
-        <ImageView
+        <com.fanc.wheretoplay.view.CircleImageView
             android:id="@+id/iv_mine_money"
             android:layout_width="@dimen/width_50"
             android:layout_height="@dimen/height_50"

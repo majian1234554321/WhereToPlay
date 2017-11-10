@@ -130,7 +130,7 @@ public class MerchantHouseNewsFragment extends BaseFragment {
 
     private void getMerchantDetail(String id) {
         showProgress();
-        Log.e("open",Network.User.PUBLIC_HOUSENEWS);
+        Log.e("token", mUser.getToken() + "\n" + Network.User.PUBLIC_HOUSENEWS);
         OkHttpUtils.post()
                 .url(Network.User.PUBLIC_HOUSENEWS)
                 .addParams(Network.Param.STORE_ID, id)

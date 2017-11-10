@@ -12,9 +12,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
-import com.fanc.wheretoplay.databinding.MineCommendFriendBinding;
 import com.fanc.wheretoplay.databinding.MineCommendMoneyBinding;
+import com.fanc.wheretoplay.datamodel.MineMoney;
+import com.fanc.wheretoplay.util.DateFormatUtil;
 
 import java.util.List;
 
@@ -40,23 +42,33 @@ public class MineMoneyAdapter extends RecyclerView.Adapter<MineMoneyAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
+        MineMoney.ContentBean mMoneyList = (MineMoney.ContentBean) mList.get(position);
         //价格
-        SpannableString text = new SpannableString(holder.mTvMineMoney.getText() + " 元");
+        SpannableString text = new SpannableString("+" + mMoneyList.getAmount() + " 元");
         text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length()-1, text.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
         holder.mTvMineMoney.setText(text);
+        //头像
+        Glide.with(mContext).load(mMoneyList.getPic()).placeholder(R.drawable.default_rect).into(holder.mIvMineMoney);
+        //时间
+        holder.mTvMineMoeyTime.setText(DateFormatUtil.getYYYYMMDDHHmm(mMoneyList.getRegTime()));
+        //nickname
+        holder.mTvMineMoneyTitle.setText(mMoneyList.getNickname());
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        if (mList != null) {
+            return mList.size();
+        }
+        return 0;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{
 
         private  MineCommendMoneyBinding mBinding;
-        private ImageView mIvMineFriend;
-        private TextView mTvMineFriendTime;
-        private TextView mTvMineFriendTitle;
+        private ImageView mIvMineMoney;
+        private TextView mTvMineMoeyTime;
+        private TextView mTvMineMoneyTitle;
         private TextView mTvMineMoney;
 
         public ViewHolder(ViewDataBinding binding) {
@@ -66,9 +78,9 @@ public class MineMoneyAdapter extends RecyclerView.Adapter<MineMoneyAdapter.View
         }
 
         private void initViews() {
-            mIvMineFriend = mBinding.ivMineMoney;
-            mTvMineFriendTime = mBinding.tvMineMoneyTime;
-            mTvMineFriendTitle = mBinding.tvMineMoneyTitle;
+            mIvMineMoney = mBinding.ivMineMoney;
+            mTvMineMoeyTime = mBinding.tvMineMoneyTime;
+            mTvMineMoneyTitle = mBinding.tvMineMoneyTitle;
             mTvMineMoney = mBinding.tvMineMoney;
         }
     }
