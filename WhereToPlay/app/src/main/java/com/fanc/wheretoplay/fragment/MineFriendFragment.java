@@ -44,7 +44,6 @@ public class MineFriendFragment extends BaseFragment {
     private TopMenu mTmMineFriend;
 
     //刷新
-    private PullToRefreshLayout mPtrl;
     private MineFriendAdapter mineFriendAdapter;
     private int page = 0;
     private int size = 6;
@@ -69,6 +68,8 @@ public class MineFriendFragment extends BaseFragment {
     }
 
     private void init() {
+        page = 0;
+        size = 6;
         mTmMineFriend.setLeftIcon(R.drawable.left);
         mTmMineFriend.setTitle(R.string.friend);
         mTmMineFriend.setTitleColor(getResources().getColor(R.color.white));
@@ -134,6 +135,7 @@ public class MineFriendFragment extends BaseFragment {
                     @Override
                     public void onError(Call call, Exception e) {
                         connectError();
+                        refreshOrLoadFail();
                     }
 
                     @Override

@@ -45,7 +45,6 @@ public class MineCommendMoneyFragment extends BaseFragment {
     private List<MineMoney.ContentBean> mCommenMoney;
 
     //刷新
-    private PullToRefreshLayout mPtrl;
     private int page = 0;
     private int size = 6;
     private List mStores;
@@ -126,7 +125,7 @@ public class MineCommendMoneyFragment extends BaseFragment {
     private void requestCommendMoney(int page, int size) {
         showProgress();
         OkHttpUtils.post()
-                .url(Network.User.USER_RCOMMEND_FRIEND)
+                .url(Network.User.USER_RCOMMEND_MONEY)
                 .addParams(Network.Param.PAGE, String.valueOf(page))
                 .addParams(Network.Param.SIZE, String.valueOf(size))
                 .addParams(Network.Param.TOKEN, "eyJpZCI6IjE0Iiwibm9uY2UiOiJrWFpGbkR3bCIsInNoYXJlX2NvZGUiOiIxNDU5ZGYwMiJ9")
@@ -135,6 +134,7 @@ public class MineCommendMoneyFragment extends BaseFragment {
                     @Override
                     public void onError(Call call, Exception e) {
                         connectError();
+                        refreshOrLoadFail();
                     }
 
                     @Override
