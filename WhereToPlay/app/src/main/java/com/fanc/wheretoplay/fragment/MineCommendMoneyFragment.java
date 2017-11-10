@@ -126,9 +126,9 @@ public class MineCommendMoneyFragment extends BaseFragment {
         showProgress();
         OkHttpUtils.post()
                 .url(Network.User.USER_RCOMMEND_MONEY)
-                .addParams(Network.Param.PAGE, String.valueOf(page))
-                .addParams(Network.Param.SIZE, String.valueOf(size))
-                .addParams(Network.Param.TOKEN, "eyJpZCI6IjE0Iiwibm9uY2UiOiJrWFpGbkR3bCIsInNoYXJlX2NvZGUiOiIxNDU5ZGYwMiJ9")
+                .addParams(Network.Param.PAGE, String.valueOf(0))
+                .addParams(Network.Param.SIZE, String.valueOf(6))
+                .addParams(Network.Param.TOKEN, String.valueOf("eyJpZCI6IjE0Iiwibm9uY2UiOiJrWFpGbkR3bCIsInNoYXJlX2NvZGUiOiIxNDU5ZGYwMiJ9"))
                 .build()
                 .execute(new DCallback<MineMoney>() {
                     @Override
