@@ -99,10 +99,10 @@ public class MineFragment extends BaseFragment {
         getScore();
 
         //条目栏的文字、图片设置
-       // mIvMineFriend.setIcon(R.drawable.mine_recommend_friend);
+        mIvMineFriend.setIcon(R.drawable.mine_recommend_friend);
         mIvMineFriend.setText(R.string.friend);
         mIvMineFriend.setRightIcon(R.drawable.right);
-       // mIvMineMoney.setIcon(R.drawable.mine_recommend_money);
+        mIvMineMoney.setIcon(R.drawable.mine_recommend_money);
         mIvMineMoney.setText(R.string.money);
         mIvMineMoney.setRightIcon(R.drawable.right);
         mIvMineMessage.setIcon(R.drawable.mine_message);

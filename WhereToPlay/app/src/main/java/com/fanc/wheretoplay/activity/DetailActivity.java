@@ -23,6 +23,8 @@ import com.fanc.wheretoplay.fragment.MessageDetailFragment;
 import com.fanc.wheretoplay.fragment.MessageFragment;
 //import com.fanc.wheretoplay.fragment.MineCommendMoneyFragment;
 //import com.fanc.wheretoplay.fragment.MineFriendFragment;
+import com.fanc.wheretoplay.fragment.MineCommendMoneyFragment;
+import com.fanc.wheretoplay.fragment.MineFriendFragment;
 import com.fanc.wheretoplay.fragment.MineInfoFragment;
 import com.fanc.wheretoplay.fragment.OrderFragment;
 import com.fanc.wheretoplay.fragment.OrderFragments;
@@ -107,10 +109,10 @@ public class DetailActivity extends BaseFragmentActivity {
                 initFragment(new AboutUsFragment());
                 break;
             case Constants.MINEFRIEND:   //推荐好友
-                //initFragment(new MineFriendFragment());
+                initFragment(new MineFriendFragment());
                 break;
             case Constants.MINEMONEY:   //推荐奖励
-                //initFragment(new MineCommendMoneyFragment());
+                initFragment(new MineCommendMoneyFragment());
                 break;
             case Constants.MESSAGE_DETAIL:
                 initFragment(new MessageDetailFragment().setMessageId(intent.getStringExtra(Constants.ID)));
