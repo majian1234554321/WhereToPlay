@@ -33,7 +33,7 @@ import com.fanc.wheretoplay.activity.CheckCommentsActivity;
 import com.fanc.wheretoplay.activity.LargeImageActivity;
 import com.fanc.wheretoplay.activity.PayBillActivity;
 import com.fanc.wheretoplay.activity.ReuseActivity;
-import com.fanc.wheretoplay.activity.ServiceActivity;
+//import com.fanc.wheretoplay.activity.ServiceActivity;
 import com.fanc.wheretoplay.activity.ShareActivity;
 import com.fanc.wheretoplay.adapter.CommentIconAdapter;
 import com.fanc.wheretoplay.adapter.MerchantTablayoutAdapter;
@@ -265,12 +265,12 @@ public class MerchantDetailFragment extends BaseFragment {
             public void onClick(View v) {
                 new ShearedPopDialog(mContext)
                         .setCollected(isCollected)
-                        .setOnCollectClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                collectStore(mStoreId);
-                            }
-                        })
+//                        .setOnCollectClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                collectStore(mStoreId);
+//                            }
+//                        })
                         .setOnShearedClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {

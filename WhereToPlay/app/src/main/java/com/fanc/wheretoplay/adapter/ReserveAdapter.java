@@ -23,11 +23,13 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.DetailActivity;
-import com.fanc.wheretoplay.activity.ServiceActivity;
+//import com.fanc.wheretoplay.activity.ServiceActivity;
 import com.fanc.wheretoplay.databinding.ItemReserveBinding;
 import com.fanc.wheretoplay.datamodel.StoreList;
 import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.Constants;
+import com.qiyukf.unicorn.api.ConsultSource;
+import com.qiyukf.unicorn.api.Unicorn;
 
 import java.text.DecimalFormat;
 import java.util.List;
@@ -112,9 +114,11 @@ public class ReserveAdapter extends RecyclerView.Adapter<ReserveAdapter.ViewHold
         holder.mIvReserveItemService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ServiceActivity.class);
-                intent.putExtra(Constants.STORE_NAME,store.getName());
-                mContext.startActivity(intent);
+//                Intent intent = new Intent(mContext, ServiceActivity.class);
+//                intent.putExtra(Constants.STORE_NAME,store.getName());
+//                mContext.startActivity(intent);
+                ConsultSource source = new ConsultSource(null, null, null);
+                Unicorn.openServiceActivity(mContext, mContext.getResources().getString(R.string.app_name), source);
             }
         });
     }

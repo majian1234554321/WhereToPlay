@@ -56,6 +56,7 @@ public class LaunchActivity extends BaseActivity {
         init();
         //七鱼需要
         parseIntent();
+        changeConvironment();   //
     }
     /**
      * 七鱼需要
@@ -72,8 +73,26 @@ public class LaunchActivity extends BaseActivity {
     public void onResume() {
         super.onResume();
         initPermissions();
-    }
 
+    }
+    /**
+     * 测试环境改变
+     */
+    private void changeConvironment() {
+        String switchStatus = new SPUtils(mContext).getString("switchStatus", "");
+        switch (switchStatus) {
+            case "on":
+                Network.changEnvironment("http://testapi.51tzl.cn");
+                Network.User.changeUserUrl(Network.USER );
+                break;
+            case "off":
+                Network.changEnvironment("http://ktv.51tzl.cn");
+                Network.User.changeUserUrl(Network.USER);
+                break;
+            default:
+                break;
+        }
+    }
     private void initPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             String[] permissions = new String[]{
