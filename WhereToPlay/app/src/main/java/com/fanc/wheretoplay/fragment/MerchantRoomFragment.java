@@ -133,6 +133,7 @@ public class MerchantRoomFragment extends BaseFragment {
                     @Override
                     public void onError(Call call, Exception e) {
                         connectError();
+                        mTvRoomAddress.setVisibility(View.GONE);
                     }
 
                     @Override

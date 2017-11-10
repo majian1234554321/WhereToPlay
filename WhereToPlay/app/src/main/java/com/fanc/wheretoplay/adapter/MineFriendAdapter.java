@@ -10,8 +10,11 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.databinding.MineCommendFriendBinding;
+import com.fanc.wheretoplay.datamodel.MineFriend;
+import com.fanc.wheretoplay.util.DateFormatUtil;
 
 import java.util.List;
 
@@ -37,12 +40,21 @@ public class MineFriendAdapter extends RecyclerView.Adapter<MineFriendAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-
+        MineFriend.ContentBean mMineFriendList = (MineFriend.ContentBean) mList.get(position);
+        //头像
+        Glide.with(mContext).load(mMineFriendList.getPic()).placeholder(R.drawable.default_rect).into(holder.mIvMineFriend);
+        //时间
+        holder.mTvMineFriendTime.setText(String.format(mContext.getResources().getString(R.string.money_time),DateFormatUtil.getYYYYMMDDHHmm(mMineFriendList.getRegTime())));
+        //nickname
+        holder.mTvMineFriendTitle.setText(mMineFriendList.getNickname());
     }
 
     @Override
     public int getItemCount() {
-        return 5;
+        if (mList !=null) {
+            return mList.size();
+        }
+        return 0;
     }
 
     static class ViewHolder extends RecyclerView.ViewHolder{

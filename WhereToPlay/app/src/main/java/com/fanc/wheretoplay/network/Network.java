@@ -75,6 +75,7 @@ public class Network{
         public static String LOGIN_FIND_PASSWORD = USER + "Login/findPassword";//找回密码
 
         public static String USER_HOME = USER + "User/home";// 我的主页
+        public static String USER_RCOMMEND_FRIEND = USER + "Reco/recomList";// 推荐好友
         public static String USER_MODIFY_AVATAR = USER + "User/modifyAvatar";// 修改头像
         public static String USER_MODIFY_PRO_FILE = USER + "User/modifyProfile";//修改资料
         public static String USER_MESSAGE_LIST = USER + "User/messageList";// 消息
@@ -146,6 +147,7 @@ public class Network{
              LOGIN_FIND_PASSWORD = url + "Login/findPassword";//找回密码
 
              USER_HOME = url + "User/home";// 我的主页
+             USER_RCOMMEND_FRIEND = url + "Reco/recomList";// 推荐好友
              USER_MODIFY_AVATAR = url + "User/modifyAvatar";// 修改头像
              USER_MODIFY_PRO_FILE = url + "User/modifyProfile";//修改资料
              USER_MESSAGE_LIST = url + "User/messageList";// 消息

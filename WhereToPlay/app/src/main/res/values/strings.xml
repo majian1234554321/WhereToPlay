@@ -134,6 +134,7 @@
     <string name="drive">代驾</string>
     <string name="friend">推荐好友</string>
     <string name="money">推荐奖励</string>
+    <string name="money_time">注册时间：%1$s</string>
 
     <!--mine info-->
     <string name="mine_info">我的资料</string>

@@ -71,7 +71,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardViewAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int position) {
-        Glide.with(mContext).load(Network.IMAGE + mPictureList.get(position)).asBitmap().placeholder(R.drawable.default_rect).into(new SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL,Target.SIZE_ORIGINAL) {
+        Glide.with(mContext).load(Network.IMAGE + mPictureList.get(position)).asBitmap().placeholder(R.drawable.default_rect).dontAnimate().into(new SimpleTarget<Bitmap>(Target.SIZE_ORIGINAL,Target.SIZE_ORIGINAL) {
             @Override
             public void onResourceReady(Bitmap bitmap, GlideAnimation<? super Bitmap> glideAnimation) {
                 //这个bitmap就是你图片url加载得到的结果

@@ -170,7 +170,7 @@
 
             <com.fanc.wheretoplay.view.MyScrollView
                 android:id="@+id/sv_reserve"
-                android:background="@color/ddialog_rightbtn_pressed"
+                android:background="@color/bg_gray"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 >

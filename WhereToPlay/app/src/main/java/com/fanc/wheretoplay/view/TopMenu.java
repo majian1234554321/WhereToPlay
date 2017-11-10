@@ -6,6 +6,7 @@ import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -28,6 +29,7 @@ public class TopMenu extends RelativeLayout {
     TextView mTvRightText;
     ImageView mIvRightIcon;
     RelativeLayout mRlTopMenuBg;
+    private LinearLayout mLlTopMenu;
 
     public TopMenu(Context context) {
         super(context);
@@ -64,6 +66,7 @@ public class TopMenu extends RelativeLayout {
         mTvRightText = binding.menuTvRighttext;
         mIvRightIcon = binding.menuIvRighticon;
         mRlTopMenuBg = binding.rlTopMenuBg;
+        mLlTopMenu = binding.llTopMenu;
     }
 
     public void setTitle(String title) {
@@ -113,7 +116,7 @@ public class TopMenu extends RelativeLayout {
     }
 
     public void setLeftIconOnClickListener(OnClickListener listener) {
-        mIvLeftIcon.setOnClickListener(listener);
+        mLlTopMenu.setOnClickListener(listener);
     }
 
     public void setRightIconOnClickListener(OnClickListener listener) {
