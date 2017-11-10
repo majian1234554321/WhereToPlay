@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\SourceGit\\KtvGit\\WhereToPlay\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sr\\values-sr.xml",
+            "outputFile": "D:\\Desktop\\code3\\ktvAndroid\\WhereToPlay\\app\\build\\intermediates\\incremental\\mergeDebugResources\\merged.dir\\values-sr\\values-sr.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\28022\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.0.aar\\ed6b0e8f1618d8fc3002507865d9e28a\\res\\values-sr\\values-sr.xml",
+                    "source": "C:\\Users\\admin\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.0.aar\\2acb1b5a3e05e8c04159372f2a53067e\\res\\values-sr\\values-sr.xml",
                     "from": {
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
@@ -14,7 +14,7 @@
                     }
                 },
                 {
-                    "source": "C:\\Users\\28022\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.0.0.aar\\ff1b3b1f0282eebf69afbb288c33e66b\\res\\values-sr\\values-sr.xml",
+                    "source": "C:\\Users\\admin\\.gradle\\caches\\transforms-1\\files-1.1\\support-compat-27.0.0.aar\\ba954e349c1b60f00d0f7ed675bd6ccf\\res\\values-sr\\values-sr.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

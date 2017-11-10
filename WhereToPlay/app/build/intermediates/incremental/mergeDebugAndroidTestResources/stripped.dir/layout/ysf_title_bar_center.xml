@@ -19,10 +19,9 @@
             android:id="@+id/ysf_title_bar_back_view"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_marginStart="15dp"
             android:contentDescription="@null"
             android:scaleType="centerInside"
-             />
+            android:src="@drawable/ysf_title_bar_back_icon" />
     </LinearLayout>
 
     <TextView
@@ -34,6 +33,7 @@
         android:ellipsize="end"
         android:maxEms="9"
         android:maxLines="1"
+        android:textColor="@color/ysf_title_bar_title_color"
         android:textSize="@dimen/ysf_title_bar_text_size" />
 
     <LinearLayout

@@ -1,10 +1,10 @@
 {
     "logs": [
         {
-            "outputFile": "D:\\SourceGit\\KtvGit\\WhereToPlay\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v14\\values-v14.xml",
+            "outputFile": "D:\\Desktop\\code3\\ktvAndroid\\WhereToPlay\\app\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values-v14\\values-v14.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\28022\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.0.aar\\ed6b0e8f1618d8fc3002507865d9e28a\\res\\values-v14\\values-v14.xml",
+                    "source": "C:\\Users\\admin\\.gradle\\caches\\transforms-1\\files-1.1\\appcompat-v7-27.0.0.aar\\2acb1b5a3e05e8c04159372f2a53067e\\res\\values-v14\\values-v14.xml",
                     "from": {
                         "startLines": "2,7,8,9,15",
                         "startColumns": "4,4,4,4,4",

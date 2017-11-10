@@ -14,8 +14,9 @@ public class ActivityPayBillBinding extends android.databinding.ViewDataBinding 
     static {
         sIncludes = null;
         sViewsWithIds = new android.util.SparseIntArray();
-        sViewsWithIds.put(R.id.tm_pay_bill, 4);
-        sViewsWithIds.put(R.id.relativeLayout, 5);
+        sViewsWithIds.put(R.id.tm_pay_bill, 3);
+        sViewsWithIds.put(R.id.relativeLayout, 4);
+        sViewsWithIds.put(R.id.tv_pay_bill_store, 5);
         sViewsWithIds.put(R.id.tv_pay_bill_discount_real, 6);
         sViewsWithIds.put(R.id.tv_pay_bill_address, 7);
         sViewsWithIds.put(R.id.tv_pay_bill_distance, 8);
@@ -112,19 +113,18 @@ public class ActivityPayBillBinding extends android.databinding.ViewDataBinding 
         this.rbPayBillAli = (android.widget.RadioButton) bindings[20];
         this.rbPayBillBalance = (android.widget.RadioButton) bindings[21];
         this.rbPayBillWeixin = (android.widget.RadioButton) bindings[19];
-        this.relativeLayout = (android.widget.RelativeLayout) bindings[5];
-        this.rgPayBill = (android.widget.RadioGroup) bindings[3];
+        this.relativeLayout = (android.widget.RelativeLayout) bindings[4];
+        this.rgPayBill = (android.widget.RadioGroup) bindings[2];
         this.rgPayBill.setTag(null);
-        this.tmPayBill = (com.fanc.wheretoplay.view.TopMenu) bindings[4];
+        this.tmPayBill = (com.fanc.wheretoplay.view.TopMenu) bindings[3];
         this.tvPayBillAddress = (android.widget.TextView) bindings[7];
         this.tvPayBillDiscountCoupon = (android.widget.TextView) bindings[14];
         this.tvPayBillDiscountReal = (android.widget.TextView) bindings[6];
         this.tvPayBillDistance = (android.widget.TextView) bindings[8];
-        this.tvPayBillDownPaymentSum = (android.widget.TextView) bindings[2];
+        this.tvPayBillDownPaymentSum = (android.widget.TextView) bindings[1];
         this.tvPayBillDownPaymentSum.setTag(null);
         this.tvPayBillPaySumReal = (android.widget.TextView) bindings[22];
-        this.tvPayBillStore = (android.widget.TextView) bindings[1];
-        this.tvPayBillStore.setTag(null);
+        this.tvPayBillStore = (android.widget.TextView) bindings[5];
         setRootTag(root);
         // listeners
         invalidateAll();
@@ -202,7 +202,6 @@ public class ActivityPayBillBinding extends android.databinding.ViewDataBinding 
             dirtyFlags = mDirtyFlags;
             mDirtyFlags = 0;
         }
-        java.lang.String orderName = null;
         java.lang.String orderPrepay = null;
         com.fanc.wheretoplay.activity.PayBillActivity click = mClick;
         com.fanc.wheretoplay.datamodel.OrderDone.Order order = mOrder;
@@ -222,8 +221,6 @@ public class ActivityPayBillBinding extends android.databinding.ViewDataBinding 
 
 
                 if (order != null) {
-                    // read order.name
-                    orderName = order.name;
                     // read order.prepay
                     orderPrepay = order.prepay;
                 }
@@ -238,7 +235,6 @@ public class ActivityPayBillBinding extends android.databinding.ViewDataBinding 
             // api target 1
 
             android.databinding.adapters.TextViewBindingAdapter.setText(this.tvPayBillDownPaymentSum, orderPrepay);
-            android.databinding.adapters.TextViewBindingAdapter.setText(this.tvPayBillStore, orderName);
         }
     }
     // Listener Stub Implementations
