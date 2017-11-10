@@ -34,7 +34,7 @@ public class BookListModel   {
              * prepay : 0.00
              * total : 0.00
              * created_time : 1509426060
-             * status : 5
+             * order_action : 5
              * consume_again : 1
              * leave_money : 0.00
              * is_comment : 0
@@ -53,7 +53,7 @@ public class BookListModel   {
             public String prepay;
             public String total;
             public String created_time;
-            public String status;
+            public String order_action;
             public String consume_again;
             public String leave_money;
             public String is_comment;

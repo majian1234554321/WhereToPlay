@@ -31,6 +31,9 @@ import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.view.RatingBar;
 import com.fanc.wheretoplay.view.TitleBarView;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
@@ -156,28 +159,31 @@ public class PublicationEvaluationActivity extends BaseActivity {
         }
 
 
-        MultipartBody.Part requestFileb =
-                MultipartBody.Part.createFormData("store_id", store_idValue);
-        MultipartBody.Part requestFileC =
-                MultipartBody.Part.createFormData("token", new SPUtils(mContext).getUser().getToken());
 
-        MultipartBody.Part requestFileD =
-                MultipartBody.Part.createFormData("order_id", order_idValue);
-        MultipartBody.Part requestFileE =
-                MultipartBody.Part.createFormData("comment ", et_content.getText().toString().trim());
 
-        MultipartBody.Part requestFileF =
-                MultipartBody.Part.createFormData("img", base64image.toString());
-        MultipartBody.Part requestFileG =
-                MultipartBody.Part.createFormData("environment", ratingValue1 + "");
-        MultipartBody.Part requestFileH =
-                MultipartBody.Part.createFormData("atmosphere", ratingValue2 + "");
+
+
+        JSONObject jsonObject = new JSONObject();
+        try {
+            jsonObject.put("store_id", store_idValue);
+            jsonObject.put("token", new SPUtils(mContext).getUser().getToken());
+            jsonObject.put("order_id", order_idValue);
+            jsonObject.put("comment", et_content.getText().toString().trim());
+            jsonObject.put("images", base64image.toString());
+            jsonObject.put("environment", ratingValue1+"");
+            jsonObject.put("atmosphere", ratingValue2+"");
+            jsonObject.put("service", ratingValue3+"");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+
+
         MultipartBody.Part requestFileA =
-                MultipartBody.Part.createFormData("service", ratingValue3 + "");
-
+                MultipartBody.Part.createFormData("data", jsonObject.toString() + "");
 
         Subscription subscription = Retrofit_RequestUtils.getRequest()
-                .SubmitCommentModel(requestFileb, requestFileC, requestFileD, requestFileE, requestFileF, requestFileG, requestFileH, requestFileA)
+                .SubmitCommentModel(requestFileA)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<SubmitCommentModel>() {

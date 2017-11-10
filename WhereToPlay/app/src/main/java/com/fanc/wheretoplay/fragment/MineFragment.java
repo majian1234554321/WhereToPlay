@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.DetailActivity;
+import com.fanc.wheretoplay.activity.ListOrderActivity;
 import com.fanc.wheretoplay.activity.SettingsActivity;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentMineBinding;
@@ -98,10 +99,10 @@ public class MineFragment extends BaseFragment {
         getScore();
 
         //条目栏的文字、图片设置
-        mIvMineFriend.setIcon(R.drawable.mine_recommend_friend);
+       // mIvMineFriend.setIcon(R.drawable.mine_recommend_friend);
         mIvMineFriend.setText(R.string.friend);
         mIvMineFriend.setRightIcon(R.drawable.right);
-        mIvMineMoney.setIcon(R.drawable.mine_recommend_money);
+       // mIvMineMoney.setIcon(R.drawable.mine_recommend_money);
         mIvMineMoney.setText(R.string.money);
         mIvMineMoney.setRightIcon(R.drawable.right);
         mIvMineMessage.setIcon(R.drawable.mine_message);
@@ -228,7 +229,8 @@ public class MineFragment extends BaseFragment {
                 goToNewPage(Constants.INTEGRAL);
                 break;
             case R.id.iv_mine_order:
-                goToNewPage(Constants.ORDER);
+                //goToNewPage(Constants.ORDER);
+                startActivity(new Intent(getContext(),ListOrderActivity.class));
                 break;
             case R.id.iv_mine_collection:
                 goToNewPage(Constants.COLLECTION);

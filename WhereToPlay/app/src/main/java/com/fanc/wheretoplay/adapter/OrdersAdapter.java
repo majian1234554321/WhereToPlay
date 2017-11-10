@@ -77,8 +77,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 intent.putExtra("store_id", dataBean.list.get(position).store_id);
                 intent.putExtra("storeName", dataBean.list.get(position).name);
                 intent.putExtra("total", dataBean.list.get(position).total);
-                if (dataBean.list != null && dataBean.list.get(position).status != null) {
-                    intent.putExtra("status", dataBean.list.get(position).status);
+                if (dataBean.list != null && dataBean.list.get(position).order_action != null) {
+                    intent.putExtra("status", dataBean.list.get(position).order_action);
                 }
                 intent.setClass(context, DetailsOrderActivity.class);
                 fragment.startActivityForResult(intent, 1001);
@@ -97,8 +97,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
 
         //status：string，订单状态：1已取消,2预订成功,4已结单，5或6已支付订金
-        if (dataBean.list != null && dataBean.list.get(position).status != null) {
-            switch (dataBean.list.get(position).status) {
+        if (dataBean.list != null && dataBean.list.get(position).order_action != null) {
+            switch (dataBean.list.get(position).order_action) {
                 case "1":
                     holder.tv_payState.setText("已取消");
                     break;
@@ -125,22 +125,22 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
 //book_type：string，预订类型 1-订金预订 2-信誉预订 3-充值
 
-        if (dataBean.list != null && dataBean.list.get(position).book_type != null) {
-            switch (dataBean.list.get(position).book_type) {
-                case "1":
-                    holder.tvPayItemTitle.setText("预订方式：订金预订");
-                    break;
-                case "2":
-                    holder.tvPayItemTitle.setText("预订方式：信誉预订");
-                    break;
-                case "3":
-                    holder.tvPayItemTitle.setText("预订方式：充值");
-                    break;
-                default:
-                    holder.tvPayItemTitle.setText("预订方式：...");
-                    break;
-            }
-        }
+//        if (dataBean.list != null && dataBean.list.get(position).book_type != null) {
+//            switch (dataBean.list.get(position).book_type) {
+//                case "1":
+//                    holder.tvPayItemTitle.setText("预订方式：订金预订");
+//                    break;
+//                case "2":
+//                    holder.tvPayItemTitle.setText("预订方式：信誉预订");
+//                    break;
+//                case "3":
+//                    holder.tvPayItemTitle.setText("预订方式：充值");
+//                    break;
+//                default:
+//                    holder.tvPayItemTitle.setText("预订方式：...");
+//                    break;
+//            }
+//        }
 
         holder.btnPayConsume.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -149,10 +149,10 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 intent.setClass(context, PayBillActivity.class);
                 intent.putExtra(Constants.ORDER_ID, dataBean.list.get(position).order_id);
                 intent.putExtra(Constants.STORE_ID, dataBean.list.get(position).store_id);
-                if (TextUtils.equals("4", dataBean.list.get(position).status)) {// 去消费
+                if (TextUtils.equals("4", dataBean.list.get(position).order_action)) {// 去消费
                     intent.putExtra(Constants.PAGE, Constants.CONSUME);
                 }
-                if (TextUtils.equals("2", dataBean.list.get(position).status)) {// 去结账
+                if (TextUtils.equals("2", dataBean.list.get(position).order_action)) {// 去结账
                     intent.putExtra(Constants.PAGE, Constants.PAYING_THE_BILL);
                 }
                 context.startActivity(intent);
