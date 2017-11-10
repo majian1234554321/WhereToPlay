@@ -6,6 +6,9 @@ import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.TextAppearanceSpan;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -119,6 +122,16 @@ public class PublicationEvaluationActivity extends BaseActivity {
             }
         });
 
+
+        /*if (store.getDiscount().length() > 0) {
+            SpannableString text = new SpannableString(store.getDiscount() + "折");
+            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            tvMerchantDetailDiscountSum.setText(text, TextView.BufferType.SPANNABLE);
+            tvMerchantDetailDiscountSum.setVisibility(View.VISIBLE);
+        } else {
+            tvMerchantDetailDiscountSum.setVisibility(View.GONE);
+        }*/
     }
 
 

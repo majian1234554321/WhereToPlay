@@ -16,40 +16,36 @@ public class FragmentMerchantDetailBinding extends android.databinding.ViewDataB
         sViewsWithIds = new android.util.SparseIntArray();
         sViewsWithIds.put(R.id.tm_merchant_detail, 1);
         sViewsWithIds.put(R.id.iv_merchant_detail_service, 2);
-        sViewsWithIds.put(R.id.tv_merchant_detail_title, 3);
-        sViewsWithIds.put(R.id.rb_merchant, 4);
-        sViewsWithIds.put(R.id.tv_merchant_detail_discount_sum, 5);
-        sViewsWithIds.put(R.id.ll_merchant_detail_comment, 6);
-        sViewsWithIds.put(R.id.tv_merchant_detail_grade, 7);
-        sViewsWithIds.put(R.id.tv_merchant_detail_comment, 8);
-        sViewsWithIds.put(R.id.rv_merchant_detail_head_image, 9);
-        sViewsWithIds.put(R.id.iv_merchant_detail_right, 10);
-        sViewsWithIds.put(R.id.ll_merchant_detail_image, 11);
-        sViewsWithIds.put(R.id.iv_merchant_detail_1, 12);
-        sViewsWithIds.put(R.id.iv_merchant_detail_2, 13);
-        sViewsWithIds.put(R.id.iv_merchant_detail_3, 14);
-        sViewsWithIds.put(R.id.iv_merchant_detail_4, 15);
-        sViewsWithIds.put(R.id.iv_merchant_detail_5, 16);
-        sViewsWithIds.put(R.id.iv_merchant_detail_6, 17);
-        sViewsWithIds.put(R.id.ll_merchant_reserve_address, 18);
-        sViewsWithIds.put(R.id.iv_merchant_reserve_address, 19);
-        sViewsWithIds.put(R.id.tv_merchant_reserve_address, 20);
-        sViewsWithIds.put(R.id.ll_merchant_brief, 21);
-        sViewsWithIds.put(R.id.ll_merchant_detail_room, 22);
-        sViewsWithIds.put(R.id.ll_merchant_detail_drinks, 23);
-        sViewsWithIds.put(R.id.ll_merchant_detail_active, 24);
-        sViewsWithIds.put(R.id.wv_merchant_detail, 25);
-        sViewsWithIds.put(R.id.rv_merchant_detail_recommend, 26);
-        sViewsWithIds.put(R.id.cl_reserve, 27);
-        sViewsWithIds.put(R.id.view, 28);
-        sViewsWithIds.put(R.id.tv_reserve_online, 29);
-        sViewsWithIds.put(R.id.tv_tel_reserve, 30);
-        sViewsWithIds.put(R.id.tv_detail_tel, 31);
-        sViewsWithIds.put(R.id.iv_tel, 32);
+        sViewsWithIds.put(R.id.ll, 3);
+        sViewsWithIds.put(R.id.tv_tel_reserve, 4);
+        sViewsWithIds.put(R.id.tv_reserve_online, 5);
+        sViewsWithIds.put(R.id.tv_pay, 6);
+        sViewsWithIds.put(R.id.tv_merchant_detail_title, 7);
+        sViewsWithIds.put(R.id.rb_merchant, 8);
+        sViewsWithIds.put(R.id.tv_merchant_detail_discount_sum, 9);
+        sViewsWithIds.put(R.id.ll_merchant_detail_comment, 10);
+        sViewsWithIds.put(R.id.tv_merchant_detail_grade, 11);
+        sViewsWithIds.put(R.id.tv_merchant_detail_comment, 12);
+        sViewsWithIds.put(R.id.rv_merchant_detail_head_image, 13);
+        sViewsWithIds.put(R.id.iv_merchant_detail_right, 14);
+        sViewsWithIds.put(R.id.ll_merchant_detail_image, 15);
+        sViewsWithIds.put(R.id.iv_merchant_detail_1, 16);
+        sViewsWithIds.put(R.id.iv_merchant_detail_2, 17);
+        sViewsWithIds.put(R.id.iv_merchant_detail_3, 18);
+        sViewsWithIds.put(R.id.iv_merchant_detail_4, 19);
+        sViewsWithIds.put(R.id.iv_merchant_detail_5, 20);
+        sViewsWithIds.put(R.id.iv_merchant_detail_6, 21);
+        sViewsWithIds.put(R.id.ll_merchant_reserve_address, 22);
+        sViewsWithIds.put(R.id.iv_merchant_reserve_address, 23);
+        sViewsWithIds.put(R.id.tv_merchant_reserve_address, 24);
+        sViewsWithIds.put(R.id.ll_merchant_brief, 25);
+        sViewsWithIds.put(R.id.ll_merchant_detail_room, 26);
+        sViewsWithIds.put(R.id.ll_merchant_detail_drinks, 27);
+        sViewsWithIds.put(R.id.ll_merchant_detail_active, 28);
+        sViewsWithIds.put(R.id.wv_merchant_detail, 29);
+        sViewsWithIds.put(R.id.rv_merchant_detail_recommend, 30);
     }
     // views
-    @NonNull
-    public final android.support.constraint.ConstraintLayout clReserve;
     @NonNull
     public final android.widget.ImageView ivMerchantDetail1;
     @NonNull
@@ -69,7 +65,7 @@ public class FragmentMerchantDetailBinding extends android.databinding.ViewDataB
     @NonNull
     public final android.widget.ImageView ivMerchantReserveAddress;
     @NonNull
-    public final android.widget.ImageView ivTel;
+    public final android.widget.LinearLayout ll;
     @NonNull
     public final android.widget.LinearLayout llMerchantBrief;
     @NonNull
@@ -95,8 +91,6 @@ public class FragmentMerchantDetailBinding extends android.databinding.ViewDataB
     @NonNull
     public final com.fanc.wheretoplay.view.TopMenu tmMerchantDetail;
     @NonNull
-    public final android.widget.TextView tvDetailTel;
-    @NonNull
     public final android.widget.TextView tvMerchantDetailComment;
     @NonNull
     public final android.widget.TextView tvMerchantDetailDiscountSum;
@@ -107,11 +101,11 @@ public class FragmentMerchantDetailBinding extends android.databinding.ViewDataB
     @NonNull
     public final android.widget.TextView tvMerchantReserveAddress;
     @NonNull
-    public final android.widget.TextView tvReserveOnline;
+    public final com.fanc.wheretoplay.view.DrawableCenterLeftTextView tvPay;
     @NonNull
-    public final android.widget.TextView tvTelReserve;
+    public final com.fanc.wheretoplay.view.DrawableCenterLeftTextView tvReserveOnline;
     @NonNull
-    public final android.view.View view;
+    public final com.fanc.wheretoplay.view.DrawableCenterLeftTextView tvTelReserve;
     @NonNull
     public final android.webkit.WebView wvMerchantDetail;
     // variables
@@ -121,41 +115,39 @@ public class FragmentMerchantDetailBinding extends android.databinding.ViewDataB
 
     public FragmentMerchantDetailBinding(@NonNull android.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
         super(bindingComponent, root, 0);
-        final Object[] bindings = mapBindings(bindingComponent, root, 33, sIncludes, sViewsWithIds);
-        this.clReserve = (android.support.constraint.ConstraintLayout) bindings[27];
-        this.ivMerchantDetail1 = (android.widget.ImageView) bindings[12];
-        this.ivMerchantDetail2 = (android.widget.ImageView) bindings[13];
-        this.ivMerchantDetail3 = (android.widget.ImageView) bindings[14];
-        this.ivMerchantDetail4 = (android.widget.ImageView) bindings[15];
-        this.ivMerchantDetail5 = (android.widget.ImageView) bindings[16];
-        this.ivMerchantDetail6 = (android.widget.ImageView) bindings[17];
-        this.ivMerchantDetailRight = (android.widget.ImageView) bindings[10];
+        final Object[] bindings = mapBindings(bindingComponent, root, 31, sIncludes, sViewsWithIds);
+        this.ivMerchantDetail1 = (android.widget.ImageView) bindings[16];
+        this.ivMerchantDetail2 = (android.widget.ImageView) bindings[17];
+        this.ivMerchantDetail3 = (android.widget.ImageView) bindings[18];
+        this.ivMerchantDetail4 = (android.widget.ImageView) bindings[19];
+        this.ivMerchantDetail5 = (android.widget.ImageView) bindings[20];
+        this.ivMerchantDetail6 = (android.widget.ImageView) bindings[21];
+        this.ivMerchantDetailRight = (android.widget.ImageView) bindings[14];
         this.ivMerchantDetailService = (android.widget.ImageView) bindings[2];
-        this.ivMerchantReserveAddress = (android.widget.ImageView) bindings[19];
-        this.ivTel = (android.widget.ImageView) bindings[32];
-        this.llMerchantBrief = (android.widget.LinearLayout) bindings[21];
-        this.llMerchantDetailActive = (android.widget.LinearLayout) bindings[24];
-        this.llMerchantDetailComment = (android.widget.LinearLayout) bindings[6];
-        this.llMerchantDetailDrinks = (android.widget.LinearLayout) bindings[23];
-        this.llMerchantDetailImage = (android.widget.LinearLayout) bindings[11];
-        this.llMerchantDetailRoom = (android.widget.LinearLayout) bindings[22];
-        this.llMerchantReserveAddress = (android.widget.LinearLayout) bindings[18];
+        this.ivMerchantReserveAddress = (android.widget.ImageView) bindings[23];
+        this.ll = (android.widget.LinearLayout) bindings[3];
+        this.llMerchantBrief = (android.widget.LinearLayout) bindings[25];
+        this.llMerchantDetailActive = (android.widget.LinearLayout) bindings[28];
+        this.llMerchantDetailComment = (android.widget.LinearLayout) bindings[10];
+        this.llMerchantDetailDrinks = (android.widget.LinearLayout) bindings[27];
+        this.llMerchantDetailImage = (android.widget.LinearLayout) bindings[15];
+        this.llMerchantDetailRoom = (android.widget.LinearLayout) bindings[26];
+        this.llMerchantReserveAddress = (android.widget.LinearLayout) bindings[22];
         this.mboundView0 = (android.widget.RelativeLayout) bindings[0];
         this.mboundView0.setTag(null);
-        this.rbMerchant = (android.widget.RatingBar) bindings[4];
-        this.rvMerchantDetailHeadImage = (android.support.v7.widget.RecyclerView) bindings[9];
-        this.rvMerchantDetailRecommend = (com.fanc.wheretoplay.view.MyRecycleView) bindings[26];
+        this.rbMerchant = (android.widget.RatingBar) bindings[8];
+        this.rvMerchantDetailHeadImage = (android.support.v7.widget.RecyclerView) bindings[13];
+        this.rvMerchantDetailRecommend = (com.fanc.wheretoplay.view.MyRecycleView) bindings[30];
         this.tmMerchantDetail = (com.fanc.wheretoplay.view.TopMenu) bindings[1];
-        this.tvDetailTel = (android.widget.TextView) bindings[31];
-        this.tvMerchantDetailComment = (android.widget.TextView) bindings[8];
-        this.tvMerchantDetailDiscountSum = (android.widget.TextView) bindings[5];
-        this.tvMerchantDetailGrade = (android.widget.TextView) bindings[7];
-        this.tvMerchantDetailTitle = (android.widget.TextView) bindings[3];
-        this.tvMerchantReserveAddress = (android.widget.TextView) bindings[20];
-        this.tvReserveOnline = (android.widget.TextView) bindings[29];
-        this.tvTelReserve = (android.widget.TextView) bindings[30];
-        this.view = (android.view.View) bindings[28];
-        this.wvMerchantDetail = (android.webkit.WebView) bindings[25];
+        this.tvMerchantDetailComment = (android.widget.TextView) bindings[12];
+        this.tvMerchantDetailDiscountSum = (android.widget.TextView) bindings[9];
+        this.tvMerchantDetailGrade = (android.widget.TextView) bindings[11];
+        this.tvMerchantDetailTitle = (android.widget.TextView) bindings[7];
+        this.tvMerchantReserveAddress = (android.widget.TextView) bindings[24];
+        this.tvPay = (com.fanc.wheretoplay.view.DrawableCenterLeftTextView) bindings[6];
+        this.tvReserveOnline = (com.fanc.wheretoplay.view.DrawableCenterLeftTextView) bindings[5];
+        this.tvTelReserve = (com.fanc.wheretoplay.view.DrawableCenterLeftTextView) bindings[4];
+        this.wvMerchantDetail = (android.webkit.WebView) bindings[29];
         setRootTag(root);
         // listeners
         invalidateAll();

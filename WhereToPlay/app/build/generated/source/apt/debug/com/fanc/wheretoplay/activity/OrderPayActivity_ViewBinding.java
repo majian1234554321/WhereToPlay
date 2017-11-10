@@ -26,13 +26,13 @@ public class OrderPayActivity_ViewBinding implements Unbinder {
 
   private View view2131296330;
 
-  private View view2131296639;
-
-  private View view2131296640;
-
   private View view2131296637;
 
   private View view2131296638;
+
+  private View view2131296635;
+
+  private View view2131296636;
 
   @UiThread
   public OrderPayActivity_ViewBinding(OrderPayActivity target) {
@@ -73,7 +73,7 @@ public class OrderPayActivity_ViewBinding implements Unbinder {
     target.llNotParticipation = Utils.findRequiredViewAsType(source, R.id.ll_not_participation, "field 'llNotParticipation'", LinearLayout.class);
     view = Utils.findRequiredView(source, R.id.ll_pay_bill_discount_coupon, "field 'llPayBillDiscountCoupon' and method 'onViewClicked'");
     target.llPayBillDiscountCoupon = Utils.castView(view, R.id.ll_pay_bill_discount_coupon, "field 'llPayBillDiscountCoupon'", LinearLayout.class);
-    view2131296639 = view;
+    view2131296637 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -82,7 +82,7 @@ public class OrderPayActivity_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.ll_pay_bill_weixin, "field 'llPayBillWeixin' and method 'onViewClicked'");
     target.llPayBillWeixin = Utils.castView(view, R.id.ll_pay_bill_weixin, "field 'llPayBillWeixin'", LinearLayout.class);
-    view2131296640 = view;
+    view2131296638 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -91,7 +91,7 @@ public class OrderPayActivity_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.ll_pay_bill_ali, "field 'llPayBillAli' and method 'onViewClicked'");
     target.llPayBillAli = Utils.castView(view, R.id.ll_pay_bill_ali, "field 'llPayBillAli'", LinearLayout.class);
-    view2131296637 = view;
+    view2131296635 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -100,7 +100,7 @@ public class OrderPayActivity_ViewBinding implements Unbinder {
     });
     view = Utils.findRequiredView(source, R.id.ll_pay_bill_balance, "field 'llPayBillBalance' and method 'onViewClicked'");
     target.llPayBillBalance = Utils.castView(view, R.id.ll_pay_bill_balance, "field 'llPayBillBalance'", LinearLayout.class);
-    view2131296638 = view;
+    view2131296636 = view;
     view.setOnClickListener(new DebouncingOnClickListener() {
       @Override
       public void doClick(View p0) {
@@ -142,13 +142,13 @@ public class OrderPayActivity_ViewBinding implements Unbinder {
 
     view2131296330.setOnClickListener(null);
     view2131296330 = null;
-    view2131296639.setOnClickListener(null);
-    view2131296639 = null;
-    view2131296640.setOnClickListener(null);
-    view2131296640 = null;
     view2131296637.setOnClickListener(null);
     view2131296637 = null;
     view2131296638.setOnClickListener(null);
     view2131296638 = null;
+    view2131296635.setOnClickListener(null);
+    view2131296635 = null;
+    view2131296636.setOnClickListener(null);
+    view2131296636 = null;
   }
 }

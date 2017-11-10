@@ -70,6 +70,11 @@ public class DetailsOrderActivity extends BaseActivity {
     OrderetailsItemView oi9;
     @BindView(R.id.oi10)
     OrderetailsItemView oi10;
+    @BindView(R.id.oi11)
+    OrderetailsItemView oi11;
+
+
+
     @BindView(R.id.tv1)
     TextView tv1;
     @BindView(R.id.tv2)
@@ -99,7 +104,7 @@ public class DetailsOrderActivity extends BaseActivity {
     TextView tvLeft;
     @BindView(R.id.tv_right)
     TextView tvRight;
-    private String order_idValue, store_idValue, storeNameValue, statusValue;
+    private String order_idValue, store_idValue, storeNameValue, statusValue,totalValue;
 
     @BindView(R.id.rl)
     RelativeLayout rl;
@@ -120,7 +125,8 @@ public class DetailsOrderActivity extends BaseActivity {
         oi7.setTv_left("车位");
         oi8.setTv_left("人数");
         oi9.setTv_left("预订方式");
-        oi10.setTv_left("备注");
+        oi10.setTv_left("总价");
+        oi11.setTv_left("备注");
 
         oi1.setTv_rightTextColor(Color.parseColor("#C4483C"));
         oi5.setTv_rightTextColor(Color.parseColor("#C4483C"));
@@ -130,6 +136,7 @@ public class DetailsOrderActivity extends BaseActivity {
         store_idValue = getIntent().getStringExtra("store_id");
         storeNameValue = getIntent().getStringExtra("storeName");
         statusValue = getIntent().getStringExtra("status");
+        totalValue = getIntent().getStringExtra("total");
 
         displayButtom();
 
@@ -220,7 +227,8 @@ public class DetailsOrderActivity extends BaseActivity {
                 break;
         }
 
-        oi10.setTv_right(contentBean.remark);
+        oi10.setTv_right(totalValue);
+        oi11.setTv_right(contentBean.remark);
 
 
         SpannableStringBuilder style1 = new SpannableStringBuilder("订单编号: " + contentBean.order_sn);
