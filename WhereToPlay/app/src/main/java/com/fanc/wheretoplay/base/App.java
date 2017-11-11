@@ -3,12 +3,14 @@ package com.fanc.wheretoplay.base;
 import android.app.Activity;
 import android.app.ActivityManager;
 import android.app.Application;
+import android.app.LauncherActivity;
 import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
 import android.util.Log;
 
+import com.fanc.wheretoplay.MainActivity;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.image.GlideGalleryImageLoader;
 import com.fanc.wheretoplay.util.Constants;
@@ -49,6 +51,7 @@ public class App extends Application {
     public static Handler mMainThreadHandler;
     private static List<Activity> activitys = new LinkedList<Activity>();
     private static List<Service> services = new LinkedList<Service>();
+    private StatusBarNotificationConfig mStatusBarNotificationConfig;
 
     @Override
     public void onCreate() {
@@ -75,8 +78,11 @@ public class App extends Application {
         }).start();
 
         //七鱼
+        mStatusBarNotificationConfig=new StatusBarNotificationConfig();
+        mStatusBarNotificationConfig.notificationEntrance= LauncherActivity.class;
+
         Unicorn.init(this, Constants.QIYU_APPKEY, options(), new GlideImageLoader(mContext));
-        
+
     }
 
     // 如果返回值为null，则全部使用默认参数。
@@ -92,9 +98,19 @@ public class App extends Application {
         return options;
     }
 
+    /**
+     * 设置点击Notification消息后进入的页面
+     * @param activity
+     */
+    public void setServiceEntranceActivity(Class<? extends Activity> activity){
+        mStatusBarNotificationConfig.notificationEntrance=activity;
+    }
+
+
     private void initOkHttp() {
         OkHttpUtils.getInstance().debug("OkHttpUtils",true).setConnectTimeout(100000, TimeUnit.MILLISECONDS);
     }
+
     private void init() {
         // 1.上下文
         mContext = this;

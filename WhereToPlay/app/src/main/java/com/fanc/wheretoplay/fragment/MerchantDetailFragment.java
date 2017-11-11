@@ -31,8 +31,9 @@ import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.CheckCommentsActivity;
 import com.fanc.wheretoplay.activity.LargeImageActivity;
+import com.fanc.wheretoplay.activity.PayBillActivity;
 import com.fanc.wheretoplay.activity.ReuseActivity;
-import com.fanc.wheretoplay.activity.ServiceActivity;
+//import com.fanc.wheretoplay.activity.ServiceActivity;
 import com.fanc.wheretoplay.activity.ShareActivity;
 import com.fanc.wheretoplay.adapter.CommentIconAdapter;
 import com.fanc.wheretoplay.adapter.MerchantTablayoutAdapter;
@@ -45,11 +46,13 @@ import com.fanc.wheretoplay.datamodel.StoreDetail;
 import com.fanc.wheretoplay.datamodel.StoreList;
 import com.fanc.wheretoplay.datamodel.Url;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.rx.RxBus;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.NaviUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
+import com.fanc.wheretoplay.view.DrawableCenterLeftTextView;
 import com.fanc.wheretoplay.view.MyRecycleView;
 import com.fanc.wheretoplay.view.ShearedPopDialog;
 import com.fanc.wheretoplay.view.TopMenu;
@@ -66,6 +69,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Call;
+import rx.functions.Action1;
 
 /**
  * Created by Administrator on 2017/6/14.
@@ -86,7 +90,7 @@ public class MerchantDetailFragment extends BaseFragment {
     TextView mTvMerchantDetailGrade;
     TextView mTvMerchantDetailCommentNo;
     LinearLayout mLlMerchantDetailComment;
-//    RecyclerView mRvMerchantDetailCommentHeadImage;
+    //    RecyclerView mRvMerchantDetailCommentHeadImage;
     // 图片
     LinearLayout mLlMerchantDetailImage;
     ImageView mIvMerchantDetail1;
@@ -99,8 +103,8 @@ public class MerchantDetailFragment extends BaseFragment {
     TextView mTvReservePromptly;
     // 电话地址
 //    LinearLayout mLlMerchantDetailTel;
-    View mVTel;
-    TextView mTvMerchantDetailTel;
+    DrawableCenterLeftTextView tvTelReserve, tvPay;
+    // TextView mTvMerchantDetailTel;
     LinearLayout mLlMerchantDetailAddress;
     TextView mTvMerchantDetailAddress;
     // 房型、酒水、活动、简介
@@ -176,8 +180,8 @@ public class MerchantDetailFragment extends BaseFragment {
         mIvMerchantDetail6 = detailBinding.ivMerchantDetail6;
         mTvReservePromptly = detailBinding.tvReserveOnline;
 //        mLlMerchantDetailTel = detailBinding.llMerchantReserveTel;
-        mVTel = detailBinding.view;
-        mTvMerchantDetailTel = detailBinding.tvDetailTel;
+        tvTelReserve = detailBinding.tvTelReserve;
+        //  mTvMerchantDetailTel = detailBinding.tvDetailTel;
         mTvMerchantDetailAddress = detailBinding.tvMerchantReserveAddress;
         mLlMerchantDetailAddress = detailBinding.llMerchantReserveAddress;
         mLlMerchantDetailRoom = detailBinding.llMerchantDetailRoom;
@@ -187,6 +191,7 @@ public class MerchantDetailFragment extends BaseFragment {
         mLlMerchantBrief = detailBinding.llMerchantBrief;
         mWvDetail = detailBinding.wvMerchantDetail;
         mRvMerchantDetailRecommend = detailBinding.rvMerchantDetailRecommend;
+        tvPay = detailBinding.tvPay;
 //        mRvMerchantDetailRoomPrice = detailBinding.rvMerchantDetailRoomPrice;
     }
 
@@ -227,24 +232,23 @@ public class MerchantDetailFragment extends BaseFragment {
         stores = new ArrayList<>();
         recommendAdapter = new ReserveAdapter(mContext, stores);
         mRvMerchantDetailRecommend.setAdapter(recommendAdapter);
-        //点击商家后台传来的消息可以进入聊天界面
-        parseIntent();
+        RxBus.getDefault().toObservable(String.class)
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String s) {
+
+                    }
+                });
+
     }
 
-    private void parseIntent() {
-        Intent intent = mContext.getIntent();
-        if (intent.hasExtra(NimIntent.EXTRA_NOTIFY_CONTENT)) {
-            Unicorn.openServiceActivity(mContext, "去哪儿客服", new ConsultSource(null, null, null));
-            // 最好将intent清掉，以免从堆栈恢复时又打开客服窗口
-            mContext.setIntent(new Intent());
-        }
-    }
+
     private void setListeners() {
         //商家后台传来的未读消息数量
         UnreadCountChangeListener listener = new UnreadCountChangeListener() {
             @Override
             public void onUnreadCountChange(int count) {
-                Log.e("wade",count + "");
+                Log.e("wade", count + "");
             }
         };
         Unicorn.addUnreadCountChangeListener(listener, true);
@@ -261,12 +265,12 @@ public class MerchantDetailFragment extends BaseFragment {
             public void onClick(View v) {
                 new ShearedPopDialog(mContext)
                         .setCollected(isCollected)
-                        .setOnCollectClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                collectStore(mStoreId);
-                            }
-                        })
+//                        .setOnCollectClickListener(new View.OnClickListener() {
+//                            @Override
+//                            public void onClick(View v) {
+//                                collectStore(mStoreId);
+//                            }
+//                        })
                         .setOnShearedClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -321,11 +325,11 @@ public class MerchantDetailFragment extends BaseFragment {
                 mContext.overridePendingTransition(R.anim.anim_in_top_right, R.anim.anim_close_top);
             }
         });
-        mVTel.setOnClickListener(new View.OnClickListener() {
+        tvTelReserve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                Uri uri = Uri.parse("tel:" + mTvMerchantDetailTel.getText().toString());
+                Uri uri = Uri.parse("tel:" + tvTelReserve.getText().toString());
                 intent.setData(uri);
                 startActivity(intent);
             }
@@ -375,17 +379,22 @@ public class MerchantDetailFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
-        //活动
-        //去掉原有活动界面跳转，改成房态界面跳转
-//        mLlMerchantDetailAction.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(mContext, ReuseActivity.class);
-//                intent.putExtra(Constants.PAGE, Constants.ACTION);
-//                intent.putExtra(Constants.STORE_ID, mStoreId);
-//                startActivity(intent);
-//            }
-//        });
+
+        //支付
+        tvPay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, PayBillActivity.class);
+                intent.putExtra(Constants.STORE_ID, mStoreId);
+                intent.putExtra("storeName", mTvMerchantDetailTitle.getText().toString());
+                intent.putExtra("address", mTvMerchantDetailAddress.getText().toString());
+                intent.putExtra("discount", mTvMerchantDetailDiscountSum.getText().toString());
+                intent.putExtra(Constants.PAGE, "商家详情支付");
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                mContext.startActivity(intent);
+
+            }
+        });
         //房态界面跳转
         mLlMerchantDetailAction.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -537,15 +546,15 @@ public class MerchantDetailFragment extends BaseFragment {
                 .execute(new DCallback<StoreDetail>() {
                     @Override
                     public void onError(Call call, Exception e) {
-                        Log.i("AAAAAAA","AAAAAAA");
+                        Log.i("AAAAAAA", "AAAAAAA");
                         connectError();
                     }
 
                     @Override
                     public void onResponse(StoreDetail response) {
-                        Log.i("AAAAAAA","response");
+                        Log.i("AAAAAAA", "response");
                         if (isSuccess(response)) {
-                            Log.i("AAAAAAA","responseB");
+                            Log.i("AAAAAAA", "responseB");
                             if (response.getStore() != null) {
                                 mStore = response.getStore();
                                 showStoreDetail(mStore);
@@ -563,7 +572,6 @@ public class MerchantDetailFragment extends BaseFragment {
      */
     private void showStoreDetail(final StoreDetail.Store store) {
         mTvMerchantDetailTitle.setText(store.getName());
-        Log.e("what","2\n" +store.getDiscount());
         if (store.getDiscount().length() > 0) {
             SpannableString text = new SpannableString(store.getDiscount() + "折");
             text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -591,7 +599,7 @@ public class MerchantDetailFragment extends BaseFragment {
         if (store.getPicture() != null) {
             showPicture(store.getPicture());
         }
-        mTvMerchantDetailTel.setText(store.getPhone());
+        //  tvTelReserve.setText(store.getPhone());
         // 地址 距离
         String d = "";
         if (store.getDistance() != null && !TextUtils.isEmpty(store.getDistance()) && !TextUtils.equals("-1", store.getDistance())) {
@@ -731,21 +739,30 @@ public class MerchantDetailFragment extends BaseFragment {
      * 分享
      */
     private void sheared() {
-        if (Build.VERSION.SDK_INT >= 23) {
-            String[] mPermissionList = new String[]{
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-                    Manifest.permission.READ_EXTERNAL_STORAGE,
-                    Manifest.permission.ACCESS_FINE_LOCATION,
-                    Manifest.permission.CALL_PHONE,
-                    Manifest.permission.READ_PHONE_STATE
-            };
-            for (String permission : mPermissionList) {
-                if (ContextCompat.checkSelfPermission(mContext, permission) != PackageManager.PERMISSION_GRANTED) {
-                    ActivityCompat.requestPermissions(mContext, new String[]{permission}, Constants.REQUEST_PERMISSION_CODE);
-                }
-            }
-        }
-        startActivity(new Intent(mContext, ShareActivity.class));
+//        if (Build.VERSION.SDK_INT >= 23) {
+//            String[] mPermissionList = new String[]{
+//                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+//                    Manifest.permission.READ_EXTERNAL_STORAGE,
+//                    Manifest.permission.ACCESS_FINE_LOCATION,
+//                    Manifest.permission.CALL_PHONE,
+//                    Manifest.permission.READ_PHONE_STATE
+//            };
+//            for (String permission : mPermissionList) {
+//                if (ContextCompat.checkSelfPermission(mContext, permission) != PackageManager.PERMISSION_GRANTED) {
+//                    ActivityCompat.requestPermissions(mContext, new String[]{permission}, Constants.REQUEST_PERMISSION_CODE);
+//                }
+//            }
+
+
+        Intent intent = new Intent(mContext, ShareActivity.class);
+        intent.putExtra("title", "乐互网");
+        intent.putExtra("secondtitle", "商家详情");
+
+        intent.putExtra("shearedUrl", shearedUrl);
+
+        startActivity(intent);
+
+
 
   /*      new ShareAction(mContext)
                 .setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.SINA)

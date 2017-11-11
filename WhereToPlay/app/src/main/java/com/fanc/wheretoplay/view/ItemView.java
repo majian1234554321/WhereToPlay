@@ -3,8 +3,10 @@ package com.fanc.wheretoplay.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
@@ -26,6 +28,8 @@ public class ItemView extends RelativeLayout {
     View mViewLine;
     TextView mTvRightText;
     TextView mTvContent;
+    private Switch mIvSwitch;
+    private CheckStatus mCheckListener;
 
     public ItemView(Context context) {
         super(context);
@@ -35,6 +39,7 @@ public class ItemView extends RelativeLayout {
     public ItemView(Context context, AttributeSet attrs) {
         super(context, attrs);
         initView();
+        setListener();
     }
 
     private void initView() {
@@ -45,6 +50,7 @@ public class ItemView extends RelativeLayout {
         mViewLine = view.findViewById(R.id.item_view_line);
         mTvRightText = (TextView) view.findViewById(R.id.item_view_right_text);
         mTvContent = (TextView) view.findViewById(R.id.item_view_content);
+        mIvSwitch = (Switch) view.findViewById(R.id.item_view_switch);
     }
 
     public void setText(String text) {
@@ -54,6 +60,27 @@ public class ItemView extends RelativeLayout {
     public void setText(int resId) {
         mTvText.setText(UIUtils.getString(resId));
     }
+
+    /**
+     * 测试环境改变
+     */
+    public void setSwitchToShow(boolean isShow) {
+        if (isShow) {
+            mIvSwitch.setVisibility(View.VISIBLE);
+        }
+    }
+
+    /**
+     * 测试环境改变
+     */
+    public void changeEnvironment(boolean isOn) {
+        if (isOn) {
+            mIvSwitch.setChecked(true);
+        } else {
+            mIvSwitch.setChecked(false);
+        }
+    }
+
 
     /**
      * 设置文本，并且隐藏图标
@@ -208,5 +235,27 @@ public class ItemView extends RelativeLayout {
      */
     public void setContentText(int resId) {
         mTvContent.setText(UIUtils.getString(resId));
+    }
+
+    /**
+     * 测试环境改变
+     */
+    private void setListener() {
+        mIvSwitch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                if (mCheckListener != null) {
+                    mCheckListener.statusChange(b);
+                }
+            }
+        });
+    }
+
+    public void setCheckListener(CheckStatus checkListener) {
+        this.mCheckListener = checkListener;
+    }
+
+    public interface CheckStatus {
+        public void statusChange(boolean b);
     }
 }

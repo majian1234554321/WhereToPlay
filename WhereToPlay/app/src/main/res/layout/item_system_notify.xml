@@ -28,25 +28,28 @@
             android:id="@+id/tv_item_system_notify_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_15"
+            android:layout_marginStart="@dimen/margin_50"
             android:text="@string/system_notify"
             android:textColor="@color/text_red"
             android:textSize="@dimen/normal_textsize"
             app:layout_constraintStart_toEndOf="@+id/iv_item_system_notify"
-            app:layout_constraintTop_toTopOf="@+id/iv_item_system_notify"/>
+            app:layout_constraintTop_toTopOf="@+id/iv_item_system_notify"
+            />
 
         <TextView
             android:id="@+id/tv_item_system_notify_content"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="4dp"
+            android:layout_marginTop="0dp"
             android:text="@{notification.content}"
             android:textColor="@color/text_detail_white_bc"
             android:textSize="@dimen/normal_textsize"
+            android:layout_marginStart="@dimen/margin_50"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="@+id/tv_item_system_notify_title"
-            app:layout_constraintTop_toBottomOf="@+id/tv_item_system_notify_title"/>
+            app:layout_constraintStart_toEndOf="@+id/iv_item_system_notify"
+            app:layout_constraintTop_toBottomOf="@+id/tv_item_system_notify_title"
+            />
 
         <TextView
             android:id="@+id/tv_item_system_notify_time"

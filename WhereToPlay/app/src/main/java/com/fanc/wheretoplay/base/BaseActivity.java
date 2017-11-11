@@ -30,13 +30,19 @@ import android.view.WindowManager;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.SignInActivity;
 import com.fanc.wheretoplay.datamodel.User;
+import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.view.DProgressDialog;
+import com.qiyukf.nimlib.sdk.NimIntent;
+import com.qiyukf.unicorn.api.ConsultSource;
+import com.qiyukf.unicorn.api.Unicorn;
 
 import java.util.Arrays;
+
+import rx.subscriptions.CompositeSubscription;
 
 import static com.fanc.wheretoplay.base.App.mContext;
 
@@ -58,6 +64,7 @@ public class BaseActivity
 
     private com.fanc.wheretoplay.view.AlertDialog mAlertDialog;
     private Receiver receiver;
+    public CompositeSubscription compositeSubscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,8 +80,13 @@ public class BaseActivity
         if (LocationUtils.location == null) {
             LocationUtils.getLocation(this);
         }
+
+        compositeSubscription = new CompositeSubscription();
+
         registerBroadcastReceiver();
+
     }
+
 
     // 状态栏透明
     private void translucent() {
@@ -138,12 +150,17 @@ public class BaseActivity
         if (mAlertDialog != null) {
             mAlertDialog = null;
         }
+
+        if (compositeSubscription!=null) {
+            compositeSubscription.clear();
+        }
     }
 
     @Override
     public void onResume() {
         super.onResume();
 //        MobclickAgent.onResume(this);
+
     }
 
     @Override

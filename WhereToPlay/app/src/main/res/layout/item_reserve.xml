@@ -79,6 +79,17 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <TextView
+            android:id="@+id/tv_reserve_item_distance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/margin_10"
+            android:textColor="@color/textcolor_3b"
+            android:textSize="@dimen/textsize_levelsmall"
+            app:layout_constraintBaseline_toBaselineOf="@+id/tv_reserve_item_address"
+            app:layout_constraintStart_toEndOf="@+id/tv_reserve_item_address"
+            app:layout_constraintTop_toBottomOf="@+id/tv_reserve_item_title"/>
+
+        <TextView
             android:id="@+id/tv_reserve_item_rise"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -114,16 +125,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tv_reserve_item_title"
             app:layout_constraintVertical_bias="0.0"/>
 
-        <TextView
-            android:id="@+id/tv_reserve_item_distance"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/margin_10"
-            android:textColor="@color/textcolor_3b"
-            android:textSize="@dimen/textsize_levelsmall"
-            app:layout_constraintBaseline_toBaselineOf="@+id/tv_reserve_item_address"
-            app:layout_constraintStart_toEndOf="@+id/tv_reserve_item_address"
-            app:layout_constraintTop_toBottomOf="@+id/tv_reserve_item_title"/>
+
 
         <ImageView
             android:id="@+id/iv_reserve_service"

@@ -48,6 +48,12 @@
             android:layout_height="wrap_content"
             android:onClick="onViewClick"/>
 
+        <com.fanc.wheretoplay.view.ItemView
+            android:id="@+id/iv_change_environment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onViewClick"/>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_0"

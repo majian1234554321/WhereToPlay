@@ -23,6 +23,7 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.fanc.wheretoplay.MainActivity;
@@ -46,6 +47,7 @@ import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.LogUtils;
+import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.FilterPopupDialog;
@@ -267,6 +269,8 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
         // 是否可以上下拉
         mSvReserve.setCanPullDown(true);
         mSvReserve.setCanPullUp(true);
+
+
     }
 
     private void setListener() {
@@ -842,6 +846,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
         if (lng != Constants.USELESS_NUMBER_PARAM) {
             param.put(Network.Param.LNG, String.valueOf(lng));
         }
+
         OkHttpUtils.post()
                 .url(Network.User.COMMON_FILTER)
                 .params(param)

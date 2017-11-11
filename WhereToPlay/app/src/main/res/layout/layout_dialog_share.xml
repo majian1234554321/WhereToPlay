@@ -76,11 +76,16 @@
                 android:drawableTop="@drawable/btn_forword_space"
                 android:gravity="center_horizontal"
                 android:text="QQ空间"/>
+
             <TextView
+                android:id="@+id/btn_sms"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:gravity="center_horizontal"/>
+                android:drawableTop="@drawable/btn_forword_space"
+                android:gravity="center_horizontal"
+                android:text="短信"/>
+
         </LinearLayout>
     </LinearLayout>
 </RelativeLayout>

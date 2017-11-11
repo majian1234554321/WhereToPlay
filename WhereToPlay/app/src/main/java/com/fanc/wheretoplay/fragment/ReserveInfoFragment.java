@@ -27,7 +27,7 @@ import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.DetailActivity;
 import com.fanc.wheretoplay.activity.DownPaymentActivity;
 import com.fanc.wheretoplay.activity.ReuseActivity;
-import com.fanc.wheretoplay.activity.ServiceActivity;
+//import com.fanc.wheretoplay.activity.ServiceActivity;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentReserveInfoBinding;
 import com.fanc.wheretoplay.datamodel.RoomList;
@@ -41,6 +41,8 @@ import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.RoomTypeDialog;
 import com.fanc.wheretoplay.view.TopMenu;
 import com.orhanobut.logger.Logger;
+import com.qiyukf.unicorn.api.ConsultSource;
+import com.qiyukf.unicorn.api.Unicorn;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
@@ -165,9 +167,11 @@ public class ReserveInfoFragment extends BaseFragment {
         mIvReserveInfoService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ServiceActivity.class);
-                intent.putExtra(Constants.STORE_NAME, storeName);
-                startActivity(intent);
+//                Intent intent = new Intent(mContext, ServiceActivity.class);
+//                intent.putExtra(Constants.STORE_NAME, storeName);
+//                startActivity(intent);
+                ConsultSource source = new ConsultSource(null, null, null);
+                Unicorn.openServiceActivity(mContext, mContext.getResources().getString(R.string.app_name), source);
             }
         });
     }
@@ -443,10 +447,12 @@ public class ReserveInfoFragment extends BaseFragment {
                 mContext.finish();
             } else if (Constants.ACTION_SELECT_ROOM.equals(action)) {
                 mTvReserveInfoRoom.setText(intent.getStringExtra(Constants.NAME) + " (" + intent.getStringExtra(Constants.MONEY) + ")");
+                mTvReserveInfoRoom.setTextColor(getResources().getColor(R.color.text_black));
                 selectedRoomId = intent.getStringExtra(Constants.ROOM);
             } else if (Constants.ACTION_SELECT_DATE_TIME.equals(action)) {
                 reserveDate = intent.getStringExtra(Constants.TIMES);
                 mTvReserveInfoTime.setText(reserveDate);
+                mTvReserveInfoTime.setTextColor(getResources().getColor(R.color.text_black));
             }
         }
     }

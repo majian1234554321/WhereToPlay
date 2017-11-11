@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,6 +17,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.DetailActivity;
+import com.fanc.wheretoplay.activity.ListOrderActivity;
 import com.fanc.wheretoplay.activity.SettingsActivity;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentMineBinding;
@@ -25,7 +25,6 @@ import com.fanc.wheretoplay.datamodel.Score;
 import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.ToastUtils;
-import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.CircleImageView;
 import com.fanc.wheretoplay.view.ItemView;
 import com.fanc.wheretoplay.view.TopMenu;
@@ -54,6 +53,8 @@ public class MineFragment extends BaseFragment {
     ItemView mIvMineOrder;
     ItemView mIvMineCollection;
     ItemView mIvMineReferral;
+    private ItemView mIvMineFriend;
+    private ItemView mIvMineMoney;
     private ItemView mTvMineDrive;
 
     Receiver receiver;
@@ -82,6 +83,8 @@ public class MineFragment extends BaseFragment {
         mIvMineCollection = mineBinding.ivMineCollection;
         mIvMineReferral = mineBinding.ivMineReferral;
         mTvMineDrive = mineBinding.ivMineDrive;
+        mIvMineFriend = mineBinding.ivMineCommendFriend;
+        mIvMineMoney = mineBinding.ivMineCommendMoney;
     }
 
     private void init() {
@@ -95,6 +98,13 @@ public class MineFragment extends BaseFragment {
         // 获取我的资料
         getScore();
 
+        //条目栏的文字、图片设置
+        mIvMineFriend.setIcon(R.drawable.mine_recommend_friend);
+        mIvMineFriend.setText(R.string.friend);
+        mIvMineFriend.setRightIcon(R.drawable.right);
+        mIvMineMoney.setIcon(R.drawable.mine_recommend_money);
+        mIvMineMoney.setText(R.string.money);
+        mIvMineMoney.setRightIcon(R.drawable.right);
         mIvMineMessage.setIcon(R.drawable.mine_message);
         mIvMineMessage.setText(R.string.message);
         mIvMineMessage.setRightIcon(R.drawable.right);
@@ -209,7 +219,7 @@ public class MineFragment extends BaseFragment {
             case R.id.iv_mine_message:
                 goToNewPage(Constants.MESSAGE);
                 break;
-            case R.id.iv_mine_wallet:
+            case R.id.iv_mine_wallet:   //钱包
                 goToNewPage(Constants.WALLET);
                 break;
             case R.id.iv_mine_discount_coupon:
@@ -219,13 +229,20 @@ public class MineFragment extends BaseFragment {
                 goToNewPage(Constants.INTEGRAL);
                 break;
             case R.id.iv_mine_order:
-                goToNewPage(Constants.ORDER);
+                //goToNewPage(Constants.ORDER);
+                startActivity(new Intent(getContext(),ListOrderActivity.class));
                 break;
             case R.id.iv_mine_collection:
                 goToNewPage(Constants.COLLECTION);
                 break;
             case R.id.iv_mine_referral:
                 goToNewPage(Constants.REFERRAL);
+                break;
+            case R.id.iv_mine_commend_friend:
+                goToNewPage(Constants.MINEFRIEND);
+                break;
+            case R.id.iv_mine_commend_money:
+                goToNewPage(Constants.MINEMONEY);
                 break;
             case R.id.iv_mine_drive:
                 ToastUtils.makePicTextShortToast(mContext,"修复中，敬请期待！");

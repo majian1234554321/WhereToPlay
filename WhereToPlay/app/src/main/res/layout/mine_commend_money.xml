@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+   <!-- <data>
+
+        <import type="com.fanc.wheretoplay.util.DateFormatUtil"/>
+
+        <variable
+            name="notification"
+            type="com.fanc.wheretoplay.datamodel.NotificationList.Notification"/>
+    </data>-->
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/padding_15">
+
+        <com.fanc.wheretoplay.view.CircleImageView
+            android:id="@+id/iv_mine_money"
+            android:layout_width="@dimen/width_50"
+            android:layout_height="@dimen/height_50"
+            android:src="@drawable/check_comments_boy"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <TextView
+            android:id="@+id/tv_mine_money_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/margin_65"
+            android:layout_marginTop="@dimen/margin_5"
+            android:text="@string/where_to_play_recreation_terrace"
+            android:textColor="@color/text_black_sec"
+            android:textSize="@dimen/normal_textsize"
+            app:layout_constraintStart_toEndOf="@+id/iv_mine_money"
+            app:layout_constraintTop_toTopOf="@+id/iv_mine_money"
+            />
+
+        <TextView
+            android:id="@+id/tv_mine_money_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/margin_5"
+            android:text="2017-11-8 16:00"
+            android:textColor="@color/textcolor_btn_normal"
+            android:textSize="@dimen/textsize_levelsmall"
+            app:layout_constraintStart_toStartOf="@+id/tv_mine_money_title"
+            app:layout_constraintBottom_toBottomOf="@+id/iv_mine_money"/>
+<!-- android:text="@{DateFormatUtil.getDateFormatMMDDHHmm(notification.created_time)}"-->
+
+        <TextView
+            android:id="@+id/tv_mine_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="+22.0"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/textsize_level2"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </android.support.constraint.ConstraintLayout>
+</layout>

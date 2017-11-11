@@ -12,10 +12,11 @@ import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.BaseActivity;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.base.BaseFragmentActivity;
-import com.fanc.wheretoplay.fragment.OrderBookFragment;
-import com.fanc.wheretoplay.fragment.OrderListAllFragment;
-import com.fanc.wheretoplay.fragment.OrderListNoPayFragment;
-import com.fanc.wheretoplay.fragment.OrderListPayFragment;
+
+import com.fanc.wheretoplay.fragment.OrderList1Fragment;
+import com.fanc.wheretoplay.fragment.OrderList2Fragment;
+import com.fanc.wheretoplay.fragment.OrderList3Fragment;
+import com.fanc.wheretoplay.fragment.OrderList4Fragment;
 import com.fanc.wheretoplay.view.TitleBarView;
 
 import java.util.ArrayList;
@@ -37,12 +38,12 @@ public class ListOrderActivity extends BaseFragmentActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_order);
         ButterKnife.bind(this);
-
+        tbv.setTv_title("订单列表");
         ArrayList<BaseFragment> fragments = new ArrayList<>();
-        fragments.add(new OrderListAllFragment());
-        fragments.add(new OrderBookFragment());
-        fragments.add(new OrderListPayFragment());
-        fragments.add(new OrderListNoPayFragment());
+        fragments.add(new OrderList1Fragment());
+        fragments.add(new OrderList2Fragment());
+        fragments.add(new OrderList3Fragment());
+        fragments.add(new OrderList4Fragment());
 
       ListOrderPagerAdapter adapter =   new ListOrderPagerAdapter(getSupportFragmentManager(),this,fragments);
         viewpager.setAdapter(adapter);

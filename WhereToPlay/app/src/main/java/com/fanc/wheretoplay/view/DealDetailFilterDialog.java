@@ -81,7 +81,7 @@ public class DealDetailFilterDialog {
         mDpFilterDate.setLineRatio(0);
         mDpFilterDate.setLineAlpha(100);
         mDpFilterDate.setLineColor(mContext.getResources().getColor(R.color.gray));
-        mDpFilterDate.setTextColor(mContext.getResources().getColor(R.color.text_and_buttor_orange));
+        mDpFilterDate.setTextColor(mContext.getResources().getColor(R.color.text_red));
 
         setOnDateSelectedListener();
         mTvFilterDate.setText(mDpFilterDate.getSelectedDate());

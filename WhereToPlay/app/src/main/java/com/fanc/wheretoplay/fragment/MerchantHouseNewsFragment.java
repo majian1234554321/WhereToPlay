@@ -8,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.TextAppearanceSpan;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -129,6 +130,7 @@ public class MerchantHouseNewsFragment extends BaseFragment {
 
     private void getMerchantDetail(String id) {
         showProgress();
+        Log.e("token", mUser.getToken() + "\n" + Network.User.PUBLIC_HOUSENEWS);
         OkHttpUtils.post()
                 .url(Network.User.PUBLIC_HOUSENEWS)
                 .addParams(Network.Param.STORE_ID, id)
@@ -152,7 +154,7 @@ public class MerchantHouseNewsFragment extends BaseFragment {
     }
 
     private void showHouseNewsList(List<HousenewsList.StatusBean> housenews) {
-        HouseNewsAdapter houseNewsAdapter = new HouseNewsAdapter(mContext, housenews);
+        HouseNewsAdapter houseNewsAdapter = new HouseNewsAdapter(mContext, housenews,mStoreId);
         mRc.setAdapter(houseNewsAdapter);
     }
 

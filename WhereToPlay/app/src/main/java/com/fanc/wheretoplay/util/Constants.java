@@ -12,7 +12,7 @@ public interface Constants {
      */
 
     public final static String WXAPPID = "wx424026eca78d03e6";
-    public final static String QQAPPID = "1105021586";
+    public final static String QQAPPID = "1106415195";
 
     String WX_APP_ID = "wx424026eca78d03e6";
     String WX_APP_SECRET = "f41673f89c694467745d16b81a13f212";
@@ -56,6 +56,8 @@ public interface Constants {
     String COLLECTION = "collection";
     String REFERRAL = "referral";// 推荐
     String DRIVE = "drive";// 代驾
+    String MINEFRIEND = "friend";// 代驾
+    String MINEMONEY = "money";// 代驾
     String DEAL_DETAIL = "deal_detail";
     String CONSUME_DETAIL = "consume_detail";
     String RECHARGE_DETAIL = "recharge_detail";

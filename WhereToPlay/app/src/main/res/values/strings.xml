@@ -59,6 +59,7 @@
     <string name="hint_redeem_code">请输入推广码</string>
     <string name="agreement_left">注册即表示同意</string>
     <string name="agreement_right">《乐互网用户协议》</string>
+    <string name="register_time">注册时间: </string>
 
     <!--Tab-->
     <string name="reserve">预订</string>
@@ -131,6 +132,9 @@
     <string name="collection">收藏</string>
     <string name="referral">推荐</string>
     <string name="drive">代驾</string>
+    <string name="friend">推荐好友</string>
+    <string name="money">推荐奖励</string>
+    <string name="money_time">注册时间：%1$s</string>
 
     <!--mine info-->
     <string name="mine_info">我的资料</string>
@@ -228,6 +232,7 @@
     <string name="clear_cache">清除缓存</string>
     <string name="about_us">关于我们</string>
     <string name="sign_out">退出登录</string>
+    <string name="changeEnv">打开测试环境</string>
 
     <!--set pay pwd-->
     <string name="hint_set_pay_pwd_1">请输入支付密码</string>
@@ -351,4 +356,9 @@
     <string name="housenews_lowest">最低消费</string>
     <string name="housenews_housenews">房态</string>
     <string name="order_details">订单详情</string>
+
+
+    <string name="image">图片</string>
+    <string name="preview">预览</string>
+    <string name="select">选择</string>
 </resources>

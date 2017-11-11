@@ -3,7 +3,7 @@
     android:id="@+id/loadmore_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gray" >
+    android:background="@color/bg_gray" >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -33,7 +33,7 @@
                 android:layout_centerVertical="true"
                 android:layout_marginEnd="@dimen/margin_8"
                 android:layout_toStartOf="@+id/loadstate_tv"
-                android:background="@drawable/loading"
+                android:background="@drawable/refreshing"
                 android:visibility="gone" />
 
             <TextView

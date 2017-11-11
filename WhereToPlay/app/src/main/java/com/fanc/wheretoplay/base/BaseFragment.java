@@ -6,18 +6,23 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.SignInActivity;
 import com.fanc.wheretoplay.datamodel.User;
+import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.view.AlertDialog;
 import com.fanc.wheretoplay.view.DProgressDialog;
 import com.fanc.wheretoplay.view.PullToRefreshLayout;
+import com.qiyukf.nimlib.sdk.NimIntent;
+import com.qiyukf.unicorn.api.ConsultSource;
+import com.qiyukf.unicorn.api.Unicorn;
 
 
 /**
@@ -49,6 +54,7 @@ public abstract class BaseFragment
         mSpUtils = new SPUtils(getActivity());
         mUser = mSpUtils.getUser();
         mLayoutInflater = LayoutInflater.from(mContext);
+        //点击商家后台传来的消息可以进入聊天界面
     }
 
     @Override
@@ -66,12 +72,15 @@ public abstract class BaseFragment
     @Override
     public void onResume() {
         super.onResume();
+
     }
 
     @Override
     public void onPause() {
         super.onPause();
     }
+
+
 
 
     // 获取状态栏高度

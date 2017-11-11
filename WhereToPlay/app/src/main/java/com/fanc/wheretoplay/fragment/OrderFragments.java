@@ -44,10 +44,10 @@ public class OrderFragments extends BaseFragment {
         tbv.setTv_title("订单");
 
         ArrayList<BaseFragment> fragments = new ArrayList<>();
-        fragments.add(new OrderListAllFragment());
-        fragments.add(new OrderBookFragment());
-        fragments.add(new OrderListPayFragment());
-        fragments.add(new OrderListNoPayFragment());
+        fragments.add(new OrderList1Fragment());
+        fragments.add(new OrderList2Fragment());
+        fragments.add(new OrderList3Fragment());
+        fragments.add(new OrderList4Fragment());
 
         ListOrderPagerAdapter adapter = new ListOrderPagerAdapter(getChildFragmentManager(), inflater.getContext(), fragments);
         viewpager.setAdapter(adapter);
@@ -61,7 +61,7 @@ public class OrderFragments extends BaseFragment {
 
         public Context context;
 
-        private String[] mTitles = new String[]{"全部", "已预订", "已支付", "已完成"};
+        private String[] mTitles = new String[]{"全部", "待支付", "待评价", "已完成"};
 
         public ArrayList<BaseFragment> fragments;
 
