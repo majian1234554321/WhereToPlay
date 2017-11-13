@@ -274,6 +274,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
      * @param pageSize
      */
     private void requestComments(int type, int pageIndex, int pageSize) {
+        Log.e("dd",intent.getStringExtra(Constants.STORE_ID));
         OkHttpUtils.post()
                 .url(Network.User.PUBLIC_COMMENTS)
                 .addParams(Network.Param.STORE_ID, intent.getStringExtra(Constants.STORE_ID))

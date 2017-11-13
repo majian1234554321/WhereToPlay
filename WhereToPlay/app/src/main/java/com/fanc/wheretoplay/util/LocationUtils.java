@@ -121,6 +121,7 @@ public class LocationUtils {
         Callback callback;
 
         public MyLocationListener() {
+
         }
 
         public MyLocationListener(Callback callback) {

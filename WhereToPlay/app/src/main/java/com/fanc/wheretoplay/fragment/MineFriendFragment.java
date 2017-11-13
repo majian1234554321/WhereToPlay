@@ -167,7 +167,7 @@ public class MineFriendFragment extends BaseFragment {
                     @Override
                     public void onError(Throwable e) {
                         closeProgress();
-                        Toast.makeText(mContext, e.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, "没有数据", Toast.LENGTH_SHORT).show();
                         refreshOrLoadFail();
                     }
 
