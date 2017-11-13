@@ -78,12 +78,9 @@ dependencies {
     //                { changing = true }
     //    provided 'com.tencent.tinker:tinker-android-anno:1.7.10'
     //                { changing = true }
-    compile files('libs/glide-3.7.0.jar')
     compile project(':okhttputils')
-    compile files('libs/BaiduLBS_Android.jar')
     //    compile project(':datetimepicker')
-    compile 'com.sina.weibo.sdk:core:4.1.0:openDefaultRelease@aar'
-    compile files('libs/libammsdk.jar')
+
     compile 'com.android.support:multidex:1.0.2'
     compile 'com.youth.banner:banner:1.4.10'
     compile 'com.google.code.gson:gson:2.8.0'
@@ -108,9 +105,8 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'com.qiyukf.unicorn:unicorn:3.11.1'
-    compile files('libs/open_sdk_r5886_lite.jar')
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.4.0'
-    compile files('libs/alipaySdk-20170922.jar')
+    compile 'com.sina.weibo.sdk:core:4.1.4:openDefaultRelease@aar'
    
 }
 

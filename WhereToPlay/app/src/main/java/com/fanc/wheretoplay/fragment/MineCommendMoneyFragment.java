@@ -132,54 +132,54 @@ public class MineCommendMoneyFragment extends BaseFragment {
 
     private void requestCommendMoney(int page, int size) {
 
-//        OkHttpUtils.post()
-//                .url(Network.User.RECOMREWARD)
-//                .addParams(Network.Param.PAGE, String.valueOf(page))
-//                .addParams(Network.Param.SIZE, String.valueOf(size))
-//                .addParams(Network.Param.TOKEN, "eyJpZCI6IjE0Iiwibm9uY2UiOiJrWFpGbkR3bCIsInNoYXJlX2NvZGUiOiIxNDU5ZGYwMiJ9")
-//                .build()
-//                .execute(new DCallback<MineMoney>() {
+        OkHttpUtils.post()
+                .url(Network.User.RECOMREWARD)
+                .addParams(Network.Param.PAGE, String.valueOf(page))
+                .addParams(Network.Param.SIZE, String.valueOf(size))
+                .addParams(Network.Param.TOKEN, "eyJpZCI6IjE0Iiwibm9uY2UiOiJrWFpGbkR3bCIsInNoYXJlX2NvZGUiOiIxNDU5ZGYwMiJ9")
+                .build()
+                .execute(new DCallback<MineMoney>() {
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        connectError();
+                    }
+
+                    @Override
+                    public void onResponse(MineMoney response) {
+                        if (isSuccess(response)) {
+                            List<MineMoney.ContentBean> content = response.getContent();
+                            showCommendMoneyList(content);
+                        }
+                    }
+                });
+
+//        MultipartBody.Part requestFileA =
+//                MultipartBody.Part.createFormData("size", size + "");
+//        MultipartBody.Part requestFileB =
+//                MultipartBody.Part.createFormData("page", page + "");
+//        MultipartBody.Part requestFileC =
+//                MultipartBody.Part.createFormData("token", "eyJpZCI6IjE0Iiwibm9uY2UiOiJrWFpGbkR3bCIsInNoYXJlX2NvZGUiOiIxNDU5ZGYwMiJ9");
+//
+//        Subscription subscription = Retrofit_RequestUtils.getRequest().recomReward(requestFileA, requestFileB, requestFileC)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Subscriber<MineMoney>() {
 //                    @Override
-//                    public void onError(Call call, Exception e) {
-//                        connectError();
+//                    public void onCompleted() {
+//
 //                    }
 //
 //                    @Override
-//                    public void onResponse(MineMoney response) {
-//                        if (isSuccess(response)) {
-//                            List<MineMoney.ContentBean> content = response.getContent();
-//                            showCommendMoneyList(content);
-//                        }
+//                    public void onError(Throwable e) {
+//                        Toast.makeText(mContext, e.toString(), Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                    @Override
+//                    public void onNext(MineMoney mineMoney) {
+//                        List<MineMoney.ContentBean> content = mineMoney.getContent();
+//                        showCommendMoneyList(content);
 //                    }
 //                });
-
-        MultipartBody.Part requestFileA =
-                MultipartBody.Part.createFormData("size", size + "");
-        MultipartBody.Part requestFileB =
-                MultipartBody.Part.createFormData("page", page + "");
-        MultipartBody.Part requestFileC =
-                MultipartBody.Part.createFormData("token", "eyJpZCI6IjE0Iiwibm9uY2UiOiJrWFpGbkR3bCIsInNoYXJlX2NvZGUiOiIxNDU5ZGYwMiJ9");
-
-        Subscription subscription = Retrofit_RequestUtils.getRequest().recomReward(requestFileA, requestFileB, requestFileC)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<MineMoney>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        Toast.makeText(mContext, e.toString(), Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onNext(MineMoney mineMoney) {
-                        List<MineMoney.ContentBean> content = mineMoney.getContent();
-                        showCommendMoneyList(content);
-                    }
-                });
 
 
     }
