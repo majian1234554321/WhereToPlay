@@ -11,6 +11,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 
 import com.fanc.wheretoplay.datamodel.CancleOrderModel;
+import com.fanc.wheretoplay.datamodel.MineMoney;
 import com.fanc.wheretoplay.datamodel.OrderDetailModel;
 import com.fanc.wheretoplay.datamodel.PayOrder;
 import com.fanc.wheretoplay.datamodel.SubmitCommentModel;
@@ -78,6 +79,8 @@ public class Network{
 
         public static String USER_HOME = USER + "User/home";// 我的主页
         public static String USER_RCOMMEND_FRIEND = USER + "Reco/recomList";// 推荐好友
+        public static String RECOMREWARD = USER + "Reco/recomReward";// 推荐
+
         public static String USER_MODIFY_AVATAR = USER + "User/modifyAvatar";// 修改头像
         public static String USER_MODIFY_PRO_FILE = USER + "User/modifyProfile";//修改资料
         public static String USER_MESSAGE_LIST = USER + "User/messageList";// 消息
@@ -291,6 +294,12 @@ public class Network{
         @Multipart
         @POST("User/immediatelyPay")
         Observable<AccessOrderIdModel> immediatelyPay(@Part MultipartBody.Part fileA,@Part MultipartBody.Part fileB,@Part MultipartBody.Part fileC);
+
+
+        //商家详情支付获取订单Id
+        @Multipart
+        @POST("Reco/recomReward")
+        Observable<MineMoney> recomReward(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC);
 
 
 
