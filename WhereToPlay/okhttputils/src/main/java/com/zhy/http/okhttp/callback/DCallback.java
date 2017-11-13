@@ -3,11 +3,16 @@ package com.zhy.http.okhttp.callback;
 import android.util.Log;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import com.orhanobut.logger.Logger;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+import org.json.JSONTokener;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -25,9 +30,12 @@ import okhttp3.Response;
  */
 public abstract class DCallback<T>
         extends Callback<T> {
+    private Response mResponse;
+
     @Override
     public T parseNetworkResponse(Response response)
             throws Exception {
+        this.mResponse = response;
         String result = response.body()
                 .string();
         Headers headers = response.headers();
@@ -36,7 +44,7 @@ public abstract class DCallback<T>
             sb.append(name + " = " + headers.get(name) + "\n");
         }
         Log.i("llm", sb.toString());
-        Log.w("aaa", result);
+        Log.e("dd", "result:\t" + result);
         Logger.json(result);// 控制台打印返回的Json
         //解析对象
         JsonParser parser = new JsonParser();
@@ -53,7 +61,7 @@ public abstract class DCallback<T>
 
         if (code == 0) {
             //访问接口成功
-            JsonObject contentJson = rootObject.getAsJsonObject("content");
+//            JsonObject contentJson = rootObject.getAsJsonObject("content");
             if (type instanceof ParameterizedType) {
                 //如果用户写了泛型，就会进入这里，否者不会执行
                 ParameterizedType parameterizedType = (ParameterizedType) type;
@@ -63,8 +71,18 @@ public abstract class DCallback<T>
                     return (T) response.body()
                             .string();
                 } else {
-                    //如果是 Bean List Map ，则解析完后返回
-                    return new Gson().fromJson(contentJson, beanType);
+//                    //如果是 Bean List Map ，则解析完后返回
+//                    return new Gson().fromJson(contentJson, beanType);
+                    JsonElement content = rootObject.get("content");
+                    if (content.isJsonArray()) {
+                        JsonArray asJsonArray = content.getAsJsonArray();
+//                        new Gson().fromJson(asJsonArray, beanType);
+                        Log.e("dd",content.toString());
+                        Log.e("dd", "Iverson:\t" + mResponse.body().string());
+                        return (T)response;
+                    } else if (content.isJsonObject()) {
+                        return new Gson().fromJson(content.getAsJsonObject(),beanType);
+                    }
                 }
             } else {
                 //如果没有写泛型，直接返回Response对象
