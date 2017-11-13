@@ -32,8 +32,6 @@ public class OrdersAdapter$ViewHolder_ViewBinding implements Unbinder {
     target.tvPayItemReserveCode = Utils.findRequiredViewAsType(source, R.id.tv_pay_item_reserve_code, "field 'tvPayItemReserveCode'", TextView.class);
     target.tvPayItemReserveRealCode = Utils.findRequiredViewAsType(source, R.id.tv_pay_item_reserve_real_code, "field 'tvPayItemReserveRealCode'", TextView.class);
     target.tvPayItemPrice = Utils.findRequiredViewAsType(source, R.id.tv_pay_item_price, "field 'tvPayItemPrice'", TextView.class);
-    target.tv_left = Utils.findRequiredViewAsType(source, R.id.tv_left, "field 'tv_left'", TextView.class);
-    target.tv_right = Utils.findRequiredViewAsType(source, R.id.tv_right, "field 'tv_right'", TextView.class);
     target.tv_storeName = Utils.findRequiredViewAsType(source, R.id.tv_storeName, "field 'tv_storeName'", TextView.class);
     target.tv_payState = Utils.findRequiredViewAsType(source, R.id.tv_payState, "field 'tv_payState'", TextView.class);
   }
@@ -57,8 +55,6 @@ public class OrdersAdapter$ViewHolder_ViewBinding implements Unbinder {
     target.tvPayItemReserveCode = null;
     target.tvPayItemReserveRealCode = null;
     target.tvPayItemPrice = null;
-    target.tv_left = null;
-    target.tv_right = null;
     target.tv_storeName = null;
     target.tv_payState = null;
   }

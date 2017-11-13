@@ -14,29 +14,30 @@ public class FragmentReserveInfoBinding extends android.databinding.ViewDataBind
     static {
         sIncludes = null;
         sViewsWithIds = new android.util.SparseIntArray();
-        sViewsWithIds.put(R.id.tm_reserve_info, 9);
-        sViewsWithIds.put(R.id.relativeLayout2, 10);
-        sViewsWithIds.put(R.id.tv_reserve_info_discount_real, 11);
-        sViewsWithIds.put(R.id.tv_reserve_info_address, 12);
-        sViewsWithIds.put(R.id.tv_reserve_info_distance, 13);
-        sViewsWithIds.put(R.id.tv_reserve_little_consume, 14);
-        sViewsWithIds.put(R.id.iv_reserve_info_service, 15);
-        sViewsWithIds.put(R.id.rb_reserve_info_credit, 16);
-        sViewsWithIds.put(R.id.rb_reserve_info_prepay, 17);
-        sViewsWithIds.put(R.id.reserve_cl, 18);
-        sViewsWithIds.put(R.id.tv_reserve_info_name, 19);
-        sViewsWithIds.put(R.id.et_reserve_info_name, 20);
-        sViewsWithIds.put(R.id.view2, 21);
-        sViewsWithIds.put(R.id.tv_reserve_info_mobile, 22);
-        sViewsWithIds.put(R.id.et_reserve_info_mobile, 23);
-        sViewsWithIds.put(R.id.tv_reserve_info_room_category, 24);
-        sViewsWithIds.put(R.id.tv_reserve_info_reserve_time, 25);
-        sViewsWithIds.put(R.id.tv_reserve_info_carport, 26);
-        sViewsWithIds.put(R.id.et_reserve_info_carport, 27);
-        sViewsWithIds.put(R.id.tv_reserve_info_number_of_people, 28);
-        sViewsWithIds.put(R.id.et_reserve_info_number_of_people, 29);
-        sViewsWithIds.put(R.id.tv_reserve_info_remark, 30);
-        sViewsWithIds.put(R.id.et_reserve_info_remark, 31);
+        sViewsWithIds.put(R.id.tm_reserve_info, 11);
+        sViewsWithIds.put(R.id.relativeLayout2, 12);
+        sViewsWithIds.put(R.id.tv_reserve_info_discount_real, 13);
+        sViewsWithIds.put(R.id.tv_reserve_info_address, 14);
+        sViewsWithIds.put(R.id.tv_reserve_info_distance, 15);
+        sViewsWithIds.put(R.id.tv_reserve_little_consume, 16);
+        sViewsWithIds.put(R.id.iv_reserve_info_service, 17);
+        sViewsWithIds.put(R.id.rb_reserve_info_credit, 18);
+        sViewsWithIds.put(R.id.rb_reserve_info_prepay, 19);
+        sViewsWithIds.put(R.id.reserve_cl, 20);
+        sViewsWithIds.put(R.id.tv_reserve_info_name, 21);
+        sViewsWithIds.put(R.id.et_reserve_info_name, 22);
+        sViewsWithIds.put(R.id.view2, 23);
+        sViewsWithIds.put(R.id.tv_reserve_info_mobile, 24);
+        sViewsWithIds.put(R.id.et_reserve_info_mobile, 25);
+        sViewsWithIds.put(R.id.tv_reserve_info_room_category, 26);
+        sViewsWithIds.put(R.id.tv1, 27);
+        sViewsWithIds.put(R.id.tv_reserve_info_reserve_time, 28);
+        sViewsWithIds.put(R.id.tv_reserve_info_carport, 29);
+        sViewsWithIds.put(R.id.et_reserve_info_carport, 30);
+        sViewsWithIds.put(R.id.tv_reserve_info_number_of_people, 31);
+        sViewsWithIds.put(R.id.et_reserve_info_number_of_people, 32);
+        sViewsWithIds.put(R.id.tv_reserve_info_remark, 33);
+        sViewsWithIds.put(R.id.et_reserve_info_remark, 34);
     }
     // views
     @NonNull
@@ -51,6 +52,8 @@ public class FragmentReserveInfoBinding extends android.databinding.ViewDataBind
     public final android.widget.EditText etReserveInfoNumberOfPeople;
     @NonNull
     public final android.widget.EditText etReserveInfoRemark;
+    @NonNull
+    public final android.widget.ImageView iv3;
     @NonNull
     public final android.widget.ImageView ivReserveInfo;
     @NonNull
@@ -73,6 +76,10 @@ public class FragmentReserveInfoBinding extends android.databinding.ViewDataBind
     public final android.widget.RadioGroup rgReserveInfo;
     @NonNull
     public final com.fanc.wheretoplay.view.TopMenu tmReserveInfo;
+    @NonNull
+    public final android.widget.TextView tv1;
+    @NonNull
+    public final android.widget.TextView tv2;
     @NonNull
     public final android.widget.TextView tvReserveInfoAddress;
     @NonNull
@@ -116,48 +123,53 @@ public class FragmentReserveInfoBinding extends android.databinding.ViewDataBind
 
     public FragmentReserveInfoBinding(@NonNull android.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
         super(bindingComponent, root, 0);
-        final Object[] bindings = mapBindings(bindingComponent, root, 32, sIncludes, sViewsWithIds);
-        this.btnReserveInfoPay = (android.widget.Button) bindings[8];
+        final Object[] bindings = mapBindings(bindingComponent, root, 35, sIncludes, sViewsWithIds);
+        this.btnReserveInfoPay = (android.widget.Button) bindings[10];
         this.btnReserveInfoPay.setTag(null);
-        this.etReserveInfoCarport = (android.widget.EditText) bindings[27];
-        this.etReserveInfoMobile = (android.widget.EditText) bindings[23];
-        this.etReserveInfoName = (android.widget.EditText) bindings[20];
-        this.etReserveInfoNumberOfPeople = (android.widget.EditText) bindings[29];
-        this.etReserveInfoRemark = (android.widget.EditText) bindings[31];
+        this.etReserveInfoCarport = (android.widget.EditText) bindings[30];
+        this.etReserveInfoMobile = (android.widget.EditText) bindings[25];
+        this.etReserveInfoName = (android.widget.EditText) bindings[22];
+        this.etReserveInfoNumberOfPeople = (android.widget.EditText) bindings[32];
+        this.etReserveInfoRemark = (android.widget.EditText) bindings[34];
+        this.iv3 = (android.widget.ImageView) bindings[7];
+        this.iv3.setTag(null);
         this.ivReserveInfo = (android.widget.ImageView) bindings[1];
         this.ivReserveInfo.setTag(null);
-        this.ivReserveInfoDate = (android.widget.ImageView) bindings[7];
+        this.ivReserveInfoDate = (android.widget.ImageView) bindings[9];
         this.ivReserveInfoDate.setTag(null);
         this.ivReserveInfoRight = (android.widget.ImageView) bindings[5];
         this.ivReserveInfoRight.setTag(null);
-        this.ivReserveInfoService = (android.widget.ImageView) bindings[15];
+        this.ivReserveInfoService = (android.widget.ImageView) bindings[17];
         this.mboundView0 = (android.widget.LinearLayout) bindings[0];
         this.mboundView0.setTag(null);
-        this.rbReserveInfoCredit = (android.widget.RadioButton) bindings[16];
-        this.rbReserveInfoPrepay = (android.widget.RadioButton) bindings[17];
-        this.relativeLayout2 = (android.widget.RelativeLayout) bindings[10];
-        this.reserveCl = (android.support.constraint.ConstraintLayout) bindings[18];
+        this.rbReserveInfoCredit = (android.widget.RadioButton) bindings[18];
+        this.rbReserveInfoPrepay = (android.widget.RadioButton) bindings[19];
+        this.relativeLayout2 = (android.widget.RelativeLayout) bindings[12];
+        this.reserveCl = (android.support.constraint.ConstraintLayout) bindings[20];
         this.rgReserveInfo = (android.widget.RadioGroup) bindings[3];
         this.rgReserveInfo.setTag(null);
-        this.tmReserveInfo = (com.fanc.wheretoplay.view.TopMenu) bindings[9];
-        this.tvReserveInfoAddress = (android.widget.TextView) bindings[12];
-        this.tvReserveInfoCarport = (android.widget.TextView) bindings[26];
-        this.tvReserveInfoDiscountReal = (android.widget.TextView) bindings[11];
-        this.tvReserveInfoDistance = (android.widget.TextView) bindings[13];
-        this.tvReserveInfoMobile = (android.widget.TextView) bindings[22];
-        this.tvReserveInfoName = (android.widget.TextView) bindings[19];
-        this.tvReserveInfoNumberOfPeople = (android.widget.TextView) bindings[28];
-        this.tvReserveInfoRemark = (android.widget.TextView) bindings[30];
-        this.tvReserveInfoReserveTime = (android.widget.TextView) bindings[25];
+        this.tmReserveInfo = (com.fanc.wheretoplay.view.TopMenu) bindings[11];
+        this.tv1 = (android.widget.TextView) bindings[27];
+        this.tv2 = (android.widget.TextView) bindings[6];
+        this.tv2.setTag(null);
+        this.tvReserveInfoAddress = (android.widget.TextView) bindings[14];
+        this.tvReserveInfoCarport = (android.widget.TextView) bindings[29];
+        this.tvReserveInfoDiscountReal = (android.widget.TextView) bindings[13];
+        this.tvReserveInfoDistance = (android.widget.TextView) bindings[15];
+        this.tvReserveInfoMobile = (android.widget.TextView) bindings[24];
+        this.tvReserveInfoName = (android.widget.TextView) bindings[21];
+        this.tvReserveInfoNumberOfPeople = (android.widget.TextView) bindings[31];
+        this.tvReserveInfoRemark = (android.widget.TextView) bindings[33];
+        this.tvReserveInfoReserveTime = (android.widget.TextView) bindings[28];
         this.tvReserveInfoRoom = (android.widget.TextView) bindings[4];
         this.tvReserveInfoRoom.setTag(null);
-        this.tvReserveInfoRoomCategory = (android.widget.TextView) bindings[24];
-        this.tvReserveInfoTime = (android.widget.TextView) bindings[6];
+        this.tvReserveInfoRoomCategory = (android.widget.TextView) bindings[26];
+        this.tvReserveInfoTime = (android.widget.TextView) bindings[8];
         this.tvReserveInfoTime.setTag(null);
         this.tvReserveInfoTitle = (android.widget.TextView) bindings[2];
         this.tvReserveInfoTitle.setTag(null);
-        this.tvReserveLittleConsume = (android.widget.TextView) bindings[14];
-        this.view2 = (android.view.View) bindings[21];
+        this.tvReserveLittleConsume = (android.widget.TextView) bindings[16];
+        this.view2 = (android.view.View) bindings[23];
         setRootTag(root);
         // listeners
         invalidateAll();
@@ -269,9 +281,11 @@ public class FragmentReserveInfoBinding extends android.databinding.ViewDataBind
             // api target 1
 
             this.btnReserveInfoPay.setOnClickListener(clickOnViewClickAndroidViewViewOnClickListener);
+            this.iv3.setOnClickListener(clickOnViewClickAndroidViewViewOnClickListener);
             this.ivReserveInfoDate.setOnClickListener(clickOnViewClickAndroidViewViewOnClickListener);
             this.ivReserveInfoRight.setOnClickListener(clickOnViewClickAndroidViewViewOnClickListener);
             android.databinding.adapters.RadioGroupBindingAdapter.setListeners(this.rgReserveInfo, (android.widget.RadioGroup.OnCheckedChangeListener)clickOnCheckedChangedAndroidWidgetRadioGroupOnCheckedChangeListener, (android.databinding.InverseBindingListener)null);
+            this.tv2.setOnClickListener(clickOnViewClickAndroidViewViewOnClickListener);
             this.tvReserveInfoRoom.setOnClickListener(clickOnViewClickAndroidViewViewOnClickListener);
             this.tvReserveInfoTime.setOnClickListener(clickOnViewClickAndroidViewViewOnClickListener);
         }

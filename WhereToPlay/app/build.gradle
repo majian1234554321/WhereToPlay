@@ -15,11 +15,8 @@ android {
         versionCode 20171110
         versionName "1.1.5"
 
-
         sourceSets.main {
-
             jniLibs.srcDirs = ['src/main/jniLibs']
-
         }
         ndk {
             //选择要添加的对应cpu类型的.so库。
@@ -32,6 +29,12 @@ android {
                 JPUSH_APPKEY : "8aed518715c80eda0449f277", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即可.
         ]
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                includeCompileClasspath = true
+            }
+        }
 
         /**
          * you can use multiDex and install it in your ApplicationLifeCycle implement
@@ -55,13 +58,11 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            buildConfigField "boolean", "LOG_DEBUG", "false"
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
-        }
-        debug {
-            debuggable true
-
         }
     }
     dataBinding {
