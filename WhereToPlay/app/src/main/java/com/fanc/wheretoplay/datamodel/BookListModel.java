@@ -8,13 +8,14 @@ import java.util.List;
 
 public class BookListModel   {
 
+
     /**
      * code : 0
      * message : 请求成功
-     * content : {"list":[{"order_id":"210","store_id":"4","name":"上海新缤纷年代","arrival_time":"1509573600","book_sn":"171031010100156947","book_type":"2","room_type":"小包","decorate_type":"现代","prepay":"0.00","total":"0.00","created_time":"1509426060","status":"5","consume_again":"1","leave_money":"0.00","is_comment":"0","is_display":"1","cover":"/Public/pcuser/images/default_rect.png"}]}
+     * content : {"list":[{"order_id":"492","store_id":"6","name":"上海天地汇会所","arrival_time":"1510308000","book_sn":"171110043239806689","order_action":"5","order_function":"2","room_type":"小包","decorate_type":"新古典","total":"0.00","statusdesc":"待处理","buttonlist":[{"buttonid":"0","title":"取消订单"}],"cover":"/Public/pcuser/images/default_rect.png"},{"order_id":"444","store_id":"6","name":"上海天地汇会所","arrival_time":"1510308000","book_sn":"171110103706754060","order_action":"1","order_function":"1","room_type":"小包","decorate_type":"新古典","total":"1.00","statusdesc":"已取消","buttonlist":[{"buttonid":"0","title":"取消订单"}],"cover":"/Public/pcuser/images/default_rect.png"},{"order_id":"443","store_id":"6","name":"上海天地汇会所","arrival_time":"1510308000","book_sn":"171110103706166216","order_action":"0","order_function":"1","room_type":"小包","decorate_type":"新古典","total":"0.00","statusdesc":"代付款","buttonlist":[{"buttonid":"1","title":"立即支付"},{"buttonid":"0","title":"取消订单"}],"cover":"/Public/pcuser/images/default_rect.png"},{"order_id":"294","store_id":"6","name":"上海天地汇会所","arrival_time":"1509966000","book_sn":"171106044800350091","order_action":"4","order_function":"5","room_type":"小包","decorate_type":"新古典","total":"0.00","statusdesc":"已结单","buttonlist":[{"buttonid":"3","title":"立即评论"}],"cover":"/Public/pcuser/images/default_rect.png"},{"order_id":"210","store_id":"4","name":"上海新缤纷年代","arrival_time":"1509573600","book_sn":"171031010100156947","order_action":"4","order_function":"5","room_type":"小包","decorate_type":"现代","total":"0.00","statusdesc":"已结单","buttonlist":[{"buttonid":"3","title":"立即评论"}],"cover":"/Public/pcuser/images/default_rect.png"},{"order_id":"186","store_id":"0","name":"","arrival_time":"0","book_sn":"","order_action":"0","order_function":"3","room_type":null,"decorate_type":null,"total":"20.00","statusdesc":"代付款","buttonlist":[{"buttonid":"1","title":"立即支付"},{"buttonid":"0","title":"取消订单"}],"cover":"/Public/pcuser/images/default_rect.png"},{"order_id":"185","store_id":"0","name":"","arrival_time":"0","book_sn":"","order_action":"0","order_function":"3","room_type":null,"decorate_type":null,"total":"20.00","statusdesc":"代付款","buttonlist":[{"buttonid":"1","title":"立即支付"},{"buttonid":"0","title":"取消订单"}],"cover":"/Public/pcuser/images/default_rect.png"},{"order_id":"184","store_id":"0","name":"","arrival_time":"0","book_sn":"","order_action":"0","order_function":"3","room_type":null,"decorate_type":null,"total":"20.00","statusdesc":"代付款","buttonlist":[{"buttonid":"1","title":"立即支付"},{"buttonid":"0","title":"取消订单"}],"cover":"/Public/pcuser/images/default_rect.png"}]}
      */
 
-    public int code;
+    public String code;
     public String message;
     public ContentBean content;
 
@@ -23,23 +24,19 @@ public class BookListModel   {
 
         public static class ListBean {
             /**
-             * order_id : 210
-             * store_id : 4
-             * name : 上海新缤纷年代
-             * arrival_time : 1509573600
-             * book_sn : 171031010100156947
-             * book_type : 2
-             * room_type : 小包
-             * decorate_type : 现代
-             * prepay : 0.00
-             * total : 0.00
-             * created_time : 1509426060
+             * order_id : 492
+             * store_id : 6
+             * name : 上海天地汇会所
+             * arrival_time : 1510308000
+             * book_sn : 171110043239806689
              * order_action : 5
-             * consume_again : 1
-             * leave_money : 0.00
-             * is_comment : 0
-             * is_display : 1
-             * cover : http://ktv.51tzl.cn/Public/pcuser/images/default_rect.png
+             * order_function : 2
+             * room_type : 小包
+             * decorate_type : 新古典
+             * total : 0.00
+             * statusdesc : 待处理
+             * buttonlist : [{"buttonid":"0","title":"取消订单"}]
+             * cover : /Public/pcuser/images/default_rect.png
              */
 
             public String order_id;
@@ -47,18 +44,24 @@ public class BookListModel   {
             public String name;
             public String arrival_time;
             public String book_sn;
-            public String book_type;
+            public String order_action;
+            public String order_function;
             public String room_type;
             public String decorate_type;
-            public String prepay;
             public String total;
-            public String created_time;
-            public String order_action;
-            public String consume_again;
-            public String leave_money;
-            public String is_comment;
-            public String is_display;
+            public String statusdesc;
             public String cover;
+            public List<ButtonlistBean> buttonlist;
+
+            public static class ButtonlistBean {
+                /**
+                 * buttonid : 0
+                 * title : 取消订单
+                 */
+
+                public String buttonid;
+                public String title;
+            }
         }
     }
 }

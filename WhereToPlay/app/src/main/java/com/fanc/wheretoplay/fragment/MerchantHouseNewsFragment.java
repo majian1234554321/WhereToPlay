@@ -54,6 +54,7 @@ public class MerchantHouseNewsFragment extends BaseFragment {
     private String mStoreName;
     private String mStoreAddress;
     private String mStoreDiscount;
+    private boolean open;
     private RecyclerView mRc;
     //集合
     private List<HousenewsList.StatusBean> housenews;
@@ -128,6 +129,11 @@ public class MerchantHouseNewsFragment extends BaseFragment {
         return this;
     }
 
+    public MerchantHouseNewsFragment setisOpen(boolean open) {
+        this.open = open;
+        return this;
+    }
+
     private void getMerchantDetail(String id) {
         showProgress();
         Log.e("token", mUser.getToken() + "\n" + Network.User.PUBLIC_HOUSENEWS);
@@ -154,7 +160,7 @@ public class MerchantHouseNewsFragment extends BaseFragment {
     }
 
     private void showHouseNewsList(List<HousenewsList.StatusBean> housenews) {
-        HouseNewsAdapter houseNewsAdapter = new HouseNewsAdapter(mContext, housenews,mStoreId);
+        HouseNewsAdapter houseNewsAdapter = new HouseNewsAdapter(mContext, housenews,mStoreId,open);
         mRc.setAdapter(houseNewsAdapter);
     }
 

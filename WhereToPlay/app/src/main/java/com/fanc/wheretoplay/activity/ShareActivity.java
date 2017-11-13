@@ -88,7 +88,7 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
 
     private WbShareHandler shareHandler;
     private String title,secondtitle;
-    public String logo = "https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1510224132575&di=e8556627c2ad19e38231bf9116ef5ce4&imgtype=0&src=http%3A%2F%2Fpic.58pic.com%2F58pic%2F13%2F74%2F51%2F99d58PIC6vm_1024.jpg";
+    public String logo = "http://testapi.51tzl.cn/static/logo.png";
 
 
     /**

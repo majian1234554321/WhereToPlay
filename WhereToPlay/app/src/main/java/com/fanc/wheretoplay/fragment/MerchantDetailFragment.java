@@ -405,6 +405,7 @@ public class MerchantDetailFragment extends BaseFragment {
                 intent.putExtra(Constants.STORE_NAME, mTvMerchantDetailTitle.getText().toString());
                 intent.putExtra(Constants.DISCOUNT_COUPON, mTvMerchantDetailDiscountSum.getText().toString());
                 intent.putExtra(Constants.ADDRESS, mTvMerchantDetailAddress.getText().toString());
+                intent.putExtra("open", true);
                 startActivity(intent);
             }
         });

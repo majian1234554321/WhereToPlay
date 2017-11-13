@@ -79,6 +79,7 @@ public class ReuseActivity extends BaseFragmentActivity {
                 .setStoreAddress(intent.getStringExtra(Constants.ADDRESS))
                 .setStoreName(intent.getStringExtra(Constants.STORE_NAME))
                 .setStoreDiscount(intent.getStringExtra(Constants.DISCOUNT_COUPON))
+                        .setisOpen(intent.getBooleanExtra("open",false))
                 );
                 break;
             case Constants.DRINKS:   //酒水
