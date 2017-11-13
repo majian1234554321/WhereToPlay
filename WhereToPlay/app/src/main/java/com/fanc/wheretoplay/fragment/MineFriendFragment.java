@@ -153,7 +153,7 @@ public class MineFriendFragment extends BaseFragment {
         MultipartBody.Part requestFileB =
                 MultipartBody.Part.createFormData("page", page + "");
         MultipartBody.Part requestFileC =
-                MultipartBody.Part.createFormData("token", "eyJpZCI6IjE0Iiwibm9uY2UiOiJrWFpGbkR3bCIsInNoYXJlX2NvZGUiOiIxNDU5ZGYwMiJ9");
+                MultipartBody.Part.createFormData("token", mUser.getToken());
 
         Subscription subscription = Retrofit_RequestUtils.getRequest().recomFriend(requestFileA, requestFileB, requestFileC)
                 .subscribeOn(Schedulers.io())
@@ -207,7 +207,7 @@ public class MineFriendFragment extends BaseFragment {
         }else {   //正常
         mStores.clear();
         mStores.addAll(mMineFriendList);
-            mineFriendAdapter.notifyDataSetChanged();
+        mineFriendAdapter.notifyDataSetChanged();
         if (mMineFriendList.size() == 0) {
             ToastUtils.showShortToast(mContext, "暂时还没有推荐好友");
         }

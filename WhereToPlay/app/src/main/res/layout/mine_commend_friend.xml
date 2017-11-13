@@ -41,12 +41,9 @@
             android:id="@+id/tv_mine_friend_timeleft"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/register_time"
             android:textColor="@color/textcolor_btn_normal"
             android:textSize="@dimen/textsize_levelsmall"
             android:layout_marginBottom="@dimen/margin_5"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="@+id/tv_mine_friend_title"
             app:layout_constraintBottom_toBottomOf="@+id/iv_mine_friend"
             />

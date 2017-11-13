@@ -162,7 +162,7 @@ public class MineCommendMoneyFragment extends BaseFragment {
         MultipartBody.Part requestFileB =
                 MultipartBody.Part.createFormData("page", page + "");
         MultipartBody.Part requestFileC =
-                MultipartBody.Part.createFormData("token", "eyJpZCI6IjE0Iiwibm9uY2UiOiJrWFpGbkR3bCIsInNoYXJlX2NvZGUiOiIxNDU5ZGYwMiJ9");
+                MultipartBody.Part.createFormData("token",  mUser.getToken());
 
         Subscription subscription = Retrofit_RequestUtils.getRequest().recomReward(requestFileA, requestFileB, requestFileC)
                 .subscribeOn(Schedulers.io())
