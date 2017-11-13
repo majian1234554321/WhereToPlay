@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
@@ -33,6 +34,7 @@ import com.fanc.wheretoplay.databinding.FragmentReserveInfoBinding;
 import com.fanc.wheretoplay.datamodel.RoomList;
 import com.fanc.wheretoplay.datamodel.StoreDescribe;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.rx.RxBus;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.DateFormatUtil;
 import com.fanc.wheretoplay.util.LocationUtils;
@@ -53,6 +55,7 @@ import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
+import rx.functions.Action1;
 
 /**
  * Created by Administrator on 2017/6/20.
@@ -76,7 +79,7 @@ public class ReserveInfoFragment extends BaseFragment {
     RadioButton mRbReserveInfoRepay;
     RadioButton mRbReserveInfoCredit;
     TextView mTvReserveInfoTime;
-//    TextView mTvReserveInfoWaiterInfo;
+    //    TextView mTvReserveInfoWaiterInfo;
     EditText mEtReserveInfoCarport;
     EditText mEtReserveInfoNumberOfPeople;
     EditText mEtReserveInfoRemark;
@@ -99,6 +102,9 @@ public class ReserveInfoFragment extends BaseFragment {
     private double lat, lng;
     // 店铺名称
     String storeName;
+    private TextView tv1;
+    private TextView tv2;
+    private ImageView iv3;
 
     @Nullable
     @Override
@@ -107,6 +113,17 @@ public class ReserveInfoFragment extends BaseFragment {
         initViews();
         init();
         setListeners();
+        RxBus.getDefault().toObservable(String.class)
+                .subscribe(new Action1<String>() {
+                    @Override
+                    public void call(String s) {
+                        if (s!=null){
+                            tv2.setText(s);
+                            tv2.setTextColor(Color.parseColor("#333333"));
+                        }
+
+                    }
+                });
         return reserveInfoBinding.getRoot();
     }
 
@@ -129,6 +146,9 @@ public class ReserveInfoFragment extends BaseFragment {
         mEtReserveInfoNumberOfPeople = reserveInfoBinding.etReserveInfoNumberOfPeople;
         mEtReserveInfoRemark = reserveInfoBinding.etReserveInfoRemark;
         mBtnReserveInfoPay = reserveInfoBinding.btnReserveInfoPay;
+        tv1 = reserveInfoBinding.tv1;
+        tv2 = reserveInfoBinding.tv2;
+        iv3 = reserveInfoBinding.iv3;
     }
 
     private void init() {
@@ -190,13 +210,14 @@ public class ReserveInfoFragment extends BaseFragment {
             case R.id.iv_reserve_info_date:
                 showReserveDateTime();
                 break;
-//            case R.id.tv_reserve_info_waiter_info:
-//                Intent intent = new Intent(mContext, DetailActivity.class);
-//                intent.putExtra(Constants.PAGE, Constants.WAITER_INFO);
-//                intent.putExtra(Constants.STORE_ID, storeId);
-//                intent.putExtra(Constants.IS_CHOOSE, true);
-//                startActivity(intent);
-//                break;
+            case R.id.tv2:
+                selectedRoomId();
+                break;
+
+            case R.id.iv3:
+                selectedRoomId();
+
+                break;
             case R.id.btn_reserve_info_pay:
                 goToPay();
                 break;
@@ -204,6 +225,18 @@ public class ReserveInfoFragment extends BaseFragment {
                 break;
         }
     }
+
+    private void selectedRoomId() {
+        Intent intent = new Intent(mContext, ReuseActivity.class);
+        intent.putExtra(Constants.PAGE, Constants.HOUSENEWS);
+        intent.putExtra(Constants.STORE_ID, storeId);
+        intent.putExtra(Constants.STORE_NAME, mTvReserveInfoTitle.getText().toString());
+        intent.putExtra(Constants.DISCOUNT_COUPON, mTvReserveInfoRealDiscount.getText().toString());
+        intent.putExtra(Constants.ADDRESS, mTvReserveInfoAddress.getText().toString() + "  " + mTvReserveInfoDistance.getText().toString());
+        intent.putExtra("open", false);
+        startActivity(intent);
+    }
+
 
     public ReserveInfoFragment setStoreId(String storeId) {
         this.storeId = storeId;
@@ -459,7 +492,8 @@ public class ReserveInfoFragment extends BaseFragment {
 
     /**
      * 构造下单参数
-     *判断传入参数的正确性
+     * 判断传入参数的正确性
+     *
      * @param storeId
      * @param nickname
      * @param mobile

@@ -50,7 +50,7 @@ public class MineMoneyAdapter extends RecyclerView.Adapter<MineMoneyAdapter.View
         //头像
         Glide.with(mContext).load(mMoneyList.getPic()).placeholder(R.drawable.default_rect).into(holder.mIvMineMoney);
         //时间
-        holder.mTvMineMoeyTime.setText(DateFormatUtil.getYYYYMMDDHHmm(mMoneyList.getRegTime()));
+       // holder.mTvMineMoeyTime.setText(DateFormatUtil.getYYYYMMDDHHmm(mMoneyList.getRegTime()));
         //nickname
         holder.mTvMineMoneyTitle.setText(mMoneyList.getNickname());
     }
