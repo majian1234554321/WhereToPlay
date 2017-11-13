@@ -10,28 +10,29 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.fanc.wheretoplay.R;
-import com.fanc.wheretoplay.activity.CheckCommentsActivity;
 import com.fanc.wheretoplay.adapter.MineFriendAdapter;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentMineFriendBinding;
 import com.fanc.wheretoplay.datamodel.MineFriend;
-import com.fanc.wheretoplay.datamodel.MineMoney;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
-import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.MyScrollView;
 import com.fanc.wheretoplay.view.PullToRefreshLayout;
 import com.fanc.wheretoplay.view.TopMenu;
-import com.zhy.http.okhttp.OkHttpUtils;
-import com.zhy.http.okhttp.callback.DCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.Call;
+import okhttp3.MultipartBody;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by peace on 2017/11/8.
@@ -124,25 +125,57 @@ public class MineFriendFragment extends BaseFragment {
 
 
     private void requestCommendFrend(int page, int size) {
+//        showProgress();
+//        OkHttpUtils.post()
+//                .url(Network.User.USER_RCOMMEND_FRIEND)
+//                .addParams(Network.Param.PAGE,String.valueOf(page))
+//                .addParams(Network.Param.SIZE,String.valueOf(size))
+//                .addParams(Network.Param.TOKEN,"eyJpZCI6IjE0Iiwibm9uY2UiOiJrWFpGbkR3bCIsInNoYXJlX2NvZGUiOiIxNDU5ZGYwMiJ9")
+//                .build()
+//                .execute(new DCallback<MineFriend>() {
+//                    @Override
+//                    public void onError(Call call, Exception e) {
+//                        connectError();
+//                        refreshOrLoadFail();
+//                    }
+//
+//                    @Override
+//                    public void onResponse(MineFriend response) {
+//                        if (isSuccess(response)) {
+//                            showCommendFrendList(response.getContent());
+//                        }
+//                    }
+//                });
+
         showProgress();
-        OkHttpUtils.post()
-                .url(Network.User.USER_RCOMMEND_FRIEND)
-                .addParams(Network.Param.PAGE,String.valueOf(page))
-                .addParams(Network.Param.SIZE,String.valueOf(size))
-                .addParams(Network.Param.TOKEN,"eyJpZCI6IjE0Iiwibm9uY2UiOiJrWFpGbkR3bCIsInNoYXJlX2NvZGUiOiIxNDU5ZGYwMiJ9")
-                .build()
-                .execute(new DCallback<MineFriend>() {
+        MultipartBody.Part requestFileA =
+                MultipartBody.Part.createFormData("size", size + "");
+        MultipartBody.Part requestFileB =
+                MultipartBody.Part.createFormData("page", page + "");
+        MultipartBody.Part requestFileC =
+                MultipartBody.Part.createFormData("token", "eyJpZCI6IjE0Iiwibm9uY2UiOiJrWFpGbkR3bCIsInNoYXJlX2NvZGUiOiIxNDU5ZGYwMiJ9");
+
+        Subscription subscription = Retrofit_RequestUtils.getRequest().recomFriend(requestFileA, requestFileB, requestFileC)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<MineFriend>() {
                     @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        closeProgress();
+                        Toast.makeText(mContext, e.toString(), Toast.LENGTH_SHORT).show();
                         refreshOrLoadFail();
                     }
 
                     @Override
-                    public void onResponse(MineFriend response) {
-                        if (isSuccess(response)) {
-                            showCommendFrendList(response.getContent());
-                        }
+                    public void onNext(MineFriend mineFriend) {
+                        closeProgress();
+                        List<MineFriend.ContentBean> mineFriendContent = mineFriend.getContent();
+                        showCommendFrendList(mineFriendContent);
                     }
                 });
     }

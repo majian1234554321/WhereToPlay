@@ -42,17 +42,17 @@ public class MineMoneyAdapter extends RecyclerView.Adapter<MineMoneyAdapter.View
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-//        MineMoney.ContentBean mMoneyList = (MineMoney.ContentBean) mList.get(position);
-//        //价格
-//        SpannableString text = new SpannableString("+" + mMoneyList.getAmount() + " 元");
-//        text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length()-1, text.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
-//        holder.mTvMineMoney.setText(text);
-//        //头像
-//        Glide.with(mContext).load(mMoneyList.getPic()).placeholder(R.drawable.default_rect).into(holder.mIvMineMoney);
-//        //时间
-//        holder.mTvMineMoeyTime.setText(DateFormatUtil.getYYYYMMDDHHmm(mMoneyList.getRegTime()));
-//        //nickname
-//        holder.mTvMineMoneyTitle.setText(mMoneyList.getNickname());
+        MineMoney.ContentBean mMoneyList = (MineMoney.ContentBean) mList.get(position);
+        //价格
+        SpannableString text = new SpannableString("+" + mMoneyList.getAmount() + " 元");
+        text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length()-1, text.length(), Spanned.SPAN_INCLUSIVE_EXCLUSIVE);
+        holder.mTvMineMoney.setText(text);
+        //头像
+        Glide.with(mContext).load(mMoneyList.getPic()).placeholder(R.drawable.default_rect).into(holder.mIvMineMoney);
+        //时间
+        holder.mTvMineMoeyTime.setText(DateFormatUtil.getYYYYMMDDHHmm(mMoneyList.getRegtime()));
+        //nickname
+        holder.mTvMineMoneyTitle.setText(mMoneyList.getNickname());
     }
 
     @Override
