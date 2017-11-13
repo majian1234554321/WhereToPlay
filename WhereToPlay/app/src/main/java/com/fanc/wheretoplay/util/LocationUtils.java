@@ -140,10 +140,7 @@ public class LocationUtils {
             Log.e("hpzl", "onReceiveLocation: \n lat = " + bdLocation.getLatitude() + "\n lnt = " + bdLocation.getLongitude());
         }
 
-        @Override
-        public void onConnectHotSpotMessage(String s, int i) {
 
-        }
     }
 
     // 定位成功后的回调接口

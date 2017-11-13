@@ -72,13 +72,13 @@ public class ShearedPopDialog extends PopupWindow {
 //        return this;
 //    }
 
-    public ShearedPopDialog setOnCollectClickListener(final MListener mListener) {
+    public ShearedPopDialog setOnCollectClickListener(final View.OnClickListener listener) {
         mTvCollect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!isCollected) {
-                    if (mListener != null) {
-                        mListener.collect();
+                    if (listener != null) {
+                        listener.onClick(v);
                     }
                 }
                 dismiss();
@@ -108,7 +108,4 @@ public class ShearedPopDialog extends PopupWindow {
         return this;
     }
 
-    public interface MListener{
-        public void collect();
-    }
 }
