@@ -152,18 +152,13 @@ public class PublicationEvaluationActivity extends BaseActivity {
             for (int i = 0; i < imagesDisplay.size(); i++) {
                 bitmap = getBitmap(imagesDisplay.get(i));
                 value = Bitmap2StrByBase64(bitmap);
-                Log.i("AAAAAAAAAAAAA", value);
+                base64image.append("data:image/png;base64,");
                 base64image.append(value);
-                if (i != imagesDisplay.size()) {
+                if (i+1 != imagesDisplay.size()) {
                     base64image.append("|");
                 }
             }
         }
-
-
-
-
-
 
         JSONObject jsonObject = new JSONObject();
         try {

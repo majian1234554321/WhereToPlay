@@ -81,7 +81,6 @@ dependencies {
     //                { changing = true }
     compile project(':okhttputils')
     //    compile project(':datetimepicker')
-
     compile 'com.android.support:multidex:1.0.2'
     compile 'com.youth.banner:banner:1.4.10'
     compile 'com.google.code.gson:gson:2.8.0'
@@ -108,7 +107,7 @@ dependencies {
     compile 'com.qiyukf.unicorn:unicorn:3.11.1'
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.4.0'
     compile 'com.sina.weibo.sdk:core:4.1.4:openDefaultRelease@aar'
-   
+    implementation 'com.android.support:appcompat-v7:27.0.0'
 }
 
 //def gitSha() {
