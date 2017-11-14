@@ -273,7 +273,6 @@ public class Network{
         @POST("User/bookList")
         Observable<BaseResponseModel<BookListModel.ContentBean>> bookList(@Part MultipartBody.Part file, @Part MultipartBody.Part fileB, @Part MultipartBody.Part filec, @Part MultipartBody.Part filed);
 
-
         //订单详情
         @Multipart
         @POST("User/orderDetail")
@@ -283,9 +282,6 @@ public class Network{
         @Multipart
         @POST("User/cancle_order")
         Observable<BaseResponseModel<CancleOrderModel.ContentBean>> cancle_order(@Part MultipartBody.Part file, @Part MultipartBody.Part fileB);
-
-
-
 
         //提交评论
         @Multipart
@@ -297,29 +293,31 @@ public class Network{
         @POST("User/immediatelyPay")
         Observable<AccessOrderIdModel> immediatelyPay(@Part MultipartBody.Part fileA,@Part MultipartBody.Part fileB,@Part MultipartBody.Part fileC);
 
-
-
-
         //商家详情支付获取支付信息
         @Multipart
         @POST("User/order_payoff")
         Observable<PayOrder> order_payoff(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC, @Part MultipartBody.Part fileAA,
                                           @Part MultipartBody.Part fileBB, @Part MultipartBody.Part fileCC,@Part MultipartBody.Part fileCCC,@Part MultipartBody.Part fileCCCC);
 
-
+        //推荐奖励
         @Multipart
         @POST("Reco/recomReward")
         Observable<MineMoney> recomReward(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC);
 
+        //推荐好友
         @Multipart
         @POST("Reco/recomList")
         Observable<MineFriend> recomFriend(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC);
 
+        //验证码
         @Multipart
         @POST("Login/verify")
         Observable<VerifyCode> getMyVerification(@Part MultipartBody.Part fileA);
 
-
+        //收藏
+        @Multipart
+        @POST("User/Collect")
+        Observable<SubmitCommentModel> collect(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB);
     }
 
 }

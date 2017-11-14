@@ -179,35 +179,47 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/iv_pay_item"
+                android:layout_marginBottom="10dp"
                 android:background="@color/white"
                 android:gravity="right"
                 android:orientation="horizontal">
 
 
+                <TextView
+                    android:id="@+id/tv_001"
+                    android:layout_width="@dimen/width_80"
+                    android:layout_height="@dimen/height_30"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/shape_btn_black_stoke"
+                    android:gravity="center"
+                    android:padding="4dp"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/normal_textsize"
+                    android:visibility="gone" />
 
                 <TextView
-                    android:id="@+id/tv_left"
+                    android:id="@+id/tv_002"
                     android:layout_width="@dimen/width_80"
-                    android:layout_height="@dimen/height_25"
-                    android:layout_marginBottom="@dimen/margin_10"
-                    android:layout_marginRight="@dimen/margin_10"
+                    android:layout_height="@dimen/height_30"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/shape_btn_black_stoke"
-                    android:text="@string/cancel_reverse"
-                    android:padding="4dp"
                     android:gravity="center"
+                    android:padding="4dp"
                     android:textColor="#333333"
-                    android:textSize="@dimen/normal_textsize" />
+                    android:textSize="@dimen/normal_textsize"
+                    android:visibility="gone" />
 
-                <Button
-                    android:id="@+id/tv_right"
+
+                <TextView
+                    android:id="@+id/tv_003"
                     android:layout_width="@dimen/width_80"
-                    android:layout_height="@dimen/height_25"
-                    android:layout_marginBottom="@dimen/margin_10"
-                    android:layout_marginRight="@dimen/margin_10"
+                    android:layout_height="@dimen/height_30"
+                    android:layout_marginRight="10dp"
                     android:background="@drawable/shape_btn_signin"
-                    android:text="@string/paying_the_bill"
+                    android:gravity="center"
                     android:textColor="@color/text_white"
-                    android:textSize="@dimen/normal_textsize" />
+                    android:textSize="@dimen/normal_textsize"
+                    android:visibility="gone" />
 
 
             </LinearLayout>

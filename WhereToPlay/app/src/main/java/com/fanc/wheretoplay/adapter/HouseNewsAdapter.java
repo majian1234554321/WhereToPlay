@@ -17,6 +17,7 @@ import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.ReuseActivity;
 import com.fanc.wheretoplay.databinding.ItemHousenewsBinding;
 import com.fanc.wheretoplay.datamodel.HousenewsList;
+import com.fanc.wheretoplay.rx.RxBus;
 import com.fanc.wheretoplay.util.Constants;
 
 import java.util.List;
@@ -30,11 +31,13 @@ public class HouseNewsAdapter extends RecyclerView.Adapter<HouseNewsAdapter.View
     private final List<HousenewsList.StatusBean> housenews;
     Context mContext;
     public String mStoreId;
+    public boolean open;
 
-    public HouseNewsAdapter(Activity mContext, List<HousenewsList.StatusBean> housenews, String mStoreId) {
+    public HouseNewsAdapter(Activity mContext, List<HousenewsList.StatusBean> housenews, String mStoreId,boolean open) {
         this.mContext = mContext;
         this.housenews = housenews;
         this.mStoreId = mStoreId;
+        this.open = open;
     }
 
 
@@ -68,11 +71,16 @@ public class HouseNewsAdapter extends RecyclerView.Adapter<HouseNewsAdapter.View
             @Override
             public void onClick(View view) {
                 if ("1".equals(housenews.get(position).getStatus())){
-                    Toast.makeText(mContext, "可以被预订", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(mContext, ReuseActivity.class);
-                    intent.putExtra(Constants.STORE_ID, mStoreId);
-                    intent.putExtra(Constants.PAGE, Constants.RESERVE_INFO);
-                    mContext. startActivity(intent);
+                    if (open) {
+                        Intent intent = new Intent(mContext, ReuseActivity.class);
+                        intent.putExtra(Constants.STORE_ID, mStoreId);
+                        intent.putExtra(Constants.PAGE, Constants.RESERVE_INFO);
+                        mContext.startActivity(intent);
+
+                    }else {
+                        RxBus.getDefault().post(housenews.get(position).getNumber());
+                        ((Activity) mContext).finish();
+                    }
                 }else {
                     Toast.makeText(mContext, "该房间已被预订或者正在使用", Toast.LENGTH_SHORT).show();
                 }

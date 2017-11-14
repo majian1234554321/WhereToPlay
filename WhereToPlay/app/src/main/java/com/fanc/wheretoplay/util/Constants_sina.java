@@ -25,7 +25,7 @@ package com.fanc.wheretoplay.util;
 public interface Constants_sina {
 
     /** 当前 DEMO 应用的 APP_KEY，第三方应用应该使用自己的 APP_KEY 替换该 APP_KEY */
-    String APP_KEY      = "281356183";
+    String APP_KEY      = "420240832";
 
     /** 
      * 当前 DEMO 应用的回调页，第三方应用可以使用自己的回调页。

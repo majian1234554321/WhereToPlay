@@ -24,6 +24,8 @@ import com.qiyukf.nimlib.sdk.NimIntent;
 import com.qiyukf.unicorn.api.ConsultSource;
 import com.qiyukf.unicorn.api.Unicorn;
 
+import rx.subscriptions.CompositeSubscription;
+
 
 /**
  * @author tylz
@@ -46,6 +48,7 @@ public abstract class BaseFragment
     public PullToRefreshLayout mPtrl;
 
     boolean isShowing;
+    public  CompositeSubscription compositeSubscription;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,7 @@ public abstract class BaseFragment
         mUser = mSpUtils.getUser();
         mLayoutInflater = LayoutInflater.from(mContext);
         //点击商家后台传来的消息可以进入聊天界面
+        compositeSubscription = new CompositeSubscription();
     }
 
     @Override
@@ -93,6 +97,15 @@ public abstract class BaseFragment
             statusBarHeight = mContext.getResources().getDimensionPixelSize(resourceId);
         }
         return statusBarHeight;
+    }
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (compositeSubscription!=null) {
+            compositeSubscription.clear();
+        }
     }
 
     /**
