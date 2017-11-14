@@ -139,7 +139,7 @@ WhereToPlay/.gradle/4.2.1/fileHashes/fileHashes.bin
 WhereToPlay/.gradle/
 WhereToPlay/.idea/
 WhereToPlay/*.iml
-/*/local.properties
+
 WhereToPlay/app/app.iml
 WhereToPlay/app/build/generated/source/apt/debug/com/fanc/wheretoplay/databinding/FragmentMineFriendBinding.java
 WhereToPlay/app/build/generated/source/apt/debug/com/fanc/wheretoplay/databinding/MineCommendFriendBinding.java
