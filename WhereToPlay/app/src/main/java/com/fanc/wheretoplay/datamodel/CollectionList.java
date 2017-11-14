@@ -30,6 +30,7 @@ public class CollectionList extends BaseModel {
     public static class Collection extends BaseObservable {
         /**
          * id：string，收藏id，
+         * store_id:
          * name: string, 商店名称，
          * path: string, 商店封面路径，
          * grade: string，商店档次，

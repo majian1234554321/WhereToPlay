@@ -1,9 +1,13 @@
 package com.fanc.wheretoplay.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.databinding.ViewDataBinding;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,8 +16,10 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
+import com.fanc.wheretoplay.activity.DetailActivity;
 import com.fanc.wheretoplay.databinding.ItemCollectionBinding;
 import com.fanc.wheretoplay.datamodel.CollectionList;
+import com.fanc.wheretoplay.util.Constants;
 
 import java.util.HashMap;
 import java.util.List;
@@ -44,7 +50,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        CollectionList.Collection collection = (CollectionList.Collection) mData.get(position);
+        final CollectionList.Collection collection = (CollectionList.Collection) mData.get(position);
         holder.binding.setCollection(collection);
 //        Glide.with(mContext).load(Network.IMAGE + collection.getPath()).into(holder.mIvCollection);
         if (isDeleting) {
@@ -61,6 +67,19 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
                 } else {// 未选中，则选中
                     setItemStatus(position);
                 }
+            }
+        });
+        //调转到选中的商家
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(mContext, DetailActivity.class);
+                intent.putExtra(Constants.PAGE, Constants.MERCHANT_DETAIL);
+                intent.putExtra(Constants.STORE_ID, collection.getId());
+                Log.e("dd"," ??????????????????" + collection.getId());
+                ActivityOptionsCompat compat = ActivityOptionsCompat.makeCustomAnimation(mContext, R.anim.anim_enter_bottom, R.anim.anim_out_top_right);
+//                mContext.startActivity(intent);
+                ActivityCompat.startActivity(mContext, intent, compat.toBundle());
             }
         });
     }

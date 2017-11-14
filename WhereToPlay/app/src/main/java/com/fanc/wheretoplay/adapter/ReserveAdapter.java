@@ -106,6 +106,7 @@ public class ReserveAdapter extends RecyclerView.Adapter<ReserveAdapter.ViewHold
                 Intent intent = new Intent(mContext, DetailActivity.class);
                 intent.putExtra(Constants.PAGE, Constants.MERCHANT_DETAIL);
                 intent.putExtra(Constants.STORE_ID, store.getId());
+                Log.e("dd"," ??????????????????" + store.getId());
                 ActivityOptionsCompat compat = ActivityOptionsCompat.makeCustomAnimation(mContext, R.anim.anim_enter_bottom, R.anim.anim_out_top_right);
 //                mContext.startActivity(intent);
                 ActivityCompat.startActivity(mContext, intent, compat.toBundle());
