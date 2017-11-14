@@ -2,32 +2,26 @@ package com.fanc.wheretoplay.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.DetailsOrderActivity;
 import com.fanc.wheretoplay.activity.PayBillActivity;
-import com.fanc.wheretoplay.activity.ReuseActivity;
+import com.fanc.wheretoplay.activity.PublicationEvaluationActivity;
 import com.fanc.wheretoplay.datamodel.BookListModel;
 
 import com.fanc.wheretoplay.datamodel.CancleOrderModel;
-import com.fanc.wheretoplay.image.GlideCatchUtil;
 import com.fanc.wheretoplay.image.GlideImageLoader;
-import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.rx.BaseResponseModel;
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
-import com.fanc.wheretoplay.rx.RxHelper;
-import com.fanc.wheretoplay.rx.RxSubscribe;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.DateFormatUtil;
 import com.fanc.wheretoplay.util.SPUtils;
@@ -40,7 +34,6 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import okhttp3.MultipartBody;
-import rx.Scheduler;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
@@ -107,17 +100,11 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
             holder.lists.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    Intent intent = new Intent();
                     switch (holder.lists.get(finalI).getText().toString().trim()) {
 
-                        case "取消订单":
-                            cancleOrder(position);
-                            break;
-                        case "立即支付":
-                            pay(position);
-                            break;
-                        case "立即评论":
-                            Intent intent = new Intent();
+                        case "查看":
+
                             intent.putExtra("order_id", dataBean.list.get(position).order_id);
                             intent.putExtra("store_id", dataBean.list.get(position).store_id);
                             intent.putExtra("storeName", dataBean.list.get(position).name);
@@ -128,6 +115,23 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                             intent.setClass(context, DetailsOrderActivity.class);
                             fragment.startActivityForResult(intent, 1001);
                             break;
+                        case "取消订单":
+                            cancleOrder(position);
+                            break;
+                        case "立即支付":
+                            pay(position);
+                            break;
+                        case "立即评论":
+                            intent.putExtra("order_id", dataBean.list.get(position).order_id);
+                            intent.putExtra("store_id", dataBean.list.get(position).store_id);
+                            intent.putExtra("storeName", dataBean.list.get(position).name);
+                            intent.putExtra("total", dataBean.list.get(position).total);
+                            if (dataBean.list != null && dataBean.list.get(position).order_action != null) {
+                                intent.putExtra("status", dataBean.list.get(position).order_action);
+                            }
+                            intent.setClass(context, PublicationEvaluationActivity.class);
+                            fragment.startActivityForResult(intent, 1001);
+                            break;
                     }
                 }
             });
@@ -135,6 +139,14 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
 
         for (int i = 0; i < dataBean.list.get(position).buttonlist.size(); i++) {
+
+            if (i+1 ==dataBean.list.get(position).buttonlist.size()){
+                holder.lists.get(i).setBackgroundResource(R.drawable.shape_btn_black_c4483c);
+                holder.lists.get(i).setTextColor(Color.WHITE);
+            }else {
+                holder.lists.get(i).setBackgroundResource(R.drawable.shape_btn_black_stoke);
+                holder.lists.get(i).setTextColor(Color.parseColor("#333333"));
+            }
 
             if (dataBean.list.get(position).buttonlist.get(i).title != null) {
                 holder.lists.get(i).setText(dataBean.list.get(position).buttonlist.get(i).title);

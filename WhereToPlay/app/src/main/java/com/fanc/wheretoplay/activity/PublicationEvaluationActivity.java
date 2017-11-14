@@ -141,6 +141,8 @@ public class PublicationEvaluationActivity extends BaseActivity {
     @OnClick(R.id.btn_commit)
     public void onViewClicked() {
 
+
+        showProgress();
         StringBuilder base64image = new StringBuilder();
         if (imagesDisplay != null && imagesDisplay.size() > 1 && imagesDisplay.contains("这不是图片")) {
             imagesDisplay.remove("这不是图片");
@@ -168,7 +170,7 @@ public class PublicationEvaluationActivity extends BaseActivity {
             jsonObject.put("store_id", store_idValue);
             jsonObject.put("token", new SPUtils(mContext).getUser().getToken());
             jsonObject.put("order_id", order_idValue);
-            jsonObject.put("comment", et_content.getText().toString().trim());
+            jsonObject.put("content", et_content.getText().toString().trim());
             jsonObject.put("images", base64image.toString());
             jsonObject.put("environment", ratingValue1+"");
             jsonObject.put("atmosphere", ratingValue2+"");
@@ -194,11 +196,13 @@ public class PublicationEvaluationActivity extends BaseActivity {
 
                     @Override
                     public void onError(Throwable throwable) {
+                        closeProgress();
                         Toast.makeText(mContext, "提交评论失败", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
                     public void onNext(SubmitCommentModel submitCommentModel) {
+                        closeProgress();
                         if (submitCommentModel.code.equals("0")) {
                             Toast.makeText(mContext, "提交评论成功", Toast.LENGTH_SHORT).show();
                             RxBus.getDefault().post("提交评价成功");
@@ -242,6 +246,7 @@ public class PublicationEvaluationActivity extends BaseActivity {
 
         ByteArrayOutputStream bos = new ByteArrayOutputStream();
         bit.compress(Bitmap.CompressFormat.JPEG, 40, bos);//参数100表示不压缩
+        //bit.compress(Bitmap.CompressFormat., 40, bos);
         byte[] bytes = bos.toByteArray();
         return Base64.encodeToString(bytes, Base64.DEFAULT);
     }

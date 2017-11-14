@@ -1,6 +1,7 @@
 package com.fanc.wheretoplay.fragment;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
@@ -44,12 +45,15 @@ import com.fanc.wheretoplay.databinding.FragmentMerchantDetailBinding;
 import com.fanc.wheretoplay.datamodel.IsOk;
 import com.fanc.wheretoplay.datamodel.StoreDetail;
 import com.fanc.wheretoplay.datamodel.StoreList;
+import com.fanc.wheretoplay.datamodel.SubmitCommentModel;
 import com.fanc.wheretoplay.datamodel.Url;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.rx.RxBus;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.NaviUtils;
+import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.DrawableCenterLeftTextView;
@@ -67,9 +71,15 @@ import com.zhy.http.okhttp.callback.DCallback;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
+import okhttp3.MultipartBody;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2017/6/14.
@@ -265,12 +275,12 @@ public class MerchantDetailFragment extends BaseFragment {
             public void onClick(View v) {
                 new ShearedPopDialog(mContext)
                         .setCollected(isCollected)
-//                        .setOnCollectClickListener(new View.OnClickListener() {
-//                            @Override
-//                            public void onClick(View v) {
-//                                collectStore(mStoreId);
-//                            }
-//                        })
+                        .setOnCollectClickListener(new View.OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                collectStore(mStoreId);
+                            }
+                        })
                         .setOnShearedClickListener(new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
@@ -712,28 +722,40 @@ public class MerchantDetailFragment extends BaseFragment {
      * @param storeId
      */
     private void collectStore(String storeId) {
-        showProgress();
-        OkHttpUtils.post()
-                .url(Network.User.USER_COLLECT)
-                .addParams(Network.Param.TOKEN, mUser.getToken())
-                .addParams(Network.Param.STORE_ID, storeId)
-                .build()
-                .execute(new DCallback<IsOk>() {
+
+
+        MultipartBody.Part requestFileA =
+                MultipartBody.Part.createFormData("token", new SPUtils(mContext).getUser().getToken());
+
+        MultipartBody.Part requestFileC =
+                MultipartBody.Part.createFormData("store_id", storeId);
+
+     Subscription subscription =  Retrofit_RequestUtils.getRequest().collect(requestFileA, requestFileC).throttleFirst(1, TimeUnit.SECONDS)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<SubmitCommentModel>() {
                     @Override
-                    public void onError(Call call, Exception e) {
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
                         connectError();
                     }
 
                     @Override
-                    public void onResponse(IsOk response) {
-                        if (isSuccess(response)) {
-                            if (response.isIs_ok()) {
-                                isCollected = true;
-                                ToastUtils.makePicTextShortToast(mContext, "收藏成功");
-                            }
+                    public void onNext(SubmitCommentModel submitCommentModel) {
+                        if (submitCommentModel.code.equals("0")) {
+                            isCollected = true;
+                            ToastUtils.makePicTextShortToast(mContext, "收藏成功");
                         }
                     }
                 });
+
+        compositeSubscription.add(subscription);
+
+
     }
 
     /**

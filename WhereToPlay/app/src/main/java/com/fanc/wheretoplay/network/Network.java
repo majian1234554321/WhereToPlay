@@ -296,7 +296,7 @@ public class Network{
         Observable<AccessOrderIdModel> immediatelyPay(@Part MultipartBody.Part fileA,@Part MultipartBody.Part fileB,@Part MultipartBody.Part fileC);
 
 
-        //商家详情支付获取订单Id
+        //
         @Multipart
         @POST("Reco/recomReward")
         Observable<MineMoney> recomReward(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC);
@@ -311,7 +311,10 @@ public class Network{
                                           @Part MultipartBody.Part fileBB, @Part MultipartBody.Part fileCC,@Part MultipartBody.Part fileCCC,@Part MultipartBody.Part fileCCCC);
 
 
-
+        //收藏
+        @Multipart
+        @POST("User/Collect")
+        Observable<SubmitCommentModel> collect(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB);
 
 
     }

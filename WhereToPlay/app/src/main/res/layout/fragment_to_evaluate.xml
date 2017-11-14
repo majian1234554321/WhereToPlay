@@ -9,13 +9,13 @@
         <com.fanc.wheretoplay.view.TopMenu
             android:id="@+id/tm_to_evaluate"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_0"
             android:layout_weight="1"
-            android:background="@color/bg"
+            android:background="@color/white"
             android:gravity="center_horizontal"
             android:orientation="vertical">
 
@@ -23,32 +23,32 @@
                 android:layout_width="@dimen/width_100"
                 android:layout_height="@dimen/height_100"
                 android:layout_marginTop="@dimen/margin_50"
-                android:src="@drawable/pay_success"/>
+                android:src="@drawable/pay_success" />
 
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/margin_15"
-                android:orientation="horizontal">
+                android:orientation="vertical">
 
                 <TextView
                     android:id="@+id/tv_to_evaluate_pay_success"
-                    android:layout_width="@dimen/width_0"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+
                     android:gravity="right"
                     android:text="@string/pay_success"
                     android:textColor="@color/pay_reserve_list_text"
-                    android:textSize="@dimen/normal_textsize"/>
+                    android:textSize="@dimen/normal_textsize" />
 
                 <TextView
                     android:id="@+id/tv_to_evaluate_pay_sum"
-                    android:layout_width="@dimen/width_0"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
+                    android:gravity="center"
                     android:text="￥500"
-                    android:textColor="@color/pay_reserve_list_text"
-                    android:textSize="@dimen/textsize_level4"/>
+                    android:textColor="#C4483C"
+                    android:textSize="@dimen/textsize_level4" />
             </LinearLayout>
 
             <TextView
@@ -58,7 +58,7 @@
                 android:layout_marginTop="@dimen/margin_10"
                 android:text="@string/to_evaluate_1"
                 android:textColor="@color/pay_reserve_list_text"
-                android:textSize="@dimen/normal_textsize"/>
+                android:textSize="@dimen/normal_textsize" />
 
             <Button
                 android:id="@+id/btn_to_evaluate"
@@ -69,8 +69,8 @@
                 android:layout_marginTop="@dimen/margin_100"
                 android:background="@drawable/shape_btn_signin"
                 android:text="@string/to_evaluate"
-                android:textColor="@color/black"
-                android:textSize="@dimen/textsize_level2"/>
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_level2" />
         </LinearLayout>
 
     </LinearLayout>

@@ -188,7 +188,7 @@
                 <TextView
                     android:id="@+id/tv_001"
                     android:layout_width="@dimen/width_80"
-                    android:layout_height="@dimen/height_25"
+                    android:layout_height="@dimen/height_30"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/shape_btn_black_stoke"
                     android:gravity="center"
@@ -200,7 +200,7 @@
                 <TextView
                     android:id="@+id/tv_002"
                     android:layout_width="@dimen/width_80"
-                    android:layout_height="@dimen/height_25"
+                    android:layout_height="@dimen/height_30"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/shape_btn_black_stoke"
                     android:gravity="center"
@@ -213,7 +213,7 @@
                 <TextView
                     android:id="@+id/tv_003"
                     android:layout_width="@dimen/width_80"
-                    android:layout_height="@dimen/height_25"
+                    android:layout_height="@dimen/height_30"
                     android:layout_marginRight="10dp"
                     android:background="@drawable/shape_btn_signin"
                     android:gravity="center"

@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
+import com.fanc.wheretoplay.activity.PublicationEvaluationActivity;
 import com.fanc.wheretoplay.activity.ReuseActivity;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentToEvaluateBinding;
@@ -91,12 +92,10 @@ public class ToEvaluateFragment extends BaseFragment {
         mBtnToEvaluate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ReuseActivity.class);
-                intent.putExtra(Constants.STORE_ID, storeId);
-                intent.putExtra(Constants.ORDER_ID, orderId);
-                intent.putExtra(Constants.PAGE, Constants.COMMENT);
+                Intent intent = new Intent(mContext, PublicationEvaluationActivity.class);
+                intent.putExtra("order_id", orderId);
+                intent.putExtra("store_id", storeId);
                 startActivity(intent);
-
                 mContext.finish();
             }
         });

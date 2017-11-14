@@ -4,6 +4,7 @@ import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.graphics.drawable.BitmapDrawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -72,13 +73,13 @@ public class ShearedPopDialog extends PopupWindow {
 //        return this;
 //    }
 
-    public ShearedPopDialog setOnCollectClickListener(final MListener mListener) {
+    public ShearedPopDialog setOnCollectClickListener(final View.OnClickListener mListener) {
         mTvCollect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!isCollected) {
                     if (mListener != null) {
-                        mListener.collect();
+                        mListener.onClick(v);
                     }
                 }
                 dismiss();
