@@ -320,20 +320,23 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
      * @param response
      */
     private void showCheckComments(CheckComments response) {
-        //顶部分数显示
-        mTvAverageScore.setText(response.getAverage_comment());
-        mTvScoreEnvironment.setText(response.getComment_environment());
-        mTvScoreatmosphere.setText(response.getComment_atmosphere());
-        mTvScoreservice.setText(response.getComment_server());
-        //顶部3个星星
-        mRbEnvironment.setRating(Float.parseFloat(response.getComment_environment()));
-        mRbAtmosphere.setRating(Float.parseFloat(response.getComment_atmosphere()));
-        mRbService.setRating(Float.parseFloat(response.getComment_server()));
-        //中部四个文字按钮
-        mBtAll.setText(getResources().getText(R.string.check_comment_all) + "(" + response.getAll_count() +")");
-        mBtPleasure.setText(getResources().getText(R.string.check_comment_pleasure) + "(" + response.getPleasure_count() +")");
-        mBtDispleasure.setText(getResources().getText(R.string.check_comment_displeasure) + "(" + response.getDispleasure_count() +")");
-        mBtpicture.setText(getResources().getText(R.string.check_comment_picture) + "(" + response.getPicture_count() +")");
+        if (response.getComment_server() !=null && response.getAll_count()!= null && response.getPleasure_count()!= null && response.getDispleasure_count()!= null
+                && response.getPicture_count() != null && response.getComment_atmosphere()!= null && response.getComment_environment() != null) {
+            //顶部分数显示
+            mTvAverageScore.setText(response.getAverage_comment());
+            mTvScoreEnvironment.setText(response.getComment_environment());
+            mTvScoreatmosphere.setText(response.getComment_atmosphere());
+            mTvScoreservice.setText(response.getComment_server());
+            //顶部3个星星
+            mRbEnvironment.setRating(Float.parseFloat(response.getComment_environment()));
+            mRbAtmosphere.setRating(Float.parseFloat(response.getComment_atmosphere()));
+            mRbService.setRating(Float.parseFloat(response.getComment_server()));
+            //中部四个文字按钮
+            mBtAll.setText(getResources().getText(R.string.check_comment_all) + "(" + response.getAll_count() +")");
+            mBtPleasure.setText(getResources().getText(R.string.check_comment_pleasure) + "(" + response.getPleasure_count() +")");
+            mBtDispleasure.setText(getResources().getText(R.string.check_comment_displeasure) + "(" + response.getDispleasure_count() +")");
+            mBtpicture.setText(getResources().getText(R.string.check_comment_picture) + "(" + response.getPicture_count() +")");
+        }
         //集合添加数据
         storeList(response.getComment_list());
 //        //底部评论
