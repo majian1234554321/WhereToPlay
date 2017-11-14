@@ -1,6 +1,8 @@
 package com.fanc.wheretoplay.fragment;
 
 import android.Manifest;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
@@ -14,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -47,7 +50,7 @@ public class ReferralFragment extends BaseFragment {
     ImageView mIvReferralsAD;
     CircleImageView mCivMineHeader;
     TextView mTvMineNickname;
-    TextView mTvInvitationCode;
+    EditText mTvInvitationCode;
     Button mBtnReferralsSheared;
 
     String shearedUrl;
@@ -92,6 +95,15 @@ public class ReferralFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 mContext.finish();
+            }
+        });
+        mTvInvitationCode.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                ClipboardManager cm =(ClipboardManager)getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                cm.setText(mUser.getShare_code());
+                //ToastUtil.toastSth(getContext() , "订单号已复制到剪切板，快去粘贴吧~");
+                return false;
             }
         });
     }

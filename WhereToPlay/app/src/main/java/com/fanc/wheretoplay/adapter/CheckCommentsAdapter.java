@@ -78,6 +78,9 @@ public class CheckCommentsAdapter extends RecyclerView.Adapter<CheckCommentsAdap
 
     @Override
     public int getItemCount() {
+        if (mList == null) {
+            return 0;
+        }
         return mList.size();
     }
 

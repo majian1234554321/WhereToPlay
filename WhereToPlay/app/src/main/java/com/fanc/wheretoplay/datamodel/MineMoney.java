@@ -8,7 +8,8 @@ import java.util.List;
  * Created by peace on 2017/11/10.
  */
 
-public class MineMoney  extends BaseModel {
+public class MineMoney extends BaseModel {
+
 
     private List<ContentBean> content;
 
@@ -24,14 +25,14 @@ public class MineMoney  extends BaseModel {
         /**
          * nickname : name1
          * pic : http://ktv.51tzl.cn/Public/head_icon.png
-         * regtime : 1506079634
-         * amount : 20
+         * regTime : 1506079634
+         * amount : 22
          */
 
         private String nickname;
         private String pic;
-        private String regtime;
-        private String amount;
+        private String regTime;
+        private int amount;
 
         public String getNickname() {
             return nickname;
@@ -49,19 +50,19 @@ public class MineMoney  extends BaseModel {
             this.pic = pic;
         }
 
-        public String getRegtime() {
-            return regtime;
+        public String getRegTime() {
+            return regTime;
         }
 
-        public void setRegtime(String regtime) {
-            this.regtime = regtime;
+        public void setRegTime(String regTime) {
+            this.regTime = regTime;
         }
 
-        public String getAmount() {
+        public int getAmount() {
             return amount;
         }
 
-        public void setAmount(String amount) {
+        public void setAmount(int amount) {
             this.amount = amount;
         }
     }

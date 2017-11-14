@@ -12,6 +12,8 @@ import retrofit2.http.Part;
 
 import com.fanc.wheretoplay.datamodel.CancleOrderModel;
 import com.fanc.wheretoplay.datamodel.MineMoney;
+import com.fanc.wheretoplay.datamodel.MineFriend;
+import com.fanc.wheretoplay.datamodel.MineMoney;
 import com.fanc.wheretoplay.datamodel.OrderDetailModel;
 import com.fanc.wheretoplay.datamodel.PayOrder;
 import com.fanc.wheretoplay.datamodel.SubmitCommentModel;
@@ -79,6 +81,7 @@ public class Network{
 
         public static String USER_HOME = USER + "User/home";// 我的主页
         public static String USER_RCOMMEND_FRIEND = USER + "Reco/recomList";// 推荐好友
+        public static String USER_RCOMMEND_MONEY = USER + "Reco/recomReward";// 推荐奖励
         public static String RECOMREWARD = USER + "Reco/recomReward";// 推荐
 
         public static String USER_MODIFY_AVATAR = USER + "User/modifyAvatar";// 修改头像
@@ -153,6 +156,7 @@ public class Network{
 
              USER_HOME = url + "User/home";// 我的主页
              USER_RCOMMEND_FRIEND = url + "Reco/recomList";// 推荐好友
+            USER_RCOMMEND_MONEY = url + "Reco/recomReward";// 推荐奖励
              USER_MODIFY_AVATAR = url + "User/modifyAvatar";// 修改头像
              USER_MODIFY_PRO_FILE = url + "User/modifyProfile";//修改资料
              USER_MESSAGE_LIST = url + "User/messageList";// 消息
@@ -296,12 +300,6 @@ public class Network{
         Observable<AccessOrderIdModel> immediatelyPay(@Part MultipartBody.Part fileA,@Part MultipartBody.Part fileB,@Part MultipartBody.Part fileC);
 
 
-        //
-        @Multipart
-        @POST("Reco/recomReward")
-        Observable<MineMoney> recomReward(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC);
-
-
 
 
         //商家详情支付获取支付信息
@@ -311,6 +309,13 @@ public class Network{
                                           @Part MultipartBody.Part fileBB, @Part MultipartBody.Part fileCC,@Part MultipartBody.Part fileCCC,@Part MultipartBody.Part fileCCCC);
 
 
+        @Multipart
+        @POST("Reco/recomReward")
+        Observable<MineMoney> recomReward(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC);
+
+        @Multipart
+        @POST("Reco/recomList")
+        Observable<MineFriend> recomFriend(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC);
         //收藏
         @Multipart
         @POST("User/Collect")

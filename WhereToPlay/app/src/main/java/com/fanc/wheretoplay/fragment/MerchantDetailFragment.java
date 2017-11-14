@@ -270,6 +270,7 @@ public class MerchantDetailFragment extends BaseFragment {
                 mContext.overridePendingTransition(R.anim.anim_in_top_right, R.anim.anim_close_top);
             }
         });
+        //收藏
         mTmDetail.setRightIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -312,18 +313,7 @@ public class MerchantDetailFragment extends BaseFragment {
                 mContext.overridePendingTransition(R.anim.anim_enter_bottom, R.anim.anim_out_top_right);
             }
         });
-//        iconAdapter.setOnItemClickListener(new CommentIconAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick() {
-////                Intent intent = new Intent(mContext, DetailActivity.class);
-////                intent.putExtra(Constants.PAGE, Constants.COMMENT_DETAIL);
-////                startActivity(intent);
-//
-//                Intent intent = new Intent(mContext, CheckCommentActivity.class);
-//                intent.putExtra(Constants.STORE_ID, mStoreId);
-//                startActivity(intent);
-//            }
-//        });
+
         //查看评论
         mLlMerchantDetailComment.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -58,6 +58,7 @@ public interface Constants {
     String DRIVE = "drive";// 代驾
     String MINEFRIEND = "friend";// 代驾
     String MINEMONEY = "money";// 代驾
+    String MINESERVICE = "mine_service";// 代驾
     String DEAL_DETAIL = "deal_detail";
     String CONSUME_DETAIL = "consume_detail";
     String RECHARGE_DETAIL = "recharge_detail";

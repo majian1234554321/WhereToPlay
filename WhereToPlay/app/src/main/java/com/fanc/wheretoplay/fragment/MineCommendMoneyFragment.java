@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -28,6 +29,7 @@ import com.fanc.wheretoplay.view.TopMenu;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -49,10 +51,10 @@ public class MineCommendMoneyFragment extends BaseFragment {
     private TopMenu mTmMineCommendMoney;
 
     private MineMoneyAdapter mineMoneyAdapter;
+    private List mCommenMoney;
 
 
     //刷新
-    private PullToRefreshLayout mPtrl;
     private int page = 0;
     private int size = 6;
     private List mStores;
@@ -131,60 +133,63 @@ public class MineCommendMoneyFragment extends BaseFragment {
 
 
     private void requestCommendMoney(int page, int size) {
-
-        OkHttpUtils.post()
-                .url(Network.User.RECOMREWARD)
-                .addParams(Network.Param.PAGE, String.valueOf(page))
-                .addParams(Network.Param.SIZE, String.valueOf(size))
-                .addParams(Network.Param.TOKEN, "eyJpZCI6IjE0Iiwibm9uY2UiOiJrWFpGbkR3bCIsInNoYXJlX2NvZGUiOiIxNDU5ZGYwMiJ9")
-                .build()
-                .execute(new DCallback<MineMoney>() {
-                    @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
-                    }
-
-                    @Override
-                    public void onResponse(MineMoney response) {
-                        if (isSuccess(response)) {
-                            List<MineMoney.ContentBean> content = response.getContent();
-                            showCommendMoneyList(content);
-                        }
-                    }
-                });
-
-//        MultipartBody.Part requestFileA =
-//                MultipartBody.Part.createFormData("size", size + "");
-//        MultipartBody.Part requestFileB =
-//                MultipartBody.Part.createFormData("page", page + "");
-//        MultipartBody.Part requestFileC =
-//                MultipartBody.Part.createFormData("token", "eyJpZCI6IjE0Iiwibm9uY2UiOiJrWFpGbkR3bCIsInNoYXJlX2NvZGUiOiIxNDU5ZGYwMiJ9");
-//
-//        Subscription subscription = Retrofit_RequestUtils.getRequest().recomReward(requestFileA, requestFileB, requestFileC)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Subscriber<MineMoney>() {
+//        showProgress();
+//        OkHttpUtils.post()
+//                .url(Network.User.USER_RCOMMEND_MONEY)
+//                .addParams(Network.Param.PAGE, String.valueOf(0))
+//                .addParams(Network.Param.SIZE, String.valueOf(6))
+//                .addParams(Network.Param.TOKEN, String.valueOf("eyJpZCI6IjE0Iiwibm9uY2UiOiJrWFpGbkR3bCIsInNoYXJlX2NvZGUiOiIxNDU5ZGYwMiJ9"))
+//                .build()
+//                .execute(new DCallback<Response>() {
 //                    @Override
-//                    public void onCompleted() {
-//
+//                    public void onError(Call call, Exception e) {
+//                        connectError();
+//                        refreshOrLoadFail();
 //                    }
 //
 //                    @Override
-//                    public void onError(Throwable e) {
-//                        Toast.makeText(mContext, e.toString(), Toast.LENGTH_SHORT).show();
-//                    }
-//
-//                    @Override
-//                    public void onNext(MineMoney mineMoney) {
-//                        List<MineMoney.ContentBean> content = mineMoney.getContent();
-//                        showCommendMoneyList(content);
+//                    public void onResponse(Response response) {
+//                        try {
+//                            Log.e("dd","====================="+response.body().string());
+//                        } catch (IOException e) {
+//                            e.printStackTrace();
+//                        }
 //                    }
 //                });
+        showProgress();
+                MultipartBody.Part requestFileA =
+                MultipartBody.Part.createFormData("size", size + "");
+        MultipartBody.Part requestFileB =
+                MultipartBody.Part.createFormData("page", page + "");
+        MultipartBody.Part requestFileC =
+                MultipartBody.Part.createFormData("token",  mUser.getToken());
 
+        Subscription subscription = Retrofit_RequestUtils.getRequest().recomReward(requestFileA, requestFileB, requestFileC)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<MineMoney>() {
+                    @Override
+                    public void onCompleted() {
 
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        closeProgress();
+                        Toast.makeText(mContext, "没有数据", Toast.LENGTH_SHORT).show();
+                        refreshOrLoadFail();
+                    }
+
+                    @Override
+                    public void onNext(MineMoney mineMoney) {
+                        closeProgress();
+                        List<MineMoney.ContentBean> content = mineMoney.getContent();
+                        showCommendMoneyList(content);
+                    }
+                });
     }
 
-    private void showCommendMoneyList(List<MineMoney.ContentBean> mCommenMoneyList) {
+    private void showCommendMoneyList(List mCommenMoneyList) {
         if (isPullDown) {// 下拉刷新
             if (mCommenMoneyList.size() == 0) {
                 ToastUtils.makePicTextShortToast(mContext, "没有推荐奖励");

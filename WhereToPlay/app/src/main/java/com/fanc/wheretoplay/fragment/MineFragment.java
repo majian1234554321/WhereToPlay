@@ -28,6 +28,8 @@ import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.view.CircleImageView;
 import com.fanc.wheretoplay.view.ItemView;
 import com.fanc.wheretoplay.view.TopMenu;
+import com.qiyukf.unicorn.api.ConsultSource;
+import com.qiyukf.unicorn.api.Unicorn;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
@@ -58,6 +60,7 @@ public class MineFragment extends BaseFragment {
     private ItemView mTvMineDrive;
 
     Receiver receiver;
+    private ItemView mIvMineService;
 
     @Nullable
     @Override
@@ -85,6 +88,7 @@ public class MineFragment extends BaseFragment {
         mTvMineDrive = mineBinding.ivMineDrive;
         mIvMineFriend = mineBinding.ivMineCommendFriend;
         mIvMineMoney = mineBinding.ivMineCommendMoney;
+        mIvMineService = mineBinding.ivMineService;
     }
 
     private void init() {
@@ -99,10 +103,10 @@ public class MineFragment extends BaseFragment {
         getScore();
 
         //条目栏的文字、图片设置
-       // mIvMineFriend.setIcon(R.drawable.mine_recommend_friend);
+        mIvMineFriend.setIcon(R.drawable.mine_recommend_friend);
         mIvMineFriend.setText(R.string.friend);
         mIvMineFriend.setRightIcon(R.drawable.right);
-       // mIvMineMoney.setIcon(R.drawable.mine_recommend_money);
+        mIvMineMoney.setIcon(R.drawable.mine_recommend_money);
         mIvMineMoney.setText(R.string.money);
         mIvMineMoney.setRightIcon(R.drawable.right);
         mIvMineMessage.setIcon(R.drawable.mine_message);
@@ -129,6 +133,9 @@ public class MineFragment extends BaseFragment {
         mTvMineDrive.setIcon(R.drawable.mine_driver);
         mTvMineDrive.setText(R.string.drive);
         mTvMineDrive.setRightIcon(R.drawable.right);
+        mIvMineService.setText(R.string.mine_service);
+        mIvMineService.setIcon(R.drawable.mine_service);
+        mIvMineService.setRightIcon(R.drawable.right);
 
         registerBroadcastReceiver();
     }
@@ -246,6 +253,11 @@ public class MineFragment extends BaseFragment {
                 break;
             case R.id.iv_mine_drive:
                 ToastUtils.makePicTextShortToast(mContext,"修复中，敬请期待！");
+//                goToNewPage(Constants.DRIVE);
+                break;
+            case R.id.iv_mine_service:
+                ConsultSource source = new ConsultSource(null, null, null);
+                Unicorn.openServiceActivity(mContext, getResources().getString(R.string.app_name), source);
 //                goToNewPage(Constants.DRIVE);
                 break;
             default:
