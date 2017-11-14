@@ -75,11 +75,9 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, DetailActivity.class);
                 intent.putExtra(Constants.PAGE, Constants.MERCHANT_DETAIL);
-                intent.putExtra(Constants.STORE_ID, collection.getId());
-                Log.e("dd"," ??????????????????" + collection.getId());
-                ActivityOptionsCompat compat = ActivityOptionsCompat.makeCustomAnimation(mContext, R.anim.anim_enter_bottom, R.anim.anim_out_top_right);
+                intent.putExtra(Constants.STORE_ID, collection.getStore_id());
 //                mContext.startActivity(intent);
-                ActivityCompat.startActivity(mContext, intent, compat.toBundle());
+                ActivityCompat.startActivity(mContext, intent,null);
             }
         });
     }

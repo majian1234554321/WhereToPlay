@@ -267,7 +267,7 @@ public class MerchantDetailFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 mContext.finish();
-                mContext.overridePendingTransition(R.anim.anim_in_top_right, R.anim.anim_close_top);
+//                mContext.overridePendingTransition(R.anim.anim_in_top_right, R.anim.anim_close_top);
             }
         });
         //收藏
