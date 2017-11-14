@@ -28,6 +28,7 @@ import com.fanc.wheretoplay.datamodel.CityResource;
 import com.fanc.wheretoplay.datamodel.User;
 import com.fanc.wheretoplay.datamodel.VerifyCode;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
@@ -42,6 +43,11 @@ import java.io.InputStream;
 import java.util.List;
 
 import okhttp3.Call;
+import okhttp3.MultipartBody;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import static com.fanc.wheretoplay.base.App.mContext;
 
@@ -116,8 +122,8 @@ public class RegisterFragment extends BaseFragment {
         if (LocationUtils.location != null) {
             mTvRegisterCity.setText(LocationUtils.location.getCity());
             List<CityResource.Province> provinces = getProvinceList();
-            for (CityResource.Province province:provinces){
-                for (CityResource.City city:province.getChild()){
+            for (CityResource.Province province : provinces) {
+                for (CityResource.City city : province.getChild()) {
                     if (LocationUtils.location.getCity() != null && LocationUtils.location.getCity().contains(city.getName())) {
                         this.mCity = city;
                     } else {
@@ -162,13 +168,41 @@ public class RegisterFragment extends BaseFragment {
             mBtnRegisterVerification.setEnabled(false);
 
             showProgress();
-            OkHttpUtils.post()
-                    .url(Network.User.LOGIN_VERIFY)
-                    .addParams(Network.Param.MOBILE, mobile)
-                    .build()
-                    .execute(new DCallback<VerifyCode>() {
+//            OkHttpUtils.post()
+//                    .url(Network.User.LOGIN_VERIFY)
+//                    .addParams(Network.Param.MOBILE, mobile)
+//                    .build()
+//                    .execute(new DCallback<VerifyCode>() {
+//                        @Override
+//                        public void onError(Call call, Exception e) {
+//                            connectError();
+//                            mTimer.cancel();
+//                            mBtnRegisterVerification.setEnabled(true);
+//                            mBtnRegisterVerification.setText("重新获取");
+//                        }
+//
+//                        @Override
+//                        public void onResponse(VerifyCode response) {
+//                            if (isSuccess(response)) {
+//                                verifyCode = response.getVerifyCode();
+////                                mEtRegisterVerification.setText(verifyCode);
+//                            }
+//                        }
+//                    });
+
+            MultipartBody.Part requestFileA = MultipartBody.Part.createFormData(Network.Param.MOBILE, mobile);
+
+            Subscription subscription = Retrofit_RequestUtils.getRequest().getMyVerification(requestFileA)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Subscriber<VerifyCode>() {
                         @Override
-                        public void onError(Call call, Exception e) {
+                        public void onCompleted() {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
                             connectError();
                             mTimer.cancel();
                             mBtnRegisterVerification.setEnabled(true);
@@ -176,15 +210,15 @@ public class RegisterFragment extends BaseFragment {
                         }
 
                         @Override
-                        public void onResponse(VerifyCode response) {
+                        public void onNext(VerifyCode response) {
+                            closeProgress();
                             if (isSuccess(response)) {
                                 verifyCode = response.getVerifyCode();
-//                                mEtRegisterVerification.setText(verifyCode);
                             }
                         }
                     });
-
         }
+
     }
 
     /**
@@ -194,7 +228,7 @@ public class RegisterFragment extends BaseFragment {
         mTimer = new CountDownTimer(MINUTE, SECOND) {
             @Override
             public void onTick(long millisUntilFinished) {
-                mBtnRegisterVerification.setText((millisUntilFinished / SECOND) + "s后重新获取");
+                mBtnRegisterVerification.setText(getResources().getString(R.string.register_verifyTime,millisUntilFinished / SECOND));
             }
 
             @Override
@@ -310,6 +344,7 @@ public class RegisterFragment extends BaseFragment {
         public void onReceive(Context context, Intent intent) {
             mCity = (CityResource.City) intent.getSerializableExtra(Constants.CITY);
             mTvRegisterCity.setText(mCity.getName());
+            mTvRegisterCity.setTextColor(getResources().getColor(R.color.text_black_sec));
         }
     }
 

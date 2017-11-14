@@ -16,6 +16,7 @@ import com.fanc.wheretoplay.datamodel.MineMoney;
 import com.fanc.wheretoplay.datamodel.OrderDetailModel;
 import com.fanc.wheretoplay.datamodel.PayOrder;
 import com.fanc.wheretoplay.datamodel.SubmitCommentModel;
+import com.fanc.wheretoplay.datamodel.VerifyCode;
 import com.fanc.wheretoplay.rx.BaseResponseModel;
 import rx.Observable;
 
@@ -313,6 +314,10 @@ public class Network{
         @Multipart
         @POST("Reco/recomList")
         Observable<MineFriend> recomFriend(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC);
+
+        @Multipart
+        @POST("Login/verify")
+        Observable<VerifyCode> getMyVerification(@Part MultipartBody.Part fileA);
 
 
     }
