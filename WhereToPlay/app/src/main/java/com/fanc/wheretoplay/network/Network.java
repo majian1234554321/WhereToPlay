@@ -318,6 +318,7 @@ public class Network{
         @Multipart
         @POST("User/Collect")
         Observable<SubmitCommentModel> collect(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB);
+
     }
 
 }

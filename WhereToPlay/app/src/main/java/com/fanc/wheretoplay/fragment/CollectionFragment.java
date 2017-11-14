@@ -10,15 +10,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.adapter.CollectionAdapter;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentCollectionBinding;
 import com.fanc.wheretoplay.datamodel.CollectionList;
+import com.fanc.wheretoplay.datamodel.DelectCollection;
 import com.fanc.wheretoplay.datamodel.IsOk;
+import com.fanc.wheretoplay.datamodel.MineMoney;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
@@ -34,6 +38,11 @@ import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
+import okhttp3.MultipartBody;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2017/6/17.
@@ -271,14 +280,14 @@ public class CollectionFragment extends BaseFragment {
                 .addParams(Network.Param.TOKEN, mUser.getToken())
                 .addParams(Network.Param.COLLECT_ID, collectionIds)
                 .build()
-                .execute(new DCallback<IsOk>() {
+                .execute(new DCallback<DelectCollection>() {
                     @Override
                     public void onError(Call call, Exception e) {
                         connectError();
                     }
 
                     @Override
-                    public void onResponse(IsOk response) {
+                    public void onResponse(DelectCollection response) {
                         if (isSuccess(response)) {
                             if (response.isIs_ok()) {
                                 for (int i:deleteIndex){
@@ -291,6 +300,43 @@ public class CollectionFragment extends BaseFragment {
                         }
                     }
                 });
+
+//        MultipartBody.Part requestFileA =
+//                MultipartBody.Part.createFormData(Network.Param.TOKEN, mUser.getToken());
+//        MultipartBody.Part requestFileB =
+//                MultipartBody.Part.createFormData(Network.Param.COLLECT_ID, collectionIds);
+//
+//        Subscription subscription = Retrofit_RequestUtils.getRequest().delectCollection(requestFileA, requestFileB)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Subscriber<DelectCollection>() {
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        closeProgress();
+//                        Toast.makeText(mContext, "没有数据", Toast.LENGTH_SHORT).show();
+//                        refreshOrLoadFail();
+//                    }
+//
+//                    @Override
+//                    public void onNext(DelectCollection response) {
+//                        closeProgress();
+//                        if (isSuccess(response)) {
+//                            if (response.getContent().isIs_ok()) {
+//                                for (int i:deleteIndex){
+//                                    collections.remove(i);
+//                                    collectionAdapter.notifyItemRemoved(i);
+//                                }
+//                                ToastUtils.makePicTextShortToast(mContext, "删除成功");
+//                                collectionAdapter.setDeleting(false);
+//                            }
+//                        }
+//                    }
+//                });
     }
 
 }
