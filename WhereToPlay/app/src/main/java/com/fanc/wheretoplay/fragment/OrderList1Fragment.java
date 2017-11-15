@@ -96,7 +96,6 @@ public class OrderList1Fragment extends BaseLazyFragment implements PullToRefres
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-
     }
 
     @Override

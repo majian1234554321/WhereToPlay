@@ -354,7 +354,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_150">
+                    android:layout_height="@dimen/height_200">
 
                     <LinearLayout
                         android:id="@+id/ll_pay_bill_weixin"
@@ -426,6 +426,29 @@
                             android:textSize="@dimen/normal_textsize" />
 
                     </LinearLayout>
+                    <LinearLayout
+                        android:id="@+id/ll_upp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ll_pay_bill_balance"
+                        android:onClick="onViewClick"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/width_50"
+                            android:layout_height="@dimen/height_50"
+                            android:padding="@dimen/padding_14"
+                            android:src="@drawable/icon_yinlian" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="银联支付"
+                            android:textColor="@color/bg"
+                            android:textSize="@dimen/normal_textsize" />
+
+                    </LinearLayout>
 
                     <RadioGroup
                         android:id="@+id/rg_pay_bill"
@@ -457,6 +480,13 @@
                             android:layout_height="@dimen/height_0"
                             android:layout_weight="1"
                             android:button="@drawable/selector_pay_way" />
+
+                        <RadioButton
+                            android:id="@+id/rb_upp"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_0"
+                            android:layout_weight="1"
+                            android:button="@drawable/selector_pay_way" />
                     </RadioGroup>
 
                     <View
@@ -475,6 +505,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_height"
                         android:layout_alignBottom="@+id/ll_pay_bill_balance"
+                        android:background="#E5E5E5" />
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/line_height"
+                        android:layout_alignBottom="@+id/ll_upp"
                         android:background="#E5E5E5" />
                 </RelativeLayout>
 

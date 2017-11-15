@@ -1,7 +1,9 @@
 package com.fanc.wheretoplay.activity;
 
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
@@ -43,13 +45,13 @@ import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
-import com.fanc.wheretoplay.view.AlertDialog;
 import com.fanc.wheretoplay.view.TopMenu;
 import com.orhanobut.logger.Logger;
 
 import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.unionpay.UPPayAssistEx;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -70,6 +72,7 @@ import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
+
 
 /**
  * Created by Administrator on 2017/6/16.
@@ -127,6 +130,7 @@ public class PayBillActivity extends BaseActivity {
     private DecimalFormat df;
     private String statusTitle;
     private TextView tvPayBillStore;
+    private RadioButton rb_upp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -138,6 +142,9 @@ public class PayBillActivity extends BaseActivity {
     }
 
     private void initViews() {
+
+
+        rb_upp = findViewById(R.id.rb_upp);
 
         tvPayBillStore = payBillBinding.tvPayBillStore;
         mTmPayBill = payBillBinding.tmPayBill;
@@ -170,15 +177,24 @@ public class PayBillActivity extends BaseActivity {
         String storeName = intent.getStringExtra("storeName");
         String discountValue = intent.getStringExtra("discount");
         String address = intent.getStringExtra("address");
-        if (discountValue!=null&&discountValue.length()>0) {
-            String value = discountValue.substring(0, discountValue.length() - 1);
-            discount = Double.parseDouble(value);
-        }else {
-            discount =  10f;
+        if (discountValue != null && discountValue.length() > 0) {
+            discount = Double.parseDouble(discountValue);
+        } else {
+            discount = 10;
         }
 
 
-        mTvDiscount.setText(discountValue);
+        if (discount > 0) {
+            SpannableString text = new SpannableString(discount + "折");
+            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            mTvDiscount.setText(text, TextView.BufferType.SPANNABLE);
+            mTvDiscount.setVisibility(View.VISIBLE);
+        } else {
+            mTvDiscount.setVisibility(View.GONE);
+        }
+
+
         mTvPayBillAddress.setText(address);
         tvPayBillStore.setText(storeName);
 
@@ -353,6 +369,9 @@ public class PayBillActivity extends BaseActivity {
             case R.id.btn_pay_bill:
                 payBill();
                 break;
+            case R.id.ll_upp:
+                rb_upp.setChecked(true);
+                break;
             default:
                 break;
         }
@@ -371,6 +390,10 @@ public class PayBillActivity extends BaseActivity {
                 break;
             case R.id.rb_pay_bill_balance:
                 payWay = Constants.PAY_WAY_BALANCE;
+                break;
+
+            case R.id.rb_upp:
+                payWay = 10086;
                 break;
             default:
                 break;
@@ -492,6 +515,9 @@ public class PayBillActivity extends BaseActivity {
                     case 3:// 余额支付
                         alertBalancePay();
                         break;
+                    case 10086:
+                        UPPayAssistEx.startPay(this, null, null, "438791594995972708301", mMode);
+                        break;
                     default:
                         break;
                 }
@@ -541,6 +567,10 @@ public class PayBillActivity extends BaseActivity {
                                 case 3:// 余额支付
                                     alertBalancePay();
                                     break;
+                                case 10086:
+                                    UPPayAssistEx.startPay(PayBillActivity.this, null, null, "438791594995972708301", mMode);
+                                    break;
+
                                 default:
                                     break;
                             }
@@ -577,10 +607,10 @@ public class PayBillActivity extends BaseActivity {
         }
 
         if (!mSpUtils.getBoolean(Constants.IS_SET_PAY_PASSWORD, false)) {
-            new AlertDialog(this)
+            new com.fanc.wheretoplay.view.AlertDialog(this)
                     .setTitle("提示")
                     .setContent("您还没有设置支付密码，现在去设置？")
-                    .setBtnOnClickListener(new AlertDialog.OnBtnClickListener() {
+                    .setBtnOnClickListener(new com.fanc.wheretoplay.view.AlertDialog.OnBtnClickListener() {
                         @Override
                         public void onBtnClick(View view, String input) {
                             Intent intent = new Intent(mContext, DetailActivity.class);
@@ -591,9 +621,9 @@ public class PayBillActivity extends BaseActivity {
                     .setCanceledOnTouchOutside(true)
                     .show();
         } else {
-            new AlertDialog(this)
+            new com.fanc.wheretoplay.view.AlertDialog(this)
                     .setPasswordInputBox()
-                    .setBtnOnClickListener(new AlertDialog.OnBtnClickListener() {
+                    .setBtnOnClickListener(new com.fanc.wheretoplay.view.AlertDialog.OnBtnClickListener() {
                         @Override
                         public void onBtnClick(View view, String input) {
                             if (input.isEmpty()) {
@@ -828,10 +858,10 @@ public class PayBillActivity extends BaseActivity {
      */
     private void alertBalancePay() {
         if (!mSpUtils.getBoolean(Constants.IS_SET_PAY_PASSWORD, false)) {
-            new AlertDialog(this)
+            new com.fanc.wheretoplay.view.AlertDialog(this)
                     .setTitle("提示")
                     .setContent("您还没有设置支付密码，现在去设置？")
-                    .setBtnOnClickListener(new AlertDialog.OnBtnClickListener() {
+                    .setBtnOnClickListener(new com.fanc.wheretoplay.view.AlertDialog.OnBtnClickListener() {
                         @Override
                         public void onBtnClick(View view, String input) {
                             Intent intent = new Intent(mContext, DetailActivity.class);
@@ -842,9 +872,9 @@ public class PayBillActivity extends BaseActivity {
                     .setCanceledOnTouchOutside(true)
                     .show();
         } else {
-            new AlertDialog(this)
+            new com.fanc.wheretoplay.view.AlertDialog(this)
                     .setPasswordInputBox()
-                    .setBtnOnClickListener(new AlertDialog.OnBtnClickListener() {
+                    .setBtnOnClickListener(new com.fanc.wheretoplay.view.AlertDialog.OnBtnClickListener() {
                         @Override
                         public void onBtnClick(View view, String input) {
                             if (input.isEmpty()) {
@@ -961,5 +991,79 @@ public class PayBillActivity extends BaseActivity {
             LocalBroadcastManager.getInstance(mContext).unregisterReceiver(receiver);
             receiver = null;
         }
+    }
+
+    /*****************************************************************
+     * mMode参数解释： "00" - 启动银联正式环境 "01" - 连接银联测试环境
+     *****************************************************************/
+    private final String mMode = "01";
+    private static final String TN_URL_01 = "http://101.231.204.84:8091/sim/getacptn";
+
+
+    //  UPPayAssistEx.startPay(this, null, null, tn, mode);
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        /*************************************************
+         * 步骤3：处理银联手机支付控件返回的支付结果
+         ************************************************/
+        if (data == null) {
+            return;
+        }
+
+        String msg = "";
+        /*
+         * 支付控件返回字符串:success、fail、cancel 分别代表支付成功，支付失败，支付取消
+         */
+        String str = data.getExtras().getString("pay_result");
+        if (str.equalsIgnoreCase("success")) {
+
+            // 如果想对结果数据验签，可使用下面这段代码，但建议不验签，直接去商户后台查询交易结果
+            // result_data结构见c）result_data参数说明
+            if (data.hasExtra("result_data")) {
+                String result = data.getExtras().getString("result_data");
+                try {
+                    JSONObject resultJson = new JSONObject(result);
+                    String sign = resultJson.getString("sign");
+                    String dataOrg = resultJson.getString("data");
+                    // 此处的verify建议送去商户后台做验签
+                    // 如要放在手机端验，则代码必须支持更新证书
+                    boolean ret = verify(dataOrg, sign, mMode);
+                    if (ret) {
+                        // 验签成功，显示支付结果
+                        msg = "支付成功！";
+                    } else {
+                        // 验签失败
+                        msg = "支付失败！";
+                    }
+                } catch (JSONException e) {
+                }
+            }
+            // 结果result_data为成功时，去商户后台查询一下再展示成功
+            msg = "支付成功！";
+        } else if (str.equalsIgnoreCase("fail")) {
+            msg = "支付失败！";
+        } else if (str.equalsIgnoreCase("cancel")) {
+            msg = "用户取消了支付";
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("支付结果通知");
+        builder.setMessage(msg);
+        builder.setInverseBackgroundForced(true);
+        // builder.setCustomTitle();
+        builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
+    private boolean verify(String msg, String sign64, String mode) {
+        // 此处的verify，商户需送去商户后台做验签
+        return true;
+
     }
 }

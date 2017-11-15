@@ -77,6 +77,8 @@
  -dontwarn okhttp3.**
  -keep class com.fanc.wheretoplay.datamodel.** { *; }
  -keep class com.fanc.wheretoplay.presenter.** { *; }
+  -keep class com.fanc.wheretoplay.view.** { *; }
+
 
 
 -keepattributes *Annotation*

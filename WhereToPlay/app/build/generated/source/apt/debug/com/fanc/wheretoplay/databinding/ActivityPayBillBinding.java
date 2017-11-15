@@ -30,11 +30,13 @@ public class ActivityPayBillBinding extends android.databinding.ViewDataBinding 
         sViewsWithIds.put(R.id.ll_pay_bill_weixin, 16);
         sViewsWithIds.put(R.id.ll_pay_bill_ali, 17);
         sViewsWithIds.put(R.id.ll_pay_bill_balance, 18);
-        sViewsWithIds.put(R.id.rb_pay_bill_weixin, 19);
-        sViewsWithIds.put(R.id.rb_pay_bill_ali, 20);
-        sViewsWithIds.put(R.id.rb_pay_bill_balance, 21);
-        sViewsWithIds.put(R.id.tv_pay_bill_pay_sum_real, 22);
-        sViewsWithIds.put(R.id.btn_pay_bill, 23);
+        sViewsWithIds.put(R.id.ll_upp, 19);
+        sViewsWithIds.put(R.id.rb_pay_bill_weixin, 20);
+        sViewsWithIds.put(R.id.rb_pay_bill_ali, 21);
+        sViewsWithIds.put(R.id.rb_pay_bill_balance, 22);
+        sViewsWithIds.put(R.id.rb_upp, 23);
+        sViewsWithIds.put(R.id.tv_pay_bill_pay_sum_real, 24);
+        sViewsWithIds.put(R.id.btn_pay_bill, 25);
     }
     // views
     @NonNull
@@ -58,6 +60,8 @@ public class ActivityPayBillBinding extends android.databinding.ViewDataBinding 
     @NonNull
     public final android.widget.LinearLayout llPayBillWeixin;
     @NonNull
+    public final android.widget.LinearLayout llUpp;
+    @NonNull
     private final android.widget.LinearLayout mboundView0;
     @NonNull
     public final android.widget.RadioButton rbPayBillAli;
@@ -65,6 +69,8 @@ public class ActivityPayBillBinding extends android.databinding.ViewDataBinding 
     public final android.widget.RadioButton rbPayBillBalance;
     @NonNull
     public final android.widget.RadioButton rbPayBillWeixin;
+    @NonNull
+    public final android.widget.RadioButton rbUpp;
     @NonNull
     public final android.widget.RelativeLayout relativeLayout;
     @NonNull
@@ -97,8 +103,8 @@ public class ActivityPayBillBinding extends android.databinding.ViewDataBinding 
 
     public ActivityPayBillBinding(@NonNull android.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
         super(bindingComponent, root, 0);
-        final Object[] bindings = mapBindings(bindingComponent, root, 24, sIncludes, sViewsWithIds);
-        this.btnPayBill = (android.widget.Button) bindings[23];
+        final Object[] bindings = mapBindings(bindingComponent, root, 26, sIncludes, sViewsWithIds);
+        this.btnPayBill = (android.widget.Button) bindings[25];
         this.cbNotParticipation = (android.widget.CheckBox) bindings[10];
         this.etPayBillConsumeSum = (android.widget.EditText) bindings[9];
         this.etPayBillNotParticipationDiscountSum = (android.widget.EditText) bindings[12];
@@ -108,11 +114,13 @@ public class ActivityPayBillBinding extends android.databinding.ViewDataBinding 
         this.llPayBillBalance = (android.widget.LinearLayout) bindings[18];
         this.llPayBillDiscountCoupon = (android.widget.LinearLayout) bindings[13];
         this.llPayBillWeixin = (android.widget.LinearLayout) bindings[16];
+        this.llUpp = (android.widget.LinearLayout) bindings[19];
         this.mboundView0 = (android.widget.LinearLayout) bindings[0];
         this.mboundView0.setTag(null);
-        this.rbPayBillAli = (android.widget.RadioButton) bindings[20];
-        this.rbPayBillBalance = (android.widget.RadioButton) bindings[21];
-        this.rbPayBillWeixin = (android.widget.RadioButton) bindings[19];
+        this.rbPayBillAli = (android.widget.RadioButton) bindings[21];
+        this.rbPayBillBalance = (android.widget.RadioButton) bindings[22];
+        this.rbPayBillWeixin = (android.widget.RadioButton) bindings[20];
+        this.rbUpp = (android.widget.RadioButton) bindings[23];
         this.relativeLayout = (android.widget.RelativeLayout) bindings[4];
         this.rgPayBill = (android.widget.RadioGroup) bindings[2];
         this.rgPayBill.setTag(null);
@@ -123,7 +131,7 @@ public class ActivityPayBillBinding extends android.databinding.ViewDataBinding 
         this.tvPayBillDistance = (android.widget.TextView) bindings[8];
         this.tvPayBillDownPaymentSum = (android.widget.TextView) bindings[1];
         this.tvPayBillDownPaymentSum.setTag(null);
-        this.tvPayBillPaySumReal = (android.widget.TextView) bindings[22];
+        this.tvPayBillPaySumReal = (android.widget.TextView) bindings[24];
         this.tvPayBillStore = (android.widget.TextView) bindings[5];
         setRootTag(root);
         // listeners

@@ -91,9 +91,6 @@ public class OrdelListFragmentPresenter implements BasePresenter {
                 .subscribe(new RxSubscribe<BookListModel.ContentBean>() {
                     @Override
                     protected void _onNext(BookListModel.ContentBean contentBean) {
-
-
-
                         if (contentBean!=null) {
                             ptrlPayReserve.refreshFinish(PullToRefreshLayout.SUCCEED);
                             orderListFragmentView.setOrderListFragmentData(contentBean, action);

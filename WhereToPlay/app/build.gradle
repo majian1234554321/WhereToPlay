@@ -1,5 +1,8 @@
 apply plugin: 'com.android.application'
 //apply plugin: 'com.jakewharton.butterknife'
+apply plugin: 'kotlin-android'
+
+apply plugin: 'kotlin-android-extensions'
 android {
 
     compileSdkVersion 27
@@ -20,7 +23,7 @@ android {
         }
         ndk {
             //选择要添加的对应cpu类型的.so库。
-            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a','x86'
+            abiFilters 'armeabi', 'armeabi-v7a', 'armeabi-v8a', 'x86'
             // 还可以添加 'x86', 'x86_64', 'mips', 'mips64'
         }
 
@@ -36,12 +39,13 @@ android {
             }
         }
 
+        multiDexEnabled true
 
+        dexOptions {
+            incremental true
+            javaMaxHeapSize "4g"
+        }
 
-        /**
-         * you can use multiDex and install it in your ApplicationLifeCycle implement
-         */
-//        multiDexEnabled true
         /**
          * buildConfig can change during patch!
          * we can use the newly value when patch
@@ -90,6 +94,7 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     //    compile 'com.tencent.tinker:tinker-android-lib:1.7.10'
     //                { changing = true }
     //    provided 'com.tencent.tinker:tinker-android-anno:1.7.10'
@@ -98,11 +103,9 @@ dependencies {
     //    compile project(':datetimepicker')
     compile 'com.android.support:multidex:1.0.2'
     compile 'com.youth.banner:banner:1.4.10'
-
     compile 'com.orhanobut:logger:1.15'
     compile 'cn.finalteam:galleryfinal:1.4.8.7'
     compile 'com.uwetrottmann.photoview:library:1.2.4'
-
     compile 'cn.jiguang.sdk:jpush:3.0.8'
     compile 'cn.jiguang.sdk:jcore:1.1.6'
     compile 'com.zhy:percent-support-extends:1.1.1'
@@ -123,6 +126,8 @@ dependencies {
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.4.0'
     compile 'com.sina.weibo.sdk:core:4.1.0:openDefaultRelease@aar'
     implementation 'com.android.support:appcompat-v7:27.0.0'
+    implementation files('libs/UPPayAssistEx.jar')
+    implementation files('libs/UPPayPluginExPro.jar')
 }
 
 //def gitSha() {

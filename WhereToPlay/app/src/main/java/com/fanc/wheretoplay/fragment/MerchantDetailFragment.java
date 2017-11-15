@@ -156,6 +156,7 @@ public class MerchantDetailFragment extends BaseFragment {
     private FragmentManager fragmentManager;
     private MerchantTablayoutAdapter adpter;
     private String briefUrl;
+    private String discountValue;
 
 
     @Nullable
@@ -388,7 +389,7 @@ public class MerchantDetailFragment extends BaseFragment {
                 intent.putExtra(Constants.STORE_ID, mStoreId);
                 intent.putExtra("storeName", mTvMerchantDetailTitle.getText().toString());
                 intent.putExtra("address", mTvMerchantDetailAddress.getText().toString());
-                intent.putExtra("discount", mTvMerchantDetailDiscountSum.getText().toString());
+                intent.putExtra("discount", discountValue);
                 intent.putExtra(Constants.PAGE, "商家详情支付");
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
@@ -572,6 +573,7 @@ public class MerchantDetailFragment extends BaseFragment {
      * @param store
      */
     private void showStoreDetail(final StoreDetail.Store store) {
+        discountValue = store.getDiscount();
         mTvMerchantDetailTitle.setText(store.getName());
         if (store.getDiscount().length() > 0) {
             SpannableString text = new SpannableString(store.getDiscount() + "折");

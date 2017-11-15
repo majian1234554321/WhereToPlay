@@ -1,5 +1,7 @@
 package com.fanc.wheretoplay.datamodel;
 
+import android.support.annotation.Nullable;
+
 import java.util.List;
 
 /**
@@ -54,6 +56,7 @@ public class OrderDetailModel {
         public String arrival_time;
         public String car_num;
         public String people_num;
+        @Nullable
         public String action;
         public String total;
         public String remark;
