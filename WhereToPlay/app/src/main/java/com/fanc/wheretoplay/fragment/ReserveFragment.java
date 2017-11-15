@@ -295,7 +295,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
                 Log.e("wade","来到mPtrl监听中");
                 isPullDown = true;
                 page = 0;
-                size = 6;
+                size = 9;
                 getStoreList(null, city.getId(), page, size, areaId, storeType, category, filterType, value);
             }
 
@@ -309,6 +309,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
 //                    page++;
 //                }
                 page ++;
+                Log.e("request_result",storeType + "\t" + page);
                 getStoreList(null, city.getId(), page, size, areaId, storeType, category, filterType, value);
             }
         });
@@ -999,6 +1000,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
             refreshAndLoadMoreSuccess();
         } else if (isPullUp) {// 上拉加载
             Log.e("request_result",stores.size() + "");
+            //集合为0，则显示“没有更多数据”
             if (stores.size() == 0) {
                 refreshOrLoadFail();
                 return;
@@ -1144,7 +1146,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
     public void setStoreType(String storeType) {
         this.storeType = storeType;
         page = 0;
-        getStoreList(null, city.getId(), 0, 0, areaId, this.storeType, category, filterType, value);
+        getStoreList(null, city.getId(), 0, 9, areaId, this.storeType, category, filterType, value);
     }
 
     @Override
