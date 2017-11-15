@@ -139,18 +139,21 @@ public class CollectionFragment extends BaseFragment {
                                         @Override
                                         public void onBtnClick(View view, String input) {
                                             emptyCollection(collectionIds);
+                                            isDeleting = !isDeleting;
                                         }
                                     })
                                     .setCanceledOnTouchOutside(false)
                                     .show();
                         } else {
                             collectionAdapter.setDeleting(false);
+                            isDeleting = !isDeleting;
                         }
                     } else {// 非删除状态，进入删除状态
                         collectionAdapter.setDeleting(true);
                         ToastUtils.makePicTextShortToast(mContext, "请选择要删除的收藏，再次点击删除按钮进行删除");
+                        isDeleting = !isDeleting;
                     }
-                    isDeleting = !isDeleting;
+//                    isDeleting = !isDeleting;
                 } else {
                     ToastUtils.makePicTextShortToast(mContext, "你还没有收藏哦");
                 }
