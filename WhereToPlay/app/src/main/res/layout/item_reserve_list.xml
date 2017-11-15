@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/height_1"
         android:layout_margin="@dimen/margin_10"
-        android:background="@drawable/border_shadow_latest">
+        android:background="@drawable/border_shadow_fir">
 
         <View
             android:id="@+id/v_bg_top"
