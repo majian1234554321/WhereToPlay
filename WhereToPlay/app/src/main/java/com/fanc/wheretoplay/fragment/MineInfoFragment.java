@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
@@ -26,9 +27,11 @@ import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentMineInfoBinding;
 import com.fanc.wheretoplay.datamodel.CityResource;
 import com.fanc.wheretoplay.datamodel.IsOk;
+import com.fanc.wheretoplay.datamodel.MineMoney;
 import com.fanc.wheretoplay.datamodel.Url;
 import com.fanc.wheretoplay.image.GlideGalleryImageLoader;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.DateFormatUtil;
 import com.fanc.wheretoplay.util.FileUtils;
@@ -60,6 +63,11 @@ import cn.finalteam.galleryfinal.ImageLoader;
 import cn.finalteam.galleryfinal.ThemeConfig;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
 import okhttp3.Call;
+import okhttp3.MultipartBody;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2017/6/15.
@@ -221,7 +229,7 @@ public class MineInfoFragment extends BaseFragment {
         Glide.with(mContext).load(Network.IMAGE + mUser.getAvatar()).into(mCivMineInfo);
         //昵称
         if (TextUtils.isEmpty(mUser.getNickname())) {
-            mEtMineInfoNickname.setText(R.string.nickname);
+            mEtMineInfoNickname.setText("");
         } else {
             mEtMineInfoNickname.setText(mUser.getNickname());
         }
@@ -545,6 +553,37 @@ public class MineInfoFragment extends BaseFragment {
                         }
                     }
                 });
+
+//        MultipartBody.Part requestFileA =
+//                MultipartBody.Part.createFormData("size", size + "");
+//        MultipartBody.Part requestFileB =
+//                MultipartBody.Part.createFormData("page", page + "");
+//        MultipartBody.Part requestFileC =
+//                MultipartBody.Part.createFormData("token",  mUser.getToken());
+//
+//        Subscription subscription = Retrofit_RequestUtils.getRequest().recomReward(requestFileA, requestFileB, requestFileC)
+//                .subscribeOn(Schedulers.io())
+//                .observeOn(AndroidSchedulers.mainThread())
+//                .subscribe(new Subscriber<MineMoney>() {
+//                    @Override
+//                    public void onCompleted() {
+//
+//                    }
+//
+//                    @Override
+//                    public void onError(Throwable e) {
+//                        closeProgress();
+//                        Toast.makeText(mContext, "没有数据", Toast.LENGTH_SHORT).show();
+//                        refreshOrLoadFail();
+//                    }
+//
+//                    @Override
+//                    public void onNext(MineMoney mineMoney) {
+//                        closeProgress();
+//                        List<MineMoney.ContentBean> content = mineMoney.getContent();
+//                        showCommendMoneyList(content);
+//                    }
+//                });
     }
 
     private void saveMineInfo(String nickname, String gender, String birthday, String city, String mobile, String sign) {
