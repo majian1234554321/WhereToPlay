@@ -200,30 +200,14 @@
             android:name=".activity.ShareActivity"
             android:screenOrientation="sensor"
             android:theme="@android:style/Theme.Translucent.NoTitleBar">
-
-            <!-- 新浪微博请求监听 -->
-            <intent-filter>
-                <action android:name="com.sina.weibo.sdk.action.ACTION_SDK_REQ_ACTIVITY" />
-
-                <category android:name="android.intent.category.DEFAULT" />
-            </intent-filter>
         </activity>
-        <activity
-            android:name="com.sina.weibo.sdk.component.WeiboSdkBrowser"
-            android:configChanges="keyboardHidden|orientation"
-            android:exported="false"
-            android:windowSoftInputMode="adjustResize" />
 
-        <meta-data
-            android:name="WEIBO_APPKEY"
-            android:value="2045436852" />
-        <meta-data
-            android:name="WEIBO_CHANNEL"
-            android:value="weibo" />
+
 
         <service
             android:name="com.sina.weibo.sdk.net.DownloadService"
-            android:exported="false" />
+            android:exported="false" >
+        </service>
 
         <activity android:name=".activity.PublicationEvaluationActivity" />
         <activity android:name=".imagepink.ImageSelectorActivity" />

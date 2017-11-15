@@ -82,6 +82,8 @@ public class Network{
         public static String USER_HOME = USER + "User/home";// 我的主页
         public static String USER_RCOMMEND_FRIEND = USER + "Reco/recomList";// 推荐好友
         public static String USER_RCOMMEND_MONEY = USER + "Reco/recomReward";// 推荐奖励
+        public static String RECOMREWARD = USER + "Reco/recomReward";// 推荐
+
         public static String USER_MODIFY_AVATAR = USER + "User/modifyAvatar";// 修改头像
         public static String USER_MODIFY_PRO_FILE = USER + "User/modifyProfile";//修改资料
         public static String USER_MESSAGE_LIST = USER + "User/messageList";// 消息

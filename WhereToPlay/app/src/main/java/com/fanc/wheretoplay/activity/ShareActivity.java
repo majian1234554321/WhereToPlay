@@ -27,18 +27,10 @@ import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.Constants_sina;
 import com.fanc.wheretoplay.util.ImageUtils;
 import com.fanc.wheretoplay.util.LogUtils;
+
 import com.sina.weibo.sdk.WbSdk;
-
-import com.sina.weibo.sdk.api.TextObject;
-import com.sina.weibo.sdk.api.WeiboMultiMessage;
-
-
 import com.sina.weibo.sdk.auth.AuthInfo;
-
-import com.sina.weibo.sdk.share.WbShareCallback;
-import com.sina.weibo.sdk.share.WbShareHandler;
 import com.tencent.connect.share.QQShare;
-
 import com.tencent.connect.share.QzoneShare;
 import com.tencent.mm.opensdk.modelbase.BaseResp;
 import com.tencent.mm.opensdk.modelmsg.SendMessageToWX;
@@ -60,6 +52,17 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+
+
+import com.sina.weibo.sdk.api.ImageObject;
+import com.sina.weibo.sdk.api.MultiImageObject;
+import com.sina.weibo.sdk.api.TextObject;
+import com.sina.weibo.sdk.api.VideoSourceObject;
+import com.sina.weibo.sdk.api.WebpageObject;
+import com.sina.weibo.sdk.api.WeiboMultiMessage;
+import com.sina.weibo.sdk.share.WbShareCallback;
+import com.sina.weibo.sdk.share.WbShareHandler;
+import com.sina.weibo.sdk.utils.Utility;
 
 
 public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, WbShareCallback {
@@ -110,7 +113,7 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
         mTencent = Tencent.createInstance(Constants.QQAPPID, this.getApplicationContext());
         // 注册应用到新浪微博
 
-        WbSdk.install(this, new AuthInfo(this, Constants_sina.APP_KEY, Constants_sina.REDIRECT_URL, Constants_sina.SCOPE));
+        WbSdk.install(this,new AuthInfo(this, Constants_sina.APP_KEY, Constants_sina.REDIRECT_URL, Constants_sina.SCOPE));
         shareHandler = new WbShareHandler(this);
         shareHandler.registerApp();
 
@@ -282,8 +285,8 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
     private TextObject getTextObj() {
         TextObject textObject = new TextObject();
         textObject.text = getSharedText();
-        textObject.title = "xxxx";
-        textObject.actionUrl = "http://www.baidu.com";
+        textObject.title = "乐互网";
+        textObject.actionUrl = shareUrl;
         return textObject;
     }
 
@@ -292,7 +295,7 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
      */
     private String getSharedText() {
 
-        String text = "@大屁老师，这是一个很漂亮的小狗，朕甚是喜欢-_-!! #大屁老师#http://weibo.com/p/1005052052202067/home?from=page_100505&mod=TAB&is_all=1#place";
+        String text = "我正在浏览这个,觉得真不错,推荐给你哦~ 地址:#http://weibo.com/p/1005052052202067/home?from=page_100505&mod=TAB&is_all=1#place";
 
         return text;
     }
@@ -310,8 +313,6 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
                 WeiboMultiMessage weiboMessage = new WeiboMultiMessage();
                 weiboMessage.textObject = getTextObj();
                 shareHandler.shareMessage(weiboMessage, false);
-
-
                 break;
         }
     }
@@ -370,6 +371,7 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
         // 当前应用唤起微博并进行分享后，需要在此调用该函数
         // 来接收微博客户端返回的数据；执行成功，返回true,并调用
         shareHandler.doResultIntent(intent, this);
+
         ShareActivity.this.setResult(100, getIntent());
     }
 
