@@ -57,6 +57,10 @@ public class ItemView extends RelativeLayout {
         mTvText.setText(text);
     }
 
+    public void setLeftTextBlod(boolean isBlod) {
+        mTvText.getPaint().setFakeBoldText(isBlod);
+    }
+
     public void setText(int resId) {
         mTvText.setText(UIUtils.getString(resId));
     }

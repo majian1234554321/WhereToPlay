@@ -202,7 +202,6 @@ public class MineCommendMoneyFragment extends BaseFragment {
             refreshAndLoadMoreSuccess();
         } else if (isPullUp) {// 上拉加载
             if (mCommenMoneyList.size() == 0) {
-                ToastUtils.makePicTextShortToast(mContext, "没有更多了哦");
                 refreshOrLoadFail();
                 return;
             }

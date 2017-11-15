@@ -354,7 +354,6 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
             refreshAndLoadMoreSuccess();
         } else if (isPullUp) {// 上拉加载
             if (commentList.size() == 0) {
-                ToastUtils.makePicTextShortToast(CheckCommentsActivity.this, "没有更多了哦");
                 refreshOrLoadFail();
                 return;
             }
