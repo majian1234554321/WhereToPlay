@@ -20,7 +20,7 @@ public class CheckComments extends BaseModel {
     /**
      * comment_environment : 4.8
      * comment_atmosphere : 4.9
-     * comment_server : 5.0
+     * comment_service : 5.0
      * average_comment : 4.9
      * all_count : 1000
      * pleasure_count : 990
@@ -31,7 +31,7 @@ public class CheckComments extends BaseModel {
 
     private String comment_environment;
     private String comment_atmosphere;
-    private String comment_server;
+    private String comment_service;
     private String average_comment;
     private String all_count;
     private String pleasure_count;
@@ -56,11 +56,11 @@ public class CheckComments extends BaseModel {
     }
 
     public String getComment_server() {
-        return comment_server;
+        return comment_service;
     }
 
     public void setComment_server(String comment_server) {
-        this.comment_server = comment_server;
+        this.comment_service = comment_server;
     }
 
     public String getAverage_comment() {
