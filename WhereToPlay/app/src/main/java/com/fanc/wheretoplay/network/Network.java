@@ -11,6 +11,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 
 import com.fanc.wheretoplay.datamodel.CancleOrderModel;
+import com.fanc.wheretoplay.datamodel.DelectCollection;
 import com.fanc.wheretoplay.datamodel.MineFriend;
 import com.fanc.wheretoplay.datamodel.MineMoney;
 import com.fanc.wheretoplay.datamodel.OrderDetailModel;
@@ -320,6 +321,11 @@ public class Network{
         @Multipart
         @POST("User/Collect")
         Observable<SubmitCommentModel> collect(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB);
+
+
+        @Multipart
+        @POST("User/deleteCollection")
+        Observable<DelectCollection> delectCollection(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB);
 
     }
 

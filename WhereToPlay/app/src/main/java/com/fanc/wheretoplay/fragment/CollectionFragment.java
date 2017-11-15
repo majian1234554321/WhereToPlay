@@ -275,21 +275,33 @@ public class CollectionFragment extends BaseFragment {
      */
     private void emptyCollection(String collectionIds) {
         showProgress();
-        OkHttpUtils.post()
-                .url(Network.User.USER_DELETE_COLLECTION)
-                .addParams(Network.Param.TOKEN, mUser.getToken())
-                .addParams(Network.Param.COLLECT_ID, collectionIds)
-                .build()
-                .execute(new DCallback<DelectCollection>() {
+
+        MultipartBody.Part requestFileA =
+                MultipartBody.Part.createFormData(Network.Param.TOKEN, mUser.getToken());
+        MultipartBody.Part requestFileB =
+                MultipartBody.Part.createFormData(Network.Param.COLLECT_ID, collectionIds);
+
+        Subscription subscription = Retrofit_RequestUtils.getRequest().delectCollection(requestFileA, requestFileB)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<DelectCollection>() {
                     @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
+                    public void onCompleted() {
+
                     }
 
                     @Override
-                    public void onResponse(DelectCollection response) {
-                        if (isSuccess(response)) {
-                            if (response.isIs_ok()) {
+                    public void onError(Throwable e) {
+                        closeProgress();
+                        Toast.makeText(mContext, "网络错误", Toast.LENGTH_SHORT).show();
+                        refreshOrLoadFail();
+                    }
+
+                    @Override
+                    public void onNext(DelectCollection response) {
+                        closeProgress();
+                        if (response != null) {
+                            if (response.getContent().isIs_ok()) {
                                 for (int i:deleteIndex){
                                     collections.remove(i);
                                     collectionAdapter.notifyItemRemoved(i);
@@ -299,44 +311,8 @@ public class CollectionFragment extends BaseFragment {
                             }
                         }
                     }
-                });
 
-//        MultipartBody.Part requestFileA =
-//                MultipartBody.Part.createFormData(Network.Param.TOKEN, mUser.getToken());
-//        MultipartBody.Part requestFileB =
-//                MultipartBody.Part.createFormData(Network.Param.COLLECT_ID, collectionIds);
-//
-//        Subscription subscription = Retrofit_RequestUtils.getRequest().delectCollection(requestFileA, requestFileB)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Subscriber<DelectCollection>() {
-//                    @Override
-//                    public void onCompleted() {
-//
-//                    }
-//
-//                    @Override
-//                    public void onError(Throwable e) {
-//                        closeProgress();
-//                        Toast.makeText(mContext, "没有数据", Toast.LENGTH_SHORT).show();
-//                        refreshOrLoadFail();
-//                    }
-//
-//                    @Override
-//                    public void onNext(DelectCollection response) {
-//                        closeProgress();
-//                        if (isSuccess(response)) {
-//                            if (response.getContent().isIs_ok()) {
-//                                for (int i:deleteIndex){
-//                                    collections.remove(i);
-//                                    collectionAdapter.notifyItemRemoved(i);
-//                                }
-//                                ToastUtils.makePicTextShortToast(mContext, "删除成功");
-//                                collectionAdapter.setDeleting(false);
-//                            }
-//                        }
-//                    }
-//                });
+                });
     }
 
 }

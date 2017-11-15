@@ -12,7 +12,17 @@ public class DelectCollection extends BaseModel {
      * content : {"is_ok":true}
      */
 
+    private ContentBean content;
 
+    public ContentBean getContent() {
+        return content;
+    }
+
+    public void setContent(ContentBean content) {
+        this.content = content;
+    }
+
+    public static class ContentBean {
         /**
          * is_ok : true
          */
@@ -26,5 +36,5 @@ public class DelectCollection extends BaseModel {
         public void setIs_ok(boolean is_ok) {
             this.is_ok = is_ok;
         }
-
+    }
 }
