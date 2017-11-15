@@ -182,16 +182,28 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
     private void pay(int position) {
         Intent intent = new Intent();
-        intent.setClass(context, PayBillActivity.class);
-        intent.putExtra(Constants.ORDER_ID, dataBean.list.get(position).order_id);
-        intent.putExtra(Constants.STORE_ID, dataBean.list.get(position).store_id);
-        if (TextUtils.equals("4", dataBean.list.get(position).order_action)) {// 去消费
-            intent.putExtra(Constants.PAGE, Constants.CONSUME);
-        }
-        if (TextUtils.equals("2", dataBean.list.get(position).order_action)) {// 去结账
-            intent.putExtra(Constants.PAGE, Constants.PAYING_THE_BILL);
-        }
+//        intent.setClass(context, PayBillActivity.class);
+//        intent.putExtra(Constants.ORDER_ID, dataBean.list.get(position).order_id);
+//        intent.putExtra(Constants.STORE_ID, dataBean.list.get(position).store_id);
+//        if (TextUtils.equals("4", dataBean.list.get(position).order_action)) {// 去消费
+//            intent.putExtra(Constants.PAGE, Constants.CONSUME);
+//        }
+//        if (TextUtils.equals("2", dataBean.list.get(position).order_action)) {// 去结账
+//            intent.putExtra(Constants.PAGE, Constants.PAYING_THE_BILL);
+//        }
+//        context.startActivity(intent);
+
+
+
+        intent.setClass(context,PayBillActivity.class);
+        intent.putExtra(Constants.STORE_ID, dataBean.list.get(position).order_id);
+        intent.putExtra("storeName", dataBean.list.get(position).name);
+       // intent.putExtra("address", dataBean.list.get(position).add);
+        intent.putExtra("discount", "10f");
+        intent.putExtra(Constants.PAGE, "商家详情支付");
+
         context.startActivity(intent);
+
     }
 
     private void cancleOrder(final int position) {

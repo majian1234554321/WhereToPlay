@@ -45,7 +45,7 @@ public class ListOrderActivity extends BaseFragmentActivity {
         fragments.add(new OrderList3Fragment());
         fragments.add(new OrderList4Fragment());
 
-      ListOrderPagerAdapter adapter =   new ListOrderPagerAdapter(getSupportFragmentManager(),this,fragments);
+      ListOrderPagerAdapter adapter =   new ListOrderPagerAdapter(this.getSupportFragmentManager(),this,fragments);
         viewpager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewpager);
 

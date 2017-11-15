@@ -1,5 +1,6 @@
 package com.fanc.wheretoplay.fragment;
 
+import android.annotation.SuppressLint;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -261,7 +262,8 @@ public class WalletFragment extends BaseFragment {
     }
 
     private final int ALI_PAY = 1;
-    private Handler mHandler = new Handler() {
+    @SuppressLint("HandlerLeak")
+    private  Handler mHandler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
             AliPayResult payResult = new AliPayResult((Map<String, String>) msg.obj);

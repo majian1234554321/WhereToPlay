@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.adapter.OrdersAdapter;
 import com.fanc.wheretoplay.base.BaseFragment;
+import com.fanc.wheretoplay.base.BaseLazyFragment;
 import com.fanc.wheretoplay.datamodel.BookListModel;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
 import com.fanc.wheretoplay.presenter.OrdelListFragmentPresenter;
@@ -30,7 +31,7 @@ import butterknife.Unbinder;
  * Created by admin on 2017/11/1.
  */
 
-public class OrderList4Fragment extends BaseFragment implements PullToRefreshLayout.OnRefreshListener,OrderListFragmentView {
+public class OrderList4Fragment extends BaseLazyFragment implements PullToRefreshLayout.OnRefreshListener,OrderListFragmentView {
     @BindView(R.id.rv_pay)
     PullableRecyclerView mRvOrder;
     Unbinder unbinder;
@@ -42,7 +43,25 @@ public class OrderList4Fragment extends BaseFragment implements PullToRefreshLay
     private OrdelListFragmentPresenter ordelListFragmentPresenter;
     private OrdersAdapter myAdapter;
 
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+
+    @Override
+    protected void initPrepare() {
+
+    }
+
+    @Override
+    protected void onInvisible() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = View.inflate(inflater.getContext(), R.layout.orderlistallfragment, null);
         unbinder = ButterKnife.bind(this, view);
 
@@ -66,13 +85,12 @@ public class OrderList4Fragment extends BaseFragment implements PullToRefreshLay
 
 
         return view;
-
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
+
     }
 
     @Override

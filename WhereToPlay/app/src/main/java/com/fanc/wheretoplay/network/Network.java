@@ -287,8 +287,6 @@ public class Network{
         Observable<BaseResponseModel<CancleOrderModel.ContentBean>> cancle_order(@Part MultipartBody.Part file, @Part MultipartBody.Part fileB);
 
 
-
-
         //提交评论
         @Multipart
         @POST("Public/submitcomment")

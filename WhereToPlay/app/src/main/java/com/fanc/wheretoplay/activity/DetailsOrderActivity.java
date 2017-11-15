@@ -36,6 +36,9 @@ import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.view.OrderetailsItemView;
 import com.fanc.wheretoplay.view.TitleBarView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -74,7 +77,6 @@ public class DetailsOrderActivity extends BaseActivity {
     OrderetailsItemView oi11;
 
 
-
     @BindView(R.id.tv1)
     TextView tv1;
     @BindView(R.id.tv2)
@@ -104,11 +106,13 @@ public class DetailsOrderActivity extends BaseActivity {
     TextView tvLeft;
     @BindView(R.id.tv_right)
     TextView tvRight;
-    private String order_idValue, store_idValue, storeNameValue, statusValue,totalValue;
+    private String order_idValue, store_idValue, storeNameValue, statusValue, totalValue;
 
     @BindView(R.id.rl)
     RelativeLayout rl;
     private String phone;
+
+    List<TextView> lists = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,6 +132,9 @@ public class DetailsOrderActivity extends BaseActivity {
         oi10.setTv_left("总价");
         oi11.setTv_left("备注");
 
+        lists.add(tvLeft);
+        lists.add(tvRight);
+
         oi1.setTv_rightTextColor(Color.parseColor("#C4483C"));
         oi5.setTv_rightTextColor(Color.parseColor("#C4483C"));
 
@@ -138,7 +145,6 @@ public class DetailsOrderActivity extends BaseActivity {
         statusValue = getIntent().getStringExtra("status");
         totalValue = getIntent().getStringExtra("total");
 
-        displayButtom();
 
         Subscription rxSbscription = RxBus.getDefault().toObservable(String.class)
                 .subscribe(new Action1<String>() {
@@ -146,7 +152,7 @@ public class DetailsOrderActivity extends BaseActivity {
                     public void call(String s) {
                         if (s != null && "提交评价成功".equals(s)) {
                             statusValue = "1";
-                            displayButtom();
+
                         }
                     }
                 });
@@ -164,7 +170,7 @@ public class DetailsOrderActivity extends BaseActivity {
 
         MultipartBody.Part requestFileC =
                 MultipartBody.Part.createFormData("order_id", order_idValue);
-     Subscription subscription =    Retrofit_RequestUtils.getRequest()
+        Subscription subscription = Retrofit_RequestUtils.getRequest()
                 .orderDetail(requestFileA, requestFileC)
                 .compose(RxHelper.<OrderDetailModel.ContentBean>handleResult())
                 .subscribe(new RxSubscribe<OrderDetailModel.ContentBean>() {
@@ -178,12 +184,70 @@ public class DetailsOrderActivity extends BaseActivity {
 
                     }
                 });
-     compositeSubscription.add(subscription);
+        compositeSubscription.add(subscription);
     }
 
     private void setData(OrderDetailModel.ContentBean contentBean) {
         tvStoreName.setText(contentBean.store_name);
         tvAddress.setText(contentBean.address);
+
+        if (contentBean.buttonlist != null) {
+            for (int i = 0; i < contentBean.buttonlist.size(); i++) {
+                lists.get(i).setText(contentBean.buttonlist.get(i).title);
+            }
+        }
+
+        for (int i = 0; i < lists.size(); i++) {
+            final int finalI = i;
+            lists.get(i).setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent intent = new Intent();
+                    switch (lists.get(finalI).getText().toString().trim()) {
+                        case "返回首页":
+                            intent.setClass(DetailsOrderActivity.this, MainActivity.class);
+                            break;
+                        case "立即支付":
+
+
+
+                            intent.setClass(mContext,PayBillActivity.class);
+                            intent.putExtra(Constants.STORE_ID, store_idValue);
+                            intent.putExtra("storeName", storeNameValue);
+                            intent.putExtra("address", tvAddress.getText().toString());
+                            intent.putExtra("discount", "10f");
+                            intent.putExtra(Constants.PAGE, "商家详情支付");
+
+                            mContext.startActivity(intent);
+
+
+//                            Toast.makeText(mContext, "立即支付", Toast.LENGTH_SHORT).show();
+//                            intent.setClass(DetailsOrderActivity.this, PayBillActivity.class);
+//                            intent.putExtra(Constants.ORDER_ID, order_idValue);
+//                            intent.putExtra(Constants.STORE_ID, store_idValue);
+//                            intent.putExtra(Constants.PAGE, Constants.CONSUME);
+//                            if (TextUtils.equals("4", statusValue)) {// 去消费
+//                                intent.putExtra(Constants.PAGE, Constants.CONSUME);
+//                            }
+//                            if (TextUtils.equals("2", statusValue)) {// 去结账
+//                                intent.putExtra(Constants.PAGE, Constants.PAYING_THE_BILL);
+//                            }
+//                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//                            mContext.startActivity(intent);
+                            break;
+                        case "取消订单":
+                            Toast.makeText(mContext, "取消订单", Toast.LENGTH_SHORT).show();
+                            break;
+                        case "立即评论":
+                            intent.putExtra("order_id", order_idValue);
+                            intent.putExtra("store_id", store_idValue);
+                            intent.setClass(DetailsOrderActivity.this, PublicationEvaluationActivity.class);
+                            break;
+                    }
+                }
+            });
+        }
+
 
         switch (contentBean.order_action) {
             case "1":
@@ -254,33 +318,6 @@ public class DetailsOrderActivity extends BaseActivity {
     public void onViewClicked(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
-            case R.id.tv_left:
-                if ("返回首页".equals(tvLeft.getText().toString().trim())) {
-                    intent.setClass(this, MainActivity.class);
-                } else {
-                    intent.putExtra("order_id", order_idValue);
-                    intent.putExtra("store_id", store_idValue);
-                    intent.setClass(this, PublicationEvaluationActivity.class);
-                }
-                startActivity(intent);
-                break;
-            case R.id.tv_right:
-
-                intent.setClass(this, PayBillActivity.class);
-                intent.putExtra(Constants.ORDER_ID, order_idValue);
-                intent.putExtra(Constants.STORE_ID, store_idValue);
-                intent.putExtra(Constants.PAGE, Constants.CONSUME);
-               /* if (TextUtils.equals("4", statusValue)) {// 去消费
-                    intent.putExtra(Constants.PAGE, Constants.CONSUME);
-                }
-                if (TextUtils.equals("2", statusValue)) {// 去结账
-                    intent.putExtra(Constants.PAGE, Constants.PAYING_THE_BILL);
-                }*/
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
-
-                break;
-
             case R.id.tv_cancel:
                 MultipartBody.Part requestFileA =
                         MultipartBody.Part.createFormData("token", new SPUtils(mContext).getUser().getToken());
@@ -359,34 +396,4 @@ public class DetailsOrderActivity extends BaseActivity {
 
     private final int REQUEST_CODE = 0x1001;
 
-
-    private void displayButtom() {
-        if (statusValue != null) {
-            switch (statusValue) {
-                case "1":
-                    //("已取消");
-                    tvLeft.setText("返回首页");
-                    tvRight.setVisibility(View.GONE);
-
-                    break;
-                case "2":
-                    // holder.tv_payState.setText("预订成功");
-                    break;
-                case "3":
-                    // holder.tv_payState.setText("已取消");
-                    break;
-                case "4":
-                    // holder.tv_payState.setText("已结单");
-                    break;
-                case "5":
-                    //  holder.tv_payState.setText("已支付订金");
-                    break;
-                case "6":
-                    //  holder.tv_payState.setText("已支付订金");
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
 }
