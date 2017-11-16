@@ -25,10 +25,10 @@
             android:layout_marginLeft="@dimen/margin_50"
             android:layout_marginRight="@dimen/margin_50"
             android:layout_marginTop="@dimen/margin_15"
-            android:gravity="center_horizontal"
             android:lineSpacingExtra="@dimen/padding_5"
             android:textColor="@color/text_black"
-            android:textSize="@dimen/normal_textsize"/>
+            android:textSize="@dimen/normal_textsize"
+            android:text="清除缓存会删除本地缓存和搜索历史记录等信息，确定要清除吗?"/>
 
         <RelativeLayout
             android:id="@+id/rl_alert_input_box"
@@ -76,7 +76,7 @@
                 android:layout_weight="1"
                 android:background="@null"
                 android:text="@string/confirm"
-                android:textColor="@color/text_black"
+                android:textColor="@color/text_red"
                 android:textSize="@dimen/normal_textsize"/>
 
             <View

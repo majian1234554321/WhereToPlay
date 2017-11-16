@@ -319,7 +319,7 @@ public class SettingsActivity extends BaseActivity {
                 .setTitle("警告")
                 .setTitleGravity(Gravity.CENTER_HORIZONTAL)
                 .setTitleColor(Color.RED)
-                .setContent("清除缓存会删除本地缓存和搜索历史记录等信息，确定要清除吗")
+                .setContent("\t\t\t\t清除缓存会删除本地缓存和搜索历史记录等信息，确定要清除吗?")
                 .setBtnOnClickListener(new AlertDialog.OnBtnClickListener() {
                     @Override
                     public void onBtnClick(View view, String input) {
