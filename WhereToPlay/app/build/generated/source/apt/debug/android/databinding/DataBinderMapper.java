@@ -93,8 +93,6 @@ class DataBinderMapper  {
                     return com.fanc.wheretoplay.databinding.ItemIntegralDetailBinding.bind(view, bindingComponent);
                 case com.fanc.wheretoplay.R.layout.fragment_deal_detail:
                     return com.fanc.wheretoplay.databinding.FragmentDealDetailBinding.bind(view, bindingComponent);
-                case com.fanc.wheretoplay.R.layout.activity_down_payment:
-                    return com.fanc.wheretoplay.databinding.ActivityDownPaymentBinding.bind(view, bindingComponent);
                 case com.fanc.wheretoplay.R.layout.mine_commend_friend:
                     return com.fanc.wheretoplay.databinding.MineCommendFriendBinding.bind(view, bindingComponent);
                 case com.fanc.wheretoplay.R.layout.fragment_about_us:
@@ -456,12 +454,6 @@ class DataBinderMapper  {
             case 1891132171: {
                 if(tag.equals("layout/fragment_deal_detail_0")) {
                     return com.fanc.wheretoplay.R.layout.fragment_deal_detail;
-                }
-                break;
-            }
-            case 1037829157: {
-                if(tag.equals("layout/activity_down_payment_0")) {
-                    return com.fanc.wheretoplay.R.layout.activity_down_payment;
                 }
                 break;
             }

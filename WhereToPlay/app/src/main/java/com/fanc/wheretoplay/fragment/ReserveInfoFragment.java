@@ -105,6 +105,7 @@ public class ReserveInfoFragment extends BaseFragment {
     private TextView tv1;
     private TextView tv2;
     private ImageView iv3;
+    public String number;
 
     @Nullable
     @Override
@@ -117,8 +118,15 @@ public class ReserveInfoFragment extends BaseFragment {
                 .subscribe(new Action1<String>() {
                     @Override
                     public void call(String s) {
-                        if (s!=null){
-                            tv2.setText(s);
+                        if (s != null) {
+                            String[] value = s.split("@");
+
+                            selectedRoomId = "";
+
+                            mTvReserveInfoRoom.setText(value[0]);
+                            mTvReserveInfoRoom.setTextColor(Color.parseColor("#333333"));
+                            tv2.setText(value[1]);
+                            number = value[1];
                             tv2.setTextColor(Color.parseColor("#333333"));
                         }
 
@@ -482,6 +490,8 @@ public class ReserveInfoFragment extends BaseFragment {
                 mTvReserveInfoRoom.setText(intent.getStringExtra(Constants.NAME) + " (" + intent.getStringExtra(Constants.MONEY) + ")");
                 mTvReserveInfoRoom.setTextColor(getResources().getColor(R.color.text_black));
                 selectedRoomId = intent.getStringExtra(Constants.ROOM);
+                number = "0";
+                tv2.setText("");
             } else if (Constants.ACTION_SELECT_DATE_TIME.equals(action)) {
                 reserveDate = intent.getStringExtra(Constants.TIMES);
                 mTvReserveInfoTime.setText(reserveDate);
@@ -543,6 +553,8 @@ public class ReserveInfoFragment extends BaseFragment {
         param.put(Network.Param.MOBILE, mobile);
         param.put(Network.Param.ROOM_ID, roomId);
         param.put(Network.Param.TYPE, type);
+        param.put(Network.Param.TYPE, type);
+        param.put("number", number);
         try {
             param.put(Network.Param.ARRIVAL_TIME, String.valueOf(DateFormatUtil.parseDateFromYYYY_MM_DD_HH_mmStr(arrivalTime).getTime() / 1000));
         } catch (ParseException e) {

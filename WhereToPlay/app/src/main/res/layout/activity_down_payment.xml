@@ -1,332 +1,320 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
 
-    <data>
+    <com.fanc.wheretoplay.view.TopMenu
+        android:id="@+id/tm_down_payment"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
-        <import type="com.fanc.wheretoplay.util.DateFormatUtil"/>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_10"
+        android:background="@color/white" />
 
-        <variable
-            name="order"
-            type="com.fanc.wheretoplay.datamodel.OrderInfoModel.ContentBean.OrderInfoBean"/>
-    </data>
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:paddingBottom="@dimen/padding_5"
+        android:paddingLeft="@dimen/padding_15"
+        android:paddingTop="@dimen/height_10"
+        android:text="@string/earnest"
+        android:textColor="@color/text_black_sec"
+        android:textSize="@dimen/normal_textsize" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height"
+        android:background="@color/pay_reserve_list_divider_white" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:padding="@dimen/padding_15">
+
+        <TextView
+            android:id="@+id/tv_down_payment_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/text_black_sec"
+            android:textSize="@dimen/textsize_level2" />
+
+        <TextView
+            android:id="@+id/tv_down_payment_time_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_down_payment_title"
+            android:layout_marginTop="@dimen/margin_5"
+            android:text="@string/pay_reserve_time"
+            android:textColor="@color/text_black_sec"
+            android:textSize="@dimen/textsize_levelsmall" />
+
+        <TextView
+            android:id="@+id/tv_down_payment_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_down_payment_time_1"
+            android:layout_marginLeft="@dimen/margin_5"
+            android:layout_toRightOf="@+id/tv_down_payment_time_1"
+
+            android:textColor="@color/text_black_sec"
+            android:textSize="@dimen/textsize_levelsmall" />
+
+        <TextView
+            android:id="@+id/tv_down_payment_room_category"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_down_payment_time_1"
+            android:layout_marginTop="@dimen/margin_5"
+            android:text="@string/pay_reserve_room_category"
+            android:textColor="@color/text_black_sec"
+            android:textSize="@dimen/textsize_levelsmall" />
+
+        <TextView
+            android:id="@+id/tv_down_payment_room"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_down_payment_room_category"
+            android:layout_marginLeft="@dimen/margin_5"
+            android:layout_toRightOf="@+id/tv_down_payment_room_category"
+
+            android:textColor="@color/text_black_sec"
+            android:textSize="@dimen/textsize_levelsmall" />
+
+        <TextView
+            android:id="@+id/tv_down_payment_1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_down_payment_room_category"
+            android:layout_marginTop="@dimen/margin_5"
+            android:text="@string/down_payment_sum_1"
+            android:textColor="@color/text_black_sec"
+            android:textSize="@dimen/textsize_levelsmall" />
+
+        <TextView
+            android:id="@+id/tv_down_payment_sum"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/tv_down_payment_1"
+            android:layout_marginLeft="@dimen/margin_5"
+            android:layout_toRightOf="@+id/tv_down_payment_1"
+            android:textColor="@color/text_red"
+            android:textSize="@dimen/textsize_levelsmall" />
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_10"
+        android:background="@color/pay_reserve_list_divider_white" />
+
+    <TextView
+        android:id="@+id/tv_down_payment_pay_way"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingBottom="@dimen/padding_10"
+        android:paddingLeft="@dimen/padding_20"
+        android:paddingTop="@dimen/padding_15"
+        android:text="@string/pay_way"
+        android:textColor="@color/text_black_sec"
+        android:textSize="@dimen/normal_textsize" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line_height"
+        android:background="@color/pay_reserve_list_divider_white" />
+
+    <RelativeLayout
+        android:id="@+id/rl_down_payment_pay_way"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_200"
+        android:background="@color/white">
+
+        <LinearLayout
+            android:id="@+id/ll_down_payment_weixin"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="onViewClick"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/width_50"
+                android:layout_height="@dimen/height_50"
+                android:padding="@dimen/padding_14"
+                android:src="@drawable/pay_by_weixin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/pay_by_weixin"
+                android:textColor="@color/text_black_sec"
+                android:textSize="@dimen/normal_textsize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_down_payment_ali"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_down_payment_weixin"
+            android:onClick="onViewClick"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/width_50"
+                android:layout_height="@dimen/height_50"
+                android:padding="@dimen/padding_14"
+                android:src="@drawable/pay_by_ali" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/pay_by_ali"
+                android:textColor="@color/text_black_sec"
+                android:textSize="@dimen/normal_textsize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_down_payment_balance"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_down_payment_ali"
+            android:onClick="onViewClick"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/width_50"
+                android:layout_height="@dimen/height_50"
+                android:padding="@dimen/padding_14"
+                android:src="@drawable/pay_by_balance" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="@string/pay_by_balance"
+                android:textColor="@color/text_black_sec"
+                android:textSize="@dimen/normal_textsize" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ll_upp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ll_down_payment_balance"
+            android:background="@color/white"
+            android:onClick="@{click.onViewClick}"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="@dimen/width_50"
+                android:layout_height="@dimen/height_50"
+                android:padding="@dimen/padding_14"
+                android:src="@drawable/icon_yinlian" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:text="银联支付"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/normal_textsize" />
+
+        </LinearLayout>
+
+        <RadioGroup
+            android:id="@+id/rg_down_payment"
+            android:layout_width="@dimen/width_50"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:orientation="vertical"
+            android:paddingLeft="@dimen/padding_10">
+
+            <RadioButton
+                android:id="@+id/rb_down_payment_weixin"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_0"
+                android:layout_weight="1"
+                android:button="@drawable/selector_pay_way"
+                android:checked="true" />
+
+            <RadioButton
+                android:id="@+id/rb_down_payment_ali"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_0"
+                android:layout_weight="1"
+                android:button="@drawable/selector_pay_way" />
+
+            <RadioButton
+                android:id="@+id/rb_down_payment_balance"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_0"
+                android:layout_weight="1"
+                android:button="@drawable/selector_pay_way" />
+
+            <RadioButton
+                android:id="@+id/rb_upp"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_0"
+                android:layout_weight="1"
+                android:button="@drawable/selector_pay_way" />
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:layout_alignBottom="@+id/ll_down_payment_weixin"
+            android:background="@color/pay_reserve_list_divider_white" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:layout_alignBottom="@+id/ll_down_payment_ali"
+            android:background="@color/pay_reserve_list_divider_white" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:layout_alignBottom="@+id/ll_down_payment_balance"
+            android:background="@color/pay_reserve_list_divider_white" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:layout_alignBottom="@+id/ll_upp"
+            android:background="@color/pay_reserve_list_divider_white" />
+
+    </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="@dimen/height_0"
+        android:layout_weight="1"
+        android:background="@color/white"
         android:orientation="vertical">
 
-        <com.fanc.wheretoplay.view.TopMenu
-            android:id="@+id/tm_down_payment"
+        <Button
+            android:id="@+id/btn_down_payment_pay"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_10"
-            android:background="@color/white"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:gravity="center_vertical"
-            android:paddingBottom="@dimen/padding_5"
-            android:paddingLeft="@dimen/padding_15"
-            android:paddingTop="@dimen/height_10"
-            android:text="@string/earnest"
-            android:textColor="@color/text_black_sec"
-            android:textSize="@dimen/normal_textsize"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_height"
-            android:background="@color/pay_reserve_list_divider_white"/>
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:padding="@dimen/padding_15">
-
-            <TextView
-                android:id="@+id/tv_down_payment_title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@{order.store_name}"
-                android:textColor="@color/text_black_sec"
-                android:textSize="@dimen/textsize_level2"/>
-
-            <TextView
-                android:id="@+id/tv_down_payment_time_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_down_payment_title"
-                android:layout_marginTop="@dimen/margin_5"
-                android:text="@string/pay_reserve_time"
-                android:textColor="@color/text_black_sec"
-                android:textSize="@dimen/textsize_levelsmall"/>
-
-            <TextView
-                android:id="@+id/tv_down_payment_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tv_down_payment_time_1"
-                android:layout_marginLeft="@dimen/margin_5"
-                android:layout_toRightOf="@+id/tv_down_payment_time_1"
-                android:text='@{DateFormatUtil.getYYYYMMDDHHmm(order.arrival_time)+@string/before}'
-                android:textColor="@color/text_black_sec"
-                android:textSize="@dimen/textsize_levelsmall"/>
-
-            <TextView
-                android:id="@+id/tv_down_payment_room_category"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_down_payment_time_1"
-                android:layout_marginTop="@dimen/margin_5"
-                android:text="@string/pay_reserve_room_category"
-                android:textColor="@color/text_black_sec"
-                android:textSize="@dimen/textsize_levelsmall"/>
-
-            <TextView
-                android:id="@+id/tv_down_payment_room"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tv_down_payment_room_category"
-                android:layout_marginLeft="@dimen/margin_5"
-                android:layout_toRightOf="@+id/tv_down_payment_room_category"
-                android:text="@{order.room_type}"
-                android:textColor="@color/text_black_sec"
-                android:textSize="@dimen/textsize_levelsmall"/>
-
-            <TextView
-                android:id="@+id/tv_down_payment_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/tv_down_payment_room_category"
-                android:layout_marginTop="@dimen/margin_5"
-                android:text="@string/down_payment_sum_1"
-                android:textColor="@color/text_black_sec"
-                android:textSize="@dimen/textsize_levelsmall"/>
-
-            <TextView
-                android:id="@+id/tv_down_payment_sum"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignBottom="@+id/tv_down_payment_1"
-                android:layout_marginLeft="@dimen/margin_5"
-                android:layout_toRightOf="@+id/tv_down_payment_1"
-                android:text='@{@string/currency_char+order.prepay}'
-                android:textColor="@color/text_red"
-                android:textSize="@dimen/textsize_levelsmall"/>
-        </RelativeLayout>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_10"
-            android:background="@color/pay_reserve_list_divider_white"/>
-
-        <TextView
-            android:id="@+id/tv_down_payment_pay_way"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/white"
-            android:paddingBottom="@dimen/padding_10"
-            android:paddingLeft="@dimen/padding_20"
-            android:paddingTop="@dimen/padding_15"
-            android:text="@string/pay_way"
-            android:textColor="@color/text_black_sec"
-            android:textSize="@dimen/normal_textsize"/>
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_height"
-            android:background="@color/pay_reserve_list_divider_white"/>
-
-        <RelativeLayout
-            android:id="@+id/rl_down_payment_pay_way"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_200"
-            android:background="@color/white">
-
-            <LinearLayout
-                android:id="@+id/ll_down_payment_weixin"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:onClick="onViewClick"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/width_50"
-                    android:layout_height="@dimen/height_50"
-                    android:padding="@dimen/padding_14"
-                    android:src="@drawable/pay_by_weixin"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/pay_by_weixin"
-                    android:textColor="@color/text_black_sec"
-                    android:textSize="@dimen/normal_textsize"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_down_payment_ali"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ll_down_payment_weixin"
-                android:onClick="onViewClick"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/width_50"
-                    android:layout_height="@dimen/height_50"
-                    android:padding="@dimen/padding_14"
-                    android:src="@drawable/pay_by_ali"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/pay_by_ali"
-                    android:textColor="@color/text_black_sec"
-                    android:textSize="@dimen/normal_textsize"/>
-
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/ll_down_payment_balance"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ll_down_payment_ali"
-                android:onClick="onViewClick"
-                android:orientation="horizontal">
-
-                <ImageView
-                    android:layout_width="@dimen/width_50"
-                    android:layout_height="@dimen/height_50"
-                    android:padding="@dimen/padding_14"
-                    android:src="@drawable/pay_by_balance"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="@string/pay_by_balance"
-                    android:textColor="@color/text_black_sec"
-                    android:textSize="@dimen/normal_textsize"/>
-
-            </LinearLayout>
-            <LinearLayout
-                android:id="@+id/ll_upp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/ll_down_payment_balance"
-                android:onClick="@{click.onViewClick}"
-                android:orientation="horizontal"
-                android:background="@color/white">
-
-                <ImageView
-                    android:layout_width="@dimen/width_50"
-                    android:layout_height="@dimen/height_50"
-                    android:padding="@dimen/padding_14"
-                    android:src="@drawable/icon_yinlian"/>
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:text="银联支付"
-                    android:textColor="@color/text_black"
-                    android:textSize="@dimen/normal_textsize"/>
-
-            </LinearLayout>
-
-            <RadioGroup
-                android:id="@+id/rg_down_payment"
-                android:layout_width="@dimen/width_50"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:orientation="vertical"
-                android:paddingLeft="@dimen/padding_10">
-
-                <RadioButton
-                    android:id="@+id/rb_down_payment_weixin"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_0"
-                    android:layout_weight="1"
-                    android:button="@drawable/selector_pay_way"
-                    android:checked="true"/>
-
-                <RadioButton
-                    android:id="@+id/rb_down_payment_ali"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_0"
-                    android:layout_weight="1"
-                    android:button="@drawable/selector_pay_way"/>
-
-                <RadioButton
-                    android:id="@+id/rb_down_payment_balance"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_0"
-                    android:layout_weight="1"
-                    android:button="@drawable/selector_pay_way"/>
-
-                <RadioButton
-                    android:id="@+id/rb_upp"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_0"
-                    android:layout_weight="1"
-                    android:button="@drawable/selector_pay_way"/>
-            </RadioGroup>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_height"
-                android:layout_alignBottom="@+id/ll_down_payment_weixin"
-                android:background="@color/pay_reserve_list_divider_white"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_height"
-                android:layout_alignBottom="@+id/ll_down_payment_ali"
-                android:background="@color/pay_reserve_list_divider_white"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_height"
-                android:layout_alignBottom="@+id/ll_down_payment_balance"
-                android:background="@color/pay_reserve_list_divider_white"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_height"
-                android:layout_alignBottom="@+id/ll_upp"
-                android:background="@color/pay_reserve_list_divider_white"/>
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_0"
-            android:layout_weight="1"
-            android:background="@color/white"
-            android:orientation="vertical">
-
-            <Button
-                android:id="@+id/btn_down_payment_pay"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_40"
-                android:layout_marginLeft="@dimen/margin_20"
-                android:layout_marginRight="@dimen/margin_20"
-                android:layout_marginTop="@dimen/margin_30"
-                android:background="@drawable/shape_btn_orange"
-                android:onClick="onViewClick"
-                android:text="@string/pay"
-                android:textColor="@color/text_white"
-                android:textSize="@dimen/textsize_level2"/>
-        </LinearLayout>
-
+            android:layout_height="@dimen/height_40"
+            android:layout_marginLeft="@dimen/margin_20"
+            android:layout_marginRight="@dimen/margin_20"
+            android:layout_marginTop="@dimen/margin_30"
+            android:background="@drawable/shape_btn_orange"
+            android:onClick="onViewClick"
+            android:text="@string/pay"
+            android:textColor="@color/text_white"
+            android:textSize="@dimen/textsize_level2" />
     </LinearLayout>
-</layout>
+
+</LinearLayout>
+

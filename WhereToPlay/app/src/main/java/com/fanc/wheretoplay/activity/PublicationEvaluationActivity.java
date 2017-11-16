@@ -223,7 +223,8 @@ public class PublicationEvaluationActivity extends BaseActivity {
                         closeProgress();
                         if (submitCommentModel.code.equals("0")) {
                             Toast.makeText(mContext, "提交评论成功", Toast.LENGTH_SHORT).show();
-                            RxBus.getDefault().post("提交评价成功");
+                            //RxBus.getDefault().post("提交评价成功");
+                            startActivity(new Intent(PublicationEvaluationActivity.this,EvaluationSuccessActivity.class));
                             finish();
                         } else {
                             Toast.makeText(mContext, "提交评论失败", Toast.LENGTH_SHORT).show();

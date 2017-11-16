@@ -330,7 +330,7 @@ public class Network{
 
 
 
-        //收藏
+        //信用预订
         @Multipart
         @POST("User/onlineBook")
         Observable<OrderInfoModel> onlineBook(@Part List<MultipartBody.Part> fileA);

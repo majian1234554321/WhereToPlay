@@ -214,13 +214,14 @@
         <activity
             android:name="com.unionpay.uppay.PayActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.unionpay.UPPayWapActivity"
             android:configChanges="orientation|keyboardHidden|fontScale"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize"></activity>
-        <activity android:name=".activity.BookActivity"></activity>
+            android:windowSoftInputMode="adjustResize" />
+        <activity android:name=".activity.BookActivity" />
+        <activity android:name=".activity.EvaluationSuccessActivity"></activity>
     </application>
 
 </manifest>

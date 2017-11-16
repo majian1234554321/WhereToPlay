@@ -12,29 +12,27 @@ import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.BaseActivity;
-import com.fanc.wheretoplay.databinding.ActivityDownPaymentBinding;
+
 import com.fanc.wheretoplay.datamodel.IsOk;
-import com.fanc.wheretoplay.datamodel.OrderInfo;
 import com.fanc.wheretoplay.datamodel.OrderInfoModel;
 import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.pay.AliPayResult;
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.util.Constants;
-import com.fanc.wheretoplay.util.SPUtils;
+import com.fanc.wheretoplay.util.DateFormatUtil;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.view.AlertDialog;
 import com.fanc.wheretoplay.view.TopMenu;
 import com.orhanobut.logger.Logger;
-
 import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
@@ -45,19 +43,15 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.MultipartBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -69,16 +63,9 @@ import rx.schedulers.Schedulers;
 
 public class DownPaymentActivity extends BaseActivity {
 
-    ActivityDownPaymentBinding paymentBinding;
 
-    TopMenu mTmDownPayment;
-    RadioGroup mRgDownPayment;
-    RadioButton mRbWeixin;
-    RadioButton mRbAli;
-    RadioButton mRbBalance;
-    Button mBtnPay;
-    TextView mTvPayWay;
-    RelativeLayout mRlPayWay;
+
+
     //店铺id
     String storeId;
     // 订单参数
@@ -94,28 +81,60 @@ public class DownPaymentActivity extends BaseActivity {
 
     IWXAPI wxApi;
     Receiver receiver;
+    @BindView(R.id.tm_down_payment)
+    TopMenu tmDownPayment;
+    @BindView(R.id.tv_down_payment_title)
+    TextView tvDownPaymentTitle;
+    @BindView(R.id.tv_down_payment_time_1)
+    TextView tvDownPaymentTime1;
+    @BindView(R.id.tv_down_payment_time)
+    TextView tvDownPaymentTime;
+    @BindView(R.id.tv_down_payment_room_category)
+    TextView tvDownPaymentRoomCategory;
+    @BindView(R.id.tv_down_payment_room)
+    TextView tvDownPaymentRoom;
+    @BindView(R.id.tv_down_payment_1)
+    TextView tvDownPayment1;
+    @BindView(R.id.tv_down_payment_sum)
+    TextView tvDownPaymentSum;
+    @BindView(R.id.tv_down_payment_pay_way)
+    TextView tvDownPaymentPayWay;
+    @BindView(R.id.ll_down_payment_weixin)
+    LinearLayout llDownPaymentWeixin;
+    @BindView(R.id.ll_down_payment_ali)
+    LinearLayout llDownPaymentAli;
+    @BindView(R.id.ll_down_payment_balance)
+    LinearLayout llDownPaymentBalance;
+    @BindView(R.id.ll_upp)
+    LinearLayout llUpp;
+    @BindView(R.id.rb_down_payment_weixin)
+    RadioButton rbDownPaymentWeixin;
+    @BindView(R.id.rb_down_payment_ali)
+    RadioButton rbDownPaymentAli;
+    @BindView(R.id.rb_down_payment_balance)
+    RadioButton rbDownPaymentBalance;
+    @BindView(R.id.rb_upp)
+    RadioButton rbUpp;
+    @BindView(R.id.rg_down_payment)
+    RadioGroup rgDownPayment;
+    @BindView(R.id.rl_down_payment_pay_way)
+    RelativeLayout rlDownPaymentPayWay;
+    @BindView(R.id.btn_down_payment_pay)
+    Button btnDownPaymentPay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        paymentBinding = DataBindingUtil.setContentView(this, R.layout.activity_down_payment);
-        initViews();
+
+        setContentView(R.layout.activity_down_payment);
+        ButterKnife.bind(this);
+
         init();
         setListeners();
         wxApi = WXAPIFactory.createWXAPI(mContext, Constants.WX_APP_ID);
         wxApi.registerApp(Constants.WX_APP_ID);
     }
 
-    private void initViews() {
-        mTmDownPayment = paymentBinding.tmDownPayment;
-        mRgDownPayment = paymentBinding.rgDownPayment;
-        mRbWeixin = paymentBinding.rbDownPaymentWeixin;
-        mRbAli = paymentBinding.rbDownPaymentAli;
-        mRbBalance = paymentBinding.rbDownPaymentBalance;
-        mBtnPay = paymentBinding.btnDownPaymentPay;
-        mTvPayWay = paymentBinding.tvDownPaymentPayWay;
-        mRlPayWay = paymentBinding.rlDownPaymentPayWay;
-    }
 
     private void init() {
         storeId = getIntent().getStringExtra(Constants.STORE_ID);
@@ -124,28 +143,28 @@ public class DownPaymentActivity extends BaseActivity {
         payWay = Constants.PAY_WAY_WEIXIN;
 
 
-        mTmDownPayment.setLeftIcon(R.drawable.left);
-        mTmDownPayment.setTitle(R.string.down_payment);
+        tmDownPayment.setLeftIcon(R.drawable.left);
+        tmDownPayment.setTitle(R.string.down_payment);
         if (Constants.RESERVE_WAY_CREDIT.equals(reserveType)) {// 信誉预订
-            mTmDownPayment.setTitle(R.string.credit_reserve);
-            mTvPayWay.setVisibility(View.GONE);
-            mRlPayWay.setVisibility(View.GONE);
-            mBtnPay.setText(R.string.confirm);
+            tmDownPayment.setTitle(R.string.credit_reserve);
+            tvDownPaymentPayWay.setVisibility(View.GONE);
+            rlDownPaymentPayWay.setVisibility(View.GONE);
+            btnDownPaymentPay.setText(R.string.confirm);
         }
-        mTmDownPayment.setTitleColor(getResources().getColor(R.color.white));
+        tmDownPayment.setTitleColor(getResources().getColor(R.color.white));
         getOrderInfo(params);
 
         registerBroadcastReceiver();
     }
 
     private void setListeners() {
-        mTmDownPayment.setLeftIconOnClickListener(new View.OnClickListener() {
+        tmDownPayment.setLeftIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 finish();
             }
         });
-        mRgDownPayment.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+        rgDownPayment.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
@@ -168,13 +187,13 @@ public class DownPaymentActivity extends BaseActivity {
     public void onViewClick(View view) {
         switch (view.getId()) {
             case R.id.ll_down_payment_weixin:
-                mRbWeixin.setChecked(true);
+                rbDownPaymentWeixin.setChecked(true);
                 break;
             case R.id.ll_down_payment_ali:
-                mRbAli.setChecked(true);
+                rbDownPaymentAli.setChecked(true);
                 break;
             case R.id.ll_down_payment_balance:
-                mRbBalance.setChecked(true);
+                rbDownPaymentBalance.setChecked(true);
                 break;
             case R.id.btn_down_payment_pay:
                 pay();
@@ -195,7 +214,7 @@ public class DownPaymentActivity extends BaseActivity {
         Intent intent = new Intent(mContext, ReuseActivity.class);
         intent.putExtra(Constants.PAGE, Constants.ORDER_TO_COMPLETE);
         intent.putExtra(Constants.STORE_ID, storeId);
-        intent.putExtra(Constants.ORDER_ID,orderId);
+        intent.putExtra(Constants.ORDER_ID, orderId);
 //        intent.putExtra(Constants.PRICE, price);
 //        if (Constants.RESERVE_WAY_CREDIT.equals(reserveType)) {
 //            intent.putExtra(Constants.CREDIT_RESERVE, true);// 信誉预订
@@ -216,7 +235,6 @@ public class DownPaymentActivity extends BaseActivity {
         List<MultipartBody.Part> fileA = new ArrayList<>();
 
 
-
         for (Map.Entry<String, String> entry : params.entrySet()) {
             MultipartBody.Part requestFileA =
                     MultipartBody.Part.createFormData(entry.getKey(), entry.getValue());
@@ -224,9 +242,8 @@ public class DownPaymentActivity extends BaseActivity {
         }
 
 
-
-     Subscription subscription =  Retrofit_RequestUtils.getRequest().onlineBook(fileA)
-                 .subscribeOn(Schedulers.io())
+        Subscription subscription = Retrofit_RequestUtils.getRequest().onlineBook(fileA)
+                .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<OrderInfoModel>() {
                     @Override
@@ -244,9 +261,9 @@ public class DownPaymentActivity extends BaseActivity {
                     @Override
                     public void onNext(OrderInfoModel orderInfo) {
                         closeProgress();
-                        if (orderInfo.code==0) {
-                                showOrderInfo(orderInfo.content.order_info);
-                            }
+                        if (orderInfo.code == 0) {
+                            showOrderInfo(orderInfo.content.order_info);
+                        }
                     }
                 });
 
@@ -257,14 +274,17 @@ public class DownPaymentActivity extends BaseActivity {
 
     /**
      * 显示订单
+     *
      * @param order
      */
     private void showOrderInfo(OrderInfoModel.ContentBean.OrderInfoBean order) {
-        paymentBinding.setOrder(order);
+        tvDownPaymentTitle.setText(order.store_name);
+        tvDownPaymentTime.setText(DateFormatUtil.stampToDate(order.arrival_time));
+        tvDownPaymentRoom.setText(order.room_type);
+        tvDownPaymentSum.setText(order.prepay);
         price = order.prepay;
         orderId = order.id;
     }
-
 
 
     /**
@@ -294,7 +314,7 @@ public class DownPaymentActivity extends BaseActivity {
         }
         // 信誉预定
         if (Constants.RESERVE_WAY_CREDIT.equals(reserveType)) {
-          //  payCreditOrder();
+            //  payCreditOrder();
             finish();
 
         }

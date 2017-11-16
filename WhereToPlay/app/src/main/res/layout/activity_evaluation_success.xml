@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context="com.fanc.wheretoplay.activity.EvaluationSuccessActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl00"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/menu_height"
+        android:background="#C4483C">
+
+        <View
+            android:id="@+id/v_statubar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/statubar_height" />
+
+        <ImageView
+            android:id="@+id/menu_iv_lefticon"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/menu_height"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/v_statubar"
+            android:layout_centerVertical="true"
+            android:paddingLeft="16dp"
+            android:paddingRight="24dp"
+            android:scaleType="center"
+            android:src="@drawable/icon_close" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/v_statubar"
+            android:layout_centerInParent="true"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/menu_text_size" />
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/rl01"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl00"
+        android:layout_marginTop="38dp">
+
+        <ImageView
+            android:id="@+id/iv01"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="38dp"
+            android:src="@drawable/icon_success" />
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_toRightOf="@+id/iv01"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="评价成功"
+                android:textColor="#333333"
+                android:textSize="14dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="left"
+                android:text="你的评价将是其他用户选择的重要参考！"
+                android:textColor="#666666"
+                android:textSize="12dp" />
+
+
+        </LinearLayout>
+
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/rl01"
+        android:layout_gravity="center"
+        android:layout_margin="20dp"
+        android:background="@drawable/shape_btn_c4483c_stoke"
+        android:paddingBottom="4dp"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:paddingTop="4dp"
+        android:text="返回商家主页"
+        android:textColor="#ffc4483c" />
+
+    <View
+
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/tv_back"
+        android:background="#E5e5e5" />
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="@dimen/margin_10"
+        android:layout_marginTop="@dimen/margin_10"
+        android:src="@drawable/recommend" />
+
+    <com.fanc.wheretoplay.view.MyRecycleView
+        android:id="@+id/recycle"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/margin_5" />
+
+</LinearLayout>
