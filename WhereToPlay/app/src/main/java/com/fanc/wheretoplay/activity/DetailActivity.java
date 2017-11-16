@@ -7,6 +7,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
+
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.BaseFragmentActivity;
 import com.fanc.wheretoplay.fragment.AboutUsFragment;
@@ -22,11 +24,14 @@ import com.fanc.wheretoplay.fragment.MessageFragment;
 import com.fanc.wheretoplay.fragment.MineCommendMoneyFragment;
 import com.fanc.wheretoplay.fragment.MineFriendFragment;
 import com.fanc.wheretoplay.fragment.MineInfoFragment;
+import com.fanc.wheretoplay.fragment.OrderFragment;
+import com.fanc.wheretoplay.fragment.OrderFragments;
 import com.fanc.wheretoplay.fragment.ReferralFragment;
 import com.fanc.wheretoplay.fragment.SetPayPwdFragment;
 import com.fanc.wheretoplay.fragment.SystemNotifyFragment;
 import com.fanc.wheretoplay.fragment.WalletFragment;
 import com.fanc.wheretoplay.util.Constants;
+import com.fanc.wheretoplay.util.LogUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 
 

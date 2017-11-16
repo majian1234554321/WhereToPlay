@@ -221,6 +221,7 @@ public class AlertDialog {
     // 密码输入界面，点击按钮回调
     public interface OnBtnClickListener {
         void onBtnClick(View view, String input);
+
     }
 
     public boolean isShowing() {

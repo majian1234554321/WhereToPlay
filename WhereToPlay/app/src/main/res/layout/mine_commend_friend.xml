@@ -26,9 +26,9 @@
 
         <TextView
             android:id="@+id/tv_mine_friend_title"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_65"
+            android:layout_marginStart="@dimen/margin_15"
             android:layout_marginTop="@dimen/margin_5"
             android:text="@string/where_to_play_recreation_terrace"
             android:textColor="@color/text_black_sec"
@@ -37,27 +37,26 @@
             app:layout_constraintTop_toTopOf="@+id/iv_mine_friend"
             />
 
-        <TextView
-            android:id="@+id/tv_mine_friend_timeleft"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/textcolor_btn_normal"
-            android:textSize="@dimen/textsize_levelsmall"
-            android:layout_marginBottom="@dimen/margin_5"
-            app:layout_constraintStart_toStartOf="@+id/tv_mine_friend_title"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_mine_friend"
-            />
+        <!--<TextView-->
+            <!--android:id="@+id/tv_mine_friend_timeleft"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:textColor="@color/textcolor_btn_normal"-->
+            <!--android:textSize="@dimen/textsize_levelsmall"-->
+            <!--android:layout_marginBottom="@dimen/margin_5"-->
+            <!--app:layout_constraintStart_toStartOf="@+id/tv_mine_friend_title"-->
+            <!--app:layout_constraintBottom_toBottomOf="@+id/iv_mine_friend"-->
+            <!--/>-->
 
         <TextView
             android:id="@+id/tv_mine_friend_time"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_5"
-            android:layout_marginStart="@dimen/margin_5"
             android:text="2017-11-8 16:00"
             android:textColor="@color/textcolor_btn_normal"
             android:textSize="@dimen/textsize_levelsmall"
-            app:layout_constraintStart_toEndOf="@+id/tv_mine_friend_timeleft"
+            app:layout_constraintStart_toStartOf="@+id/tv_mine_friend_title"
             app:layout_constraintBottom_toBottomOf="@+id/iv_mine_friend"/>
 <!-- android:text="@{DateFormatUtil.getDateFormatMMDDHHmm(notification.created_time)}"-->
 

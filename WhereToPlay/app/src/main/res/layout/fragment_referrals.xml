@@ -20,103 +20,120 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/padding_15">
-
-            <ImageView
-                android:id="@+id/iv_referral_logo"
-                android:layout_width="@dimen/width_30"
-                android:layout_height="@dimen/height_30"
-                android:src="@mipmap/ic_launcher"/>
-
-            <TextView
-                android:id="@+id/tv_referral_recreation_terrace"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/margin_10"
-                android:layout_toRightOf="@+id/iv_referral_logo"
-                android:text="@string/where_to_play_recreation_terrace"
-                android:textColor="@color/text_black"
-                android:textSize="@dimen/textsize_level2"/>
-
-        </RelativeLayout>
-
-        <ImageView
-            android:id="@+id/iv_referral_referral_ad"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_200"
-            android:layout_marginLeft="@dimen/margin_5"
-            android:layout_marginRight="@dimen/margin_5"
-            android:scaleType="fitXY"/>
-
-        <RelativeLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_20">
-
-            <com.fanc.wheretoplay.view.CircleImageView
-                android:id="@+id/civ_referral_mine_header"
-                android:layout_width="@dimen/width_40"
-                android:layout_height="@dimen/height_40"
-                android:src="@mipmap/ic_launcher"/>
-
-            <TextView
-                android:id="@+id/tv_referral_mine_nickname"
-                android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_centerVertical="true"
-                android:layout_marginLeft="@dimen/margin_10"
-                android:layout_toRightOf="@+id/civ_referral_mine_header"
-                android:text="JoJo"
-                android:textColor="@color/text_black"
-                android:textSize="@dimen/normal_textsize"/>
-        </RelativeLayout>
+                android:background="@color/bg_gray"
+                android:orientation="vertical">
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:padding="@dimen/padding_15">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="@dimen/margin_15"
-            android:layout_marginTop="@dimen/margin_15"
-            android:text="@string/mine_invitation_code"
-            android:textColor="@color/text_black"
-            android:textSize="@dimen/normal_textsize"/>
+                    <ImageView
+                        android:id="@+id/iv_referral_logo"
+                        android:layout_width="@dimen/width_30"
+                        android:layout_height="@dimen/height_30"
+                        android:src="@mipmap/ic_launcher"/>
 
-        <EditText
-            android:id="@+id/tv_referral_mine_code"
-            android:layout_width="@dimen/width_180"
-            android:layout_height="wrap_content"
-            android:background="@drawable/shape_invitaiton_code"
-            android:gravity="center_horizontal"
-            android:padding="@dimen/padding_5"
-            android:paddingTop="@dimen/padding_5"
-            android:text="HL12"
-            android:textColor="@color/text_red"
-            android:textIsSelectable="true"/>
+                    <TextView
+                        android:id="@+id/tv_referral_recreation_terrace"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_toRightOf="@+id/iv_referral_logo"
+                        android:text="@string/where_to_play_recreation_terrace"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/textsize_level2"/>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/margin_15"
-            android:gravity="center"
-            android:lineSpacingExtra="@dimen/text_line_space_5"
-            android:text="@string/invitation_code_explain"
-            android:textColor="@color/text_down_payment_and_way"
-            android:textSize="@dimen/textsize_levelsmall"/>
+                </RelativeLayout>
 
-        <Button
-            android:id="@+id/btn_referral_sheared"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_40"
-            android:layout_marginLeft="@dimen/margin_15"
-            android:layout_marginRight="@dimen/margin_15"
-            android:layout_marginTop="@dimen/margin_50"
-            android:background="@drawable/shape_btn_signin"
-            android:onClick="@{click.onViewClick}"
-            android:text="@string/sheared"
-            android:textColor="@color/text_white"
-            android:textSize="@dimen/textsize_level2"/>
+                <ImageView
+                    android:id="@+id/iv_referral_referral_ad"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_200"
+                    android:layout_marginLeft="@dimen/margin_5"
+                    android:layout_marginRight="@dimen/margin_5"
+                    android:scaleType="fitXY"/>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/margin_20">
+
+                    <com.fanc.wheretoplay.view.CircleImageView
+                        android:id="@+id/civ_referral_mine_header"
+                        android:layout_width="@dimen/width_40"
+                        android:layout_height="@dimen/height_40"
+                        android:src="@mipmap/ic_launcher"/>
+
+                    <TextView
+                        android:id="@+id/tv_referral_mine_nickname"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="@dimen/margin_10"
+                        android:layout_toRightOf="@+id/civ_referral_mine_header"
+                        android:text="JoJo"
+                        android:textColor="@color/text_black"
+                        android:textSize="@dimen/normal_textsize"/>
+                </RelativeLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:text="@string/mine_invitation_code"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/normal_textsize"
+                    android:layout_gravity="center_horizontal"/>
+
+                <EditText
+                    android:id="@+id/tv_referral_mine_code"
+                    android:layout_width="@dimen/width_180"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/shape_invitaiton_code"
+                    android:gravity="center_horizontal"
+                    android:padding="@dimen/padding_5"
+                    android:paddingTop="@dimen/padding_5"
+                    android:text="HL12"
+                    android:textColor="@color/text_red"
+                    android:textIsSelectable="true"
+                    android:layout_gravity="center_horizontal"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:gravity="center"
+                    android:lineSpacingExtra="@dimen/text_line_space_5"
+                    android:text="@string/invitation_code_explain"
+                    android:textColor="@color/text_down_payment_and_way"
+                    android:textSize="@dimen/textsize_levelsmall"
+                    android:layout_gravity="center_horizontal"/>
+
+                <Button
+                    android:id="@+id/btn_referral_sheared"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginRight="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_50"
+                    android:background="@drawable/shape_btn_signin"
+                    android:onClick="@{click.onViewClick}"
+                    android:text="@string/sheared"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/textsize_level2"
+                    android:layout_gravity="center_horizontal"/>
+            </LinearLayout>
+        </ScrollView>
+
     </LinearLayout>
 </layout>

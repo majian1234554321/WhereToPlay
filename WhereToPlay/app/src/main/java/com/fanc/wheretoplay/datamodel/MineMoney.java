@@ -10,7 +10,6 @@ import java.util.List;
 
 public class MineMoney extends BaseModel {
 
-
     private List<ContentBean> content;
 
     public List<ContentBean> getContent() {
@@ -25,14 +24,14 @@ public class MineMoney extends BaseModel {
         /**
          * nickname : name1
          * pic : http://ktv.51tzl.cn/Public/head_icon.png
-         * regTime : 1506079634
-         * amount : 22
+         * regtime : 1506079634
+         * amount : 20
          */
 
         private String nickname;
         private String pic;
-        private String regTime;
-        private int amount;
+        private String regtime;
+        private String amount;
 
         public String getNickname() {
             return nickname;
@@ -50,19 +49,19 @@ public class MineMoney extends BaseModel {
             this.pic = pic;
         }
 
-        public String getRegTime() {
-            return regTime;
+        public String getRegtime() {
+            return regtime;
         }
 
-        public void setRegTime(String regTime) {
-            this.regTime = regTime;
+        public void setRegtime(String regtime) {
+            this.regtime = regtime;
         }
 
-        public int getAmount() {
+        public String getAmount() {
             return amount;
         }
 
-        public void setAmount(int amount) {
+        public void setAmount(String amount) {
             this.amount = amount;
         }
     }

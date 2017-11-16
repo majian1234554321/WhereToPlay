@@ -43,7 +43,7 @@ public abstract class DCallback<T>
         for (String name : headers.names()) {
             sb.append(name + " = " + headers.get(name) + "\n");
         }
-        Log.i("llm", sb.toString());
+        Log.i("dd", sb.toString());
         Log.e("dd", "result:\t" + result);
         Logger.json(result);// 控制台打印返回的Json
         //解析对象

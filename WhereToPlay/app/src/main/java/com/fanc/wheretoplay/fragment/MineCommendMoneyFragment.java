@@ -35,6 +35,7 @@ import java.util.List;
 
 import okhttp3.Call;
 import okhttp3.MultipartBody;
+import okhttp3.Response;
 import rx.Subscriber;
 import rx.Subscription;
 import rx.android.schedulers.AndroidSchedulers;
@@ -52,7 +53,6 @@ public class MineCommendMoneyFragment extends BaseFragment {
 
     private MineMoneyAdapter mineMoneyAdapter;
     private List mCommenMoney;
-
 
     //刷新
     private int page = 0;
@@ -202,7 +202,6 @@ public class MineCommendMoneyFragment extends BaseFragment {
             refreshAndLoadMoreSuccess();
         } else if (isPullUp) {// 上拉加载
             if (mCommenMoneyList.size() == 0) {
-                ToastUtils.makePicTextShortToast(mContext, "没有更多了哦");
                 refreshOrLoadFail();
                 return;
             }

@@ -17,6 +17,7 @@ import com.fanc.wheretoplay.databinding.FragmentResetPwdBinding;
 import com.fanc.wheretoplay.datamodel.User;
 import com.fanc.wheretoplay.datamodel.VerifyCode;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.view.TopMenu;
@@ -24,6 +25,11 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
 import okhttp3.Call;
+import okhttp3.MultipartBody;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2017/6/12.
@@ -98,13 +104,41 @@ public class ResetPwdFragment extends BaseFragment {
             countDown();
 
             showProgress();
-            OkHttpUtils.post()
-                    .url(Network.User.LOGIN_VERIFY)
-                    .addParams(Network.Param.MOBILE, mobile)
-                    .build()
-                    .execute(new DCallback<VerifyCode>() {
+//            OkHttpUtils.post()
+//                    .url(Network.User.LOGIN_VERIFY)
+//                    .addParams(Network.Param.MOBILE, mobile)
+//                    .build()
+//                    .execute(new DCallback<VerifyCode>() {
+//                        @Override
+//                        public void onError(Call call, Exception e) {
+//                            connectError();
+//                            mTimer.cancel();
+//                            mBtnResetPwdVerify.setEnabled(true);
+//                            mBtnResetPwdVerify.setText("重新获取");
+//                        }
+//
+//                        @Override
+//                        public void onResponse(VerifyCode response) {
+//                            mBtnResetPwdVerify.setEnabled(true);
+//                            if (isSuccess(response)) {
+//                                verifyCode = response.getVerifyCode();
+////                                mEtResetPwdVerification.setText(verifyCode);
+//                            }
+//                        }
+//                    });
+            MultipartBody.Part requestFileA = MultipartBody.Part.createFormData(Network.Param.MOBILE, mobile);
+
+            Subscription subscription = Retrofit_RequestUtils.getRequest().getMyVerification(requestFileA)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Subscriber<VerifyCode>() {
                         @Override
-                        public void onError(Call call, Exception e) {
+                        public void onCompleted() {
+
+                        }
+
+                        @Override
+                        public void onError(Throwable e) {
                             connectError();
                             mTimer.cancel();
                             mBtnResetPwdVerify.setEnabled(true);
@@ -112,11 +146,10 @@ public class ResetPwdFragment extends BaseFragment {
                         }
 
                         @Override
-                        public void onResponse(VerifyCode response) {
-                            mBtnResetPwdVerify.setEnabled(true);
+                        public void onNext(VerifyCode response) {
+                            closeProgress();
                             if (isSuccess(response)) {
                                 verifyCode = response.getVerifyCode();
-//                                mEtResetPwdVerification.setText(verifyCode);
                             }
                         }
                     });

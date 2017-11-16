@@ -11,7 +11,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 
 import com.fanc.wheretoplay.datamodel.CancleOrderModel;
-import com.fanc.wheretoplay.datamodel.MineMoney;
+import com.fanc.wheretoplay.datamodel.DelectCollection;
 import com.fanc.wheretoplay.datamodel.MineFriend;
 import com.fanc.wheretoplay.datamodel.MineMoney;
 import com.fanc.wheretoplay.datamodel.OrderDetailModel;
@@ -19,6 +19,7 @@ import com.fanc.wheretoplay.datamodel.OrderInfo;
 import com.fanc.wheretoplay.datamodel.OrderInfoModel;
 import com.fanc.wheretoplay.datamodel.PayOrder;
 import com.fanc.wheretoplay.datamodel.SubmitCommentModel;
+import com.fanc.wheretoplay.datamodel.VerifyCode;
 import com.fanc.wheretoplay.rx.BaseResponseModel;
 
 import java.util.List;
@@ -280,7 +281,6 @@ public class Network{
         @POST("User/bookList")
         Observable<BaseResponseModel<BookListModel.ContentBean>> bookList(@Part MultipartBody.Part file, @Part MultipartBody.Part fileB, @Part MultipartBody.Part filec, @Part MultipartBody.Part filed);
 
-
         //订单详情
         @Multipart
         @POST("User/orderDetail")
@@ -302,23 +302,27 @@ public class Network{
         @POST("User/immediatelyPay")
         Observable<AccessOrderIdModel> immediatelyPay(@Part MultipartBody.Part fileA,@Part MultipartBody.Part fileB,@Part MultipartBody.Part fileC);
 
-
-
-
         //商家详情支付获取支付信息
         @Multipart
         @POST("User/order_payoff")
         Observable<PayOrder> order_payoff(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC, @Part MultipartBody.Part fileAA,
                                           @Part MultipartBody.Part fileBB, @Part MultipartBody.Part fileCC,@Part MultipartBody.Part fileCCC,@Part MultipartBody.Part fileCCCC);
 
-
+        //推荐奖励
         @Multipart
         @POST("Reco/recomReward")
         Observable<MineMoney> recomReward(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC);
 
+        //推荐好友
         @Multipart
         @POST("Reco/recomList")
         Observable<MineFriend> recomFriend(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC);
+
+        //验证码
+        @Multipart
+        @POST("Login/verify")
+        Observable<VerifyCode> getMyVerification(@Part MultipartBody.Part fileA);
+
         //收藏
         @Multipart
         @POST("User/Collect")
@@ -332,6 +336,10 @@ public class Network{
         Observable<OrderInfoModel> onlineBook(@Part List<MultipartBody.Part> fileA);
 
 
+
+        @Multipart
+        @POST("User/deleteCollection")
+        Observable<DelectCollection> delectCollection(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB);
 
     }
 

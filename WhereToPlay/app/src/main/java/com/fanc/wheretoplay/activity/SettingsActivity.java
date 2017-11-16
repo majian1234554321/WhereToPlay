@@ -100,24 +100,31 @@ public class SettingsActivity extends BaseActivity {
 
         mIvChangeEnvironment.isShowIcon(false);
         mIvChangeEnvironment.setText(R.string.changeEnv);
+        mIvChangeEnvironment.setLeftTextBlod(true);
         mIvChangeEnvironment.setSwitchToShow(true);
         mIvSettingSetPayPwd.isShowIcon(false);
         mIvSettingSetPayPwd.setText(R.string.set_pay_pwd);
+        mIvSettingSetPayPwd.setLeftTextBlod(true);
         mIvSettingSetPayPwd.setRightIcon(R.drawable.right);
         mIvSettingAdviceFeedback.isShowIcon(false);
         mIvSettingAdviceFeedback.setText(R.string.advice_feedback);
+        mIvSettingAdviceFeedback.setLeftTextBlod(true);
         mIvSettingAdviceFeedback.setRightIcon(R.drawable.right);
         mIvSettingSystemNotify.isShowIcon(false);
         mIvSettingSystemNotify.setText(R.string.system_notify);
+        mIvSettingSystemNotify.setLeftTextBlod(true);
         mIvSettingSystemNotify.setRightIcon(R.drawable.right);
         mIvSettingCheckToUpdate.isShowIcon(false);
         mIvSettingCheckToUpdate.setText(R.string.check_to_update);
+        mIvSettingCheckToUpdate.setLeftTextBlod(true);
         mIvSettingCheckToUpdate.setRightIcon(R.drawable.right);
         mIvSettingClearCache.isShowIcon(false);
         mIvSettingClearCache.setText(R.string.clear_cache);
+        mIvSettingClearCache.setLeftTextBlod(true);
         mIvSettingClearCache.setRightIcon(R.drawable.right);
         mIvSettingAboutUs.isShowIcon(false);
         mIvSettingAboutUs.setText(R.string.about_us);
+        mIvSettingAboutUs.setLeftTextBlod(true);
         mIvSettingAboutUs.setRightIcon(R.drawable.right);
 
         mIvSettingCheckToUpdate.setRightText(UIUtils.getAppVersionName());

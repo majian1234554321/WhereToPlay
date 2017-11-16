@@ -124,7 +124,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
     // 筛选分类
     List<String> conditions;
     // 页码。数量
-    int page, size;
+    int page, size = 6;
     // 轮播图
     List<String> mBannerIamges;
     // 商铺
@@ -295,19 +295,21 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
                 Log.e("wade","来到mPtrl监听中");
                 isPullDown = true;
                 page = 0;
-                size = 0;
+                size = 9;
                 getStoreList(null, city.getId(), page, size, areaId, storeType, category, filterType, value);
             }
 
             @Override
             public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
                 isPullUp = true;
-                size = 0;
-                if (mStores.size() < 10) {
-                    page = 0;
-                } else {
-                    page++;
-                }
+                size = 6;
+//                if (mStores.size() < 10) {
+//                    page = 0;
+//                } else {
+//                    page++;
+//                }
+                page ++;
+                Log.e("request_result",storeType + "\t" + page);
                 getStoreList(null, city.getId(), page, size, areaId, storeType, category, filterType, value);
             }
         });
@@ -997,15 +999,18 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
             mReserveAdapter.notifyDataSetChanged();
             refreshAndLoadMoreSuccess();
         } else if (isPullUp) {// 上拉加载
+            Log.e("request_result",stores.size() + "");
+            //集合为0，则显示“没有更多数据”
             if (stores.size() == 0) {
-                ToastUtils.makePicTextShortToast(mContext, "没有更多了哦");
                 refreshOrLoadFail();
                 return;
             }
-            if (mStores.size() < 10) {
+            if (mStores.size() < 6) {
                 mStores.clear();
+                Log.e("request_result",mStores.size() + "");
             }
             mStores.addAll(stores);
+            Log.e("request_result",mStores.size() + "");
             mReserveAdapter.notifyDataSetChanged();
             refreshAndLoadMoreSuccess();
             return;
@@ -1140,7 +1145,8 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
 
     public void setStoreType(String storeType) {
         this.storeType = storeType;
-        getStoreList(null, city.getId(), 0, 0, areaId, this.storeType, category, filterType, value);
+        page = 0;
+        getStoreList(null, city.getId(), 0, 9, areaId, this.storeType, category, filterType, value);
     }
 
     @Override

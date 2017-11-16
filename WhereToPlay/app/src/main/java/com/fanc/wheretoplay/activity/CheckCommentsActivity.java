@@ -320,8 +320,6 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
      * @param response
      */
     private void showCheckComments(CheckComments response) {
-        if (response.getComment_server() !=null && response.getAll_count()!= null && response.getPleasure_count()!= null && response.getDispleasure_count()!= null
-                && response.getPicture_count() != null && response.getComment_atmosphere()!= null && response.getComment_environment() != null) {
             //顶部分数显示
             mTvAverageScore.setText(response.getAverage_comment());
             mTvScoreEnvironment.setText(response.getComment_environment());
@@ -336,7 +334,6 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
             mBtPleasure.setText(getResources().getText(R.string.check_comment_pleasure) + "(" + response.getPleasure_count() +")");
             mBtDispleasure.setText(getResources().getText(R.string.check_comment_displeasure) + "(" + response.getDispleasure_count() +")");
             mBtpicture.setText(getResources().getText(R.string.check_comment_picture) + "(" + response.getPicture_count() +")");
-        }
         //集合添加数据
         storeList(response.getComment_list());
 //        //底部评论
@@ -357,7 +354,6 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
             refreshAndLoadMoreSuccess();
         } else if (isPullUp) {// 上拉加载
             if (commentList.size() == 0) {
-                ToastUtils.makePicTextShortToast(CheckCommentsActivity.this, "没有更多了哦");
                 refreshOrLoadFail();
                 return;
             }

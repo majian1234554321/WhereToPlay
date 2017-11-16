@@ -29,6 +29,7 @@
     <string name="loading">正在加载...</string>
     <string name="load_succeed">加载成功</string>
     <string name="load_fail">加载失败</string>
+    <string name="load_no_more">没有更多了哦</string>
 
     <!--自定义进度弹窗-->
     <string name="hard_loading">正在加载中</string>
@@ -60,6 +61,7 @@
     <string name="agreement_left">注册即表示同意</string>
     <string name="agreement_right">《乐互网用户协议》</string>
     <string name="register_time">注册时间: </string>
+    <string name="register_verifyTime">%1$ds后重新获取</string>
 
     <!--Tab-->
     <string name="reserve">预订</string>
@@ -132,7 +134,7 @@
     <string name="collection">收藏</string>
     <string name="referral">推荐</string>
     <string name="drive">代驾</string>
-    <string name="friend">推荐好友</string>
+    <string name="friend">团队成员</string>
     <string name="money">推荐奖励</string>
     <string name="mine_service">客服</string>
     <string name="money_time">注册时间：%1$s</string>
@@ -211,7 +213,7 @@
     <string name="use_deadline">使用时间：</string>
     <string name="arrive_with_cash">(可抵现金)</string>
     <string name="rmb">RMB</string>
-    <string name="where_to_play_discount_coupon">去哪儿优惠券</string>
+    <string name="where_to_play_discount_coupon">乐互网优惠券</string>
     <string name="currency_char">¥</string>
 
     <!--integral-->

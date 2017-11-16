@@ -100,7 +100,7 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.ViewHo
                     break;
                 case "4":// 已经结账状态，取消按钮隐藏，消费按钮为消费
                     holder.mIvState.setImageResource(R.drawable.close_account);
-                    holder.mTvState.setTextColor(UIUtils.getColor(R.color.close_account));
+                    holder.mTvState.setTextColor(UIUtils.getColor(R.color.text_red));
                     holder.mTvState.setText(R.string.payed_the_bill);
                     holder.mBtnBuy.setVisibility(View.VISIBLE);
                     holder.mBtnBuy.setText(R.string.consume);

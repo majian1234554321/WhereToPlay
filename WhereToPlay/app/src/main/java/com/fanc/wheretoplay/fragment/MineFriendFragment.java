@@ -193,7 +193,6 @@ public class MineFriendFragment extends BaseFragment {
             refreshAndLoadMoreSuccess();
         }else if (isPullUp) {// 上拉加载
             if (mMineFriendList.size() == 0) {
-                ToastUtils.makePicTextShortToast(mContext, "没有更多了哦");
                 refreshOrLoadFail();
                 return;
             }

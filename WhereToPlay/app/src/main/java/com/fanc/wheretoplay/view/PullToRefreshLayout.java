@@ -284,7 +284,7 @@ public class PullToRefreshLayout extends RelativeLayout
 		default:
 			// 加载失败
 			loadStateImageView.setVisibility(View.VISIBLE);
-			loadStateTextView.setText(R.string.load_fail);
+			loadStateTextView.setText(R.string.load_no_more);
 			loadStateImageView.setBackgroundResource(R.drawable.refresh_failed);
 			break;
 		}

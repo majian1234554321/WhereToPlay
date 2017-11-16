@@ -10,15 +10,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.adapter.CollectionAdapter;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentCollectionBinding;
 import com.fanc.wheretoplay.datamodel.CollectionList;
+import com.fanc.wheretoplay.datamodel.DelectCollection;
 import com.fanc.wheretoplay.datamodel.IsOk;
+import com.fanc.wheretoplay.datamodel.MineMoney;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
@@ -34,6 +38,11 @@ import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
+import okhttp3.MultipartBody;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2017/6/17.
@@ -130,18 +139,21 @@ public class CollectionFragment extends BaseFragment {
                                         @Override
                                         public void onBtnClick(View view, String input) {
                                             emptyCollection(collectionIds);
+                                            isDeleting = !isDeleting;
                                         }
                                     })
                                     .setCanceledOnTouchOutside(false)
                                     .show();
                         } else {
                             collectionAdapter.setDeleting(false);
+                            isDeleting = !isDeleting;
                         }
                     } else {// 非删除状态，进入删除状态
                         collectionAdapter.setDeleting(true);
                         ToastUtils.makePicTextShortToast(mContext, "请选择要删除的收藏，再次点击删除按钮进行删除");
+                        isDeleting = !isDeleting;
                     }
-                    isDeleting = !isDeleting;
+//                    isDeleting = !isDeleting;
                 } else {
                     ToastUtils.makePicTextShortToast(mContext, "你还没有收藏哦");
                 }
@@ -266,21 +278,33 @@ public class CollectionFragment extends BaseFragment {
      */
     private void emptyCollection(String collectionIds) {
         showProgress();
-        OkHttpUtils.post()
-                .url(Network.User.USER_DELETE_COLLECTION)
-                .addParams(Network.Param.TOKEN, mUser.getToken())
-                .addParams(Network.Param.COLLECT_ID, collectionIds)
-                .build()
-                .execute(new DCallback<IsOk>() {
+
+        MultipartBody.Part requestFileA =
+                MultipartBody.Part.createFormData(Network.Param.TOKEN, mUser.getToken());
+        MultipartBody.Part requestFileB =
+                MultipartBody.Part.createFormData(Network.Param.COLLECT_ID, collectionIds);
+
+        Subscription subscription = Retrofit_RequestUtils.getRequest().delectCollection(requestFileA, requestFileB)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<DelectCollection>() {
                     @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
+                    public void onCompleted() {
+
                     }
 
                     @Override
-                    public void onResponse(IsOk response) {
-                        if (isSuccess(response)) {
-                            if (response.isIs_ok()) {
+                    public void onError(Throwable e) {
+                        closeProgress();
+                        Toast.makeText(mContext, "网络错误", Toast.LENGTH_SHORT).show();
+                        refreshOrLoadFail();
+                    }
+
+                    @Override
+                    public void onNext(DelectCollection response) {
+                        closeProgress();
+                        if (response != null) {
+                            if (response.getContent().isIs_ok()) {
                                 for (int i:deleteIndex){
                                     collections.remove(i);
                                     collectionAdapter.notifyItemRemoved(i);
@@ -290,6 +314,7 @@ public class CollectionFragment extends BaseFragment {
                             }
                         }
                     }
+
                 });
     }
 

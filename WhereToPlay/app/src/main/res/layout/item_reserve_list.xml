@@ -13,7 +13,7 @@
         android:layout_height="wrap_content"
         android:padding="@dimen/height_1"
         android:layout_margin="@dimen/margin_10"
-        android:background="@drawable/shape_pay">
+        android:background="@drawable/border_shadow_fir">
 
         <View
             android:id="@+id/v_bg_top"
@@ -26,6 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_120"
             android:layout_below="@+id/v_bg_top"
+            android:background="@color/bg_white"
             />
 
         <TextView
@@ -37,7 +38,7 @@
             android:layout_marginLeft="@dimen/margin_10"
             android:gravity="center_vertical"
             android:text="@{order.store_name}"
-            android:textColor="@color/textcolor_5a"
+            android:textColor="@color/textcolor_3b"
             android:textSize="@dimen/textsize_level2"/>
 
         <TextView
@@ -60,7 +61,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/margin_10"
             android:text='@{order.room_type+" "+order.room_number}'
-            android:textColor="@color/textcolor_5a"
+            android:textColor="@color/text_red"
             android:textSize="@dimen/normal_textsize"/>
 
         <TextView
@@ -151,9 +152,9 @@
                 android:layout_height="@dimen/height_30"
                 android:layout_marginBottom="@dimen/margin_10"
                 android:layout_marginRight="@dimen/margin_10"
-                android:background="@drawable/shape_btn_signin"
+                android:background="@drawable/shape_btn_gray"
                 android:text="@string/cancel_reverse"
-                android:textColor="@color/text_white"
+                android:textColor="@color/text_gray"
                 android:textSize="@dimen/normal_textsize"
                 android:visibility="gone"/>
 

@@ -1,13 +1,6 @@
 package com.fanc.wheretoplay.datamodel;
 
-import android.databinding.BaseObservable;
-import android.databinding.BindingAdapter;
-import android.util.Log;
-import android.widget.ImageView;
-
-import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.base.BaseModel;
-import com.fanc.wheretoplay.network.Network;
 
 import java.util.List;
 
@@ -17,6 +10,9 @@ import java.util.List;
 
 public class CollectionList extends BaseModel {
 
+    /**
+     * content : {"list":[{"store_id":"5","id":"89","name":"上海白金翰宫商务会所","path":"/Upload/image/20170925/20170925093607_30193.jpg","grade":"顶级","decorate":"欧式","district":"黄浦区","distance":"11201","min_price":"1000"},{"store_id":"5","id":"88","name":"上海白金翰宫商务会所","path":"/Upload/image/20170925/20170925093607_30193.jpg","grade":"顶级","decorate":"欧式","district":"黄浦区","distance":"11201","min_price":"1000"}]}
+     */
     private List<Collection> list;
 
     public List<Collection> getList() {
@@ -27,18 +23,20 @@ public class CollectionList extends BaseModel {
         this.list = list;
     }
 
-    public static class Collection extends BaseObservable {
+    public static class Collection {
         /**
-         * id：string，收藏id，
-         * name: string, 商店名称，
-         * path: string, 商店封面路径，
-         * grade: string，商店档次，
-         * decorate: string, 商店装修风格
-         * district：string，商店所在区名
-         * distance：string，用户与商店的距离
-         * min_price: string, 最低消费单位元
+         * store_id : 5
+         * id : 89
+         * name : 上海白金翰宫商务会所
+         * path : /Upload/image/20170925/20170925093607_30193.jpg
+         * grade : 顶级
+         * decorate : 欧式
+         * district : 黄浦区
+         * distance : 11201
+         * min_price : 1000
          */
 
+        private String store_id;
         private String id;
         private String name;
         private String path;
@@ -48,11 +46,13 @@ public class CollectionList extends BaseModel {
         private String distance;
         private String min_price;
 
-        @BindingAdapter(value = {"img"}, requireAll = false)
-        public static void setCollectionImage(ImageView imageView, String url) {
-            Glide.with(imageView.getContext()).load(Network.IMAGE + url).into(imageView);
+        public String getStore_id() {
+            return store_id;
         }
 
+        public void setStore_id(String store_id) {
+            this.store_id = store_id;
+        }
 
         public String getId() {
             return id;
@@ -118,4 +118,5 @@ public class CollectionList extends BaseModel {
             this.min_price = min_price;
         }
     }
+
 }
