@@ -3,8 +3,10 @@ package com.fanc.wheretoplay.fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,7 @@ import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.DetailsOrderActivity;
 import com.fanc.wheretoplay.adapter.OrdersAdapter;
 import com.fanc.wheretoplay.base.BaseFragment;
+import com.fanc.wheretoplay.base.BaseLazyFragment;
 import com.fanc.wheretoplay.datamodel.BookListModel;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
 import com.fanc.wheretoplay.presenter.OrdelListFragmentPresenter;
@@ -23,6 +26,7 @@ import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.OrderListFragmentView;
 import com.fanc.wheretoplay.view.PullToRefreshLayout;
 import com.fanc.wheretoplay.view.PullableRecyclerView;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -36,7 +40,7 @@ import butterknife.Unbinder;
  * Created by admin on 2017/11/1.
  */
 
-public class OrderList2Fragment extends BaseFragment implements PullToRefreshLayout.OnRefreshListener,OrderListFragmentView {
+public class OrderList2Fragment extends BaseLazyFragment implements PullToRefreshLayout.OnRefreshListener,OrderListFragmentView {
     @BindView(R.id.rv_pay)
     PullableRecyclerView mRvOrder;
     Unbinder unbinder;
@@ -48,7 +52,25 @@ public class OrderList2Fragment extends BaseFragment implements PullToRefreshLay
     private OrdelListFragmentPresenter ordelListFragmentPresenter;
     private OrdersAdapter myAdapter;
 
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+
+    @Override
+    protected void initPrepare() {
+
+    }
+
+    @Override
+    protected void onInvisible() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = View.inflate(inflater.getContext(), R.layout.orderlistallfragment, null);
         unbinder = ButterKnife.bind(this, view);
 
@@ -60,39 +82,42 @@ public class OrderList2Fragment extends BaseFragment implements PullToRefreshLay
         mRvOrder.addItemDecoration(new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL,
                 UIUtils.dp2Px(1), mContext.getResources().getColor(R.color.pay_reserve_list_divider_white)));
         mRvOrder.setItemAnimator(new DefaultItemAnimator());
+
         mRvOrder.setCanPullDown(true);
         mRvOrder.setCanPullUp(true);
 
         ptrlPayReserve.setOnRefreshListener(this);
         currentPage = 0;
 
-        ordelListFragmentPresenter = new OrdelListFragmentPresenter(mContext,this,ptrlPayReserve);
+        ordelListFragmentPresenter = new OrdelListFragmentPresenter(mContext,this,ptrlPayReserve,OrderList2Fragment.this);
         ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
 
 
         return view;
-
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
+
     }
 
     @Override
     public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
+        isPullDown = true;
         currentPage=0;
         ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
     }
 
     @Override
     public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
+        isPullUp = true;
         if (myAdapter!=null&&myAdapter.getItemCount() >= 10) {
             currentPage++;
             ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onLoadMore");
         }else {
-            ptrlPayReserve.refreshFinish(PullToRefreshLayout.SUCCEED);
+            ptrlPayReserve.loadmoreFinish(0);
+            Toast.makeText(mContext, "暂无更多的数据加载", Toast.LENGTH_SHORT).show();
         }
     }
 

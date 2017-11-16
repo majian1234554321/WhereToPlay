@@ -15,10 +15,15 @@ import com.fanc.wheretoplay.datamodel.DelectCollection;
 import com.fanc.wheretoplay.datamodel.MineFriend;
 import com.fanc.wheretoplay.datamodel.MineMoney;
 import com.fanc.wheretoplay.datamodel.OrderDetailModel;
+import com.fanc.wheretoplay.datamodel.OrderInfo;
+import com.fanc.wheretoplay.datamodel.OrderInfoModel;
 import com.fanc.wheretoplay.datamodel.PayOrder;
 import com.fanc.wheretoplay.datamodel.SubmitCommentModel;
 import com.fanc.wheretoplay.datamodel.VerifyCode;
 import com.fanc.wheretoplay.rx.BaseResponseModel;
+
+import java.util.List;
+
 import rx.Observable;
 
 /**
@@ -286,6 +291,7 @@ public class Network{
         @POST("User/cancle_order")
         Observable<BaseResponseModel<CancleOrderModel.ContentBean>> cancle_order(@Part MultipartBody.Part file, @Part MultipartBody.Part fileB);
 
+
         //提交评论
         @Multipart
         @POST("Public/submitcomment")
@@ -321,6 +327,15 @@ public class Network{
         @Multipart
         @POST("User/Collect")
         Observable<SubmitCommentModel> collect(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB);
+
+
+
+        //信用预订
+        @Multipart
+        @POST("User/onlineBook")
+        Observable<OrderInfoModel> onlineBook(@Part List<MultipartBody.Part> fileA);
+
+
 
         //删除收藏
         @Multipart

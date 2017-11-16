@@ -20,6 +20,7 @@ import com.fanc.wheretoplay.datamodel.BookListModel;
 
 import com.fanc.wheretoplay.datamodel.CancleOrderModel;
 import com.fanc.wheretoplay.image.GlideImageLoader;
+import com.fanc.wheretoplay.presenter.DetailsOrderPresenter;
 import com.fanc.wheretoplay.rx.BaseResponseModel;
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.util.Constants;
@@ -44,7 +45,7 @@ import static com.fanc.wheretoplay.network.Network.IMAGE;
  * Created by admin on 2017/11/1.
  */
 
-public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
+public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder>  {
     public Context context;
     public Fragment fragment;
     public BookListModel.ContentBean dataBean;
@@ -75,6 +76,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 if (dataBean.list != null && dataBean.list.get(position).order_action != null) {
                     intent.putExtra("status", dataBean.list.get(position).order_action);
                 }
+                intent.putExtra("discount", dataBean.list.get(position).discount);
                 intent.setClass(context, DetailsOrderActivity.class);
                 fragment.startActivityForResult(intent, 1001);
             }
@@ -104,7 +106,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                     switch (holder.lists.get(finalI).getText().toString().trim()) {
 
                         case "查看":
-
+                            intent.putExtra("discount", dataBean.list.get(position).discount);
                             intent.putExtra("order_id", dataBean.list.get(position).order_id);
                             intent.putExtra("store_id", dataBean.list.get(position).store_id);
                             intent.putExtra("storeName", dataBean.list.get(position).name);
@@ -122,6 +124,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                             pay(position);
                             break;
                         case "立即评论":
+                            intent.putExtra("address", dataBean.list.get(position).address);
                             intent.putExtra("order_id", dataBean.list.get(position).order_id);
                             intent.putExtra("store_id", dataBean.list.get(position).store_id);
                             intent.putExtra("storeName", dataBean.list.get(position).name);
@@ -182,16 +185,28 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
     private void pay(int position) {
         Intent intent = new Intent();
-        intent.setClass(context, PayBillActivity.class);
-        intent.putExtra(Constants.ORDER_ID, dataBean.list.get(position).order_id);
-        intent.putExtra(Constants.STORE_ID, dataBean.list.get(position).store_id);
-        if (TextUtils.equals("4", dataBean.list.get(position).order_action)) {// 去消费
-            intent.putExtra(Constants.PAGE, Constants.CONSUME);
-        }
-        if (TextUtils.equals("2", dataBean.list.get(position).order_action)) {// 去结账
-            intent.putExtra(Constants.PAGE, Constants.PAYING_THE_BILL);
-        }
+//        intent.setClass(context, PayBillActivity.class);
+//        intent.putExtra(Constants.ORDER_ID, dataBean.list.get(position).order_id);
+//        intent.putExtra(Constants.STORE_ID, dataBean.list.get(position).store_id);
+//        if (TextUtils.equals("4", dataBean.list.get(position).order_action)) {// 去消费
+//            intent.putExtra(Constants.PAGE, Constants.CONSUME);
+//        }
+//        if (TextUtils.equals("2", dataBean.list.get(position).order_action)) {// 去结账
+//            intent.putExtra(Constants.PAGE, Constants.PAYING_THE_BILL);
+//        }
+//        context.startActivity(intent);
+
+
+        intent.putExtra("address", dataBean.list.get(position).address);
+        intent.setClass(context,PayBillActivity.class);
+        intent.putExtra(Constants.STORE_ID, dataBean.list.get(position).order_id);
+        intent.putExtra("storeName", dataBean.list.get(position).name);
+       // intent.putExtra("address", dataBean.list.get(position).add);
+        intent.putExtra("discount", dataBean.list.get(position).discount);
+        intent.putExtra(Constants.PAGE, "商家详情支付");
+
         context.startActivity(intent);
+
     }
 
     private void cancleOrder(final int position) {
@@ -204,6 +219,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                     public void onBtnClick(View view, String input) {
                         //cancelOrder(order, position);
 
+                        //DetailsOrderPresenter detailsOrderPresenter =  new DetailsOrderPresenter();
+                       // detailsOrderPresenter.cancelOrder();
                         MultipartBody.Part requestFileA =
                                 MultipartBody.Part.createFormData("token", new SPUtils(context).getUser().getToken());
 

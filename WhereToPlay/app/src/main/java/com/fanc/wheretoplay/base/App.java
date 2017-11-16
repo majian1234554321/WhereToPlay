@@ -8,6 +8,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.support.multidex.MultiDex;
 import android.util.Log;
 
 import com.fanc.wheretoplay.MainActivity;
@@ -54,12 +55,20 @@ public class App extends Application {
     private StatusBarNotificationConfig mStatusBarNotificationConfig;
 
     @Override
+    protected void attachBaseContext(Context base) {
+        super.attachBaseContext(base);
+        MultiDex.install(this) ;
+    }
+
+    @Override
     public void onCreate() {
         super.onCreate();
         // 方法里面初始化了handler，如果放在子线程中，
         // 小米手机中出java.lang.RuntimeException，无法启动
         // 华为手机无异常
+
         init();
+
         // 加快APP启动速度1
         // 1 把耗时操作的初始化过程放在子线程中
         // 2 把耗时操作的初始化过程IntentService中

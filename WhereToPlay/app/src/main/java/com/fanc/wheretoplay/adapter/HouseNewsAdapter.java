@@ -78,7 +78,13 @@ public class HouseNewsAdapter extends RecyclerView.Adapter<HouseNewsAdapter.View
                         mContext.startActivity(intent);
 
                     }else {
-                        RxBus.getDefault().post(housenews.get(position).getNumber());
+                        HousenewsList.StatusBean statusBean =     new HousenewsList.StatusBean(housenews.get(position).getName(),
+                                housenews.get(position).getNumber(),
+                                housenews.get(position).getMin_price(),
+                        housenews.get(position).getStatus(),
+                        housenews.get(position).room_id);
+
+                        RxBus.getDefault().post(statusBean);
                         ((Activity) mContext).finish();
                     }
                 }else {

@@ -39,6 +39,7 @@ public class BookListModel   {
              * cover : /Public/pcuser/images/default_rect.png
              */
 
+            public String address;
             public String order_id;
             public String store_id;
             public String name;
@@ -51,6 +52,7 @@ public class BookListModel   {
             public String total;
             public String statusdesc;
             public String cover;
+            public String discount;
             public List<ButtonlistBean> buttonlist;
 
             public static class ButtonlistBean {

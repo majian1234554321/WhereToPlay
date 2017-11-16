@@ -155,6 +155,7 @@ public class MerchantDetailFragment extends BaseFragment {
     private FragmentManager fragmentManager;
     private MerchantTablayoutAdapter adpter;
     private String briefUrl;
+    private String discountValue;
 
 
     @Nullable
@@ -375,7 +376,7 @@ public class MerchantDetailFragment extends BaseFragment {
                 intent.putExtra(Constants.STORE_ID, mStoreId);
                 intent.putExtra("storeName", mTvMerchantDetailTitle.getText().toString());
                 intent.putExtra("address", mTvMerchantDetailAddress.getText().toString());
-                intent.putExtra("discount", mTvMerchantDetailDiscountSum.getText().toString());
+                intent.putExtra("discount", discountValue);
                 intent.putExtra(Constants.PAGE, "商家详情支付");
                 intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
@@ -534,15 +535,15 @@ public class MerchantDetailFragment extends BaseFragment {
                 .execute(new DCallback<StoreDetail>() {
                     @Override
                     public void onError(Call call, Exception e) {
-                        Log.i("AAAAAAA", "AAAAAAA");
+
                         connectError();
                     }
 
                     @Override
                     public void onResponse(StoreDetail response) {
-                        Log.i("AAAAAAA", "response");
+
                         if (isSuccess(response)) {
-                            Log.i("AAAAAAA", "responseB");
+
                             if (response.getStore() != null) {
                                 mStore = response.getStore();
                                 showStoreDetail(mStore);
@@ -559,6 +560,7 @@ public class MerchantDetailFragment extends BaseFragment {
      * @param store
      */
     private void showStoreDetail(final StoreDetail.Store store) {
+        discountValue = store.getDiscount();
         mTvMerchantDetailTitle.setText(store.getName());
         if (store.getDiscount().length() > 0) {
             SpannableString text = new SpannableString(store.getDiscount() + "折");
@@ -707,7 +709,7 @@ public class MerchantDetailFragment extends BaseFragment {
         MultipartBody.Part requestFileC =
                 MultipartBody.Part.createFormData("store_id", storeId);
 
-     Subscription subscription =  Retrofit_RequestUtils.getRequest().collect(requestFileA, requestFileC).throttleFirst(1, TimeUnit.SECONDS)
+     Subscription subscription =  Retrofit_RequestUtils.getRequest().collect(requestFileA, requestFileC)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<SubmitCommentModel>() {

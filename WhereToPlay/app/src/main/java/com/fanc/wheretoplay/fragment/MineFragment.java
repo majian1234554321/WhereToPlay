@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.DetailActivity;
+//import com.fanc.wheretoplay.activity.EvaluationSuccessActivity;
 import com.fanc.wheretoplay.activity.ListOrderActivity;
 import com.fanc.wheretoplay.activity.SettingsActivity;
 import com.fanc.wheretoplay.base.BaseFragment;
@@ -249,6 +250,7 @@ public class MineFragment extends BaseFragment {
             case R.id.iv_mine_order:
                 //goToNewPage(Constants.ORDER);
                 startActivity(new Intent(getContext(),ListOrderActivity.class));
+                //startActivity(new Intent(getContext(),EvaluationSuccessActivity.class));
                 break;
             case R.id.iv_mine_collection:
                 goToNewPage(Constants.COLLECTION);

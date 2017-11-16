@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,11 +15,13 @@ import android.widget.Toast;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.adapter.OrdersAdapter;
 import com.fanc.wheretoplay.base.BaseFragment;
+import com.fanc.wheretoplay.base.BaseLazyFragment;
 import com.fanc.wheretoplay.datamodel.BookListModel;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
 import com.fanc.wheretoplay.presenter.OrdelListFragmentPresenter;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.UIUtils;
+import com.fanc.wheretoplay.view.MyRecycleView;
 import com.fanc.wheretoplay.view.OrderListFragmentView;
 import com.fanc.wheretoplay.view.PullToRefreshLayout;
 import com.fanc.wheretoplay.view.PullableRecyclerView;
@@ -39,7 +42,7 @@ import com.fanc.wheretoplay.rx.RxSubscribe;
  * Created by admin on 2017/11/1.
  */
 
-public class OrderList1Fragment extends BaseFragment implements PullToRefreshLayout.OnRefreshListener ,OrderListFragmentView {
+public class OrderList1Fragment extends BaseLazyFragment implements PullToRefreshLayout.OnRefreshListener ,OrderListFragmentView {
     @BindView(R.id.rv_pay)
     PullableRecyclerView mRvOrder;
     Unbinder unbinder;
@@ -51,7 +54,25 @@ public class OrderList1Fragment extends BaseFragment implements PullToRefreshLay
     private OrdelListFragmentPresenter ordelListFragmentPresenter;
     private OrdersAdapter myAdapter;
 
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+
+    @Override
+    protected void initPrepare() {
+
+    }
+
+    @Override
+    protected void onInvisible() {
+
+    }
+
+    @Override
+    protected void initData() {
+
+    }
+
+    @Override
+    protected View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = View.inflate(inflater.getContext(), R.layout.orderlistallfragment, null);
         unbinder = ButterKnife.bind(this, view);
 
@@ -63,39 +84,39 @@ public class OrderList1Fragment extends BaseFragment implements PullToRefreshLay
         mRvOrder.addItemDecoration(new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL,
                 UIUtils.dp2Px(1), mContext.getResources().getColor(R.color.pay_reserve_list_divider_white)));
         mRvOrder.setItemAnimator(new DefaultItemAnimator());
+
         mRvOrder.setCanPullDown(true);
         mRvOrder.setCanPullUp(true);
 
         ptrlPayReserve.setOnRefreshListener(this);
         currentPage = 0;
 
-        ordelListFragmentPresenter = new OrdelListFragmentPresenter(mContext,this,ptrlPayReserve);
+        ordelListFragmentPresenter = new OrdelListFragmentPresenter(mContext,this,ptrlPayReserve,OrderList1Fragment.this);
         ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
-
-
         return view;
-
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        unbinder.unbind();
     }
 
     @Override
     public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
+
         currentPage=0;
         ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
     }
 
     @Override
     public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
+
         if (myAdapter!=null&&myAdapter.getItemCount() >= 10) {
             currentPage++;
             ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onLoadMore");
         }else {
-            ptrlPayReserve.refreshFinish(PullToRefreshLayout.SUCCEED);
+            ptrlPayReserve.loadmoreFinish(0);
+            Toast.makeText(mContext, "暂无更多的数据加载", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -114,6 +135,7 @@ public class OrderList1Fragment extends BaseFragment implements PullToRefreshLay
 
         if (contentBean.list != null) {
             if ("onRefresh".equals(action)) {
+
                 if ("onLoadMore".equals(action) && myAdapter != null) {
                     myAdapter.notifyDataSetChanged();
                 } else {

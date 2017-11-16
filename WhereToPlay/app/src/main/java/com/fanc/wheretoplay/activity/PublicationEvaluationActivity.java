@@ -88,6 +88,9 @@ public class PublicationEvaluationActivity extends BaseActivity {
     float ratingValue1 = 10f;
     float ratingValue2 = 10f;
     float ratingValue3 = 10f;
+    private String addressValue;
+    private String discountValue;
+    private double discount;
 
 
     @Override
@@ -99,6 +102,26 @@ public class PublicationEvaluationActivity extends BaseActivity {
 
         order_idValue = getIntent().getStringExtra("order_id");
         store_idValue = getIntent().getStringExtra("store_id");
+        addressValue = getIntent().getStringExtra("address");
+        discountValue = getIntent().getStringExtra("discount");
+
+        if (discountValue !=null&& discountValue.length()>0) {
+            discount = Double.parseDouble(discountValue);
+        }else {
+            discount =  10;
+        }
+
+
+        if (discount > 0) {
+            SpannableString text = new SpannableString(discount + "折");
+            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            tvMerchantDetailDiscountSum.setText(text, TextView.BufferType.SPANNABLE);
+            tvMerchantDetailDiscountSum.setVisibility(View.VISIBLE);
+        } else {
+            tvMerchantDetailDiscountSum.setVisibility(View.GONE);
+        }
+
 
         rvImage.setLayoutManager(new GridLayoutManager(this, 3));
         imagesfinal = new ArrayList<>();
@@ -200,7 +223,8 @@ public class PublicationEvaluationActivity extends BaseActivity {
                         closeProgress();
                         if (submitCommentModel.code.equals("0")) {
                             Toast.makeText(mContext, "提交评论成功", Toast.LENGTH_SHORT).show();
-                            RxBus.getDefault().post("提交评价成功");
+                            //RxBus.getDefault().post("提交评价成功");
+                          //  startActivity(new Intent(PublicationEvaluationActivity.this,EvaluationSuccessActivity.class));
                             finish();
                         } else {
                             Toast.makeText(mContext, "提交评论失败", Toast.LENGTH_SHORT).show();
