@@ -70,7 +70,7 @@ public class ActivityDownPaymentBinding extends android.databinding.ViewDataBind
     public final android.widget.TextView tvDownPaymentTitle;
     // variables
     @Nullable
-    private com.fanc.wheretoplay.datamodel.OrderInfo.Order mOrder;
+    private com.fanc.wheretoplay.datamodel.OrderInfoModel.ContentBean.OrderInfoBean mOrder;
     // values
     // listeners
     // Inverse Binding Event Handlers
@@ -129,7 +129,7 @@ public class ActivityDownPaymentBinding extends android.databinding.ViewDataBind
     public boolean setVariable(int variableId, @Nullable Object variable)  {
         boolean variableSet = true;
         if (BR.order == variableId) {
-            setOrder((com.fanc.wheretoplay.datamodel.OrderInfo.Order) variable);
+            setOrder((com.fanc.wheretoplay.datamodel.OrderInfoModel.ContentBean.OrderInfoBean) variable);
         }
         else {
             variableSet = false;
@@ -137,7 +137,7 @@ public class ActivityDownPaymentBinding extends android.databinding.ViewDataBind
             return variableSet;
     }
 
-    public void setOrder(@Nullable com.fanc.wheretoplay.datamodel.OrderInfo.Order Order) {
+    public void setOrder(@Nullable com.fanc.wheretoplay.datamodel.OrderInfoModel.ContentBean.OrderInfoBean Order) {
         this.mOrder = Order;
         synchronized(this) {
             mDirtyFlags |= 0x1L;
@@ -146,7 +146,7 @@ public class ActivityDownPaymentBinding extends android.databinding.ViewDataBind
         super.requestRebind();
     }
     @Nullable
-    public com.fanc.wheretoplay.datamodel.OrderInfo.Order getOrder() {
+    public com.fanc.wheretoplay.datamodel.OrderInfoModel.ContentBean.OrderInfoBean getOrder() {
         return mOrder;
     }
 
@@ -170,7 +170,7 @@ public class ActivityDownPaymentBinding extends android.databinding.ViewDataBind
         java.lang.String orderRoomType = null;
         java.lang.String dateFormatUtilGetYYYYMMDDHHmmOrderArrivalTimeTvDownPaymentTimeAndroidStringBefore = null;
         java.lang.String tvDownPaymentSumAndroidStringCurrencyCharOrderPrepay = null;
-        com.fanc.wheretoplay.datamodel.OrderInfo.Order order = mOrder;
+        com.fanc.wheretoplay.datamodel.OrderInfoModel.ContentBean.OrderInfoBean order = mOrder;
         java.lang.String orderStoreName = null;
 
         if ((dirtyFlags & 0x3L) != 0) {

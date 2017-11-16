@@ -7,7 +7,7 @@
 
         <variable
             name="order"
-            type="com.fanc.wheretoplay.datamodel.OrderInfo.Order"/>
+            type="com.fanc.wheretoplay.datamodel.OrderInfoModel.ContentBean.OrderInfoBean"/>
     </data>
 
     <LinearLayout
@@ -145,7 +145,7 @@
         <RelativeLayout
             android:id="@+id/rl_down_payment_pay_way"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_150"
+            android:layout_height="@dimen/height_200"
             android:background="@color/white">
 
             <LinearLayout
@@ -218,6 +218,30 @@
                     android:textSize="@dimen/normal_textsize"/>
 
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_upp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_down_payment_balance"
+                android:onClick="@{click.onViewClick}"
+                android:orientation="horizontal"
+                android:background="@color/white">
+
+                <ImageView
+                    android:layout_width="@dimen/width_50"
+                    android:layout_height="@dimen/height_50"
+                    android:padding="@dimen/padding_14"
+                    android:src="@drawable/icon_yinlian"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="银联支付"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/normal_textsize"/>
+
+            </LinearLayout>
 
             <RadioGroup
                 android:id="@+id/rg_down_payment"
@@ -248,6 +272,13 @@
                     android:layout_height="@dimen/height_0"
                     android:layout_weight="1"
                     android:button="@drawable/selector_pay_way"/>
+
+                <RadioButton
+                    android:id="@+id/rb_upp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_0"
+                    android:layout_weight="1"
+                    android:button="@drawable/selector_pay_way"/>
             </RadioGroup>
 
             <View
@@ -267,6 +298,13 @@
                 android:layout_height="@dimen/line_height"
                 android:layout_alignBottom="@+id/ll_down_payment_balance"
                 android:background="@color/pay_reserve_list_divider_white"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:layout_alignBottom="@+id/ll_upp"
+                android:background="@color/pay_reserve_list_divider_white"/>
+
         </RelativeLayout>
 
         <LinearLayout

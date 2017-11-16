@@ -16,6 +16,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.fanc.wheretoplay.R;
@@ -23,9 +24,12 @@ import com.fanc.wheretoplay.base.BaseActivity;
 import com.fanc.wheretoplay.databinding.ActivityDownPaymentBinding;
 import com.fanc.wheretoplay.datamodel.IsOk;
 import com.fanc.wheretoplay.datamodel.OrderInfo;
+import com.fanc.wheretoplay.datamodel.OrderInfoModel;
 import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.pay.AliPayResult;
+import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.util.Constants;
+import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.view.AlertDialog;
 import com.fanc.wheretoplay.view.TopMenu;
@@ -41,10 +45,23 @@ import com.zhy.http.okhttp.callback.StringCallback;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.MultipartBody;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.RequestBody;
+import okhttp3.Response;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2017/6/15.
@@ -195,35 +212,60 @@ public class DownPaymentActivity extends BaseActivity {
      */
     private void getOrderInfo(HashMap<String, String> params) {
         showProgress();
-        OkHttpUtils.post()
-                .url(Network.User.USER_ONLINE_BOOK)
-                .params(params)
-                .build()
-                .execute(new DCallback<OrderInfo>() {
+
+        List<MultipartBody.Part> fileA = new ArrayList<>();
+
+
+
+        for (Map.Entry<String, String> entry : params.entrySet()) {
+            MultipartBody.Part requestFileA =
+                    MultipartBody.Part.createFormData(entry.getKey(), entry.getValue());
+            fileA.add(requestFileA);
+        }
+
+
+
+     Subscription subscription =  Retrofit_RequestUtils.getRequest().onlineBook(fileA)
+                 .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<OrderInfoModel>() {
                     @Override
-                    public void onError(Call call, Exception e) {
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        //Toast.makeText(DownPaymentActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        closeProgress();
                         connectError();
                     }
 
                     @Override
-                    public void onResponse(OrderInfo response) {
-                        if (isSuccess(response)) {
-                            if (response.order_info != null) {
-                                showOrderInfo(response.order_info);
+                    public void onNext(OrderInfoModel orderInfo) {
+                        closeProgress();
+                        if (orderInfo.code==0) {
+                                showOrderInfo(orderInfo.content.order_info);
                             }
-                        }
                     }
                 });
+
+        compositeSubscription.add(subscription);
+
+
     }
 
     /**
      * 显示订单
+     * @param order
      */
-    private void showOrderInfo(OrderInfo.Order order) {
+    private void showOrderInfo(OrderInfoModel.ContentBean.OrderInfoBean order) {
         paymentBinding.setOrder(order);
         price = order.prepay;
         orderId = order.id;
     }
+
+
 
     /**
      * 订金预定支付，信誉预定跳过支付
@@ -252,7 +294,9 @@ public class DownPaymentActivity extends BaseActivity {
         }
         // 信誉预定
         if (Constants.RESERVE_WAY_CREDIT.equals(reserveType)) {
-            payCreditOrder();
+          //  payCreditOrder();
+            finish();
+
         }
     }
 

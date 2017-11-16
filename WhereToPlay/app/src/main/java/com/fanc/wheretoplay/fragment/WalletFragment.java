@@ -63,7 +63,7 @@ public class WalletFragment extends BaseFragment {
     TextView mTvBalance;
     EditText mEtRechargeSum;
     RadioButton mRbWalletWeixin;
-    RadioButton mRbWalletAli;
+    RadioButton mRbWalletAli,rbUpp;
     // 充值类型，1支付宝，2微信
     int type = 2;
     // 充值金额
@@ -81,16 +81,20 @@ public class WalletFragment extends BaseFragment {
         initViews();
         init();
         setListeners();
+        
         wxApi = WXAPIFactory.createWXAPI(mContext, Constants.WX_APP_ID);
         wxApi.registerApp(Constants.WX_APP_ID);
         return walletBinding.getRoot();
     }
 
     private void initViews() {
+        
         mTmWallet = walletBinding.tmWallet;
         mTvBalance = walletBinding.tvWalletBalance;
         mEtRechargeSum = walletBinding.etWalletSum;
         mRbWalletWeixin = walletBinding.rbWalletWeixin;
+
+        rbUpp = walletBinding.rbUpp;
         mRbWalletAli = walletBinding.rbWalletAli;
     }
 
@@ -133,6 +137,9 @@ public class WalletFragment extends BaseFragment {
             case R.id.ll_wallet_ali:
                 mRbWalletAli.setChecked(true);
                 break;
+            case R.id.ll_upp:
+                rbUpp.setChecked(true);
+                break;
             case R.id.btn_wallet_recharge:
                 recharge();
                 // 修改显示金额
@@ -149,6 +156,9 @@ public class WalletFragment extends BaseFragment {
                 break;
             case R.id.rb_wallet_ali:
                 type = 1;
+                break;
+            case R.id.rb_upp:
+                type = 10086;
                 break;
             default:
                 break;
@@ -228,6 +238,11 @@ public class WalletFragment extends BaseFragment {
                             if (type == 2) {// 微信
                                 wxPay(json);
                             }
+                            
+                            if (type==10086){
+                                uppPay();
+                            }
+                            
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -235,6 +250,9 @@ public class WalletFragment extends BaseFragment {
                     }
                 });
 
+    }
+
+    private void uppPay() {
     }
 
     /**

@@ -38,7 +38,9 @@
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="org.simalliance.openmobileapi.SMARTCARD" />
     <uses-permission android:name="android.permission.NFC" />
-    <uses-feature android:name="android.hardware.nfc.hce"/>
+
+    <uses-feature android:name="android.hardware.nfc.hce" />
+
     <!--
     &lt;!&ndash;Required &ndash;&gt;
     <permission
@@ -64,7 +66,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:replace="android:allowBackup">
-        <uses-library android:name="org.simalliance.openmobileapi" android:required="false"/>
+        <uses-library
+            android:name="org.simalliance.openmobileapi"
+            android:required="false" />
 
         <activity
             android:name=".activity.LaunchActivity"
@@ -126,13 +130,13 @@
             android:configChanges="orientation|keyboardHidden|navigation|screenSize"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
         <activity
             android:name="com.alipay.sdk.app.H5AuthActivity"
             android:configChanges="orientation|keyboardHidden|navigation"
             android:exported="false"
             android:screenOrientation="behind"
-            android:windowSoftInputMode="adjustResize|stateHidden"></activity>
+            android:windowSoftInputMode="adjustResize|stateHidden" />
 
         <!-- 微信分享和支付 -->
         <activity
@@ -189,18 +193,19 @@
             android:value="H3sGc7uvHsmwwLbEnXpDSDmXeNqVENkL" />
         <!-- Tinker热修复 -->
 
-
         <activity android:name=".activity.DiscoverImageActivity" />
         <activity android:name=".activity.ListOrderActivity" />
         <activity android:name=".activity.DetailsOrderActivity" />
         <activity
             android:name=".activity.ShareActivity"
             android:screenOrientation="sensor"
-            android:theme="@android:style/Theme.Translucent.NoTitleBar"></activity>
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
-       <!-- <service
+        <!--
+            <service
             android:name="com.sina.weibo.sdk.net.DownloadService"
-            android:exported="false"></service>-->
+            android:exported="false"></service>
+        -->
 
         <activity android:name=".activity.PublicationEvaluationActivity" />
         <activity android:name=".imagepink.ImageSelectorActivity" />
@@ -209,16 +214,13 @@
         <activity
             android:name="com.unionpay.uppay.PayActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
-            android:screenOrientation="portrait">
-        </activity>
-
+            android:screenOrientation="portrait"></activity>
         <activity
             android:name="com.unionpay.UPPayWapActivity"
             android:configChanges="orientation|keyboardHidden|fontScale"
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" >
-        </activity>
-
+            android:windowSoftInputMode="adjustResize"></activity>
+        <activity android:name=".activity.BookActivity"></activity>
     </application>
 
 </manifest>

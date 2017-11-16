@@ -133,7 +133,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_100">
+            android:layout_height="@dimen/height_150">
 
             <LinearLayout
                 android:id="@+id/ll_wallet_weixin"
@@ -183,6 +183,30 @@
                     android:textSize="@dimen/normal_textsize"/>
 
             </LinearLayout>
+            <LinearLayout
+                android:id="@+id/ll_upp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/ll_wallet_ali"
+                android:onClick="@{click.onViewClick}"
+                android:orientation="horizontal"
+                android:background="@color/white">
+
+                <ImageView
+                    android:layout_width="@dimen/width_50"
+                    android:layout_height="@dimen/height_50"
+                    android:padding="@dimen/padding_14"
+                    android:src="@drawable/icon_yinlian"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:text="银联支付"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/normal_textsize"/>
+
+            </LinearLayout>
 
 
             <RadioGroup
@@ -208,6 +232,13 @@
                     android:layout_height="@dimen/height_0"
                     android:layout_weight="1"
                     android:button="@drawable/selector_pay_way"/>
+
+                <RadioButton
+                    android:id="@+id/rb_upp"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_0"
+                    android:layout_weight="1"
+                    android:button="@drawable/selector_pay_way"/>
             </RadioGroup>
 
             <View
@@ -220,6 +251,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height"
                 android:layout_alignBottom="@+id/ll_wallet_ali"
+                android:background="@color/pay_reserve_list_divider_white"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:layout_alignBottom="@+id/ll_upp"
                 android:background="@color/pay_reserve_list_divider_white"/>
         </RelativeLayout>
 
@@ -234,6 +271,7 @@
             android:layout_height="@dimen/height_40"
             android:layout_marginBottom="@dimen/margin_50"
             android:layout_marginLeft="@dimen/margin_20"
+            android:layout_marginTop="20dp"
             android:layout_marginRight="@dimen/margin_20"
             android:background="@drawable/shape_btn_signin"
             android:onClick="@{click.onViewClick}"

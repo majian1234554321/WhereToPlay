@@ -548,15 +548,15 @@ public class MerchantDetailFragment extends BaseFragment {
                 .execute(new DCallback<StoreDetail>() {
                     @Override
                     public void onError(Call call, Exception e) {
-                        Log.i("AAAAAAA", "AAAAAAA");
+
                         connectError();
                     }
 
                     @Override
                     public void onResponse(StoreDetail response) {
-                        Log.i("AAAAAAA", "response");
+
                         if (isSuccess(response)) {
-                            Log.i("AAAAAAA", "responseB");
+
                             if (response.getStore() != null) {
                                 mStore = response.getStore();
                                 showStoreDetail(mStore);
@@ -722,7 +722,7 @@ public class MerchantDetailFragment extends BaseFragment {
         MultipartBody.Part requestFileC =
                 MultipartBody.Part.createFormData("store_id", storeId);
 
-     Subscription subscription =  Retrofit_RequestUtils.getRequest().collect(requestFileA, requestFileC).throttleFirst(1, TimeUnit.SECONDS)
+     Subscription subscription =  Retrofit_RequestUtils.getRequest().collect(requestFileA, requestFileC)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<SubmitCommentModel>() {

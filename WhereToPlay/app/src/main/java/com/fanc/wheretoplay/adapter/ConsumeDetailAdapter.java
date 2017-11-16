@@ -57,9 +57,12 @@ public class ConsumeDetailAdapter extends RecyclerView.Adapter<ConsumeDetailAdap
         if (Double.parseDouble(consumeDetail.getAccount()) == 0D) {
             holder.mLlTvItemConsumeOrder.setVisibility(View.GONE);
         }
-        if (Double.parseDouble(consumeDetail.getDiscount()) == 0D) {
-            holder.mLlTvItemConsumeDiscount.setVisibility(View.GONE);
+        if (consumeDetail.getDiscount()!=null){
+            if (Double.parseDouble(consumeDetail.getDiscount()) == 0D) {
+                holder.mLlTvItemConsumeDiscount.setVisibility(View.GONE);
+            }
         }
+
     }
 
     @Override

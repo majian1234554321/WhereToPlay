@@ -14,12 +14,13 @@ public class FragmentWalletBinding extends android.databinding.ViewDataBinding  
     static {
         sIncludes = null;
         sViewsWithIds = new android.util.SparseIntArray();
-        sViewsWithIds.put(R.id.tm_wallet, 5);
-        sViewsWithIds.put(R.id.ll_pay_bill_balance, 6);
-        sViewsWithIds.put(R.id.tv_wallet_balance, 7);
-        sViewsWithIds.put(R.id.et_wallet_sum, 8);
-        sViewsWithIds.put(R.id.rb_wallet_weixin, 9);
-        sViewsWithIds.put(R.id.rb_wallet_ali, 10);
+        sViewsWithIds.put(R.id.tm_wallet, 6);
+        sViewsWithIds.put(R.id.ll_pay_bill_balance, 7);
+        sViewsWithIds.put(R.id.tv_wallet_balance, 8);
+        sViewsWithIds.put(R.id.et_wallet_sum, 9);
+        sViewsWithIds.put(R.id.rb_wallet_weixin, 10);
+        sViewsWithIds.put(R.id.rb_wallet_ali, 11);
+        sViewsWithIds.put(R.id.rb_upp, 12);
     }
     // views
     @NonNull
@@ -29,11 +30,15 @@ public class FragmentWalletBinding extends android.databinding.ViewDataBinding  
     @NonNull
     public final android.widget.LinearLayout llPayBillBalance;
     @NonNull
+    public final android.widget.LinearLayout llUpp;
+    @NonNull
     public final android.widget.LinearLayout llWalletAli;
     @NonNull
     public final android.widget.LinearLayout llWalletWeixin;
     @NonNull
     private final android.widget.LinearLayout mboundView0;
+    @NonNull
+    public final android.widget.RadioButton rbUpp;
     @NonNull
     public final android.widget.RadioButton rbWalletAli;
     @NonNull
@@ -55,23 +60,26 @@ public class FragmentWalletBinding extends android.databinding.ViewDataBinding  
 
     public FragmentWalletBinding(@NonNull android.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
         super(bindingComponent, root, 0);
-        final Object[] bindings = mapBindings(bindingComponent, root, 11, sIncludes, sViewsWithIds);
-        this.btnWalletRecharge = (android.widget.Button) bindings[4];
+        final Object[] bindings = mapBindings(bindingComponent, root, 13, sIncludes, sViewsWithIds);
+        this.btnWalletRecharge = (android.widget.Button) bindings[5];
         this.btnWalletRecharge.setTag(null);
-        this.etWalletSum = (android.widget.EditText) bindings[8];
-        this.llPayBillBalance = (android.widget.LinearLayout) bindings[6];
+        this.etWalletSum = (android.widget.EditText) bindings[9];
+        this.llPayBillBalance = (android.widget.LinearLayout) bindings[7];
+        this.llUpp = (android.widget.LinearLayout) bindings[3];
+        this.llUpp.setTag(null);
         this.llWalletAli = (android.widget.LinearLayout) bindings[2];
         this.llWalletAli.setTag(null);
         this.llWalletWeixin = (android.widget.LinearLayout) bindings[1];
         this.llWalletWeixin.setTag(null);
         this.mboundView0 = (android.widget.LinearLayout) bindings[0];
         this.mboundView0.setTag(null);
-        this.rbWalletAli = (android.widget.RadioButton) bindings[10];
-        this.rbWalletWeixin = (android.widget.RadioButton) bindings[9];
-        this.rgWallet = (android.widget.RadioGroup) bindings[3];
+        this.rbUpp = (android.widget.RadioButton) bindings[12];
+        this.rbWalletAli = (android.widget.RadioButton) bindings[11];
+        this.rbWalletWeixin = (android.widget.RadioButton) bindings[10];
+        this.rgWallet = (android.widget.RadioGroup) bindings[4];
         this.rgWallet.setTag(null);
-        this.tmWallet = (com.fanc.wheretoplay.view.TopMenu) bindings[5];
-        this.tvWalletBalance = (android.widget.TextView) bindings[7];
+        this.tmWallet = (com.fanc.wheretoplay.view.TopMenu) bindings[6];
+        this.tvWalletBalance = (android.widget.TextView) bindings[8];
         setRootTag(root);
         // listeners
         invalidateAll();
@@ -154,6 +162,7 @@ public class FragmentWalletBinding extends android.databinding.ViewDataBinding  
             // api target 1
 
             this.btnWalletRecharge.setOnClickListener(clickOnViewClickAndroidViewViewOnClickListener);
+            this.llUpp.setOnClickListener(clickOnViewClickAndroidViewViewOnClickListener);
             this.llWalletAli.setOnClickListener(clickOnViewClickAndroidViewViewOnClickListener);
             this.llWalletWeixin.setOnClickListener(clickOnViewClickAndroidViewViewOnClickListener);
             android.databinding.adapters.RadioGroupBindingAdapter.setListeners(this.rgWallet, (android.widget.RadioGroup.OnCheckedChangeListener)clickOnCheckedChangedAndroidWidgetRadioGroupOnCheckedChangeListener, (android.databinding.InverseBindingListener)null);

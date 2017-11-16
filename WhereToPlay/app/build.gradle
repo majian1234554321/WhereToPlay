@@ -42,7 +42,6 @@ android {
 
         multiDexEnabled true
 
-
         /**
          * buildConfig can change during patch!
          * we can use the newly value when patch

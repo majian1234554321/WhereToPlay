@@ -116,6 +116,7 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:visibility="gone"
                 android:padding="8dp">
 
                 <CheckBox
@@ -186,7 +187,7 @@
                     app:starHalf="@drawable/star_selectno"
                     app:starImageSize="30dp"
                     app:starPadding="15dp"
-                    app:starStep="0"
+                    app:starStep="5"
                     app:stepSize="Half" />
             </LinearLayout>
 
@@ -216,7 +217,7 @@
                     app:starHalf="@drawable/star_selectno"
                     app:starImageSize="30dp"
                     app:starPadding="15dp"
-                    app:starStep="1.5"
+                    app:starStep="5"
                     app:stepSize="Half" />
             </LinearLayout>
 
@@ -247,7 +248,7 @@
                     app:starHalf="@drawable/star_selectno"
                     app:starImageSize="30dp"
                     app:starPadding="15dp"
-                    app:starStep="1.5"
+                    app:starStep="5"
                     app:stepSize="Half" />
             </LinearLayout>
 
