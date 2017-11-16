@@ -25,6 +25,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 
+import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.datamodel.BookListModel;
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.rx.RxHelper;
@@ -46,14 +47,16 @@ public class OrdelListFragmentPresenter implements BasePresenter {
     private final CompositeSubscription mSubscriptions;
     PullToRefreshLayout ptrlPayReserve;
 
+    public BaseFragment baseFragment ;
 
 
 
-    public OrdelListFragmentPresenter(Context context, OrderListFragmentView orderListFragmentView,PullToRefreshLayout ptrlPayReserve) {
+    public OrdelListFragmentPresenter(Context context, OrderListFragmentView orderListFragmentView,PullToRefreshLayout ptrlPayReserve, BaseFragment baseFragment) {
         mSubscriptions = new CompositeSubscription();
         this.context = context;
         this.orderListFragmentView = orderListFragmentView;
         this.ptrlPayReserve = ptrlPayReserve;
+        this.baseFragment = baseFragment;
 
 
     }
@@ -92,17 +95,29 @@ public class OrdelListFragmentPresenter implements BasePresenter {
                     @Override
                     protected void _onNext(BookListModel.ContentBean contentBean) {
                         if (contentBean!=null) {
-                            ptrlPayReserve.refreshFinish(PullToRefreshLayout.SUCCEED);
+                            if (action.equals("onRefresh")) {
+                                ptrlPayReserve.refreshFinish(0);
+                            }else {
+                                ptrlPayReserve.loadmoreFinish(0);
+                            }
+
+
                             orderListFragmentView.setOrderListFragmentData(contentBean, action);
                         } else {
-                            ptrlPayReserve.refreshFinish(PullToRefreshLayout.FAIL);
+                            if (action.equals("onRefresh")) {
+                                ptrlPayReserve.refreshFinish(5);
+                            }else {
+                                ptrlPayReserve.loadmoreFinish(5);
+                            }
                         }
                     }
 
                     @Override
                     protected void _onError(String message) {
-                        if (ptrlPayReserve!=null){
-                            ptrlPayReserve.refreshFinish(PullToRefreshLayout.FAIL);
+                        if (action.equals("onRefresh")) {
+                            ptrlPayReserve.refreshFinish(5);
+                        }else {
+                            ptrlPayReserve.loadmoreFinish(5);
                         }
 
                     }

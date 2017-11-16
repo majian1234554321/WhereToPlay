@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -73,14 +74,14 @@ public class OrderList4Fragment extends BaseLazyFragment implements PullToRefres
         mRvOrder.addItemDecoration(new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL,
                 UIUtils.dp2Px(1), mContext.getResources().getColor(R.color.pay_reserve_list_divider_white)));
         mRvOrder.setItemAnimator(new DefaultItemAnimator());
+
         mRvOrder.setCanPullDown(true);
         mRvOrder.setCanPullUp(true);
-
 
         ptrlPayReserve.setOnRefreshListener(this);
         currentPage = 0;
 
-        ordelListFragmentPresenter = new OrdelListFragmentPresenter(mContext,this,ptrlPayReserve);
+        ordelListFragmentPresenter = new OrdelListFragmentPresenter(mContext,this,ptrlPayReserve,OrderList4Fragment.this);
         ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
 
 
@@ -105,7 +106,8 @@ public class OrderList4Fragment extends BaseLazyFragment implements PullToRefres
             currentPage++;
             ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onLoadMore");
         }else {
-            ptrlPayReserve.refreshFinish(PullToRefreshLayout.SUCCEED);
+            ptrlPayReserve.loadmoreFinish(0);
+            Toast.makeText(mContext, "暂无更多的数据加载", Toast.LENGTH_SHORT).show();
         }
     }
 

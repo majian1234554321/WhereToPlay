@@ -1,6 +1,7 @@
 package com.fanc.wheretoplay.util;
 
 
+import android.annotation.SuppressLint;
 import android.text.TextUtils;
 
 import java.text.ParseException;
@@ -1408,13 +1409,10 @@ public class DateFormatUtil {
     }
 
 
-    public static String stampToDate(String s){
-        String res;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        long lt = new Long(s);
-        Date date = new Date(lt);
-        res = simpleDateFormat.format(date);
-        return res;
+    public static String stampToDate(String s) {
+
+        @SuppressLint("SimpleDateFormat") String date = new  SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(new java.util.Date(Long.parseLong(s) * 1000));
+        return date;
     }
 
 }
