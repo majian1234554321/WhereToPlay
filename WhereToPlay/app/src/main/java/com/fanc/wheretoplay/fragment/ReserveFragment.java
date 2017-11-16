@@ -735,7 +735,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
      */
     private void setImageViewRotateAnimationUnrotate(ImageView imageView) {
         imageView.startAnimation(trilateral_0_180_Animation());
-        imageView.setImageResource(R.drawable.pull_down_red);
+        imageView.setImageResource(R.drawable.pull_up);
     }
 
     /**
@@ -763,7 +763,6 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
      * 三角形向下的动画
      */
     private RotateAnimation trilateral_180_360_Animation() {
-        LogUtils.e("走了向下的动画");
         RotateAnimation animation = (RotateAnimation) AnimationUtils.loadAnimation(mContext, R.anim.rotate_up_deal_filter);
         animation.setDuration(300);
         animation.setFillAfter(!animation.getFillAfter());
