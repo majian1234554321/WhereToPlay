@@ -296,7 +296,6 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
                 isPullDown = true;
                 page = 0;
                 size = count;
-//                Log.e("request_result","来到mPtrl——onRefresh监听中：\t" +city.getId() +"\t"+ page +"\t"+ size + "\t"+ areaId +"\t"+ storeType+ "\t"+ category + "\t"+ filterType+ "\t"+ value);
                 getStoreList(null, city.getId(), page, size, areaId, storeType, category, filterType, value);
             }
 
@@ -310,7 +309,6 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
 //                    page++;
 //                }
                 page ++;
-//                Log.e("request_result","来到mPtrl——onLoadMore 监听中：\t" +city.getId() +"\t"+ page +"\t"+ size + "\t"+ areaId +"\t"+ storeType+ "\t"+ category + "\t"+ filterType+ "\t"+ value);
                 getStoreList(null, city.getId(), page, size, areaId, storeType, category, filterType, value);
             }
         });
@@ -1000,7 +998,6 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
             mReserveAdapter.notifyDataSetChanged();
             refreshAndLoadMoreSuccess();
         } else if (isPullUp) {// 上拉加载
-//            Log.e("request_result",stores.size() + "");
             //集合为0，则显示“没有更多数据”
             if (stores.size() == 0) {
                 refreshOrLoadFail();
@@ -1010,7 +1007,6 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
 //                mStores.clear();
 //            }
             mStores.addAll(stores);
-//            Log.e("request_result",mStores.size() + "");
             mReserveAdapter.notifyDataSetChanged();
             refreshAndLoadMoreSuccess();
             return;
@@ -1146,7 +1142,6 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
     public void setStoreType(String storeType) {
         this.storeType = storeType;
         page = 0;
-//        Log.e("request_result","来到setStoreType 方法中：\t" +city.getId() +"\t"+ 0 +"\t"+ count + "\t"+ areaId +"\t"+ storeType+ "\t"+ category + "\t"+ filterType+ "\t"+ value);
         getStoreList(null, city.getId(), 0, count, areaId, this.storeType, category, filterType, value);
     }
 

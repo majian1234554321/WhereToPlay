@@ -26,6 +26,7 @@ import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentMineInfoBinding;
 import com.fanc.wheretoplay.datamodel.CityResource;
+import com.fanc.wheretoplay.datamodel.DelectCollection;
 import com.fanc.wheretoplay.datamodel.IsOk;
 import com.fanc.wheretoplay.datamodel.MineMoney;
 import com.fanc.wheretoplay.datamodel.Url;
@@ -95,6 +96,13 @@ public class MineInfoFragment extends BaseFragment {
     Handler handler;
     // 选中城市的id
     String cityId;
+    private MultipartBody.Part requestFileG;
+    private MultipartBody.Part requestFileA;
+    private MultipartBody.Part requestFileB;
+    private MultipartBody.Part requestFileC;
+    private MultipartBody.Part requestFileD;
+    private MultipartBody.Part requestFileE;
+    private MultipartBody.Part requestFileF;
 
     @Nullable
     @Override
@@ -471,14 +479,19 @@ public class MineInfoFragment extends BaseFragment {
                 });
     }
 
+    /**
+     * 验证修改后的个人信息
+     */
     private void confirmModify() {
-        Map<String, String> param = new HashMap<>();
-        param.put(Network.Param.TOKEN, mUser.getToken());
+//        Map<String, String> param = new HashMap<>();
+//        param.put(Network.Param.TOKEN, mUser.getToken());
+        requestFileG = MultipartBody.Part.createFormData(Network.Param.TOKEN,  mUser.getToken());
         //昵称
         final String nickname = mEtMineInfoNickname.getText().toString();
         if (nickname.length() >= 2) {// 长度大于等于2，且和原来的不一样
             if (!TextUtils.equals(mUser.getNickname(), nickname)) {
-                param.put(Network.Param.NICKNAME, nickname);
+//                param.put(Network.Param.NICKNAME, nickname);
+                requestFileA = MultipartBody.Part.createFormData(Network.Param.NICKNAME, nickname);
             }
         } else {
             ToastUtils.makePicTextShortToast(mContext, "昵称长度不在接受范围内，昵称应为2至20位");
@@ -496,13 +509,15 @@ public class MineInfoFragment extends BaseFragment {
         } else {
             gender1 = GENDER;
         }
-        param.put(Network.Param.GENDER, gender1);
+//        param.put(Network.Param.GENDER, gender1);
+        requestFileB = MultipartBody.Part.createFormData(Network.Param.GENDER, gender1);
         // 生日
         String birthday = mTvMineInfoBirthday.getText().toString();
         final String birthdayTime;
         if (!(UIUtils.getString(R.string.please_choose).equals(birthday))) {
             birthdayTime = String.valueOf(DateFormatUtil.getDate4StrDate(birthday, "yyyy-MM-dd").getTime() / 1000);
-            param.put(Network.Param.BIRTHDAY, birthdayTime);
+//            param.put(Network.Param.BIRTHDAY, birthdayTime);
+            requestFileC = MultipartBody.Part.createFormData(Network.Param.BIRTHDAY,  birthdayTime);
         } else {
             birthdayTime = "";
         }
@@ -510,78 +525,88 @@ public class MineInfoFragment extends BaseFragment {
         String city = mTvMineInfoCity.getText().toString();
         if (!(UIUtils.getString(R.string.please_choose).equals(city))) {
             if (cityId != null) {
-                param.put(Network.Param.REGISTERED, cityId);
+//                param.put(Network.Param.REGISTERED, cityId);
+                requestFileD = MultipartBody.Part.createFormData(Network.Param.REGISTERED, cityId);
             }
         }
         // 手机
         final String mobile = mEtMineInfoMobile.getText().toString().trim();
         if (mobileFormat(mobile)) {
-            param.put(Network.Param.MOBILE, mobile);
+//            param.put(Network.Param.MOBILE, mobile);
+            requestFileE = MultipartBody.Part.createFormData(Network.Param.MOBILE, mobile);
         }
         // 签名
         final String sign = mEtMineInfoSign.getText().toString().trim();
         if (!TextUtils.equals(mUser.getSignature(), sign)) {
-            param.put(Network.Param.SIGNATURE, sign);
+//            param.put(Network.Param.SIGNATURE, sign);
+            requestFileF = MultipartBody.Part.createFormData(Network.Param.SIGNATURE,  sign);
         }
+
         showProgress();
-        OkHttpUtils.post()
-                .url(Network.User.USER_MODIFY_PRO_FILE)
-                .params(param)
-                .build()
-                .execute(new DCallback<IsOk>() {
+
+        //用retrofit代替原有网络进行请求
+        Subscription subscription = Retrofit_RequestUtils.getRequest().changeMineInfo(requestFileA, requestFileB, requestFileC, requestFileD, requestFileE, requestFileF, requestFileG)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<DelectCollection>() {
                     @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
+                    public void onCompleted() {
                     }
 
                     @Override
-                    public void onResponse(IsOk response) {
-                        if (isSuccess(response)) {
-                            if (response.isIs_ok()) {
-                                ToastUtils.showShortToast(mContext, UIUtils.getString(R.string.modify_success));
-                                saveMineInfo(nickname, gender1, birthdayTime, cityId, mobile, sign);
+                    public void onError(Throwable e) {
+                        closeProgress();
+                        Toast.makeText(mContext, "网络出错", Toast.LENGTH_SHORT).show();
+                        refreshOrLoadFail();
+                    }
 
-                                Intent intent = new Intent(Constants.ACTION_MINE_INFO_MODIFY_SUCCESS);
-                                intent.putExtra(Constants.MOBILE, mobile);
-                                intent.putExtra(Constants.NAME, nickname);
-                                LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
+                    @Override
+                    public void onNext(DelectCollection delectCollection) {
+                        closeProgress();
+                        if (delectCollection.getContent().isIs_ok()) {
+                            Log.e("mineinfo","true");
+                            ToastUtils.showShortToast(mContext, UIUtils.getString(R.string.modify_success));
+                            saveMineInfo(nickname, gender1, birthdayTime, cityId, mobile, sign);
 
-                                mContext.finish();
-                            } else {
-                                ToastUtils.showShortToast(mContext, "修改失败，原因：没有修改任何信息");
-                            }
+                            Intent intent = new Intent(Constants.ACTION_MINE_INFO_MODIFY_SUCCESS);
+                            intent.putExtra(Constants.MOBILE, mobile);
+                            intent.putExtra(Constants.NAME, nickname);
+                            LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
+
+                            mContext.finish();
+                        } else {
+                            ToastUtils.showShortToast(mContext, "修改失败，原因：没有修改任何信息");
                         }
                     }
                 });
 
-//        MultipartBody.Part requestFileA =
-//                MultipartBody.Part.createFormData("size", size + "");
-//        MultipartBody.Part requestFileB =
-//                MultipartBody.Part.createFormData("page", page + "");
-//        MultipartBody.Part requestFileC =
-//                MultipartBody.Part.createFormData("token",  mUser.getToken());
-//
-//        Subscription subscription = Retrofit_RequestUtils.getRequest().recomReward(requestFileA, requestFileB, requestFileC)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(new Subscriber<MineMoney>() {
+//        OkHttpUtils.post()
+//                .url(Network.User.USER_MODIFY_PRO_FILE)
+//                .params(param)
+//                .build()
+//                .execute(new DCallback<IsOk>() {
 //                    @Override
-//                    public void onCompleted() {
-//
+//                    public void onError(Call call, Exception e) {
+//                        connectError();
 //                    }
 //
 //                    @Override
-//                    public void onError(Throwable e) {
-//                        closeProgress();
-//                        Toast.makeText(mContext, "没有数据", Toast.LENGTH_SHORT).show();
-//                        refreshOrLoadFail();
-//                    }
+//                    public void onResponse(IsOk response) {
+//                        if (isSuccess(response)) {
+//                            if (response.isIs_ok()) {
+//                                ToastUtils.showShortToast(mContext, UIUtils.getString(R.string.modify_success));
+//                                saveMineInfo(nickname, gender1, birthdayTime, cityId, mobile, sign);
 //
-//                    @Override
-//                    public void onNext(MineMoney mineMoney) {
-//                        closeProgress();
-//                        List<MineMoney.ContentBean> content = mineMoney.getContent();
-//                        showCommendMoneyList(content);
+//                                Intent intent = new Intent(Constants.ACTION_MINE_INFO_MODIFY_SUCCESS);
+//                                intent.putExtra(Constants.MOBILE, mobile);
+//                                intent.putExtra(Constants.NAME, nickname);
+//                                LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
+//
+//                                mContext.finish();
+//                            } else {
+//                                ToastUtils.showShortToast(mContext, "修改失败，原因：没有修改任何信息");
+//                            }
+//                        }
 //                    }
 //                });
     }
@@ -602,7 +627,7 @@ public class MineInfoFragment extends BaseFragment {
         if (mobile != null && !TextUtils.isEmpty(mobile)) {
             mSpUtils.putString(SPUtils.UserKey.MOBILE, mobile);
         }
-        if (sign != null && !TextUtils.isEmpty(sign)) {
+        if (sign != null ) {
             mSpUtils.putString(SPUtils.UserKey.SIGNATURE, sign);
         }
     }

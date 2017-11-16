@@ -13,17 +13,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
-        <ImageView
-            android:id="@+id/iv_merchant_detail_service"
-            android:layout_width="@dimen/width_48"
-            android:layout_height="@dimen/height_48"
-            android:layout_alignBottom="@+id/tm_merchant_detail"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="@dimen/margin_40"
-            android:padding="@dimen/padding_12"
-            android:src="@drawable/service_black" />
-
-
         <LinearLayout
             android:id="@+id/ll"
             android:layout_width="match_parent"

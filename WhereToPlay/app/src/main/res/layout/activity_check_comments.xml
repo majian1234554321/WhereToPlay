@@ -317,11 +317,13 @@
 
 
                     <!--评论列表-->
-                    <android.support.v7.widget.RecyclerView
+                    <com.fanc.wheretoplay.view.MyRecycleView
                         android:id="@+id/rc_comments"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:background="@color/white"
+                        android:focusable="false"
+                        android:focusableInTouchMode="false"
                         />
 
                 </LinearLayout>
