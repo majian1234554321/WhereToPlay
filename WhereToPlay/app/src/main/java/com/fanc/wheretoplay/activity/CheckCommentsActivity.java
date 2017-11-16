@@ -67,8 +67,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
     private int mID = R.id.bt_comments_one;
     private CheckComments mResponse;
 
-    private int page = 1;
-    private int size = 6;
+    private int page = 1, count = 9,size = count;
     private int mType = 1;
     private List mStores;
     private CheckCommentsAdapter checkCommentsAdapter;
@@ -143,20 +142,21 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
             @Override
             public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
                 isPullDown = true;
-                page = 0;
-                size = 6;
+                page = 1;
+                size = count;
                 requestComments(mType, page, size);
             }
 
             @Override
             public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
                 isPullUp = true;
-                size = 6;
-                if (mStores.size() < 6) {
-                    page = 0;
-                } else {
-                    page++;
-                }
+                size = count;
+//                if (mStores.size() < 6) {
+//                    page = 0;
+//                } else {
+//                    page++;
+//                }
+                page ++ ;
                 requestComments(mType, page, size);
             }
         });
@@ -171,25 +171,25 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
             case R.id.bt_comments_one:
                 if (mID != R.id.bt_comments_one) {
                     clickPress(R.id.bt_comments_one);
-                    requestComments(1, 1, 6);
+                    requestComments(1, 1, count);
                 }
                 break;
             case R.id.bt_comments_two:
                 if (mID != R.id.bt_comments_two) {
                     clickPress(R.id.bt_comments_two);
-                    requestComments(2, 1, 6);
+                    requestComments(2, 1, count);
                 }
                 break;
             case R.id.bt_comments_three:
                 if (mID != R.id.bt_comments_three) {
                     clickPress(R.id.bt_comments_three);
-                    requestComments(3, 1, 6);
+                    requestComments(3, 1, count);
                 }
                 break;
             case R.id.bt_comments_four:
                 if (mID != R.id.bt_comments_four) {
                     clickPress(R.id.bt_comments_four);
-                    requestComments(4, 1, 6);
+                    requestComments(4, 1, count);
                 }
                 break;
             default:
@@ -343,11 +343,11 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
 
     private void storeList(List<CheckComments.CommentListBean> commentList) {
         if (isPullDown) {// 下拉刷新
-//            if (commentList.size() == 0) {
-//                ToastUtils.makePicTextShortToast(CheckCommentsActivity.this, "没有评论");
-//                refreshAndLoadMoreSuccess();
-//                return;
-//            }
+            if (commentList.size() == 0) {
+                ToastUtils.makePicTextShortToast(CheckCommentsActivity.this, "没有评论");
+                refreshAndLoadMoreSuccess();
+                return;
+            }
             mStores.clear();
             mStores.addAll(commentList);
             checkCommentsAdapter.notifyDataSetChanged();
@@ -357,9 +357,9 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
                 refreshOrLoadFail();
                 return;
             }
-            if (mStores.size() < 6) {
-                mStores.clear();
-            }
+//            if (mStores.size() < 6) {
+//                mStores.clear();
+//            }
             mStores.addAll(commentList);
             checkCommentsAdapter.notifyDataSetChanged();
             refreshAndLoadMoreSuccess();

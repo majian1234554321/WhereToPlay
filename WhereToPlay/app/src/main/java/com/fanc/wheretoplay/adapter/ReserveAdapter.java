@@ -28,11 +28,14 @@ import com.fanc.wheretoplay.databinding.ItemReserveBinding;
 import com.fanc.wheretoplay.datamodel.StoreList;
 import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.Constants;
+import com.fanc.wheretoplay.view.VerticalTextView;
 import com.qiyukf.unicorn.api.ConsultSource;
 import com.qiyukf.unicorn.api.Unicorn;
 
 import java.text.DecimalFormat;
 import java.util.List;
+
+import static com.qiyukf.unicorn.api.msg.MsgTypeEnum.text;
 
 /**
  * Created by Administrator on 2017/6/13.
@@ -111,16 +114,14 @@ public class ReserveAdapter extends RecyclerView.Adapter<ReserveAdapter.ViewHold
                 ActivityCompat.startActivity(mContext, intent, compat.toBundle());
             }
         });
-        holder.mIvReserveItemService.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(mContext, ServiceActivity.class);
-//                intent.putExtra(Constants.STORE_NAME,store.getName());
-//                mContext.startActivity(intent);
-                ConsultSource source = new ConsultSource(null, null, null);
-                Unicorn.openServiceActivity(mContext, mContext.getResources().getString(R.string.app_name), source);
-            }
-        });
+
+        //旋转名称
+        String name = store.getName();
+        int length = store.getName().length();
+        if (length > 7) {
+            name = store.getName().substring(7, length ) + "\n"  + store.getName().substring(0, 7);
+        }
+        holder.mVtReserve.setText(name);
     }
 
     @Override
@@ -152,7 +153,7 @@ public class ReserveAdapter extends RecyclerView.Adapter<ReserveAdapter.ViewHold
         TextView mTvReserveItemDiscountSum;
         TextView mTvReserveItemPrice;
         TextView mTvReserveItemDistance;
-        ImageView mIvReserveItemService;
+        private VerticalTextView mVtReserve;
 
         public ViewHolder(ViewDataBinding binding) {
             super(binding.getRoot());
@@ -167,7 +168,8 @@ public class ReserveAdapter extends RecyclerView.Adapter<ReserveAdapter.ViewHold
             mTvReserveItemDiscountSum = binding.tvReserveItemDiscountSum;
             mTvReserveItemPrice = binding.tvReserveItemPrice;
             mTvReserveItemDistance = binding.tvReserveItemDistance;
-            mIvReserveItemService = binding.ivReserveService;
+
+            mVtReserve = binding.vtReserve;
         }
     }
 }

@@ -269,7 +269,7 @@ public class MineFragment extends BaseFragment {
             case R.id.iv_mine_service:
                 ConsultSource source = new ConsultSource(null, null, null);
                 Unicorn.openServiceActivity(mContext, getResources().getString(R.string.app_name), source);
-//                goToNewPage(Constants.DRIVE);
+
                 break;
             default:
                 break;
