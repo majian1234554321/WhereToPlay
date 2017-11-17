@@ -21,9 +21,9 @@ import java.util.List;
 public class IntegralAdapter extends RecyclerView.Adapter<IntegralAdapter.ViewHolder> {
 
     Context mContext;
-    List mData;
+    List<ScoreList.ContentBean.ListBean> mData;
 
-    public IntegralAdapter(Context mContext, List mData) {
+    public IntegralAdapter(Context mContext, List<ScoreList.ContentBean.ListBean> mData) {
         this.mContext = mContext;
         this.mData = mData;
     }
@@ -36,7 +36,7 @@ public class IntegralAdapter extends RecyclerView.Adapter<IntegralAdapter.ViewHo
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.binding.setScore((ScoreList.Score) mData.get(position));
+        holder.binding.setScore( mData.get(position));
     }
 
     @Override

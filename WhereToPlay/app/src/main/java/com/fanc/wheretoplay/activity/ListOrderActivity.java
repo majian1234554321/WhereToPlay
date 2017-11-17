@@ -56,23 +56,17 @@ public class ListOrderActivity extends BaseFragmentActivity {
 
     public class ListOrderPagerAdapter extends FragmentPagerAdapter {
 
-
-
       public  ListOrderActivity listOrderActivity;
 
         private String[] mTitles = new String[]{"全部", "已预订", "已支付","已完成"};
 
         public ArrayList<BaseFragment> fragments;
 
-
-
         public ListOrderPagerAdapter(FragmentManager fragmentManager, ListOrderActivity listOrderActivity, ArrayList<BaseFragment> fragments) {
             super(fragmentManager);
             this.listOrderActivity = listOrderActivity;
             this.fragments = fragments;
         }
-
-
 
 
         @Override

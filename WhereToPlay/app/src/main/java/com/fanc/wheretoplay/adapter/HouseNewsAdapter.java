@@ -70,19 +70,21 @@ public class HouseNewsAdapter extends RecyclerView.Adapter<HouseNewsAdapter.View
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                HousenewsList.StatusBean statusBean =     new HousenewsList.StatusBean(housenews.get(position).getName(),
+                        housenews.get(position).getNumber(),
+                        housenews.get(position).getMin_price(),
+                        housenews.get(position).getStatus(),
+                        housenews.get(position).room_id);
                 if ("1".equals(housenews.get(position).getStatus())){
                     if (open) {
                         Intent intent = new Intent(mContext, ReuseActivity.class);
                         intent.putExtra(Constants.STORE_ID, mStoreId);
                         intent.putExtra(Constants.PAGE, Constants.RESERVE_INFO);
                         mContext.startActivity(intent);
+                        RxBus.getDefault().post(statusBean);
 
                     }else {
-                        HousenewsList.StatusBean statusBean =     new HousenewsList.StatusBean(housenews.get(position).getName(),
-                                housenews.get(position).getNumber(),
-                                housenews.get(position).getMin_price(),
-                        housenews.get(position).getStatus(),
-                        housenews.get(position).room_id);
+
 
                         RxBus.getDefault().post(statusBean);
                         ((Activity) mContext).finish();

@@ -27,7 +27,7 @@ public class ItemIntegralDetailBinding extends android.databinding.ViewDataBindi
     public final android.widget.TextView tvItemIntegralTitle;
     // variables
     @Nullable
-    private com.fanc.wheretoplay.datamodel.ScoreList.Score mScore;
+    private com.fanc.wheretoplay.datamodel.ScoreList.ContentBean.ListBean mScore;
     // values
     // listeners
     // Inverse Binding Event Handlers
@@ -69,7 +69,7 @@ public class ItemIntegralDetailBinding extends android.databinding.ViewDataBindi
     public boolean setVariable(int variableId, @Nullable Object variable)  {
         boolean variableSet = true;
         if (BR.score == variableId) {
-            setScore((com.fanc.wheretoplay.datamodel.ScoreList.Score) variable);
+            setScore((com.fanc.wheretoplay.datamodel.ScoreList.ContentBean.ListBean) variable);
         }
         else {
             variableSet = false;
@@ -77,7 +77,7 @@ public class ItemIntegralDetailBinding extends android.databinding.ViewDataBindi
             return variableSet;
     }
 
-    public void setScore(@Nullable com.fanc.wheretoplay.datamodel.ScoreList.Score Score) {
+    public void setScore(@Nullable com.fanc.wheretoplay.datamodel.ScoreList.ContentBean.ListBean Score) {
         this.mScore = Score;
         synchronized(this) {
             mDirtyFlags |= 0x1L;
@@ -86,7 +86,7 @@ public class ItemIntegralDetailBinding extends android.databinding.ViewDataBindi
         super.requestRebind();
     }
     @Nullable
-    public com.fanc.wheretoplay.datamodel.ScoreList.Score getScore() {
+    public com.fanc.wheretoplay.datamodel.ScoreList.ContentBean.ListBean getScore() {
         return mScore;
     }
 
@@ -106,7 +106,7 @@ public class ItemIntegralDetailBinding extends android.databinding.ViewDataBindi
         }
         int intDoubleParseDoubleScoreScoreDetail = 0;
         double doubleParseDoubleScoreScoreDetail = 0.0;
-        com.fanc.wheretoplay.datamodel.ScoreList.Score score = mScore;
+        com.fanc.wheretoplay.datamodel.ScoreList.ContentBean.ListBean score = mScore;
         java.lang.String javaLangStringIntDoubleParseDoubleScoreScoreDetail = null;
         java.lang.String scoreScoreDetail = null;
         java.lang.String scoreName = null;
@@ -117,9 +117,9 @@ public class ItemIntegralDetailBinding extends android.databinding.ViewDataBindi
 
                 if (score != null) {
                     // read score.score_detail
-                    scoreScoreDetail = score.getScore_detail();
+                    scoreScoreDetail = score.score_detail;
                     // read score.name
-                    scoreName = score.getName();
+                    scoreName = score.name;
                 }
 
 

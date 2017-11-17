@@ -6,6 +6,7 @@ import com.fanc.wheretoplay.datamodel.AccessOrderIdModel;
 import com.fanc.wheretoplay.datamodel.BookListModel;
 
 import okhttp3.MultipartBody;
+import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -19,6 +20,7 @@ import com.fanc.wheretoplay.datamodel.OrderDetailModel;
 import com.fanc.wheretoplay.datamodel.OrderInfo;
 import com.fanc.wheretoplay.datamodel.OrderInfoModel;
 import com.fanc.wheretoplay.datamodel.PayOrder;
+import com.fanc.wheretoplay.datamodel.ScoreList;
 import com.fanc.wheretoplay.datamodel.SubmitCommentModel;
 import com.fanc.wheretoplay.datamodel.VerifyCode;
 import com.fanc.wheretoplay.rx.BaseResponseModel;
@@ -335,6 +337,12 @@ public class Network{
         @Multipart
         @POST("User/onlineBook")
         Observable<OrderInfoModel> onlineBook(@Part List<MultipartBody.Part> fileA);
+
+
+        //信用预订
+        @Multipart
+        @POST("User/scoreList")
+        Observable<ScoreList> scoreList(@Part MultipartBody.Part fileA);
 
 
 
