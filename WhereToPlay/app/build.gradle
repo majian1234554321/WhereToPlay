@@ -15,8 +15,8 @@ android {
         applicationId "com.fanc.wheretoplay"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 20171116
-        versionName "1.1.7"
+        versionCode 20171117
+        versionName "1.1.9"
 
         sourceSets.main {
             jniLibs.srcDirs = ['src/main/jniLibs']

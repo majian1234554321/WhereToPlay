@@ -23,17 +23,17 @@ public class RegisterAgreement extends BaseFragment {
 
     @BindView(R.id.tm_agreement)
     TopMenu tmAgreement;
-    Unbinder unbinder;
+//    Unbinder unbinder;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = LayoutInflater.from(mContext).inflate(R.layout.fragment_register_agr, container, false);
-//        ButterKnife.bind(this,view);
+        ButterKnife.bind(this,view);
         initViews();
         init();
         setListener();
-        unbinder = ButterKnife.bind(this, view);
+//        unbinder = ButterKnife.bind(this, view);
         return view;
     }
 
@@ -56,9 +56,9 @@ public class RegisterAgreement extends BaseFragment {
         });
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        unbinder.unbind();
-    }
+//    @Override
+//    public void onDestroyView() {
+//        super.onDestroyView();
+//        unbinder.unbind();
+//    }
 }

@@ -34,7 +34,7 @@ public class Retrofit_RequestUtils {
                             .readTimeout(20,TimeUnit.SECONDS)
                             .build();
                     request = new Retrofit.Builder()
-                            .baseUrl("http://testapi.51tzl.cn" + Network.API)
+                            .baseUrl(Network.BASE + Network.API)
                             .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                             .client(okHttpClient)
