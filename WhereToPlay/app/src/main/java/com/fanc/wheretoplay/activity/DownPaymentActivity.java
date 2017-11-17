@@ -17,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
 import com.fanc.wheretoplay.R;
@@ -251,7 +252,7 @@ public class DownPaymentActivity extends BaseActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        //Toast.makeText(DownPaymentActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DownPaymentActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
                         closeProgress();
                         connectError();
                     }
@@ -312,9 +313,8 @@ public class DownPaymentActivity extends BaseActivity {
         }
         // 信誉预定
         if (Constants.RESERVE_WAY_CREDIT.equals(reserveType)) {
-            //  payCreditOrder();
+            Toast.makeText(mContext, "信誉预订成功", Toast.LENGTH_SHORT).show();
             finish();
-
         }
     }
 

@@ -15,17 +15,14 @@ import kotlinx.android.synthetic.main.evaluationsuccessadapter.view.*
 class EvaluationSuccessAdapter(var list: ArrayList<String>) : RecyclerView.Adapter<EvaluationSuccessAdapter.ViewHolder>() {
 
 
-    override fun getItemCount(): Int {
-        return list.size
-    }
+    override fun getItemCount(): Int = if (list.size>0)list.size else 0
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder {
-        return ViewHolder(View.inflate(parent?.context, R.layout.evaluationsuccessadapter, null))
-    }
+    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder =
+            ViewHolder(View.inflate(parent?.context, R.layout.evaluationsuccessadapter, null))
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         with(holder?.itemView!!) {
-            tv_reserve_item_title.text = list.get(position)
+            tv_reserve_item_title.text = list[position]
         }
     }
 

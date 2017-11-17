@@ -3,6 +3,7 @@ package com.fanc.wheretoplay.activity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
+import com.fanc.wheretoplay.MainActivity
 import com.fanc.wheretoplay.R
 import com.fanc.wheretoplay.adapter.EvaluationSuccessAdapter
 import com.fanc.wheretoplay.base.BaseActivity
@@ -16,8 +17,13 @@ class EvaluationSuccessActivity : BaseActivity(), View.OnClickListener {
                 finish()
             }
             R.id.tv_back -> {
+                val intent = intent
+                intent.setClass(this, MainActivity::class.java)
+                startActivity(intent)
+                finish()
             }
         }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
