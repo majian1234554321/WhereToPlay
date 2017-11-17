@@ -90,8 +90,7 @@ public class MerchantDetailFragment extends BaseFragment {
     FragmentMerchantDetailBinding detailBinding;
 
     TopMenu mTmDetail;
-    // 客服
-    ImageView mIvService;
+
     // 商家信息
     TextView mTvMerchantDetailTitle;
     RatingBar mRbMerchantDetailGrade;
@@ -173,7 +172,6 @@ public class MerchantDetailFragment extends BaseFragment {
     private void initViews() {
         mTmDetail = detailBinding.tmMerchantDetail;
 //        mBannerDetail = detailBinding.bannerDetail;
-        mIvService = detailBinding.ivMerchantDetailService;
         mTvMerchantDetailTitle = detailBinding.tvMerchantDetailTitle;
         mRbMerchantDetailGrade = detailBinding.rbMerchant;
         mTvMerchantDetailDiscountSum = detailBinding.tvMerchantDetailDiscountSum;
@@ -292,18 +290,7 @@ public class MerchantDetailFragment extends BaseFragment {
                         .show(mTmDetail.getIvRightIcon());
             }
         });
-        //客服
-        mIvService.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-//                Intent intent = new Intent(mContext, ServiceActivity.class);
-//                intent.putExtra(Constants.STORE_NAME, mStore.getName());
-//                startActivity(intent);
-                // 启动聊天界面
-                ConsultSource source = new ConsultSource(null, null, null);
-                Unicorn.openServiceActivity(mContext, getResources().getString(R.string.app_name), source);
-            }
-        });
+
         mTvReservePromptly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

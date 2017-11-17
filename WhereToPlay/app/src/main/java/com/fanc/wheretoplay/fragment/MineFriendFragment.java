@@ -208,7 +208,7 @@ public class MineFriendFragment extends BaseFragment {
         mStores.addAll(mMineFriendList);
         mineFriendAdapter.notifyDataSetChanged();
         if (mMineFriendList.size() == 0) {
-            ToastUtils.showShortToast(mContext, "暂时还没有推荐好友");
+            ToastUtils.showShortToast(mContext, "暂时还没有团队成员");
         }
     }
     }

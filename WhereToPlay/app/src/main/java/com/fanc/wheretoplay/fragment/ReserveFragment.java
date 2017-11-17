@@ -124,7 +124,8 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
     // 筛选分类
     List<String> conditions;
     // 页码。数量
-    int page, size = 6;
+
+    int page, count = 9,size = count ;
     // 轮播图
     List<String> mBannerIamges;
     // 商铺
@@ -292,24 +293,22 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
         mPtrl.setOnRefreshListener(new PullToRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
-                Log.e("wade","来到mPtrl监听中");
                 isPullDown = true;
                 page = 0;
-                size = 9;
+                size = count;
                 getStoreList(null, city.getId(), page, size, areaId, storeType, category, filterType, value);
             }
 
             @Override
             public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
                 isPullUp = true;
-                size = 6;
+                size = count;
 //                if (mStores.size() < 10) {
 //                    page = 0;
 //                } else {
 //                    page++;
 //                }
                 page ++;
-                Log.e("request_result",storeType + "\t" + page);
                 getStoreList(null, city.getId(), page, size, areaId, storeType, category, filterType, value);
             }
         });
@@ -736,7 +735,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
      */
     private void setImageViewRotateAnimationUnrotate(ImageView imageView) {
         imageView.startAnimation(trilateral_0_180_Animation());
-        imageView.setImageResource(R.drawable.pull_down_red);
+        imageView.setImageResource(R.drawable.pull_up);
     }
 
     /**
@@ -764,7 +763,6 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
      * 三角形向下的动画
      */
     private RotateAnimation trilateral_180_360_Animation() {
-        LogUtils.e("走了向下的动画");
         RotateAnimation animation = (RotateAnimation) AnimationUtils.loadAnimation(mContext, R.anim.rotate_up_deal_filter);
         animation.setDuration(300);
         animation.setFillAfter(!animation.getFillAfter());
@@ -999,18 +997,15 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
             mReserveAdapter.notifyDataSetChanged();
             refreshAndLoadMoreSuccess();
         } else if (isPullUp) {// 上拉加载
-            Log.e("request_result",stores.size() + "");
             //集合为0，则显示“没有更多数据”
             if (stores.size() == 0) {
                 refreshOrLoadFail();
                 return;
             }
-            if (mStores.size() < 6) {
-                mStores.clear();
-                Log.e("request_result",mStores.size() + "");
-            }
+//            if (mStores.size() < 6) {
+//                mStores.clear();
+//            }
             mStores.addAll(stores);
-            Log.e("request_result",mStores.size() + "");
             mReserveAdapter.notifyDataSetChanged();
             refreshAndLoadMoreSuccess();
             return;
@@ -1146,7 +1141,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
     public void setStoreType(String storeType) {
         this.storeType = storeType;
         page = 0;
-        getStoreList(null, city.getId(), 0, 9, areaId, this.storeType, category, filterType, value);
+        getStoreList(null, city.getId(), 0, count, areaId, this.storeType, category, filterType, value);
     }
 
     @Override

@@ -64,8 +64,6 @@ import rx.schedulers.Schedulers;
 public class DownPaymentActivity extends BaseActivity {
 
 
-
-
     //店铺id
     String storeId;
     // 订单参数

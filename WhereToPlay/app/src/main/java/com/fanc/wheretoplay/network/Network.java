@@ -344,9 +344,15 @@ public class Network{
 
 
 
+        //删除收藏
         @Multipart
         @POST("User/deleteCollection")
         Observable<DelectCollection> delectCollection(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB);
+
+        //修改个人信息
+        @Multipart
+        @POST("User/modifyProfile")
+        Observable<DelectCollection> changeMineInfo(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB  ,@Part MultipartBody.Part fileC  ,@Part MultipartBody.Part fileD  ,@Part MultipartBody.Part fileE  ,@Part MultipartBody.Part fileF  ,@Part MultipartBody.Part fileG);
 
     }
 

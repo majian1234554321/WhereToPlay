@@ -1,0 +1,63 @@
+package com.fanc.wheretoplay.view;
+
+import android.content.Context;
+import android.graphics.Canvas;
+import android.util.AttributeSet;
+import android.util.Log;
+import android.view.Gravity;
+import android.widget.TextView;
+
+import com.fanc.wheretoplay.util.UIUtils;
+
+/**
+ * Created by peace on 2017/11/16.
+ */
+
+public class VerticalTextView extends android.support.v7.widget.AppCompatTextView {
+    final boolean topDown;
+    private final float textSize;
+    private CharSequence text;
+
+
+    public VerticalTextView(Context context, AttributeSet attrs){
+        super(context, attrs);
+        final int gravity = getGravity();
+        text = getText();
+        textSize = getTextSize();
+        if(Gravity.isVertical(gravity) && (gravity&Gravity.VERTICAL_GRAVITY_MASK) == Gravity.BOTTOM) {
+            setGravity((gravity&Gravity.HORIZONTAL_GRAVITY_MASK) | Gravity.TOP);
+            topDown = false;
+        }else
+            topDown = true;
+    }
+
+
+    @Override
+    protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec){
+        super.onMeasure(heightMeasureSpec, widthMeasureSpec);
+        setMeasuredDimension(getMeasuredHeight(), getMeasuredWidth());
+    }
+
+
+    @Override
+    protected boolean setFrame(int l, int t, int r, int b){
+        return super.setFrame(l, t, l+(b-t), t+(r-l));
+    }
+
+
+    @Override
+    public void draw(Canvas canvas){
+
+        //gravity 是top的话走第一个情况
+        if(topDown){
+            canvas.translate(getHeight(), 0);
+            canvas.rotate(90);
+        }else {
+            canvas.translate(0, getWidth());
+            canvas.rotate(-90);
+        }
+
+        canvas.clipRect(0, 0, getWidth(), getHeight(), android.graphics.Region.Op.REPLACE);
+        super.draw(canvas);
+    }
+}
