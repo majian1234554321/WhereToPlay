@@ -18,6 +18,7 @@ import com.fanc.wheretoplay.datamodel.OrderDetailModel;
 import com.fanc.wheretoplay.datamodel.OrderInfo;
 import com.fanc.wheretoplay.datamodel.OrderInfoModel;
 import com.fanc.wheretoplay.datamodel.PayOrder;
+import com.fanc.wheretoplay.datamodel.ScoreList;
 import com.fanc.wheretoplay.datamodel.SubmitCommentModel;
 import com.fanc.wheretoplay.datamodel.VerifyCode;
 import com.fanc.wheretoplay.rx.BaseResponseModel;
@@ -334,6 +335,12 @@ public class Network{
         @Multipart
         @POST("User/onlineBook")
         Observable<OrderInfoModel> onlineBook(@Part List<MultipartBody.Part> fileA);
+
+
+        //信用预订
+        @Multipart
+        @POST("User/scoreList")
+        Observable<ScoreList> scoreList(@Part MultipartBody.Part fileA);
 
 
 

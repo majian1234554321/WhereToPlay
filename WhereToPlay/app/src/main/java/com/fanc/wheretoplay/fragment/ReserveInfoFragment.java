@@ -31,6 +31,7 @@ import com.fanc.wheretoplay.activity.ReuseActivity;
 //import com.fanc.wheretoplay.activity.ServiceActivity;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentReserveInfoBinding;
+import com.fanc.wheretoplay.datamodel.HousenewsList;
 import com.fanc.wheretoplay.datamodel.RoomList;
 import com.fanc.wheretoplay.datamodel.StoreDescribe;
 import com.fanc.wheretoplay.network.Network;
@@ -114,19 +115,16 @@ public class ReserveInfoFragment extends BaseFragment {
         initViews();
         init();
         setListeners();
-        RxBus.getDefault().toObservable(String.class)
-                .subscribe(new Action1<String>() {
+        RxBus.getDefault().toObservable(HousenewsList.StatusBean.class)
+                .subscribe(new Action1<HousenewsList.StatusBean>() {
                     @Override
-                    public void call(String s) {
+                    public void call(HousenewsList.StatusBean s) {
                         if (s != null) {
-                            String[] value = s.split("@");
-
-                            selectedRoomId = "";
-
-                            mTvReserveInfoRoom.setText(value[0]);
+                            selectedRoomId = s.room_id;
+                            mTvReserveInfoRoom.setText(s.getName());
                             mTvReserveInfoRoom.setTextColor(Color.parseColor("#333333"));
-                            tv2.setText(value[1]);
-                            number = value[1];
+                            tv2.setText(s.getNumber());
+                            number = s.getNumber();
                             tv2.setTextColor(Color.parseColor("#333333"));
                         }
 
