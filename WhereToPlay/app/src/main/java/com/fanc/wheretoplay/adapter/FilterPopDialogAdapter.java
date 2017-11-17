@@ -195,7 +195,7 @@ public class FilterPopDialogAdapter extends BaseAdapter {
 
         TextView clickTextView = textViewHashMap.get(position);
         if (clickTextView != null) {
-            clickTextView.setTextColor(UIUtils.getColor(R.color.text_and_buttor_orange));
+            clickTextView.setTextColor(UIUtils.getColor(R.color.text_red));
             if (isFilter) {
                 clickTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.filter_checked, 0);
             }

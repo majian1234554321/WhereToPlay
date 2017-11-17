@@ -242,6 +242,7 @@
             app:layout_constraintEnd_toEndOf="@+id/rl_register_user_input"
             app:layout_constraintStart_toEndOf="@+id/tv_agreement_left"
             android:textSize="@dimen/normal_textsize"
+            android:onClick="@{doClick.onClick}"
             />
     </android.support.constraint.ConstraintLayout>
 </layout>

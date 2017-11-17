@@ -17,14 +17,18 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.AlterCityActivity;
+import com.fanc.wheretoplay.activity.DetailActivity;
 import com.fanc.wheretoplay.activity.SignInActivity;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentRegisterBinding;
 import com.fanc.wheretoplay.datamodel.CityResource;
+import com.fanc.wheretoplay.datamodel.DelectCollection;
+import com.fanc.wheretoplay.datamodel.NewUser;
 import com.fanc.wheretoplay.datamodel.User;
 import com.fanc.wheretoplay.datamodel.VerifyCode;
 import com.fanc.wheretoplay.network.Network;
@@ -74,7 +78,12 @@ public class RegisterFragment extends BaseFragment {
     CityResource.City mCity;
     // 验证码定时器
     CountDownTimer mTimer;
-
+    private MultipartBody.Part requestFileA;
+    private MultipartBody.Part requestFileB;
+    private MultipartBody.Part requestFileC;
+    private MultipartBody.Part requestFileD;
+    private MultipartBody.Part requestFileF;
+    private TextView mTvAgreementRight;
 
 
     @Override
@@ -97,6 +106,7 @@ public class RegisterFragment extends BaseFragment {
         mBtnRegisterVerification = registerBinding.btnRegisterVerification;
         mEtRegisterRedeemCode = registerBinding.etRedeemCode;
         mBtnRegister = registerBinding.btnRegister;
+        mTvAgreementRight = registerBinding.tvAgreementRight;
     }
 
     /**
@@ -113,7 +123,6 @@ public class RegisterFragment extends BaseFragment {
             }
         });
         registerBinding.setDoClick(this);
-
 //        if (LocationUtils.location != null) {
 //            List<CityResource.Province> provinces = getProvinceList();
 //            for (CityResource.Province province:provinces){
@@ -134,11 +143,21 @@ public class RegisterFragment extends BaseFragment {
             case R.id.btn_register:
                 register();
                 break;
+            case R.id.tv_agreement_right:
+                agreement();
             default:
 
                 break;
         }
     }
+
+    //同意协议
+    private void agreement() {
+        Intent intent = new Intent(mContext, DetailActivity.class);
+        intent.putExtra(Constants.PAGE, Constants.AGREEMENT);
+        startActivity(intent);
+    }
+
     /**
      * 获取验证码
      */
@@ -150,27 +169,6 @@ public class RegisterFragment extends BaseFragment {
             mBtnRegisterVerification.setEnabled(false);
 
             showProgress();
-//            OkHttpUtils.post()
-//                    .url(Network.User.LOGIN_VERIFY)
-//                    .addParams(Network.Param.MOBILE, mobile)
-//                    .build()
-//                    .execute(new DCallback<VerifyCode>() {
-//                        @Override
-//                        public void onError(Call call, Exception e) {
-//                            connectError();
-//                            mTimer.cancel();
-//                            mBtnRegisterVerification.setEnabled(true);
-//                            mBtnRegisterVerification.setText("重新获取");
-//                        }
-//
-//                        @Override
-//                        public void onResponse(VerifyCode response) {
-//                            if (isSuccess(response)) {
-//                                verifyCode = response.getVerifyCode();
-////                                mEtRegisterVerification.setText(verifyCode);
-//                            }
-//                        }
-//                    });
 
             MultipartBody.Part requestFileA = MultipartBody.Part.createFormData(Network.Param.MOBILE, mobile);
 
@@ -254,31 +252,65 @@ public class RegisterFragment extends BaseFragment {
     }
 
     private void register(String mobile, String password, String verifyCode, String shearedCode,String nickName) {
+        requestFileA = MultipartBody.Part.createFormData(Network.Param.MOBILE,  mobile);
+        requestFileB = MultipartBody.Part.createFormData(Network.Param.PASSWORD,  password);
+        requestFileC = MultipartBody.Part.createFormData(Network.Param.CODE,  verifyCode);
+        requestFileD = MultipartBody.Part.createFormData(Network.Param.SHARE_CODE,  shearedCode);
+        requestFileF = MultipartBody.Part.createFormData(Network.Param.NICKNAME,  nickName);
+
         mBtnRegister.setEnabled(false);
         showProgress();
-        OkHttpUtils.post()
-                .url(Network.User.LOGIN_REGISTER)
-                .addParams(Network.Param.MOBILE, mobile)
-                .addParams(Network.Param.PASSWORD, password)
-                .addParams(Network.Param.CODE, verifyCode)
-                .addParams(Network.Param.SHARE_CODE, shearedCode)
-                .addParams(Network.Param.NICKNAME, nickName)
-                .build()
-                .execute(new DCallback<User>() {
+//        OkHttpUtils.post()
+//                .url(Network.User.LOGIN_REGISTER)
+//                .addParams(Network.Param.MOBILE, mobile)
+//                .addParams(Network.Param.PASSWORD, password)
+//                .addParams(Network.Param.CODE, verifyCode)
+//                .addParams(Network.Param.SHARE_CODE, shearedCode)
+//                .addParams(Network.Param.NICKNAME, nickName)
+//                .build()
+//                .execute(new DCallback<User>() {
+//                    @Override
+//                    public void onError(Call call, Exception e) {
+//                        connectError();
+//                        mBtnRegister.setEnabled(true);
+//                    }
+//
+//                    @Override
+//                    public void onResponse(User response) {
+//                        mBtnRegister.setEnabled(true);
+//
+//                        if (isSuccess(response)) {
+//                            ToastUtils.showShortToast(mContext, "注册成功");
+//                            mSpUtils.putBoolean(Constants.IS_SIGN_IN, true);
+//                            mSpUtils.putUser(response);
+//                            ((SignInActivity) mContext).startActivityToHome();
+//                        }
+//                    }
+//                });
+
+        Subscription subscription = Retrofit_RequestUtils.getRequest().register(requestFileA, requestFileB, requestFileC, requestFileD,requestFileF)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<NewUser>() {
                     @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        closeProgress();
+                        Toast.makeText(mContext, "网络出错", Toast.LENGTH_SHORT).show();
                         mBtnRegister.setEnabled(true);
                     }
 
                     @Override
-                    public void onResponse(User response) {
+                    public void onNext(NewUser response) {
+                        closeProgress();
                         mBtnRegister.setEnabled(true);
-
-                        if (isSuccess(response)) {
+                        if (response != null) {
                             ToastUtils.showShortToast(mContext, "注册成功");
                             mSpUtils.putBoolean(Constants.IS_SIGN_IN, true);
-                            mSpUtils.putUser(response);
+                            mSpUtils.putUser(response.getUser());
                             ((SignInActivity) mContext).startActivityToHome();
                         }
                     }

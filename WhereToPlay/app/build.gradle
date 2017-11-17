@@ -120,6 +120,7 @@ dependencies {
     compile 'com.qiyukf.unicorn:unicorn:3.11.1'
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.4.0'
     compile 'com.sina.weibo.sdk:core:4.1.0:openDefaultRelease@aar'
+
     implementation 'com.android.support:appcompat-v7:27.0.1'
     implementation files('libs/UPPayAssistEx.jar')
     implementation files('libs/UPPayPluginExPro.jar')

@@ -237,7 +237,7 @@ public class MineInfoFragment extends BaseFragment {
         Glide.with(mContext).load(Network.IMAGE + mUser.getAvatar()).into(mCivMineInfo);
         //昵称
         if (TextUtils.isEmpty(mUser.getNickname())) {
-            mEtMineInfoNickname.setText("");
+            mEtMineInfoNickname.setText(R.string.nickname);
         } else {
             mEtMineInfoNickname.setText(mUser.getNickname());
         }

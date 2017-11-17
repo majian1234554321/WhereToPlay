@@ -33,36 +33,21 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/iv_reserve_item" />
 
-        <TextView
-            android:id="@+id/tv_reserve_item_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:ems="1"
-            android:maxLines="10"
 
-            android:textColor="@color/text_white"
-            android:textSize="@dimen/textsize_level3"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.039"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.075" /><!--android:text="@{store.name}"-->
-
-       <com.fanc.wheretoplay.view.VerticalTextView
-           android:id="@+id/vt_reserve"
-           android:layout_width="wrap_content"
-           android:layout_height="wrap_content"
-           android:text="Fashion Shanghai 上海"
-           android:gravity="top"
-           android:textColor="@color/text_white"
-           android:textSize="@dimen/textsize_level3"
-           app:layout_constraintBottom_toBottomOf="@id/iv_reserve_item"
-           app:layout_constraintEnd_toEndOf="parent"
-           app:layout_constraintHorizontal_bias="0.039"
-           app:layout_constraintStart_toStartOf="parent"
-           app:layout_constraintTop_toTopOf="@id/iv_reserve_item"
-           />
+        <!--<cc.sayaki.widget.PlumbTextView-->
+            <!--android:id="@+id/vt_reserve"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginTop="30dp"-->
+            <!--android:layout_marginBottom="30dp"-->
+            <!--app:text="Fashion Shanghai 上海"-->
+            <!--app:textColor="@color/text_white"-->
+            <!--app:textSize="@dimen/textsize_level3"-->
+            <!--app:layout_constraintBottom_toBottomOf="@id/iv_reserve_item"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="0.039"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="@id/iv_reserve_item"/>-->
 
         <!--<TextView
             android:id="@+id/tv_reserve_item_discount"

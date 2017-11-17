@@ -43,6 +43,7 @@ public interface Constants {
      */
     String PAGE = "page";
     String MERCHANT_DETAIL = "merchant_detail";
+    String AGREEMENT = "agreement";
     String SEARCH = "search";
     String MINE = "mine";
     String TO_EVALUATE = "to_evaluate";// 去评价
