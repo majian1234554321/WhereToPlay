@@ -37,34 +37,9 @@
             app:layout_constraintTop_toBottomOf="@+id/tm_register">
 
             <TextView
-                android:id="@+id/tv_register_area"
-                android:layout_width="@dimen/width_80"
-                android:layout_height="@dimen/height_40"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/margin_15"
-                android:text="@string/area"
-                android:textColor="@color/text_black"
-                android:textSize="@dimen/normal_textsize"/>
-
-            <TextView
-                android:id="@+id/tv_register_city"
-                android:layout_width="wrap_content"
-                android:layout_height="@dimen/height_40"
-                android:layout_alignBottom="@+id/tv_register_area"
-                android:layout_toRightOf="@+id/tv_register_area"
-                android:drawablePadding="@dimen/padding_5"
-                android:drawableRight="@drawable/triangle_down"
-                android:gravity="center"
-                android:onClick="@{doClick.onClick}"
-                android:text="@string/city"
-                android:textColor="@color/editText"
-                android:textSize="@dimen/normal_textsize"/>
-
-            <TextView
                 android:id="@+id/tv_register_mobile"
                 android:layout_width="@dimen/width_80"
                 android:layout_height="@dimen/height_40"
-                android:layout_below="@+id/tv_register_area"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/margin_15"
                 android:text="@string/mobile"
@@ -197,11 +172,11 @@
                 android:textColorHint="@color/editText"
                 android:textSize="@dimen/normal_textsize"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/line_height_1px"
-                android:layout_below="@+id/tv_register_area"
-                android:background="@color/pay_reserve_list_divider_white"/>
+            <!--<View-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="@dimen/line_height_1px"-->
+                <!--android:layout_below="@+id/tv_register_area"-->
+                <!--android:background="@color/pay_reserve_list_divider_white"/>-->
 
             <View
                 android:layout_width="match_parent"

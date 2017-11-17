@@ -186,7 +186,7 @@ public class ResetPwdFragment extends BaseFragment {
             return;
         }
         String inputVerifyCode = mEtResetPwdVerification.getText().toString().trim();
-        if (!((SignInActivity) mContext).verifyCodeFormat(inputVerifyCode, verifyCode)) {
+        if (!((SignInActivity) mContext).verifyCodeFormat(inputVerifyCode)) {
             return;
         }
         mBtnResetPwd.setEnabled(false);

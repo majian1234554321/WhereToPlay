@@ -136,7 +136,7 @@ public class MainActivity extends BaseFragmentActivity {
         tvMainTabMine = mainBinding.tvMainTabMine;
         tvMainTabPay = mainBinding.tvMainTabPay;
         tvMainTabReserve = mainBinding.tvMainTabReserve;
-        Log.w("llm", "MainActivity（133）：RegistrationID =  " + JPushInterface.getRegistrationID(this));
+//        Log.w("llm", "MainActivity（133）：RegistrationID =  " + JPushInterface.getRegistrationID(this));
     }
 
     /**

@@ -20,7 +20,6 @@ import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 public class Retrofit_RequestUtils {
     private volatile static Network.LH_API request;
 
-
     private Retrofit_RequestUtils(){}
 
     public static Network.LH_API getRequest() {
@@ -35,7 +34,7 @@ public class Retrofit_RequestUtils {
                             .readTimeout(20,TimeUnit.SECONDS)
                             .build();
                     request = new Retrofit.Builder()
-                            .baseUrl(Network.BASE+Network.API)
+                            .baseUrl(Network.BASE + Network.API)
                             .addConverterFactory(GsonConverterFactory.create())
                             .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                             .client(okHttpClient)

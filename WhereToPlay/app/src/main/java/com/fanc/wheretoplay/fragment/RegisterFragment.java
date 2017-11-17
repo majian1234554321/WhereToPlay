@@ -63,7 +63,6 @@ public class RegisterFragment extends BaseFragment {
     FragmentRegisterBinding registerBinding;
 
     TopMenu mTmRegister;
-    TextView mTvRegisterCity;
     EditText mEtRegisterMobile;
     EditText mEtRegisterPwd;
     EditText mEtRegisterVerification;
@@ -72,11 +71,10 @@ public class RegisterFragment extends BaseFragment {
     EditText mEtRegisterRedeemCode;
 
     Button mBtnRegister;
-    Receiver receiver;
     CityResource.City mCity;
     // 验证码定时器
     CountDownTimer mTimer;
-    String verifyCode;
+
 
 
     @Override
@@ -92,7 +90,6 @@ public class RegisterFragment extends BaseFragment {
      */
     private void initView() {
         mTmRegister = registerBinding.tmRegister;
-        mTvRegisterCity = registerBinding.tvRegisterCity;
         mEtRegisterMobile = registerBinding.etRegisterMobile;
         mEtRegisterPwd = registerBinding.etRegisterPassword;
         mEtRegisterVerification = registerBinding.etRegisterVerification;
@@ -117,29 +114,20 @@ public class RegisterFragment extends BaseFragment {
         });
         registerBinding.setDoClick(this);
 
-        registerBroadcastReceiver();
-        Log.v("RegisterFragment", "LocationUtils.location:" + LocationUtils.location);
-        if (LocationUtils.location != null) {
-            mTvRegisterCity.setText(LocationUtils.location.getCity());
-            List<CityResource.Province> provinces = getProvinceList();
-            for (CityResource.Province province : provinces) {
-                for (CityResource.City city : province.getChild()) {
-                    if (LocationUtils.location.getCity() != null && LocationUtils.location.getCity().contains(city.getName())) {
-                        this.mCity = city;
-                    } else {
-                        //没有数据时设置文字为”请选择“
-                        mTvRegisterCity.setText(getResources().getString(R.string.city_select));
-                    }
-                }
-            }
-        }
+//        if (LocationUtils.location != null) {
+//            List<CityResource.Province> provinces = getProvinceList();
+//            for (CityResource.Province province:provinces){
+//                for (CityResource.City city:province.getChild()){
+//                    if (LocationUtils.location.getCity() != null && LocationUtils.location.getCity().contains(city.getName())) {
+//                        this.mCity = city;
+//                    }
+//                }
+//            }
+//        }
     }
 
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.tv_register_city:
-                goToSelectedCity();
-                break;
             case R.id.btn_register_verification:
                 getVerification();
                 break;
@@ -151,12 +139,6 @@ public class RegisterFragment extends BaseFragment {
                 break;
         }
     }
-
-    private void goToSelectedCity() {
-        Intent intent = new Intent(mContext, AlterCityActivity.class);
-        startActivity(intent);
-    }
-
     /**
      * 获取验证码
      */
@@ -212,9 +194,6 @@ public class RegisterFragment extends BaseFragment {
                         @Override
                         public void onNext(VerifyCode response) {
                             closeProgress();
-                            if (isSuccess(response)) {
-                                verifyCode = response.getVerifyCode();
-                            }
                         }
                     });
         }
@@ -240,29 +219,7 @@ public class RegisterFragment extends BaseFragment {
         mTimer.start();
     }
 
-    /**
-     * 城市有效性检查
-     *
-     * @param city
-     * @return
-     */
-    private boolean cityFormat(String city) {
-        if (UIUtils.getString(R.string.city).equals(city) || mCity == null) {
-            ToastUtils.showShortToast(mContext, "请选择城市");
-            return false;
-        }
-//        if (city.equals(mCity.getName())) {
-//            ToastUtils.showShortToast(mContext, "请选择城市");
-//            return false;
-//        }
-        return true;
-    }
-
     private void register() {
-        String city = mTvRegisterCity.getText().toString().trim();
-        if (!cityFormat(city)) {
-            return;
-        }
 
         //手机号
         String mobile = mEtRegisterMobile.getText().toString().trim();
@@ -278,7 +235,7 @@ public class RegisterFragment extends BaseFragment {
 
         //验证码
         String inputVerifyCode = mEtRegisterVerification.getText().toString().trim();
-        if (!((SignInActivity) mContext).verifyCodeFormat(inputVerifyCode, verifyCode)) {
+        if (!((SignInActivity) mContext).verifyCodeFormat(inputVerifyCode)) {
             return;
         }
 
@@ -293,11 +250,10 @@ public class RegisterFragment extends BaseFragment {
         if (!((SignInActivity) mContext).nicknameFormat(nickName)) {
             return;
         }
-        register(mobile, password, inputVerifyCode, mCity.getId(), mCity.getLat(), mCity.getLng(), redeemCode);
+        register(mobile, password, inputVerifyCode, redeemCode, nickName);
     }
 
-    private void register(String mobile, String password, String verifyCode,
-                          String cityId, String lat, String lng, String shearedCode) {
+    private void register(String mobile, String password, String verifyCode, String shearedCode,String nickName) {
         mBtnRegister.setEnabled(false);
         showProgress();
         OkHttpUtils.post()
@@ -305,10 +261,8 @@ public class RegisterFragment extends BaseFragment {
                 .addParams(Network.Param.MOBILE, mobile)
                 .addParams(Network.Param.PASSWORD, password)
                 .addParams(Network.Param.CODE, verifyCode)
-                .addParams(Network.Param.REGISTERED, cityId)
-                .addParams(Network.Param.LAT, lat)
-                .addParams(Network.Param.LNG, lng)
                 .addParams(Network.Param.SHARE_CODE, shearedCode)
+                .addParams(Network.Param.NICKNAME, nickName)
                 .build()
                 .execute(new DCallback<User>() {
                     @Override
@@ -331,54 +285,32 @@ public class RegisterFragment extends BaseFragment {
                 });
     }
 
-
-    private void registerBroadcastReceiver() {
-        receiver = new Receiver();
-        IntentFilter filter = new IntentFilter(Constants.ACTION_CITY_SELECTED);
-        LocalBroadcastManager.getInstance(mContext).registerReceiver(receiver, filter);
-    }
-
-    class Receiver extends BroadcastReceiver {
-
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            mCity = (CityResource.City) intent.getSerializableExtra(Constants.CITY);
-            mTvRegisterCity.setText(mCity.getName());
-            mTvRegisterCity.setTextColor(getResources().getColor(R.color.text_black_sec));
-        }
-    }
-
-    /**
-     * 省列表
-     *
-     * @return
-     */
-    private List<CityResource.Province> getProvinceList() {
-        List<CityResource.Province> provinces = null;
-        try {
-            InputStream inputStream = mContext.getAssets().open("city.txt");
-            int length = inputStream.available();
-            byte[] cityBytes = new byte[length];
-            inputStream.read(cityBytes);
-            String json = new String(cityBytes);
-//            Logger.json(json);
-            Gson gson = new Gson();
-            CityResource cityResource = gson.fromJson(json, CityResource.class);
-            provinces = cityResource.provinces;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return provinces;
-    }
+//    /**
+//     * 省列表
+//     *
+//     * @return
+//     */
+//    private List<CityResource.Province> getProvinceList() {
+//        List<CityResource.Province> provinces = null;
+//        try {
+//            InputStream inputStream = mContext.getAssets().open("city.txt");
+//            int length = inputStream.available();
+//            byte[] cityBytes = new byte[length];
+//            inputStream.read(cityBytes);
+//            String json = new String(cityBytes);
+////            Logger.json(json);
+//            Gson gson = new Gson();
+//            CityResource cityResource = gson.fromJson(json, CityResource.class);
+//            provinces = cityResource.provinces;
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//        return provinces;
+//    }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        // 取消广播
-        if (receiver != null) {
-            LocalBroadcastManager.getInstance(mContext).unregisterReceiver(receiver);
-            receiver = null;
-        }
         // 关闭定时器
         if (mTimer != null) {
             mTimer.cancel();

@@ -142,7 +142,7 @@ public class PickerDialog {
         for (int i = 0; i < this.provinces.size(); i++) {
             CityResource.Province province = this.provinces.get(i);
             provinces.add(province.getName());
-            Log.d("aaa", "setCityPickerData: j = " + province.getName());
+            Log.d("Aaaaa", "setCityPickerData: j = " + province.getName());
             if (i == 0) {
                 for (int j = 0; j < province.getChild().size(); j++) {
                     CityResource.City city = province.getChild().get(j);
@@ -207,7 +207,7 @@ public class PickerDialog {
                     if (listener != null) {
                         listener.onBtnClick(v, date, 0, null, 0);
                     }
-                    Log.d("aaa", "onClick: date = " + date);
+                    Log.d("Aaaaa", "onClick: date = " + date);
                 } else {
                     if (province == null) {
                         province = mWvProvince.getSelectedItem();
@@ -215,7 +215,7 @@ public class PickerDialog {
                     if (city == null) {
                         city = mWvCity.getSelectedItem();
                     }
-                    Log.d("aaa", "onClick: province = " + province + "\tcity = " + city);
+                    Log.d("Aaaaa", "onClick: province = " + province + "\tcity = " + city);
                     listener.onBtnClick(v, province, provinceIndex, city, cityIndex);
                 }
                 dismiss();
