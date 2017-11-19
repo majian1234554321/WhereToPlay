@@ -240,6 +240,9 @@ public class ReserveInfoFragment extends BaseFragment {
         intent.putExtra(Constants.DISCOUNT_COUPON, mTvReserveInfoRealDiscount.getText().toString());
         intent.putExtra(Constants.ADDRESS, mTvReserveInfoAddress.getText().toString() + "  " + mTvReserveInfoDistance.getText().toString());
         intent.putExtra("open", false);
+        intent.putExtra("arrival_time", mTvReserveInfoTime.getText().toString().trim());
+
+
         startActivity(intent);
     }
 

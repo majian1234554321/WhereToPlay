@@ -1,5 +1,6 @@
 package com.fanc.wheretoplay.activity
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.view.View
@@ -17,9 +18,7 @@ class EvaluationSuccessActivity : BaseActivity(), View.OnClickListener {
                 finish()
             }
             R.id.tv_back -> {
-                val intent = intent
-                intent.setClass(this, MainActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
         }

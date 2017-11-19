@@ -156,7 +156,6 @@ public class SPUtils {
         putString(UserKey.SHARE_CODE, user.getShare_code());
         putString(UserKey.STATUS, user.getCreated_time());
         putString(UserKey.TOKEN, user.getToken());
-        Log.e("token","user设置token :\t"+user.getToken());
         putString(UserKey.AVATAR, user.getAvatar());
         putString(UserKey.GENDER, user.getGender());
         putString(UserKey.BIRTHDAY, user.getBirthday());
@@ -174,7 +173,6 @@ public class SPUtils {
         user.setShare_code(getString(UserKey.SHARE_CODE, ""));
         user.setStatus(getString(UserKey.STATUS, ""));
         user.setToken(getString(UserKey.TOKEN, ""));
-        Log.e("token","gettoken :\t" + getString(UserKey.TOKEN, ""));
         user.setAvatar(getString(UserKey.AVATAR, ""));
         user.setGender(getString(UserKey.GENDER, ""));
         user.setBirthday(getString(UserKey.BIRTHDAY, ""));
@@ -192,7 +190,6 @@ public class SPUtils {
         putString(UserKey.SHARE_CODE, newUser.getShare_code());
         putString(UserKey.STATUS, newUser.getCreated_time());
         putString(UserKey.TOKEN, newUser.getToken());
-        Log.e("token","newUser设置token :\t"+newUser.getToken());
         putString(UserKey.AVATAR, newUser.getAvatar());
         putString(UserKey.GENDER, newUser.getGender());
         putString(UserKey.BIRTHDAY, newUser.getBirthday());

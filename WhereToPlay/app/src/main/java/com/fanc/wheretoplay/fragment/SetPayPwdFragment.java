@@ -14,7 +14,9 @@ import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentSetPayPwdBinding;
 import com.fanc.wheretoplay.datamodel.IsOk;
+import com.fanc.wheretoplay.datamodel.SubmitCommentModel;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.view.NumPswView;
@@ -23,6 +25,11 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
 import okhttp3.Call;
+import okhttp3.MultipartBody;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2017/6/19.
@@ -108,31 +115,45 @@ public class SetPayPwdFragment extends BaseFragment {
     private void setPayPwd() {
         mBtnSetPayPwd.setEnabled(false);
         showProgress();
-        OkHttpUtils.post()
-                .url(Network.User.USER_PAY_PASSWORD)
-                .addParams(Network.Param.TOKEN, mUser.getToken())
-                .addParams(Network.Param.PASSWORD, password1)
-                .addParams(Network.Param.REPASSWORD, password2)
-                .build()
-                .execute(new DCallback<IsOk>() {
+
+
+        MultipartBody.Part requestFileA =
+                MultipartBody.Part.createFormData("password", password1);
+        MultipartBody.Part requestFileB =
+                MultipartBody.Part.createFormData("repassword", password2);
+        MultipartBody.Part requestFileC =
+                MultipartBody.Part.createFormData("token", mUser.getToken());
+
+        Subscription subscription = Retrofit_RequestUtils.getRequest().payPassword(requestFileA, requestFileB, requestFileC)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<SubmitCommentModel>() {
                     @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
-                        mBtnSetPayPwd.setEnabled(true);
+                    public void onCompleted() {
+
                     }
 
                     @Override
-                    public void onResponse(IsOk response) {
-                        mBtnSetPayPwd.setEnabled(true);
-                        if (isSuccess(response)) {
-                            if (response.isIs_ok()) {
-                                ToastUtils.showShortToast(mContext, "密码设置成功！");
-                                mSpUtils.putBoolean(Constants.IS_SET_PAY_PASSWORD, true);
-                                mContext.finish();
-                            }
+                    public void onError(Throwable e) {
+                        closeProgress();
+                    }
+
+                    @Override
+                    public void onNext(SubmitCommentModel submitCommentModel) {
+                        closeProgress();
+                        if (submitCommentModel != null && submitCommentModel.code.equals("0")) {
+                            ToastUtils.showShortToast(mContext, "密码设置成功！");
+                            mSpUtils.putBoolean(Constants.IS_SET_PAY_PASSWORD, true);
+                            mContext.finish();
+                        } else {
+                            ToastUtils.showShortToast(mContext, "密码设置失败！");
                         }
                     }
                 });
+
+        compositeSubscription.add(subscription);
     }
+
+
 
 }

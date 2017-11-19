@@ -206,7 +206,7 @@ public class PayBillActivity extends BaseActivity {
                 getOrderInfo(Network.User.USER_CONSUME_AGAIN, orderId, storeId);
                 break;
             case "商家详情支付":
-                mTmPayBill.setTitle("商家详情支付");
+                mTmPayBill.setTitle("支付");
                 break;
             default:
                 mTmPayBill.setTitle(R.string.buy);
@@ -554,7 +554,7 @@ public class PayBillActivity extends BaseActivity {
                     @Override
                     public void onNext(AccessOrderIdModel accessOrderIdModel) {
                         if ("0".equals(accessOrderIdModel.code)) {
-                            Toast.makeText(PayBillActivity.this, accessOrderIdModel.content.order_id, Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(PayBillActivity.this, accessOrderIdModel.content.order_id, Toast.LENGTH_SHORT).show();
                             orderId = accessOrderIdModel.content.order_id;
                             switch (payWay) {
                                 case 0:

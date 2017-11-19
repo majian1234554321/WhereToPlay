@@ -228,7 +228,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
     private final int REQUEST_CODE = 0x1001;
 
     @Override
-    public void setDetailsOrderViewData(OrderDetailModel.ContentBean contentBean) {
+    public void setDetailsOrderViewData(final OrderDetailModel.ContentBean contentBean) {
         tvStoreName.setText(contentBean.store_name);
         tvAddress.setText(contentBean.address);
 
@@ -285,6 +285,20 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                             intent.putExtra("store_id", store_idValue);
                             intent.setClass(DetailsOrderActivity.this, PublicationEvaluationActivity.class);
                             mContext.startActivity(intent);
+
+                        case "预支付":
+
+                            intent.putExtra("flag", "预订支付");
+                            intent.putExtra("order_id", order_idValue);
+                            intent.putExtra("store_name", storeNameValue);
+
+                            intent.putExtra("arrival_time", contentBean.arrival_time);
+                            intent.putExtra("prepay", contentBean.total);
+
+
+                            intent.setClass(DetailsOrderActivity.this, DownPaymentActivity.class);
+                            mContext.startActivity(intent);
+
                             break;
                     }
 

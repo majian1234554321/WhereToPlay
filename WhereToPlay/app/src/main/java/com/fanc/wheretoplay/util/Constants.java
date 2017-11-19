@@ -86,6 +86,7 @@ public interface Constants {
     String BRIEF = "简介";   //简介
     String HOUSENEWS = "房态";   //房态
     String ORDER_TO_COMPLETE = "order_to_complete";// 下单完成界面
+    String REGISTER_AGREEMENT_URL = "http://ktv.51tzl.cn/static/protocol/";   //乐互网协议
 
 
     /**

@@ -90,7 +90,6 @@ public class BriefFragment extends BaseFragment {
             @Override
             public void onPageFinished(WebView view, String url) {
                 super.onPageFinished(view, url);
-                Log.d("Aaaaa", "onPageFinished: url = " + url);
             }
         });
 
