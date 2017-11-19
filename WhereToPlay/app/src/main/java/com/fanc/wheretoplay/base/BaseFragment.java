@@ -128,7 +128,7 @@ public abstract class BaseFragment
         if (model == null) {
             return false;
         }
-        if (model.code != 0 || !TextUtils.isEmpty(model.message)) {
+        if (model.code != 0 || (!TextUtils.isEmpty(model.message) && !TextUtils.equals(model.message,"请求成功"))) {
 //            if (model.code == 40001 || model.equals("接口授权失败")) {
 //                ToastUtils.makePicTextShortToast(mContext, Constants.ICON_TIP, UIUtils.getString(R.string.login_Lose));
 //                mSpUtils.removeUser();

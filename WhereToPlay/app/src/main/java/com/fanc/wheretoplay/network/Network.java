@@ -360,6 +360,13 @@ public class Network{
         @Multipart
         @POST("Login/register")
         Observable<NewUser> register(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB  , @Part MultipartBody.Part fileC  , @Part MultipartBody.Part fileD  , @Part MultipartBody.Part fileE );
+
+        //登录
+        @Multipart
+        @POST("Login/login")
+        Observable<NewUser> logIn(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB , @Part MultipartBody.Part fileC);
+
+
     }
 
 }

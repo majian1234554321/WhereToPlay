@@ -9,6 +9,8 @@ import com.fanc.wheretoplay.base.BaseModel;
 public class NewUser extends BaseModel {
 
     /**
+     * "code": 50002,
+     "message": "手机号码已注册",
      * content : {"id":"29","pid":"20","mobile":"13526505114","created_time":"1497321970","status":"1","share_code":"29593f51","token":"eyJpZCI6IjI5Iiwibm9uY2UiOiJFdlhLcUZvTCIsInNoYXJlX2NvZGUiOiIyOTU5M2Y1MSJ9"}
      */
 

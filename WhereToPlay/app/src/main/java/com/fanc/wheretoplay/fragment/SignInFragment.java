@@ -4,25 +4,35 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.fanc.wheretoplay.MainActivity;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.SignInActivity;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentSigninBinding;
+import com.fanc.wheretoplay.datamodel.NewUser;
 import com.fanc.wheretoplay.datamodel.User;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
+import cn.jpush.android.api.JPushInterface;
 import okhttp3.Call;
+import okhttp3.MultipartBody;
+import rx.Subscriber;
+import rx.Subscription;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2017/6/12.
@@ -37,6 +47,9 @@ public class SignInFragment extends BaseFragment {
     //    TextView mTvForgetPwd;
 //    TextView mTvMobilRegister;
     Button mBtnSignIn;
+    private MultipartBody.Part requestFileA;
+    private MultipartBody.Part requestFileB;
+    private MultipartBody.Part requestFileC;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -97,30 +110,61 @@ public class SignInFragment extends BaseFragment {
 
         mBtnSignIn.setEnabled(false);
         showProgress();
-        OkHttpUtils.post()
-                .url(Network.User.LOGIN_LOGIN)
-                .addParams(Network.Param.MOBILE, mobile)
-                .addParams(Network.Param.PASSWORD, pwd)
-                .build()
-                .execute(new DCallback<User>() {
+//        OkHttpUtils.post()
+//                .url(Network.User.LOGIN_LOGIN)
+//                .addParams(Network.Param.MOBILE, mobile)
+//                .addParams(Network.Param.PASSWORD, pwd)
+//                .build()
+//                .execute(new DCallback<User>() {
+//                    @Override
+//                    public void onError(Call call, Exception e) {
+//                        connectError();
+//                        mBtnSignIn.setEnabled(true);
+//                    }
+//
+//                    @Override
+//                    public void onResponse(User response) {
+//                        mBtnSignIn.setEnabled(true);
+//                        if (isSuccess(response)) {
+//                            ToastUtils.showShortToast(mContext, "登录成功");
+//                            mSpUtils.putUser(response);
+//                            mSpUtils.putBoolean(Constants.IS_SIGN_IN, true);
+//                            ((SignInActivity) mContext).startActivityToHome();
+//                        }
+//                    }
+//                });
+        String registrationID = JPushInterface.getRegistrationID(mContext);//极光推送id
+        requestFileA = MultipartBody.Part.createFormData(Network.Param.MOBILE,  mobile);
+        requestFileB = MultipartBody.Part.createFormData(Network.Param.PASSWORD,  pwd);
+        requestFileC = MultipartBody.Part.createFormData(Network.Param.REGISTRATIONID,  registrationID);
+
+
+        Subscription subscription = Retrofit_RequestUtils.getRequest().logIn(requestFileA, requestFileB, requestFileC)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<NewUser>() {
                     @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
+                    public void onCompleted() {
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                        closeProgress();
+                        Toast.makeText(mContext, "网络出错", Toast.LENGTH_SHORT).show();
                         mBtnSignIn.setEnabled(true);
                     }
 
                     @Override
-                    public void onResponse(User response) {
+                    public void onNext(NewUser response) {
                         mBtnSignIn.setEnabled(true);
                         if (isSuccess(response)) {
                             ToastUtils.showShortToast(mContext, "登录成功");
-                            mSpUtils.putUser(response);
+                            mSpUtils.putUser(response.getUser());
+                            Log.e("token","登录response.getUser()设置token :\t"+response.getUser().getToken());
                             mSpUtils.putBoolean(Constants.IS_SIGN_IN, true);
                             ((SignInActivity) mContext).startActivityToHome();
                         }
                     }
                 });
-
-
     }
 }
