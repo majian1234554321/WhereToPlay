@@ -124,7 +124,7 @@
             android:layout_alignTop="@+id/tv_reserve_list_item_name"
             android:layout_marginRight="@dimen/margin_5"
             android:layout_toLeftOf="@+id/tv_reserve_list_item_state"
-            android:src="@drawable/reserve_book_in"/>
+            android:src="@drawable/reserve_book_in_hollow"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
