@@ -319,9 +319,7 @@ public class PayFragment extends BaseFragment {
             this.orders.clear();
             this.orders.addAll(orders);
             orderNewAdapter.notifyDataSetChanged();
-            if (orders.size() == 0) {
-                ToastUtils.showShortToast(mContext, "没有订单");
-            }
+          
         }
     }
 
