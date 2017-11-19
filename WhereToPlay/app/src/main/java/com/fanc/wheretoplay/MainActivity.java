@@ -31,6 +31,7 @@ import com.fanc.wheretoplay.fragment.MineFragment;
 import com.fanc.wheretoplay.fragment.PayFragment;
 import com.fanc.wheretoplay.fragment.ReserveFragment;
 import com.fanc.wheretoplay.util.Constants;
+import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.MyViewPager;
@@ -111,6 +112,7 @@ public class MainActivity extends BaseFragmentActivity {
         if (intent.hasExtra(NimIntent.EXTRA_NOTIFY_CONTENT)) {
             Unicorn.openServiceActivity(this, getResources().getString(R.string.app_name), new ConsultSource(null, null, null));
         }
+
         init();
         initFragments();
         initPage();

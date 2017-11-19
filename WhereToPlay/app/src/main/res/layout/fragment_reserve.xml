@@ -86,7 +86,7 @@
                     android:drawableRight="@drawable/pull_down_4"
                     android:onClick="@{click.onClick}"
                     android:paddingLeft="@dimen/padding_15"
-                    android:text="深圳市"
+                    android:text="选择地区"
                     android:textColor="@color/white"
                     android:textSize="@dimen/textsize_level3"
                     app:layout_constraintStart_toStartOf="parent"

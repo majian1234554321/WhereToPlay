@@ -15,6 +15,7 @@ import com.fanc.wheretoplay.activity.SignInActivity;
 import com.fanc.wheretoplay.datamodel.User;
 import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.Constants;
+import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.view.AlertDialog;
@@ -50,6 +51,7 @@ public abstract class BaseFragment
     boolean isShowing;
     public  CompositeSubscription compositeSubscription;
 
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -59,6 +61,7 @@ public abstract class BaseFragment
         mLayoutInflater = LayoutInflater.from(mContext);
         //点击商家后台传来的消息可以进入聊天界面
         compositeSubscription = new CompositeSubscription();
+
     }
 
     @Override

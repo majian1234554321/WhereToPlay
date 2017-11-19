@@ -51,7 +51,7 @@ public class PayFragment extends BaseFragment {
 //    List<BookList.Book> books;
 //    PayReserveAdapter payReserveAdapter;
 
-    int page, size;
+    int page, count = 9, size = count;
     Receiver receiver;
 
     MainActivity.MyOnTouchListener onTouchListener;
@@ -110,18 +110,20 @@ public class PayFragment extends BaseFragment {
             public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
                 isPullDown = true;
                 page = 0;
-                size = 0;
+                size = count;
                 getOrderList(page, size);
             }
 
             @Override
             public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
                 isPullUp = true;
-                if (orders.size() < 10) {
-                    page = 0;
-                } else {
-                    page++;
-                }
+                size = count;
+                page ++;
+//                if (orders.size() < 10) {
+//                    page = 0;
+//                } else {
+//                    page++;
+//                }
                 getOrderList(page, size);
             }
         });
@@ -292,20 +294,20 @@ public class PayFragment extends BaseFragment {
 //    }
 
     private void showOrderList(List<OrderList.Order> orders) {
-        if (isPullDown) {
+        if (isPullDown) {   // 下拉刷新
             this.orders.clear();
             this.orders.addAll(orders);
             orderNewAdapter.notifyDataSetChanged();
             refreshAndLoadMoreSuccess();
-        } else if (isPullUp) {
-            if (orders.size() < 1) {
-                ToastUtils.makePicTextShortToast(mContext, "没有更多了哦");
+        } else if (isPullUp) {   // 上拉加载
+            //集合为0，则显示“没有更多数据”
+            if (orders.size() == 0) {
                 refreshOrLoadFail();
                 return;
             }
-            if (this.orders.size() < 10) {
-                this.orders.clear();
-            }
+//            if (this.orders.size() < 10) {
+//                this.orders.clear();
+//            }
             for (int i = 0; i < orders.size(); i++) {
                 this.orders.add(orders.get(i));
                 orderNewAdapter.notifyItemChanged(this.orders.size() + i);
@@ -317,6 +319,9 @@ public class PayFragment extends BaseFragment {
             this.orders.clear();
             this.orders.addAll(orders);
             orderNewAdapter.notifyDataSetChanged();
+            if (orders.size() == 0) {
+                ToastUtils.showShortToast(mContext, "没有订单");
+            }
         }
     }
 

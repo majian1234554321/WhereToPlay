@@ -25,6 +25,7 @@ import com.fanc.wheretoplay.base.BaseActivity;
 import com.fanc.wheretoplay.databinding.ActivityLaunchBinding;
 import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.Constants;
+import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.ItemView;
@@ -56,7 +57,8 @@ public class LaunchActivity extends BaseActivity {
         init();
         //七鱼需要
         parseIntent();
-        changeConvironment();   //
+        changeConvironment();
+
     }
     /**
      * 七鱼需要

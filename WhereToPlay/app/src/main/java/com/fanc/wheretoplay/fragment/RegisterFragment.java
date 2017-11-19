@@ -310,7 +310,6 @@ public class RegisterFragment extends BaseFragment {
                             ToastUtils.showShortToast(mContext, "注册成功");
                             mSpUtils.putBoolean(Constants.IS_SIGN_IN, true);
                             mSpUtils.putUser(response.getUser());
-                            Log.e("token","注册response.getUser()设置token :\t"+response.getUser().getToken());
                             ((SignInActivity) mContext).startActivityToHome();
                         }
                     }

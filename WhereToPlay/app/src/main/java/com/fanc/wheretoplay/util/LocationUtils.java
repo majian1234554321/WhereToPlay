@@ -9,6 +9,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
+import com.baidu.location.BDAbstractLocationListener;
 import com.baidu.location.BDLocation;
 import com.baidu.location.BDLocationListener;
 import com.baidu.location.LocationClient;
@@ -117,7 +118,7 @@ public class LocationUtils {
     }
 
 
-    public static class MyLocationListener implements BDLocationListener {
+    public static class MyLocationListener extends BDAbstractLocationListener {
         Callback callback;
 
         public MyLocationListener() {

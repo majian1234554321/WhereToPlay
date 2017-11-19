@@ -75,7 +75,7 @@ import okhttp3.Call;
  * Created by Administrator on 2017/6/12.
  */
 
-public class ReserveFragment extends BaseFragment implements IOnFocusListener {
+public class ReserveFragment extends BaseFragment implements IOnFocusListener, LocationUtils.Callback {
     FragmentReserveBinding reserveBinding;
 
     RelativeLayout mRlTopMenu;
@@ -125,7 +125,6 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
     // 筛选分类
     List<String> conditions;
     // 页码。数量
-
     int page, count = 9,size = count ;
     // 轮播图
     List<String> mBannerIamges;
@@ -140,6 +139,8 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
     FilterPopStoreTypeAdapter filterStoreTypeAdapter;
     FilterPopDialogAdapter filterAdapter;
     FilterPopChildAdapter filterChildAdapter;
+    //次数
+    int times = 0;
     // 分类筛选
 //    FilterPopupDialog filterCategory;
 //    FilterPopDialogAdapter filterCategoryAdapter;
@@ -165,7 +166,8 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
     private TextView mTvCommercialKtv;
     private TextView mTvVolumeSales;
     private TextView mTvReserveBar;
-
+    //定位信息
+    private BDLocation bdLocation;
     /**
      * 选中的娱乐分栏图标
      */
@@ -234,14 +236,17 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
     }
 
     private void init() {
+        //商务ktv圆形按钮被选中
         clickToChange(0);
         //设置字体
         AssetManager assets = App.getContext().getAssets();
         Typeface font = Typeface.createFromAsset(assets, "fonts/trends .ttf");
         mTvReserveTitle.setTypeface(font);
         reserveBinding.setClick(this);
-        city = getCity();
-        mTvReserveCity.setText(city.getName());
+//        //得到当前城市
+//        city = getCity();
+//        Log.e("city","LocationUtils.location为空：\t" + (LocationUtils.location == null));
+//        mTvReserveCity.setText(city.getName());
 
         mBannerIamges = new ArrayList<>();
         mBanner.setImageLoader(new GlideImageLoader());
@@ -255,9 +260,10 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
         // 主页网络请求
         showProgress();
         getFilterList(null, lat, lng);
-        getStoreList(null, city.getId(), page, size, null, storeType, null, null, null);
+        //第一次请求数据
+//        getStoreList(null, city.getId(), page, size, null, storeType, null, null, null);
         // 筛选
-        areas = city.getChild();
+//        areas = city.getChild();
         filters = new ArrayList<>();
         conditions = new ArrayList<>(Arrays.asList(UIUtils.getStrings(R.array.filter_condition)));
         filterZH = new ArrayList<>(Arrays.asList(UIUtils.getStrings(R.array.filter)));
@@ -272,7 +278,8 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
         mSvReserve.setCanPullDown(true);
         mSvReserve.setCanPullUp(true);
 
-
+        //获取定位
+        LocationUtils.getLocation(mContext, this);
     }
 
     private void setListener() {
@@ -793,28 +800,50 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
         return provinces;
     }
 
+    /**
+     * 定位返回的数据mBdLocation
+     * @param mBdLocation
+     */
+    @Override
+    public void onReceiveLocation(BDLocation mBdLocation) {
+        bdLocation = mBdLocation;
+        //得到当前城市
+        city = getCity();
+        Log.e("city","LocationUtils.location为空：\t" + (LocationUtils.location == null?"true":LocationUtils.location .getCity()));
+        Log.e("times","" + (times ++));
+        mTvReserveCity.setText(city.getName());
+        getStoreList(null, city.getId(), page, size, null, storeType, null, null, null);
+        // 筛选
+        areas = city.getChild();
+    }
+
+    //得到CityResource.City类
     private CityResource.City getCity() {
         CityResource.City city = null;
         List<CityResource.Province> provinces = getProvinceList();   //得到bean类型的省列表
-        BDLocation bdLocation = LocationUtils.location;
+//        BDLocation bdLocation = LocationUtils.location;
         for (CityResource.Province province : provinces) {
             //循环bean类型的省列表中province类中的城市
             for (int i = 0; i < province.getChild().size(); i++) {
                 city = province.getChild().get(i);
                 if (bdLocation != null) {// 定位成功
-                    String bdCity = bdLocation.getCity();
-//                    Log.e("city",city + "\t\t"+bdLocation.getCity());
+                    String bdCity = bdLocation.getCity();   //百度地位的城市
+
+                    Log.e("city","定位成功\t" + city + "\t\t"+bdLocation.getCity());
+
                     if (bdCity != null) {// 获取城市成功
                         //如果定位的当前城市和province中的城市一样，则返回
                         if (bdCity.contains(city.getName())) {
                             return city;
                         }
-                    } else {// 获取城市失败，从本地读取，也就是个人信息里选择的城市
+                    } else {// 获取城市失败，从本地读取，也就是个人信息里选择的城市,判断是否一样，一样则返回
+                        Log.e("city","获取城市失败");
                         if (city.getId().equals(mUser.getRegistered())) {
                             return city;
                         }
                     }
-                } else {// 定位失败，从本地读取，也就是个人信息里选择的城市
+                } else {// 定位失败，从本地读取，也就是个人信息里选择的城市,判断是否一样，一样则返回
+                    Log.e("city","定位失败");
                     if (city.getId().equals(mUser.getRegistered())) {
                         return city;
                     }
@@ -995,7 +1024,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
      * @param stores
      */
     private void showStoreList(List<StoreList.Store> stores) {
-        if (isPullDown) {// 下拉刷新
+        if (isPullDown) {   // 下拉刷新
             mStores.clear();
             mStores.addAll(stores);
             mReserveAdapter.notifyDataSetChanged();

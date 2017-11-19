@@ -160,7 +160,6 @@ public class SignInFragment extends BaseFragment {
                         if (isSuccess(response)) {
                             ToastUtils.showShortToast(mContext, "登录成功");
                             mSpUtils.putUser(response.getUser());
-                            Log.e("token","登录response.getUser()设置token :\t"+response.getUser().getToken());
                             mSpUtils.putBoolean(Constants.IS_SIGN_IN, true);
                             ((SignInActivity) mContext).startActivityToHome();
                         }
