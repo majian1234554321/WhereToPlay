@@ -112,7 +112,7 @@
                 android:drawableStart="@drawable/reserve_address"
                 android:drawablePadding="@dimen/padding_10"
                 android:maxWidth="@dimen/width_260"
-                android:textColor="@color/text_black"
+                android:textColor="@color/textcolor_btn_normal"
                 android:textSize="@dimen/textsize_levelsmall"
                 android:singleLine="true"
                 android:ellipsize="end"/>
@@ -124,7 +124,7 @@
                 android:layout_alignBaseline="@+id/tv_room_address"
                 android:layout_marginStart="@dimen/margin_40"
                 android:layout_toRightOf="@+id/tv_reserve_info_address"
-                android:textColor="@color/text_black"
+                android:textColor="@color/textcolor_btn_normal"
                 android:textSize="@dimen/textsize_levelsmall"/>
         </RelativeLayout>
 
