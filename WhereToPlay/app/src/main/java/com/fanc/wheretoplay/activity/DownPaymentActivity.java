@@ -164,7 +164,7 @@ public class DownPaymentActivity extends BaseActivity {
             String prepayValue = getIntent().getStringExtra("prepay");
 
             tvDownPaymentTitle.setText(store_nameValue);
-            tvDownPaymentTime.setText(arrival_timeValue);
+            tvDownPaymentTime.setText(DateFormatUtil.stampToDate(arrival_timeValue));
             //tvDownPaymentRoom.setText(order.room_type);
             tvDownPaymentSum.setText(prepayValue);
             price = prepayValue;
@@ -279,7 +279,7 @@ public class DownPaymentActivity extends BaseActivity {
                     @Override
                     public void onNext(OrderInfoModel orderInfo) {
                         closeProgress();
-                        if (orderInfo.code == 0) {
+                        if (orderInfo.code.equals("0")) {
                             showOrderInfo(orderInfo.content.order_info);
                         }
                     }

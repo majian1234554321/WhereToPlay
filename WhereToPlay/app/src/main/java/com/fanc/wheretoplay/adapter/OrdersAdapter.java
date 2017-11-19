@@ -136,7 +136,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                             intent.setClass(context, PublicationEvaluationActivity.class);
                             fragment.startActivityForResult(intent, 1001);
                             break;
-                        case "预支付":
+                        case "预付支付":
 
                             intent.putExtra("flag", "预订支付");
                             intent.putExtra("order_id", dataBean.list.get(position).order_id);

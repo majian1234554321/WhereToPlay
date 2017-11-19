@@ -258,7 +258,11 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                             intent.putExtra("storeName", storeNameValue);
                             intent.putExtra("address", tvAddress.getText().toString());
                             intent.putExtra("discount", discountValue);
-                            intent.putExtra(Constants.PAGE, "商家详情支付");
+
+                           // intent.putExtra("pay", discountValue);
+
+
+                            //intent.putExtra(Constants.PAGE, "商家详情支付");
 
                             mContext.startActivity(intent);
 
@@ -286,7 +290,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                             intent.setClass(DetailsOrderActivity.this, PublicationEvaluationActivity.class);
                             mContext.startActivity(intent);
 
-                        case "预支付":
+                        case "预付支付":
 
                             intent.putExtra("flag", "预订支付");
                             intent.putExtra("order_id", order_idValue);

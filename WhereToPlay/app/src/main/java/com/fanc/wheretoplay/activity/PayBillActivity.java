@@ -921,6 +921,7 @@ public class PayBillActivity extends BaseActivity {
                 .execute(new DCallback<IsOk>() {
                     @Override
                     public void onError(Call call, Exception e) {
+                        Toast.makeText(mContext, e.toString(), Toast.LENGTH_SHORT).show();
                         connectError();
                     }
 
