@@ -223,7 +223,7 @@ public class WalletFragment extends BaseFragment {
 
                     @Override
                     public void onResponse(String response) {
-                        Log.w("aaa", response);
+                        Log.w("Aaaaa", response);
                         Logger.d(response);
                         try {
                             JSONObject object = new JSONObject(response);

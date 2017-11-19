@@ -179,13 +179,13 @@ public class SettingsActivity extends BaseActivity {
                     (new SPUtils(mContext)).putString("switchStatus","on");
                     Network.changEnvironment("http://testapi.51tzl.cn");
                     Network.User.changeUserUrl(Network.USER );
-                   ToastUtils.showShortToast(SettingsActivity.this, "改变测试环境，重新登录");
+                   ToastUtils.showShortToast(SettingsActivity.this, "现在是测试环境，请重新登录");
                     signOut();
                 } else {
                     (new SPUtils(mContext)).putString("switchStatus","off");
                     Network.changEnvironment("http://ktv.51tzl.cn");
                     Network.User.changeUserUrl(Network.USER);
-                    ToastUtils.showShortToast(SettingsActivity.this, "改变测试环境，重新登录");
+                    ToastUtils.showShortToast(SettingsActivity.this, "现在是正式环境，请重新登录");
                     signOut();
                 }
             }
@@ -318,7 +318,6 @@ public class SettingsActivity extends BaseActivity {
         new AlertDialog(this)
                 .setTitle("警告")
                 .setTitleGravity(Gravity.CENTER_HORIZONTAL)
-                .setTitleColor(Color.RED)
                 .setContent("\t\t\t\t清除缓存会删除本地缓存和搜索历史记录等信息，确定要清除吗?")
                 .setBtnOnClickListener(new AlertDialog.OnBtnClickListener() {
                     @Override
@@ -408,7 +407,7 @@ public class SettingsActivity extends BaseActivity {
                     Cursor cursor = ((DownloadManager) mContext.getSystemService(DOWNLOAD_SERVICE)).query(query);
                     if (cursor.moveToFirst() && cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)) == DownloadManager.STATUS_SUCCESSFUL) {
                         String filePath = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
-//                        Log.v("aaa", "Downloading of the new app version complete");
+//                        Log.v("Aaaaa", "Downloading of the new app version complete");
                         //start the installation of the latest version
                         // 安装apk
                         Intent installIntent = new Intent(Intent.ACTION_VIEW);

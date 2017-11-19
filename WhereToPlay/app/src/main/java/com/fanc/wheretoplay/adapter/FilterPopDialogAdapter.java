@@ -191,16 +191,16 @@ public class FilterPopDialogAdapter extends BaseAdapter {
                 preTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, 0, 0);
             }
         }
-        Log.d("aaa", "onClick:pre = " + pre + "\t preTextView = " + preTextView);
+        Log.d("Aaaaa", "onClick:pre = " + pre + "\t preTextView = " + preTextView);
 
         TextView clickTextView = textViewHashMap.get(position);
         if (clickTextView != null) {
-            clickTextView.setTextColor(UIUtils.getColor(R.color.text_and_buttor_orange));
+            clickTextView.setTextColor(UIUtils.getColor(R.color.text_red));
             if (isFilter) {
                 clickTextView.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.filter_checked, 0);
             }
         }
-        Log.w("aaa", "onClick:position= " + position + "\t  clickTextView = " + clickTextView);
+        Log.w("Aaaaa", "onClick:position= " + position + "\t  clickTextView = " + clickTextView);
         this.pre = position;
     }
 

@@ -27,6 +27,7 @@ import com.fanc.wheretoplay.fragment.MineInfoFragment;
 import com.fanc.wheretoplay.fragment.OrderFragment;
 import com.fanc.wheretoplay.fragment.OrderFragments;
 import com.fanc.wheretoplay.fragment.ReferralFragment;
+import com.fanc.wheretoplay.fragment.RegisterAgreement;
 import com.fanc.wheretoplay.fragment.SetPayPwdFragment;
 import com.fanc.wheretoplay.fragment.SystemNotifyFragment;
 import com.fanc.wheretoplay.fragment.WalletFragment;
@@ -64,6 +65,9 @@ public class DetailActivity extends BaseFragmentActivity {
             case Constants.MERCHANT_DETAIL:
                 initFragment(new MerchantDetailFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID)));
                 break;
+            case Constants.AGREEMENT:
+                initFragment(new RegisterAgreement());
+                break;
             case Constants.MINE_INFO:
                 initFragment(new MineInfoFragment());
                 break;
@@ -83,7 +87,7 @@ public class DetailActivity extends BaseFragmentActivity {
                 initFragment(new IntegralFragment());
                 break;
             case Constants.ORDER:   //订单
-               // initFragment(new OrderFragments());
+                // initFragment(new OrderFragments());
                 break;
             case Constants.COLLECTION:   //收藏
                 initFragment(new CollectionFragment());
@@ -116,7 +120,7 @@ public class DetailActivity extends BaseFragmentActivity {
                 initFragment(new CommentDetailFragment());
                 break;
             case Constants.DRIVE:
-                ToastUtils.makePicTextShortToast(this,"修复中，敬请期待！");
+                ToastUtils.makePicTextShortToast(this, "修复中，敬请期待！");
 //                initFragment(new CommentDetailFragment());
                 break;
             default:
@@ -135,7 +139,7 @@ public class DetailActivity extends BaseFragmentActivity {
     public void onBackPressed() {
         super.onBackPressed();
         ActivityCompat.finishAfterTransition(this);
-        this.overridePendingTransition(R.anim.anim_in_top_right, R.anim.anim_close_top);
+//        this.overridePendingTransition(R.anim.anim_in_top_right, R.anim.anim_close_top);
     }
 
     @Override

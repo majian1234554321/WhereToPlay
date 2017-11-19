@@ -1,22 +1,14 @@
 package com.fanc.wheretoplay.activity;
 
-import android.Manifest;
-import android.app.ActivityOptions;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.os.Build;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
-import android.support.v4.content.ContextCompat;
 import android.text.TextUtils;
 import android.util.Log;
 
-import com.baidu.location.BDLocation;
 import com.fanc.wheretoplay.MainActivity;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.App;
@@ -24,7 +16,6 @@ import com.fanc.wheretoplay.base.BaseFragmentActivity;
 import com.fanc.wheretoplay.fragment.RegisterFragment;
 import com.fanc.wheretoplay.fragment.ResetPwdFragment;
 import com.fanc.wheretoplay.fragment.SignInFragment;
-import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 
@@ -153,21 +144,12 @@ public class SignInActivity extends BaseFragmentActivity {
     /**
      * 验证码有效性验证
      *
-     * @param input      用户输入的验证码
-     * @param verifyCode 服务器给的验证码
+     * @param input      用户输入的验证
      * @return
      */
-    public boolean verifyCodeFormat(String input, String verifyCode) {
-        if (verifyCode == null || TextUtils.isEmpty(verifyCode)) {
-            ToastUtils.showShortToast(mContext, "请获取验证码");
-            return false;
-        }
+    public boolean verifyCodeFormat(String input) {
         if (TextUtils.isEmpty(input)) {
             ToastUtils.showShortToast(mContext, "请输入验证码");
-            return false;
-        }
-        if (!TextUtils.equals(input, verifyCode)) {
-            ToastUtils.showShortToast(mContext, "验证码错误");
             return false;
         }
         return true;

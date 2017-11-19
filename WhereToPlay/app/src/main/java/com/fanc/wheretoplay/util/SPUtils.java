@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import com.fanc.wheretoplay.datamodel.NewUser;
 import com.fanc.wheretoplay.datamodel.User;
 
 
@@ -111,7 +112,6 @@ public class SPUtils {
                 .commit();
     }
 
-
  /*   public void putFence(Location location){
         putString("user_fen_lat",location.lat);
         putString("user_fen_lng",location.lng);
@@ -178,6 +178,22 @@ public class SPUtils {
         user.setRegistered(getString(UserKey.REGISTERED, ""));
         user.setSignature(getString(UserKey.SIGNATURE, ""));
         return user;
+    }
+
+    public void putUser(NewUser.User newUser) {
+        putString(UserKey.ID, newUser.getId());
+        putString(UserKey.PID, newUser.getPid());
+        putString(UserKey.NICKNAME, newUser.getNickname());
+        putString(UserKey.MOBILE, newUser.getMobile());
+        putString(UserKey.CREATED_TIME, newUser.getCreated_time());
+        putString(UserKey.SHARE_CODE, newUser.getShare_code());
+        putString(UserKey.STATUS, newUser.getCreated_time());
+        putString(UserKey.TOKEN, newUser.getToken());
+        putString(UserKey.AVATAR, newUser.getAvatar());
+        putString(UserKey.GENDER, newUser.getGender());
+        putString(UserKey.BIRTHDAY, newUser.getBirthday());
+        putString(UserKey.REGISTERED, newUser.getRegistered());
+        putString(UserKey.SIGNATURE, newUser.getSignature());
     }
 
     public void removeUser() {

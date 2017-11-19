@@ -15,6 +15,7 @@ import com.fanc.wheretoplay.datamodel.CancleOrderModel;
 import com.fanc.wheretoplay.datamodel.DelectCollection;
 import com.fanc.wheretoplay.datamodel.MineFriend;
 import com.fanc.wheretoplay.datamodel.MineMoney;
+import com.fanc.wheretoplay.datamodel.NewUser;
 import com.fanc.wheretoplay.datamodel.OrderDetailModel;
 import com.fanc.wheretoplay.datamodel.OrderInfo;
 import com.fanc.wheretoplay.datamodel.OrderInfoModel;
@@ -355,6 +356,10 @@ public class Network{
         @POST("User/modifyProfile")
         Observable<DelectCollection> changeMineInfo(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB  ,@Part MultipartBody.Part fileC  ,@Part MultipartBody.Part fileD  ,@Part MultipartBody.Part fileE  ,@Part MultipartBody.Part fileF  ,@Part MultipartBody.Part fileG);
 
+        //修改个人信息
+        @Multipart
+        @POST("Login/register")
+        Observable<NewUser> register(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB  , @Part MultipartBody.Part fileC  , @Part MultipartBody.Part fileD  , @Part MultipartBody.Part fileE );
 
         //推荐奖励
         @Multipart

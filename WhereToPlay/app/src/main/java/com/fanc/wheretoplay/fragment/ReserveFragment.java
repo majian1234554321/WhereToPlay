@@ -1,5 +1,6 @@
 package com.fanc.wheretoplay.fragment;
 
+import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -770,7 +771,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
     }
 
     /**
-     * 省列表
+     * 把assets中city.txt的json形式的数据准成bean类型的省列表
      *
      * @return
      */
@@ -794,23 +795,26 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener {
 
     private CityResource.City getCity() {
         CityResource.City city = null;
-        List<CityResource.Province> provinces = getProvinceList();
+        List<CityResource.Province> provinces = getProvinceList();   //得到bean类型的省列表
         BDLocation bdLocation = LocationUtils.location;
         for (CityResource.Province province : provinces) {
+            //循环bean类型的省列表中province类中的城市
             for (int i = 0; i < province.getChild().size(); i++) {
                 city = province.getChild().get(i);
                 if (bdLocation != null) {// 定位成功
                     String bdCity = bdLocation.getCity();
+//                    Log.e("city",city + "\t\t"+bdLocation.getCity());
                     if (bdCity != null) {// 获取城市成功
+                        //如果定位的当前城市和province中的城市一样，则返回
                         if (bdCity.contains(city.getName())) {
                             return city;
                         }
-                    } else {// 获取城市失败，从本地读取
+                    } else {// 获取城市失败，从本地读取，也就是个人信息里选择的城市
                         if (city.getId().equals(mUser.getRegistered())) {
                             return city;
                         }
                     }
-                } else {// 定位失败，从本地读取
+                } else {// 定位失败，从本地读取，也就是个人信息里选择的城市
                     if (city.getId().equals(mUser.getRegistered())) {
                         return city;
                     }
