@@ -356,6 +356,13 @@ public class Network{
         @POST("User/modifyProfile")
         Observable<DelectCollection> changeMineInfo(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB  ,@Part MultipartBody.Part fileC  ,@Part MultipartBody.Part fileD  ,@Part MultipartBody.Part fileE  ,@Part MultipartBody.Part fileF  ,@Part MultipartBody.Part fileG);
 
+<<<<<<< HEAD
+=======
+        //修改个人信息
+        @Multipart
+        @POST("Login/register")
+        Observable<NewUser> register(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB  , @Part MultipartBody.Part fileC  , @Part MultipartBody.Part fileD  , @Part MultipartBody.Part fileE );
+>>>>>>> c9dc71be23e0c3b8654e69e5fea61963b8ba2b0c
 
         //推荐奖励
         @Multipart
@@ -364,6 +371,7 @@ public class Network{
 
 
 
+<<<<<<< HEAD
         //修改个人信息
         @Multipart
         @POST("Login/register")
@@ -375,6 +383,8 @@ public class Network{
         Observable<NewUser> logIn(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB , @Part MultipartBody.Part fileC);
 
 
+=======
+>>>>>>> c9dc71be23e0c3b8654e69e5fea61963b8ba2b0c
     }
 
 }

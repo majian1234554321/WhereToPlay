@@ -16,7 +16,11 @@ android {
         minSdkVersion 17
         targetSdkVersion 27
         versionCode 20171119
+<<<<<<< HEAD
         versionName "1.2"
+=======
+        versionName "1.1.9"
+>>>>>>> c9dc71be23e0c3b8654e69e5fea61963b8ba2b0c
 
         sourceSets.main {
             jniLibs.srcDirs = ['src/main/jniLibs']
