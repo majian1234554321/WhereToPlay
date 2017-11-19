@@ -791,7 +791,8 @@ public class PayBillActivity extends BaseActivity {
             if (TextUtils.equals(resultStatus, "9000")) {
                 // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
                 ToastUtils.showShortToast(mContext, "支付成功");
-                checkAliPayResult(resultInfo, orderId, discountId);
+               // checkAliPayResult(resultInfo, orderId, discountId);
+                paySuccess();
             } else {
                 // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                 ToastUtils.showShortToast(mContext, "支付失败");

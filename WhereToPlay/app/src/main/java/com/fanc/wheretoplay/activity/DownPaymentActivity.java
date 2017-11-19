@@ -440,7 +440,9 @@ public class DownPaymentActivity extends BaseActivity {
             // 判断resultStatus 为9000则代表支付成功
             if (TextUtils.equals(resultStatus, "9000")) {
                 // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-                checkAliPayResult(resultInfo, orderId);
+               // checkAliPayResult(resultInfo, orderId);
+
+                payCompleted();
             } else {
                 // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                 ToastUtils.showShortToast(mContext, "支付失败");

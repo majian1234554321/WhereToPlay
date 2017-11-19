@@ -15,6 +15,7 @@ class EvaluationSuccessActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when (p0!!.id) {
             R.id.menu_iv_lefticon -> {
+
                 finish()
             }
             R.id.tv_back -> {
@@ -34,10 +35,13 @@ class EvaluationSuccessActivity : BaseActivity(), View.OnClickListener {
         setContentView(R.layout.activity_evaluation_success)
         tv_title.text = "评价成功"
 
+        menu_iv_lefticon.setOnClickListener(this)
+        tv_back.setOnClickListener(this)
+
         val evaluationSuccessAdapter = EvaluationSuccessAdapter(list)
         recycle.adapter = evaluationSuccessAdapter
         recycle.layoutManager = LinearLayoutManager(this)
-        menu_iv_lefticon.setOnClickListener(this)
+
 
     }
 
