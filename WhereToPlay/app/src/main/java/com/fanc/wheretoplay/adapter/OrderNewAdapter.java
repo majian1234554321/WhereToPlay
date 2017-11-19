@@ -109,7 +109,7 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.ViewHo
                 case "0":
                 case "5":// 已支付定金状态，取消按钮显示，消费按钮隐藏
                 case "6":
-                    holder.mIvState.setImageResource(R.drawable.reserve_book_in);
+                    holder.mIvState.setImageResource(R.drawable.reserve_book_in_hollow);
                     holder.mTvState.setTextColor(UIUtils.getColor(R.color.text_red));
                     holder.mTvState.setText(R.string.reserving);
                     holder.mBtnCancel.setVisibility(View.VISIBLE);
