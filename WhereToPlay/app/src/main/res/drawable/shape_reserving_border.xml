@@ -4,7 +4,6 @@
     <corners
         android:bottomLeftRadius="@dimen/toast_bg_radius"
         android:bottomRightRadius="@dimen/toast_bg_radius"
-        android:topLeftRadius="@dimen/toast_bg_radius"
-        android:topRightRadius="@dimen/toast_bg_radius"/>
-    <solid android:color="@color/reserve_info_title"/>
+       />
+    <solid android:color="@color/text_red"/>
 </shape>
