@@ -1411,7 +1411,7 @@ public class DateFormatUtil {
 
     public static String stampToDate(String s) {
 
-        @SuppressLint("SimpleDateFormat") String date = new  SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(new java.util.Date(Long.parseLong(s) * 1000));
+        String date = new  SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(new java.util.Date(Long.parseLong(s) * 1000));
         return date;
     }
 

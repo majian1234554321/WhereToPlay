@@ -2,6 +2,7 @@ package com.fanc.wheretoplay.fragment;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
@@ -61,7 +62,8 @@ public class ToEvaluateFragment extends BaseFragment {
     private void init() {
         mTmToEvaluate.setLeftIcon(R.drawable.left);
         if (isComment) {
-            mTmToEvaluate.setTitle(R.string.to_evaluate);
+            mTmToEvaluate.setTitle("支付完成");
+            mTmToEvaluate.setTitleColor(Color.parseColor("#FFFFFF"));
             mBtnToEvaluate.setText(R.string.to_evaluate);
         } else {
             mTmToEvaluate.setTitle(R.string.confirm);

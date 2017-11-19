@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.DetailsOrderActivity;
+import com.fanc.wheretoplay.activity.DownPaymentActivity;
 import com.fanc.wheretoplay.activity.PayBillActivity;
 import com.fanc.wheretoplay.activity.PublicationEvaluationActivity;
 import com.fanc.wheretoplay.datamodel.BookListModel;
@@ -45,7 +46,7 @@ import static com.fanc.wheretoplay.network.Network.IMAGE;
  * Created by admin on 2017/11/1.
  */
 
-public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder>  {
+public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
     public Context context;
     public Fragment fragment;
     public BookListModel.ContentBean dataBean;
@@ -135,6 +136,20 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                             intent.setClass(context, PublicationEvaluationActivity.class);
                             fragment.startActivityForResult(intent, 1001);
                             break;
+                        case "预支付":
+
+                            intent.putExtra("flag", "预订支付");
+                            intent.putExtra("order_id", dataBean.list.get(position).order_id);
+                            intent.putExtra("store_name", dataBean.list.get(position).name);
+
+                            intent.putExtra("arrival_time", dataBean.list.get(position).arrival_time);
+                            intent.putExtra("prepay", dataBean.list.get(position).total);
+
+
+                            intent.setClass(context, DownPaymentActivity.class);
+                            fragment.startActivity(intent);
+
+                            break;
                     }
                 }
             });
@@ -143,10 +158,10 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
         for (int i = 0; i < dataBean.list.get(position).buttonlist.size(); i++) {
 
-            if (i+1 ==dataBean.list.get(position).buttonlist.size()){
+            if (i + 1 == dataBean.list.get(position).buttonlist.size()) {
                 holder.lists.get(i).setBackgroundResource(R.drawable.shape_btn_black_c4483c);
                 holder.lists.get(i).setTextColor(Color.WHITE);
-            }else {
+            } else {
                 holder.lists.get(i).setBackgroundResource(R.drawable.shape_btn_black_stoke);
                 holder.lists.get(i).setTextColor(Color.parseColor("#333333"));
             }
@@ -198,10 +213,10 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
 
         intent.putExtra("address", dataBean.list.get(position).address);
-        intent.setClass(context,PayBillActivity.class);
+        intent.setClass(context, PayBillActivity.class);
         intent.putExtra(Constants.STORE_ID, dataBean.list.get(position).order_id);
         intent.putExtra("storeName", dataBean.list.get(position).name);
-       // intent.putExtra("address", dataBean.list.get(position).add);
+        // intent.putExtra("address", dataBean.list.get(position).add);
         intent.putExtra("discount", dataBean.list.get(position).discount);
         intent.putExtra(Constants.PAGE, "商家详情支付");
 
@@ -220,7 +235,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                         //cancelOrder(order, position);
 
                         //DetailsOrderPresenter detailsOrderPresenter =  new DetailsOrderPresenter();
-                       // detailsOrderPresenter.cancelOrder();
+                        // detailsOrderPresenter.cancelOrder();
                         MultipartBody.Part requestFileA =
                                 MultipartBody.Part.createFormData("token", new SPUtils(context).getUser().getToken());
 

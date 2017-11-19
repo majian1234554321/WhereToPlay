@@ -141,17 +141,36 @@ public class DownPaymentActivity extends BaseActivity {
         reserveType = params.get(Network.Param.TYPE);
         payWay = Constants.PAY_WAY_WEIXIN;
 
+        String flag = getIntent().getStringExtra("flag");
 
         tmDownPayment.setLeftIcon(R.drawable.left);
         tmDownPayment.setTitle(R.string.down_payment);
-        if (Constants.RESERVE_WAY_CREDIT.equals(reserveType)) {// 信誉预订
-            tmDownPayment.setTitle(R.string.credit_reserve);
-            tvDownPaymentPayWay.setVisibility(View.GONE);
-            rlDownPaymentPayWay.setVisibility(View.GONE);
-            btnDownPaymentPay.setText(R.string.confirm);
-        }
         tmDownPayment.setTitleColor(getResources().getColor(R.color.white));
-        getOrderInfo(params);
+
+        if (!"预订支付".equals(flag)) {
+            if (Constants.RESERVE_WAY_CREDIT.equals(reserveType)) {// 信誉预订
+                tmDownPayment.setTitle(R.string.credit_reserve);
+                tvDownPaymentPayWay.setVisibility(View.GONE);
+                rlDownPaymentPayWay.setVisibility(View.GONE);
+                btnDownPaymentPay.setText(R.string.confirm);
+            }
+
+            getOrderInfo(params);
+        } else {
+
+            String order_idValue = getIntent().getStringExtra("order_id");
+            String store_nameValue = getIntent().getStringExtra("store_name");
+            String arrival_timeValue = getIntent().getStringExtra("arrival_time");
+            String prepayValue = getIntent().getStringExtra("prepay");
+
+            tvDownPaymentTitle.setText(store_nameValue);
+            tvDownPaymentTime.setText(arrival_timeValue);
+            //tvDownPaymentRoom.setText(order.room_type);
+            tvDownPaymentSum.setText(prepayValue);
+            price = prepayValue;
+            orderId = order_idValue;
+        }
+
 
         registerBroadcastReceiver();
     }

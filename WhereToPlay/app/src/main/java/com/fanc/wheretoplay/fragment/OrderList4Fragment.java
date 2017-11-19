@@ -106,8 +106,8 @@ public class OrderList4Fragment extends BaseLazyFragment implements PullToRefres
             currentPage++;
             ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onLoadMore");
         }else {
-            ptrlPayReserve.loadmoreFinish(0);
-            Toast.makeText(mContext, "暂无更多的数据加载", Toast.LENGTH_SHORT).show();
+            ptrlPayReserve.loadmoreFinish(-1);
+
         }
     }
 
@@ -135,12 +135,15 @@ public class OrderList4Fragment extends BaseLazyFragment implements PullToRefres
                     myAdapter.append(contentBean.list);
 
                 } else {
+                    if (ptrlPayReserve!=null)
+                        ptrlPayReserve.loadmoreFinish(-1);
                     //     loadMoreFooterView.setStatus(LoadMoreFooterView.Status.THE_END);
                 }
 
             }
         } else {
-            //loadMoreFooterView.setStatus(LoadMoreFooterView.Status.THE_END);
+            if (ptrlPayReserve!=null)
+                ptrlPayReserve.loadmoreFinish(-1);
         }
 
 
