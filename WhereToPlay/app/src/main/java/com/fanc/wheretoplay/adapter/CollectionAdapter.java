@@ -154,4 +154,13 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
         }
         notifyDataSetChanged();
     }
+    public void delectItems(List<Integer> deleteIndex){
+        for (int i:deleteIndex){
+            mData.remove(i);
+            notifyItemRemoved(i);
+//            if (i != mData.size()) {
+//                notifyItemRangeChanged(i, mData.size() - i + 1);
+//            }
+        }
+    }
 }
