@@ -243,10 +243,11 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
         Typeface font = Typeface.createFromAsset(assets, "fonts/trends .ttf");
         mTvReserveTitle.setTypeface(font);
         reserveBinding.setClick(this);
-//        //得到当前城市
-//        city = getCity();
+//        //得到当前城市，强制设置为“上海”
+        city = getCity();
 //        Log.e("city","LocationUtils.location为空：\t" + (LocationUtils.location == null));
-//        mTvReserveCity.setText(city.getName());
+        //第一次强制设置为上海
+        mTvReserveCity.setText(city.getName());
 
         mBannerIamges = new ArrayList<>();
         mBanner.setImageLoader(new GlideImageLoader());
@@ -260,10 +261,10 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
         // 主页网络请求
         showProgress();
         getFilterList(null, lat, lng);
-        //第一次请求数据
-//        getStoreList(null, city.getId(), page, size, null, storeType, null, null, null);
+        //第一次请求数据，city.getId()强制设置为上海的id
+        getStoreList(null, city.getId(), page, size, null, storeType, null, null, null);
         // 筛选
-//        areas = city.getChild();
+        areas = city.getChild();
         filters = new ArrayList<>();
         conditions = new ArrayList<>(Arrays.asList(UIUtils.getStrings(R.array.filter_condition)));
         filterZH = new ArrayList<>(Arrays.asList(UIUtils.getStrings(R.array.filter)));
@@ -277,9 +278,8 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
         // 是否可以上下拉
         mSvReserve.setCanPullDown(true);
         mSvReserve.setCanPullUp(true);
-
         //获取定位
-        LocationUtils.getLocation(mContext, this);
+//        LocationUtils.getLocation(mContext, this);
     }
 
     private void setListener() {
@@ -289,15 +289,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
                 // 空实现，防止滑动后，点击传递到后面
             }
         });
-//        mIvReserveSideslip.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (!((MainActivity) mContext).isOpen) {
-//                    ((MainActivity) mContext).isOpen = true;
-//                    ((MainActivity) mContext).mDlSideslip.openDrawer(Gravity.START);
-//                }
-//            }
-//        });
+
         mPtrl.setOnRefreshListener(new PullToRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
@@ -352,7 +344,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
         mSvReserve.setOnScrollListener(new MyScrollView.OnScrollListener() {
             @Override
             public void onScroll(int l, int t, int oldl, int oldt) {
-//                标题栏岁滑动距离改变透明度
+//                标题栏随滑动距离改变透明度
 //                if (t <= mContext.getResources().getDimension(R.dimen.menu_height)) {
 //                    mVTopMenuBg.setAlpha(t / mContext.getResources().getDimension(R.dimen.menu_height));
 //                } else {
@@ -382,14 +374,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
                 setImageViewRotateAnimation(mIvReserveFilter, mIvReserveFilterSuspend, false);
             }
         });
-        /* mLlReserveCategory.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                filterCategory.showAsDropDown(mLlReserveCategory);
-                setTextColor(mTvReserveCategory, mTvReserveCategorySuspend, false);
-                setImageViewRotateAnimation(mIvReserveCategory, mIvReserveCategorySuspend, false);
-            }
-        });*/
+
         mLlReserveAreaSuspend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -406,14 +391,6 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
                 setImageViewRotateAnimation(mIvReserveFilter, mIvReserveFilterSuspend, false);
             }
         });
-        /* mLlReserveCategorySuspend.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                filterCategory.showAsDropDown(mLlReserveCategorySuspend);
-                setTextColor(mTvReserveCategory, mTvReserveCategorySuspend, false);
-                setImageViewRotateAnimation(mIvReserveCategory, mIvReserveCategorySuspend, false);
-            }
-        });*/
 
         //娱乐分栏点击事件
         entertainment(mLlBar, 3, "酒吧");
@@ -806,15 +783,15 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
      */
     @Override
     public void onReceiveLocation(BDLocation mBdLocation) {
-        bdLocation = mBdLocation;
-        //得到当前城市
-        city = getCity();
-        Log.e("city","LocationUtils.location为空：\t" + (LocationUtils.location == null?"true":LocationUtils.location .getCity()));
-        Log.e("times","" + (times ++));
-        mTvReserveCity.setText(city.getName());
-        getStoreList(null, city.getId(), page, size, null, storeType, null, null, null);
-        // 筛选
-        areas = city.getChild();
+//        bdLocation = mBdLocation;
+//        //得到当前城市
+//        city = getCity();
+//        Log.e("city","LocationUtils.location为空：\t" + (LocationUtils.location == null?"true":LocationUtils.location .getCity()));
+//        Log.e("times","" + (times ++));
+//        mTvReserveCity.setText(city.getName());
+//        getStoreList(null, city.getId(), page, size, null, storeType, null, null, null);
+//        // 筛选
+//        areas = city.getChild();
     }
 
     //得到CityResource.City类
@@ -829,22 +806,21 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
                 if (bdLocation != null) {// 定位成功
                     String bdCity = bdLocation.getCity();   //百度地位的城市
 
-                    Log.e("city","定位成功\t" + city + "\t\t"+bdLocation.getCity());
-
                     if (bdCity != null) {// 获取城市成功
                         //如果定位的当前城市和province中的城市一样，则返回
                         if (bdCity.contains(city.getName())) {
                             return city;
                         }
                     } else {// 获取城市失败，从本地读取，也就是个人信息里选择的城市,判断是否一样，一样则返回
-                        Log.e("city","获取城市失败");
+//                        Log.e("city","获取城市失败");
                         if (city.getId().equals(mUser.getRegistered())) {
                             return city;
                         }
                     }
                 } else {// 定位失败，从本地读取，也就是个人信息里选择的城市,判断是否一样，一样则返回
-                    Log.e("city","定位失败");
-                    if (city.getId().equals(mUser.getRegistered())) {
+//                    Log.e("city","定位失败");
+                    //第一次进入页面city.getId()强制设置为上海的id ="2623"
+                    if (city.getId().equals(/*mUser.getRegistered()*/"2623")) {
                         return city;
                     }
                 }
