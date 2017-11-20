@@ -124,8 +124,7 @@ public class MerchantDetailFragment extends BaseFragment {
     private LinearLayout mLlMerchantBrief;
 
 
-    // 详情
-    WebView mWvDetail;
+
     // 推荐店铺
     MyRecycleView mRvMerchantDetailRecommend;
     List<StoreList.Store> stores;
@@ -198,7 +197,6 @@ public class MerchantDetailFragment extends BaseFragment {
         mLlMerchantDetailAction = detailBinding.llMerchantDetailActive;
 //        mLlMerchantDetailWaiter = detailBinding.llMerchantDetailWaiter;
         mLlMerchantBrief = detailBinding.llMerchantBrief;
-        mWvDetail = detailBinding.wvMerchantDetail;
         mRvMerchantDetailRecommend = detailBinding.rvMerchantDetailRecommend;
         tvPay = detailBinding.tvPay;
 //        mRvMerchantDetailRoomPrice = detailBinding.rvMerchantDetailRoomPrice;
