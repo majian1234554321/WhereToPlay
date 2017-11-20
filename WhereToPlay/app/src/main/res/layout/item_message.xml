@@ -11,6 +11,10 @@
             type="com.fanc.wheretoplay.datamodel.MessageList.Message"/>
     </data>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
     <LinearLayout
         android:id="@+id/sml_delete"
         android:layout_width="match_parent"
@@ -73,5 +77,5 @@
             android:textSize="@dimen/normal_textsize"/>
 
     </LinearLayout>
-
+    </RelativeLayout>
 </layout>

@@ -137,8 +137,8 @@ public class DownPaymentActivity extends BaseActivity {
 
     private void init() {
         storeId = getIntent().getStringExtra(Constants.STORE_ID);
-        params = (HashMap<String, String>) getIntent().getSerializableExtra(Constants.PARAM);
-        reserveType = params.get(Network.Param.TYPE);
+
+
         payWay = Constants.PAY_WAY_WEIXIN;
 
         String flag = getIntent().getStringExtra("flag");
@@ -148,6 +148,8 @@ public class DownPaymentActivity extends BaseActivity {
         tmDownPayment.setTitleColor(getResources().getColor(R.color.white));
 
         if (!"预订支付".equals(flag)) {
+            params = (HashMap<String, String>) getIntent().getSerializableExtra(Constants.PARAM);
+            reserveType = params.get(Network.Param.TYPE);
             if (Constants.RESERVE_WAY_CREDIT.equals(reserveType)) {// 信誉预订
                 tmDownPayment.setTitle(R.string.credit_reserve);
                 tvDownPaymentPayWay.setVisibility(View.GONE);
@@ -159,6 +161,9 @@ public class DownPaymentActivity extends BaseActivity {
         } else {
 
             String order_idValue = getIntent().getStringExtra("order_id");
+
+             reserveType = getIntent().getStringExtra("pay_type");
+
             String store_nameValue = getIntent().getStringExtra("store_name");
             String arrival_timeValue = getIntent().getStringExtra("arrival_time");
             String prepayValue = getIntent().getStringExtra("prepay");
@@ -271,7 +276,7 @@ public class DownPaymentActivity extends BaseActivity {
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(DownPaymentActivity.this, e.toString(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(DownPaymentActivity.this, "预订失败", Toast.LENGTH_SHORT).show();
                         closeProgress();
                         connectError();
                     }

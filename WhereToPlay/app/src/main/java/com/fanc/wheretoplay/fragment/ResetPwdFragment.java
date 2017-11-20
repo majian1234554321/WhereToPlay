@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.SignInActivity;
@@ -44,7 +45,7 @@ public class ResetPwdFragment extends BaseFragment {
 
     TopMenu mTmResetPwd;
     EditText mEtResetPwdMobile;
-    EditText mEtResetPwdPwd;
+    EditText mEtResetPwdPwd,mEtResetPwdPwd2;
     EditText mEtResetPwdVerification;
     Button mBtnResetPwdVerify;
     Button mBtnResetPwd;
@@ -68,6 +69,8 @@ public class ResetPwdFragment extends BaseFragment {
         mEtResetPwdVerification = resetPwdBinding.etResetPwdVerification;
         mBtnResetPwdVerify = resetPwdBinding.btnResetPwdVerification;
         mBtnResetPwd = resetPwdBinding.btnResetPwd;
+        mEtResetPwdPwd2 = resetPwdBinding.etResetPwdPassword2;
+
     }
 
     private void init() {
@@ -104,28 +107,7 @@ public class ResetPwdFragment extends BaseFragment {
             countDown();
 
             showProgress();
-//            OkHttpUtils.post()
-//                    .url(Network.User.LOGIN_VERIFY)
-//                    .addParams(Network.Param.MOBILE, mobile)
-//                    .build()
-//                    .execute(new DCallback<VerifyCode>() {
-//                        @Override
-//                        public void onError(Call call, Exception e) {
-//                            connectError();
-//                            mTimer.cancel();
-//                            mBtnResetPwdVerify.setEnabled(true);
-//                            mBtnResetPwdVerify.setText("重新获取");
-//                        }
-//
-//                        @Override
-//                        public void onResponse(VerifyCode response) {
-//                            mBtnResetPwdVerify.setEnabled(true);
-//                            if (isSuccess(response)) {
-//                                verifyCode = response.getVerifyCode();
-////                                mEtResetPwdVerification.setText(verifyCode);
-//                            }
-//                        }
-//                    });
+
             MultipartBody.Part requestFileA = MultipartBody.Part.createFormData(Network.Param.MOBILE, mobile);
 
             Subscription subscription = Retrofit_RequestUtils.getRequest().getMyVerification(requestFileA)
@@ -189,6 +171,14 @@ public class ResetPwdFragment extends BaseFragment {
         if (!((SignInActivity) mContext).verifyCodeFormat(inputVerifyCode)) {
             return;
         }
+
+        String password2 = mEtResetPwdPwd2.getText().toString();
+
+        if (!password.equals(password2)){
+            Toast.makeText(mContext, "两次密码不相符合", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         mBtnResetPwd.setEnabled(false);
         showProgress();
         OkHttpUtils.post()

@@ -57,35 +57,13 @@
                 android:textColorHint="@color/text_hint"
                 android:textSize="@dimen/normal_textsize"/>
 
-            <TextView
-                android:id="@+id/tv_reset_pwd_password"
-                android:layout_width="@dimen/width_80"
-                android:layout_height="@dimen/height_40"
-                android:layout_below="@+id/tv_reset_pwd_mobile"
-                android:gravity="center_vertical"
-                android:paddingLeft="@dimen/margin_15"
-                android:text="@string/password"
-                android:textColor="@color/shape_reserve_top_bg"
-                android:textSize="@dimen/normal_textsize"/>
 
-            <EditText
-                android:id="@+id/et_reset_pwd_password"
-                android:layout_width="match_parent"
-                android:layout_height="@dimen/height_40"
-                android:layout_alignBottom="@+id/tv_reset_pwd_password"
-                android:layout_toRightOf="@+id/tv_reset_pwd_password"
-                android:background="@null"
-                android:hint="@string/hint_password"
-                android:inputType="textPassword"
-                android:textColor="@color/shape_reserve_top_bg"
-                android:textColorHint="@color/text_hint"
-                android:textSize="@dimen/normal_textsize"/>
 
             <TextView
                 android:id="@+id/tv_reset_pwd_verification"
                 android:layout_width="@dimen/width_80"
                 android:layout_height="@dimen/height_40"
-                android:layout_below="@+id/tv_reset_pwd_password"
+                android:layout_below="@+id/tv_reset_pwd_mobile"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/margin_15"
                 android:text="@string/verification"
@@ -119,10 +97,66 @@
                 android:textColor="@color/text_white"
                 android:textSize="@dimen/normal_textsize"/>
 
+
+            <TextView
+                android:id="@+id/tv_reset_pwd_password"
+                android:layout_width="@dimen/width_80"
+                android:layout_height="@dimen/height_40"
+                android:layout_below="@+id/tv_reset_pwd_verification"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/margin_15"
+                android:text="新密码"
+                android:textColor="@color/shape_reserve_top_bg"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <EditText
+                android:id="@+id/et_reset_pwd_password"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_40"
+                android:layout_alignBottom="@+id/tv_reset_pwd_password"
+                android:layout_toRightOf="@+id/tv_reset_pwd_password"
+                android:background="@null"
+                android:hint="@string/hint_password"
+                android:inputType="textPassword"
+                android:textColor="@color/shape_reserve_top_bg"
+                android:textColorHint="@color/text_hint"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <TextView
+                android:id="@+id/tv_reset_pwd_password2"
+                android:layout_width="@dimen/width_80"
+                android:layout_height="@dimen/height_40"
+                android:layout_below="@+id/tv_reset_pwd_password"
+                android:gravity="center_vertical"
+                android:paddingLeft="@dimen/margin_15"
+                android:text="确认密码"
+                android:textColor="@color/shape_reserve_top_bg"
+                android:textSize="@dimen/normal_textsize"/>
+
+            <EditText
+                android:id="@+id/et_reset_pwd_password2"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_40"
+                android:layout_alignBottom="@+id/tv_reset_pwd_password2"
+                android:layout_toRightOf="@+id/tv_reset_pwd_password2"
+                android:background="@null"
+                android:hint="请确认新密码"
+                android:inputType="textPassword"
+                android:textColor="@color/shape_reserve_top_bg"
+                android:textColorHint="@color/text_hint"
+                android:textSize="@dimen/normal_textsize"/>
+
+
             <View
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/line_height_1px"
                 android:layout_below="@+id/tv_reset_pwd_mobile"
+                android:background="@color/pay_reserve_list_divider_white"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height_1px"
+                android:layout_below="@+id/tv_reset_pwd_verification"
                 android:background="@color/pay_reserve_list_divider_white"/>
 
             <View

@@ -9,11 +9,16 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.baidu.location.BDLocation;
+import com.baidu.location.BDLocationListener;
+import com.baidu.location.LocationClient;
+import com.baidu.location.LocationClientOption;
 import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.DetailActivity;
@@ -31,10 +36,16 @@ import com.fanc.wheretoplay.view.ItemView;
 import com.fanc.wheretoplay.view.TopMenu;
 import com.qiyukf.unicorn.api.ConsultSource;
 import com.qiyukf.unicorn.api.Unicorn;
+import com.sdu.didi.openapi.DIOpenSDK;
+import com.sdu.didi.openapi.DiDiWebActivity;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
+import java.util.HashMap;
+
 import okhttp3.Call;
+
+import static com.fanc.wheretoplay.util.LocationUtils.mLocationClient;
 
 /**
  * Created by Administrator on 2017/6/14.
@@ -62,6 +73,7 @@ public class MineFragment extends BaseFragment {
 
     Receiver receiver;
     private ItemView mIvMineService;
+    private MyBDLocationListener mBDLocationListener;
 
     @Nullable
     @Override
@@ -249,7 +261,7 @@ public class MineFragment extends BaseFragment {
                 break;
             case R.id.iv_mine_order:
                 //goToNewPage(Constants.ORDER);
-                startActivity(new Intent(getContext(),ListOrderActivity.class));
+                startActivity(new Intent(getContext(), ListOrderActivity.class));
                 //startActivity(new Intent(getContext(),EvaluationSuccessActivity.class));
                 break;
             case R.id.iv_mine_collection:
@@ -265,8 +277,39 @@ public class MineFragment extends BaseFragment {
                 goToNewPage(Constants.MINEMONEY);
                 break;
             case R.id.iv_mine_drive:
-                ToastUtils.makePicTextShortToast(mContext,"修复中，敬请期待！");
-//                goToNewPage(Constants.DRIVE);
+                //  ToastUtils.makePicTextShortToast(mContext,"修复中，敬请期待！");
+
+/*
+
+                mLocationClient = new LocationClient(mContext);
+                mBDLocationListener = new MyBDLocationListener();
+                // 注册监听
+                mLocationClient.registerLocationListener(mBDLocationListener);
+
+
+                // 声明定位参数
+                LocationClientOption option = new LocationClientOption();
+                option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);// 设置定位模式 高精度
+                option.setCoorType("bd09ll");// 设置返回定位结果是百度经纬度 默认gcj02
+                option.setScanSpan(5000);// 设置发起定位请求的时间间隔 单位ms
+                option.setIsNeedAddress(true);// 设置定位结果包含地址信息
+                option.setNeedDeviceDirect(true);// 设置定位结果包含手机机头 的方向
+                // 设置定位参数
+                mLocationClient.setLocOption(option);
+                // 启动定位
+                mLocationClient.start();
+*/
+
+
+                HashMap<String, String> map = new HashMap<String, String>();
+                map.put("lat", "39.916195");
+                map.put("lng", "116.66355");
+                map.put("maptype", "wgs84");
+                DIOpenSDK.showDDPage(getActivity(), map);
+
+
+
+
                 break;
             case R.id.iv_mine_service:
                 ConsultSource source = new ConsultSource(null, null, null);
@@ -294,12 +337,49 @@ public class MineFragment extends BaseFragment {
     }
 
 
+     class MyBDLocationListener implements BDLocationListener {
+
+        @Override
+        public void onReceiveLocation(BDLocation location) {
+            // 非空判断
+            if (location != null) {
+                // 根据BDLocation 对象获得经纬度以及详细地址信息
+                double latitude = location.getLatitude();
+                double longitude = location.getLongitude();
+                String address = location.getAddrStr();
+                Log.i("HHHHHH", "address:" + address + " latitude:" + latitude
+                        + " longitude:" + longitude + "---"+Thread.currentThread().getName());
+                if (mLocationClient.isStarted()) {
+                    // 获得位置之后停止定位
+                    mLocationClient.stop();
+                }
+
+
+                HashMap<String, String> map = new HashMap<>();
+
+                map.put("maptype", "baidu");
+                map.put("fromlat", latitude+"");
+                map.put("fromlng", longitude+"");
+
+
+                DiDiWebActivity.showDDPage(mContext, map);
+
+
+            }
+        }
+    }
+
+
     @Override
     public void onDestroyView() {
         super.onDestroyView();
         if (receiver != null) {
             LocalBroadcastManager.getInstance(mContext).unregisterReceiver(receiver);
             receiver = null;
+        }
+
+        if (mLocationClient != null) {
+            mLocationClient.unRegisterLocationListener(mBDLocationListener);
         }
     }
 }
