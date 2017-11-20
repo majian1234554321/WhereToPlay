@@ -14,15 +14,18 @@ public class ItemMessageBinding extends android.databinding.ViewDataBinding  {
     static {
         sIncludes = null;
         sViewsWithIds = new android.util.SparseIntArray();
-        sViewsWithIds.put(R.id.ll_item_message, 3);
-        sViewsWithIds.put(R.id.v_unread, 4);
-        sViewsWithIds.put(R.id.btn_item_message_delete, 5);
+        sViewsWithIds.put(R.id.sml_delete, 3);
+        sViewsWithIds.put(R.id.ll_item_message, 4);
+        sViewsWithIds.put(R.id.v_unread, 5);
+        sViewsWithIds.put(R.id.btn_item_message_delete, 6);
     }
     // views
     @NonNull
     public final android.widget.Button btnItemMessageDelete;
     @NonNull
     public final android.widget.LinearLayout llItemMessage;
+    @NonNull
+    private final android.widget.RelativeLayout mboundView0;
     @NonNull
     public final android.widget.LinearLayout smlDelete;
     @NonNull
@@ -40,16 +43,17 @@ public class ItemMessageBinding extends android.databinding.ViewDataBinding  {
 
     public ItemMessageBinding(@NonNull android.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
         super(bindingComponent, root, 1);
-        final Object[] bindings = mapBindings(bindingComponent, root, 6, sIncludes, sViewsWithIds);
-        this.btnItemMessageDelete = (android.widget.Button) bindings[5];
-        this.llItemMessage = (android.widget.LinearLayout) bindings[3];
-        this.smlDelete = (android.widget.LinearLayout) bindings[0];
-        this.smlDelete.setTag(null);
+        final Object[] bindings = mapBindings(bindingComponent, root, 7, sIncludes, sViewsWithIds);
+        this.btnItemMessageDelete = (android.widget.Button) bindings[6];
+        this.llItemMessage = (android.widget.LinearLayout) bindings[4];
+        this.mboundView0 = (android.widget.RelativeLayout) bindings[0];
+        this.mboundView0.setTag(null);
+        this.smlDelete = (android.widget.LinearLayout) bindings[3];
         this.tvItemMessageContent = (android.widget.TextView) bindings[2];
         this.tvItemMessageContent.setTag(null);
         this.tvItemMessageTitle = (android.widget.TextView) bindings[1];
         this.tvItemMessageTitle.setTag(null);
-        this.vUnread = (android.view.View) bindings[4];
+        this.vUnread = (android.view.View) bindings[5];
         setRootTag(root);
         // listeners
         invalidateAll();

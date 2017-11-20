@@ -191,6 +191,28 @@
     rx.internal.util.atomic.LinkedQueueNode consumerNode;
 }
 
+-keepclassmembers class * {
+   public <init> (org.json.JSONObject);
+}
+
+-keep public class com.fanc.wheretoplay.R$*{
+public static final int *;
+}
+
+-keepnames class com.sdu.didi.openapi.utils.Utils{}
+-keep public class com.sdu.didi.openapi.Methods{}
+-keepclassmembers class com.sdu.didi.openapi.Methods{
+public java.lang.String *(java.lang.String);
+}
+-keepclassmembers class com.sdu.didi.openapi.utils.Utils{
+public static java.lang.String getTimestamp();
+public static java.lang.String getRandomString(int);
+}
+-keep public class com.sdu.didi.uuid.ed {*;}
+-keep public class com.sdu.didi.uuid.SigLib {*;}
+
+
+
 
 
 

@@ -108,7 +108,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
     TextView tvLeft;
     @BindView(R.id.tv_right)
     TextView tvRight;
-    private String order_idValue, store_idValue, storeNameValue, statusValue, totalValue,discountValue;
+    private String order_idValue, store_idValue, storeNameValue, statusValue, totalValue, discountValue;
 
     @BindView(R.id.rl)
     RelativeLayout rl;
@@ -148,7 +148,6 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
         statusValue = getIntent().getStringExtra("status");
         totalValue = getIntent().getStringExtra("total");
         discountValue = getIntent().getStringExtra("discount");
-
 
 
         Subscription rxSbscription = RxBus.getDefault().toObservable(String.class)
@@ -259,7 +258,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                             intent.putExtra("address", tvAddress.getText().toString());
                             intent.putExtra("discount", discountValue);
 
-                           // intent.putExtra("pay", discountValue);
+                            // intent.putExtra("pay", discountValue);
 
 
                             intent.putExtra(Constants.PAGE, "商家详情支付");
@@ -290,7 +289,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                             intent.setClass(DetailsOrderActivity.this, PublicationEvaluationActivity.class);
                             mContext.startActivity(intent);
 
-                        case "预付支付":
+                        case "转预付":
 
                             intent.putExtra("flag", "预订支付");
                             intent.putExtra("order_id", order_idValue);
@@ -328,6 +327,16 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                 break;
             case "1":
                 oi9.setTv_right("预付预定");
+                break;
+
+            case "2":
+                oi9.setTv_right("信用预定");
+                break;
+            case "3":
+                oi9.setTv_right("充值");
+                break;
+            case "5":
+                oi9.setTv_right("结单支付");
                 break;
             default:
                 break;

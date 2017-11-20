@@ -221,7 +221,17 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".activity.BookActivity" />
-        <activity android:name=".activity.EvaluationSuccessActivity"></activity>
+        <activity android:name=".activity.EvaluationSuccessActivity" />
+
+        <meta-data
+            android:name="UMENG_APPKEY"
+            android:value="5a126b998f4a9d5e2d00001a" />
+        <meta-data
+            android:name="UMENG_CHANNEL"
+            android:value="Umeng" />
+
+        <activity android:name=".Main2Activity"></activity>
+
     </application>
 
 </manifest>

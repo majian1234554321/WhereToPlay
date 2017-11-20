@@ -19,7 +19,7 @@ public class FragmentCollectionBinding extends android.databinding.ViewDataBindi
     }
     // views
     @NonNull
-    private final android.widget.LinearLayout mboundView0;
+    private final android.widget.RelativeLayout mboundView0;
     @NonNull
     public final android.support.v7.widget.RecyclerView rvCollection;
     @NonNull
@@ -32,7 +32,7 @@ public class FragmentCollectionBinding extends android.databinding.ViewDataBindi
     public FragmentCollectionBinding(@NonNull android.databinding.DataBindingComponent bindingComponent, @NonNull View root) {
         super(bindingComponent, root, 0);
         final Object[] bindings = mapBindings(bindingComponent, root, 3, sIncludes, sViewsWithIds);
-        this.mboundView0 = (android.widget.LinearLayout) bindings[0];
+        this.mboundView0 = (android.widget.RelativeLayout) bindings[0];
         this.mboundView0.setTag(null);
         this.rvCollection = (android.support.v7.widget.RecyclerView) bindings[2];
         this.tmCollection = (com.fanc.wheretoplay.view.TopMenu) bindings[1];

@@ -194,6 +194,7 @@ public class RegisterFragment extends BaseFragment {
                             closeProgress();
                         }
                     });
+            compositeSubscription.add(subscription);
         }
 
     }

@@ -95,7 +95,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         holder.tvPayItemRealTime.setText(DateFormatUtil.stampToDate(dataBean.list.get(position).arrival_time) + " 前");
 
 
-        //status：string，订单状态：1已取消,2预订成功,4已结单，5或6已支付订金
+
 
         for (int i = 0; i < holder.lists.size(); i++) {
             final int finalI = i;
@@ -136,11 +136,13 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                             intent.setClass(context, PublicationEvaluationActivity.class);
                             fragment.startActivityForResult(intent, 1001);
                             break;
-                        case "预付支付":
+                        case "转预付":
 
                             intent.putExtra("flag", "预订支付");
                             intent.putExtra("order_id", dataBean.list.get(position).order_id);
                             intent.putExtra("store_name", dataBean.list.get(position).name);
+
+                            intent.putExtra("pay_type", "1");
 
                             intent.putExtra("arrival_time", dataBean.list.get(position).arrival_time);
                             intent.putExtra("prepay", dataBean.list.get(position).total);
@@ -181,13 +183,15 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         if (dataBean.list != null && dataBean.list.get(position).order_function != null) {
             switch (dataBean.list.get(position).order_function) {
                 case "1":
-                    holder.tvPayItemTitle.setText("预订方式：订金预订");
+                    holder.tvPayItemTitle.setText("预订方式：预付预定");
                     break;
                 case "2":
-                    holder.tvPayItemTitle.setText("预订方式：信誉预订");
+                    holder.tvPayItemTitle.setText("预订方式：信用预定");
                     break;
                 case "3":
                     holder.tvPayItemTitle.setText("预订方式：充值");
+                case "5":
+                    holder.tvPayItemTitle.setText("预订方式：结单支付");
                     break;
                 default:
                     holder.tvPayItemTitle.setText("预订方式：...");

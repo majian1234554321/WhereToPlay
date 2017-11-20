@@ -15,9 +15,9 @@ android {
         applicationId "com.fanc.wheretoplay"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 20171119
+        versionCode 20171120
 
-        versionName "1.1.9"
+        versionName "1.2.0"
 
 
         sourceSets.main {
@@ -122,10 +122,12 @@ dependencies {
     compile 'com.qiyukf.unicorn:unicorn:3.11.1'
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.4.0'
     compile 'com.sina.weibo.sdk:core:4.1.0:openDefaultRelease@aar'
-
     implementation 'com.android.support:appcompat-v7:27.0.1'
     implementation files('libs/UPPayAssistEx.jar')
     implementation files('libs/UPPayPluginExPro.jar')
+    compile 'com.umeng.analytics:analytics:6.1.2'
+    implementation project(':didi_sdk_for_common_v1.1.0_05_28')
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
 }
 
 //def gitSha() {

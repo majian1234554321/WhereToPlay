@@ -39,6 +39,7 @@ import com.fanc.wheretoplay.view.DProgressDialog;
 import com.qiyukf.nimlib.sdk.NimIntent;
 import com.qiyukf.unicorn.api.ConsultSource;
 import com.qiyukf.unicorn.api.Unicorn;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.Arrays;
 
@@ -71,6 +72,7 @@ public class BaseActivity
         super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         translucent();
+        MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
         setRequestedOrientation(ActivityInfo
                 .SCREEN_ORIENTATION_PORTRAIT);
         mSpUtils = new SPUtils(this);
@@ -159,14 +161,15 @@ public class BaseActivity
     @Override
     public void onResume() {
         super.onResume();
-//        MobclickAgent.onResume(this);
+        MobclickAgent.onResume(this);
+
 
     }
 
     @Override
     public void onPause() {
         super.onPause();
-//        MobclickAgent.onPause(this);
+        MobclickAgent.onPause(this);
     }
 
 

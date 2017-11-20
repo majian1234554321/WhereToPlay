@@ -29,6 +29,7 @@ import android.widget.TextView;
 
 import com.baidu.location.BDLocation;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.util.Util;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.CheckCommentsActivity;
 import com.fanc.wheretoplay.activity.LargeImageActivity;
@@ -681,7 +682,9 @@ public class MerchantDetailFragment extends BaseFragment {
                 defaultImage = R.drawable.default_square;
             }
             imgs.add(pictures.get(i).getPicture_path());
-            Glide.with(mContext).load(Network.IMAGE + pictures.get(i).getPicture_path()).placeholder(defaultImage).into(mImageViews.get(i));
+            if (Util.isOnMainThread()) {
+                Glide.with(mContext).load(Network.IMAGE + pictures.get(i).getPicture_path()).placeholder(defaultImage).into(mImageViews.get(i));
+            }
             final int finalI = i;
             mImageViews.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override

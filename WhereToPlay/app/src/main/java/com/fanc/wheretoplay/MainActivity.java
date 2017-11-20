@@ -10,12 +10,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
@@ -31,18 +26,17 @@ import com.fanc.wheretoplay.fragment.MineFragment;
 import com.fanc.wheretoplay.fragment.PayFragment;
 import com.fanc.wheretoplay.fragment.ReserveFragment;
 import com.fanc.wheretoplay.util.Constants;
-import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.MyViewPager;
 import com.qiyukf.nimlib.sdk.NimIntent;
 import com.qiyukf.unicorn.api.ConsultSource;
 import com.qiyukf.unicorn.api.Unicorn;
+import com.sdu.didi.openapi.DIOpenSDK;
+import com.sdu.didi.openapi.DiDiWebActivity;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import cn.jpush.android.api.JPushInterface;
 
 public class MainActivity extends BaseFragmentActivity {
     ActivityMainBinding mainBinding;
@@ -108,6 +102,7 @@ public class MainActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        DIOpenSDK.registerApp(this, "didi65434B4C6253787A30446D76544D474E", "c841ae9e1a8cf7dcc912fe3fe6624dfd");
         Intent intent = this.getIntent();
         if (intent.hasExtra(NimIntent.EXTRA_NOTIFY_CONTENT)) {
             Unicorn.openServiceActivity(this, getResources().getString(R.string.app_name), new ConsultSource(null, null, null));

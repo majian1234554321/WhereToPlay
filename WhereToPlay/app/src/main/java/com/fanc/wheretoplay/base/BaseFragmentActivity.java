@@ -32,6 +32,7 @@ import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.PullToRefreshLayout;
+import com.umeng.analytics.MobclickAgent;
 
 import java.util.Arrays;
 
@@ -62,8 +63,8 @@ public class BaseFragmentActivity extends FragmentActivity {
         mSPUtils = new SPUtils(this);
         App.addActivity(this);
         // 友盟统计
-//        MobclickAgent.openActivityDurationTrack(false);
-//        MobclickAgent.setScenarioType(getApplicationContext(), MobclickAgent.EScenarioType.E_UM_NORMAL);
+        MobclickAgent.openActivityDurationTrack(false);
+        MobclickAgent.setScenarioType(getApplicationContext(), MobclickAgent.EScenarioType.E_UM_NORMAL);
 //        Log.e("aaa", "onCreate:状态栏高度 =  " + UIUtils.px2Dp(getStatuBarHeight()));
         if (LocationUtils.location == null) {
             LocationUtils.getLocation(this);
@@ -124,13 +125,13 @@ public class BaseFragmentActivity extends FragmentActivity {
     @Override
     public void onResume() {
         super.onResume();
-//        MobclickAgent.onResume(this);
+        MobclickAgent.onResume(this);
     }
 
     @Override
     public void onPause() {
         super.onPause();
-//        MobclickAgent.onPause(this);
+        MobclickAgent.onPause(this);
     }
 
     @Override

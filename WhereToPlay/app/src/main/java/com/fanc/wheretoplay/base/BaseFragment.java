@@ -24,6 +24,7 @@ import com.fanc.wheretoplay.view.PullToRefreshLayout;
 import com.qiyukf.nimlib.sdk.NimIntent;
 import com.qiyukf.unicorn.api.ConsultSource;
 import com.qiyukf.unicorn.api.Unicorn;
+import com.umeng.analytics.MobclickAgent;
 
 import rx.subscriptions.CompositeSubscription;
 
@@ -79,12 +80,13 @@ public abstract class BaseFragment
     @Override
     public void onResume() {
         super.onResume();
-
+        MobclickAgent.onPageStart("MainScreen");
     }
 
     @Override
     public void onPause() {
         super.onPause();
+        MobclickAgent.onPageEnd("MainScreen");
     }
 
 
