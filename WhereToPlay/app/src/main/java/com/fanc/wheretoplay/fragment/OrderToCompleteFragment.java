@@ -50,6 +50,7 @@ public class OrderToCompleteFragment extends BaseFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_order_to_complete, container, false);
+
         initView();
         init();
         initListener();

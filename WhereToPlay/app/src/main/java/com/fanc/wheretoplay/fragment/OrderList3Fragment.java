@@ -27,6 +27,7 @@ import com.fanc.wheretoplay.view.PullableRecyclerView;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import cn.jpush.android.api.JPushInterface;
 
 /**
  * Created by admin on 2017/11/1.

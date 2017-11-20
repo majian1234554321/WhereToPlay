@@ -258,7 +258,7 @@ public class BaseActivity
                             // 提示用户去应用设置界面手动开启权限
                             new AlertDialog.Builder(this)
                                     .setTitle("权限不可用")
-                                    .setMessage("请在-应用设置-权限-中，允许去哪玩使用权限")
+                                    .setMessage("请在-应用设置-权限-中，允许乐互网使用权限")
                                     .setPositiveButton("立即开启", new DialogInterface.OnClickListener() {
                                         @Override
                                         public void onClick(DialogInterface dialog, int which) {

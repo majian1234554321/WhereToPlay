@@ -303,13 +303,13 @@ public class Network{
         //商家详情支付获取订单Id
         @Multipart
         @POST("User/immediatelyPay")
-        Observable<AccessOrderIdModel> immediatelyPay(@Part MultipartBody.Part fileA,@Part MultipartBody.Part fileB,@Part MultipartBody.Part fileC);
+        Observable<AccessOrderIdModel> immediatelyPay(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC);
 
         //商家详情支付获取支付信息
         @Multipart
         @POST("User/order_payoff")
         Observable<PayOrder> order_payoff(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC, @Part MultipartBody.Part fileAA,
-                                          @Part MultipartBody.Part fileBB, @Part MultipartBody.Part fileCC,@Part MultipartBody.Part fileCCC,@Part MultipartBody.Part fileCCCC);
+                                          @Part MultipartBody.Part fileBB, @Part MultipartBody.Part fileCC, @Part MultipartBody.Part fileCCC, @Part MultipartBody.Part fileCCCC);
 
         //推荐奖励
         @Multipart
@@ -332,7 +332,6 @@ public class Network{
         Observable<SubmitCommentModel> collect(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB);
 
 
-
         //信用预订
         @Multipart
         @POST("User/onlineBook")
@@ -345,7 +344,6 @@ public class Network{
         Observable<ScoreList> scoreList(@Part MultipartBody.Part fileA);
 
 
-
         //删除收藏
         @Multipart
         @POST("User/deleteCollection")
@@ -354,7 +352,13 @@ public class Network{
         //修改个人信息
         @Multipart
         @POST("User/modifyProfile")
-        Observable<DelectCollection> changeMineInfo(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB  ,@Part MultipartBody.Part fileC  ,@Part MultipartBody.Part fileD  ,@Part MultipartBody.Part fileE  ,@Part MultipartBody.Part fileF  ,@Part MultipartBody.Part fileG);
+        Observable<DelectCollection> changeMineInfo(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC, @Part MultipartBody.Part fileD, @Part MultipartBody.Part fileE, @Part MultipartBody.Part fileF, @Part MultipartBody.Part fileG);
+
+
+        //修改个人信息
+        @Multipart
+        @POST("Login/register")
+        Observable<NewUser> register(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC, @Part MultipartBody.Part fileD, @Part MultipartBody.Part fileE);
 
 
         //推荐奖励
@@ -364,15 +368,11 @@ public class Network{
 
 
 
-        //修改个人信息
-        @Multipart
-        @POST("Login/register")
-        Observable<NewUser> register(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB  , @Part MultipartBody.Part fileC  , @Part MultipartBody.Part fileD  , @Part MultipartBody.Part fileE );
 
         //登录
         @Multipart
         @POST("Login/login")
-        Observable<NewUser> logIn(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB , @Part MultipartBody.Part fileC);
+        Observable<NewUser> logIn(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC);
 
 
     }

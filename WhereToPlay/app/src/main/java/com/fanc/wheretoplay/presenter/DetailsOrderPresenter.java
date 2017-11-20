@@ -1,6 +1,7 @@
 package com.fanc.wheretoplay.presenter;
 
 import android.content.Context;
+import android.widget.Toast;
 
 import com.fanc.wheretoplay.activity.DetailsOrderActivity;
 import com.fanc.wheretoplay.datamodel.CancleOrderModel;
@@ -65,7 +66,7 @@ public class DetailsOrderPresenter implements BasePresenter {
 
                     @Override
                     protected void _onError(String message) {
-
+                        //Toast.makeText(mContext, message, Toast.LENGTH_SHORT).show();
                     }
                 });
         compositeSubscription.add(subscription);
