@@ -280,7 +280,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
         // 是否可以上下拉
         mSvReserve.setCanPullDown(true);
         mSvReserve.setCanPullUp(true);
-        //获取定位
+        //监听GPS打开情况，打开后获取定位
 //        LocationUtils.getLocation(mContext, this);
     }
 
