@@ -127,6 +127,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
     List<String> conditions;
     // 页码。数量
     int page, count = 9,size = count ;
+    boolean isFirst = true;
     // 轮播图
     List<String> mBannerIamges;
     // 商铺
@@ -898,7 +899,10 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
                     @Override
                     public void onResponse(StoreList response) {
                         if (isSuccess(response)) {
-                            showBanner(response.getSliders());
+                            if (isFirst) {   //轮播图的数据只请求一次
+                                showBanner(response.getSliders());
+                                isFirst = !isFirst;
+                            }
                             showStoreList(response.getStore());
                         } else {
                             refreshOrLoadFail();

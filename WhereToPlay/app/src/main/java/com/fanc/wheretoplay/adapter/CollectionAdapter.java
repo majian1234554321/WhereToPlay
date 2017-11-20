@@ -55,8 +55,10 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
 //        Glide.with(mContext).load(Network.IMAGE + collection.getPath()).into(holder.mIvCollection);
         if (isDeleting) {
             holder.mCbCollectionStatus.setVisibility(View.VISIBLE);
+            holder.mViewCollection.setVisibility(View.GONE);   //调整UI的view
         } else {
             holder.mCbCollectionStatus.setVisibility(View.GONE);
+            holder.mViewCollection.setVisibility(View.VISIBLE);   //调整UI的view
         }
         holder.mCbCollectionStatus.setChecked(getItemStatus(position));
         holder.mCbCollectionStatus.setOnClickListener(new View.OnClickListener() {
@@ -100,6 +102,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
         TextView mTvCollectionDistance;
         TextView mTvCollectionPrice;
         CheckBox mCbCollectionStatus;
+        View mViewCollection;
 
         public ViewHolder(ViewDataBinding binding) {
             super(binding.getRoot());
@@ -115,6 +118,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
             mTvCollectionDistance = binding.tvItemCollectionDistance;
             mTvCollectionPrice = binding.tvItemCollectionPrice;
             mCbCollectionStatus = binding.cbCollectionItemStatus;
+            mViewCollection = binding.viewCollection;
         }
     }
 
