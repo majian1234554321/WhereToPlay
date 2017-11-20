@@ -54,6 +54,7 @@ public class RegisterAgreement extends BaseFragment {
     private void showAgreement() {
         mWv.getSettings().setJavaScriptEnabled(true);
         mWv.getSettings().setLayoutAlgorithm(WebSettings.LayoutAlgorithm.SINGLE_COLUMN);
+
         mWv.loadUrl(Constants.REGISTER_AGREEMENT_URL);
         mWv.setWebViewClient(new WebViewClient() {
             @Override
