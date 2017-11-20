@@ -262,7 +262,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                            // intent.putExtra("pay", discountValue);
 
 
-                            //intent.putExtra(Constants.PAGE, "商家详情支付");
+                            intent.putExtra(Constants.PAGE, "商家详情支付");
 
                             mContext.startActivity(intent);
 
