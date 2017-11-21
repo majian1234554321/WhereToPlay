@@ -27,11 +27,13 @@ import com.zhy.http.okhttp.callback.DCallback;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.MultipartBody;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+
 
 /**
  * Created by Administrator on 2017/6/17.
@@ -99,15 +101,22 @@ public class IntegralFragment extends BaseFragment {
         Retrofit_RequestUtils.getRequest().scoreList(requestFileA)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<ScoreList>() {
-                    @Override
-                    public void onCompleted() {
+                .subscribe(new Observer<ScoreList>() {
 
-                    }
 
                     @Override
                     public void onError(Throwable e) {
                         closeProgress();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+
                     }
 
                     @Override

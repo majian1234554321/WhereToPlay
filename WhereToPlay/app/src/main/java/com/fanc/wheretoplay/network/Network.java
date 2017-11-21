@@ -5,6 +5,7 @@ import android.util.Log;
 import com.fanc.wheretoplay.datamodel.AccessOrderIdModel;
 import com.fanc.wheretoplay.datamodel.BookListModel;
 
+import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
@@ -21,13 +22,14 @@ import com.fanc.wheretoplay.datamodel.OrderInfo;
 import com.fanc.wheretoplay.datamodel.OrderInfoModel;
 import com.fanc.wheretoplay.datamodel.PayOrder;
 import com.fanc.wheretoplay.datamodel.ScoreList;
+import com.fanc.wheretoplay.datamodel.StoreDetailModel;
 import com.fanc.wheretoplay.datamodel.SubmitCommentModel;
 import com.fanc.wheretoplay.datamodel.VerifyCode;
 import com.fanc.wheretoplay.rx.BaseResponseModel;
 
 import java.util.List;
 
-import rx.Observable;
+
 
 /**
  * Created by Administrator on 2017/6/29.
@@ -373,6 +375,16 @@ public class Network{
         @Multipart
         @POST("Login/login")
         Observable<NewUser> logIn(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC);
+
+
+
+        //
+        @Multipart
+        @POST("Public/storeDetail")
+        Observable<StoreDetailModel> storeDetail(@Part MultipartBody.Part fileA);
+
+
+
 
 
     }

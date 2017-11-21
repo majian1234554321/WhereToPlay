@@ -27,12 +27,12 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
 import cn.jpush.android.api.JPushInterface;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.MultipartBody;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2017/6/12.
@@ -139,12 +139,12 @@ public class SignInFragment extends BaseFragment {
         requestFileC = MultipartBody.Part.createFormData(Network.Param.REGISTRATIONID,  registrationID);
 
 
-        Subscription subscription = Retrofit_RequestUtils.getRequest().logIn(requestFileA, requestFileB, requestFileC)
+         Retrofit_RequestUtils.getRequest().logIn(requestFileA, requestFileB, requestFileC)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<NewUser>() {
+                .subscribe(new Observer<NewUser>() {
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
                     }
 
                     @Override
@@ -152,6 +152,11 @@ public class SignInFragment extends BaseFragment {
                         closeProgress();
                         Toast.makeText(mContext, "网络出错", Toast.LENGTH_SHORT).show();
                         mBtnSignIn.setEnabled(true);
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+
                     }
 
                     @Override

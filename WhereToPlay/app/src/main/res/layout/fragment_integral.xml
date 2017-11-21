@@ -39,7 +39,7 @@
             android:paddingLeft="@dimen/padding_15"
             android:paddingTop="@dimen/padding_5"
             android:text="@string/integral_detail"
-            android:textColor="@color/pay_reserve_list_text"
+            android:textColor="#333333"
             android:textSize="@dimen/normal_textsize"/>
 
         <android.support.v7.widget.RecyclerView

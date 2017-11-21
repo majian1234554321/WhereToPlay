@@ -43,7 +43,8 @@ import com.umeng.analytics.MobclickAgent;
 
 import java.util.Arrays;
 
-import rx.subscriptions.CompositeSubscription;
+
+import io.reactivex.disposables.CompositeDisposable;
 
 import static com.fanc.wheretoplay.base.App.mContext;
 
@@ -65,7 +66,7 @@ public class BaseActivity
 
     private com.fanc.wheretoplay.view.AlertDialog mAlertDialog;
     private Receiver receiver;
-    public CompositeSubscription compositeSubscription;
+    public CompositeDisposable compositeSubscription;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -83,7 +84,7 @@ public class BaseActivity
             LocationUtils.getLocation(this);
         }
 
-        compositeSubscription = new CompositeSubscription();
+        compositeSubscription = new CompositeDisposable ();
 
         registerBroadcastReceiver();
 

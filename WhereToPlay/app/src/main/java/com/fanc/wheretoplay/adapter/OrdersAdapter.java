@@ -35,10 +35,11 @@ import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
-import rx.Subscriber;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 import static com.fanc.wheretoplay.network.Network.IMAGE;
 
@@ -93,8 +94,6 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         holder.tv_payState.setText(dataBean.list.get(position).statusdesc);
 
         holder.tvPayItemRealTime.setText(DateFormatUtil.stampToDate(dataBean.list.get(position).arrival_time) + " 前");
-
-
 
 
         for (int i = 0; i < holder.lists.size(); i++) {
@@ -183,10 +182,10 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         if (dataBean.list != null && dataBean.list.get(position).order_function != null) {
             switch (dataBean.list.get(position).order_function) {
                 case "1":
-                    holder.tvPayItemTitle.setText("预订方式：预付预定");
+                    holder.tvPayItemTitle.setText("预订方式：预付预订");
                     break;
                 case "2":
-                    holder.tvPayItemTitle.setText("预订方式：信用预定");
+                    holder.tvPayItemTitle.setText("预订方式：信用预订");
                     break;
                 case "3":
                     holder.tvPayItemTitle.setText("预订方式：充值");
@@ -249,10 +248,22 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                         Retrofit_RequestUtils.getRequest().cancle_order(requestFileA, requestFileC)
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
-                                .subscribe(new Subscriber<BaseResponseModel<CancleOrderModel.ContentBean>>() {
-                                    @Override
-                                    public void onCompleted() {
+                                .subscribe(new Observer<BaseResponseModel<CancleOrderModel.ContentBean>>() {
 
+                                    @Override
+                                    public void onSubscribe(Disposable disposable) {
+
+                                    }
+
+                                    @Override
+                                    public void onNext(BaseResponseModel<CancleOrderModel.ContentBean> contentBeanBaseResponseModel) {
+                                        if (contentBeanBaseResponseModel.success() && contentBeanBaseResponseModel.content.is_cancle) {
+                                            ToastUtils.showShortToast(context, "取消订单成功");
+                                            dataBean.list.remove(position);
+                                            notifyDataSetChanged();
+                                        } else {
+                                            ToastUtils.showShortToast(context, "取消订单失败");
+                                        }
                                     }
 
                                     @Override
@@ -261,14 +272,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                                     }
 
                                     @Override
-                                    public void onNext(BaseResponseModel<CancleOrderModel.ContentBean> contentBean) {
-                                        if (contentBean.success() && contentBean.content.is_cancle) {
-                                            ToastUtils.showShortToast(context, "取消订单成功");
-                                            dataBean.list.remove(position);
-                                            notifyDataSetChanged();
-                                        } else {
-                                            ToastUtils.showShortToast(context, "取消订单失败");
-                                        }
+                                    public void onComplete() {
+
                                     }
                                 });
 

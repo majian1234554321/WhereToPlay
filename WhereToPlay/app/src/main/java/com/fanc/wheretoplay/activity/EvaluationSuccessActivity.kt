@@ -8,8 +8,17 @@ import com.fanc.wheretoplay.MainActivity
 import com.fanc.wheretoplay.R
 import com.fanc.wheretoplay.adapter.EvaluationSuccessAdapter
 import com.fanc.wheretoplay.base.BaseActivity
+import com.fanc.wheretoplay.datamodel.StoreDetailModel
+import com.fanc.wheretoplay.rx.Retrofit_RequestUtils
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 import kotlinx.android.synthetic.main.activity_evaluation_success.*
+import okhttp3.MultipartBody
+import org.reactivestreams.Subscriber
+
 
 class EvaluationSuccessActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
@@ -28,22 +37,55 @@ class EvaluationSuccessActivity : BaseActivity(), View.OnClickListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        var list = ArrayList<String>()
-        list.add("'1")
-        list.add("'2")
-        list.add("'3")
+
+
         setContentView(R.layout.activity_evaluation_success)
         tv_title.text = "评价成功"
+
+        val idValue = intent.getStringExtra("store_id")
 
         menu_iv_lefticon.setOnClickListener(this)
         tv_back.setOnClickListener(this)
 
-        val evaluationSuccessAdapter = EvaluationSuccessAdapter(list)
-        recycle.adapter = evaluationSuccessAdapter
+
         recycle.layoutManager = LinearLayoutManager(this)
+
+        loadData(idValue)
 
 
     }
 
+    private fun loadData(idValue: String?) {
 
+        @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+        val requestFileA = MultipartBody.Part.createFormData("id", idValue)
+
+        Retrofit_RequestUtils.getRequest()
+                .storeDetail(requestFileA)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : Observer<StoreDetailModel> {
+                    override fun onSubscribe(p0: Disposable) {
+                       // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+
+                    override fun onError(p0: Throwable) {
+                       // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+
+                    override fun onNext(p0: StoreDetailModel) {
+                        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                        val list = p0.content?.store?.list
+                        val evaluationSuccessAdapter = EvaluationSuccessAdapter(list!!)
+                        recycle.adapter = evaluationSuccessAdapter
+                    }
+
+                    override fun onComplete() {
+                       // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
+
+
+                })
+
+    }
 }

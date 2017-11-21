@@ -24,6 +24,8 @@ import com.qiyukf.unicorn.api.StatusBarNotificationConfig;
 import com.qiyukf.unicorn.api.UICustomization;
 import com.qiyukf.unicorn.api.Unicorn;
 import com.qiyukf.unicorn.api.YSFOptions;
+
+import com.sdu.didi.openapi.DIOpenSDK;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.io.File;
@@ -68,6 +70,9 @@ public class App extends Application {
         // 华为手机无异常
 
         init();
+
+
+        DIOpenSDK.registerApp(this, "didi65434B4C6253787A30446D76544D474E", "c841ae9e1a8cf7dcc912fe3fe6624dfd");
 
         // 加快APP启动速度1
         // 1 把耗时操作的初始化过程放在子线程中

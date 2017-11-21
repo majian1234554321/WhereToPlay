@@ -19,7 +19,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@{detail.name}"
-            android:textColor="@color/white"
+            android:textColor="#333333"
             android:textSize="@dimen/normal_textsize"/>
 
         <LinearLayout
@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/subscription_consume"
-                android:textColor="@color/text_detail_white_bc"
+                android:textColor="#333333"
                 android:textSize="@dimen/textsize_levelsmall"/>
 
             <TextView
@@ -51,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{detail.prepay}"
-                android:textColor="@color/text_and_buttor_orange"
+                android:textColor="#c4483c"
                 android:textSize="@dimen/normal_textsize"/>
         </LinearLayout>
 
@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/order_consume"
-                android:textColor="@color/text_detail_white_bc"
+                android:textColor="#333333"
                 android:textSize="@dimen/textsize_levelsmall"/>
 
             <TextView
@@ -84,7 +84,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{detail.account}"
-                android:textColor="@color/text_and_buttor_orange"
+                android:textColor="#c4483c"
                 android:textSize="@dimen/normal_textsize"/>
         </LinearLayout>
 
@@ -101,7 +101,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/discount_sum"
-                android:textColor="@color/text_detail_white_bc"
+                android:textColor="#333333"
                 android:textSize="@dimen/textsize_levelsmall"/>
 
             <TextView
@@ -109,7 +109,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@{detail.discount}"
-                android:textColor="@color/text_and_buttor_orange"
+                android:textColor="#c4483c"
                 android:textSize="@dimen/normal_textsize"/>
         </LinearLayout>
 
@@ -125,7 +125,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/total"
-                android:textColor="@color/text_detail_white_bc"
+                android:textColor="#333333"
                 android:textSize="@dimen/textsize_levelsmall"/>
 
             <TextView
@@ -133,7 +133,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text='@{String.valueOf(detail.total)}'
-                android:textColor="@color/text_and_buttor_orange"
+                android:textColor="#c4483c"
                 android:textSize="@dimen/normal_textsize"/>
         </LinearLayout>
 

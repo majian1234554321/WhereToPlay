@@ -77,7 +77,8 @@
  -dontwarn okhttp3.**
  -keep class com.fanc.wheretoplay.datamodel.** { *; }
  -keep class com.fanc.wheretoplay.presenter.** { *; }
-  -keep class com.fanc.wheretoplay.view.** { *; }
+ -keep class com.fanc.wheretoplay.view.** { *; }
+ -keep class com.fanc.wheretoplay.rx.** { *; }
 
 
 
@@ -199,20 +200,12 @@
 public static final int *;
 }
 
--keepnames class com.sdu.didi.openapi.utils.Utils{}
--keep public class com.sdu.didi.openapi.Methods{}
--keepclassmembers class com.sdu.didi.openapi.Methods{
-public java.lang.String *(java.lang.String);
-}
--keepclassmembers class com.sdu.didi.openapi.utils.Utils{
-public static java.lang.String getTimestamp();
-public static java.lang.String getRandomString(int);
-}
--keep public class com.sdu.didi.uuid.ed {*;}
--keep public class com.sdu.didi.uuid.SigLib {*;}
+
+
+-keep class *.R
+-keepclasseswithmembers class **.R$* {    public static <fields>;}
 
 
 
-
-
+-keep class com.sdu.** {*;}
 

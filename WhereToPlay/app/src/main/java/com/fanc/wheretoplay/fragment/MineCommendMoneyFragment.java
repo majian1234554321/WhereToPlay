@@ -33,13 +33,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.MultipartBody;
 import okhttp3.Response;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by peace on 2017/11/8.
@@ -164,12 +164,12 @@ public class MineCommendMoneyFragment extends BaseFragment {
         MultipartBody.Part requestFileC =
                 MultipartBody.Part.createFormData("token",  mUser.getToken());
 
-        Subscription subscription = Retrofit_RequestUtils.getRequest().recomReward(requestFileA, requestFileB, requestFileC)
+         Retrofit_RequestUtils.getRequest().recomReward(requestFileA, requestFileB, requestFileC)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<MineMoney>() {
+                .subscribe(new Observer<MineMoney>() {
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
 
                     }
 
@@ -178,6 +178,11 @@ public class MineCommendMoneyFragment extends BaseFragment {
                         closeProgress();
                         Toast.makeText(mContext, "没有数据", Toast.LENGTH_SHORT).show();
                         refreshOrLoadFail();
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+
                     }
 
                     @Override

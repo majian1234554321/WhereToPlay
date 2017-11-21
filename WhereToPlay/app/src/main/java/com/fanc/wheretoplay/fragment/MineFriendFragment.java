@@ -28,11 +28,12 @@ import com.fanc.wheretoplay.view.TopMenu;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+
 
 /**
  * Created by peace on 2017/11/8.
@@ -155,12 +156,12 @@ public class MineFriendFragment extends BaseFragment {
         MultipartBody.Part requestFileC =
                 MultipartBody.Part.createFormData("token", mUser.getToken());
 
-        Subscription subscription = Retrofit_RequestUtils.getRequest().recomFriend(requestFileA, requestFileB, requestFileC)
+        Retrofit_RequestUtils.getRequest().recomFriend(requestFileA, requestFileB, requestFileC)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<MineFriend>() {
+                .subscribe(new Observer<MineFriend>() {
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
 
                     }
 
@@ -169,6 +170,11 @@ public class MineFriendFragment extends BaseFragment {
                         closeProgress();
                         Toast.makeText(mContext, "没有数据", Toast.LENGTH_SHORT).show();
                         refreshOrLoadFail();
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+
                     }
 
                     @Override

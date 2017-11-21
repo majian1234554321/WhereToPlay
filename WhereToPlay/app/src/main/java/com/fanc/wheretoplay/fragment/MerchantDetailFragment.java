@@ -74,13 +74,14 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.MultipartBody;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Action1;
-import rx.schedulers.Schedulers;
+
 
 /**
  * Created by Administrator on 2017/6/14.
@@ -240,13 +241,7 @@ public class MerchantDetailFragment extends BaseFragment {
         stores = new ArrayList<>();
         recommendAdapter = new ReserveAdapter(mContext, stores);
         mRvMerchantDetailRecommend.setAdapter(recommendAdapter);
-        RxBus.getDefault().toObservable(String.class)
-                .subscribe(new Action1<String>() {
-                    @Override
-                    public void call(String s) {
 
-                    }
-                });
 
     }
 
@@ -710,18 +705,25 @@ public class MerchantDetailFragment extends BaseFragment {
         MultipartBody.Part requestFileC =
                 MultipartBody.Part.createFormData("store_id", storeId);
 
-     Subscription subscription =  Retrofit_RequestUtils.getRequest().collect(requestFileA, requestFileC)
+      Retrofit_RequestUtils.getRequest().collect(requestFileA, requestFileC)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<SubmitCommentModel>() {
-                    @Override
-                    public void onCompleted() {
+                .subscribe(new Observer<SubmitCommentModel>() {
 
-                    }
 
                     @Override
                     public void onError(Throwable e) {
                         connectError();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+
                     }
 
                     @Override
@@ -733,7 +735,7 @@ public class MerchantDetailFragment extends BaseFragment {
                     }
                 });
 
-        compositeSubscription.add(subscription);
+
 
 
     }
