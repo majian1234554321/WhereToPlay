@@ -25,12 +25,12 @@ import com.fanc.wheretoplay.view.TopMenu;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.MultipartBody;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2017/6/12.
@@ -110,12 +110,12 @@ public class ResetPwdFragment extends BaseFragment {
 
             MultipartBody.Part requestFileA = MultipartBody.Part.createFormData(Network.Param.MOBILE, mobile);
 
-            Subscription subscription = Retrofit_RequestUtils.getRequest().getMyVerification(requestFileA)
+          Retrofit_RequestUtils.getRequest().getMyVerification(requestFileA)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Subscriber<VerifyCode>() {
+                    .subscribe(new Observer<VerifyCode>() {
                         @Override
-                        public void onCompleted() {
+                        public void onComplete() {
 
                         }
 
@@ -125,6 +125,11 @@ public class ResetPwdFragment extends BaseFragment {
                             mTimer.cancel();
                             mBtnResetPwdVerify.setEnabled(true);
                             mBtnResetPwdVerify.setText("重新获取");
+                        }
+
+                        @Override
+                        public void onSubscribe(Disposable disposable) {
+
                         }
 
                         @Override

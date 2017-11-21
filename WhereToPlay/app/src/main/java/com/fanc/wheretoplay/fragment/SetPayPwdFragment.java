@@ -24,12 +24,13 @@ import com.fanc.wheretoplay.view.TopMenu;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.MultipartBody;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+
 
 /**
  * Created by Administrator on 2017/6/19.
@@ -124,18 +125,23 @@ public class SetPayPwdFragment extends BaseFragment {
         MultipartBody.Part requestFileC =
                 MultipartBody.Part.createFormData("token", mUser.getToken());
 
-        Subscription subscription = Retrofit_RequestUtils.getRequest().payPassword(requestFileA, requestFileB, requestFileC)
+         Retrofit_RequestUtils.getRequest().payPassword(requestFileA, requestFileB, requestFileC)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<SubmitCommentModel>() {
+                .subscribe(new Observer<SubmitCommentModel>() {
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
 
                     }
 
                     @Override
                     public void onError(Throwable e) {
                         closeProgress();
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+
                     }
 
                     @Override
@@ -151,7 +157,7 @@ public class SetPayPwdFragment extends BaseFragment {
                     }
                 });
 
-        compositeSubscription.add(subscription);
+
     }
 
 

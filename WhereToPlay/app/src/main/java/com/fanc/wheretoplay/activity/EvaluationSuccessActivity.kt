@@ -10,12 +10,15 @@ import com.fanc.wheretoplay.adapter.EvaluationSuccessAdapter
 import com.fanc.wheretoplay.base.BaseActivity
 import com.fanc.wheretoplay.datamodel.StoreDetailModel
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 
 import kotlinx.android.synthetic.main.activity_evaluation_success.*
 import okhttp3.MultipartBody
-import rx.Subscriber
-import rx.android.schedulers.AndroidSchedulers
-import rx.schedulers.Schedulers
+import org.reactivestreams.Subscriber
+
 
 class EvaluationSuccessActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
@@ -57,37 +60,32 @@ class EvaluationSuccessActivity : BaseActivity(), View.OnClickListener {
         @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
         val requestFileA = MultipartBody.Part.createFormData("id", idValue)
 
-        val subscription = Retrofit_RequestUtils.getRequest()
+        Retrofit_RequestUtils.getRequest()
                 .storeDetail(requestFileA)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-
-
-                .subscribe(object : Subscriber<StoreDetailModel>() {
-                    override fun onCompleted() {
-                        //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                .subscribe(object : Observer<StoreDetailModel> {
+                    override fun onSubscribe(p0: Disposable) {
+                       // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     }
 
-                    override fun onNext(t: StoreDetailModel?) {
-                        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    override fun onError(p0: Throwable) {
+                       // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                    }
 
-                        val list = t?.content?.store?.list
+                    override fun onNext(p0: StoreDetailModel) {
+                        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                        val list = p0.content?.store?.list
                         val evaluationSuccessAdapter = EvaluationSuccessAdapter(list!!)
                         recycle.adapter = evaluationSuccessAdapter
-
                     }
 
-                    override fun onError(e: Throwable?) {
-                        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-
+                    override fun onComplete() {
+                       // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     }
+
 
                 })
 
-        compositeSubscription.add(subscription)
-
-
     }
-
-
 }

@@ -26,7 +26,7 @@ import com.qiyukf.unicorn.api.ConsultSource;
 import com.qiyukf.unicorn.api.Unicorn;
 import com.umeng.analytics.MobclickAgent;
 
-import rx.subscriptions.CompositeSubscription;
+
 
 
 /**
@@ -50,7 +50,7 @@ public abstract class BaseFragment
     public PullToRefreshLayout mPtrl;
 
     boolean isShowing;
-    public  CompositeSubscription compositeSubscription;
+
 
 
     @Override
@@ -61,7 +61,7 @@ public abstract class BaseFragment
         mUser = mSpUtils.getUser();
         mLayoutInflater = LayoutInflater.from(mContext);
         //点击商家后台传来的消息可以进入聊天界面
-        compositeSubscription = new CompositeSubscription();
+
 
     }
 
@@ -108,9 +108,7 @@ public abstract class BaseFragment
     @Override
     public void onDestroy() {
         super.onDestroy();
-        if (compositeSubscription!=null) {
-            compositeSubscription.clear();
-        }
+
     }
 
     /**

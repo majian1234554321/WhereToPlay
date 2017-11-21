@@ -37,12 +37,12 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.MultipartBody;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 /**
  * Created by Administrator on 2017/6/17.
@@ -273,20 +273,26 @@ public class CollectionFragment extends BaseFragment {
         MultipartBody.Part requestFileB =
                 MultipartBody.Part.createFormData(Network.Param.COLLECT_ID, collectionIds);
 
-        Subscription subscription = Retrofit_RequestUtils.getRequest().delectCollection(requestFileA, requestFileB)
+        Retrofit_RequestUtils.getRequest().delectCollection(requestFileA, requestFileB)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<DelectCollection>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
+                .subscribe(new Observer<DelectCollection>() {
 
                     @Override
                     public void onError(Throwable e) {
                         closeProgress();
                         Toast.makeText(mContext, "网络错误", Toast.LENGTH_SHORT).show();
                         refreshOrLoadFail();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+
                     }
 
                     @Override

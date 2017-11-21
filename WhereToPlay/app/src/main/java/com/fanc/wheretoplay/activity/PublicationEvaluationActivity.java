@@ -40,13 +40,12 @@ import java.util.ArrayList;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
-import rx.Scheduler;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
-import rx.subjects.Subject;
+
 
 public class PublicationEvaluationActivity extends BaseActivity {
 
@@ -202,13 +201,13 @@ public class PublicationEvaluationActivity extends BaseActivity {
         MultipartBody.Part requestFileA =
                 MultipartBody.Part.createFormData("data", jsonObject.toString() + "");
 
-        Subscription subscription = Retrofit_RequestUtils.getRequest()
+         Retrofit_RequestUtils.getRequest()
                 .SubmitCommentModel(requestFileA)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<SubmitCommentModel>() {
+                .subscribe(new Observer<SubmitCommentModel>() {
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
 
                     }
 
@@ -216,6 +215,11 @@ public class PublicationEvaluationActivity extends BaseActivity {
                     public void onError(Throwable throwable) {
                         closeProgress();
                         Toast.makeText(mContext, "提交评论失败", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+
                     }
 
                     @Override
@@ -231,7 +235,7 @@ public class PublicationEvaluationActivity extends BaseActivity {
                         }
                     }
                 });
-        compositeSubscription.add(subscription);
+
     }
 
 

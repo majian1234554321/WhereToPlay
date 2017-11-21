@@ -5,13 +5,14 @@ package com.fanc.wheretoplay.rx;
 
 
 import com.fanc.wheretoplay.network.Network;
-import com.fanc.wheretoplay.rx.gsonconverter.GsonConverterFactory;
+
 
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
-import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 
 
 /**
@@ -36,7 +37,7 @@ public class Retrofit_RequestUtils {
                     request = new Retrofit.Builder()
                             .baseUrl(Network.BASE + Network.API)
                             .addConverterFactory(GsonConverterFactory.create())
-                            .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                             .client(okHttpClient)
                             .build().create(Network.LH_API.class);
                 }

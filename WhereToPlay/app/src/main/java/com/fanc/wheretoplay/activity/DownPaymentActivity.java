@@ -43,6 +43,8 @@ import com.zhy.http.okhttp.callback.StringCallback;
 
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -51,12 +53,13 @@ import java.util.Map;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.MultipartBody;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+
 
 /**
  * Created by Administrator on 2017/6/15.
@@ -265,32 +268,41 @@ public class DownPaymentActivity extends BaseActivity {
         }
 
 
-        Subscription subscription = Retrofit_RequestUtils.getRequest().onlineBook(fileA)
+         Retrofit_RequestUtils.getRequest().onlineBook(fileA)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<OrderInfoModel>() {
+                .subscribe(new Observer<OrderInfoModel>() {
+
                     @Override
-                    public void onCompleted() {
+                    public void onSubscribe(Disposable disposable) {
 
                     }
 
                     @Override
-                    public void onError(Throwable e) {
+                    public void onNext(OrderInfoModel orderInfoModel) {
+                        closeProgress();
+                        if (orderInfoModel.code.equals("0")) {
+                            showOrderInfo(orderInfoModel.content.order_info);
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable throwable) {
                         Toast.makeText(DownPaymentActivity.this, "预订失败", Toast.LENGTH_SHORT).show();
                         closeProgress();
                         connectError();
                     }
 
                     @Override
-                    public void onNext(OrderInfoModel orderInfo) {
-                        closeProgress();
-                        if (orderInfo.code.equals("0")) {
-                            showOrderInfo(orderInfo.content.order_info);
-                        }
+                    public void onComplete() {
+
                     }
                 });
 
-        compositeSubscription.add(subscription);
+
+
+
+       // compositeSubscription.add(subscription);
 
 
     }

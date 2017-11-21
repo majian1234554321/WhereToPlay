@@ -46,12 +46,12 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.MultipartBody;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
 
 import static com.fanc.wheretoplay.base.App.mContext;
 
@@ -172,12 +172,12 @@ public class RegisterFragment extends BaseFragment {
 
             MultipartBody.Part requestFileA = MultipartBody.Part.createFormData(Network.Param.MOBILE, mobile);
 
-            Subscription subscription = Retrofit_RequestUtils.getRequest().getMyVerification(requestFileA)
+             Retrofit_RequestUtils.getRequest().getMyVerification(requestFileA)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Subscriber<VerifyCode>() {
+                    .subscribe(new Observer<VerifyCode>() {
                         @Override
-                        public void onCompleted() {
+                        public void onComplete() {
 
                         }
 
@@ -190,11 +190,16 @@ public class RegisterFragment extends BaseFragment {
                         }
 
                         @Override
+                        public void onSubscribe(Disposable disposable) {
+
+                        }
+
+                        @Override
                         public void onNext(VerifyCode response) {
                             closeProgress();
                         }
                     });
-            compositeSubscription.add(subscription);
+
         }
 
     }
@@ -289,12 +294,12 @@ public class RegisterFragment extends BaseFragment {
 //                    }
 //                });
 
-        Subscription subscription = Retrofit_RequestUtils.getRequest().register(requestFileA, requestFileB, requestFileC, requestFileD,requestFileF)
+        Retrofit_RequestUtils.getRequest().register(requestFileA, requestFileB, requestFileC, requestFileD,requestFileF)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<NewUser>() {
+                .subscribe(new Observer<NewUser>() {
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
                     }
 
                     @Override
@@ -302,6 +307,11 @@ public class RegisterFragment extends BaseFragment {
                         closeProgress();
                         Toast.makeText(mContext, "网络出错", Toast.LENGTH_SHORT).show();
                         mBtnRegister.setEnabled(true);
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+
                     }
 
                     @Override

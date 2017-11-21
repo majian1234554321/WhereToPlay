@@ -207,39 +207,5 @@ public static final int *;
 
 
 
+-keep class com.sdu.** {*;}
 
-
--keepnames class com.sdu.didi.openapi.utils.Utils{}
--keepnames class com.sdu.didi.openapi.location.*{*;}
--keep public class com.sdu.didi.openapi.Methods{}
--keep public class com.sdu.didi.openapi.Methods{}
-
--keepclassmembers class com.sdu.didi.openapi.Methods{
-   public java.lang.String *(java.lang.String);
-}
-
--keepclassmembers class com.sdu.didi.openapi.utils.Utils{
-   public static java.lang.String getTimestamp();
-   public static java.lang.String getRandomString(int);
-}
-
-
--keep com.sdu.didi.openapi.DIOpenSDK
-
--keep public enum com.sdu.didi.openapi.DIOpenSDK$** {
-    **[] $VALUES;
-    public *;
-}
-
--keepclassmembers class com.sdu.didi.openapi.DiDiWebActivity{
-   public *;
-}
-
--keepclassmembers class com.sdu.didi.openapi.DIOpenSDK{
-   public *;
-}
-
--keep public interface com.sdu.didi.openapi.DIOpenSDK$DDCallBack {*;}
-
--keep public class com.sdu.didi.uuid.ed {*;}
--keep public class com.sdu.didi.uuid.SigLib {*;}

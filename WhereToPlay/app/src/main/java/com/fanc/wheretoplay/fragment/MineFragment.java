@@ -378,8 +378,8 @@ public class MineFragment extends BaseFragment {
             receiver = null;
         }
 
-        if (mLocationClient != null) {
-            mLocationClient.unRegisterLocationListener(mBDLocationListener);
-        }
+//        if (mLocationClient != null) {
+//            mLocationClient.unRegisterLocationListener(mBDLocationListener);
+//        }
     }
 }

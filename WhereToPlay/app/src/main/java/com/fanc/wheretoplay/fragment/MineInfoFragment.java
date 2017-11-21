@@ -63,12 +63,13 @@ import cn.finalteam.galleryfinal.GalleryFinal;
 import cn.finalteam.galleryfinal.ImageLoader;
 import cn.finalteam.galleryfinal.ThemeConfig;
 import cn.finalteam.galleryfinal.model.PhotoInfo;
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.MultipartBody;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.schedulers.Schedulers;
+
 
 /**
  * Created by Administrator on 2017/6/15.
@@ -541,12 +542,12 @@ public class MineInfoFragment extends BaseFragment {
         showProgress();
 
         //用retrofit代替原有网络进行请求
-        Subscription subscription = Retrofit_RequestUtils.getRequest().changeMineInfo(requestFileA, requestFileB, requestFileC, requestFileD, requestFileE, requestFileF, requestFileG)
+         Retrofit_RequestUtils.getRequest().changeMineInfo(requestFileA, requestFileB, requestFileC, requestFileD, requestFileE, requestFileF, requestFileG)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<DelectCollection>() {
+                .subscribe(new Observer<DelectCollection>() {
                     @Override
-                    public void onCompleted() {
+                    public void onComplete() {
                     }
 
                     @Override
@@ -554,6 +555,11 @@ public class MineInfoFragment extends BaseFragment {
                         closeProgress();
                         Toast.makeText(mContext, "网络出错", Toast.LENGTH_SHORT).show();
                         refreshOrLoadFail();
+                    }
+
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+
                     }
 
                     @Override

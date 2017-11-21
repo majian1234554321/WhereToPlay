@@ -4,38 +4,24 @@ package com.fanc.wheretoplay.presenter;
  * Created by admin on 2017/11/3.
  */
 
-import android.app.Activity;
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.util.ArrayMap;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.MultipartBody;
-import rx.Subscriber;
-import rx.subscriptions.CompositeSubscription;
 
-
-import android.app.Activity;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.util.ArrayMap;
-import android.view.View;
-import android.widget.TextView;
-import android.widget.Toast;
 
 
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.datamodel.BookListModel;
+import com.fanc.wheretoplay.rx.BaseResponseModel;
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
-import com.fanc.wheretoplay.rx.RxHelper;
-import com.fanc.wheretoplay.rx.RxSubscribe;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.view.OrderListFragmentView;
 import com.fanc.wheretoplay.view.PullToRefreshLayout;
 
-import rx.Subscriber;
-import rx.subscriptions.CompositeSubscription;
 
 /**
  * Created by DELL on 2017/6/13.
@@ -44,7 +30,7 @@ import rx.subscriptions.CompositeSubscription;
 public class OrdelListFragmentPresenter implements BasePresenter {
     public Context context;
     public OrderListFragmentView orderListFragmentView;
-    private final CompositeSubscription mSubscriptions;
+
     PullToRefreshLayout ptrlPayReserve;
 
     public BaseFragment baseFragment ;
@@ -52,7 +38,7 @@ public class OrdelListFragmentPresenter implements BasePresenter {
 
 
     public OrdelListFragmentPresenter(Context context, OrderListFragmentView orderListFragmentView,PullToRefreshLayout ptrlPayReserve, BaseFragment baseFragment) {
-        mSubscriptions = new CompositeSubscription();
+
         this.context = context;
         this.orderListFragmentView = orderListFragmentView;
         this.ptrlPayReserve = ptrlPayReserve;
@@ -68,9 +54,7 @@ public class OrdelListFragmentPresenter implements BasePresenter {
 
     @Override
     public void unsubscribe() {
-        if (mSubscriptions != null) {
-            mSubscriptions.clear();
-        }
+
     }
 
 
@@ -89,12 +73,18 @@ public class OrdelListFragmentPresenter implements BasePresenter {
 
 
 
-        mSubscriptions.add(Retrofit_RequestUtils.getRequest().bookList(requestFileA,requestFileC,requestFileB,requestFileD)
-                .compose(RxHelper.<BookListModel.ContentBean>handleResult())
-                .subscribe(new RxSubscribe<BookListModel.ContentBean>() {
+       Retrofit_RequestUtils.getRequest().bookList(requestFileA,requestFileC,requestFileB,requestFileD)
+               .subscribeOn(Schedulers.io())
+               .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<BaseResponseModel<BookListModel.ContentBean>>(){
                     @Override
-                    protected void _onNext(BookListModel.ContentBean contentBean) {
-                        if (contentBean!=null) {
+                    public void onSubscribe(Disposable disposable) {
+
+                    }
+
+                    @Override
+                    public void onNext(BaseResponseModel<BookListModel.ContentBean> contentBeanBaseResponseModel) {
+                        if (contentBeanBaseResponseModel!=null) {
                             if (action.equals("onRefresh")) {
                                 ptrlPayReserve.refreshFinish(0);
                             }else {
@@ -102,7 +92,7 @@ public class OrdelListFragmentPresenter implements BasePresenter {
                             }
 
 
-                            orderListFragmentView.setOrderListFragmentData(contentBean, action);
+                            orderListFragmentView.setOrderListFragmentData(contentBeanBaseResponseModel.content, action);
                         } else {
                             if (action.equals("onRefresh")) {
                                 ptrlPayReserve.refreshFinish(5);
@@ -113,18 +103,23 @@ public class OrdelListFragmentPresenter implements BasePresenter {
                     }
 
                     @Override
-                    protected void _onError(String message) {
+                    public void onError(Throwable throwable) {
                         if (action.equals("onRefresh")) {
                             ptrlPayReserve.refreshFinish(5);
                         }else {
                             ptrlPayReserve.loadmoreFinish(5);
                         }
+                    }
+
+                    @Override
+                    public void onComplete() {
 
                     }
-                }));
-    }
+
+                });
 
 
+}
 
 
 }

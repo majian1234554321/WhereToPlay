@@ -5,38 +5,24 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.adapter.OrdersAdapter;
-import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.base.BaseLazyFragment;
 import com.fanc.wheretoplay.datamodel.BookListModel;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
 import com.fanc.wheretoplay.presenter.OrdelListFragmentPresenter;
-import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.UIUtils;
-import com.fanc.wheretoplay.view.MyRecycleView;
 import com.fanc.wheretoplay.view.OrderListFragmentView;
 import com.fanc.wheretoplay.view.PullToRefreshLayout;
 import com.fanc.wheretoplay.view.PullableRecyclerView;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import okhttp3.MultipartBody;
-
-import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
-import com.fanc.wheretoplay.rx.RxHelper;
-import com.fanc.wheretoplay.rx.RxSubscribe;
 
 /**
  * Created by admin on 2017/11/1.

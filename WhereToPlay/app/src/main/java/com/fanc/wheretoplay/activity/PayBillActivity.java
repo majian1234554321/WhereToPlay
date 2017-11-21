@@ -63,15 +63,13 @@ import java.text.DecimalFormat;
 import java.util.HashMap;
 import java.util.Map;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.MultipartBody;
-import rx.Observable;
-import rx.Scheduler;
-import rx.Subscriber;
-import rx.Subscription;
-import rx.android.schedulers.AndroidSchedulers;
-import rx.functions.Func1;
-import rx.schedulers.Schedulers;
+
 
 
 /**
@@ -536,19 +534,15 @@ public class PayBillActivity extends BaseActivity {
         MultipartBody.Part requestFileC =
                 MultipartBody.Part.createFormData("store_id", storeId);
 
-        Subscription subscription = Retrofit_RequestUtils.getRequest()
+       Retrofit_RequestUtils.getRequest()
                 .immediatelyPay(requestFileA, requestFileB, requestFileC)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Subscriber<AccessOrderIdModel>() {
-                    @Override
-                    public void onCompleted() {
-
-                    }
+                .subscribe(new Observer<AccessOrderIdModel>() {
 
                     @Override
-                    public void onError(Throwable e) {
-                        Toast.makeText(mContext, e.toString(), Toast.LENGTH_SHORT).show();
+                    public void onSubscribe(Disposable disposable) {
+
                     }
 
                     @Override
@@ -579,8 +573,18 @@ public class PayBillActivity extends BaseActivity {
                             Toast.makeText(mContext, "请求失败", Toast.LENGTH_SHORT).show();
                         }
                     }
+
+                    @Override
+                    public void onError(Throwable throwable) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
                 });
-        compositeSubscription.add(subscription);
+        //compositeSubscription.add(subscription);
     }
 
     /**

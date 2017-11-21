@@ -55,8 +55,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import io.reactivex.functions.Consumer;
 import okhttp3.Call;
-import rx.functions.Action1;
+
 
 /**
  * Created by Administrator on 2017/6/20.
@@ -115,10 +116,10 @@ public class ReserveInfoFragment extends BaseFragment {
         initViews();
         init();
         setListeners();
-        RxBus.getDefault().toObservable(HousenewsList.StatusBean.class)
-                .subscribe(new Action1<HousenewsList.StatusBean>() {
+        RxBus.getDefault().toFlowable(HousenewsList.StatusBean.class)
+                .subscribe(new Consumer<HousenewsList.StatusBean>() {
                     @Override
-                    public void call(HousenewsList.StatusBean s) {
+                    public void accept(HousenewsList.StatusBean s) {
                         if (s != null) {
                             selectedRoomId = s.room_id;
                             mTvReserveInfoRoom.setText(s.getName());

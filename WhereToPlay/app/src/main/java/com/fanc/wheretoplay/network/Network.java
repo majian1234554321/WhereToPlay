@@ -5,6 +5,7 @@ import android.util.Log;
 import com.fanc.wheretoplay.datamodel.AccessOrderIdModel;
 import com.fanc.wheretoplay.datamodel.BookListModel;
 
+import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
@@ -28,7 +29,7 @@ import com.fanc.wheretoplay.rx.BaseResponseModel;
 
 import java.util.List;
 
-import rx.Observable;
+
 
 /**
  * Created by Administrator on 2017/6/29.
@@ -377,7 +378,7 @@ public class Network{
 
 
 
-        //登录
+        //
         @Multipart
         @POST("Public/storeDetail")
         Observable<StoreDetailModel> storeDetail(@Part MultipartBody.Part fileA);

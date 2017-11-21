@@ -12,31 +12,26 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.PermissionChecker;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
-import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.fanc.wheretoplay.MainActivity;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.BaseActivity;
-import com.fanc.wheretoplay.datamodel.CancleOrderModel;
 import com.fanc.wheretoplay.datamodel.OrderDetailModel;
 import com.fanc.wheretoplay.presenter.DetailsOrderPresenter;
-import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.rx.RxBus;
-import com.fanc.wheretoplay.rx.RxHelper;
-import com.fanc.wheretoplay.rx.RxSubscribe;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.DateFormatUtil;
-import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.view.DetailsOrderView;
 import com.fanc.wheretoplay.view.OrderetailsItemView;
 import com.fanc.wheretoplay.view.TitleBarView;
+
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,9 +39,9 @@ import java.util.List;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
-import okhttp3.MultipartBody;
-import rx.Subscription;
-import rx.functions.Action1;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Consumer;
+
 
 public class DetailsOrderActivity extends BaseActivity implements DetailsOrderView {
 
@@ -150,10 +145,10 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
         discountValue = getIntent().getStringExtra("discount");
 
 
-        Subscription rxSbscription = RxBus.getDefault().toObservable(String.class)
-                .subscribe(new Action1<String>() {
+        Disposable rxSbscription = RxBus.getDefault().toFlowable(String.class)
+                .subscribe(new Consumer<String>() {
                     @Override
-                    public void call(String s) {
+                    public void accept(String s) throws Exception {
                         if (s != null && "提交评价成功".equals(s)) {
                             statusValue = "1";
 
@@ -246,11 +241,11 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                     switch (lists.get(finalI).getText().toString().trim()) {
                         case "返回首页":
                             intent.setClass(DetailsOrderActivity.this, MainActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                             mContext.startActivity(intent);
                             finish();
                             break;
                         case "立即支付":
-
 
                             intent.setClass(mContext, PayBillActivity.class);
                             intent.putExtra(Constants.STORE_ID, store_idValue);
