@@ -212,6 +212,7 @@ public static final int *;
 -keepnames class com.sdu.didi.openapi.utils.Utils{}
 -keepnames class com.sdu.didi.openapi.location.*{*;}
 -keep public class com.sdu.didi.openapi.Methods{}
+-keep public class com.sdu.didi.openapi.Methods{}
 
 -keepclassmembers class com.sdu.didi.openapi.Methods{
    public java.lang.String *(java.lang.String);
@@ -221,6 +222,9 @@ public static final int *;
    public static java.lang.String getTimestamp();
    public static java.lang.String getRandomString(int);
 }
+
+
+-keep com.sdu.didi.openapi.DIOpenSDK
 
 -keep public enum com.sdu.didi.openapi.DIOpenSDK$** {
     **[] $VALUES;
