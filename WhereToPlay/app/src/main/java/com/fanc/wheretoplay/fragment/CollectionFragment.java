@@ -118,17 +118,6 @@ public class CollectionFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 if (collections.size() > 0) {
-//                    new AlertDialog(mContext)
-//                            .setTitle(null)
-//                            .setContent("确定清空收藏吗")
-//                            .setBtnOnClickListener(new AlertDialog.OnBtnClickListener() {
-//                                @Override
-//                                public void onBtnClick(View view, String input) {
-//                                    emptyCollection(getCollectionIds());
-//                                }
-//                            })
-//                            .setCanceledOnTouchOutside(true)
-//                            .show();
                     if (isDeleting) {// 是删除状态，执行删除操作
                         final String collectionIds = getSelectedCollectionId();
                         if (collectionIds != null) {
@@ -305,10 +294,11 @@ public class CollectionFragment extends BaseFragment {
                         closeProgress();
                         if (response != null) {
                             if (response.getContent().isIs_ok()) {
-                                for (int i:deleteIndex){
-                                    collections.remove(i);
-                                    collectionAdapter.notifyItemRemoved(i);
-                                }
+//                                for (int i:deleteIndex){
+//                                    collections.remove(i);
+//                                    collectionAdapter.notifyItemRemoved(i);
+//                                }
+                                collectionAdapter.delectItems(deleteIndex);
                                 ToastUtils.makePicTextShortToast(mContext, "删除成功");
                                 collectionAdapter.setDeleting(false);
                             }

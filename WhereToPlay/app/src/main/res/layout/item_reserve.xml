@@ -13,7 +13,7 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/margin_10">
+        android:paddingBottom="@dimen/margin_5">
 
         <ImageView
             android:id="@+id/iv_reserve_item"
@@ -98,6 +98,7 @@
             android:text="@string/rise"
             android:textColor="@color/text_black"
             android:textSize="@dimen/textsize_levelsmall"
+            android:paddingBottom="@dimen/margin_7"
             android:layout_marginBottom="@dimen/padding_3"
             app:layout_constraintBottom_toBottomOf="@id/tv_reserve_item_price"
             app:layout_constraintEnd_toEndOf="@+id/tv_reserve_item_discount_sum"
@@ -110,6 +111,7 @@
             android:text="@{store.capita}"
             android:textColor="@color/text_black"
             android:textSize="@dimen/textsize_level4"
+            android:paddingBottom="@dimen/margin_7"
             android:layout_marginBottom="@dimen/padding_3"
             app:layout_constraintEnd_toStartOf="@+id/tv_reserve_item_rise"
             app:layout_constraintTop_toBottomOf="@id/iv_reserve_item"

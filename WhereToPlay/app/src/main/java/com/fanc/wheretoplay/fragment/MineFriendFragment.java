@@ -183,7 +183,7 @@ public class MineFriendFragment extends BaseFragment {
     private void showCommendFrendList(List<MineFriend.ContentBean> mMineFriendList) {
         if (isPullDown) {// 下拉刷新
             if (mMineFriendList.size() == 0) {
-                ToastUtils.makePicTextShortToast(mContext, "没有推荐好友");
+                ToastUtils.makePicTextShortToast(mContext, "没有团队成员");
                 refreshAndLoadMoreSuccess();
                 return;
             }

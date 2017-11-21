@@ -566,22 +566,25 @@
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/line_height"
                     android:background="@color/pay_reserve_list_divider_white" />
-
-                <!--要把他放到viewpager中的fragment里-->
-                <WebView
-                    android:id="@+id/wv_merchant_detail"
+                <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:background="@color/bg"
-                    android:visibility="gone" />
+                    android:layout_marginTop="@dimen/margin_10">
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="@dimen/height_70"
+                        android:background="@color/white"
+                        />
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_marginBottom="@dimen/margin_10"
+                        android:layout_marginTop="@dimen/margin_10"
+                        android:src="@drawable/recommend"
+                        android:layout_centerInParent="true"/>
+                </RelativeLayout>
 
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_horizontal"
-                    android:layout_marginBottom="@dimen/margin_10"
-                    android:layout_marginTop="@dimen/margin_10"
-                    android:src="@drawable/recommend" />
 
                 <com.fanc.wheretoplay.view.MyRecycleView
                     android:id="@+id/rv_merchant_detail_recommend"

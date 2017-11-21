@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
 import android.widget.ImageView;
@@ -126,6 +127,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
     List<String> conditions;
     // 页码。数量
     int page, count = 9,size = count ;
+    boolean isFirst = true;
     // 轮播图
     List<String> mBannerIamges;
     // 商铺
@@ -139,8 +141,6 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
     FilterPopStoreTypeAdapter filterStoreTypeAdapter;
     FilterPopDialogAdapter filterAdapter;
     FilterPopChildAdapter filterChildAdapter;
-    //次数
-    int times = 0;
     // 分类筛选
 //    FilterPopupDialog filterCategory;
 //    FilterPopDialogAdapter filterCategoryAdapter;
@@ -172,6 +172,8 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
      * 选中的娱乐分栏图标
      */
     int selectedId;
+
+    private RotateAnimation animation_up;
 
     @Nullable
     @Override
@@ -278,7 +280,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
         // 是否可以上下拉
         mSvReserve.setCanPullDown(true);
         mSvReserve.setCanPullUp(true);
-        //获取定位
+        //监听GPS打开情况，打开后获取定位
 //        LocationUtils.getLocation(mContext, this);
     }
 
@@ -498,18 +500,9 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
                 .setPopupWindowHeight(254)
                 .setAdapter(filterAreaAdapter);
         // 筛选（两级菜单）
-//        filterStoreTypeAdapter = new FilterPopStoreTypeAdapter(mContext, filterStoreType);
         filterAdapter = new FilterPopDialogAdapter(mContext, filterBeans);
-//        filterAdapter.setFilter(true);
-//        filterChildAdapter = new FilterPopChildAdapter(mContext, filterBeans);
         filter = new FilterPopupDialog(mContext)
-//                .setStoreTypeAdapter(filterStoreTypeAdapter)
                 .setAdapter(filterAdapter);
-//                .setChildAdapter(filterChildAdapter);
-        // 分类筛选
-//        filterCategoryAdapter = new FilterPopDialogAdapter(mContext, conditions);
-//        filterCategory = new FilterPopupDialog(mContext)
-//                .setAdapter(filterCategoryAdapter);
 
     }
 
@@ -531,40 +524,11 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
                 getStoreList(null, city.getId(), 0, 0, areaId, storeType, category, filterType, value);
             }
         });
-        // 筛选 店家类型
-//        filterStoreTypeAdapter.setListener(new FilterPopStoreTypeAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(String name, String typeId, int position) {
-//                if (position == 0) {
-//                    // 清楚筛选条件
-//                    storeType = null;
-//                    filterType = null;
-//                    value = null;
-//                    // 隐藏弹窗，清楚标记
-//                    mTvReserveFilter.setText(R.string.filter);
-////                    mTvReserveFilterSuspend.setText(R.string.filter);
-//                    filter.dismiss();
-//
-//                    // 清楚选中状态
-//                    filterStoreTypeAdapter.cleanStatus();
-//                    filterAdapter.cleanStatus();
-//                    filterChildAdapter.cleanStatus();
-//
-//                    getStoreList(null, city.getId(), 0, 0, areaId, storeType, category, filterType, value);
-//                } else {
-//                    storeType = typeId;
-//                }
-//            }
-//        });
+
         // 店家   房型，装修风格，档次，活动和优惠等
         filterAdapter.setListener(new FilterPopDialogAdapter.OnItemClickListener() {
             @Override
             public void onItemClick(String name, String dataID, int position) {
-//                if (storeType == null) {
-//                    ToastUtils.showShortToast(mContext, "请选择左侧店家类型");
-//                    filterAdapter.cleanStatus();
-//                    return;
-//                }
                 if (position == 0) {
                     mTvReserveFilter.setText(R.string.filter);
                     mTvReserveFilterSuspend.setText(R.string.filter);
@@ -572,22 +536,8 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
 
                     filterType = null;
                     value = null;
-//                    filterChildAdapter.cleanStatus();
                     filterAdapter.cleanStatus();
-//                    getStoreList(null, city.getId(), 0, 0, areaId, storeType, category, filterType, value);
                 } else {
-//                    filterBeans.clear();
-//                    filterBeans.addAll(filters.get(position - 1));
-//                    if (position == filters.size()) {
-//                        filterChildAdapter.setDiscount(true);
-//                    } else {
-//                        filterChildAdapter.setDiscount(false);
-//                    }
-//                    filterChildAdapter.cleanStatus();
-//                    filterChildAdapter.notifyDataSetChanged();
-//                    filter.showChildList();
-//
-//                    filterType = filterEN.get(position - 1);
                     filterType = "decorate";
 
                     value = dataID;
@@ -598,40 +548,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
                 getStoreList(null, city.getId(), 0, 0, areaId, storeType, category, filterType, value);
             }
         });
-        // 子级菜单
-//        filterChildAdapter.setListener(new FilterPopChildAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(String name, String typeId, int position) {
-//                filter.dismiss();
-//                mTvReserveFilter.setText(name);
-////                mTvReserveFilterSuspend.setText(name);
-//
-//                value = typeId;
-//                showProgress();
-//                getStoreList(null, city.getId(), 0, 0, areaId, storeType, category, filterType, value);
-//            }
-//        });
 
-//        filterCategoryAdapter.setListener(new FilterPopDialogAdapter.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(String name, String dataID, int position) {
-//                if (position == 0) {
-//                    mTvReserveCategory.setText(R.string.all);
-////                    mTvReserveCategorySuspend.setText(R.string.all);
-//
-//                    category = null;
-//                } else {
-////                    mTvReserveCategory.setText(name);
-////                    mTvReserveCategorySuspend.setText(name);
-//
-//                    category = String.valueOf(position);
-//                }
-//                filterCategory.dismiss();
-//
-//                showProgress();
-//                getStoreList(null, city.getId(), 0, 0, areaId, storeType, category, filterType, value);
-//            }
-//        });
     }
 
     private void setPopupWindowDismissListener() {
@@ -649,13 +566,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
                 setImageViewRotateAnimation(mIvReserveFilter,mIvReserveFilterSuspend, true);
             }
         });
-//        filterCategory.setOnDismissListener(new PopupWindow.OnDismissListener() {
-//            @Override
-//            public void onDismiss() {
-//                setTextColor(mTvReserveCategory, mTvReserveCategorySuspend, true);
-//                setImageViewRotateAnimation(mIvReserveCategory, mIvReserveCategorySuspend, true);
-//            }
-//        });
+
     }
 
     /**
@@ -718,9 +629,25 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
      *
      * @param imageView
      */
-    private void setImageViewRotateAnimationUnrotate(ImageView imageView) {
+    private void setImageViewRotateAnimationUnrotate(final ImageView imageView) {
         imageView.startAnimation(trilateral_0_180_Animation());
-        imageView.setImageResource(R.drawable.pull_up);
+
+        animation_up.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                imageView.clearAnimation();
+                imageView.setImageResource(R.drawable.pull_up);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
     }
 
     /**
@@ -728,7 +655,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
      *
      * @param imageView
      */
-    private void setImageViewRotateAnimationRotated(ImageView imageView) {
+    private void setImageViewRotateAnimationRotated(final ImageView imageView) {
         imageView.startAnimation(trilateral_180_360_Animation());
         imageView.setImageResource(R.drawable.pull_down_3);
     }
@@ -737,21 +664,24 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
      * 三角形向上的动画
      */
     private RotateAnimation trilateral_0_180_Animation() {
-        LogUtils.e("走了向上的动画");
-        RotateAnimation animation = (RotateAnimation) AnimationUtils.loadAnimation(mContext, R.anim.rotate_down_deal_filter);
-        animation.setDuration(300);
-        animation.setFillAfter(!animation.getFillAfter());
-        return animation;
+        Log.e("animation","走了向上的动画");
+        if (animation_up == null) {
+            animation_up = (RotateAnimation) AnimationUtils.loadAnimation(mContext, R.anim.rotate_down_deal_filter);
+        }
+        animation_up.setDuration(300);
+        animation_up.setFillAfter(!animation_up.getFillAfter());
+        return animation_up;
     }
 
     /**
      * 三角形向下的动画
      */
     private RotateAnimation trilateral_180_360_Animation() {
-        RotateAnimation animation = (RotateAnimation) AnimationUtils.loadAnimation(mContext, R.anim.rotate_up_deal_filter);
-        animation.setDuration(300);
-        animation.setFillAfter(!animation.getFillAfter());
-        return animation;
+        Log.e("animation","走了向上的动画");
+        RotateAnimation animation_down = (RotateAnimation) AnimationUtils.loadAnimation(mContext, R.anim.rotate_up_deal_filter);
+        animation_down.setDuration(300);
+        animation_down.setFillAfter(!animation_down.getFillAfter());
+        return animation_down;
     }
 
     /**
@@ -787,7 +717,6 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
 //        //得到当前城市
 //        city = getCity();
 //        Log.e("city","LocationUtils.location为空：\t" + (LocationUtils.location == null?"true":LocationUtils.location .getCity()));
-//        Log.e("times","" + (times ++));
 //        mTvReserveCity.setText(city.getName());
 //        getStoreList(null, city.getId(), page, size, null, storeType, null, null, null);
 //        // 筛选
@@ -798,7 +727,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
     private CityResource.City getCity() {
         CityResource.City city = null;
         List<CityResource.Province> provinces = getProvinceList();   //得到bean类型的省列表
-//        BDLocation bdLocation = LocationUtils.location;
+        BDLocation bdLocation = LocationUtils.location;
         for (CityResource.Province province : provinces) {
             //循环bean类型的省列表中province类中的城市
             for (int i = 0; i < province.getChild().size(); i++) {
@@ -970,7 +899,10 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
                     @Override
                     public void onResponse(StoreList response) {
                         if (isSuccess(response)) {
-                            showBanner(response.getSliders());
+                            if (isFirst) {   //轮播图的数据只请求一次
+                                showBanner(response.getSliders());
+                                isFirst = !isFirst;
+                            }
                             showStoreList(response.getStore());
                         } else {
                             refreshOrLoadFail();
@@ -1074,10 +1006,6 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
             case R.id.ib_reserve_search:
                 intent.putExtra(Constants.PAGE, Constants.SEARCH);
                 break;
-//                去掉标题栏的“我的”图标
-//            case R.id.ib_reserve_mine:
-//                intent.putExtra(Constants.PAGE, Constants.MINE);
-//                break;
             default:
                 break;
         }
@@ -1161,5 +1089,8 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
             receiver = null;
         }
         ((MainActivity) mContext).unregisterMyOnTouchListener(onTouchListener);
+        if (animation_up != null) {
+            animation_up.cancel();
+        }
     }
 }

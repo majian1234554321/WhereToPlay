@@ -95,8 +95,8 @@ public class ListFragment extends BaseFragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         RecycleViewDivider divider = new RecycleViewDivider(mContext, LinearLayout.HORIZONTAL);
-        mRv.setLayoutManager(linearLayoutManager);
         mRv.addItemDecoration(divider);
+        mRv.setLayoutManager(linearLayoutManager);
 
         mStores = new ArrayList();
         adapter = new ReserveAdapter(mContext, mStores);
