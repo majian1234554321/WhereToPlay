@@ -334,6 +334,8 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
                         // 反之，当y轴移动距离大于x轴的一半，才能下滑
                         if (lastY > mBanner.getTop() && y < mBanner.getBottom() && dx >= dy / 2) {
                             mSvReserve.setCanPullDown(false);
+                        } else if (lastY > mBanner.getTop() && y < mBanner.getBottom() && dy >= dx / 2) {
+                            mSvReserve.setCanPullDown(true);
                         } else {
                             mSvReserve.setCanPullDown(true);
                         }
@@ -740,14 +742,13 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
                         if (bdCity.contains(city.getName())) {
                             return city;
                         }
-                    } else {// 获取城市失败，从本地读取，也就是个人信息里选择的城市,判断是否一样，一样则返回
-//                        Log.e("city","获取城市失败");
-                        if (city.getId().equals(mUser.getRegistered())) {
+                    } else {   // 获取城市失败，从本地读取，也就是个人信息里选择的城市,判断是否一样，一样则返回
+                        //第一次进入页面city.getId()强制设置为上海的id ="2623"
+                        if (city.getId().equals(/*mUser.getRegistered()*/"2623")) {
                             return city;
                         }
                     }
-                } else {// 定位失败，从本地读取，也就是个人信息里选择的城市,判断是否一样，一样则返回
-//                    Log.e("city","定位失败");
+                } else {   // 定位失败，从本地读取，也就是个人信息里选择的城市,判断是否一样，一样则返回
                     //第一次进入页面city.getId()强制设置为上海的id ="2623"
                     if (city.getId().equals(/*mUser.getRegistered()*/"2623")) {
                         return city;
@@ -762,12 +763,15 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
      * 悬停栏
      */
     private void hoverBar() {
+        Log.e("Scroll","mSvReserve.getScrollY():\t" + mSvReserve.getScrollY());
         if (mSvReserve.getScrollY() > mLlSuspendTop ) {
             if (mFilterSuspend.getVisibility() != View.VISIBLE) {
+                Log.e("Scroll","出现");
                 mFilterSuspend.setVisibility(View.VISIBLE);
             }
         } else if (mSvReserve.getScrollY() < mLlSuspendBottom ) {
             if (mFilterSuspend.getVisibility() != View.INVISIBLE) {
+                Log.e("Scroll","消失");
                 mFilterSuspend.setVisibility(View.INVISIBLE);
             }
         }
