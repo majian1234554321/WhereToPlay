@@ -167,6 +167,7 @@ public class CollectionFragment extends BaseFragment {
         for (int i : collectionAdapter.status.keySet()) {
             if (collectionAdapter.status.get(i)) {
                 deleteIndex.add(i);
+                Log.e("delete", i + "");
                 if (count != 0) {
                     sb.append(",");
                 }
@@ -304,7 +305,14 @@ public class CollectionFragment extends BaseFragment {
 //                                    collections.remove(i);
 //                                    collectionAdapter.notifyItemRemoved(i);
 //                                }
-                                collectionAdapter.delectItems(deleteIndex);
+
+                                for (int i = 0; i < deleteIndex.size(); i++) {
+                                    int integer = deleteIndex.get(i);
+                                    collections.remove(integer - i );
+                                    Log.e("delete", "integer - i: \t" + (integer - i));
+                                    collectionAdapter.notifyItemRemoved(integer - i);
+                                }
+//                                collectionAdapter.delectItems(deleteIndex);
                                 ToastUtils.makePicTextShortToast(mContext, "删除成功");
                                 collectionAdapter.setDeleting(false);
                             }
