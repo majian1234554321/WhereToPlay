@@ -763,15 +763,19 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
      * 悬停栏
      */
     private void hoverBar() {
-        Log.e("Scroll","mSvReserve.getScrollY():\t" + mSvReserve.getScrollY());
+        if (mLlSuspendTop == 0 || mLlSuspendBottom == 0) {
+            //"区域 风格" 栏的测量
+            if (mLlReserveFilter != null) {
+                mLlSuspendTop = mLlReserveFilter.getTop();
+                mLlSuspendBottom = mLlReserveFilter.getBottom();
+            }
+        }
         if (mSvReserve.getScrollY() > mLlSuspendTop ) {
             if (mFilterSuspend.getVisibility() != View.VISIBLE) {
-                Log.e("Scroll","出现");
                 mFilterSuspend.setVisibility(View.VISIBLE);
             }
         } else if (mSvReserve.getScrollY() < mLlSuspendBottom ) {
             if (mFilterSuspend.getVisibility() != View.INVISIBLE) {
-                Log.e("Scroll","消失");
                 mFilterSuspend.setVisibility(View.INVISIBLE);
             }
         }
