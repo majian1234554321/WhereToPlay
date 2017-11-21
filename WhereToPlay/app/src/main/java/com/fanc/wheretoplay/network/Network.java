@@ -21,6 +21,7 @@ import com.fanc.wheretoplay.datamodel.OrderInfo;
 import com.fanc.wheretoplay.datamodel.OrderInfoModel;
 import com.fanc.wheretoplay.datamodel.PayOrder;
 import com.fanc.wheretoplay.datamodel.ScoreList;
+import com.fanc.wheretoplay.datamodel.StoreDetailModel;
 import com.fanc.wheretoplay.datamodel.SubmitCommentModel;
 import com.fanc.wheretoplay.datamodel.VerifyCode;
 import com.fanc.wheretoplay.rx.BaseResponseModel;
@@ -373,6 +374,16 @@ public class Network{
         @Multipart
         @POST("Login/login")
         Observable<NewUser> logIn(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC);
+
+
+
+        //登录
+        @Multipart
+        @POST("Public/storeDetail")
+        Observable<StoreDetailModel> storeDetail(@Part MultipartBody.Part fileA);
+
+
+
 
 
     }
