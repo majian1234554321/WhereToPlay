@@ -32,6 +32,7 @@ import com.fanc.wheretoplay.view.ItemView;
 import com.qiyukf.nimlib.sdk.NimIntent;
 import com.qiyukf.unicorn.api.ConsultSource;
 import com.qiyukf.unicorn.api.Unicorn;
+import com.sdu.didi.openapi.DIOpenSDK;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -54,6 +55,7 @@ public class LaunchActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         launchBinding = DataBindingUtil.setContentView(this, R.layout.activity_launch);
 //        initPermissions();
+
         init();
         //七鱼需要
         parseIntent();

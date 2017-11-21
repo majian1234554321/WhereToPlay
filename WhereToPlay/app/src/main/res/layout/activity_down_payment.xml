@@ -212,7 +212,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@+id/ll_down_payment_balance"
             android:background="@color/white"
-            android:onClick="@{click.onViewClick}"
+            android:onClick="onViewClick"
             android:orientation="horizontal">
 
             <ImageView

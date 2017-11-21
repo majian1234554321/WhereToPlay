@@ -186,6 +186,7 @@ public class ResetPwdFragment extends BaseFragment {
                 .addParams(Network.Param.MOBILE, mobile)
                 .addParams(Network.Param.PASSWORD, password)
                 .addParams(Network.Param.CODE, inputVerifyCode)
+                .addParams("newpassword",password2)
                 .build()
                 .execute(new DCallback<User>() {
                     @Override

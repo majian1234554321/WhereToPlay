@@ -102,7 +102,7 @@ public class MainActivity extends BaseFragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
-        DIOpenSDK.registerApp(this, "didi65434B4C6253787A30446D76544D474E", "c841ae9e1a8cf7dcc912fe3fe6624dfd");
+
         Intent intent = this.getIntent();
         if (intent.hasExtra(NimIntent.EXTRA_NOTIFY_CONTENT)) {
             Unicorn.openServiceActivity(this, getResources().getString(R.string.app_name), new ConsultSource(null, null, null));

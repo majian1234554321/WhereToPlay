@@ -183,10 +183,10 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         if (dataBean.list != null && dataBean.list.get(position).order_function != null) {
             switch (dataBean.list.get(position).order_function) {
                 case "1":
-                    holder.tvPayItemTitle.setText("预订方式：预付预定");
+                    holder.tvPayItemTitle.setText("预订方式：预付预订");
                     break;
                 case "2":
-                    holder.tvPayItemTitle.setText("预订方式：信用预定");
+                    holder.tvPayItemTitle.setText("预订方式：信用预订");
                     break;
                 case "3":
                     holder.tvPayItemTitle.setText("预订方式：充值");

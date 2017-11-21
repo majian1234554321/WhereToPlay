@@ -294,7 +294,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                             intent.putExtra("flag", "预订支付");
                             intent.putExtra("order_id", order_idValue);
                             intent.putExtra("store_name", storeNameValue);
-
+                            intent.putExtra("pay_type", "1");
                             intent.putExtra("arrival_time", contentBean.arrival_time);
                             intent.putExtra("prepay", contentBean.total);
 
@@ -323,14 +323,14 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
 
         switch (contentBean.action) {
             case "0":
-                oi9.setTv_right("信用预定");
+                oi9.setTv_right("信用预订");
                 break;
             case "1":
-                oi9.setTv_right("预付预定");
+                oi9.setTv_right("预付预订");
                 break;
 
             case "2":
-                oi9.setTv_right("信用预定");
+                oi9.setTv_right("信用预订");
                 break;
             case "3":
                 oi9.setTv_right("充值");

@@ -31,7 +31,7 @@ android {
 
         manifestPlaceholders = [
                 JPUSH_PKGNAME: "com.fanc.wheretoplay",
-                JPUSH_APPKEY : "8aed518715c80eda0449f277", //JPush上注册的包名对应的appkey.
+                JPUSH_APPKEY : "20f536d762ba4da4042ae43f", //JPush上注册的包名对应的appkey.
                 JPUSH_CHANNEL: "developer-default", //暂时填写默认值即�?
         ]
 
@@ -62,13 +62,13 @@ android {
     buildTypes {
         release {
             buildConfigField "boolean", "LOG_DEBUG", "false"
-            minifyEnabled false
-            zipAlignEnabled false
-            shrinkResources false
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
         debug {
-            debuggable true
+            debuggable false
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
@@ -126,8 +126,8 @@ dependencies {
     implementation files('libs/UPPayAssistEx.jar')
     implementation files('libs/UPPayPluginExPro.jar')
     compile 'com.umeng.analytics:analytics:6.1.2'
-    implementation project(':didi_sdk_for_common_v1.1.0_05_28')
-    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
+    //compile 'com.google.firebase:firebase-appindexing:11.6.0'
+    implementation project(':didi_sdk_for_common_v1.1.0_12_08')
 }
 
 //def gitSha() {
