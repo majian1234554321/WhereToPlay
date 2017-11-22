@@ -86,6 +86,7 @@ public class BaseActivity
 
         compositeSubscription = new CompositeDisposable ();
 
+
         registerBroadcastReceiver();
 
     }

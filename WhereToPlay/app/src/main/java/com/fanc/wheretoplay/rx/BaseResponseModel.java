@@ -1,12 +1,14 @@
 package com.fanc.wheretoplay.rx;
 
-import java.io.Serializable;
+
+
+
 
 /**
  * Created by DELL on 2017/3/9.
  */
 
-public class BaseResponseModel<T> implements Serializable {
+public class BaseResponseModel<T>  {
     public String code;
     public String message;
     public T content;
@@ -19,10 +21,10 @@ public class BaseResponseModel<T> implements Serializable {
 
     @Override
     public String toString() {
-        return "BaseModel{" +
+        return "BaseResponseModel{" +
                 "code='" + code + '\'' +
-                ", msg='" + message + '\'' +
-                ", data=" + content +
+                ", message='" + message + '\'' +
+                ", content=" + content +
                 '}';
     }
 

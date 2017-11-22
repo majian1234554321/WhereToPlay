@@ -1,12 +1,14 @@
 package com.fanc.wheretoplay.datamodel;
 
+import com.fanc.wheretoplay.rx.BaseResponseModel;
+
 import java.util.List;
 
 /**
  * Created by admin on 2017/11/2.
  */
 
-public class BookListModel   {
+public class BookListModel {
 
 
     /**
@@ -19,7 +21,7 @@ public class BookListModel   {
     public String message;
     public ContentBean content;
 
-    public static class ContentBean {
+    public static class ContentBean extends BaseResponseModel<ContentBean> {
         public List<ListBean> list;
 
         public static class ListBean {

@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_15"
             android:text='@{detail.balance_type.equals("1")?@string/recharge_way_ali:@string/recharge_way_weixin}'
-            android:textColor="@color/white"
+            android:textColor="#333333"
             android:textSize="@dimen/normal_textsize"/>
 
         <TextView
@@ -42,7 +42,7 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:text="@{'+'+detail.balance}"
-            android:textColor="@color/text_and_buttor_orange"
+            android:textColor="#c4483c"
             android:textSize="@dimen/normal_textsize"/>
     </RelativeLayout>
 

@@ -40,8 +40,8 @@
         android:maxWidth="140dp"
         android:singleLine="true"
         android:textSize="18sp"
-        android:visibility="gone"
-        android:textColor="@android:color/black" />
+        android:text="滴滴出行"
+        android:textColor="@android:color/white" />
 
     <WebView
         android:id="@+id/didi_webview"

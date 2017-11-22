@@ -316,25 +316,27 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
         oi7.setTv_right(contentBean.car_num);
         oi8.setTv_right(contentBean.people_num);
 
-        switch (contentBean.action) {
-            case "0":
-                oi9.setTv_right("信用预订");
-                break;
-            case "1":
-                oi9.setTv_right("预付预订");
-                break;
+        if (contentBean.action != null) {
+            switch (contentBean.action) {
+                case "0":
+                    oi9.setTv_right("信用预订");
+                    break;
+                case "1":
+                    oi9.setTv_right("预付预订");
+                    break;
 
-            case "2":
-                oi9.setTv_right("信用预订");
-                break;
-            case "3":
-                oi9.setTv_right("充值");
-                break;
-            case "5":
-                oi9.setTv_right("结单支付");
-                break;
-            default:
-                break;
+                case "2":
+                    oi9.setTv_right("信用预订");
+                    break;
+                case "3":
+                    oi9.setTv_right("充值");
+                    break;
+                case "5":
+                    oi9.setTv_right("结单支付");
+                    break;
+                default:
+                    break;
+            }
         }
 
         oi10.setTv_right(totalValue);
@@ -345,17 +347,24 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
         style1.setSpan(new ForegroundColorSpan(Color.parseColor("#333333")), 5, style1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         tv1.setText(style1);
 
-        SpannableStringBuilder style2 = new SpannableStringBuilder("创建时间: " + DateFormatUtil.stampToDate(contentBean.created_time));
-        style2.setSpan(new ForegroundColorSpan(Color.parseColor("#333333")), 5, style2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tv2.setText(style2);
+        if (contentBean.created_time!=null) {
+            SpannableStringBuilder style2 = new SpannableStringBuilder("创建时间: " + DateFormatUtil.stampToDate(contentBean.created_time));
+            style2.setSpan(new ForegroundColorSpan(Color.parseColor("#333333")), 5, style2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            tv2.setText(style2);
+        }
 
-        SpannableStringBuilder style3 = new SpannableStringBuilder("预订时间: " + DateFormatUtil.stampToDate(contentBean.reserve_time));
-        style3.setSpan(new ForegroundColorSpan(Color.parseColor("#333333")), 5, style3.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tv3.setText(style3);
+        if (contentBean.reserve_time!=null) {
+            SpannableStringBuilder style3 = new SpannableStringBuilder("预订时间: " + DateFormatUtil.stampToDate(contentBean.reserve_time));
+            style3.setSpan(new ForegroundColorSpan(Color.parseColor("#333333")), 5, style3.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            tv3.setText(style3);
+        }
 
-        SpannableStringBuilder style4 = new SpannableStringBuilder("成交时间: " + DateFormatUtil.stampToDate(contentBean.finish_time));
-        style4.setSpan(new ForegroundColorSpan(Color.parseColor("#333333")), 5, style4.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        tv4.setText(style4);
+        if (contentBean.finish_time!=null) {
+            SpannableStringBuilder style4 = new SpannableStringBuilder("成交时间: " + DateFormatUtil.stampToDate(contentBean.finish_time));
+            style4.setSpan(new ForegroundColorSpan(Color.parseColor("#333333")), 5, style4.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            tv4.setText(style4);
+        }
+
 
     }
 

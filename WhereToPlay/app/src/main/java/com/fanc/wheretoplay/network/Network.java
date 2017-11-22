@@ -5,6 +5,7 @@ import android.util.Log;
 import com.fanc.wheretoplay.datamodel.AccessOrderIdModel;
 import com.fanc.wheretoplay.datamodel.BookListModel;
 
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
 import okhttp3.MultipartBody;
 import retrofit2.http.Headers;
@@ -284,7 +285,7 @@ public class Network{
         //订单列表
         @Multipart
         @POST("User/bookList")
-        Observable<BaseResponseModel<BookListModel.ContentBean>> bookList(@Part MultipartBody.Part file, @Part MultipartBody.Part fileB, @Part MultipartBody.Part filec, @Part MultipartBody.Part filed);
+        Flowable<BookListModel.ContentBean> bookList(@Part MultipartBody.Part file, @Part MultipartBody.Part fileB, @Part MultipartBody.Part filec, @Part MultipartBody.Part filed);
 
         //订单详情
         @Multipart

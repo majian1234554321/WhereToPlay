@@ -5,18 +5,24 @@ package com.fanc.wheretoplay.presenter;
  */
 
 import android.content.Context;
+import android.widget.Toast;
 
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subscribers.DisposableSubscriber;
 import okhttp3.MultipartBody;
 
 
 
 import com.fanc.wheretoplay.base.BaseFragment;
+import com.fanc.wheretoplay.datamodel.BookList;
 import com.fanc.wheretoplay.datamodel.BookListModel;
+import com.fanc.wheretoplay.datamodel.BookListModel.ContentBean;
 import com.fanc.wheretoplay.rx.BaseResponseModel;
+import com.fanc.wheretoplay.rx.DisposableSubscriber2;
+import com.fanc.wheretoplay.rx.FlowableTransformer2;
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.view.OrderListFragmentView;
@@ -73,50 +79,32 @@ public class OrdelListFragmentPresenter implements BasePresenter {
 
 
 
-       Retrofit_RequestUtils.getRequest().bookList(requestFileA,requestFileC,requestFileB,requestFileD)
-               .subscribeOn(Schedulers.io())
-               .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<BaseResponseModel<BookListModel.ContentBean>>(){
-                    @Override
-                    public void onSubscribe(Disposable disposable) {
+       Retrofit_RequestUtils.getRequest()
+               .bookList(requestFileA,requestFileC,requestFileB,requestFileD)
+               .compose(new FlowableTransformer2<BookListModel.ContentBean>())
+               .subscribe(new DisposableSubscriber2<BookListModel.ContentBean>() {
+                   @Override
+                   protected void successful(BookListModel.ContentBean content) {
+                       if (action.equals("onRefresh")) {
+                           ptrlPayReserve.refreshFinish(0);
+                       }else {
+                           ptrlPayReserve.loadmoreFinish(0);
+                       }
+                       orderListFragmentView.setOrderListFragmentData(content, action);
+                   }
 
-                    }
+                   @Override
+                   public void failed(String t) {
+                       Toast.makeText(context, t, Toast.LENGTH_SHORT).show();
+                       if (action.equals("onRefresh")) {
+                           ptrlPayReserve.refreshFinish(5);
+                       }else {
+                           ptrlPayReserve.loadmoreFinish(5);
+                       }
+                   }
+               });
 
-                    @Override
-                    public void onNext(BaseResponseModel<BookListModel.ContentBean> contentBeanBaseResponseModel) {
-                        if (contentBeanBaseResponseModel!=null) {
-                            if (action.equals("onRefresh")) {
-                                ptrlPayReserve.refreshFinish(0);
-                            }else {
-                                ptrlPayReserve.loadmoreFinish(0);
-                            }
 
-
-                            orderListFragmentView.setOrderListFragmentData(contentBeanBaseResponseModel.content, action);
-                        } else {
-                            if (action.equals("onRefresh")) {
-                                ptrlPayReserve.refreshFinish(5);
-                            }else {
-                                ptrlPayReserve.loadmoreFinish(5);
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onError(Throwable throwable) {
-                        if (action.equals("onRefresh")) {
-                            ptrlPayReserve.refreshFinish(5);
-                        }else {
-                            ptrlPayReserve.loadmoreFinish(5);
-                        }
-                    }
-
-                    @Override
-                    public void onComplete() {
-
-                    }
-
-                });
 
 
 }

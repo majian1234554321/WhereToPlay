@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.DetailsOrderActivity;
 import com.fanc.wheretoplay.activity.DownPaymentActivity;
+import com.fanc.wheretoplay.activity.EvaluationSuccessActivity;
 import com.fanc.wheretoplay.activity.PayBillActivity;
 import com.fanc.wheretoplay.activity.PublicationEvaluationActivity;
 import com.fanc.wheretoplay.datamodel.BookListModel;
@@ -80,6 +81,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 }
                 intent.putExtra("discount", dataBean.list.get(position).discount);
                 intent.setClass(context, DetailsOrderActivity.class);
+                //intent.setClass(context, EvaluationSuccessActivity.class);
                 fragment.startActivityForResult(intent, 1001);
             }
         });

@@ -17,7 +17,6 @@ import io.reactivex.schedulers.Schedulers
 
 import kotlinx.android.synthetic.main.activity_evaluation_success.*
 import okhttp3.MultipartBody
-import org.reactivestreams.Subscriber
 
 
 class EvaluationSuccessActivity : BaseActivity(), View.OnClickListener {
