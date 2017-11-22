@@ -33,7 +33,9 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -158,7 +160,7 @@ public class CollectionFragment extends BaseFragment {
      */
     private String getSelectedCollectionId() {
         if (deleteIndex == null) {
-            deleteIndex = new ArrayList<>();
+            deleteIndex = new LinkedList();
         } else {
             deleteIndex.clear();
         }
@@ -167,7 +169,6 @@ public class CollectionFragment extends BaseFragment {
         for (int i : collectionAdapter.status.keySet()) {
             if (collectionAdapter.status.get(i)) {
                 deleteIndex.add(i);
-                Log.e("delete", i + "");
                 if (count != 0) {
                     sb.append(",");
                 }
@@ -179,6 +180,18 @@ public class CollectionFragment extends BaseFragment {
         if (deleteIndex.size() < 1) {
             return null;
         }
+
+        Collections.sort(deleteIndex);
+//        for (int i = 0; i < deleteIndex.size(); i++) {
+//            for (int j = 0; j < deleteIndex.size() - i - 1; j ++ ) {
+//                if (  deleteIndex.get(j) > deleteIndex.get(j + 1)) {
+//                    int k = 0;
+//                    k = deleteIndex.get(j + 1);
+//                    deleteIndex.set(j + 1,deleteIndex.get(j));
+//                    deleteIndex.set(j, k);
+//                }
+//            }
+//        }
         return sb.toString();
     }
 
@@ -301,18 +314,10 @@ public class CollectionFragment extends BaseFragment {
                         closeProgress();
                         if (response != null) {
                             if (response.getContent().isIs_ok()) {
-//                                for (int i:deleteIndex){
-//                                    collections.remove(i);
-//                                    collectionAdapter.notifyItemRemoved(i);
-//                                }
-
-                                for (int i = 0; i < deleteIndex.size(); i++) {
-                                    int integer = deleteIndex.get(i);
-                                    collections.remove(integer - i );
-                                    Log.e("delete", "integer - i: \t" + (integer - i));
-                                    collectionAdapter.notifyItemRemoved(integer - i);
+                                for (int i = deleteIndex.size(); i > 0; i --) {
+                                    collections.remove(i -1 );
+                                    collectionAdapter.notifyItemRemoved(i -1);
                                 }
-//                                collectionAdapter.delectItems(deleteIndex);
                                 ToastUtils.makePicTextShortToast(mContext, "删除成功");
                                 collectionAdapter.setDeleting(false);
                             }
