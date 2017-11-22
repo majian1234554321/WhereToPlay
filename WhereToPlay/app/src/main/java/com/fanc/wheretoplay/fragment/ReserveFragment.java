@@ -1064,7 +1064,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
 
                         @Override
                         public void onResponse(IsOk response) {
-
+                            closeProgress();
                         }
                     });
         }

@@ -182,16 +182,6 @@ public class CollectionFragment extends BaseFragment {
         }
 
         Collections.sort(deleteIndex);
-//        for (int i = 0; i < deleteIndex.size(); i++) {
-//            for (int j = 0; j < deleteIndex.size() - i - 1; j ++ ) {
-//                if (  deleteIndex.get(j) > deleteIndex.get(j + 1)) {
-//                    int k = 0;
-//                    k = deleteIndex.get(j + 1);
-//                    deleteIndex.set(j + 1,deleteIndex.get(j));
-//                    deleteIndex.set(j, k);
-//                }
-//            }
-//        }
         return sb.toString();
     }
 
@@ -314,9 +304,19 @@ public class CollectionFragment extends BaseFragment {
                         closeProgress();
                         if (response != null) {
                             if (response.getContent().isIs_ok()) {
-                                for (int i = deleteIndex.size(); i > 0; i --) {
-                                    collections.remove(i -1 );
-                                    collectionAdapter.notifyItemRemoved(i -1);
+                                for (int i = 0; i < deleteIndex.size(); i++) {
+                                    Log.e("delete", "deleteIndex 删除下标:\t"+deleteIndex.get(i));
+                                }
+                                for (int i = 0; i < collections.size(); i++) {
+                                    Log.e("delete", "collections下标：\t"+(i) + "\tID:\t"+collections.get(i).getId());
+                                }
+                                for (int i = deleteIndex.size() - 1; i >= 0; i --) {
+                                    collections.remove(deleteIndex.get(i) );
+                                    Log.e("delete", "collections删除下标：\t"+(deleteIndex.get(i)) + "\t删除ID:\t"+collections.get(deleteIndex.get(i)).getId());
+                                    collectionAdapter.notifyItemRemoved(deleteIndex.get(i) );
+                                }
+                                for (int i = 0; i < collections.size(); i++) {
+                                    Log.e("delete", "collections下标：\t"+(i) + "\tID:\t"+collections.get(i).getId());
                                 }
                                 ToastUtils.makePicTextShortToast(mContext, "删除成功");
                                 collectionAdapter.setDeleting(false);

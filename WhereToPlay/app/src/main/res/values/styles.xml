@@ -45,7 +45,7 @@
         <item name="android:layout_marginLeft">@dimen/margin_8</item>
     </style>
 
-    <!--自定义进度条-->
+    <!--自定义进度条 1 -->
     <style name="progress_dialog" parent="@android:style/Theme.Dialog">
         <item name="android:windowFrame">@null</item>
         <item name="android:windowIsFloating">true</item>
@@ -54,6 +54,13 @@
         <item name="android:background">@null</item>
         <item name="android:windowBackground">@null</item>
         <item name="android:backgroundDimEnabled">false</item>
+    </style>
+    <!--自定义进度条 2 -->
+    <style name="my_progress_dialog" parent="@android:style/Widget.DeviceDefault.ProgressBar.Small">
+        <item name="android:indeterminateTint" > @color/text_red</item>
+        <item name="android:indeterminateTintMode"> src_atop</item>
+        <item name="android:minWidth">@dimen/width_40</item>
+        <item name="android:minHeight">@dimen/height_40</item>
     </style>
     <!--画廊-->
     <style name="ecoGalleryStyle"></style>
