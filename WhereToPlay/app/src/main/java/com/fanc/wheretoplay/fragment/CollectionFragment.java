@@ -304,19 +304,10 @@ public class CollectionFragment extends BaseFragment {
                         closeProgress();
                         if (response != null) {
                             if (response.getContent().isIs_ok()) {
-                                for (int i = 0; i < deleteIndex.size(); i++) {
-                                    Log.e("delete", "deleteIndex 删除下标:\t"+deleteIndex.get(i));
-                                }
-                                for (int i = 0; i < collections.size(); i++) {
-                                    Log.e("delete", "collections下标：\t"+(i) + "\tID:\t"+collections.get(i).getId());
-                                }
                                 for (int i = deleteIndex.size() - 1; i >= 0; i --) {
-                                    collections.remove(deleteIndex.get(i) );
-                                    Log.e("delete", "collections删除下标：\t"+(deleteIndex.get(i)) + "\t删除ID:\t"+collections.get(deleteIndex.get(i)).getId());
-                                    collectionAdapter.notifyItemRemoved(deleteIndex.get(i) );
-                                }
-                                for (int i = 0; i < collections.size(); i++) {
-                                    Log.e("delete", "collections下标：\t"+(i) + "\tID:\t"+collections.get(i).getId());
+                                    int nba = deleteIndex.get(i);
+                                    collections.remove(nba );
+                                    collectionAdapter.notifyItemRemoved(nba );
                                 }
                                 ToastUtils.makePicTextShortToast(mContext, "删除成功");
                                 collectionAdapter.setDeleting(false);

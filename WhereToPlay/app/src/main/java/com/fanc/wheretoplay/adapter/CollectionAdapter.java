@@ -44,14 +44,12 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Log.e("delete","onCreateViewHolder");
         return new ViewHolder(DataBindingUtil.inflate(LayoutInflater.from(mContext),
                 R.layout.item_collection, parent, false));
     }
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Log.e("delete","onBindViewHolder 中的position:\t" + position);
         final CollectionList.Collection collection = (CollectionList.Collection) mData.get(position);
         holder.binding.setCollection(collection);
 //        Glide.with(mContext).load(Network.IMAGE + collection.getPath()).into(holder.mIvCollection);
