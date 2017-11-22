@@ -33,7 +33,9 @@ import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -158,7 +160,7 @@ public class CollectionFragment extends BaseFragment {
      */
     private String getSelectedCollectionId() {
         if (deleteIndex == null) {
-            deleteIndex = new ArrayList<>();
+            deleteIndex = new LinkedList();
         } else {
             deleteIndex.clear();
         }
@@ -178,6 +180,8 @@ public class CollectionFragment extends BaseFragment {
         if (deleteIndex.size() < 1) {
             return null;
         }
+
+        Collections.sort(deleteIndex);
         return sb.toString();
     }
 
@@ -300,11 +304,11 @@ public class CollectionFragment extends BaseFragment {
                         closeProgress();
                         if (response != null) {
                             if (response.getContent().isIs_ok()) {
-//                                for (int i:deleteIndex){
-//                                    collections.remove(i);
-//                                    collectionAdapter.notifyItemRemoved(i);
-//                                }
-                                collectionAdapter.delectItems(deleteIndex);
+                                for (int i = deleteIndex.size() - 1; i >= 0; i --) {
+                                    int nba = deleteIndex.get(i);
+                                    collections.remove(nba );
+                                    collectionAdapter.notifyItemRemoved(nba );
+                                }
                                 ToastUtils.makePicTextShortToast(mContext, "删除成功");
                                 collectionAdapter.setDeleting(false);
                             }

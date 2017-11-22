@@ -166,7 +166,6 @@
                 android:layout_toRightOf="@+id/tv_redeem_code"
                 android:background="@null"
                 android:hint="@string/hint_redeem_code"
-                android:inputType="textPassword"
                 android:maxLength="20"
                 android:textColor="@color/text_black"
                 android:textColorHint="@color/editText"
