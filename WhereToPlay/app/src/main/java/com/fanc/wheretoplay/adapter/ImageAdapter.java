@@ -77,7 +77,14 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
     }
 
     public void refresh(ArrayList<String> images) {
-        imagesfinal = images;
+
+        for (String s : imagesfinal) {
+            if (s!=null&&s.endsWith("这不是图片")){
+                imagesfinal.remove(s);
+            }
+        }
+
+        imagesfinal .addAll( images);
         notifyDataSetChanged();
     }
 

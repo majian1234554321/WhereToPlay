@@ -81,7 +81,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 }
                 intent.putExtra("discount", dataBean.list.get(position).discount);
                 intent.setClass(context, DetailsOrderActivity.class);
-                //intent.setClass(context, EvaluationSuccessActivity.class);
+               // intent.setClass(context, PublicationEvaluationActivity.class);
                 fragment.startActivityForResult(intent, 1001);
             }
         });

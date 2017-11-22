@@ -148,15 +148,6 @@ public class PublicationEvaluationActivity extends BaseActivity {
         });
 
 
-        /*if (store.getDiscount().length() > 0) {
-            SpannableString text = new SpannableString(store.getDiscount() + "折");
-            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            tvMerchantDetailDiscountSum.setText(text, TextView.BufferType.SPANNABLE);
-            tvMerchantDetailDiscountSum.setVisibility(View.VISIBLE);
-        } else {
-            tvMerchantDetailDiscountSum.setVisibility(View.GONE);
-        }*/
     }
 
 

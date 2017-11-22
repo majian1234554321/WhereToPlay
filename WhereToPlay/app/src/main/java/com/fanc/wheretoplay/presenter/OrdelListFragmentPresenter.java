@@ -7,20 +7,15 @@ package com.fanc.wheretoplay.presenter;
 import android.content.Context;
 import android.widget.Toast;
 
-import io.reactivex.Observer;
-import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
-import io.reactivex.schedulers.Schedulers;
-import io.reactivex.subscribers.DisposableSubscriber;
+
 import okhttp3.MultipartBody;
 
 
-
 import com.fanc.wheretoplay.base.BaseFragment;
-import com.fanc.wheretoplay.datamodel.BookList;
+
 import com.fanc.wheretoplay.datamodel.BookListModel;
-import com.fanc.wheretoplay.datamodel.BookListModel.ContentBean;
-import com.fanc.wheretoplay.rx.BaseResponseModel;
+
+
 import com.fanc.wheretoplay.rx.DisposableSubscriber2;
 import com.fanc.wheretoplay.rx.FlowableTransformer2;
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
@@ -39,11 +34,10 @@ public class OrdelListFragmentPresenter implements BasePresenter {
 
     PullToRefreshLayout ptrlPayReserve;
 
-    public BaseFragment baseFragment ;
+    public BaseFragment baseFragment;
 
 
-
-    public OrdelListFragmentPresenter(Context context, OrderListFragmentView orderListFragmentView,PullToRefreshLayout ptrlPayReserve, BaseFragment baseFragment) {
+    public OrdelListFragmentPresenter(Context context, OrderListFragmentView orderListFragmentView, PullToRefreshLayout ptrlPayReserve, BaseFragment baseFragment) {
 
         this.context = context;
         this.orderListFragmentView = orderListFragmentView;
@@ -70,7 +64,7 @@ public class OrdelListFragmentPresenter implements BasePresenter {
                 MultipartBody.Part.createFormData("token", new SPUtils(context).getUser().getToken());
 
         MultipartBody.Part requestFileC =
-                MultipartBody.Part.createFormData("page", currentPageValue+"");
+                MultipartBody.Part.createFormData("page", currentPageValue + "");
         MultipartBody.Part requestFileD =
                 MultipartBody.Part.createFormData("size", "10");
 
@@ -78,36 +72,33 @@ public class OrdelListFragmentPresenter implements BasePresenter {
                 MultipartBody.Part.createFormData("type", typeValue);
 
 
+        Retrofit_RequestUtils.getRequest()
+                .bookList(requestFileA, requestFileC, requestFileB, requestFileD)
+                .compose(new FlowableTransformer2<BookListModel.ContentBean>())
+                .subscribe(new DisposableSubscriber2<BookListModel.ContentBean>() {
+                    @Override
+                    protected void successful(BookListModel.ContentBean content) {
+                        if (action.equals("onRefresh")) {
+                            ptrlPayReserve.refreshFinish(0);
+                        } else {
+                            ptrlPayReserve.loadmoreFinish(0);
+                        }
+                        orderListFragmentView.setOrderListFragmentData(content, action);
+                    }
 
-       Retrofit_RequestUtils.getRequest()
-               .bookList(requestFileA,requestFileC,requestFileB,requestFileD)
-               .compose(new FlowableTransformer2<BookListModel.ContentBean>())
-               .subscribe(new DisposableSubscriber2<BookListModel.ContentBean>() {
-                   @Override
-                   protected void successful(BookListModel.ContentBean content) {
-                       if (action.equals("onRefresh")) {
-                           ptrlPayReserve.refreshFinish(0);
-                       }else {
-                           ptrlPayReserve.loadmoreFinish(0);
-                       }
-                       orderListFragmentView.setOrderListFragmentData(content, action);
-                   }
-
-                   @Override
-                   public void failed(String t) {
-                       Toast.makeText(context, t, Toast.LENGTH_SHORT).show();
-                       if (action.equals("onRefresh")) {
-                           ptrlPayReserve.refreshFinish(5);
-                       }else {
-                           ptrlPayReserve.loadmoreFinish(5);
-                       }
-                   }
-               });
-
+                    @Override
+                    public void failed(String t) {
+                        Toast.makeText(context, t, Toast.LENGTH_SHORT).show();
+                        if (action.equals("onRefresh")) {
+                            ptrlPayReserve.refreshFinish(5);
+                        } else {
+                            ptrlPayReserve.loadmoreFinish(5);
+                        }
+                    }
+                });
 
 
-
-}
+    }
 
 
 }

@@ -45,16 +45,16 @@ public class Network{
 //    String BASE = "http://ktv.ctkey.com.cn";// 测试
 //    String IMAGE = "http://ktv.ctkey.com.cn";
 
-//    public static String BASE = "http://testapi.51tzl.cn";   // 测试
-//    public static String IMAGE = "http://testapi.51tzl.cn";   // 测试
+    public static String BASE = "http://testapi.51tzl.cn";   // 测试
+    public static String IMAGE = "http://testapi.51tzl.cn";   // 测试
     // 模块
     public static String API = "/Api/";// 用户模块
 
     // 手机系统
     public static String PHONE_ANDROID = "android";
 
-    public static String IMAGE = "http://ktv.51tzl.cn";
-    public static String BASE = "http://ktv.51tzl.cn";
+//    public static String IMAGE = "http://ktv.51tzl.cn";
+//    public static String BASE = "http://ktv.51tzl.cn";
     public static String USER = BASE + API;
 
     public static void changEnvironment(String url) {
@@ -306,7 +306,7 @@ public class Network{
         //商家详情支付获取订单Id
         @Multipart
         @POST("User/immediatelyPay")
-        Observable<AccessOrderIdModel> immediatelyPay(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC);
+        Observable<AccessOrderIdModel> immediatelyPay(@Part List<MultipartBody.Part> fileA);
 
         //商家详情支付获取支付信息
         @Multipart

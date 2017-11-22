@@ -64,12 +64,10 @@ class EvaluationSuccessActivity : BaseActivity(), View.OnClickListener {
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<StoreDetailModel> {
-                    override fun onSubscribe(p0: Disposable) {
-                       // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                    }
+                    override fun onSubscribe(p0: Disposable) = Unit
 
                     override fun onError(p0: Throwable) {
-                       // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                        // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
                     }
 
                     override fun onNext(p0: StoreDetailModel) {
@@ -79,9 +77,7 @@ class EvaluationSuccessActivity : BaseActivity(), View.OnClickListener {
                         recycle.adapter = evaluationSuccessAdapter
                     }
 
-                    override fun onComplete() {
-                       // TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-                    }
+                    override fun onComplete() = Unit
 
 
                 })

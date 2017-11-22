@@ -60,16 +60,23 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableEmitter;
+import io.reactivex.ObservableOnSubscribe;
+import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
+import io.reactivex.subjects.Subject;
 import okhttp3.Call;
 import okhttp3.MultipartBody;
-
 
 
 /**
@@ -527,15 +534,33 @@ public class PayBillActivity extends BaseActivity {
 
     //商家详情支付
     private void storeDetailPay() {
-        MultipartBody.Part requestFileA =
-                MultipartBody.Part.createFormData("token", new SPUtils(mContext).getUser().getToken());
-        MultipartBody.Part requestFileB =
-                MultipartBody.Part.createFormData("amount", mEtConsumeSum.getText().toString().trim());
-        MultipartBody.Part requestFileC =
-                MultipartBody.Part.createFormData("store_id", storeId);
 
-       Retrofit_RequestUtils.getRequest()
-                .immediatelyPay(requestFileA, requestFileB, requestFileC)
+
+        String[] key = {"store_id", "token", "total", "fee", "display_prepay", "coup_id", "coup_amount", "display_balance", "discount"};
+
+        String[] value = {
+                storeId
+                , new SPUtils(mContext).getUser().getToken()
+                , mEtConsumeSum.getText().toString().trim()
+                , mEtNotParticipation.getText().toString().trim()
+                , mTvDownPaymentSum.getText().toString().trim()
+                , discountId
+                , discountPrice
+                , mTvPaySumReal.getText().toString().trim()
+                , discount+""
+        };
+
+        List<MultipartBody.Part> list = new ArrayList();
+        for (int i = 0; i < key.length; i++) {
+            if (value[i]!=null) {
+                list.add(MultipartBody.Part.createFormData(key[i], value[i]));
+            }
+
+        }
+
+
+        Retrofit_RequestUtils.getRequest()
+                .immediatelyPay(list)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<AccessOrderIdModel>() {
@@ -576,7 +601,7 @@ public class PayBillActivity extends BaseActivity {
 
                     @Override
                     public void onError(Throwable throwable) {
-
+                        Toast.makeText(mContext, throwable.toString(), Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -584,7 +609,7 @@ public class PayBillActivity extends BaseActivity {
 
                     }
                 });
-        //compositeSubscription.add(subscription);
+
     }
 
     /**
@@ -763,46 +788,53 @@ public class PayBillActivity extends BaseActivity {
      * @param orderString
      */
     private void aliPay(final String orderString) {
-        Runnable payRunnable = new Runnable() {
-
+        Observable.just(orderString).map(new Function<String, AliPayResult>() {
             @Override
-            public void run() {
+            public AliPayResult apply(String payTask) throws Exception {
                 PayTask alipay = new PayTask(PayBillActivity.this);
                 Map<String, String> result = alipay.payV2(orderString, true);
-
-                Message msg = new Message();
-                msg.what = ALI_PAY;
-                msg.obj = result;
-                mHandler.sendMessage(msg);
+                return new AliPayResult(result);
             }
-        };
-        // 必须异步调用
-        Thread payThread = new Thread(payRunnable);
-        payThread.start();
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<AliPayResult>() {
+                    @Override
+                    public void onSubscribe(Disposable disposable) {
+
+                    }
+
+                    @Override
+                    public void onNext(AliPayResult payResult) {
+                        /**
+                         对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
+                         */
+                        String resultInfo = payResult.getResult();// 同步返回需要验证的信息
+                        String resultStatus = payResult.getResultStatus();
+                        // 判断resultStatus 为9000则代表支付成功
+                        if (TextUtils.equals(resultStatus, "9000")) {
+                            // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
+                            ToastUtils.showShortToast(mContext, "支付成功");
+                            // checkAliPayResult(resultInfo, orderId, discountId);
+                            paySuccess();
+                        } else {
+                            // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
+                            ToastUtils.showShortToast(mContext, "支付失败");
+                        }
+                    }
+
+                    @Override
+                    public void onError(Throwable throwable) {
+
+                    }
+
+                    @Override
+                    public void onComplete() {
+
+                    }
+                });
+
     }
 
-    private final int ALI_PAY = 1;
-    private Handler mHandler = new Handler() {
-        @Override
-        public void handleMessage(Message msg) {
-            AliPayResult payResult = new AliPayResult((Map<String, String>) msg.obj);
-            /**
-             对于支付结果，请商户依赖服务端的异步通知结果。同步通知结果，仅作为支付结束的通知。
-             */
-            String resultInfo = payResult.getResult();// 同步返回需要验证的信息
-            String resultStatus = payResult.getResultStatus();
-            // 判断resultStatus 为9000则代表支付成功
-            if (TextUtils.equals(resultStatus, "9000")) {
-                // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-                ToastUtils.showShortToast(mContext, "支付成功");
-               // checkAliPayResult(resultInfo, orderId, discountId);
-                paySuccess();
-            } else {
-                // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
-                ToastUtils.showShortToast(mContext, "支付失败");
-            }
-        }
-    };
 
     /**
      * 支付结果验证

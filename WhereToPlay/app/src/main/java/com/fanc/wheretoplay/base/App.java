@@ -14,6 +14,7 @@ import android.util.Log;
 import com.fanc.wheretoplay.MainActivity;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.image.GlideGalleryImageLoader;
+import com.fanc.wheretoplay.service.CatchExcep;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.FileUtils;
 import com.fanc.wheretoplay.util.GlideImageLoader;
@@ -70,7 +71,8 @@ public class App extends Application {
         // 华为手机无异常
 
         init();
-
+        CatchExcep catchExcep = new CatchExcep();
+        catchExcep.init();
 
         DIOpenSDK.registerApp(this, "didi65434B4C6253787A30446D76544D474E", "c841ae9e1a8cf7dcc912fe3fe6624dfd");
 
