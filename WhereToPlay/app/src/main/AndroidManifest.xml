@@ -88,6 +88,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ReuseActivity"
+
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustUnspecified|stateHidden" />
         <activity
@@ -228,7 +229,7 @@
             android:value="5a126b998f4a9d5e2d00001a" />
         <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="Umeng" />
+            android:value="${UMENG_CHANNEL_VALUE}" />
 
         <activity android:name=".Main2Activity"></activity>
 

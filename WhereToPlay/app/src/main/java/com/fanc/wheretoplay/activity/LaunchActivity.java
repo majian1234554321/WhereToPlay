@@ -23,7 +23,9 @@ import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.App;
 import com.fanc.wheretoplay.base.BaseActivity;
 import com.fanc.wheretoplay.databinding.ActivityLaunchBinding;
+import com.fanc.wheretoplay.datamodel.DataValue;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.util.BaiDuMapUtils;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.SPUtils;
@@ -49,12 +51,27 @@ public class LaunchActivity extends BaseActivity {
     int[] imgs;
     List<ImageView> imageViews;
     int prePosition;
-
+    private BaiDuMapUtils baiDuMapUtils;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         launchBinding = DataBindingUtil.setContentView(this, R.layout.activity_launch);
 //        initPermissions();
+        new Thread(new Runnable() {
+
+
+
+            @Override
+            public void run() {
+                baiDuMapUtils = new BaiDuMapUtils();
+                BaiDuMapUtils.BaiDuInfoModel baiDuInfoModel = baiDuMapUtils.getCurrentAllinfo(LaunchActivity.this);
+
+                DataValue.latitude = baiDuInfoModel.latitude;
+                DataValue.longitude = baiDuInfoModel.longitude;
+
+            }
+        }).start();
+
 
         init();
         //七鱼需要
@@ -62,6 +79,15 @@ public class LaunchActivity extends BaseActivity {
         changeConvironment();
 
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        if (baiDuMapUtils!=null){
+            baiDuMapUtils.destoryBaiDuLocation();
+        }
+    }
+
     /**
      * 七鱼需要
      */
@@ -73,12 +99,14 @@ public class LaunchActivity extends BaseActivity {
             setIntent(new Intent());
         }
     }
+
     @Override
     public void onResume() {
         super.onResume();
         initPermissions();
 
     }
+
     /**
      * 测试环境改变
      */
@@ -87,7 +115,7 @@ public class LaunchActivity extends BaseActivity {
         switch (switchStatus) {
             case "on":
                 Network.changEnvironment("http://testapi.51tzl.cn");
-                Network.User.changeUserUrl(Network.USER );
+                Network.User.changeUserUrl(Network.USER);
                 break;
             case "off":
                 Network.changEnvironment("http://ktv.51tzl.cn");
@@ -97,6 +125,7 @@ public class LaunchActivity extends BaseActivity {
                 break;
         }
     }
+
     private void initPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             String[] permissions = new String[]{

@@ -96,20 +96,6 @@ public class DiscoverFragment extends BaseFragment {
                 LinearLayoutManager.HORIZONTAL, UIUtils.dp2Px(10), UIUtils.getColor(R.color.bg_gray));
         mRvDiscover.addItemDecoration(divider);
 
-//        mTmDiscover.setRightText("切换");
-//        final GridLayoutManager gridLayoutManager = new GridLayoutManager(mContext, 2);
-//        mTmDiscover.setRightTextOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                if (isGrid) {
-//                    mRvDiscover.setLayoutManager(lm);
-//                } else {
-//                    mRvDiscover.setLayoutManager(gridLayoutManager);
-//                }
-//                mDiscoverAdapter.notifyDataSetChanged();
-//                isGrid = !isGrid;
-//            }
-//        });
     }
 
     private void getAdvertisingList(String token, double lat, double lng) {

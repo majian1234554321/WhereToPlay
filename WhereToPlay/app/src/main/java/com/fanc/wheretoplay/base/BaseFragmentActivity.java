@@ -47,7 +47,7 @@ import static com.fanc.wheretoplay.base.App.mContext;
  * @updateDate 2016/3/23 0023
  * @updateDes
  */
-public class BaseFragmentActivity extends FragmentActivity {
+public class BaseFragmentActivity extends BaseActivity {
     public SPUtils mSPUtils;
     public com.fanc.wheretoplay.view.AlertDialog mAlertDialog;
     private Receiver receiver;

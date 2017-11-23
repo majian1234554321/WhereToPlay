@@ -157,15 +157,14 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.ViewHo
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(mContext, PayBillActivity.class);
-                intent.putExtra(Constants.ORDER_ID, order.order_id);
                 intent.putExtra(Constants.STORE_ID, order.store_id);
-                if (TextUtils.equals("4", order.status)) {// 去消费
-                    intent.putExtra(Constants.PAGE, Constants.CONSUME);
-                }
-                if (TextUtils.equals("2", order.status)) {// 去结账
-                    intent.putExtra(Constants.PAGE, Constants.PAYING_THE_BILL);
-                }
+                intent.putExtra("storeName", order.store_name);
+                intent.putExtra("address", order.book_type);
+                intent.putExtra("discount", order.discount);
+                intent.putExtra(Constants.PAGE, "商家详情支付");
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 mContext.startActivity(intent);
+
             }
         });
         holder.mBtnToComment.setOnClickListener(new View.OnClickListener() {
@@ -200,6 +199,8 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.ViewHo
         Button mBtnBuy;
         Button mBtnCancel;
         Button mBtnToComment;
+
+
 
         public ViewHolder(ViewDataBinding binding) {
             super(binding.getRoot());

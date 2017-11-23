@@ -89,6 +89,7 @@ public interface Constants {
     String REGISTER_AGREEMENT_URL = "http://ktv.51tzl.cn/static/protocol/";   //乐互网协议
 
 
+
     /**
      * broadcast
      */

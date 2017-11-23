@@ -536,7 +536,7 @@ public class PayBillActivity extends BaseActivity {
     private void storeDetailPay() {
 
 
-        String[] key = {"store_id", "token", "total", "fee", "display_prepay", "coup_id", "coup_amount", "display_balance", "discount"};
+        String[] key = {"store_id", "token", "total", "fee", "display_prepay", "coup_id", "coup_amount", "money"};
 
         String[] value = {
                 storeId
@@ -547,12 +547,12 @@ public class PayBillActivity extends BaseActivity {
                 , discountId
                 , discountPrice
                 , mTvPaySumReal.getText().toString().trim()
-                , discount+""
+
         };
 
         List<MultipartBody.Part> list = new ArrayList();
         for (int i = 0; i < key.length; i++) {
-            if (value[i]!=null) {
+            if (value[i] != null) {
                 list.add(MultipartBody.Part.createFormData(key[i], value[i]));
             }
 
@@ -572,27 +572,34 @@ public class PayBillActivity extends BaseActivity {
 
                     @Override
                     public void onNext(AccessOrderIdModel accessOrderIdModel) {
+                        double paySum = Double.parseDouble(mTvPaySumReal.getText().toString());
+
                         if ("0".equals(accessOrderIdModel.code)) {
                             //Toast.makeText(PayBillActivity.this, accessOrderIdModel.content.order_id, Toast.LENGTH_SHORT).show();
                             orderId = accessOrderIdModel.content.order_id;
-                            switch (payWay) {
-                                case 0:
-                                    ToastUtils.makePicTextShortToast(mContext, "请选择支付方式");
-                                    break;
-                                case 1://支付宝支付
-                                case 2:// 微信支付
-                                    payOrder();
-                                    break;
-                                case 3:// 余额支付
-                                    alertBalancePay();
-                                    break;
-                                case 10086:
-                                    UPPayAssistEx.startPay(PayBillActivity.this, null, null, "438791594995972708301", mMode);
-                                    break;
+                            if (paySum <= 0) {
+                                payBillDeductTheDeposit();
+                            } else {
+                                switch (payWay) {
+                                    case 0:
+                                        ToastUtils.makePicTextShortToast(mContext, "请选择支付方式");
+                                        break;
+                                    case 1://支付宝支付
+                                    case 2:// 微信支付
+                                        payOrder();
+                                        break;
+                                    case 3:// 余额支付
+                                        alertBalancePay();
+                                        break;
+                                    case 10086:
+                                        UPPayAssistEx.startPay(PayBillActivity.this, null, null, "438791594995972708301", mMode);
+                                        break;
 
-                                default:
-                                    break;
+                                    default:
+                                        break;
+                                }
                             }
+
 
                         } else {
                             Toast.makeText(mContext, "请求失败", Toast.LENGTH_SHORT).show();
@@ -965,7 +972,7 @@ public class PayBillActivity extends BaseActivity {
                     public void onResponse(IsOk response) {
                         if (isSuccess(response)) {
                             if (response.isResult()) {
-                                paySuccess();
+                                checkAliPayResult("",orderId,"");
                             }
                         }
                     }

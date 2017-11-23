@@ -41,11 +41,13 @@ import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.callback.IOnFocusListener;
 import com.fanc.wheretoplay.databinding.FragmentReserveBinding;
 import com.fanc.wheretoplay.datamodel.CityResource;
+import com.fanc.wheretoplay.datamodel.DataValue;
 import com.fanc.wheretoplay.datamodel.Filter;
 import com.fanc.wheretoplay.datamodel.IsOk;
 import com.fanc.wheretoplay.datamodel.StoreList;
 import com.fanc.wheretoplay.image.GlideImageLoader;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.util.BaiDuMapUtils;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.LogUtils;
@@ -150,7 +152,6 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
     String filterType;// 筛选
     String value;// 筛选值，id
     String category;// 分类筛选
-    double lat, lng;
 
     MainActivity.MyOnTouchListener onTouchListener;
 //    private LinearLayout mEntertainment;
@@ -262,7 +263,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
         mRvReserve.setAdapter(mReserveAdapter);
         // 主页网络请求
         showProgress();
-        getFilterList(null, lat, lng);
+        getFilterList(null, Double.parseDouble(DataValue.latitude), Double.parseDouble(DataValue.longitude));
         //第一次请求数据，city.getId()强制设置为上海的id
         getStoreList(null, city.getId(), page, size, null, storeType, null, null, null);
         // 筛选
@@ -500,6 +501,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
         filterAreaAdapter = new FilterPopDialogAdapter(mContext, areas);
         filterArea = new FilterPopupDialog(mContext)
                 .setPopupWindowHeight(254)
+
                 .setAdapter(filterAreaAdapter);
         // 筛选（两级菜单）
         filterAdapter = new FilterPopDialogAdapter(mContext, filterBeans);
@@ -857,7 +859,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
         Map<String, String> param = new HashMap<>();
 //        param.put(Network.Param.TOKEN, token);
         param.put(Network.Param.CITY, cityId);
-        double lat, lng;
+       /* double lat, lng;
         //存储经纬度
         if (LocationUtils.location != null) {
             lat = LocationUtils.location.getLatitude();
@@ -865,17 +867,21 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
         } else {
             lat = Double.parseDouble(city.getLat());
             lng = Double.parseDouble(city.getLng());
-        }
-        if (Constants.USELESS_NUMBER_PARAM == lat) {// 现在不会走这里，（此为初始版的设计）
-            param.put(Network.Param.LAT, "");
-        } else {
-            param.put(Network.Param.LAT, String.valueOf(lat));
-        }
-        if (Constants.USELESS_NUMBER_PARAM == lng) {
-            param.put(Network.Param.LNG, "");
-        } else {
-            param.put(Network.Param.LNG, String.valueOf(lng));
-        }
+        }*/
+
+
+
+
+           // param.put(Network.Param.LAT, String.valueOf(lat));
+            param.put(Network.Param.LAT, DataValue.latitude);
+
+
+
+
+
+          //  param.put(Network.Param.LNG, String.valueOf(lng));
+            param.put(Network.Param.LNG, DataValue.longitude);
+
 
         param.put(Network.Param.PAGE, String.valueOf(page));
         param.put(Network.Param.SIZE, String.valueOf(size));
@@ -892,6 +898,10 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
             param.put(Network.Param.FILTER, filter);
             param.put(Network.Param.VALUE, value);
         }
+
+
+
+
 
         OkHttpUtils.post()
                 .url(Network.User.COMMON_STORE_LIST)

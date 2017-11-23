@@ -270,7 +270,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
                                     @Override
                                     public void onError(Throwable throwable) {
-
+                                        ToastUtils.showShortToast(context, throwable.toString());
                                     }
 
                                     @Override

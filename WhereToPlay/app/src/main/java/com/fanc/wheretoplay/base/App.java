@@ -57,6 +57,9 @@ public class App extends Application {
     private static List<Service> services = new LinkedList<Service>();
     private StatusBarNotificationConfig mStatusBarNotificationConfig;
 
+
+
+
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);

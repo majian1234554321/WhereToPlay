@@ -44,7 +44,10 @@ public class MineFriendAdapter extends RecyclerView.Adapter<MineFriendAdapter.Vi
         //头像
         Glide.with(mContext).load(mMineFriendList.getPic()).placeholder(R.drawable.default_rect).into(holder.mIvMineFriend);
         //时间
-        holder.mTvMineFriendTime.setText(String.format(mContext.getResources().getString(R.string.money_time),DateFormatUtil.getYYYYMMDDHHmm(mMineFriendList.getRegTime())));
+      //  holder.mTvMineFriendTime.setText(String.format(mContext.getResources().getString(R.string.money_time),DateFormatUtil.getYYYYMMDDHHmm(mMineFriendList.getRegTime())));
+
+        holder.mTvMineFriendTime.setText(String.format(mContext.getResources().getString(R.string.money_time),DateFormatUtil.stampToDate(mMineFriendList.getRegTime())));
+
         //nickname
         holder.mTvMineFriendTitle.setText(mMineFriendList.getNickname());
     }

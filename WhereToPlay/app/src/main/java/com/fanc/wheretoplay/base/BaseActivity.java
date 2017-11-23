@@ -11,7 +11,9 @@ import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.content.res.Resources;
+import android.database.ContentObserver;
 import android.graphics.Color;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -19,6 +21,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.provider.Settings;
 import android.support.annotation.NonNull;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -58,7 +61,7 @@ import static com.fanc.wheretoplay.base.App.mContext;
  * @updateDes
  */
 public class BaseActivity
-        extends Activity {
+        extends FragmentActivity {
     public SPUtils mSpUtils;
     private DProgressDialog mProgressDialog;
     public Context mContext;
@@ -67,6 +70,7 @@ public class BaseActivity
     private com.fanc.wheretoplay.view.AlertDialog mAlertDialog;
     private Receiver receiver;
     public CompositeDisposable compositeSubscription;
+    private LocationManager mLocationManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,8 +88,10 @@ public class BaseActivity
             LocationUtils.getLocation(this);
         }
 
-        compositeSubscription = new CompositeDisposable ();
+        compositeSubscription = new CompositeDisposable();
 
+
+        mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
         registerBroadcastReceiver();
 
@@ -155,7 +161,7 @@ public class BaseActivity
             mAlertDialog = null;
         }
 
-        if (compositeSubscription!=null) {
+        if (compositeSubscription != null) {
             compositeSubscription.clear();
         }
     }
@@ -174,6 +180,37 @@ public class BaseActivity
         MobclickAgent.onPause(this);
     }
 
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getContentResolver()
+                .registerContentObserver(
+                        Settings.Secure.getUriFor(Settings.Secure.LOCATION_PROVIDERS_ALLOWED),
+
+                        false, mGpsMonitor);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        getContentResolver().unregisterContentObserver(mGpsMonitor);
+    }
+
+    private
+    final ContentObserver mGpsMonitor = new
+            ContentObserver(null) {
+                @Override
+                public void onChange(boolean selfChange) {
+                    super.onChange(selfChange);
+                    boolean enabled = mLocationManager
+                            .isProviderEnabled(LocationManager.GPS_PROVIDER);
+
+                    Log.i("GPSGPS",enabled+"");
+
+                }
+
+            };
 
     /**
      * 对返回的数据信息进行解析，判断网络是否成功

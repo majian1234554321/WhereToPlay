@@ -25,6 +25,7 @@ import com.fanc.wheretoplay.fragment.DiscoverFragment;
 import com.fanc.wheretoplay.fragment.MineFragment;
 import com.fanc.wheretoplay.fragment.PayFragment;
 import com.fanc.wheretoplay.fragment.ReserveFragment;
+import com.fanc.wheretoplay.util.BaiDuMapUtils;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
@@ -108,6 +109,8 @@ public class MainActivity extends BaseFragmentActivity {
             Unicorn.openServiceActivity(this, getResources().getString(R.string.app_name), new ConsultSource(null, null, null));
         }
 
+
+
         init();
         initFragments();
         initPage();
@@ -170,6 +173,7 @@ public class MainActivity extends BaseFragmentActivity {
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         screenWidth = displayMetrics.widthPixels;
         setSelectedPage(0);
+
     }
 
 
@@ -240,28 +244,7 @@ public class MainActivity extends BaseFragmentActivity {
                             break;
                     }
                 }
-                //去掉底部选择栏的滑动块
-//                ConstraintLayout.LayoutParams layoutParams = (ConstraintLayout.LayoutParams) mFlMainTab.getLayoutParams();
-//                layoutParams.leftMargin = (int) (screenWidth / 3 * (position + positionOffset));
-//                mFlMainTab.setLayoutParams(layoutParams);
-//                if (positionOffset > 0) {
-//                    if (position == 0) {
-//                        // 预定大图标和支付小图标，向右滑动逐渐隐藏，向左滑动逐渐显示
-////                        mIvReserveBig.setAlpha(1 - positionOffset);
-////                        mIvPay.setAlpha(1 - positionOffset);
-//                        // 预定小图标和支付大图标，向右滑动逐渐显示，向左滑动逐渐隐藏
-////                        mIvPayBig.setAlpha(positionOffset);
-//                        mIvReserve.setAlpha(positionOffset);
-//                    }
-//                    if (position == 1) {
-//                        // 支付大图标和发现小图标，向右滑动逐渐隐藏，向左滑动逐渐显示
-//                        mIvDiscover.setAlpha(1 - positionOffset);
-////                        mIvPayBig.setAlpha(1 - positionOffset);
-//                        // 支付小图标和发现大图标，向右滑动逐渐显示，向左滑动逐渐隐藏
-////                        mIvDiscoverBig.setAlpha(positionOffset);
-//                        mIvPay.setAlpha(positionOffset);
-//                    }
-//                }
+
 
             }
 
