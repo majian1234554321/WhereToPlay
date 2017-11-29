@@ -1410,9 +1410,12 @@ public class DateFormatUtil {
 
 
     public static String stampToDate(String s) {
-
-        String date = new  SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(new java.util.Date(Long.parseLong(s) * 1000));
-        return date;
+        if ("0".equals(s)||TextUtils.isEmpty(s)){
+            return "";
+        }else {
+            String date = new  SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(new java.util.Date(Long.parseLong(s) * 1000));
+            return date;
+        }
     }
 
 }

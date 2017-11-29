@@ -38,12 +38,14 @@
                 android:layout_weight="1"
                 android:drawablePadding="4dp"
                 android:gravity="center"
+                android:visibility="gone"
                 android:text="发表评价" />
 
 
             <TextView
                 android:id="@+id/tv_right"
                 android:layout_width="0dp"
+                android:visibility="gone"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="#C4483C"

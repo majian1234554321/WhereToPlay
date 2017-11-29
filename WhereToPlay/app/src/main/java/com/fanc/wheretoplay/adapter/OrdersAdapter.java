@@ -36,6 +36,7 @@ import com.fanc.wheretoplay.view.AlertDialog;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ConcurrentHashMap;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -86,7 +87,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 intent.putExtra("discount", dataBean.list.get(position).discount);
                 intent.setClass(context, DetailsOrderActivity.class);
 
-                fragment.startActivityForResult(intent, 1001);
+                fragment.startActivity(intent);
 
 
             }
@@ -100,8 +101,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
         GlideImageLoader.display(context, holder.ivPayItem, IMAGE + dataBean.list.get(position).cover);
         holder.tv_payState.setText(dataBean.list.get(position).statusdesc);
-
-        holder.tvPayItemRealTime.setText(DateFormatUtil.stampToDate(dataBean.list.get(position).arrival_time) + " 前");
+        String time = !TextUtils.isEmpty(DateFormatUtil.stampToDate(dataBean.list.get(position).arrival_time))  ? DateFormatUtil.stampToDate(dataBean.list.get(position).arrival_time) + "前":"";
+        holder.tvPayItemRealTime.setText(time);
 
 
         for (int i = 0; i < holder.lists.size(); i++) {
@@ -237,6 +238,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         intent.putExtra(Constants.PAGE, "商家详情支付");
 
         context.startActivity(intent);
+
+
 
     }
 

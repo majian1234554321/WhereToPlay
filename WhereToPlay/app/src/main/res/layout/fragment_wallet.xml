@@ -133,7 +133,7 @@
 
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="@dimen/height_150">
+            android:layout_height="@dimen/height_100">
 
             <LinearLayout
                 android:id="@+id/ll_wallet_weixin"
@@ -190,6 +190,7 @@
                 android:layout_below="@+id/ll_wallet_ali"
                 android:onClick="@{click.onViewClick}"
                 android:orientation="horizontal"
+                android:visibility="gone"
                 android:background="@color/white">
 
                 <ImageView
@@ -237,6 +238,7 @@
                     android:id="@+id/rb_upp"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_0"
+                    android:visibility="gone"
                     android:layout_weight="1"
                     android:button="@drawable/selector_pay_way"/>
             </RadioGroup>

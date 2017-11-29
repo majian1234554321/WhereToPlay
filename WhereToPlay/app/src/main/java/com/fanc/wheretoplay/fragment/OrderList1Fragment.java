@@ -123,13 +123,7 @@ public class OrderList1Fragment extends BaseLazyFragment implements PullToRefres
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==1001){
 
-        }
-    }
 
     @Override
     public void setOrderListFragmentData(BookListModel.ContentBean contentBean, String action) {

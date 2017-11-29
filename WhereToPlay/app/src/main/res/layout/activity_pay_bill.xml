@@ -354,7 +354,7 @@
 
                 <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_200">
+                    android:layout_height="@dimen/height_150">
 
                     <LinearLayout
                         android:id="@+id/ll_pay_bill_weixin"
@@ -432,6 +432,7 @@
                         android:layout_height="wrap_content"
                         android:layout_below="@+id/ll_pay_bill_balance"
                         android:onClick="onViewClick"
+                        android:visibility="gone"
                         android:orientation="horizontal">
 
                         <ImageView
@@ -485,6 +486,7 @@
                             android:id="@+id/rb_upp"
                             android:layout_width="match_parent"
                             android:layout_height="@dimen/height_0"
+                            android:visibility="gone"
                             android:layout_weight="1"
                             android:button="@drawable/selector_pay_way" />
                     </RadioGroup>
@@ -510,6 +512,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/line_height"
+                        android:visibility="gone"
                         android:layout_alignBottom="@+id/ll_upp"
                         android:background="#E5E5E5" />
                 </RelativeLayout>

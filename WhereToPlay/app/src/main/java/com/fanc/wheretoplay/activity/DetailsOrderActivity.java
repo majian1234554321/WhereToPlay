@@ -229,6 +229,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
         if (contentBean.buttonlist != null) {
             for (int i = 0; i < contentBean.buttonlist.size(); i++) {
                 lists.get(i).setText(contentBean.buttonlist.get(i).title);
+                lists.get(i).setVisibility(View.VISIBLE);
             }
         }
 
@@ -265,8 +266,9 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
 
 
                             intent.putExtra(Constants.PAGE, "商家详情支付");
-
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                             mContext.startActivity(intent);
+
 
 
 //                            Toast.makeText(mContext, "立即支付", Toast.LENGTH_SHORT).show();
@@ -290,7 +292,9 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                             intent.putExtra("order_id", order_idValue);
                             intent.putExtra("store_id", store_idValue);
                             intent.setClass(DetailsOrderActivity.this, PublicationEvaluationActivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                             mContext.startActivity(intent);
+
 
                         case "转预付":
 

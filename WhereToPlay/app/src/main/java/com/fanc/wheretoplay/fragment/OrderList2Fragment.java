@@ -22,6 +22,7 @@ import com.fanc.wheretoplay.base.BaseLazyFragment;
 import com.fanc.wheretoplay.datamodel.BookListModel;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
 import com.fanc.wheretoplay.presenter.OrdelListFragmentPresenter;
+import com.fanc.wheretoplay.rx.RxBus;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.OrderListFragmentView;
 import com.fanc.wheretoplay.view.PullToRefreshLayout;
@@ -35,6 +36,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
+import io.reactivex.functions.Consumer;
 
 /**
  * Created by admin on 2017/11/1.
@@ -92,6 +94,19 @@ public class OrderList2Fragment extends BaseLazyFragment implements PullToRefres
         ordelListFragmentPresenter = new OrdelListFragmentPresenter(mContext,this,ptrlPayReserve,OrderList2Fragment.this);
         ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
 
+        RxBus.getDefault().toFlowable(Intent.class)
+                .subscribe(new Consumer<Intent>() {
+                    @Override
+                    public void accept(Intent intent) throws Exception {
+                        if (intent!=null&&"Value".equals(intent.getStringExtra("Key"))){
+                            //Toast.makeText(mContext, "QQQQ", Toast.LENGTH_SHORT).show();
+                            currentPage=0;
+                            ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
+                        }
+
+                    }
+                });
+
 
         return view;
     }
@@ -121,13 +136,7 @@ public class OrderList2Fragment extends BaseLazyFragment implements PullToRefres
         }
     }
 
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode==1001){
-           // Toast.makeText(mContext, "1001", Toast.LENGTH_SHORT).show();
-        }
-    }
+
 
     @Override
     public void setOrderListFragmentData(BookListModel.ContentBean contentBean, String action) {

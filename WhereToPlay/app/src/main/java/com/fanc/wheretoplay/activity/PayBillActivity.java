@@ -346,9 +346,13 @@ public class PayBillActivity extends BaseActivity {
                     // 最终支付 = 消费支付金额 + 不参与优惠（+服务费）
                     if (!TextUtils.isEmpty(mEtNotParticipation.getText().toString())) {
                         if (lastPaySum < 0) {
-                            mTvPaySumReal.setText(String.valueOf(Double.parseDouble(mEtNotParticipation.getText().toString()) * (1 + cashRate / 100)));
+
+                            String value = df.format(Double.parseDouble(mEtNotParticipation.getText().toString()) * (1 + cashRate / 100));
+                            mTvPaySumReal.setText(value);
                         } else {
-                            mTvPaySumReal.setText(String.valueOf(lastPaySum + Double.parseDouble(mEtNotParticipation.getText().toString()) * (1 + cashRate / 100)));
+                            String value = df.format(lastPaySum + Double.parseDouble(mEtNotParticipation.getText().toString()) * (1 + cashRate / 100));
+
+                            mTvPaySumReal.setText(value);
                         }
                     }
                 } else {
@@ -416,9 +420,6 @@ public class PayBillActivity extends BaseActivity {
                 break;
         }
     }
-
-
-
 
 
     private void payBill() {
