@@ -23,6 +23,7 @@ import android.provider.Settings;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.LocalBroadcastManager;
+import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -31,9 +32,12 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.fanc.wheretoplay.R;
+import com.fanc.wheretoplay.activity.LaunchActivity;
 import com.fanc.wheretoplay.activity.SignInActivity;
+import com.fanc.wheretoplay.datamodel.DataValue;
 import com.fanc.wheretoplay.datamodel.User;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.util.BaiDuMapUtils;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.SPUtils;
@@ -71,11 +75,12 @@ public class BaseActivity
     private Receiver receiver;
     public CompositeDisposable compositeSubscription;
     private LocationManager mLocationManager;
+    private BaiDuMapUtils baiDuMapUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        super.onCreate(savedInstanceState);
         translucent();
         MobclickAgent.setScenarioType(this, MobclickAgent.EScenarioType.E_UM_NORMAL);
         setRequestedOrientation(ActivityInfo
@@ -90,6 +95,13 @@ public class BaseActivity
 
         compositeSubscription = new CompositeDisposable();
 
+
+        baiDuMapUtils = new BaiDuMapUtils();
+        BaiDuMapUtils.BaiDuInfoModel baiDuInfoModel = baiDuMapUtils.getCurrentAllinfo(this);
+        if (baiDuInfoModel != null) {
+            DataValue.latitude = baiDuInfoModel.latitude;
+            DataValue.longitude = baiDuInfoModel.longitude;
+        }
 
         mLocationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
 
@@ -161,6 +173,10 @@ public class BaseActivity
             mAlertDialog = null;
         }
 
+        if (baiDuMapUtils != null) {
+            baiDuMapUtils.destoryBaiDuLocation();
+        }
+
         if (compositeSubscription != null) {
             compositeSubscription.clear();
         }
@@ -206,7 +222,7 @@ public class BaseActivity
                     boolean enabled = mLocationManager
                             .isProviderEnabled(LocationManager.GPS_PROVIDER);
 
-                    Log.i("GPSGPS",enabled+"");
+                    Log.i("GPSGPS", enabled + "");
 
                 }
 

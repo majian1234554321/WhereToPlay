@@ -344,7 +344,7 @@
     <string name="reserve_submit">预订已提交</string>
 
     <!--reserved list-->
-    <string name="buy">买单</string>
+    <string name="buy">支付</string>
 
     <!--房型-->
     <string name="housetype">小包（2-5人）</string>

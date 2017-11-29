@@ -68,6 +68,8 @@ public class OrderDetailModel {
         public String number;
         public String statusdesc;
         public List<ButtonlistBean> buttonlist;
+        public String book_price;
+        public String prepay;
 
         public static class ButtonlistBean {
             /**

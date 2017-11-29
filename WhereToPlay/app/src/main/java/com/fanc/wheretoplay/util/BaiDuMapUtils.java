@@ -32,7 +32,7 @@ public class BaiDuMapUtils {
     private MyBDLocationListener mBDLocationListener;
 
     //获取当前的信息 (地址，经度，纬度)
-    public BaiDuInfoModel getCurrentAllinfo(Context mContext) {
+    public  BaiDuInfoModel getCurrentAllinfo(Context mContext) {
         mLocationClient = new LocationClient(mContext);
         mBDLocationListener = new MyBDLocationListener();
         // 注册监听

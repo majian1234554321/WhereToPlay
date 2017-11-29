@@ -26,6 +26,8 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.fanc.wheretoplay.activity.SignInActivity;
+import com.fanc.wheretoplay.datamodel.DataValue;
+import com.fanc.wheretoplay.util.BaiDuMapUtils;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.SPUtils;
@@ -54,11 +56,13 @@ public class BaseFragmentActivity extends BaseActivity {
     //刷新
     public PullToRefreshLayout mPtrl;
     public boolean isPullDown, isPullUp;
+    private BaiDuMapUtils baiDuMapUtils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         requestWindowFeature(Window.FEATURE_NO_TITLE);
+        super.onCreate(savedInstanceState);
+
         translucent();// 状态栏透明
         mSPUtils = new SPUtils(this);
         App.addActivity(this);
@@ -69,6 +73,15 @@ public class BaseFragmentActivity extends BaseActivity {
         if (LocationUtils.location == null) {
             LocationUtils.getLocation(this);
         }
+
+        baiDuMapUtils = new BaiDuMapUtils();
+        BaiDuMapUtils.BaiDuInfoModel baiDuInfoModel = baiDuMapUtils.getCurrentAllinfo(this);
+        if (baiDuInfoModel != null) {
+            DataValue.latitude = baiDuInfoModel.latitude;
+            DataValue.longitude = baiDuInfoModel.longitude;
+        }
+
+
         registerBroadcastReceiver();
     }
 
@@ -145,6 +158,10 @@ public class BaseFragmentActivity extends BaseActivity {
         }
         if (mAlertDialog != null) {
             mAlertDialog = null;
+        }
+
+        if (baiDuMapUtils != null) {
+            baiDuMapUtils.destoryBaiDuLocation();
         }
     }
 

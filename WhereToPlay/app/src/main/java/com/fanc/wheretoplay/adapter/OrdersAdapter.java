@@ -4,8 +4,10 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
@@ -25,6 +27,7 @@ import com.fanc.wheretoplay.image.GlideImageLoader;
 import com.fanc.wheretoplay.presenter.DetailsOrderPresenter;
 import com.fanc.wheretoplay.rx.BaseResponseModel;
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
+import com.fanc.wheretoplay.rx.RxBus;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.DateFormatUtil;
 import com.fanc.wheretoplay.util.SPUtils;
@@ -58,6 +61,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         this.context = context;
         this.fragment = fragment;
         this.dataBean = dataBean;
+
     }
 
     @Override
@@ -81,8 +85,10 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 }
                 intent.putExtra("discount", dataBean.list.get(position).discount);
                 intent.setClass(context, DetailsOrderActivity.class);
-               // intent.setClass(context, PublicationEvaluationActivity.class);
+
                 fragment.startActivityForResult(intent, 1001);
+
+
             }
         });
 
@@ -91,7 +97,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         holder.tvPayItemRoom.setText(dataBean.list.get(position).room_type);
         holder.tvPayItemDecorate.setText(dataBean.list.get(position).decorate_type);
         holder.tvPayItemReserveRealCode.setText(dataBean.list.get(position).book_sn);
-        holder.tvPayItemPrice.setText("总价：" + dataBean.list.get(position).total);
+
         GlideImageLoader.display(context, holder.ivPayItem, IMAGE + dataBean.list.get(position).cover);
         holder.tv_payState.setText(dataBean.list.get(position).statusdesc);
 
@@ -123,7 +129,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                             cancleOrder(position);
                             break;
                         case "立即支付":
-                            pay(position);
+                            pay(position, holder);
                             break;
                         case "立即评论":
                             intent.putExtra("address", dataBean.list.get(position).address);
@@ -144,9 +150,10 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                             intent.putExtra("store_name", dataBean.list.get(position).name);
 
                             intent.putExtra("pay_type", "1");
+                            intent.putExtra("pay_Action", "转预付");
 
                             intent.putExtra("arrival_time", dataBean.list.get(position).arrival_time);
-                            intent.putExtra("prepay", dataBean.list.get(position).total);
+                            intent.putExtra("prepay", dataBean.list.get(position).prepay);
 
 
                             intent.setClass(context, DownPaymentActivity.class);
@@ -185,17 +192,22 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
             switch (dataBean.list.get(position).order_function) {
                 case "1":
                     holder.tvPayItemTitle.setText("预订方式：预付预订");
+                    holder.tvPayItemPrice.setText("总价：" + dataBean.list.get(position).prepay);
                     break;
                 case "2":
                     holder.tvPayItemTitle.setText("预订方式：信用预订");
+                    holder.tvPayItemPrice.setText("总价：" + dataBean.list.get(position).total);
                     break;
                 case "3":
                     holder.tvPayItemTitle.setText("预订方式：充值");
+                    holder.tvPayItemPrice.setText("总价：" + dataBean.list.get(position).total);
                 case "5":
                     holder.tvPayItemTitle.setText("预订方式：结单支付");
+                    holder.tvPayItemPrice.setText("总价：" + dataBean.list.get(position).total);
                     break;
                 default:
                     holder.tvPayItemTitle.setText("预订方式：...");
+                    holder.tvPayItemPrice.setText("总价：" + dataBean.list.get(position).total);
                     break;
             }
         }
@@ -203,25 +215,24 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
     }
 
-    private void pay(int position) {
+    private void pay(int position, ViewHolder holder) {
         Intent intent = new Intent();
-//        intent.setClass(context, PayBillActivity.class);
-//        intent.putExtra(Constants.ORDER_ID, dataBean.list.get(position).order_id);
-//        intent.putExtra(Constants.STORE_ID, dataBean.list.get(position).store_id);
-//        if (TextUtils.equals("4", dataBean.list.get(position).order_action)) {// 去消费
-//            intent.putExtra(Constants.PAGE, Constants.CONSUME);
-//        }
-//        if (TextUtils.equals("2", dataBean.list.get(position).order_action)) {// 去结账
-//            intent.putExtra(Constants.PAGE, Constants.PAYING_THE_BILL);
-//        }
-//        context.startActivity(intent);
+        intent.setClass(context, PayBillActivity.class);
+
+
+        if ("预订方式：预付预订".equals(holder.tvPayItemTitle.getText().toString().trim())) {
+            intent.putExtra("pay_Action", "预订方式：预付预订");
+            intent.putExtra("money", dataBean.list.get(position).prepay);
+        } else {
+            intent.putExtra("pay_Action", "预订方式：结单支付");
+            intent.putExtra("money", dataBean.list.get(position).total);
+        }
 
 
         intent.putExtra("address", dataBean.list.get(position).address);
-        intent.setClass(context, PayBillActivity.class);
-        intent.putExtra(Constants.STORE_ID, dataBean.list.get(position).order_id);
+        intent.putExtra(Constants.STORE_ID, dataBean.list.get(position).store_id);
         intent.putExtra("storeName", dataBean.list.get(position).name);
-        // intent.putExtra("address", dataBean.list.get(position).add);
+        intent.putExtra("displayMoney", dataBean.list.get(position).total);
         intent.putExtra("discount", dataBean.list.get(position).discount);
         intent.putExtra(Constants.PAGE, "商家详情支付");
 
@@ -237,10 +248,6 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 .setBtnOnClickListener(new AlertDialog.OnBtnClickListener() {
                     @Override
                     public void onBtnClick(View view, String input) {
-                        //cancelOrder(order, position);
-
-                        //DetailsOrderPresenter detailsOrderPresenter =  new DetailsOrderPresenter();
-                        // detailsOrderPresenter.cancelOrder();
                         MultipartBody.Part requestFileA =
                                 MultipartBody.Part.createFormData("token", new SPUtils(context).getUser().getToken());
 
@@ -261,8 +268,10 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                                     public void onNext(BaseResponseModel<CancleOrderModel.ContentBean> contentBeanBaseResponseModel) {
                                         if (contentBeanBaseResponseModel.success() && contentBeanBaseResponseModel.content.is_cancle) {
                                             ToastUtils.showShortToast(context, "取消订单成功");
-                                            dataBean.list.remove(position);
-                                            notifyDataSetChanged();
+                                            Intent intent = new Intent();
+                                            intent.putExtra("Key", "Value");
+                                            RxBus.getDefault().post(intent);
+
                                         } else {
                                             ToastUtils.showShortToast(context, "取消订单失败");
                                         }

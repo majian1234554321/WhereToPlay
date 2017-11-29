@@ -1,8 +1,10 @@
 package com.fanc.wheretoplay.fragment;
 
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.databinding.DataBindingUtil;
@@ -24,6 +26,7 @@ import android.widget.TextView;
 import com.alipay.sdk.app.PayTask;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.DetailActivity;
+import com.fanc.wheretoplay.activity.PayBillActivity;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentWalletBinding;
 import com.fanc.wheretoplay.datamodel.IsOk;
@@ -39,6 +42,7 @@ import com.orhanobut.logger.Logger;
 import com.tencent.mm.sdk.modelpay.PayReq;
 import com.tencent.mm.sdk.openapi.IWXAPI;
 import com.tencent.mm.sdk.openapi.WXAPIFactory;
+import com.unionpay.UPPayAssistEx;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 import com.zhy.http.okhttp.callback.StringCallback;
@@ -158,7 +162,7 @@ public class WalletFragment extends BaseFragment {
                 type = 1;
                 break;
             case R.id.rb_upp:
-                type = 10086;
+                type = 4;
                 break;
             default:
                 break;
@@ -239,8 +243,8 @@ public class WalletFragment extends BaseFragment {
                                 wxPay(json);
                             }
                             
-                            if (type==10086){
-                                uppPay();
+                            if (type==4){
+                                UPPayAssistEx.startPay(mContext, null, null, json.getString("orderString"), mMode);
                             }
                             
                         } catch (JSONException e) {
@@ -252,7 +256,72 @@ public class WalletFragment extends BaseFragment {
 
     }
 
-    private void uppPay() {
+
+    private final String mMode = "00";
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        /*************************************************
+         * 步骤3：处理银联手机支付控件返回的支付结果
+         ************************************************/
+        if (data == null) {
+            return;
+        }
+
+        String msg = "";
+        /*
+         * 支付控件返回字符串:success、fail、cancel 分别代表支付成功，支付失败，支付取消
+         */
+        String str = data.getExtras().getString("pay_result");
+        if (str.equalsIgnoreCase("success")) {
+
+            // 如果想对结果数据验签，可使用下面这段代码，但建议不验签，直接去商户后台查询交易结果
+            // result_data结构见c）result_data参数说明
+            if (data.hasExtra("result_data")) {
+                String result = data.getExtras().getString("result_data");
+                try {
+                    JSONObject resultJson = new JSONObject(result);
+                    String sign = resultJson.getString("sign");
+                    String dataOrg = resultJson.getString("data");
+                    // 此处的verify建议送去商户后台做验签
+                    // 如要放在手机端验，则代码必须支持更新证书
+                    boolean ret = verify(dataOrg, sign, mMode);
+                    if (ret) {
+                        // 验签成功，显示支付结果
+                        msg = "支付成功！";
+                    } else {
+                        // 验签失败
+                        msg = "支付失败！";
+                    }
+                } catch (JSONException e) {
+                }
+            }
+            // 结果result_data为成功时，去商户后台查询一下再展示成功
+            msg = "支付成功！";
+        } else if (str.equalsIgnoreCase("fail")) {
+            msg = "支付失败！";
+        } else if (str.equalsIgnoreCase("cancel")) {
+            msg = "用户取消了支付";
+        }
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+        builder.setTitle("支付结果通知");
+        builder.setMessage(msg);
+        builder.setInverseBackgroundForced(true);
+        // builder.setCustomTitle();
+        builder.setNegativeButton("确定", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+        builder.create().show();
+    }
+
+    private boolean verify(String msg, String sign64, String mode) {
+        // 此处的verify，商户需送去商户后台做验签
+        return true;
+
     }
 
     /**

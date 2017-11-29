@@ -31,6 +31,7 @@ import com.fanc.wheretoplay.activity.ReuseActivity;
 //import com.fanc.wheretoplay.activity.ServiceActivity;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentReserveInfoBinding;
+import com.fanc.wheretoplay.datamodel.DataValue;
 import com.fanc.wheretoplay.datamodel.HousenewsList;
 import com.fanc.wheretoplay.datamodel.RoomList;
 import com.fanc.wheretoplay.datamodel.StoreDescribe;
@@ -135,6 +136,9 @@ public class ReserveInfoFragment extends BaseFragment {
     }
 
     private void initViews() {
+
+
+
         mTmReserveInfo = reserveInfoBinding.tmReserveInfo;
         mTvReserveInfoTitle = reserveInfoBinding.tvReserveInfoTitle;
         mTvReserveInfoRealDiscount = reserveInfoBinding.tvReserveInfoDiscountReal;
@@ -167,16 +171,10 @@ public class ReserveInfoFragment extends BaseFragment {
         // 联系人信息
         mEtReserveInfoName.setText(mUser.getNickname());
         mEtReserveInfoMobile.setText(mUser.getMobile());
-        if (LocationUtils.location != null) {
-            lat = LocationUtils.location.getLatitude();
-            lng = LocationUtils.location.getLongitude();
-        } else {
-            lat = -1;
-            lng = -1;
-        }
+
         // 房型
         if (storeId != null) {
-            getStoreDescribe(storeId, lat, lng);
+            getStoreDescribe(storeId, DataValue.latitude, DataValue.longitude);
 //            getRoomList(storeId);
         }
 
@@ -253,23 +251,18 @@ public class ReserveInfoFragment extends BaseFragment {
         return this;
     }
 
-    private void getStoreDescribe(String storeId, double lat, double lng) {
+    private void getStoreDescribe(String storeId, String lat, String lng) {
         Map<String, String> params = new HashMap<>();
         params.put(Network.Param.TOKEN, mUser.getToken());
         if (storeId != null && !storeId.isEmpty()) {
             params.put(Network.Param.STORE_ID, storeId);
         }
-        if (Constants.USELESS_NUMBER_PARAM != lat) {
-            params.put(Network.Param.LAT, String.valueOf(lat));
-        } else {
-            params.put(Network.Param.LAT, "");
-        }
 
-        if (Constants.USELESS_NUMBER_PARAM != lng) {
-            params.put(Network.Param.LNG, String.valueOf(lng));
-        } else {
-            params.put(Network.Param.LNG, "");
-        }
+            params.put(Network.Param.LAT, lat);
+
+
+            params.put(Network.Param.LNG, lng);
+
 
         OkHttpUtils.post()
                 .url(Network.User.USER_STORE_DESCRIBE)
@@ -293,6 +286,7 @@ public class ReserveInfoFragment extends BaseFragment {
     }
 
     private void showStoreDescribe(StoreDescribe.Store store) {
+        Log.i("XXXXXXXXXXXXXX",store.cover);
         reserveInfoBinding.setStore(store);
         String d = "";
         // 距离

@@ -38,23 +38,21 @@ import java.util.List;
 
 public class Network{
 
-    // 公共前缀123456678888888888
-//    String BASE = "http://192.168.1.96/ktv/index.php";// 开发
-//    String IMAGE = "http://192.168.1.96/ktv";// 图片
 
-//    String BASE = "http://ktv.ctkey.com.cn";// 测试
-//    String IMAGE = "http://ktv.ctkey.com.cn";
 
     public static String BASE = "http://testapi.51tzl.cn";   // 测试
-    public static String IMAGE = "http://testapi.51tzl.cn";   // 测试
+   // public static String BASE = "http://ktv.51tzl.cn";
+
+
+    public static String IMAGE = "";   // 测试
     // 模块
     public static String API = "/Api/";// 用户模块
 
     // 手机系统
     public static String PHONE_ANDROID = "android";
 
-//    public static String IMAGE = "http://ktv.51tzl.cn";
-//    public static String BASE = "http://ktv.51tzl.cn";
+
+
     public static String USER = BASE + API;
 
     public static void changEnvironment(String url) {

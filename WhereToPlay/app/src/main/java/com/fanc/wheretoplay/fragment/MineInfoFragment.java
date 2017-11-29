@@ -33,6 +33,7 @@ import com.fanc.wheretoplay.datamodel.Url;
 import com.fanc.wheretoplay.image.GlideGalleryImageLoader;
 import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
+import com.fanc.wheretoplay.rx.RxBus;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.DateFormatUtil;
 import com.fanc.wheretoplay.util.FileUtils;
@@ -572,7 +573,9 @@ public class MineInfoFragment extends BaseFragment {
                                 Intent intent = new Intent(Constants.ACTION_MINE_INFO_MODIFY_SUCCESS);
                                 intent.putExtra(Constants.MOBILE, mobile);
                                 intent.putExtra(Constants.NAME, nickname);
-                                LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
+                               // LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
+
+                                RxBus.getDefault().post(intent);
 
                                 mContext.finish();
                             } else {

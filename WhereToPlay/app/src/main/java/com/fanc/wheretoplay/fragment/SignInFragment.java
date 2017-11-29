@@ -47,9 +47,6 @@ public class SignInFragment extends BaseFragment {
     //    TextView mTvForgetPwd;
 //    TextView mTvMobilRegister;
     Button mBtnSignIn;
-    private MultipartBody.Part requestFileA;
-    private MultipartBody.Part requestFileB;
-    private MultipartBody.Part requestFileC;
 
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -110,33 +107,11 @@ public class SignInFragment extends BaseFragment {
 
         mBtnSignIn.setEnabled(false);
         showProgress();
-//        OkHttpUtils.post()
-//                .url(Network.User.LOGIN_LOGIN)
-//                .addParams(Network.Param.MOBILE, mobile)
-//                .addParams(Network.Param.PASSWORD, pwd)
-//                .build()
-//                .execute(new DCallback<User>() {
-//                    @Override
-//                    public void onError(Call call, Exception e) {
-//                        connectError();
-//                        mBtnSignIn.setEnabled(true);
-//                    }
-//
-//                    @Override
-//                    public void onResponse(User response) {
-//                        mBtnSignIn.setEnabled(true);
-//                        if (isSuccess(response)) {
-//                            ToastUtils.showShortToast(mContext, "登录成功");
-//                            mSpUtils.putUser(response);
-//                            mSpUtils.putBoolean(Constants.IS_SIGN_IN, true);
-//                            ((SignInActivity) mContext).startActivityToHome();
-//                        }
-//                    }
-//                });
+
         String registrationID = JPushInterface.getRegistrationID(mContext);//极光推送id
-        requestFileA = MultipartBody.Part.createFormData(Network.Param.MOBILE,  mobile);
-        requestFileB = MultipartBody.Part.createFormData(Network.Param.PASSWORD,  pwd);
-        requestFileC = MultipartBody.Part.createFormData(Network.Param.REGISTRATIONID,  registrationID);
+        MultipartBody.Part requestFileA = MultipartBody.Part.createFormData(Network.Param.MOBILE, mobile);
+        MultipartBody.Part requestFileB = MultipartBody.Part.createFormData(Network.Param.PASSWORD, pwd);
+        MultipartBody.Part requestFileC = MultipartBody.Part.createFormData(Network.Param.REGISTRATIONID, registrationID);
 
 
          Retrofit_RequestUtils.getRequest().logIn(requestFileA, requestFileB, requestFileC)

@@ -6,6 +6,7 @@ import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
@@ -51,26 +52,16 @@ public class LaunchActivity extends BaseActivity {
     int[] imgs;
     List<ImageView> imageViews;
     int prePosition;
-    private BaiDuMapUtils baiDuMapUtils;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         launchBinding = DataBindingUtil.setContentView(this, R.layout.activity_launch);
 //        initPermissions();
-        new Thread(new Runnable() {
 
 
 
-            @Override
-            public void run() {
-                baiDuMapUtils = new BaiDuMapUtils();
-                BaiDuMapUtils.BaiDuInfoModel baiDuInfoModel = baiDuMapUtils.getCurrentAllinfo(LaunchActivity.this);
-
-                DataValue.latitude = baiDuInfoModel.latitude;
-                DataValue.longitude = baiDuInfoModel.longitude;
-
-            }
-        }).start();
 
 
         init();
@@ -83,9 +74,7 @@ public class LaunchActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (baiDuMapUtils!=null){
-            baiDuMapUtils.destoryBaiDuLocation();
-        }
+
     }
 
     /**
@@ -207,19 +196,20 @@ public class LaunchActivity extends BaseActivity {
             }
 
             @Override
-            public boolean isViewFromObject(View view, Object object) {
+            public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
                 return view == object;
             }
 
+            @NonNull
             @Override
-            public Object instantiateItem(ViewGroup container, int position) {
+            public Object instantiateItem(@NonNull ViewGroup container, int position) {
                 ImageView imageView = imageViews.get(position);
                 container.addView(imageView);
                 return imageView;
             }
 
             @Override
-            public void destroyItem(ViewGroup container, int position, Object object) {
+            public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
                 container.removeView((View) object);
 //                super.destroyItem(container, position, object);
             }

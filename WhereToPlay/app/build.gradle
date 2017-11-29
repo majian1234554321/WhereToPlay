@@ -17,9 +17,9 @@ android {
         applicationId "com.fanc.wheretoplay"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 20171120
+        versionCode 20171124
 
-        versionName "1.2.0"
+        versionName "1.2.4"
 
 
         sourceSets.main {

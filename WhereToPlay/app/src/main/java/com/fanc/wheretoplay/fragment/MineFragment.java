@@ -29,6 +29,7 @@ import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentMineBinding;
 import com.fanc.wheretoplay.datamodel.Score;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.rx.RxBus;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.view.CircleImageView;
@@ -43,6 +44,7 @@ import com.zhy.http.okhttp.callback.DCallback;
 
 import java.util.HashMap;
 
+import io.reactivex.functions.Consumer;
 import okhttp3.Call;
 
 import static com.fanc.wheretoplay.util.LocationUtils.mLocationClient;
@@ -73,7 +75,7 @@ public class MineFragment extends BaseFragment {
 
     Receiver receiver;
     private ItemView mIvMineService;
-    private MyBDLocationListener mBDLocationListener;
+
 
     @Nullable
     @Override
@@ -161,17 +163,31 @@ public class MineFragment extends BaseFragment {
         mIvMineService.setIcon(R.drawable.mine_service);
         mIvMineService.setRightIcon(R.drawable.right);
 
-        registerBroadcastReceiver();
+
+        RxBus.getDefault().toFlowable(Intent.class)
+                .subscribe(new Consumer<Intent>() {
+                    @Override
+                    public void accept(Intent intent) throws Exception {
+                        if (intent.getStringExtra(Constants.URL) != null) {
+                            Glide.with(mContext).load(intent.getStringExtra(Constants.URL)).into(mCivMine);
+                        }
+
+                        if (intent.getStringExtra(Constants.NAME) != null) {
+                            mTvMimeNickname.setText(intent.getStringExtra(Constants.NAME));
+                        }
+
+                        if (intent.getStringExtra(Constants.MOBILE) != null) {
+                            mTvMimeMobile.setText(intent.getStringExtra(Constants.MOBILE));
+                        }
+
+
+                    }
+                });
+        // registerBroadcastReceiver();
     }
 
     private void setListeners() {
-        //去掉左边箭头的点击事件
-//        mTmMine.setLeftIconOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mContext.finish();
-//            }
-//        });
+
         mTmMine.setRightIconOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -277,39 +293,11 @@ public class MineFragment extends BaseFragment {
                 goToNewPage(Constants.MINEMONEY);
                 break;
             case R.id.iv_mine_drive:
-                //  ToastUtils.makePicTextShortToast(mContext,"修复中，敬请期待！");
-
-/*
-
-                mLocationClient = new LocationClient(mContext);
-                mBDLocationListener = new MyBDLocationListener();
-                // 注册监听
-                mLocationClient.registerLocationListener(mBDLocationListener);
-
-
-                // 声明定位参数
-                LocationClientOption option = new LocationClientOption();
-                option.setLocationMode(LocationClientOption.LocationMode.Hight_Accuracy);// 设置定位模式 高精度
-                option.setCoorType("bd09ll");// 设置返回定位结果是百度经纬度 默认gcj02
-                option.setScanSpan(5000);// 设置发起定位请求的时间间隔 单位ms
-                option.setIsNeedAddress(true);// 设置定位结果包含地址信息
-                option.setNeedDeviceDirect(true);// 设置定位结果包含手机机头 的方向
-                // 设置定位参数
-                mLocationClient.setLocOption(option);
-                // 启动定位
-                mLocationClient.start();
-*/
-
-
                 HashMap<String, String> map = new HashMap<String, String>();
                 map.put("lat", "39.916195");
                 map.put("lng", "116.66355");
                 map.put("maptype", "wgs84");
-                DIOpenSDK.showDDPage(getActivity(), map);
-
-
-
-
+                DIOpenSDK.showDDPage(mContext, map);
                 break;
             case R.id.iv_mine_service:
                 ConsultSource source = new ConsultSource(null, null, null);
@@ -337,39 +325,6 @@ public class MineFragment extends BaseFragment {
     }
 
 
-     class MyBDLocationListener implements BDLocationListener {
-
-        @Override
-        public void onReceiveLocation(BDLocation location) {
-            // 非空判断
-            if (location != null) {
-                // 根据BDLocation 对象获得经纬度以及详细地址信息
-                double latitude = location.getLatitude();
-                double longitude = location.getLongitude();
-                String address = location.getAddrStr();
-                Log.i("HHHHHH", "address:" + address + " latitude:" + latitude
-                        + " longitude:" + longitude + "---"+Thread.currentThread().getName());
-                if (mLocationClient.isStarted()) {
-                    // 获得位置之后停止定位
-                    mLocationClient.stop();
-                }
-
-
-                HashMap<String, String> map = new HashMap<>();
-
-                map.put("maptype", "baidu");
-                map.put("fromlat", latitude+"");
-                map.put("fromlng", longitude+"");
-
-
-                DiDiWebActivity.showDDPage(mContext, map);
-
-
-            }
-        }
-    }
-
-
     @Override
     public void onDestroyView() {
         super.onDestroyView();
@@ -377,7 +332,5 @@ public class MineFragment extends BaseFragment {
             LocalBroadcastManager.getInstance(mContext).unregisterReceiver(receiver);
             receiver = null;
         }
-
-//
     }
 }

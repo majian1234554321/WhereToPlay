@@ -62,7 +62,7 @@ public class ReserveAdapter extends RecyclerView.Adapter<ReserveAdapter.ViewHold
         final StoreList.Store store = (StoreList.Store) mData.get(position);
         holder.binding.setStore(store);
         // 图片
-        Glide.with(mContext).load(Network.IMAGE + store.getCover()).placeholder(R.drawable.default_rect).into(holder.mIvReserveItem);
+        Glide.with(mContext).load( store.getCover()).placeholder(R.drawable.default_rect).into(holder.mIvReserveItem);
         // 折扣
         Log.e("what","1\n" + store.getDiscount());
         if (store.getDiscount().length() > 0) {

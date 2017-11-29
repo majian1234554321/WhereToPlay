@@ -2,6 +2,7 @@ package com.fanc.wheretoplay.fragment;
 
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
@@ -70,6 +71,7 @@ public class DiscountCouponFragment extends BaseFragment {
         mTmDiscountCoupon.setLeftIcon(R.drawable.left);
         mTmDiscountCoupon.setTitle(R.string.discount_coupon);
         mTmDiscountCoupon.setTitleColor(getResources().getColor(R.color.white));
+        mTmDiscountCoupon.setRightTextColor(Color.WHITE);
         // 是否是选择优惠券
         if (isChoose) {
             chooseDiscountCoupon();

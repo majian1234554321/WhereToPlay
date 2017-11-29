@@ -43,6 +43,7 @@ import com.fanc.wheretoplay.adapter.ReserveAdapter;
 import com.fanc.wheretoplay.base.App;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentMerchantDetailBinding;
+import com.fanc.wheretoplay.datamodel.DataValue;
 import com.fanc.wheretoplay.datamodel.IsOk;
 import com.fanc.wheretoplay.datamodel.StoreDetail;
 import com.fanc.wheretoplay.datamodel.StoreList;
@@ -500,14 +501,14 @@ public class MerchantDetailFragment extends BaseFragment {
 
     private void getMerchantDetail() {
         if (LocationUtils.location != null) {
-            getMerchantDetail(this.mStoreId, LocationUtils.location.getLatitude(), LocationUtils.location.getLongitude());
+            getMerchantDetail(this.mStoreId, DataValue.latitude, DataValue.longitude);
         } else {
             showTextProgress("定位中...");
             LocationUtils.getLocation(mContext, new LocationUtils.Callback() {
                 @Override
                 public void onReceiveLocation(BDLocation bdLocation) {
                     closeProgress();
-                    getMerchantDetail(mStoreId, bdLocation.getLatitude(), bdLocation.getLongitude());
+                    getMerchantDetail(mStoreId, DataValue.latitude, DataValue.longitude);
                 }
             });
         }
@@ -518,13 +519,13 @@ public class MerchantDetailFragment extends BaseFragment {
      *
      * @param id
      */
-    private void getMerchantDetail(String id, double lat, double lng) {
+    private void getMerchantDetail(String id, String lat, String lng) {
         showProgress();
         OkHttpUtils.post()
                 .url(Network.User.PUBLIC_STORE_DETAIL)
                 .addParams(Network.Param.ID, id)
-                .addParams(Network.Param.LAT, String.valueOf(lat))
-                .addParams(Network.Param.LNG, String.valueOf(lng))
+                .addParams(Network.Param.LAT, lat)
+                .addParams(Network.Param.LNG, lng)
                 .build()
                 .execute(new DCallback<StoreDetail>() {
                     @Override

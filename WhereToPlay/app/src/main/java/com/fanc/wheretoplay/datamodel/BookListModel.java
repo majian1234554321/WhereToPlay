@@ -56,6 +56,8 @@ public class BookListModel {
             public String cover;
             public String discount;
             public List<ButtonlistBean> buttonlist;
+            public String book_price;
+            public String prepay;
 
             public static class ButtonlistBean {
                 /**

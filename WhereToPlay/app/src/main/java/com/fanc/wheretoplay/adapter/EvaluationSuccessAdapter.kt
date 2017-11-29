@@ -43,7 +43,7 @@ class EvaluationSuccessAdapter(var list: MutableList<StoreDetailModel.ContentBea
                 tv_reserve_item_discount_sum.visibility = View.GONE
             }
 
-            Glide.with(context).load(Network.IMAGE + list[position].cover).placeholder(R.drawable.default_rect).into(iv_reserve_item)
+            Glide.with(context).load(list[position].cover).placeholder(R.drawable.default_rect).into(iv_reserve_item)
             tv_reserve_item_address.text = list[position].area
             tv_reserve_item_price.text = list[position].capita
 

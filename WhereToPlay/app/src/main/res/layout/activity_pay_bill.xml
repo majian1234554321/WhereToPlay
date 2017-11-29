@@ -118,7 +118,7 @@
                         android:inputType="numberDecimal"
                         android:maxLength="12"
                         android:paddingRight="@dimen/padding_10"
-                        android:textColor="#333333"
+                        android:textColor="#C4483C"
                         android:textColorHint="@color/pay_reserve_list_text"
                         android:textSize="@dimen/normal_textsize" />
 

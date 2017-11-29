@@ -253,7 +253,15 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                             intent.putExtra("address", tvAddress.getText().toString());
                             intent.putExtra("discount", discountValue);
 
-                            // intent.putExtra("pay", discountValue);
+                            if ("预订方式：预付预订".equals(oi9.getTv_right())){
+                                intent.putExtra("pay_Action","预订方式：预付预订");
+                                intent.putExtra("money",contentBean.prepay);
+                            }else {
+                                intent.putExtra("pay_Action","预订方式：结单支付");
+                                intent.putExtra("money",contentBean.total);
+                            }
+
+
 
 
                             intent.putExtra(Constants.PAGE, "商家详情支付");
@@ -291,7 +299,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                             intent.putExtra("store_name", storeNameValue);
                             intent.putExtra("pay_type", "1");
                             intent.putExtra("arrival_time", contentBean.arrival_time);
-                            intent.putExtra("prepay", contentBean.total);
+                            intent.putExtra("prepay", contentBean.book_price);
 
 
                             intent.setClass(DetailsOrderActivity.this, DownPaymentActivity.class);
@@ -320,26 +328,31 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
             switch (contentBean.action) {
                 case "0":
                     oi9.setTv_right("信用预订");
+                    oi10.setTv_right(totalValue);
                     break;
                 case "1":
                     oi9.setTv_right("预付预订");
+                    oi10.setTv_right(contentBean.prepay);
                     break;
 
                 case "2":
                     oi9.setTv_right("信用预订");
+                    oi10.setTv_right(totalValue);
                     break;
                 case "3":
                     oi9.setTv_right("充值");
+                    oi10.setTv_right(totalValue);
                     break;
                 case "5":
                     oi9.setTv_right("结单支付");
+                    oi10.setTv_right(totalValue);
                     break;
                 default:
                     break;
             }
         }
 
-        oi10.setTv_right(totalValue);
+
         oi11.setTv_right(contentBean.remark);
 
 

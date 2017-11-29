@@ -169,6 +169,18 @@ public class PayBillActivity extends BaseActivity {
         mRbPayBillBalance = payBillBinding.rbPayBillBalance;
         df = new DecimalFormat("0.00");
 
+        String pay_Action = getIntent().getStringExtra("pay_Action");
+        String dispayMoney = getIntent().getStringExtra("money");
+        if ("预订方式：预付预订".equals(pay_Action) && dispayMoney != null) {
+            mTvDownPaymentSum.setText(dispayMoney);
+            mTvPaySumReal.setText(dispayMoney);
+        } else if ("预订方式：结单支付".equals(pay_Action) && dispayMoney != null) {
+            mEtConsumeSum.setText(dispayMoney);
+            mEtConsumeSum.setFocusable(false);
+            mEtConsumeSum.setFocusableInTouchMode(false);
+            mTvPaySumReal.setText(dispayMoney);
+        }
+
 
     }
 
@@ -177,7 +189,7 @@ public class PayBillActivity extends BaseActivity {
         mTmPayBill.setTitleColor(Color.WHITE);
         payWay = Constants.PAY_WAY_WEIXIN;
         Intent intent = getIntent();
-        String orderId = intent.getStringExtra(Constants.ORDER_ID);
+
         storeId = intent.getStringExtra(Constants.STORE_ID);
         String storeName = intent.getStringExtra("storeName");
         String discountValue = intent.getStringExtra("discount");
@@ -208,14 +220,14 @@ public class PayBillActivity extends BaseActivity {
         switch (statusTitle) {
             case Constants.CONSUME:
                 mTmPayBill.setTitle(R.string.consume);
-                getOrderInfo(Network.User.USER_CONSUME_AGAIN, orderId, storeId);
+
                 break;
             case "商家详情支付":
                 mTmPayBill.setTitle("支付");
                 break;
             default:
                 mTmPayBill.setTitle(R.string.buy);
-                getOrderInfo(Network.User.USER_ORDER_DONE, orderId, null);
+
                 break;
         }
 
@@ -398,96 +410,16 @@ public class PayBillActivity extends BaseActivity {
                 break;
 
             case R.id.rb_upp:
-                payWay = 10086;
+                payWay = 4;
                 break;
             default:
                 break;
         }
     }
 
-    /**
-     * 获取订单信息
-     *
-     * @param url     订单接口（结单/消费）
-     * @param orderId
-     * @param storeId
-     */
-    private void getOrderInfo(String url, final String orderId, String storeId) {
-        Map<String, String> params = new HashMap<>();
-        params.put(Network.Param.TOKEN, mUser.getToken());
-        params.put(Network.Param.ORDER_ID, orderId);
-        if (storeId != null) {
-            params.put(Network.Param.STORE_ID, storeId);
-        }
-        if (LocationUtils.location != null) {
-            params.put(Network.Param.LAT, String.valueOf(LocationUtils.location.getLatitude()));
-            params.put(Network.Param.LNG, String.valueOf(LocationUtils.location.getLongitude()));
-        } else {
-            params.put(Network.Param.LAT, "-1");
-            params.put(Network.Param.LNG, "-1");
-        }
 
-        showProgress();
-        OkHttpUtils.post()
-                .url(url)
-                .params(params)
-                .build()
-                .execute(new DCallback<OrderDone>() {
-                    @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
-                    }
 
-                    @Override
-                    public void onResponse(OrderDone response) {
-                        if (isSuccess(response)) {
-                            showOrderInfo(response.order);
-                            PayBillActivity.this.orderId = response.order.order_id;
-                            discount = Double.parseDouble(response.order.discount);
-                            subscription = Double.parseDouble(response.order.prepay);
-                        }
-                    }
-                });
-    }
 
-    private void showOrderInfo(OrderDone.Order order) {
-        payBillBinding.setOrder(order);
-        // 折扣
-        if (order.discount.length() > 0) {
-            SpannableString text = new SpannableString(order.discount + "折");
-            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            mTvDiscount.setText(text, TextView.BufferType.SPANNABLE);
-            mTvDiscount.setVisibility(View.VISIBLE);
-        }
-        // 地址 距离
-        String d = "";
-        if (order.distance != null && !TextUtils.isEmpty(order.distance) && !TextUtils.equals("-1", order.distance)) {
-
-            double distance = Double.parseDouble(order.distance);
-            if (distance < 500) {
-                d = "<500m";
-            } else
-//                if (distance < 100000)
-            {
-                if (distance < 1000) {
-                    d = order.distance + "m";
-                } else {
-                    // 0.几的时候，格式化会把小数点前的0去掉，原因未知
-                    DecimalFormat df = new DecimalFormat("#.0");
-                    d = df.format(distance / 1000) + "km";
-                }
-            }
-        }
-        mTvPayBillAddress.setText(order.address + "    " + d);
-        tvPayBillStore.setText(order.name);
-        // 服务费率
-        if (!TextUtils.isEmpty(order.cash_rate)) {
-            cashRate = Double.parseDouble(order.cash_rate);
-        }
-        mCbNotParticipation.setText(UIUtils.getString(R.string.not_participation_discount_sum) + "(服务费：" + cashRate + "%)");
-
-    }
 
     private void payBill() {
         String consume = mEtConsumeSum.getText().toString();
@@ -520,8 +452,8 @@ public class PayBillActivity extends BaseActivity {
                     case 3:// 余额支付
                         alertBalancePay();
                         break;
-                    case 10086:
-                        UPPayAssistEx.startPay(this, null, null, "438791594995972708301", mMode);
+                    case 4:
+                        payOrder();
                         break;
                     default:
                         break;
@@ -591,8 +523,9 @@ public class PayBillActivity extends BaseActivity {
                                     case 3:// 余额支付
                                         alertBalancePay();
                                         break;
-                                    case 10086:
-                                        UPPayAssistEx.startPay(PayBillActivity.this, null, null, "438791594995972708301", mMode);
+                                    case 4:
+
+                                        payOrder();
                                         break;
 
                                     default:
@@ -781,6 +714,10 @@ public class PayBillActivity extends BaseActivity {
                             if (payWay == 2) {// 微信
                                 wxPay(json);
                             }
+                            if (payWay == 4) {
+                                UPPayAssistEx.startPay(PayBillActivity.this, null, null, json.getString("orderString"), mMode);
+                            }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -869,7 +806,7 @@ public class PayBillActivity extends BaseActivity {
                     @Override
                     public void onResponse(IsOk response) {
                         if (isSuccess(response)) {
-                            ToastUtils.makePicTextShortToast(mContext, response.getInfo());
+                            //  ToastUtils.makePicTextShortToast(mContext, response.getInfo());
                             if (response.isResult()) {
                                 paySuccess();
                             }
@@ -972,7 +909,7 @@ public class PayBillActivity extends BaseActivity {
                     public void onResponse(IsOk response) {
                         if (isSuccess(response)) {
                             if (response.isResult()) {
-                                checkAliPayResult("",orderId,"");
+                                checkAliPayResult("", orderId, "");
                             }
                         }
                     }
@@ -1041,7 +978,7 @@ public class PayBillActivity extends BaseActivity {
     /*****************************************************************
      * mMode参数解释： "00" - 启动银联正式环境 "01" - 连接银联测试环境
      *****************************************************************/
-    private final String mMode = "00";
+    private final String mMode = "01";
     private static final String TN_URL_01 = "http://101.231.204.84:8091/sim/getacptn";
 
 

@@ -90,7 +90,7 @@
             android:name=".activity.ReuseActivity"
 
             android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustUnspecified|stateHidden" />
+            android:windowSoftInputMode="adjustPan|stateHidden" />
         <activity
             android:name=".activity.DownPaymentActivity"
             android:screenOrientation="portrait" />

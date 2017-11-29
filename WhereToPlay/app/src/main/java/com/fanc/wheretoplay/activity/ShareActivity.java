@@ -295,7 +295,7 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
      */
     private String getSharedText() {
 
-        String text = "我正在浏览这个,觉得真不错,推荐给你哦~ 地址:#http://weibo.com/p/1005052052202067/home?from=page_100505&mod=TAB&is_all=1#place";
+        String text = "我正在浏览这个,觉得真不错,推荐给你哦~ 地址:"+shareUrl;
 
         return text;
     }
