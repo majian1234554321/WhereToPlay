@@ -25,12 +25,12 @@ public class MineFriend extends BaseModel {
         /**
          * nickname : name1
          * pic : http://ktv.51tzl.cn/Public/head_icon.png
-         * regTime : 1506079634
+         * regtime : 1506079634
          */
 
         private String nickname;
         private String pic;
-        private String regTime;
+        public String regtime;
 
         public String getNickname() {
             return nickname;
@@ -48,12 +48,6 @@ public class MineFriend extends BaseModel {
             this.pic = pic;
         }
 
-        public String getRegTime() {
-            return regTime;
-        }
 
-        public void setRegTime(String regTime) {
-            this.regTime = regTime;
-        }
     }
 }

@@ -141,7 +141,7 @@ public class DatePicker extends LinearLayout {
             mWvMonth.setItems(months, currentMonth - 1);
         } else if (selectedMonth != null) {
             mWvMonth.setItems(months, selectedMonth);
-        } else if (currentMonth != -1) {
+        } else {
             mWvMonth.setItems(months, currentMonth);
         }
     }
@@ -164,7 +164,7 @@ public class DatePicker extends LinearLayout {
             mWvDay.setItems(days, currentDay - 1);
         } else if (selectedDay != null) {
             mWvDay.setItems(days, selectedDay);
-        } else if (currentDay != -1) {
+        } else {
             mWvDay.setItems(days, currentDay);
         }
     }

@@ -10,7 +10,7 @@ import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.TextAppearanceSpan;
 import android.util.Base64;
-import android.util.Log;
+
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -19,14 +19,14 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.bumptech.glide.Glide;
+
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.adapter.ImageAdapter;
 import com.fanc.wheretoplay.base.BaseActivity;
 import com.fanc.wheretoplay.datamodel.SubmitCommentModel;
 import com.fanc.wheretoplay.imagepink.utils.ImageSelectorUtils;
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
-import com.fanc.wheretoplay.rx.RxBus;
+
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.view.RatingBar;
 import com.fanc.wheretoplay.view.TitleBarView;

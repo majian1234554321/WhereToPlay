@@ -31,7 +31,7 @@ import io.reactivex.functions.Consumer;
  * Created by admin on 2017/11/1.
  */
 
-public class OrderList1Fragment extends BaseLazyFragment implements PullToRefreshLayout.OnRefreshListener ,OrderListFragmentView {
+public class OrderList1Fragment extends BaseLazyFragment implements PullToRefreshLayout.OnRefreshListener, OrderListFragmentView {
     @BindView(R.id.rv_pay)
     PullableRecyclerView mRvOrder;
     Unbinder unbinder;
@@ -39,10 +39,9 @@ public class OrderList1Fragment extends BaseLazyFragment implements PullToRefres
     PullToRefreshLayout ptrlPayReserve;
     public static final String TYPE = "1";
 
-    public int currentPage ;
+    public int currentPage;
     private OrdelListFragmentPresenter ordelListFragmentPresenter;
     private OrdersAdapter myAdapter;
-
 
 
     @Override
@@ -80,17 +79,16 @@ public class OrderList1Fragment extends BaseLazyFragment implements PullToRefres
         ptrlPayReserve.setOnRefreshListener(this);
         currentPage = 0;
 
-        ordelListFragmentPresenter = new OrdelListFragmentPresenter(mContext,this,ptrlPayReserve,OrderList1Fragment.this);
-        ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
+        ordelListFragmentPresenter = new OrdelListFragmentPresenter(mContext, this, ptrlPayReserve, OrderList1Fragment.this);
+        ordelListFragmentPresenter.getOrdelListData(TYPE, currentPage, "onRefresh");
 
         RxBus.getDefault().toFlowable(Intent.class)
                 .subscribe(new Consumer<Intent>() {
                     @Override
                     public void accept(Intent intent) throws Exception {
-                        if (intent!=null&&"Value".equals(intent.getStringExtra("Key"))){
-                            //Toast.makeText(mContext, "QQQQ", Toast.LENGTH_SHORT).show();
-                            currentPage=0;
-                            ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
+                        if (intent != null && "Value".equals(intent.getStringExtra("Key"))) {
+                            currentPage = 0;
+                            ordelListFragmentPresenter.getOrdelListData(TYPE, currentPage, "onRefresh");
                         }
 
                     }
@@ -107,27 +105,25 @@ public class OrderList1Fragment extends BaseLazyFragment implements PullToRefres
     @Override
     public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
 
-        currentPage=0;
-        ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
+        currentPage = 0;
+        ordelListFragmentPresenter.getOrdelListData(TYPE, currentPage, "onRefresh");
     }
 
     @Override
     public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
 
-        if (myAdapter!=null&&myAdapter.getItemCount() >= 10) {
+        if (myAdapter != null && myAdapter.getItemCount() >= 10) {
             currentPage++;
-            ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onLoadMore");
-        }else {
+            ordelListFragmentPresenter.getOrdelListData(TYPE, currentPage, "onLoadMore");
+        } else {
             ptrlPayReserve.loadmoreFinish(-1);
 
         }
     }
 
 
-
     @Override
     public void setOrderListFragmentData(BookListModel.ContentBean contentBean, String action) {
-
 
 
         if (contentBean.list != null) {
@@ -136,7 +132,7 @@ public class OrderList1Fragment extends BaseLazyFragment implements PullToRefres
                 if ("onLoadMore".equals(action) && myAdapter != null) {
                     myAdapter.notifyDataSetChanged();
                 } else {
-                    myAdapter = new OrdersAdapter(mContext,OrderList1Fragment.this,contentBean);
+                    myAdapter = new OrdersAdapter(mContext, OrderList1Fragment.this, contentBean);
                     mRvOrder.setAdapter(myAdapter);
                 }
             } else if ("onLoadMore".equals(action)) {
@@ -145,13 +141,13 @@ public class OrderList1Fragment extends BaseLazyFragment implements PullToRefres
                     myAdapter.append(contentBean.list);
 
                 } else {
-                    if (ptrlPayReserve!=null)
+                    if (ptrlPayReserve != null)
                         ptrlPayReserve.loadmoreFinish(-1);
                 }
 
             }
         } else {
-            if (ptrlPayReserve!=null)
+            if (ptrlPayReserve != null)
                 ptrlPayReserve.loadmoreFinish(-1);
         }
     }

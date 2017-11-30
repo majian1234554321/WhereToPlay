@@ -107,7 +107,7 @@ public class DetailActivity extends BaseFragmentActivity {
             case Constants.ABOUT_US:   //关于我们
                 initFragment(new AboutUsFragment());
                 break;
-            case Constants.MINEFRIEND:   //推荐好友
+            case Constants.MINEFRIEND:   //团队成员
                 initFragment(new MineFriendFragment());
                 break;
             case Constants.MINEMONEY:   //推荐奖励

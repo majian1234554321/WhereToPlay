@@ -58,12 +58,10 @@ public class App extends Application {
     private StatusBarNotificationConfig mStatusBarNotificationConfig;
 
 
-
-
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-        MultiDex.install(this) ;
+        MultiDex.install(this);
     }
 
     @Override
@@ -95,8 +93,8 @@ public class App extends Application {
         }).start();
 
         //七鱼
-        mStatusBarNotificationConfig=new StatusBarNotificationConfig();
-        mStatusBarNotificationConfig.notificationEntrance= LauncherActivity.class;
+        mStatusBarNotificationConfig = new StatusBarNotificationConfig();
+        mStatusBarNotificationConfig.notificationEntrance = LauncherActivity.class;
 
         Unicorn.init(this, Constants.QIYU_APPKEY, options(), new GlideImageLoader(mContext));
 
@@ -117,15 +115,16 @@ public class App extends Application {
 
     /**
      * 设置点击Notification消息后进入的页面
+     *
      * @param activity
      */
-    public void setServiceEntranceActivity(Class<? extends Activity> activity){
-        mStatusBarNotificationConfig.notificationEntrance=activity;
+    public void setServiceEntranceActivity(Class<? extends Activity> activity) {
+        mStatusBarNotificationConfig.notificationEntrance = activity;
     }
 
 
     private void initOkHttp() {
-        OkHttpUtils.getInstance().debug("OkHttpUtils",true).setConnectTimeout(100000, TimeUnit.MILLISECONDS);
+        OkHttpUtils.getInstance().debug("OkHttpUtils", true).setConnectTimeout(100000, TimeUnit.MILLISECONDS);
     }
 
     private void init() {

@@ -68,7 +68,9 @@ public class DealDetailFilterDialog {
                 UIUtils.getScreenWidth(), LinearLayout.LayoutParams.MATCH_PARENT);
         mDialog.setContentView(binding.getRoot(), layoutParams);
         Window dialogWindow = mDialog.getWindow();
-        dialogWindow.setGravity(Gravity.TOP);
+        if (dialogWindow != null) {
+            dialogWindow.setGravity(Gravity.TOP);
+        }
 //        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
 
         init();

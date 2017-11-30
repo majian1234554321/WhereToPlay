@@ -8,7 +8,7 @@ android {
     buildToolsVersion '27.0.0'
 
     flavorDimensions "color"
-    //recommend
+
     dexOptions {
         jumboMode = true
         javaMaxHeapSize "4g"
@@ -17,15 +17,14 @@ android {
         applicationId "com.fanc.wheretoplay"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 20171124
+        versionCode 20171130
 
-        versionName "1.2.4"
+        versionName "1.3.0"
 
 
         sourceSets.main {
             jniLibs.srcDirs = ['src/main/jniLibs']
         }
-
 
 
         manifestPlaceholders = [
@@ -83,6 +82,9 @@ android {
         _anzhi{}
         _yingyonghui{}
         _91{}
+        _oppo{}
+        _vivo{}
+        _meizu{}
 
     }
 

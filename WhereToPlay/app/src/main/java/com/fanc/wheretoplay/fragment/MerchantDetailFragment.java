@@ -312,7 +312,7 @@ public class MerchantDetailFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_DIAL);
-                Uri uri = Uri.parse("tel:" + tvTelReserve.getText().toString());
+                Uri uri = Uri.parse("tel:" + (TextUtils.isEmpty(phonevalue)?"4000051179":phonevalue));
                 intent.setData(uri);
                 startActivity(intent);
             }
@@ -519,6 +519,7 @@ public class MerchantDetailFragment extends BaseFragment {
      *
      * @param id
      */
+    private String phonevalue;
     private void getMerchantDetail(String id, String lat, String lng) {
         showProgress();
         OkHttpUtils.post()
@@ -528,6 +529,9 @@ public class MerchantDetailFragment extends BaseFragment {
                 .addParams(Network.Param.LNG, lng)
                 .build()
                 .execute(new DCallback<StoreDetail>() {
+
+
+
                     @Override
                     public void onError(Call call, Exception e) {
 
@@ -543,6 +547,7 @@ public class MerchantDetailFragment extends BaseFragment {
                                 mStore = response.getStore();
                                 showStoreDetail(mStore);
                                 shearedUrl = Network.BASE + "/" + response.getStore().getUrl();
+                                phonevalue = response.getStore().getPhone();
                             }
                         }
                     }

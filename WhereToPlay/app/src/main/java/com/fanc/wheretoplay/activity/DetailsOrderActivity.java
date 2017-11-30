@@ -30,7 +30,8 @@ import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.view.DetailsOrderView;
 import com.fanc.wheretoplay.view.OrderetailsItemView;
 import com.fanc.wheretoplay.view.TitleBarView;
-
+import com.qiyukf.unicorn.api.ConsultSource;
+import com.qiyukf.unicorn.api.Unicorn;
 
 
 import java.util.ArrayList;
@@ -163,7 +164,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
     }
 
 
-    @OnClick({R.id.rl, R.id.tv_msn})
+    @OnClick({R.id.rl, R.id.tv_msn, R.id.tv_call})
     public void onViewClicked(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -195,6 +196,9 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
 
                 break;
             case R.id.tv_msn:
+
+                ConsultSource source = new ConsultSource(null, null, null);
+                Unicorn.openServiceActivity(mContext, getResources().getString(R.string.app_name), source);
                 break;
 
         }
@@ -208,6 +212,8 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
             startActivity(intent);
         }
+
+
     }
 
 
@@ -247,43 +253,25 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                             finish();
                             break;
                         case "立即支付":
-
                             intent.setClass(mContext, PayBillActivity.class);
                             intent.putExtra(Constants.STORE_ID, store_idValue);
                             intent.putExtra("storeName", storeNameValue);
                             intent.putExtra("address", tvAddress.getText().toString());
                             intent.putExtra("discount", discountValue);
 
-                            if ("预订方式：预付预订".equals(oi9.getTv_right())){
-                                intent.putExtra("pay_Action","预订方式：预付预订");
-                                intent.putExtra("money",contentBean.prepay);
-                            }else {
-                                intent.putExtra("pay_Action","预订方式：结单支付");
-                                intent.putExtra("money",contentBean.total);
+                            if ("预订方式：预付预订".equals(oi9.getTv_right())) {
+                                intent.putExtra("pay_Action", "预订方式：预付预订");
+                                intent.putExtra("money", contentBean.prepay);
+                            } else {
+                                intent.putExtra("pay_Action", "预订方式：结单支付");
+                                intent.putExtra("money", contentBean.total);
                             }
-
-
-
 
                             intent.putExtra(Constants.PAGE, "商家详情支付");
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                             mContext.startActivity(intent);
 
 
-
-//                            Toast.makeText(mContext, "立即支付", Toast.LENGTH_SHORT).show();
-//                            intent.setClass(DetailsOrderActivity.this, PayBillActivity.class);
-//                            intent.putExtra(Constants.ORDER_ID, order_idValue);
-//                            intent.putExtra(Constants.STORE_ID, store_idValue);
-//                            intent.putExtra(Constants.PAGE, Constants.CONSUME);
-//                            if (TextUtils.equals("4", statusValue)) {// 去消费
-//                                intent.putExtra(Constants.PAGE, Constants.CONSUME);
-//                            }
-//                            if (TextUtils.equals("2", statusValue)) {// 去结账
-//                                intent.putExtra(Constants.PAGE, Constants.PAYING_THE_BILL);
-//                            }
-//                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//                            mContext.startActivity(intent);
                             break;
                         case "取消订单":
                             detailsOrderPresenter.cancelOrder();
@@ -295,6 +283,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                             mContext.startActivity(intent);
 
+                            break;
 
                         case "转预付":
 
@@ -364,19 +353,19 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
         style1.setSpan(new ForegroundColorSpan(Color.parseColor("#333333")), 5, style1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         tv1.setText(style1);
 
-        if (contentBean.created_time!=null) {
+        if (contentBean.created_time != null) {
             SpannableStringBuilder style2 = new SpannableStringBuilder("创建时间: " + DateFormatUtil.stampToDate(contentBean.created_time));
             style2.setSpan(new ForegroundColorSpan(Color.parseColor("#333333")), 5, style2.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             tv2.setText(style2);
         }
 
-        if (contentBean.reserve_time!=null) {
+        if (contentBean.reserve_time != null) {
             SpannableStringBuilder style3 = new SpannableStringBuilder("预订时间: " + DateFormatUtil.stampToDate(contentBean.reserve_time));
             style3.setSpan(new ForegroundColorSpan(Color.parseColor("#333333")), 5, style3.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             tv3.setText(style3);
         }
 
-        if (contentBean.finish_time!=null) {
+        if (contentBean.finish_time != null) {
             SpannableStringBuilder style4 = new SpannableStringBuilder("成交时间: " + DateFormatUtil.stampToDate(contentBean.finish_time));
             style4.setSpan(new ForegroundColorSpan(Color.parseColor("#333333")), 5, style4.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             tv4.setText(style4);

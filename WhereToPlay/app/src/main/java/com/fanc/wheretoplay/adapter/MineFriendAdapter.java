@@ -46,7 +46,7 @@ public class MineFriendAdapter extends RecyclerView.Adapter<MineFriendAdapter.Vi
         //时间
       //  holder.mTvMineFriendTime.setText(String.format(mContext.getResources().getString(R.string.money_time),DateFormatUtil.getYYYYMMDDHHmm(mMineFriendList.getRegTime())));
 
-        holder.mTvMineFriendTime.setText(String.format(mContext.getResources().getString(R.string.money_time),DateFormatUtil.stampToDate(mMineFriendList.getRegTime())));
+        holder.mTvMineFriendTime.setText(String.format(mContext.getResources().getString(R.string.money_time),DateFormatUtil.stampToDate(mMineFriendList.regtime)));
 
         //nickname
         holder.mTvMineFriendTitle.setText(mMineFriendList.getNickname());
