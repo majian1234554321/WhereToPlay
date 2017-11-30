@@ -176,8 +176,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                 startActivity(intent);
                 break;
             case R.id.tv_call:
-              /*  Intent intent2 = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + phone));
-                startActivity(intent2);*/
+
                 if (Build.VERSION.SDK_INT >= 23) {
 
                     //判断有没有拨打电话权限
@@ -200,6 +199,9 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                 ConsultSource source = new ConsultSource(null, null, null);
                 Unicorn.openServiceActivity(mContext, getResources().getString(R.string.app_name), source);
                 break;
+
+                default:
+                    break;
 
         }
     }
@@ -259,7 +261,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                             intent.putExtra("address", tvAddress.getText().toString());
                             intent.putExtra("discount", discountValue);
 
-                            if ("预订方式：预付预订".equals(oi9.getTv_right())) {
+                            if ("预付预订".equals(oi9.getTv_right())) {
                                 intent.putExtra("pay_Action", "预订方式：预付预订");
                                 intent.putExtra("money", contentBean.prepay);
                             } else {
@@ -299,6 +301,8 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                             mContext.startActivity(intent);
 
                             break;
+                            default:
+                                break;
                     }
 
                 }

@@ -147,7 +147,7 @@ public class SetPayPwdFragment extends BaseFragment {
                     @Override
                     public void onNext(SubmitCommentModel submitCommentModel) {
                         closeProgress();
-                        if (submitCommentModel != null && submitCommentModel.code.equals("0")) {
+                        if (submitCommentModel != null && "0".equals(submitCommentModel.code)) {
                             ToastUtils.showShortToast(mContext, "密码设置成功！");
                             mSpUtils.putBoolean(Constants.IS_SET_PAY_PASSWORD, true);
                             mContext.finish();

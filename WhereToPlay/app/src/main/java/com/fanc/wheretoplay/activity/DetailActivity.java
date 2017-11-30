@@ -37,7 +37,9 @@ import com.fanc.wheretoplay.util.ToastUtils;
 
 
 /**
- * Created by Administrator on 2017/6/16.
+ *
+ * @author Administrator
+ * @date 2017/6/16
  */
 
 public class DetailActivity extends BaseFragmentActivity {

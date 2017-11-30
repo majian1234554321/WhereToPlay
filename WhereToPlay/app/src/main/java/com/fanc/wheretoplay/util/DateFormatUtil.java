@@ -885,7 +885,7 @@ public class DateFormatUtil {
      * @return
      */
     public static String getStrDate4String(String date, String format) {
-        if (date == null || date.trim().equals("")) {
+        if (date == null || "".equals(date.trim())) {
             return "";
         } else {
             SimpleDateFormat df = new SimpleDateFormat(format);
@@ -929,7 +929,7 @@ public class DateFormatUtil {
      * @return
      */
     public static Date getDate4StrDate(String date, String format) {
-        if (date == null || date.trim().equals("")) {
+        if (date == null || "".equals(date.trim())) {
             return null;
         } else {
             SimpleDateFormat df = new SimpleDateFormat(format);

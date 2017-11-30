@@ -20,7 +20,9 @@ import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.TopMenu;
 
 /**
- * Created by Administrator on 2017/7/7.
+ *
+ * @author Administrator
+ * @date 2017/7/7
  */
 
 public class WaiterPhotoActivity extends BaseActivity {

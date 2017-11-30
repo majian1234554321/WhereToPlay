@@ -49,7 +49,9 @@ import okhttp3.Call;
 import static com.fanc.wheretoplay.util.Constants.ACTION_SIGN_OUT;
 
 /**
- * Created by Administrator on 2017/6/19.
+ *
+ * @author Administrator
+ * @date 2017/6/19
  */
 
 public class SettingsActivity extends BaseActivity {
@@ -215,6 +217,8 @@ public class SettingsActivity extends BaseActivity {
             case R.id.btn_settings_sign_out:
                 signOut();
                 break;
+                default:
+                    break;
         }
     }
 

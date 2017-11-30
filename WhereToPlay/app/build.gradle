@@ -108,7 +108,6 @@ dependencies {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
-
     compile project(':okhttputils')
     compile 'com.android.support:multidex:1.0.2'
     compile 'com.youth.banner:banner:1.4.10'
@@ -119,31 +118,27 @@ dependencies {
     compile 'cn.jiguang.sdk:jcore:1.1.6'
     compile 'com.zhy:percent-support-extends:1.1.1'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.android.support:support-annotations:27.0.1'
-    compile 'com.android.support:support-v4:27.0.1'
-    compile 'com.android.support:design:27.0.1'
+    compile 'com.android.support:support-annotations:27.0.2'
+    compile 'com.android.support:design:27.0.2'
     compile 'com.jakewharton:butterknife:8.8.1'
     testCompile 'junit:junit:4.12'
-
-
     compile 'io.reactivex.rxjava2:rxjava:2.1.1'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-
-
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'com.qiyukf.unicorn:unicorn:3.11.1'
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.4.0'
     compile 'com.sina.weibo.sdk:core:4.1.0:openDefaultRelease@aar'
-    implementation 'com.android.support:appcompat-v7:27.0.1'
+    implementation 'com.android.support:appcompat-v7:27.0.2'
     implementation files('libs/UPPayAssistEx.jar')
     implementation files('libs/UPPayPluginExPro.jar')
     compile 'com.umeng.analytics:analytics:6.1.2'
     //compile 'com.google.firebase:firebase-appindexing:11.6.0'
     implementation project(':didi_sdk_for_common_v1.1.0_12_08')
+    implementation 'com.android.support:support-v4:27.0.2'
 }
 
 

@@ -15,7 +15,7 @@ public class BaseResponseModel<T>  {
 
 
     public boolean success() {
-        return code.equals("0");
+        return "0".equals(code);
     }
 
 

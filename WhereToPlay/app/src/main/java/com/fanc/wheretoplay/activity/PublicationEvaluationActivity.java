@@ -216,7 +216,7 @@ public class PublicationEvaluationActivity extends BaseActivity {
                     @Override
                     public void onNext(SubmitCommentModel submitCommentModel) {
                         closeProgress();
-                        if (submitCommentModel.code.equals("0")) {
+                        if ("0".equals(submitCommentModel.code)) {
                             Toast.makeText(mContext, "提交评论成功", Toast.LENGTH_SHORT).show();
                             //RxBus.getDefault().post("提交评价成功");
                             startActivity(new Intent(PublicationEvaluationActivity.this,EvaluationSuccessActivity.class));

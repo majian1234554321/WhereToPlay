@@ -911,7 +911,8 @@ public class PayBillActivity extends BaseActivity {
                     public void onResponse(IsOk response) {
                         if (isSuccess(response)) {
                             if (response.isResult()) {
-                                checkAliPayResult("", orderId, "");
+                               // checkAliPayResult("", orderId, "");
+                                paySuccess();
                             }
                         }
                     }
@@ -1013,7 +1014,7 @@ public class PayBillActivity extends BaseActivity {
          * 支付控件返回字符串:success、fail、cancel 分别代表支付成功，支付失败，支付取消
          */
         String str = data.getExtras().getString("pay_result");
-        if (str.equalsIgnoreCase("success")) {
+        if ("success".equalsIgnoreCase(str)) {
 
             // 如果想对结果数据验签，可使用下面这段代码，但建议不验签，直接去商户后台查询交易结果
             // result_data结构见c）result_data参数说明
@@ -1038,9 +1039,9 @@ public class PayBillActivity extends BaseActivity {
             }
             // 结果result_data为成功时，去商户后台查询一下再展示成功
             msg = "支付成功！";
-        } else if (str.equalsIgnoreCase("fail")) {
+        } else if ("fail".equalsIgnoreCase(str)) {
             msg = "支付失败！";
-        } else if (str.equalsIgnoreCase("cancel")) {
+        } else if ("cancel".equalsIgnoreCase(str)) {
             msg = "用户取消了支付";
         }
 

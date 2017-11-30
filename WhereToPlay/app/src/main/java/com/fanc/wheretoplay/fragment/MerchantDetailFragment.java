@@ -734,7 +734,7 @@ public class MerchantDetailFragment extends BaseFragment {
 
                     @Override
                     public void onNext(SubmitCommentModel submitCommentModel) {
-                        if (submitCommentModel.code.equals("0")) {
+                        if ("0".equals(submitCommentModel.code)) {
                             isCollected = true;
                             ToastUtils.makePicTextShortToast(mContext, "收藏成功");
                         }

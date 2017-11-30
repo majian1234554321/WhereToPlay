@@ -37,9 +37,10 @@ import java.util.List;
 import okhttp3.Call;
 
 
-
 /**
- * Created by peace on 2017/10/30.
+ *
+ * @author peace
+ * @date 2017/10/30
  */
 
 public class CheckCommentsActivity extends BaseFragmentActivity {

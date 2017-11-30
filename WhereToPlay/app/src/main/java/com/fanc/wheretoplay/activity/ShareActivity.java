@@ -1,8 +1,5 @@
 package com.fanc.wheretoplay.activity;
 
-/**
- * Created by admin on 2017/11/1.
- */
 
 import android.content.Context;
 import android.content.Intent;
@@ -44,6 +41,7 @@ import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.tauth.IUiListener;
 import com.tencent.tauth.Tencent;
 import com.tencent.tauth.UiError;
+
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -65,6 +63,9 @@ import com.sina.weibo.sdk.share.WbShareHandler;
 import com.sina.weibo.sdk.utils.Utility;
 
 
+/**
+ * @author admin
+ */
 public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, WbShareCallback {
     @BindView(R.id.btn_share_wechat)
     TextView btnShareWechat;
@@ -90,7 +91,7 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
     private String shareUrl;
 
     private WbShareHandler shareHandler;
-    private String title,secondtitle;
+    private String title, secondtitle;
     public String logo = "http://testapi.51tzl.cn/static/logo.png";
 
 
@@ -113,15 +114,13 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
         mTencent = Tencent.createInstance(Constants.QQAPPID, this.getApplicationContext());
         // 注册应用到新浪微博
 
-        WbSdk.install(this,new AuthInfo(this, Constants_sina.APP_KEY, Constants_sina.REDIRECT_URL, Constants_sina.SCOPE));
+        WbSdk.install(this, new AuthInfo(this, Constants_sina.APP_KEY, Constants_sina.REDIRECT_URL, Constants_sina.SCOPE));
         shareHandler = new WbShareHandler(this);
         shareHandler.registerApp();
 
         title = getIntent().getStringExtra("title");
         secondtitle = getIntent().getStringExtra("secondtitle");
-        shareUrl =   getIntent().getStringExtra("shearedUrl");
-
-
+        shareUrl = getIntent().getStringExtra("shearedUrl");
 
 
         getWindow().getDecorView().setOnTouchListener(new View.OnTouchListener() {
@@ -168,7 +167,7 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
     }
 
 
-    @OnClick({R.id.btn_share_wechat, R.id.btn_share_pyq, R.id.btn_share_weibo, R.id.btn_share_qq, R.id.btn_share_qzone,R.id.btn_sms})
+    @OnClick({R.id.btn_share_wechat, R.id.btn_share_pyq, R.id.btn_share_weibo, R.id.btn_share_qq, R.id.btn_share_qzone, R.id.btn_sms})
     public void onClick(View view) {
         switch (view.getId()) {
 
@@ -219,6 +218,8 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
                 }
                 // 存在QQ客户端进行QQ空间分享
                 shareQzone();
+                break;
+            default:
                 break;
         }
     }
@@ -273,6 +274,8 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
                 api.sendReq(req1);
                 finish();
                 break;
+                default:
+                    break;
         }
 
     }
@@ -295,7 +298,7 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
      */
     private String getSharedText() {
 
-        String text = "我正在浏览这个,觉得真不错,推荐给你哦~ 地址:"+shareUrl;
+        String text = "我正在浏览这个,觉得真不错,推荐给你哦~ 地址:" + shareUrl;
 
         return text;
     }
@@ -374,9 +377,6 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
 
         ShareActivity.this.setResult(100, getIntent());
     }
-
-
-
 
 
     @Override

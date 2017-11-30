@@ -23,7 +23,8 @@ import static com.fanc.wheretoplay.base.App.mContext;
 
 
 /**
- * Created by Administrator on 2017/6/12.
+ * @author Administrator
+ * @date 2017/6/12
  */
 
 public class SignInActivity extends BaseFragmentActivity {
@@ -93,6 +94,8 @@ public class SignInActivity extends BaseFragmentActivity {
                 case TAG_RESETPWD:
                     f = new ResetPwdFragment();
                     break;
+                default:
+                    break;
             }
         }
         transaction.replace(R.id.fl_signin_container, f, tag);
@@ -144,7 +147,7 @@ public class SignInActivity extends BaseFragmentActivity {
     /**
      * 验证码有效性验证
      *
-     * @param input      用户输入的验证
+     * @param input 用户输入的验证
      * @return
      */
     public boolean verifyCodeFormat(String input) {
@@ -157,6 +160,7 @@ public class SignInActivity extends BaseFragmentActivity {
 
     /**
      * 验证昵称
+     *
      * @param nickname
      * @return
      */
@@ -191,6 +195,8 @@ public class SignInActivity extends BaseFragmentActivity {
 //                    break;-
             case TAG_RESETPWD:
                 signIn();
+                break;
+            default:
                 break;
         }
     }

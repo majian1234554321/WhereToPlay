@@ -127,7 +127,7 @@ public class GlideCatchUtil {
         try {
             File file = new File(filePath);
             if (file.isDirectory()) {
-                File files[] = file.listFiles();
+                File[] files = file.listFiles();
                 for (File file1 : files) {
                     deleteFolderFile(file1.getAbsolutePath(), true);
                 }

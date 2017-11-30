@@ -89,6 +89,8 @@ public class ListFragment extends BaseFragment {
             case 4:
                 mTm.setTitle(R.string.most_discount);
                 break;
+            default:
+                break;
         }
         mTm.setTitleColor(getResources().getColor(R.color.white));
         // 列表

@@ -25,7 +25,9 @@ import com.fanc.wheretoplay.fragment.ToEvaluateFragment;
 import com.fanc.wheretoplay.util.Constants;
 
 /**
- * Created by Administrator on 2017/6/14.
+ *
+ * @author Administrator
+ * @date 2017/6/14
  */
 
 public class ReuseActivity extends BaseFragmentActivity {

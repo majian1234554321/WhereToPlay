@@ -49,7 +49,9 @@ import okhttp3.MultipartBody;
 import static com.fanc.wheretoplay.network.Network.IMAGE;
 
 /**
- * Created by admin on 2017/11/1.
+ *
+ * @author admin
+ * @date 2017/11/1
  */
 
 public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder> {
@@ -161,6 +163,9 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                             fragment.startActivity(intent);
 
                             break;
+
+                            default:
+                                break;
                     }
                 }
             });

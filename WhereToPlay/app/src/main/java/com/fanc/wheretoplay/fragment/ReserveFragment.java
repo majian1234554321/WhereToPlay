@@ -746,13 +746,13 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
                         }
                     } else {   // 获取城市失败，从本地读取，也就是个人信息里选择的城市,判断是否一样，一样则返回
                         //第一次进入页面city.getId()强制设置为上海的id ="2623"
-                        if (city.getId().equals(/*mUser.getRegistered()*/"2623")) {
+                        if ("2623".equals(city.getId())) {
                             return city;
                         }
                     }
                 } else {   // 定位失败，从本地读取，也就是个人信息里选择的城市,判断是否一样，一样则返回
                     //第一次进入页面city.getId()强制设置为上海的id ="2623"
-                    if (city.getId().equals(/*mUser.getRegistered()*/"2623")) {
+                    if ("2623".equals(city.getId())) {
                         return city;
                     }
                 }

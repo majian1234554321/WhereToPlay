@@ -2,6 +2,7 @@ package com.fanc.wheretoplay.fragment;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,7 +37,9 @@ import okhttp3.MultipartBody;
 
 
 /**
- * Created by Administrator on 2017/6/17.
+ *
+ * @author Administrator
+ * @date 2017/6/17
  */
 
 public class IntegralFragment extends BaseFragment {
@@ -52,7 +55,7 @@ public class IntegralFragment extends BaseFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         integralBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_integral, container, false);
         initViews();
         init();

@@ -3,6 +3,7 @@ package com.fanc.wheretoplay.activity;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.view.MotionEvent;
@@ -110,7 +111,7 @@ public class LargeImageActivity extends BaseActivity {
             }
 
             @Override
-            public void destroyItem(ViewGroup container, int position, Object object) {
+            public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
                 container.removeView((View) object);
             }
         });

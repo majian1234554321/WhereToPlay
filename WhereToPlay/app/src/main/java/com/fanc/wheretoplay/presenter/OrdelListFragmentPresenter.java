@@ -78,7 +78,7 @@ public class OrdelListFragmentPresenter implements BasePresenter {
                 .subscribe(new DisposableSubscriber2<BookListModel.ContentBean>() {
                     @Override
                     protected void successful(BookListModel.ContentBean content) {
-                        if (action.equals("onRefresh")) {
+                        if ("onRefresh".equals(action)) {
                             ptrlPayReserve.refreshFinish(0);
                         } else {
                             ptrlPayReserve.loadmoreFinish(0);
@@ -89,7 +89,7 @@ public class OrdelListFragmentPresenter implements BasePresenter {
                     @Override
                     public void failed(String t) {
                         Toast.makeText(context, t, Toast.LENGTH_SHORT).show();
-                        if (action.equals("onRefresh")) {
+                        if ("onRefresh".equals(action)) {
                             ptrlPayReserve.refreshFinish(5);
                         } else {
                             ptrlPayReserve.loadmoreFinish(5);
