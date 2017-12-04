@@ -48,7 +48,7 @@ public class ListOrderActivity extends BaseFragmentActivity {
         fragments.add(new OrderList3Fragment());
         fragments.add(new OrderList4Fragment());
 
-      ListOrderPagerAdapter adapter =   new ListOrderPagerAdapter(this.getSupportFragmentManager(),this,fragments);
+        ListOrderPagerAdapter adapter = new ListOrderPagerAdapter(this.getSupportFragmentManager(), this, fragments);
         viewpager.setAdapter(adapter);
         tabLayout.setupWithViewPager(viewpager);
 
@@ -56,12 +56,11 @@ public class ListOrderActivity extends BaseFragmentActivity {
     }
 
 
-
     public class ListOrderPagerAdapter extends FragmentPagerAdapter {
 
-      public  ListOrderActivity listOrderActivity;
+        public ListOrderActivity listOrderActivity;
 
-        private String[] mTitles = new String[]{"全部", "已预订", "已支付","已完成"};
+        private String[] mTitles = new String[]{"全部", "已预订", "已支付", "已完成"};
 
         public ArrayList<BaseFragment> fragments;
 
@@ -74,7 +73,7 @@ public class ListOrderActivity extends BaseFragmentActivity {
 
         @Override
         public Fragment getItem(int position) {
-        return fragments.get(position);
+            return fragments.get(position);
         }
 
         @Override
@@ -84,13 +83,9 @@ public class ListOrderActivity extends BaseFragmentActivity {
 
         @Override
         public CharSequence getPageTitle(int position) {
-           return mTitles[position];
+            return mTitles[position];
         }
     }
-
-
-
-
 
 
 }

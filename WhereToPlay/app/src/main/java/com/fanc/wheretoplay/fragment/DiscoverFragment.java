@@ -34,7 +34,9 @@ import java.util.Map;
 import okhttp3.Call;
 
 /**
- * Created by Administrator on 2017/6/12.
+ *
+ * @author Administrator
+ * @date 2017/6/12
  */
 
 public class DiscoverFragment extends BaseFragment {

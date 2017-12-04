@@ -41,7 +41,7 @@ public class DateFormatUtil {
     /**
      * 格式：yyyyMMddHHmmss
      */
-    public static SimpleDateFormat yMdHms = new SimpleDateFormat("yyyyMMddHHmmss");
+    private static SimpleDateFormat yMdHms = new SimpleDateFormat("yyyyMMddHHmmss");
     /**
      * 格式：yyyy.MM.dd
      */
@@ -756,167 +756,14 @@ public class DateFormatUtil {
         return predate;
     }
 
-    /**
-     * <p>获取中文日期格式</p>
-     * 格式：xxxx年xx月xx日
-     *
-     * @param date
-     * @return
-     */
-    /*public static String getChinaDateFormat(Date date) {
-        // 获取yyyy-mm-dd格式日期格式
-		String dateStr = getDateTime_I(date);
-		StringBuffer sb = new StringBuffer();
-		if (dateStr != null && dateStr.length() > 0) {
-			String[] newStr = dateStr.split("-");
-			// 获取月
-			int month = Integer.valueOf(newStr[1]);
-			// 获取日
-			int day = Integer.valueOf(newStr[2]);
-			sb.append(newStr[0]).append("年");
-			sb.append(month).append("月").append(day).append("日");
-		}
-		return sb.toString();
-	}*/
 
-    /**
-     * <p>获取中文日期时间格式</p>
-     * 格式：xxxx年xx月xx日<br>
-     *
-     * @param date 指定日期对象，为null时获取当前系统时间
-     * @return 返回诸如“xxxx年xx月xx日”格式的日期
-     */
-    public static String getChineseDate(Date date) {
-        if (date == null)
-            date = new Date();
-        int yyyy = getCustomYear(date);
-        int MM = getCustomMonth(date);
-        int dd = getCustomDay(date);
 
-        StringBuilder sb = new StringBuilder();
-        sb.append(yyyy + "年");
-        sb.append(MM + "月");
-        sb.append(dd + "日");
-        return sb.toString();
-    }
 
-    /**
-     * <p>获取中文日期时间格式</p>
-     * 格式：xxxx年xx月xx日 xx时xx分xx秒
-     *
-     * @param date 指定日期对象，为null时获取当前系统时间
-     * @return 返回诸如“xxxx年xx月xx日 xx时xx分xx秒”格式的日期
-     */
-    public static String getChineseDateTime(Date date) {
-        if (date == null)
-            date = new Date();
-        int yyyy = getCustomYear(date);
-        int MM = getCustomMonth(date);
-        int dd = getCustomDay(date);
 
-        int HH = getCustomHour(date);
-        int mm = getCustomMinute(date);
-        int ss = getCustomSecond(date);
 
-        StringBuilder sb = new StringBuilder();
-        sb.append(yyyy + "年");
-        sb.append(MM + "月");
-        sb.append(dd + "日");
-        sb.append(" ");
-        sb.append(HH + "时");
-        sb.append(mm + "分");
-        sb.append(ss + "秒");
 
-        return sb.toString();
-    }
 
-    /**
-     * add by lipp
-     * <p>
-     * 获取xxxx年xx月xx日 日期格式。
-     * </p>
-     *
-     * @param date 格式必须是2009-03-21字符串
-     * @return
-     */
-    public static String getChinaDateFormat(String date) {
-        // 获取yyyy-mm-dd格式日期格式
-        StringBuffer sb = new StringBuffer();
-        if (date != null && date.length() > 0) {
-            String[] newStr = date.split("-");
-            // 获取月
-            int month = Integer.valueOf(newStr[1]);
-            // 获取日
-            int day = Integer.valueOf(newStr[2]);
-            sb.append(newStr[0]).append("年");
-            sb.append(month).append("月").append(day).append("日");
-        }
-        return sb.toString();
-    }
 
-    /**
-     * 判断一个日期字符串是否合法
-     *
-     * @param date
-     * @param format
-     * @return
-     * @author liufengyu
-     */
-    public static boolean isDateStringCorrect(String date, String format) {
-        SimpleDateFormat df = new SimpleDateFormat(format);
-
-        try {
-            df.setLenient(false);
-            df.parse(date);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
-    }
-
-    /**
-     * add by gongtao
-     * <p>
-     * 将字符串类型的日期格式 转换为 符合要求的日期格式
-     * </P>
-     *
-     * @param date
-     * @param format
-     * @return
-     */
-    public static String getStrDate4String(String date, String format) {
-        if (date == null || "".equals(date.trim())) {
-            return "";
-        } else {
-            SimpleDateFormat df = new SimpleDateFormat(format);
-            try {
-                Date d = df.parse(date);
-                return df.format(d);
-            } catch (ParseException e) {
-                System.out.println(e);
-                return "";
-            }
-        }
-    }
-
-    /**
-     * add by gongtao
-     * <p>
-     * 将Date类型的日期格式 转换为 符合要求的 String日期格式
-     * </P>
-     *
-     * @param date
-     * @param format
-     * @return
-     */
-    public static String getStrDate4Date(Date date, String format) {
-        if (date == null) {
-            return "";
-        } else {
-            SimpleDateFormat df = new SimpleDateFormat(format);
-            return df.format(date);
-        }
-    }
 
     /**
      * add by gongtao
@@ -1021,7 +868,8 @@ public class DateFormatUtil {
         try {
             Date beginDate = format.parse(beginStr);
             Date endDate = format.parse(endStr);
-            long millisecond = endDate.getTime() - beginDate.getTime(); // 日期相减获取日期差X(单位:毫秒)
+            long millisecond = endDate.getTime() - beginDate.getTime();
+            // 日期相减获取日期差X(单位:毫秒)
             return (int) (millisecond / (1000 * 60 * 60 * 24));
         } catch (ParseException e) {
             e.printStackTrace();
@@ -1124,7 +972,7 @@ public class DateFormatUtil {
         return date_time;
     }
 
-    /* 字符串时间格式转换为 Date
+    /** 字符串时间格式转换为 Date
      *
      * @param date 此格式 yyyy-MM-dd
      * @return
@@ -1190,6 +1038,8 @@ public class DateFormatUtil {
                     return (int) (millisecond / (1000 * 60 * 60));
                 case 3: // day
                     return (int) (millisecond / (1000 * 60 * 60 * 24));
+                default:
+                    break;
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1286,7 +1136,7 @@ public class DateFormatUtil {
      */
     public static String getCurrDateAndTime() {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy年MM月dd日");
-        Date curDate = new Date(System.currentTimeMillis());//
+        Date curDate = new Date(System.currentTimeMillis());
         String str = formatter.format(curDate);
         return str;
     }

@@ -6,6 +6,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -60,12 +61,14 @@ public class OrderList4Fragment extends BaseLazyFragment implements PullToRefres
 
     @Override
     protected void initData() {
-
+        Log.i("OrderList2Fragment", getClass().getSimpleName());
+        ordelListFragmentPresenter = new OrdelListFragmentPresenter(mContext,this,ptrlPayReserve,OrderList4Fragment.this);
+        ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
     }
 
     @Override
     protected View initView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = View.inflate(inflater.getContext(), R.layout.orderlistallfragment, null);
+        View view = View.inflate(inflater.getContext(), R.layout.orderlistallfragment4, null);
         unbinder = ButterKnife.bind(this, view);
 
         LinearLayoutManager lm = new LinearLayoutManager(mContext);
@@ -83,15 +86,14 @@ public class OrderList4Fragment extends BaseLazyFragment implements PullToRefres
         ptrlPayReserve.setOnRefreshListener(this);
         currentPage = 0;
 
-        ordelListFragmentPresenter = new OrdelListFragmentPresenter(mContext,this,ptrlPayReserve,OrderList4Fragment.this);
-        ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
+
 
         RxBus.getDefault().toFlowable(Intent.class)
                 .subscribe(new Consumer<Intent>() {
                     @Override
                     public void accept(Intent intent) throws Exception {
                         if (intent!=null&&"Value".equals(intent.getStringExtra("Key"))){
-                            //Toast.makeText(mContext, "QQQQ", Toast.LENGTH_SHORT).show();
+
                             currentPage=0;
                             ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
                         }

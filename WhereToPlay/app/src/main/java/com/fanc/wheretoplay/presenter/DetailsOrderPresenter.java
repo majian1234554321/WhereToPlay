@@ -19,12 +19,14 @@ import okhttp3.MultipartBody;
 
 
 /**
- * Created by admin on 2017/11/15.
+ *
+ * @author admin
+ * @date 2017/11/15
  */
 
 public class DetailsOrderPresenter implements BasePresenter {
     public Context mContext;
-    public String order_idValue;
+    private String order_idValue;
     public DetailsOrderView detailsOrderView ;
     private final CompositeDisposable compositeSubscription;
 

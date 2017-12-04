@@ -7,7 +7,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
+
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.BaseFragmentActivity;
@@ -24,15 +24,15 @@ import com.fanc.wheretoplay.fragment.MessageFragment;
 import com.fanc.wheretoplay.fragment.MineCommendMoneyFragment;
 import com.fanc.wheretoplay.fragment.MineFriendFragment;
 import com.fanc.wheretoplay.fragment.MineInfoFragment;
-import com.fanc.wheretoplay.fragment.OrderFragment;
-import com.fanc.wheretoplay.fragment.OrderFragments;
+
+
 import com.fanc.wheretoplay.fragment.ReferralFragment;
 import com.fanc.wheretoplay.fragment.RegisterAgreement;
 import com.fanc.wheretoplay.fragment.SetPayPwdFragment;
 import com.fanc.wheretoplay.fragment.SystemNotifyFragment;
 import com.fanc.wheretoplay.fragment.WalletFragment;
 import com.fanc.wheretoplay.util.Constants;
-import com.fanc.wheretoplay.util.LogUtils;
+
 import com.fanc.wheretoplay.util.ToastUtils;
 
 
@@ -79,7 +79,8 @@ public class DetailActivity extends BaseFragmentActivity {
             case Constants.WALLET:
                 initFragment(new WalletFragment());
                 break;
-            case Constants.DEAL_DETAIL:   //交易明细
+            case Constants.DEAL_DETAIL:
+                //交易明细
                 initFragment(new DealDetailFragment());
                 break;
             case Constants.DISCOUNT_COUPON:
@@ -88,31 +89,40 @@ public class DetailActivity extends BaseFragmentActivity {
             case Constants.INTEGRAL:
                 initFragment(new IntegralFragment());
                 break;
-            case Constants.ORDER:   //订单
+            case Constants.ORDER:
+                //订单
                 // initFragment(new OrderFragments());
                 break;
-            case Constants.COLLECTION:   //收藏
+            case Constants.COLLECTION:
+                //收藏
                 initFragment(new CollectionFragment());
                 break;
-            case Constants.REFERRAL:   //推荐
+            case Constants.REFERRAL:
+                //推荐
                 initFragment(new ReferralFragment());
                 break;
-            case Constants.SET_PAY_PWD:   //设置密码
+            case Constants.SET_PAY_PWD:
+                //设置密码
                 initFragment(new SetPayPwdFragment());
                 break;
-            case Constants.ADVICE_FEEDBACK:   //意见反馈
+            case Constants.ADVICE_FEEDBACK:
+                //意见反馈
                 initFragment(new AdviceFeedbackFragment());
                 break;
-            case Constants.SYSTEM_NOTIFY:   //系统通知
+            case Constants.SYSTEM_NOTIFY:
+                //系统通知
                 initFragment(new SystemNotifyFragment());
                 break;
-            case Constants.ABOUT_US:   //关于我们
+            case Constants.ABOUT_US:
+                //关于我们
                 initFragment(new AboutUsFragment());
                 break;
-            case Constants.MINEFRIEND:   //团队成员
+            case Constants.MINEFRIEND:
+                //团队成员
                 initFragment(new MineFriendFragment());
                 break;
-            case Constants.MINEMONEY:   //推荐奖励
+            case Constants.MINEMONEY:
+                //推荐奖励
                 initFragment(new MineCommendMoneyFragment());
                 break;
             case Constants.MESSAGE_DETAIL:

@@ -1,6 +1,9 @@
 package com.fanc.wheretoplay.activity;
 
 import android.Manifest;
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -17,6 +20,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fanc.wheretoplay.MainActivity;
 import com.fanc.wheretoplay.R;
@@ -104,6 +108,10 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
     TextView tvLeft;
     @BindView(R.id.tv_right)
     TextView tvRight;
+
+    @BindView(R.id.tv_copy)
+    TextView tv_copy;
+
     private String order_idValue, store_idValue, storeNameValue, statusValue, totalValue, discountValue;
 
     @BindView(R.id.rl)
@@ -112,6 +120,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
 
     List<TextView> lists = new ArrayList<>();
     private DetailsOrderPresenter detailsOrderPresenter;
+    private String order_sn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -164,11 +173,20 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
     }
 
 
-    @OnClick({R.id.rl, R.id.tv_msn, R.id.tv_call})
+    @OnClick({R.id.rl, R.id.tv_msn, R.id.tv_call,R.id.tv_copy})
     public void onViewClicked(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
+            case R.id.tv_copy:
+                ClipboardManager cm = (ClipboardManager) getSystemService(Context.CLIPBOARD_SERVICE);
+                // 将文本内容放到系统剪贴板里。
+                ClipData clipData = ClipData.newPlainText("simple text copy", order_sn);
+                if (cm != null) {
+                    cm.setPrimaryClip(clipData);
+                    Toast.makeText(mContext, "已复制订单号到剪切板", Toast.LENGTH_SHORT).show();
+                }
 
+                break;
             case R.id.rl:
                 intent.putExtra(Constants.PAGE, Constants.MERCHANT_DETAIL);
                 intent.putExtra(Constants.STORE_ID, store_idValue);
@@ -352,6 +370,8 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
 
         oi11.setTv_right(contentBean.remark);
 
+
+        order_sn = contentBean.order_sn;
 
         SpannableStringBuilder style1 = new SpannableStringBuilder("订单编号: " + contentBean.order_sn);
         style1.setSpan(new ForegroundColorSpan(Color.parseColor("#333333")), 5, style1.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);

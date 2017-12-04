@@ -22,6 +22,9 @@ import com.fanc.wheretoplay.imagepink.view.ClipImageView;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * @author admin
+ */
 public class ClipImageActivity extends Activity {
 
     private FrameLayout btnConfirm;
@@ -54,9 +57,9 @@ public class ClipImageActivity extends Activity {
     }
 
     private void initView() {
-        imageView = (ClipImageView) findViewById(R.id.process_img);
-        btnConfirm = (FrameLayout) findViewById(R.id.btn_confirm);
-        btnBack = (FrameLayout) findViewById(R.id.btn_back);
+        imageView = findViewById(R.id.process_img);
+        btnConfirm = findViewById(R.id.btn_confirm);
+        btnBack = findViewById(R.id.btn_back);
 
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +100,6 @@ public class ClipImageActivity extends Activity {
         if (bitmap != null) {
             imagePath = ImageUtil.saveImage(bitmap, getCacheDir().getPath() + File.separator + "image_select");
             bitmap.recycle();
-            bitmap = null;
         }
 
         if (StringUtils.isNotEmptyString(imagePath)) {

@@ -33,7 +33,9 @@ import java.util.List;
 
 
 /**
- * Created by Administrator on 2017/6/29.
+ *
+ * @author Administrator
+ * @date 2017/6/29
  */
 
 public class Network{
@@ -377,7 +379,6 @@ public class Network{
 
 
 
-        //
         @Multipart
         @POST("Public/storeDetail")
         Observable<StoreDetailModel> storeDetail(@Part MultipartBody.Part fileA);

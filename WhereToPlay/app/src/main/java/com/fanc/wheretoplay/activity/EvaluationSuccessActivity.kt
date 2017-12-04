@@ -37,7 +37,6 @@ class EvaluationSuccessActivity : BaseActivity(), View.OnClickListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-
         setContentView(R.layout.activity_evaluation_success)
         tv_title.text = "评价成功"
 

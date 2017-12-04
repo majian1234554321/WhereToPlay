@@ -9,6 +9,7 @@ import android.content.res.AssetManager;
 import android.databinding.DataBindingUtil;
 import android.graphics.Typeface;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -75,14 +76,15 @@ import cn.jpush.android.api.JPushInterface;
 import okhttp3.Call;
 
 /**
- * Created by Administrator on 2017/6/12.
+ * @author Administrator
+ * @date 2017/6/12
  */
 
 public class ReserveFragment extends BaseFragment implements IOnFocusListener, LocationUtils.Callback {
     FragmentReserveBinding reserveBinding;
 
     RelativeLayout mRlTopMenu;
-//    ImageView mIvReserveSideslip;
+    //    ImageView mIvReserveSideslip;
     MyScrollView mSvReserve;
     Banner mBanner;
     TextView mTvReserveCity;
@@ -93,19 +95,19 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
     LinearLayout mLlReserveFilterReal;
     TextView mTvReserveFilter;
     ImageView mIvReserveFilter;
-//    LinearLayout mLlReserveCategory;
+    //    LinearLayout mLlReserveCategory;
 //    TextView mTvReserveCategory;
 //    ImageView mIvReserveCategory;
     MyRecycleView mRvReserve;
     View mVTopMenuBg;
-//    LinearLayout mLlSuspend;
+    //    LinearLayout mLlSuspend;
     LinearLayout mLlReserveAreaSuspend;
     TextView mTvReserveAreaSuspend;
     ImageView mIvReserveAreaSuspend;
     LinearLayout mLlReserveFilterRealSuspend;
     TextView mTvReserveFilterSuspend;
     ImageView mIvReserveFilterSuspend;
-//    LinearLayout mLlReserveCategorySuspend;
+    //    LinearLayout mLlReserveCategorySuspend;
 //    TextView mTvReserveCategorySuspend;
     ImageView mIvReserveCategorySuspend;
 
@@ -128,7 +130,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
     // 筛选分类
     List<String> conditions;
     // 页码。数量
-    int page, count = 9,size = count ;
+    int page, count = 9, size = count;
     boolean isFirst = true;
     // 轮播图
     List<String> mBannerIamges;
@@ -154,7 +156,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
     String category;// 分类筛选
 
     MainActivity.MyOnTouchListener onTouchListener;
-//    private LinearLayout mEntertainment;
+    //    private LinearLayout mEntertainment;
     private LinearLayout mFilterSuspend;
     private TextView mTvReserveTitle;
     //娱乐分类
@@ -178,7 +180,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         reserveBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_reserve, container, false);
         initViews();
         init();
@@ -192,6 +194,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
         getResult4SetPayPassword();
         // 上传极光id
         uploadRegistrationID();
+
     }
 
     private void initViews() {
@@ -311,7 +314,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
 //                } else {
 //                    page++;
 //                }
-                page ++;
+                page++;
                 getStoreList(null, city.getId(), page, size, areaId, storeType, category, filterType, value);
             }
         });
@@ -341,6 +344,8 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
                             mSvReserve.setCanPullDown(true);
                         }
                         break;
+                    default:
+                        break;
                 }
                 return false;
             }
@@ -362,7 +367,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
         });
 
         /*去掉首页选择栏按钮*/
-       mLlReserveArea.setOnClickListener(new View.OnClickListener() {
+        mLlReserveArea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 filterArea.showAsDropDown(mLlReserveArea);
@@ -388,7 +393,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
                 setImageViewRotateAnimation(mIvReserveArea, mIvReserveAreaSuspend, false);
             }
         });
-       mLlReserveFilterRealSuspend.setOnClickListener(new View.OnClickListener() {
+        mLlReserveFilterRealSuspend.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 filter.showAsDropDown(mLlReserveFilterRealSuspend);
@@ -423,6 +428,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
 
     /**
      * 点击同一个图标不会改变第二次
+     *
      * @param num
      */
     private void mClick(int num) {
@@ -464,17 +470,17 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
         //按下时
         switch (num) {
             case 0:
-                    mIvCommericalKtv.setImageResource(R.drawable.reserve_commercial_ktv_in);
-                    mTvCommercialKtv.setTextColor(getResources().getColor(R.color.text_red));
-                    setSelectedId(num);
+                mIvCommericalKtv.setImageResource(R.drawable.reserve_commercial_ktv_in);
+                mTvCommercialKtv.setTextColor(getResources().getColor(R.color.text_red));
+                setSelectedId(num);
                 break;
             case 1:
-                    mIvVolumeSales.setImageResource(R.drawable.reserve_volume_sales_in);
-                    mTvVolumeSales.setTextColor(getResources().getColor(R.color.text_red));
+                mIvVolumeSales.setImageResource(R.drawable.reserve_volume_sales_in);
+                mTvVolumeSales.setTextColor(getResources().getColor(R.color.text_red));
                 break;
             case 3:
-                    mIvReserveBar.setImageResource(R.drawable.reserve_bar_in);
-                    mTvReserveBar.setTextColor(getResources().getColor(R.color.text_red));
+                mIvReserveBar.setImageResource(R.drawable.reserve_bar_in);
+                mTvReserveBar.setTextColor(getResources().getColor(R.color.text_red));
                 break;
             default:
                 break;
@@ -567,7 +573,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
             @Override
             public void onDismiss() {
                 setTextColor(mTvReserveFilter, mTvReserveFilterSuspend, true);
-                setImageViewRotateAnimation(mIvReserveFilter,mIvReserveFilterSuspend, true);
+                setImageViewRotateAnimation(mIvReserveFilter, mIvReserveFilterSuspend, true);
             }
         });
 
@@ -668,7 +674,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
      * 三角形向上的动画
      */
     private RotateAnimation trilateral_0_180_Animation() {
-        Log.e("animation","走了向上的动画");
+        Log.e("animation", "走了向上的动画");
         if (animation_up == null) {
             animation_up = (RotateAnimation) AnimationUtils.loadAnimation(mContext, R.anim.rotate_down_deal_filter);
         }
@@ -681,7 +687,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
      * 三角形向下的动画
      */
     private RotateAnimation trilateral_180_360_Animation() {
-        Log.e("animation","走了向上的动画");
+        Log.e("animation", "走了向上的动画");
         RotateAnimation animation_down = (RotateAnimation) AnimationUtils.loadAnimation(mContext, R.anim.rotate_up_deal_filter);
         animation_down.setDuration(300);
         animation_down.setFillAfter(!animation_down.getFillAfter());
@@ -713,6 +719,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
 
     /**
      * 定位返回的数据mBdLocation
+     *
      * @param mBdLocation
      */
     @Override
@@ -772,11 +779,11 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
                 mLlSuspendBottom = mLlReserveFilter.getBottom();
             }
         }
-        if (mSvReserve.getScrollY() > mLlSuspendTop ) {
+        if (mSvReserve.getScrollY() > mLlSuspendTop) {
             if (mFilterSuspend.getVisibility() != View.VISIBLE) {
                 mFilterSuspend.setVisibility(View.VISIBLE);
             }
-        } else if (mSvReserve.getScrollY() < mLlSuspendBottom ) {
+        } else if (mSvReserve.getScrollY() < mLlSuspendBottom) {
             if (mFilterSuspend.getVisibility() != View.INVISIBLE) {
                 mFilterSuspend.setVisibility(View.INVISIBLE);
             }
@@ -859,28 +866,14 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
         Map<String, String> param = new HashMap<>();
 //        param.put(Network.Param.TOKEN, token);
         param.put(Network.Param.CITY, cityId);
-       /* double lat, lng;
-        //存储经纬度
-        if (LocationUtils.location != null) {
-            lat = LocationUtils.location.getLatitude();
-            lng = LocationUtils.location.getLongitude();
-        } else {
-            lat = Double.parseDouble(city.getLat());
-            lng = Double.parseDouble(city.getLng());
-        }*/
 
 
+        // param.put(Network.Param.LAT, String.valueOf(lat));
+        param.put(Network.Param.LAT, DataValue.latitude);
 
 
-           // param.put(Network.Param.LAT, String.valueOf(lat));
-            param.put(Network.Param.LAT, DataValue.latitude);
-
-
-
-
-
-          //  param.put(Network.Param.LNG, String.valueOf(lng));
-            param.put(Network.Param.LNG, DataValue.longitude);
+        //  param.put(Network.Param.LNG, String.valueOf(lng));
+        param.put(Network.Param.LNG, DataValue.longitude);
 
 
         param.put(Network.Param.PAGE, String.valueOf(page));
@@ -898,9 +891,6 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
             param.put(Network.Param.FILTER, filter);
             param.put(Network.Param.VALUE, value);
         }
-
-
-
 
 
         OkHttpUtils.post()

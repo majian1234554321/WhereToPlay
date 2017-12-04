@@ -70,7 +70,9 @@ import okhttp3.MultipartBody;
 public class DownPaymentActivity extends BaseActivity {
 
 
-    //店铺id
+    /**
+     * 店铺id
+     */
     String storeId;
     // 订单参数
     HashMap<String, String> params;
@@ -167,7 +169,7 @@ public class DownPaymentActivity extends BaseActivity {
 
             String order_idValue = getIntent().getStringExtra("order_id");
 
-             reserveType = getIntent().getStringExtra("pay_type");
+            reserveType = getIntent().getStringExtra("pay_type");
 
             String store_nameValue = getIntent().getStringExtra("store_name");
             String arrival_timeValue = getIntent().getStringExtra("arrival_time");
@@ -274,7 +276,7 @@ public class DownPaymentActivity extends BaseActivity {
         }
 
 
-         Retrofit_RequestUtils.getRequest().onlineBook(fileA)
+        Retrofit_RequestUtils.getRequest().onlineBook(fileA)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<OrderInfoModel>() {
@@ -306,9 +308,7 @@ public class DownPaymentActivity extends BaseActivity {
                 });
 
 
-
-
-       // compositeSubscription.add(subscription);
+        // compositeSubscription.add(subscription);
 
 
     }
@@ -386,18 +386,20 @@ public class DownPaymentActivity extends BaseActivity {
                         try {
                             JSONObject object = new JSONObject(response);
                             JSONObject json = object.getJSONObject("content");
-                            if (payWay == 1) {// 支付宝
+                            if (payWay == 1) {
+                                // 支付宝
                                 orderId = json.getString("orderform_id");
                                 // 唤起支付宝
 //                                EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);// 沙箱环境
 
                                 aliPay(json.getString("orderString"));
                             }
-                            if (payWay == 2) {// 微信
+                            if (payWay == 2) {
+                                // 微信
                                 wxPay(json);
                             }
 
-                            if (payWay == 4) {//
+                            if (payWay == 4) {
                                 UPPayAssistEx.startPay(DownPaymentActivity.this, null, null, json.getString("orderString"), mMode);
                             }
                         } catch (JSONException e) {
@@ -474,7 +476,7 @@ public class DownPaymentActivity extends BaseActivity {
             // 判断resultStatus 为9000则代表支付成功
             if (TextUtils.equals(resultStatus, "9000")) {
                 // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-               // checkAliPayResult(resultInfo, orderId);
+                // checkAliPayResult(resultInfo, orderId);
 
                 payCompleted();
             } else {

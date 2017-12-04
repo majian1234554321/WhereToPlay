@@ -194,9 +194,15 @@
             android:value="H3sGc7uvHsmwwLbEnXpDSDmXeNqVENkL" />
         <!-- Tinker热修复 -->
 
-        <activity android:name=".activity.DiscoverImageActivity" />
-        <activity android:name=".activity.ListOrderActivity" />
-        <activity android:name=".activity.DetailsOrderActivity" />
+        <activity
+            android:name=".activity.DiscoverImageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.ListOrderActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.DetailsOrderActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ShareActivity"
             android:screenOrientation="sensor"
@@ -208,10 +214,18 @@
             android:exported="false"></service>
         -->
 
-        <activity android:name=".activity.PublicationEvaluationActivity" />
-        <activity android:name=".imagepink.ImageSelectorActivity" />
-        <activity android:name=".imagepink.ClipImageActivity" />
-        <activity android:name=".activity.OrderPayActivity" />
+        <activity
+            android:name=".activity.PublicationEvaluationActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".imagepink.ImageSelectorActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".imagepink.ClipImageActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.OrderPayActivity"
+            android:screenOrientation="portrait" />
         <activity
             android:name="com.unionpay.uppay.PayActivity"
             android:configChanges="orientation|keyboardHidden|keyboard"
@@ -222,7 +236,9 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity android:name=".activity.BookActivity" />
-        <activity android:name=".activity.EvaluationSuccessActivity" />
+        <activity
+            android:name=".activity.EvaluationSuccessActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="UMENG_APPKEY"
@@ -231,7 +247,9 @@
             android:name="UMENG_CHANNEL"
             android:value="${UMENG_CHANNEL_VALUE}" />
 
-        <activity android:name=".Main2Activity"></activity>
+        <activity
+            android:name=".Main2Activity"
+            android:screenOrientation="portrait" />
 
     </application>
 

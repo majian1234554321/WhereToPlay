@@ -85,6 +85,7 @@ android {
         _oppo{}
         _vivo{}
         _meizu{}
+        _sougou{}
 
     }
 
@@ -139,6 +140,7 @@ dependencies {
     //compile 'com.google.firebase:firebase-appindexing:11.6.0'
     implementation project(':didi_sdk_for_common_v1.1.0_12_08')
     implementation 'com.android.support:support-v4:27.0.2'
+    debugCompile 'com.amitshekhar.android:debug-db:1.0.0'
 }
 
 

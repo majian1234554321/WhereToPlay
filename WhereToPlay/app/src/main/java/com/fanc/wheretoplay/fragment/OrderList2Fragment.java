@@ -7,6 +7,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -68,7 +69,9 @@ public class OrderList2Fragment extends BaseLazyFragment implements PullToRefres
 
     @Override
     protected void initData() {
-
+        Log.i("OrderList2Fragment", getClass().getSimpleName());
+        ordelListFragmentPresenter = new OrdelListFragmentPresenter(mContext,this,ptrlPayReserve,OrderList2Fragment.this);
+        ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
     }
 
     @Override
@@ -80,7 +83,6 @@ public class OrderList2Fragment extends BaseLazyFragment implements PullToRefres
         lm.setOrientation(LinearLayoutManager.VERTICAL);
         mRvOrder.setLayoutManager(lm);
 
-
         mRvOrder.addItemDecoration(new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL,
                 UIUtils.dp2Px(1), mContext.getResources().getColor(R.color.pay_reserve_list_divider_white)));
         mRvOrder.setItemAnimator(new DefaultItemAnimator());
@@ -91,8 +93,7 @@ public class OrderList2Fragment extends BaseLazyFragment implements PullToRefres
         ptrlPayReserve.setOnRefreshListener(this);
         currentPage = 0;
 
-        ordelListFragmentPresenter = new OrdelListFragmentPresenter(mContext,this,ptrlPayReserve,OrderList2Fragment.this);
-        ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
+
 
         RxBus.getDefault().toFlowable(Intent.class)
                 .subscribe(new Consumer<Intent>() {

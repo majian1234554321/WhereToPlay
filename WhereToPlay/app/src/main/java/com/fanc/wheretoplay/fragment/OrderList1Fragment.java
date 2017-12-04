@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,7 +57,9 @@ public class OrderList1Fragment extends BaseLazyFragment implements PullToRefres
 
     @Override
     protected void initData() {
-
+        Log.i("OrderList2Fragment", getClass().getSimpleName());
+        ordelListFragmentPresenter = new OrdelListFragmentPresenter(mContext, this, ptrlPayReserve, OrderList1Fragment.this);
+        ordelListFragmentPresenter.getOrdelListData(TYPE, currentPage, "onRefresh");
     }
 
     @Override
@@ -79,8 +82,7 @@ public class OrderList1Fragment extends BaseLazyFragment implements PullToRefres
         ptrlPayReserve.setOnRefreshListener(this);
         currentPage = 0;
 
-        ordelListFragmentPresenter = new OrdelListFragmentPresenter(mContext, this, ptrlPayReserve, OrderList1Fragment.this);
-        ordelListFragmentPresenter.getOrdelListData(TYPE, currentPage, "onRefresh");
+
 
         RxBus.getDefault().toFlowable(Intent.class)
                 .subscribe(new Consumer<Intent>() {

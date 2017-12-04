@@ -144,10 +144,14 @@ public class MainActivity extends BaseFragmentActivity {
      */
     private void initFragments() {
         fragments = new ArrayList<>();
-        fragments.add(reserveFragment = new ReserveFragment());   //添加预定Fragment
-        fragments.add(new PayFragment());   //添加支付Fragment
-        fragments.add(new DiscoverFragment());   //添加发现Fragment
-        fragments.add(new MineFragment());   //添加我的Fragment
+        fragments.add(reserveFragment = new ReserveFragment());
+        //添加预定Fragment
+        fragments.add(new PayFragment());
+        //添加支付Fragment
+        fragments.add(new DiscoverFragment());
+        //添加发现Fragment
+        fragments.add(new MineFragment());
+        //添加我的Fragment
     }
 
     /**
