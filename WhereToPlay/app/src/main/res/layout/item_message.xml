@@ -1,17 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <data>
 
-        <import type="android.view.View"/>
 
-        <variable
-            name="message"
-            type="com.fanc.wheretoplay.datamodel.MessageList.Message"/>
-    </data>
 
-    <RelativeLayout
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -47,7 +40,7 @@
                     android:id="@+id/tv_item_message_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@{message.title}"
+
                     android:textColor="@color/text_black"
                     android:textSize="@dimen/normal_textsize"
                     app:layout_constraintStart_toStartOf="parent"
@@ -58,7 +51,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin_5"
-                    android:text="@{message.content}"
+
                     android:textColor="@color/pay_reserve_list_text"
                     android:textSize="@dimen/normal_textsize"
                     app:layout_constraintStart_toStartOf="parent"
@@ -78,4 +71,3 @@
 
     </LinearLayout>
     </RelativeLayout>
-</layout>

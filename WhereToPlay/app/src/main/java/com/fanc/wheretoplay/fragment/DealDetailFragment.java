@@ -155,7 +155,6 @@ public class DealDetailFragment extends BaseFragment implements RadioGroup.OnChe
                     case 1:
                         mRbDealDetailRechage.setChecked(true);
                         break;
-
                     case 2:
                         referral.setChecked(true);
                         break;
@@ -186,7 +185,7 @@ public class DealDetailFragment extends BaseFragment implements RadioGroup.OnChe
                 break;
             case R.id.rb_deal_detail_referral:
                 mMvpDealDetail.setCurrentItem(2);
-                currentDetail = -1;
+
                 break;
             default:
                 break;

@@ -104,6 +104,7 @@ public class MessageDetailFragment extends BaseFragment {
                             if (response.getDetail() != null) {
                                 showMessageDetail(response.getDetail());
                                 Intent intent = new Intent(Constants.ACTION_MESSAGE_READED);
+
                                 LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
                             }
                         }

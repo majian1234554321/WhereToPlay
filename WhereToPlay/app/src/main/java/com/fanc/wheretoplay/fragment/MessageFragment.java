@@ -48,12 +48,8 @@ public class MessageFragment extends BaseFragment {
     TopMenu mTmMessage;
     RecyclerView mRvMessage;
 
-
     List<MessageList.Message> messages;
     MessageAdapter adapter;
-
-    Receiver receiver;
-    int pos = -1;
 
 
     @Nullable
@@ -62,7 +58,7 @@ public class MessageFragment extends BaseFragment {
         messageBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_collection, null, false);
         initViews();
         init();
-        setListener();
+
         return messageBinding.getRoot();
     }
 
@@ -71,30 +67,7 @@ public class MessageFragment extends BaseFragment {
         mRvMessage = messageBinding.rvCollection;
     }
 
-    private void setListener() {
-        mTmMessage.setLeftIconOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mContext.finish();
-            }
-        });
-        adapter.setOnItemClickListener(new MessageAdapter.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Intent intent = new Intent(mContext, DetailActivity.class);
-                intent.putExtra(Constants.PAGE, Constants.MESSAGE_DETAIL);
-                intent.putExtra(Constants.ID, messages.get(position).getId());
-                startActivity(intent);
-                pos = position;
-            }
 
-            @Override
-            public void onClickDelete(int position) {
-                pos = position;
-                deleteMessage(messages.get(position).getId());
-            }
-        });
-    }
 
     private void init() {
         mTmMessage.setLeftIcon(R.drawable.left);
@@ -114,7 +87,7 @@ public class MessageFragment extends BaseFragment {
         mRvMessage.setAdapter(adapter);
 
         getMessageList();
-        registerBroadcastReceiver();
+
     }
 
     private void getMessageList() {
@@ -146,56 +119,9 @@ public class MessageFragment extends BaseFragment {
         adapter.notifyDataSetChanged();
     }
 
-    private void deleteMessage(String messageId) {
-        showProgress();
-        OkHttpUtils.post()
-                .url(Network.User.USER_DELETE_MESSAGE)
-                .addParams(Network.Param.TOKEN, mUser.getToken())
-                .addParams(Network.Param.MESSAGE_ID, messageId)
-                .build()
-                .execute(new DCallback<IsOk>() {
-                    @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
-                    }
 
-                    @Override
-                    public void onResponse(IsOk response) {
-                        if (isSuccess(response)) {
-                            if (response.isIs_ok()) {
-                                ToastUtils.showShortToast(mContext, "删除成功");
-                                messages.remove(pos);
-                                adapter.notifyItemRemoved(pos);
-                                adapter.notifyItemRangeChanged(pos, adapter.getItemCount());
-                            }
-                        }
-                    }
-                });
-    }
 
-    private void registerBroadcastReceiver() {
-        receiver = new Receiver();
-        IntentFilter filter = new IntentFilter(Constants.ACTION_MESSAGE_READED);
-        LocalBroadcastManager.getInstance(mContext).registerReceiver(receiver, filter);
-    }
 
-    class Receiver extends BroadcastReceiver {
 
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (pos != -1) {
-                messages.get(pos).setReaded("1");
-                adapter.notifyDataSetChanged();
-            }
-        }
-    }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (receiver != null) {
-            LocalBroadcastManager.getInstance(mContext).unregisterReceiver(receiver);
-            receiver = null;
-        }
-    }
 }
