@@ -6,6 +6,7 @@
     <com.fanc.wheretoplay.view.TopMenu
         android:id="@+id/tm_mine_friend"
         android:layout_width="match_parent"
+        android:visibility="gone"
         android:layout_height="wrap_content" />
     <com.fanc.wheretoplay.view.PullToRefreshLayout
         android:id="@+id/ptrl_commend_friend"

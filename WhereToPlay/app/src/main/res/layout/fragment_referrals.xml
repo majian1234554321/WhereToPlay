@@ -5,7 +5,7 @@
 
         <variable
             name="click"
-            type="com.fanc.wheretoplay.fragment.ReferralFragment"/>
+            type="com.fanc.wheretoplay.fragment.ReferralFragment" />
     </data>
 
     <LinearLayout
@@ -18,16 +18,19 @@
         <com.fanc.wheretoplay.view.TopMenu
             android:id="@+id/tm_referral"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content"
+             />
 
         <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/bg_gray"
                 android:orientation="vertical">
+
                 <RelativeLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -38,7 +41,7 @@
                         android:id="@+id/iv_referral_logo"
                         android:layout_width="@dimen/width_30"
                         android:layout_height="@dimen/height_30"
-                        android:src="@mipmap/ic_launcher"/>
+                        android:src="@mipmap/ic_launcher" />
 
                     <TextView
                         android:id="@+id/tv_referral_recreation_terrace"
@@ -49,7 +52,7 @@
                         android:layout_toRightOf="@+id/iv_referral_logo"
                         android:text="@string/where_to_play_recreation_terrace"
                         android:textColor="@color/text_black"
-                        android:textSize="@dimen/textsize_level2"/>
+                        android:textSize="@dimen/textsize_level2" />
 
                 </RelativeLayout>
 
@@ -59,7 +62,7 @@
                     android:layout_height="@dimen/height_200"
                     android:layout_marginLeft="@dimen/margin_5"
                     android:layout_marginRight="@dimen/margin_5"
-                    android:scaleType="fitXY"/>
+                    android:scaleType="fitXY" />
 
                 <RelativeLayout
                     android:layout_width="wrap_content"
@@ -71,7 +74,7 @@
                         android:id="@+id/civ_referral_mine_header"
                         android:layout_width="@dimen/width_40"
                         android:layout_height="@dimen/height_40"
-                        android:src="@mipmap/ic_launcher"/>
+                        android:src="@mipmap/ic_launcher" />
 
                     <TextView
                         android:id="@+id/tv_referral_mine_nickname"
@@ -82,47 +85,48 @@
                         android:layout_toRightOf="@+id/civ_referral_mine_header"
                         android:text="JoJo"
                         android:textColor="@color/text_black"
-                        android:textSize="@dimen/normal_textsize"/>
+                        android:textSize="@dimen/normal_textsize" />
                 </RelativeLayout>
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginBottom="@dimen/margin_15"
                     android:layout_marginTop="@dimen/margin_15"
                     android:text="@string/mine_invitation_code"
                     android:textColor="@color/text_black"
-                    android:textSize="@dimen/normal_textsize"
-                    android:layout_gravity="center_horizontal"/>
+                    android:textSize="@dimen/normal_textsize" />
 
                 <EditText
                     android:id="@+id/tv_referral_mine_code"
                     android:layout_width="@dimen/width_180"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:background="@drawable/shape_invitaiton_code"
                     android:gravity="center_horizontal"
                     android:padding="@dimen/padding_5"
                     android:paddingTop="@dimen/padding_5"
                     android:text="HL12"
                     android:textColor="@color/text_red"
-                    android:textIsSelectable="true"
-                    android:layout_gravity="center_horizontal"/>
+                    android:textIsSelectable="true" />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/margin_15"
                     android:gravity="center"
                     android:lineSpacingExtra="@dimen/text_line_space_5"
                     android:text="@string/invitation_code_explain"
                     android:textColor="@color/text_down_payment_and_way"
-                    android:textSize="@dimen/textsize_levelsmall"
-                    android:layout_gravity="center_horizontal"/>
+                    android:textSize="@dimen/textsize_levelsmall" />
 
                 <Button
                     android:id="@+id/btn_referral_sheared"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/height_40"
+                    android:layout_gravity="center_horizontal"
                     android:layout_marginLeft="@dimen/margin_15"
                     android:layout_marginRight="@dimen/margin_15"
                     android:layout_marginTop="@dimen/margin_50"
@@ -130,8 +134,7 @@
                     android:onClick="@{click.onViewClick}"
                     android:text="@string/sheared"
                     android:textColor="@color/text_white"
-                    android:textSize="@dimen/textsize_level2"
-                    android:layout_gravity="center_horizontal"/>
+                    android:textSize="@dimen/textsize_level2" />
             </LinearLayout>
         </ScrollView>
 

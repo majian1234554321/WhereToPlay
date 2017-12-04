@@ -112,7 +112,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
     @BindView(R.id.tv_copy)
     TextView tv_copy;
 
-    private String order_idValue, store_idValue, storeNameValue, statusValue, totalValue, discountValue;
+    private String order_idValue, store_idValue, storeNameValue, statusValue, totalValue, discountValue,addressValue;
 
     @BindView(R.id.rl)
     RelativeLayout rl;
@@ -153,6 +153,8 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
         statusValue = getIntent().getStringExtra("status");
         totalValue = getIntent().getStringExtra("total");
         discountValue = getIntent().getStringExtra("discount");
+
+        addressValue = getIntent().getStringExtra("address");
 
 
         Disposable rxSbscription = RxBus.getDefault().toFlowable(String.class)
@@ -299,6 +301,15 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                         case "立即评论":
                             intent.putExtra("order_id", order_idValue);
                             intent.putExtra("store_id", store_idValue);
+
+                            intent.putExtra("store_id", store_idValue);
+
+                            intent.putExtra("store_name", storeNameValue);
+
+                            intent.putExtra("address", tvAddress.getText().toString());
+
+
+
                             intent.setClass(DetailsOrderActivity.this, PublicationEvaluationActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                             mContext.startActivity(intent);

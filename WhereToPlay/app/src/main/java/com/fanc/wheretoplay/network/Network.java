@@ -31,19 +31,16 @@ import com.fanc.wheretoplay.rx.BaseResponseModel;
 import java.util.List;
 
 
-
 /**
- *
  * @author Administrator
  * @date 2017/6/29
  */
 
-public class Network{
+public class Network {
 
 
-
-   // public static String BASE = "http://testapi.51tzl.cn";   // 测试
-    public static String BASE = "http://ktv.51tzl.cn";
+    // public static String BASE = "http://testapi.51tzl.cn";   // 测试
+    public static String BASE = "https://ktv.51tzl.cn";
 
 
     public static String IMAGE = "";   // 测试
@@ -52,7 +49,6 @@ public class Network{
 
     // 手机系统
     public static String PHONE_ANDROID = "android";
-
 
 
     public static String USER = BASE + API;
@@ -139,82 +135,82 @@ public class Network{
         public static String USER_WAITING = USER + "User/waiting";// 下单成功
         public static String USER_NEW_ORDERLIST = USER + "User/new_orderList";// 订单新接口
 
-        public  static void changeUserUrl(String url) {
-             PUBLIC_STORE_DETAIL = url + "Public/storeDetail";// 店铺详情
-             PUBLIC_VERSION = url + "Public/version";// 版本检测
-             PUBLIC_ENVIRONMENT = url + "Public/environment";// 环境
-             PUBLIC_ATMOSPHERE = url + "Public/atmosphere";// 气氛
-             PUBLIC_SERVICE = url + "Public/service";// 服务
-             PUBLIC_OTHER = url + "Public/other";// 其他
-             PUBLIC_ROOM_LIST = url + "Public/roomList";// 房型列表
-             PUBLIC_MARKETING = url + "Public/marketing";// 活动
-             PUBLIC_WINE = url + "Public/wine";// 酒水
-             PUBLIC_ROOM_TYPE = url + "Public/roomtype";// 房型列表
-             PUBLIC_HOUSENEWS = url + "Public/roomstatus";// 房态（新）
-             PUBLIC_HOUSE_TYPE = url + "Public/roomtype";// 房型列表（新）
-             PUBLIC_COMMENTS = url + "Public/storecomment";// 全部评论
+        public static void changeUserUrl(String url) {
+            PUBLIC_STORE_DETAIL = url + "Public/storeDetail";// 店铺详情
+            PUBLIC_VERSION = url + "Public/version";// 版本检测
+            PUBLIC_ENVIRONMENT = url + "Public/environment";// 环境
+            PUBLIC_ATMOSPHERE = url + "Public/atmosphere";// 气氛
+            PUBLIC_SERVICE = url + "Public/service";// 服务
+            PUBLIC_OTHER = url + "Public/other";// 其他
+            PUBLIC_ROOM_LIST = url + "Public/roomList";// 房型列表
+            PUBLIC_MARKETING = url + "Public/marketing";// 活动
+            PUBLIC_WINE = url + "Public/wine";// 酒水
+            PUBLIC_ROOM_TYPE = url + "Public/roomtype";// 房型列表
+            PUBLIC_HOUSENEWS = url + "Public/roomstatus";// 房态（新）
+            PUBLIC_HOUSE_TYPE = url + "Public/roomtype";// 房型列表（新）
+            PUBLIC_COMMENTS = url + "Public/storecomment";// 全部评论
 
-             COMMON_STORE_LIST = url + "Common/storeList";//主页列表
-             COMMON_FILTER = url + "Common/filter";// 筛选列表
-             COMMON_ADVERTISING = url + "Common/advertising";//发现店铺
-             COMMON_RECOMMENDATION = url + "Common/recommendation";// 推荐搜索
-             COMMON_SEARCH = url + "Common/search";// 搜索
-             COMMON_STORE_SORT = url + "Common/storeSort";// 发现筛选
+            COMMON_STORE_LIST = url + "Common/storeList";//主页列表
+            COMMON_FILTER = url + "Common/filter";// 筛选列表
+            COMMON_ADVERTISING = url + "Common/advertising";//发现店铺
+            COMMON_RECOMMENDATION = url + "Common/recommendation";// 推荐搜索
+            COMMON_SEARCH = url + "Common/search";// 搜索
+            COMMON_STORE_SORT = url + "Common/storeSort";// 发现筛选
 
-             LOGIN_VERIFY = url + "Login/verify";// 验证码
-             LOGIN_REGISTER = url + "Login/register";// 注册
-             LOGIN_LOGIN = url + "Login/login";// 登录
-             LOGIN_FIND_PASSWORD = url + "Login/findPassword";//找回密码
+            LOGIN_VERIFY = url + "Login/verify";// 验证码
+            LOGIN_REGISTER = url + "Login/register";// 注册
+            LOGIN_LOGIN = url + "Login/login";// 登录
+            LOGIN_FIND_PASSWORD = url + "Login/findPassword";//找回密码
 
-             USER_HOME = url + "User/home";// 我的主页
-             USER_RCOMMEND_FRIEND = url + "Reco/recomList";// 推荐好友
+            USER_HOME = url + "User/home";// 我的主页
+            USER_RCOMMEND_FRIEND = url + "Reco/recomList";// 推荐好友
             USER_RCOMMEND_MONEY = url + "Reco/recomReward";// 推荐奖励
-             USER_MODIFY_AVATAR = url + "User/modifyAvatar";// 修改头像
-             USER_MODIFY_PRO_FILE = url + "User/modifyProfile";//修改资料
-             USER_MESSAGE_LIST = url + "User/messageList";// 消息
-             USER_MESSAGE_DETAIL = url + "User/messageDetail";// 消息详情
-             USER_DELETE_MESSAGE = url + "User/deleteMessage";// 删除消息
-             USER_MY_WALLET = url + "User/myWallet";// 钱包
-             USER_COST_DETAIL = url + "User/costDetail";// 消费明细
-             USER_RECHARGE_DETAIL = url + "User/rechargeDetail";// 充值明细
-             USER_COUPON_LIST = url + "User/couponList";// 优惠券
-             USER_SCORE_LIST = url + "User/scoreList";// 积分
-             USER_BOOK_LIST = url + "User/bookList";// 订单
-             USER_COLLECTION_LIST = url + "User/collectionList";// 收藏
-             USER_SHARE_AD = url + "User/shareAD";// 推荐分享
-             USER_PAY_PASSWORD = url + "User/payPassword";// 设置支付密码
-             USER_FEEDBACK = url + "User/feedback";// 意见反馈
-             USER_NOTIFICATION = url + "User/notification";// 系统通知
-             USER_SHARE_STORE = url + "user/share_store";// 分享店铺
-             USER_SHARE_CODE = url + "user/share_code";// 分享邀请
-             USER_COLLECT = url + "User/Collect";// 收藏
-             USER_DELETE_COLLECTION = url + "User/deleteCollection";// 删除收藏
-             USER_STORE_DESCRIBE = url + "User/store_describe";// 商铺描述
-             USER_SERVER_LIST = url + "User/serverList";// 服务员列表
-             USER_SELECT_WAITER = url + "User/selectWaiter";// 选择服务员
-             USER_ONLINE_BOOK = url + "User/onlineBook";// 在线预订
-             USER_COMMENT_PAGE = url + "User/commentPage";// 写评价页面
-             USER_SUBMIT_COMMENT = url + "User/submitComment";// 提交评论
-             USER_USER_RECHARGE = url + "User/userRecharge";// 用户充值
-             USER_RECHARGE_ALIPAY_VALIDA = url + "User/rechargeAlipayValida";// 支付宝充值结果验证
-             USER_CANCLE_ORDER = url + "User/cancle_order";// 取消订单
-             USER_OUT_ORDER = url + "User/out_order";// 删除订单
-             USER_ORDER_DONE = url + "User/order_done";// 结单
-             USER_CONSUME_AGAIN = url + "User/consume_again";// 消费
-             USER_ORDER_PAYOFF = url + "User/order_payoff";// 订单支付
-             USER_ORDER_PAYOFF_VALIDATE = url + "User/order_payoffvalidate";// 结账/消费 支付宝支付验证
-             USER_PAYORDER = url + "User/payOrder";// 订金支付
-             USER_PREPAY_ORDER_VALIDATE = url + "User/prepayorderValidate";// 预订 支付宝支付结果验证
-             USER_CONFIRM_SETCODE = url + "User/confirm_setcode";// 检查用户是否设置过密码
-             USER_CONFIRM_COLLECT = url + "User/confirm_collect";// 判断用户是否收藏过店铺
-             USER_SAVE_REGISTRATIONID = url + "User/save_registrationid";// 极光RegistrationID保存接口
-             USER_IS_DISPLAY = url + "User/is_display";// 信誉预订是否显示
-             USER_WAITING = url + "User/waiting";// 下单成功
-             USER_NEW_ORDERLIST = url + "User/new_orderList";// 订单新接口
+            USER_MODIFY_AVATAR = url + "User/modifyAvatar";// 修改头像
+            USER_MODIFY_PRO_FILE = url + "User/modifyProfile";//修改资料
+            USER_MESSAGE_LIST = url + "User/messageList";// 消息
+            USER_MESSAGE_DETAIL = url + "User/messageDetail";// 消息详情
+            USER_DELETE_MESSAGE = url + "User/deleteMessage";// 删除消息
+            USER_MY_WALLET = url + "User/myWallet";// 钱包
+            USER_COST_DETAIL = url + "User/costDetail";// 消费明细
+            USER_RECHARGE_DETAIL = url + "User/rechargeDetail";// 充值明细
+            USER_COUPON_LIST = url + "User/couponList";// 优惠券
+            USER_SCORE_LIST = url + "User/scoreList";// 积分
+            USER_BOOK_LIST = url + "User/bookList";// 订单
+            USER_COLLECTION_LIST = url + "User/collectionList";// 收藏
+            USER_SHARE_AD = url + "User/shareAD";// 推荐分享
+            USER_PAY_PASSWORD = url + "User/payPassword";// 设置支付密码
+            USER_FEEDBACK = url + "User/feedback";// 意见反馈
+            USER_NOTIFICATION = url + "User/notification";// 系统通知
+            USER_SHARE_STORE = url + "user/share_store";// 分享店铺
+            USER_SHARE_CODE = url + "user/share_code";// 分享邀请
+            USER_COLLECT = url + "User/Collect";// 收藏
+            USER_DELETE_COLLECTION = url + "User/deleteCollection";// 删除收藏
+            USER_STORE_DESCRIBE = url + "User/store_describe";// 商铺描述
+            USER_SERVER_LIST = url + "User/serverList";// 服务员列表
+            USER_SELECT_WAITER = url + "User/selectWaiter";// 选择服务员
+            USER_ONLINE_BOOK = url + "User/onlineBook";// 在线预订
+            USER_COMMENT_PAGE = url + "User/commentPage";// 写评价页面
+            USER_SUBMIT_COMMENT = url + "User/submitComment";// 提交评论
+            USER_USER_RECHARGE = url + "User/userRecharge";// 用户充值
+            USER_RECHARGE_ALIPAY_VALIDA = url + "User/rechargeAlipayValida";// 支付宝充值结果验证
+            USER_CANCLE_ORDER = url + "User/cancle_order";// 取消订单
+            USER_OUT_ORDER = url + "User/out_order";// 删除订单
+            USER_ORDER_DONE = url + "User/order_done";// 结单
+            USER_CONSUME_AGAIN = url + "User/consume_again";// 消费
+            USER_ORDER_PAYOFF = url + "User/order_payoff";// 订单支付
+            USER_ORDER_PAYOFF_VALIDATE = url + "User/order_payoffvalidate";// 结账/消费 支付宝支付验证
+            USER_PAYORDER = url + "User/payOrder";// 订金支付
+            USER_PREPAY_ORDER_VALIDATE = url + "User/prepayorderValidate";// 预订 支付宝支付结果验证
+            USER_CONFIRM_SETCODE = url + "User/confirm_setcode";// 检查用户是否设置过密码
+            USER_CONFIRM_COLLECT = url + "User/confirm_collect";// 判断用户是否收藏过店铺
+            USER_SAVE_REGISTRATIONID = url + "User/save_registrationid";// 极光RegistrationID保存接口
+            USER_IS_DISPLAY = url + "User/is_display";// 信誉预订是否显示
+            USER_WAITING = url + "User/waiting";// 下单成功
+            USER_NEW_ORDERLIST = url + "User/new_orderList";// 订单新接口
         }
     }
 
-    public static class  Param {
+    public static class Param {
         public static String MOBILE = "mobile";// mobile
         public static String PASSWORD = "password";// string, 必须, 密码
         public static String CODE = "code";// int , 必须, 短信验证码
@@ -280,7 +276,7 @@ public class Network{
     }
 
 
-    public  interface  LH_API {
+    public interface LH_API {
 
         //订单列表
         @Multipart
@@ -370,21 +366,15 @@ public class Network{
         Observable<SubmitCommentModel> payPassword(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC);
 
 
-
-
         //登录
         @Multipart
         @POST("Login/login")
         Observable<NewUser> logIn(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC);
 
 
-
         @Multipart
         @POST("Public/storeDetail")
         Observable<StoreDetailModel> storeDetail(@Part MultipartBody.Part fileA);
-
-
-
 
 
     }

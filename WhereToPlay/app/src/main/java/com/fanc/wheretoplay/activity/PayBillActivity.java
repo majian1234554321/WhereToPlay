@@ -136,6 +136,8 @@ public class PayBillActivity extends BaseActivity {
     private String statusTitle;
     private TextView tvPayBillStore;
     private RadioButton rb_upp;
+    private String storeName;
+    private String address;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -191,9 +193,9 @@ public class PayBillActivity extends BaseActivity {
         Intent intent = getIntent();
 
         storeId = intent.getStringExtra(Constants.STORE_ID);
-        String storeName = intent.getStringExtra("storeName");
+        storeName = intent.getStringExtra("storeName");
         String discountValue = intent.getStringExtra("discount");
-        String address = intent.getStringExtra("address");
+        address = intent.getStringExtra("address");
         if (discountValue != null && discountValue.length() > 0) {
             discount = Double.parseDouble(discountValue);
         } else {
@@ -661,6 +663,12 @@ public class PayBillActivity extends BaseActivity {
         intent.putExtra(Constants.ORDER_ID, orderId);
         intent.putExtra(Constants.PRICE, mTvPaySumReal.getText().toString());
         intent.putExtra(Constants.IS_COMMENT, true);
+
+
+        intent.putExtra("store_name", storeName);
+        intent.putExtra("address", address);
+
+
         startActivity(intent);
         // 通知消费页面
         Intent intent1 = new Intent(Constants.ACTION_PAY_SUCCESS);

@@ -3,12 +3,14 @@ package com.fanc.wheretoplay.fragment;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
+
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RadioButton;
@@ -16,7 +18,7 @@ import android.widget.RadioGroup;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.BaseFragment;
-import com.fanc.wheretoplay.databinding.FragmentDealDetailBinding;
+
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.view.DealDetailFilterDialog;
@@ -26,20 +28,22 @@ import com.fanc.wheretoplay.view.TopMenu;
 import java.util.ArrayList;
 import java.util.List;
 
+import butterknife.ButterKnife;
+import butterknife.Unbinder;
+
 /**
  * Created by Administrator on 2017/6/16.
  */
 
-public class DealDetailFragment extends BaseFragment {
+public class DealDetailFragment extends BaseFragment implements RadioGroup.OnCheckedChangeListener {
 
     private final int CONSUME_DETAIL = 1;// 消费明细
     private final int RECHARGE_DETAIL = 2;// 充值明细
 
-    FragmentDealDetailBinding dealDetailBinding;
     TopMenu mTmDealDetail;
     MyViewPager mMvpDealDetail;
     RadioButton mRbDealDetailConsume;
-    RadioButton mRbDealDetailRechage;
+    RadioButton mRbDealDetailRechage, referral;
 
     List<Fragment> fragments;
 
@@ -47,19 +51,30 @@ public class DealDetailFragment extends BaseFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        dealDetailBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_deal_detail, null, false);
-        initViews();
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        View view = View.inflate(inflater.getContext(), R.layout.fragment_deal_detail, null);
+
+
+        initViews(view);
         init();
         setListeners();
-        return dealDetailBinding.getRoot();
+        return view;
     }
 
-    private void initViews() {
-        mTmDealDetail = dealDetailBinding.tmDealDetail;
-        mMvpDealDetail = dealDetailBinding.mvpDealDetail;
-        mRbDealDetailConsume = dealDetailBinding.rbDealDetailConsume;
-        mRbDealDetailRechage = dealDetailBinding.rbDealDetailRecharge;
+    private void initViews(View view) {
+
+        mTmDealDetail = view.findViewById(R.id.tm_deal_detail);
+        mRbDealDetailConsume = view.findViewById(R.id.rb_deal_detail_consume);
+        mRbDealDetailRechage = view.findViewById(R.id.rb_deal_detail_recharge);
+        referral = view.findViewById(R.id.rb_deal_detail_referral);
+        mMvpDealDetail = view.findViewById(R.id.mvp_deal_detail);
+
+      RadioGroup  rg = view.findViewById(R.id.rg_deal_detail);
+        rg.setOnCheckedChangeListener(this);
+
+
+
     }
 
     private void init() {
@@ -69,7 +84,7 @@ public class DealDetailFragment extends BaseFragment {
         mTmDealDetail.setTitleColor(getResources().getColor(R.color.white));
         mTmDealDetail.setRightTextColor(getResources().getColor(R.color.white));
 
-        dealDetailBinding.setClcik(this);
+
         initPage();
         mRbDealDetailConsume.setChecked(true);
     }
@@ -78,6 +93,7 @@ public class DealDetailFragment extends BaseFragment {
         fragments = new ArrayList<>();
         fragments.add(new ConsumeDetailFragment());
         fragments.add(new RechargeDetailFragment());
+        fragments.add(new MineCommendMoneyFragment());
 
         mMvpDealDetail.setAdapter(new FragmentPagerAdapter(getFragmentManager()) {
             @Override
@@ -139,6 +155,11 @@ public class DealDetailFragment extends BaseFragment {
                     case 1:
                         mRbDealDetailRechage.setChecked(true);
                         break;
+
+                    case 2:
+                        referral.setChecked(true);
+                        break;
+
                     default:
                         break;
                 }
@@ -151,7 +172,9 @@ public class DealDetailFragment extends BaseFragment {
         });
     }
 
-    public void onCheckedChanged(RadioGroup group, int checkedId) {
+
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
         switch (checkedId) {
             case R.id.rb_deal_detail_consume:
                 mMvpDealDetail.setCurrentItem(0);
@@ -161,9 +184,12 @@ public class DealDetailFragment extends BaseFragment {
                 mMvpDealDetail.setCurrentItem(1);
                 currentDetail = RECHARGE_DETAIL;
                 break;
+            case R.id.rb_deal_detail_referral:
+                mMvpDealDetail.setCurrentItem(2);
+                currentDetail = -1;
+                break;
             default:
                 break;
         }
     }
-
 }

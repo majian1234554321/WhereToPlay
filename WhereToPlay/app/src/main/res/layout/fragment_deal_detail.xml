@@ -1,15 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <data>
-
-        <variable
-            name="clcik"
-            type="com.fanc.wheretoplay.fragment.DealDetailFragment"/>
-    </data>
 
     <android.support.constraint.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@color/bg_gray">
@@ -21,16 +14,16 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <RadioGroup
             android:id="@+id/rg_deal_detail"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_50"
-            android:background="@color/white"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true"
-            android:onCheckedChanged="@{clcik.onCheckedChanged}"
+            android:background="@color/white"
+
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +32,7 @@
             <View
                 android:layout_width="@dimen/width_0"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"/>
+                android:layout_weight="0.5" />
 
             <RadioButton
                 android:id="@+id/rb_deal_detail_consume"
@@ -50,12 +43,12 @@
                 android:gravity="center"
                 android:text="@string/consume_detail"
                 android:textColor="@drawable/selector_deal_detail_text_color"
-                android:textSize="@dimen/textsize_level2"/>
+                android:textSize="@dimen/textsize_level2" />
 
             <View
                 android:layout_width="@dimen/width_0"
                 android:layout_height="match_parent"
-                android:layout_weight="1"/>
+                android:layout_weight="0.5" />
 
             <RadioButton
                 android:id="@+id/rb_deal_detail_recharge"
@@ -66,12 +59,28 @@
                 android:gravity="center"
                 android:text="@string/recharge_detail"
                 android:textColor="@drawable/selector_deal_detail_text_color"
-                android:textSize="@dimen/textsize_level2"/>
+                android:textSize="@dimen/textsize_level2" />
 
             <View
                 android:layout_width="@dimen/width_0"
                 android:layout_height="match_parent"
-                android:layout_weight="0.5"/>
+                android:layout_weight="0.5" />
+
+            <RadioButton
+                android:id="@+id/rb_deal_detail_referral"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:button="@null"
+                android:drawableBottom="@drawable/selector_deal_detail_line"
+                android:gravity="center"
+                android:text="推荐奖励"
+                android:textColor="@drawable/selector_deal_detail_text_color"
+                android:textSize="@dimen/textsize_level2" />
+
+            <View
+                android:layout_width="@dimen/width_0"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5" />
         </RadioGroup>
 
         <com.fanc.wheretoplay.view.MyViewPager
@@ -80,7 +89,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rg_deal_detail"/>
+            app:layout_constraintTop_toBottomOf="@+id/rg_deal_detail" />
 
         <View
             android:id="@+id/view"
@@ -90,7 +99,6 @@
             android:background="@color/pay_reserve_list_divider_white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rg_deal_detail"/>
+            app:layout_constraintTop_toBottomOf="@+id/rg_deal_detail" />
     </android.support.constraint.ConstraintLayout>
 
-</layout>

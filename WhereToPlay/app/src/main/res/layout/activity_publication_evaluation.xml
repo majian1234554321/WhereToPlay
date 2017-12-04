@@ -39,7 +39,7 @@
                     android:layout_marginLeft="@dimen/margin_12"
                     android:layout_marginTop="@dimen/margin_10"
                     android:gravity="center_vertical"
-                    android:text="上海天地汇会所"
+                    tools:text="上海天地汇会所"
                     android:textColor="@color/text_black"
                     android:textSize="@dimen/textsize_level4" />
 
@@ -53,7 +53,7 @@
                     android:drawableLeft="@drawable/reserve_address"
                     android:drawablePadding="8dp"
                     android:gravity="center_vertical"
-                    android:text="上海市黄浦区嵩山路嵩山路嵩山路79号-2-f 1188.8km"
+                    tools:text="上海市黄浦区嵩山路嵩山路嵩山路79号-2-f 1188.8km"
                     android:textColor="@color/text_black"
                     android:textSize="14sp" />
 

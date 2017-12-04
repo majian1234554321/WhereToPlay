@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,9 +42,12 @@ public class ToEvaluateFragment extends BaseFragment {
     String price;
     boolean isCreditReserve;
 
+    String storeName,storeAddress;
+
+
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         evaluateBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_to_evaluate, null, false);
         initViews();
         init();
@@ -97,6 +101,11 @@ public class ToEvaluateFragment extends BaseFragment {
                 Intent intent = new Intent(mContext, PublicationEvaluationActivity.class);
                 intent.putExtra("order_id", orderId);
                 intent.putExtra("store_id", storeId);
+
+                intent.putExtra("store_name", storeName);
+                intent.putExtra("address", storeAddress);
+
+
                 startActivity(intent);
                 mContext.finish();
             }
@@ -107,6 +116,17 @@ public class ToEvaluateFragment extends BaseFragment {
         this.storeId = storeId;
         return this;
     }
+
+    public ToEvaluateFragment setStoreValue(String storeName,String storeAddress) {
+        this.storeName = storeName;
+        this.storeAddress = storeAddress;
+        return this;
+    }
+
+
+
+
+
 
     public ToEvaluateFragment setOrderId(String orderId) {
         this.orderId = orderId;

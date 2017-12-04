@@ -62,6 +62,7 @@ public class ReuseActivity extends BaseFragmentActivity {
                         .setOrderId(intent.getStringExtra(Constants.ORDER_ID))
                         .setComment(intent.getBooleanExtra(Constants.IS_COMMENT, false))
                         .setPrice(intent.getStringExtra(Constants.PRICE))
+                        .setStoreValue(intent.getStringExtra("store_name"),intent.getStringExtra("address"))
                         .isCreditReserve(intent.getBooleanExtra(Constants.CREDIT_RESERVE, false)));
                 break;
             case Constants.RESERVE_INFO:   //在线预订

@@ -269,6 +269,10 @@ public class OrderPayActivity extends BaseActivity implements RadioGroup.OnCheck
         intent.putExtra(Constants.ORDER_ID, order_idValue);
         intent.putExtra(Constants.PRICE, tvPayBillPaySumReal.getText().toString());
         intent.putExtra(Constants.IS_COMMENT, true);
+
+        intent.putExtra("store_name", store_nameValue);
+        intent.putExtra("address", store_addressValue);
+
         startActivity(intent);
         // 通知消费页面
         Intent intent1 = new Intent(Constants.ACTION_PAY_SUCCESS);

@@ -88,7 +88,7 @@ public class PublicationEvaluationActivity extends BaseActivity {
     float ratingValue2 = 10f;
     float ratingValue3 = 10f;
     private String addressValue;
-    private String discountValue;
+    private String discountValue, store_nameValue;
     private double discount;
 
 
@@ -103,11 +103,14 @@ public class PublicationEvaluationActivity extends BaseActivity {
         store_idValue = getIntent().getStringExtra("store_id");
         addressValue = getIntent().getStringExtra("address");
         discountValue = getIntent().getStringExtra("discount");
+        store_nameValue = getIntent().getStringExtra("store_name");
+        tvMerchantDetailTitle.setText(store_nameValue);
+        tvMerchantReserveAddress.setText(addressValue);
 
-        if (discountValue !=null&& discountValue.length()>0) {
+        if (discountValue != null && discountValue.length() > 0) {
             discount = Double.parseDouble(discountValue);
-        }else {
-            discount =  10;
+        } else {
+            discount = 10;
         }
 
 
@@ -167,7 +170,7 @@ public class PublicationEvaluationActivity extends BaseActivity {
                 value = Bitmap2StrByBase64(bitmap);
                 base64image.append("data:image/png;base64,");
                 base64image.append(value);
-                if (i+1 != imagesDisplay.size()) {
+                if (i + 1 != imagesDisplay.size()) {
                     base64image.append("|");
                 }
             }
@@ -180,19 +183,18 @@ public class PublicationEvaluationActivity extends BaseActivity {
             jsonObject.put("order_id", order_idValue);
             jsonObject.put("content", et_content.getText().toString().trim());
             jsonObject.put("images", base64image.toString());
-            jsonObject.put("environment", ratingValue1+"");
-            jsonObject.put("atmosphere", ratingValue2+"");
-            jsonObject.put("service", ratingValue3+"");
+            jsonObject.put("environment", ratingValue1 + "");
+            jsonObject.put("atmosphere", ratingValue2 + "");
+            jsonObject.put("service", ratingValue3 + "");
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
-
         MultipartBody.Part requestFileA =
                 MultipartBody.Part.createFormData("data", jsonObject.toString() + "");
 
-         Retrofit_RequestUtils.getRequest()
+        Retrofit_RequestUtils.getRequest()
                 .SubmitCommentModel(requestFileA)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
@@ -219,7 +221,7 @@ public class PublicationEvaluationActivity extends BaseActivity {
                         if ("0".equals(submitCommentModel.code)) {
                             Toast.makeText(mContext, "提交评论成功", Toast.LENGTH_SHORT).show();
                             //RxBus.getDefault().post("提交评价成功");
-                            startActivity(new Intent(PublicationEvaluationActivity.this,EvaluationSuccessActivity.class));
+                            startActivity(new Intent(PublicationEvaluationActivity.this, EvaluationSuccessActivity.class));
                             finish();
                         } else {
                             Toast.makeText(mContext, "提交评论失败", Toast.LENGTH_SHORT).show();
