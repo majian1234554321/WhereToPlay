@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.databinding.DataBindingUtil;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentPagerAdapter;
@@ -13,20 +13,17 @@ import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import com.fanc.wheretoplay.activity.SignInActivity;
 import com.fanc.wheretoplay.base.App;
 import com.fanc.wheretoplay.base.BaseFragmentActivity;
 import com.fanc.wheretoplay.callback.IOnFocusListener;
-import com.fanc.wheretoplay.databinding.ActivityMainBinding;
 import com.fanc.wheretoplay.fragment.DiscoverFragment;
 import com.fanc.wheretoplay.fragment.MineFragment;
 import com.fanc.wheretoplay.fragment.PayFragment;
 import com.fanc.wheretoplay.fragment.ReserveFragment;
-import com.fanc.wheretoplay.util.BaiDuMapUtils;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
@@ -34,41 +31,15 @@ import com.fanc.wheretoplay.view.MyViewPager;
 import com.qiyukf.nimlib.sdk.NimIntent;
 import com.qiyukf.unicorn.api.ConsultSource;
 import com.qiyukf.unicorn.api.Unicorn;
-import com.sdu.didi.openapi.DIOpenSDK;
-import com.sdu.didi.openapi.DiDiWebActivity;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends BaseFragmentActivity {
-    ActivityMainBinding mainBinding;
-    /**
-     * 主页
-     */
-    MyViewPager mMvpMain;
-    /**
-     * 未选中时小图
-     */
-    ImageView mIvReserve;
-    ImageView mIvPay;
-    ImageView mIvDiscover;
-    private ImageView mIvMine;
-    /**
-     * 底部导航
-     */
-    LinearLayout mLlTabReserve;
-    LinearLayout mLlTabPay;
-    LinearLayout mLlTabDiscover;
-    private LinearLayout mLlMine;
-    private TextView tvMainTabDiscover;
-    private TextView tvMainTabMine;
-    private TextView tvMainTabPay;
-    private TextView tvMainTabReserve;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
-    /**
-     * 选中的导航栏
-     */
-    int selectedId;
+public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnCheckedChangeListener {
+
     /**
      * 主页fragment
      */
@@ -77,9 +48,7 @@ public class MainActivity extends BaseFragmentActivity {
      * 屏幕宽度
      */
     int screenWidth;
-    /**
-     * 选中状态的LayoutParams
-     */
+
     /**
      * 预定
      */
@@ -92,53 +61,41 @@ public class MainActivity extends BaseFragmentActivity {
      * 退出登录广播
      */
     Receiver receiver;
+    @BindView(R.id.mvp_main)
+    MyViewPager mMvpMain;
+    @BindView(R.id.rb1)
+    RadioButton rb1;
+    @BindView(R.id.rb2)
+    RadioButton rb2;
+    @BindView(R.id.rb3)
+    RadioButton rb3;
+    @BindView(R.id.rb4)
+    RadioButton rb4;
+    @BindView(R.id.ll_main_tab)
+    RadioGroup llMainTab;
     /**
      * fragment 触摸监听
      */
     private ArrayList<MyOnTouchListener> onTouchListeners = new ArrayList<MyOnTouchListener>();
 
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        mainBinding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
 
         Intent intent = this.getIntent();
         if (intent.hasExtra(NimIntent.EXTRA_NOTIFY_CONTENT)) {
             Unicorn.openServiceActivity(this, getResources().getString(R.string.app_name), new ConsultSource(null, null, null));
         }
 
-
-
-        init();
         initFragments();
         initPage();
         setListeners();
         registerBroadcastReceiver();
     }
 
-    /**
-     * init views
-     */
-    private void init() {
-        mMvpMain = mainBinding.mvpMain;
-        //底部选择栏
-        mIvReserve = mainBinding.ivMainTabReserve;
-        mIvPay = mainBinding.ivMainTabPay;
-        mIvDiscover = mainBinding.ivMainTabDiscover;
-        mIvMine = mainBinding.ivMainTabMine;
-        mLlTabReserve = mainBinding.llMaintabReserve;
-        mLlTabPay = mainBinding.llMainTabPay;
-        mLlTabDiscover = mainBinding.llMainTabDiscover;
-        mLlMine = mainBinding.llMainTabMine;
-        tvMainTabDiscover = mainBinding.tvMainTabDiscover;
-        tvMainTabMine = mainBinding.tvMainTabMine;
-        tvMainTabPay = mainBinding.tvMainTabPay;
-        tvMainTabReserve = mainBinding.tvMainTabReserve;
-//        Log.w("llm", "MainActivity（133）：RegistrationID =  " + JPushInterface.getRegistrationID(this));
-    }
 
     /**
      * new fragment page
@@ -146,13 +103,10 @@ public class MainActivity extends BaseFragmentActivity {
     private void initFragments() {
         fragments = new ArrayList<>();
         fragments.add(reserveFragment = new ReserveFragment());
-        //添加预定Fragment
         fragments.add(new PayFragment());
-        //添加支付Fragment
         fragments.add(new DiscoverFragment());
-        //添加发现Fragment
         fragments.add(new MineFragment());
-        //添加我的Fragment
+
     }
 
     /**
@@ -172,59 +126,16 @@ public class MainActivity extends BaseFragmentActivity {
         });
         mMvpMain.setCurrentItem(0);
         mMvpMain.setOffscreenPageLimit(3);
+        setDrawableTop(R.drawable.reserve_book_in, rb1, R.color.text_red);
 
         // 获取屏幕宽度
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         screenWidth = displayMetrics.widthPixels;
-        setSelectedPage(0);
+
 
     }
 
-
-
-    private void setSelectedPage(int position) {
-        setSelectedId(position);
-        setSelectedButton(position);
-    }
-
-    /**
-     * 设置选中的页面
-     *
-     * @param position
-     */
-    private void setSelectedButton(int position) {
-        mIvReserve.setImageResource(R.drawable.reserve_book);
-        mIvPay.setImageResource(R.drawable.reserve_pay);
-        mIvDiscover.setImageResource(R.drawable.discover);
-        mIvMine.setImageResource(R.drawable.mine);
-        tvMainTabDiscover.setTextColor(getResources().getColor(R.color.reserve_unpress));
-        tvMainTabMine.setTextColor(getResources().getColor(R.color.reserve_unpress));
-        tvMainTabPay.setTextColor(getResources().getColor(R.color.reserve_unpress));
-        tvMainTabReserve.setTextColor(getResources().getColor(R.color.reserve_unpress));
-
-        // 选中的大图标显示，小图标隐藏
-        switch (position) {
-            case 0:
-                mIvReserve.setImageResource(R.drawable.reserve_book_in);
-                tvMainTabReserve.setTextColor(getResources().getColor(R.color.text_red));
-                break;
-            case 1:
-                mIvPay.setImageResource(R.drawable.reserve_pay_in);
-                tvMainTabPay.setTextColor(getResources().getColor(R.color.text_red));
-                break;
-            case 2:
-                mIvDiscover.setImageResource(R.drawable.discover_in);
-                tvMainTabDiscover.setTextColor(getResources().getColor(R.color.text_red));
-                break;
-            case 3:
-                mIvMine.setImageResource(R.drawable.mine_in);
-                tvMainTabMine.setTextColor(getResources().getColor(R.color.text_red));
-                break;
-            default:
-                break;
-        }
-    }
 
     /**
      * set selected listener and tab clicked listener
@@ -237,12 +148,25 @@ public class MainActivity extends BaseFragmentActivity {
 
             @Override
             public void onPageSelected(int position) {
-                if ((position==1||position==3)&&!mSpUtils.getBoolean(com.fanc.wheretoplay.util.Constants.IS_SIGN_IN, false)){
+                if ((position == 1 || position == 3) && !mSpUtils.getBoolean(Constants.IS_SIGN_IN, false)) {
                     startActivity(new Intent(MainActivity.this, SignInActivity.class));
-                    mMvpMain.setCurrentItem(position-1);
-
-                }else {
-                    setSelectedPage(position);
+                    mMvpMain.setCurrentItem(position - 1);
+                } else {
+                    mMvpMain.setCurrentItem(position);
+                    switch (position) {
+                        case 0:
+                            rb1.setChecked(true);
+                            break;
+                        case 1:
+                            rb2.setChecked(true);
+                            break;
+                        case 2:
+                            rb3.setChecked(true);
+                            break;
+                        case 3:
+                            rb4.setChecked(true);
+                            break;
+                    }
                 }
 
             }
@@ -252,74 +176,10 @@ public class MainActivity extends BaseFragmentActivity {
 
             }
         });
+        llMainTab.setOnCheckedChangeListener(this);
 
     }
 
-    public void doClick(View view) {
-        switch (view.getId()) {
-            //切换viewpager，if判断是防止二次加载
-            case R.id.ll_maintab_reserve:
-                if (selectedId != R.id.ll_maintab_reserve) {
-                    mMvpMain.setCurrentItem(0);
-                    setSelectedPage(0);
-                }
-                break;
-            case R.id.ll_main_tab_pay:
-                if (selectedId != R.id.ll_main_tab_pay) {
-
-                    if (!mSpUtils.getBoolean(com.fanc.wheretoplay.util.Constants.IS_SIGN_IN, false)){
-                        startActivity(new Intent(MainActivity.this, SignInActivity.class));
-                    }else {
-                        mMvpMain.setCurrentItem(1);
-                        setSelectedPage(1);
-                    }
-
-
-                }
-                break;
-            case R.id.ll_main_tab_discover:
-                if (selectedId != R.id.ll_main_tab_discover) {
-                    mMvpMain.setCurrentItem(2);
-                    setSelectedPage(2);
-                }
-                break;
-            case R.id.ll_main_tab_mine:
-                if (selectedId != R.id.ll_main_tab_mine) {
-                    if (!mSpUtils.getBoolean(com.fanc.wheretoplay.util.Constants.IS_SIGN_IN, false)){
-                        startActivity(new Intent(MainActivity.this, SignInActivity.class));
-                    }else {
-                        mMvpMain.setCurrentItem(3);
-                        setSelectedPage(3);
-                    }
-                }
-//            case R.id.cl_sideslip:
-            default:
-                break;
-        }
-    }
-
-    /**
-     * 设置选中页面的导航栏按钮id
-     *
-     * @param position
-     */
-    private void setSelectedId(int position) {
-        switch (position) {
-            case 0:
-                selectedId = R.id.ll_maintab_reserve;
-                break;
-            case 1:
-                selectedId = R.id.ll_main_tab_pay;
-                break;
-            case 2:
-                selectedId = R.id.ll_main_tab_discover;
-                break;
-            case 3:
-                selectedId = R.id.ll_main_tab_mine;
-            default:
-                break;
-        }
-    }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
@@ -333,13 +193,13 @@ public class MainActivity extends BaseFragmentActivity {
 
     @Override
     public void onBackPressed() {
-            if (System.currentTimeMillis() - preClickTime > 2000) {
-                ToastUtils.showShortToast(this, UIUtils.getString(R.string.exit_app));
-                preClickTime = System.currentTimeMillis();
-            } else {//双击退出程序
-                App.closeApplication();
-                super.onBackPressed();
-            }
+        if (System.currentTimeMillis() - preClickTime > 2000) {
+            ToastUtils.showShortToast(this, UIUtils.getString(R.string.exit_app));
+            preClickTime = System.currentTimeMillis();
+        } else {//双击退出程序
+            App.closeApplication();
+            super.onBackPressed();
+        }
     }
 
     private void registerBroadcastReceiver() {
@@ -347,6 +207,64 @@ public class MainActivity extends BaseFragmentActivity {
         IntentFilter filter = new IntentFilter(Constants.ACTION_SIGN_OUT);
         LocalBroadcastManager.getInstance(this).registerReceiver(receiver, filter);
     }
+
+    @Override
+    public void onCheckedChanged(RadioGroup radioGroup, int i) {
+
+
+        setDrawableTop(R.drawable.reserve_book, rb1, R.color.reserve_unpress);
+        setDrawableTop(R.drawable.reserve_pay, rb2, R.color.reserve_unpress);
+        setDrawableTop(R.drawable.discover, rb3, R.color.reserve_unpress);
+        setDrawableTop(R.drawable.mine, rb4, R.color.reserve_unpress);
+
+
+        switch (i) {
+            case R.id.rb1:
+                rb1.setChecked(true);
+                mMvpMain.setCurrentItem(0);
+                setDrawableTop(R.drawable.reserve_book_in, rb1, R.color.text_red);
+                break;
+            case R.id.rb2:
+
+                if (!mSpUtils.getBoolean(Constants.IS_SIGN_IN, false)) {
+                    rb1.setChecked(true);
+                    startActivity(new Intent(MainActivity.this, SignInActivity.class));
+                } else {
+                    rb2.setChecked(true);
+                    setDrawableTop(R.drawable.reserve_pay_in, rb2, R.color.text_red);
+                    mMvpMain.setCurrentItem(1);
+                }
+
+                break;
+            case R.id.rb3:
+                rb3.setChecked(true);
+                setDrawableTop(R.drawable.discover_in, rb3, R.color.text_red);
+                mMvpMain.setCurrentItem(2);
+
+                break;
+            case R.id.rb4:
+                if (!mSpUtils.getBoolean(Constants.IS_SIGN_IN, false)) {
+                    rb1.setChecked(true);
+                    startActivity(new Intent(MainActivity.this, SignInActivity.class));
+                } else {
+                    rb4.setChecked(true);
+                    setDrawableTop(R.drawable.mine_in, rb4, R.color.text_red);
+                    mMvpMain.setCurrentItem(3);
+                }
+
+                break;
+
+        }
+    }
+
+
+    public void setDrawableTop(int resource, RadioButton radioButton, int color) {
+        Drawable topDrawable = getResources().getDrawable(resource);
+        topDrawable.setBounds(0, 0, topDrawable.getMinimumWidth(), topDrawable.getMinimumHeight());
+        radioButton.setCompoundDrawables(null, topDrawable, null, null);
+        radioButton.setTextColor(getResources().getColor(color));
+    }
+
 
     class Receiver extends BroadcastReceiver {
 

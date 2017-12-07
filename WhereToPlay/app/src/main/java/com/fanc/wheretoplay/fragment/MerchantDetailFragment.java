@@ -26,6 +26,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.bumptech.glide.Glide;
@@ -264,6 +265,9 @@ public class MerchantDetailFragment extends BaseFragment {
 //                mContext.overridePendingTransition(R.anim.anim_in_top_right, R.anim.anim_close_top);
             }
         });
+
+
+
         //收藏
         mTmDetail.setRightIconOnClickListener(new View.OnClickListener() {
             @Override
@@ -286,14 +290,20 @@ public class MerchantDetailFragment extends BaseFragment {
             }
         });
 
+        //预订
         mTvReservePromptly.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, ReuseActivity.class);
-                intent.putExtra(Constants.STORE_ID, mStoreId);
-                intent.putExtra(Constants.PAGE, Constants.RESERVE_INFO);
-                startActivity(intent);
-                mContext.overridePendingTransition(R.anim.anim_enter_bottom, R.anim.anim_out_top_right);
+                if (isLogin()) {
+                    Intent intent = new Intent(mContext, ReuseActivity.class);
+                    intent.putExtra(Constants.STORE_ID, mStoreId);
+                    intent.putExtra(Constants.PAGE, Constants.RESERVE_INFO);
+                    startActivity(intent);
+                    mContext.overridePendingTransition(R.anim.anim_enter_bottom, R.anim.anim_out_top_right);
+                }else {
+                    Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+                }
+
             }
         });
 
@@ -367,14 +377,19 @@ public class MerchantDetailFragment extends BaseFragment {
         tvPay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(mContext, PayBillActivity.class);
-                intent.putExtra(Constants.STORE_ID, mStoreId);
-                intent.putExtra("storeName", mTvMerchantDetailTitle.getText().toString());
-                intent.putExtra("address", mTvMerchantDetailAddress.getText().toString());
-                intent.putExtra("discount", discountValue);
-                intent.putExtra(Constants.PAGE, "商家详情支付");
-                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                mContext.startActivity(intent);
+                if (isLogin()){
+                    Intent intent = new Intent(mContext, PayBillActivity.class);
+                    intent.putExtra(Constants.STORE_ID, mStoreId);
+                    intent.putExtra("storeName", mTvMerchantDetailTitle.getText().toString());
+                    intent.putExtra("address", mTvMerchantDetailAddress.getText().toString());
+                    intent.putExtra("discount", discountValue);
+                    intent.putExtra(Constants.PAGE, "商家详情支付");
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(intent);
+                }else {
+                    Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+                }
+
 
             }
         });
@@ -406,16 +421,7 @@ public class MerchantDetailFragment extends BaseFragment {
                 startActivity(intent);
             }
         });
-        //去掉服务页跳转
-//        mLlMerchantDetailWaiter.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(mContext, DetailActivity.class);
-//                intent.putExtra(Constants.PAGE, Constants.WAITER_INFO);
-//                intent.putExtra(Constants.STORE_ID, mStoreId);
-//                startActivity(intent);
-//            }
-//        });
+
     }
 
     private void initImageLayout() {

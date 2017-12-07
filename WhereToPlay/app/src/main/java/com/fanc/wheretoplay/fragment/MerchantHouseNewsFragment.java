@@ -2,6 +2,7 @@ package com.fanc.wheretoplay.fragment;
 
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,12 +17,14 @@ import android.webkit.WebView;
 import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
+import com.fanc.wheretoplay.adapter.DateAdapter;
 import com.fanc.wheretoplay.adapter.HouseNewsAdapter;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentHousenewsBinding;
 import com.fanc.wheretoplay.datamodel.HousenewsList;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.util.DateFormatUtil;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.TopMenu;
 import com.google.gson.Gson;
@@ -30,6 +33,7 @@ import com.zhy.http.okhttp.callback.DCallback;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import okhttp3.Call;
@@ -56,12 +60,17 @@ public class MerchantHouseNewsFragment extends BaseFragment {
     private String mStoreDiscount;
     private boolean open;
     private RecyclerView mRc;
+    RecyclerView mRvDate;
+    private Date selectedDate;
     //集合
     private List<HousenewsList.StatusBean> housenews;
+    private Date date;
+    public final int DAY = 1000 * 60 * 60 * 24;
+    private ArrayList<Date> mDate;
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_housenews, container, false);
         initViews();
         init();
@@ -72,6 +81,7 @@ public class MerchantHouseNewsFragment extends BaseFragment {
     private void initViews() {
         mBrief = binding.tmHousenews;
         mRc = binding.rcMerchantHousenews;
+        mRvDate = binding.rvDate;
     }
 
     private void init() {
@@ -91,6 +101,39 @@ public class MerchantHouseNewsFragment extends BaseFragment {
             binding.tvRoomDiscountReal.setText(text, TextView.BufferType.SPANNABLE);
         }
 
+        // 日期列表
+        LinearLayoutManager linearLayoutManager2 = new LinearLayoutManager(mContext);
+        linearLayoutManager2.setOrientation(LinearLayoutManager.HORIZONTAL);
+        mRvDate.setLayoutManager(linearLayoutManager2);
+        mDate = new ArrayList();
+        for (int i = 0; i < 7; i++) {
+            date = new Date(System.currentTimeMillis() + i * DAY);
+            mDate.add(date);
+        }
+        DateAdapter mDateAdapter = new DateAdapter(mContext, mDate);
+        mRvDate.setAdapter(mDateAdapter);
+         selectedDate = new Date(mDate.get(0).getTime());
+        mDateAdapter.setOnItemClickListener(new DateAdapter.OnItemClickListener() {
+
+
+
+            @Override
+            public void onItemClick(int position) {
+//                selectedDate = new Date(mDate.get(position).getTime());
+//                mDateTimeAdaper.setDay(DateFormatUtil.getCustomDay(selectedDate));
+//                if (DateFormatUtil.parseStringTolong(selectedTime, DateFormatUtil.HHmm) <= last) {
+//                    long date = selectedDate.getTime() + DAY;
+//                    selectedDate.setTime(date);
+//                }
+//                mTvDataMonth.setText(DateFormatUtil.getCustomMonth(selectedDate) + UIUtils.getString(R.string.month));
+//                mTvDataYear.setText(String.valueOf(DateFormatUtil.getCustomYear(selectedDate)));
+//                // 时间选择时，选中第一个
+//                mHandler.removeMessages(255);
+//                mHandler.sendEmptyMessageDelayed(255, 50);
+            }
+        });
+
+
         getMerchantDetail(mStoreId);   //
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -109,6 +152,7 @@ public class MerchantHouseNewsFragment extends BaseFragment {
             }
         });
     }
+
     public MerchantHouseNewsFragment setStoreId(String mStoreId) {
         this.mStoreId = mStoreId;
         return this;
@@ -150,9 +194,9 @@ public class MerchantHouseNewsFragment extends BaseFragment {
                     @Override
                     public void onResponse(HousenewsList response) {
                         if (isSuccess(response)) {
-                            if (response.getStatus() != null ) {
+                            if (response.getStatus() != null) {
                                 housenews = response.getStatus();
-                              showHouseNewsList(housenews);
+                                showHouseNewsList(housenews);
                             }
                         }
                     }
@@ -160,7 +204,7 @@ public class MerchantHouseNewsFragment extends BaseFragment {
     }
 
     private void showHouseNewsList(List<HousenewsList.StatusBean> housenews) {
-        HouseNewsAdapter houseNewsAdapter = new HouseNewsAdapter(mContext, housenews,mStoreId,open);
+        HouseNewsAdapter houseNewsAdapter = new HouseNewsAdapter(mContext, housenews, mStoreId, open);
         mRc.setAdapter(houseNewsAdapter);
     }
 

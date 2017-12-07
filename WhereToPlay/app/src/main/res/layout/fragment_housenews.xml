@@ -13,61 +13,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-       <!-- <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_80"
-            android:background="@color/white">
-
-            <TextView
-                android:id="@+id/tv_merchant_housenews_title"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="@dimen/margin_12"
-                android:layout_marginTop="@dimen/margin_10"
-                android:gravity="center_vertical"
-                android:textColor="@color/text_black"
-                android:textSize="@dimen/textsize_level4"
-                android:text="上海天地会所"/>
-
-            <RatingBar
-                android:id="@+id/rb_merchant_housenews"
-                style="@style/star"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignLeft="@+id/tv_merchant_detail_title"
-                android:layout_below="@+id/tv_merchant_detail_title"
-                android:layout_marginBottom="@dimen/margin_10"
-                android:layout_marginTop="@dimen/margin_5"
-                android:numStars="5"
-                android:rating="3.5"
-                android:stepSize="0.2" />
-
-            &lt;!&ndash;<TextView
-                android:id="@+id/tv_merchant_detail_discount"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/margin_15"
-                android:gravity="center"
-                android:text="@string/discount"
-                android:textColor="@color/text_and_buttor_orange"
-                android:textSize="@dimen/textsize_levelsmall"/>&ndash;&gt;
-
-            <TextView
-                android:id="@+id/tv_merchant_housenews_discount_sum"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_alignBottom="@+id/tv_merchant_detail_title"
-                android:layout_alignParentRight="true"
-                android:layout_marginRight="@dimen/margin_10"
-                android:background="@drawable/discount"
-                android:gravity="center"
-                android:paddingLeft="@dimen/padding_20"
-                android:paddingRight="@dimen/padding_5"
-                android:textColor="@color/text_white"
-                android:textSize="@dimen/textsize_level4"
-                android:text="8.6折"/>
-        </RelativeLayout>-->
 
         <RelativeLayout
             android:id="@+id/relativeLayout"
@@ -132,6 +77,12 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_height"
             android:background="@color/pay_reserve_list_divider_white" />
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/rv_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
 
         <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
