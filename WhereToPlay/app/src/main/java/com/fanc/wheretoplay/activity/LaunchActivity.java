@@ -61,9 +61,6 @@ public class LaunchActivity extends BaseActivity {
 //        initPermissions();
 
 
-
-
-
         init();
         //七鱼需要
         parseIntent();
@@ -144,13 +141,15 @@ public class LaunchActivity extends BaseActivity {
             initImageAndIndicator();
             initViewPager();
         } else {
-            if (!isLogin()) {
+           /* if (!isLogin()) {
                 // 未登录状态，去登录
                 toSignIn();
             } else {
                 // 已登录，去主页
                 startActivityToHome();
-            }
+            }*/
+            startActivityToHome();
+
         }
     }
 

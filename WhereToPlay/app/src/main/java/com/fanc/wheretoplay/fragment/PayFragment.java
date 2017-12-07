@@ -62,10 +62,12 @@ public class PayFragment extends BaseFragment {
     List<OrderList.Order> orders;
     OrderNewAdapter orderNewAdapter;
 
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         payBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_pay, container, false);
+
         initViews();
         init();
         setListeners();

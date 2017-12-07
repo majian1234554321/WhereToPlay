@@ -265,34 +265,7 @@
 
                             </LinearLayout>
 
-                            <LinearLayout
-                                android:id="@+id/ll_reserve_volume_sales"
-                                android:layout_width="@dimen/width_0"
-                                android:layout_height="match_parent"
-                                android:orientation="vertical"
-                                android:layout_weight="1"
-                                >
 
-                                <ImageView
-                                    android:id="@+id/iv_reserve_volume_sales"
-                                    android:layout_width="@dimen/width_50"
-                                    android:layout_height="@dimen/height_50"
-                                    android:src="@drawable/reserve_volume_sales"
-                                    android:layout_marginTop="@dimen/margin_15"
-                                    android:layout_gravity="center_horizontal"
-                                    />
-
-                                <TextView
-                                    android:id="@+id/tv_reserve_volume_sales"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:text="@string/reserve_volume_sales"
-                                    android:layout_marginTop="@dimen/margin_10"
-                                    android:textSize="@dimen/textsize_levelmedium"
-                                    android:layout_gravity="center_horizontal"
-                                    android:textColor="@color/text_black"/>
-
-                            </LinearLayout>
 
                             <LinearLayout
                                 android:id="@+id/ll_reserve_bar"
@@ -322,6 +295,36 @@
                                     />
 
                             </LinearLayout>
+
+                            <LinearLayout
+                                android:id="@+id/ll_reserve_volume_sales"
+                                android:layout_width="@dimen/width_0"
+                                android:layout_height="match_parent"
+                                android:orientation="vertical"
+                                android:layout_weight="1"
+                                >
+
+                                <ImageView
+                                    android:id="@+id/iv_reserve_volume_sales"
+                                    android:layout_width="@dimen/width_50"
+                                    android:layout_height="@dimen/height_50"
+                                    android:src="@drawable/reserve_volume_sales"
+                                    android:layout_marginTop="@dimen/margin_15"
+                                    android:layout_gravity="center_horizontal"
+                                    />
+
+                                <TextView
+                                    android:id="@+id/tv_reserve_volume_sales"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="@string/reserve_volume_sales"
+                                    android:layout_marginTop="@dimen/margin_10"
+                                    android:textSize="@dimen/textsize_levelmedium"
+                                    android:layout_gravity="center_horizontal"
+                                    android:textColor="@color/text_black"/>
+
+                            </LinearLayout>
+
                         </LinearLayout>
 
                     </LinearLayout>

@@ -70,6 +70,12 @@ public class MessageFragment extends BaseFragment {
 
 
     private void init() {
+        mTmMessage.setLeftIconOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                mContext.finish();
+            }
+        });
         mTmMessage.setLeftIcon(R.drawable.left);
         mTmMessage.setTitle(R.string.message);
         mTmMessage.setTitleColor(getResources().getColor(R.color.white));

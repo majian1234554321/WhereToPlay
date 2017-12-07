@@ -141,7 +141,7 @@ public abstract class BaseFragment
 //                startActivity(intent);
 //                onDestroy();
 //            } else {
-            ToastUtils.showShortToast(mContext, model.message);
+
             if (model.code == 50003) {
                 Intent intent = new Intent(Constants.ACTION_RESIGN_IN);
                 LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);

@@ -171,6 +171,8 @@ public class PayBillActivity extends BaseActivity {
         mRbPayBillBalance = payBillBinding.rbPayBillBalance;
         df = new DecimalFormat("0.00");
 
+
+
         String pay_Action = getIntent().getStringExtra("pay_Action");
         String dispayMoney = getIntent().getStringExtra("money");
         if ("预订方式：预付预订".equals(pay_Action) && dispayMoney != null) {

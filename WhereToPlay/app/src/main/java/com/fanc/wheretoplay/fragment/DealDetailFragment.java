@@ -70,9 +70,8 @@ public class DealDetailFragment extends BaseFragment implements RadioGroup.OnChe
         referral = view.findViewById(R.id.rb_deal_detail_referral);
         mMvpDealDetail = view.findViewById(R.id.mvp_deal_detail);
 
-      RadioGroup  rg = view.findViewById(R.id.rg_deal_detail);
+        RadioGroup rg = view.findViewById(R.id.rg_deal_detail);
         rg.setOnCheckedChangeListener(this);
-
 
 
     }
@@ -178,13 +177,17 @@ public class DealDetailFragment extends BaseFragment implements RadioGroup.OnChe
             case R.id.rb_deal_detail_consume:
                 mMvpDealDetail.setCurrentItem(0);
                 currentDetail = CONSUME_DETAIL;
+                mTmDealDetail.mTvRightText.setVisibility(View.VISIBLE);
                 break;
             case R.id.rb_deal_detail_recharge:
                 mMvpDealDetail.setCurrentItem(1);
                 currentDetail = RECHARGE_DETAIL;
+                mTmDealDetail.mTvRightText.setVisibility(View.VISIBLE);
                 break;
             case R.id.rb_deal_detail_referral:
                 mMvpDealDetail.setCurrentItem(2);
+
+                mTmDealDetail.mTvRightText.setVisibility(View.GONE);
 
                 break;
             default:

@@ -188,21 +188,7 @@
 
                 </LinearLayout>
 
-                <!-- <View
-                     android:layout_width="match_parent"
-                     android:layout_height="@dimen/height_10"
-                     android:background="@color/pay_reserve_list_divider"/>-->
 
-                <!--<TextView
-                    android:id="@+id/tv_pay_bill_title"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="@dimen/margin_15"
-                    android:layout_marginLeft="@dimen/margin_15"
-                    android:text="@{order.name}"
-                    android:textColor="@color/white"
-                    android:textSize="@dimen/textsize_level2"
-                    android:visibility="gone"/>-->
 
                 <View
                     android:layout_width="match_parent"
@@ -210,44 +196,8 @@
                     android:layout_marginTop="@dimen/margin_10"
                     android:background="#E5E5E5" />
 
-                <!--<LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_50"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:paddingLeft="@dimen/padding_15"
-                    android:paddingRight="@dimen/padding_15"
-                    android:visibility="gone">
 
-                    <TextView
-                        android:layout_width="@dimen/width_0"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="@string/discount1"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/textsize_level2"/>
 
-                    <TextView
-                        android:id="@+id/tv_pay_bill_discount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@{order.discount}"
-                        android:textColor="@color/text_and_buttor_orange"
-                        android:textSize="@dimen/textsize_level3"/>
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="@string/discount"
-                        android:textColor="@color/text_and_buttor_orange"
-                        android:textSize="@dimen/normal_textsize"/>
-
-                </LinearLayout>-->
-
-                <!--<View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/line_height"
-                    android:background="@color/pay_reserve_list_divider"/>-->
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -266,10 +216,11 @@
                         android:textSize="@dimen/textsize_level2" />
 
                     <TextView
+
                         android:id="@+id/tv_pay_bill_down_payment_sum"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@{order.prepay}"
+
                         android:textColor="#C4483C"
                         android:textSize="@dimen/textsize_level2" />
 

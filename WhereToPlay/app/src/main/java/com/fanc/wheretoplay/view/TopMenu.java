@@ -23,11 +23,11 @@ import com.fanc.wheretoplay.databinding.ViewTopmenuBinding;
  * @updateDes
  */
 public class TopMenu extends RelativeLayout {
-    ImageView mIvLeftIcon;
-    TextView mTvLeftText;
-    TextView mTvTitle;
-    TextView mTvRightText;
-    ImageView mIvRightIcon;
+    public ImageView mIvLeftIcon;
+    public TextView mTvLeftText;
+    public TextView mTvTitle;
+    public TextView mTvRightText;
+    public ImageView mIvRightIcon;
     RelativeLayout mRlTopMenuBg;
     private LinearLayout mLlTopMenu;
 

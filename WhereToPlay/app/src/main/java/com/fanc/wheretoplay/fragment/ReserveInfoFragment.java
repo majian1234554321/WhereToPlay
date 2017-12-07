@@ -137,8 +137,6 @@ public class ReserveInfoFragment extends BaseFragment {
 
     private void initViews() {
 
-
-
         mTmReserveInfo = reserveInfoBinding.tmReserveInfo;
         mTvReserveInfoTitle = reserveInfoBinding.tvReserveInfoTitle;
         mTvReserveInfoRealDiscount = reserveInfoBinding.tvReserveInfoDiscountReal;
@@ -367,30 +365,7 @@ public class ReserveInfoFragment extends BaseFragment {
         intent.putExtra(Constants.IS_CHOOSE, true);
         startActivity(intent);
 
-//        if (rooms == null) {
-//            ToastUtils.makePicTextShortToast(mContext, "房型数据格式不正确");
-//            return;
-//        }
-//        if (rooms.size() < 1) {
-//            ToastUtils.makePicTextShortToast(mContext, "该店家暂无房间");
-//            return;
-//        }
-//        if (roomTypeDialog == null) {
-//            roomTypeDialog = new RoomTypeDialog(mContext)
-//                    .setContent(rooms)
-//                    .setOnRoomSelectedListener(new RoomTypeDialog.OnRoomSelectedListener() {
-//                        @Override
-//                        public void onRoomSelected(String roomName, String roomId) {
-//                            mTvReserveInfoRoom.setText(roomName);
-//                            selectedRoomId = roomId;
-////                        ToastUtils.makePicTextShortToast(mContext, selectedRoomId);
-//                        }
-//                    })
-//                    .setCanceledOnTouchOutside(true)
-//                    .show();
-//        } else if (!roomTypeDialog.isShowing()) {
-//            roomTypeDialog.show();
-//        }
+//
     }
 
     /**
@@ -405,57 +380,7 @@ public class ReserveInfoFragment extends BaseFragment {
         startActivity(intent);
 
 
-//        TimeSelectorDialog dialog = new TimeSelectorDialog(mContext);
-//        //设置标题
-//        dialog.setTimeTitle("选择时间:");
-//        //显示类型
-//        dialog.setIsShowtype(TimeConfig.YEAR_MONTH_DAY_HOUR_MINUTE);
 //
-//        //默认时间
-//        dialog.setCurrentDate(DateFormatUtil.getYYYYMMDDHHmm(String.valueOf(System.currentTimeMillis() / 1000)));
-//        //隐藏清除按钮
-//        dialog.setEmptyIsShow(false);
-//        dialog.setDateListener(new DateListener() {
-//            @Override
-//            public void onReturnDate(String time, int year, int month, int day, int hour, int minute, int isShowType) {
-//                try {
-//                    long selected = DateFormatUtil.parseDateFromYYYY_MM_DD_HH_mmStr(time).getTime();
-//                    if (selected < System.currentTimeMillis()) {
-//                        ToastUtils.makePicTextShortToast(mContext, "请选择有效的预定时间");
-//                        return;
-//                    }
-//                    // 信誉预订
-//                    if (type == Constants.RESERVE_WAY_CREDIT) {
-//                        // 选中的时间
-//                        String[] times = time.split(" ")[1].split(":");
-//                        // 商家端限制时间
-//                        if (reservedTime == null || TextUtils.isEmpty(reservedTime)) {
-//                            reservedTime = "22:00";
-//                        }
-//                        String[] limits = reservedTime.split(":");
-//                        if (Integer.parseInt(times[0]) > Integer.parseInt(limits[0])) {
-//                            ToastUtils.makePicTextShortToast(mContext, "预定时间不能超过 " + reservedTime);
-//                            return;
-//                        } else {
-//                            if (Integer.parseInt(times[0]) == Integer.parseInt(limits[0]) && Integer.parseInt(times[1]) > Integer.parseInt(limits[1])) {
-//                                ToastUtils.makePicTextShortToast(mContext, "预定时间不能超过 " + reservedTime);
-//                                return;
-//                            }
-//                        }
-//                    }
-//                    mTvReserveInfoTime.setText(time);
-//                    reserveDate = time;
-//                } catch (ParseException e) {
-//                    e.printStackTrace();
-//                }
-//            }
-//
-//            @Override
-//            public void onReturnDate(String empty) {
-//                ToastUtils.makePicTextShortToast(mContext, empty);
-//            }
-//        });
-//        dialog.show();
     }
 
 

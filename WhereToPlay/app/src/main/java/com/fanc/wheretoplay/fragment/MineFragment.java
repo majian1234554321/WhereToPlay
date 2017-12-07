@@ -27,6 +27,7 @@ import com.fanc.wheretoplay.activity.ListOrderActivity;
 import com.fanc.wheretoplay.activity.SettingsActivity;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentMineBinding;
+import com.fanc.wheretoplay.datamodel.DataValue;
 import com.fanc.wheretoplay.datamodel.Score;
 import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.rx.RxBus;
@@ -294,8 +295,8 @@ public class MineFragment extends BaseFragment {
                 break;
             case R.id.iv_mine_drive:
                 HashMap<String, String> map = new HashMap<String, String>();
-                map.put("lat", "39.916195");
-                map.put("lng", "116.66355");
+                map.put("lat", DataValue.latitude);
+                map.put("lng", DataValue.longitude);
                 map.put("maptype", "wgs84");
                 DIOpenSDK.showDDPage(mContext, map);
                 break;

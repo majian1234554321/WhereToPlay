@@ -27,20 +27,24 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/margin_10"
             android:text="0"
-            android:textColor="@color/text_red"
+            android:textColor="#333333"
             android:textSize="@dimen/textsize_level2"/>
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/margin_20"
-            android:background="@color/pay_reserve_list_divider_white"
+
             android:paddingBottom="@dimen/padding_5"
             android:paddingLeft="@dimen/padding_15"
             android:paddingTop="@dimen/padding_5"
             android:text="@string/integral_detail"
             android:textColor="#333333"
-            android:textSize="@dimen/normal_textsize"/>
+            android:textSize="15sp"/>
+        <View
+            android:layout_width="match_parent"
+            android:background="#ffdddddd"
+            android:layout_height="@dimen/line_height_1px"/>
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/rv_integral"

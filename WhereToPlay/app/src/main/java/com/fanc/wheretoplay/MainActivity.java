@@ -17,6 +17,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.fanc.wheretoplay.activity.SignInActivity;
 import com.fanc.wheretoplay.base.App;
 import com.fanc.wheretoplay.base.BaseFragmentActivity;
 import com.fanc.wheretoplay.callback.IOnFocusListener;
@@ -232,29 +233,18 @@ public class MainActivity extends BaseFragmentActivity {
         mMvpMain.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                if (positionOffset == 0) {
-                    switch (position) {
-                        case 0:
-//                            mIvPayBig.setAlpha(0F);
-//                            mIvDiscoverBig.setAlpha(0F);
-                            break;
-                        case 1:
-//                            mIvReserveBig.setAlpha(0F);
-//                            mIvDiscoverBig.setAlpha(0F);
-                            break;
-                        case 2:
-//                            mIvReserveBig.setAlpha(0F);
-//                            mIvPayBig.setAlpha(0F);
-                            break;
-                    }
-                }
-
-
             }
 
             @Override
             public void onPageSelected(int position) {
-                setSelectedPage(position);
+                if ((position==1||position==3)&&!mSpUtils.getBoolean(com.fanc.wheretoplay.util.Constants.IS_SIGN_IN, false)){
+                    startActivity(new Intent(MainActivity.this, SignInActivity.class));
+                    mMvpMain.setCurrentItem(position-1);
+
+                }else {
+                    setSelectedPage(position);
+                }
+
             }
 
             @Override
@@ -276,8 +266,15 @@ public class MainActivity extends BaseFragmentActivity {
                 break;
             case R.id.ll_main_tab_pay:
                 if (selectedId != R.id.ll_main_tab_pay) {
-                    mMvpMain.setCurrentItem(1);
-                    setSelectedPage(1);
+
+                    if (!mSpUtils.getBoolean(com.fanc.wheretoplay.util.Constants.IS_SIGN_IN, false)){
+                        startActivity(new Intent(MainActivity.this, SignInActivity.class));
+                    }else {
+                        mMvpMain.setCurrentItem(1);
+                        setSelectedPage(1);
+                    }
+
+
                 }
                 break;
             case R.id.ll_main_tab_discover:
@@ -288,8 +285,12 @@ public class MainActivity extends BaseFragmentActivity {
                 break;
             case R.id.ll_main_tab_mine:
                 if (selectedId != R.id.ll_main_tab_mine) {
-                    mMvpMain.setCurrentItem(3);
-                    setSelectedPage(3);
+                    if (!mSpUtils.getBoolean(com.fanc.wheretoplay.util.Constants.IS_SIGN_IN, false)){
+                        startActivity(new Intent(MainActivity.this, SignInActivity.class));
+                    }else {
+                        mMvpMain.setCurrentItem(3);
+                        setSelectedPage(3);
+                    }
                 }
 //            case R.id.cl_sideslip:
             default:

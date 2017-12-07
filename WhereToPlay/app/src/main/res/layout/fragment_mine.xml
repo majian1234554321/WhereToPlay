@@ -142,6 +142,7 @@
                 <com.fanc.wheretoplay.view.ItemView
                     android:id="@+id/iv_mine_commend_money"
                     android:layout_width="match_parent"
+                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     android:onClick="@{click.onViewClick}"/>
 
