@@ -39,6 +39,7 @@ public class DateTimeAdapter extends BaseAdapter {
     int currentDay;
     // 选中的日期
     int day;
+    boolean flag;
 
     /**
      * 构造方法
@@ -46,7 +47,7 @@ public class DateTimeAdapter extends BaseAdapter {
      * @param context
      * @param data
      */
-    public DateTimeAdapter(Context context, List data) {
+    public DateTimeAdapter(Context context, List data,boolean flag ) {
         super(context, data);
         status = new HashMap<>();
 //        status.put(0, true);
@@ -54,6 +55,7 @@ public class DateTimeAdapter extends BaseAdapter {
         String currentTime = DateFormatUtil.getYYYYMMDDHHmm(String.valueOf(System.currentTimeMillis() / 1000));
         current = DateFormatUtil.parseStringTolong(currentTime.substring(11), DateFormatUtil.HHmm);
         day = currentDay = DateFormatUtil.getCurrentDay();
+        this.flag = flag;
     }
 
     @Override
@@ -71,40 +73,20 @@ public class DateTimeAdapter extends BaseAdapter {
         String time = (String) getItem(position);
         holder.binding.setTime(time);
         // 超过最晚预定时间则item不可用
-        long time1 = DateFormatUtil.parseStringTolong(time, DateFormatUtil.HHmm);
-        if (lastTime1 != null) {
-            if (lastTime >= earliest) {// 最晚预定时间在18:00-23:59之间
-                if (time1 > lastTime || time1 <= last) {
-                    holder.mCbTime.setEnabled(false);
-                } else {
-                    holder.mCbTime.setEnabled(true);
-                }
-            } else if (lastTime <= last) {// 最晚预定时间在00:00-03:30之间
-                if (time1 <= last && time1 > lastTime) {
-                    holder.mCbTime.setEnabled(false);
-                } else {
-                    holder.mCbTime.setEnabled(true);
-                }
+
+
+        if (flag){
+            if (DateFormatUtil.time1totime2(time)){
+                holder.mCbTime.setEnabled(false);
+            }else {
+                holder.mCbTime.setEnabled(true);
             }
+        }else {
+            holder.mCbTime.setEnabled(true);
         }
-        // 如果item显示时间，小于当前时间，则item不可用
-        if (day == currentDay) {
-//        if ((current >= earliest || current <= last)) {
-            if (current >= earliest) {//18:00-23:59之间
-                if ((time1 > 0 && time1 < current) || (time1 < 0 && time1 > lastTime)) {
-                    holder.mCbTime.setEnabled(false);
-//                } else {
-//                    holder.mCbTime.setEnabled(true);
-                }
-            } else if (current <= last) {//00:00-03:30之间
-                if (time1 < current || time1 > 0) {
-                    holder.mCbTime.setEnabled(false);
-//                } else {
-//                    holder.mCbTime.setEnabled(true);
-                }
-            }
-//        }
-        }
+
+
+
 
         statusAble.put(position, holder.mCbTime.isEnabled());
 

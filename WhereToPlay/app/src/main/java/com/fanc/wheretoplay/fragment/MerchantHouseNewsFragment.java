@@ -112,29 +112,26 @@ public class MerchantHouseNewsFragment extends BaseFragment {
         }
         DateAdapter mDateAdapter = new DateAdapter(mContext, mDate);
         mRvDate.setAdapter(mDateAdapter);
-         selectedDate = new Date(mDate.get(0).getTime());
+        selectedDate = new Date(mDate.get(0).getTime());
         mDateAdapter.setOnItemClickListener(new DateAdapter.OnItemClickListener() {
-
 
 
             @Override
             public void onItemClick(int position) {
-//                selectedDate = new Date(mDate.get(position).getTime());
-//                mDateTimeAdaper.setDay(DateFormatUtil.getCustomDay(selectedDate));
-//                if (DateFormatUtil.parseStringTolong(selectedTime, DateFormatUtil.HHmm) <= last) {
-//                    long date = selectedDate.getTime() + DAY;
-//                    selectedDate.setTime(date);
-//                }
-//                mTvDataMonth.setText(DateFormatUtil.getCustomMonth(selectedDate) + UIUtils.getString(R.string.month));
-//                mTvDataYear.setText(String.valueOf(DateFormatUtil.getCustomYear(selectedDate)));
-//                // 时间选择时，选中第一个
-//                mHandler.removeMessages(255);
-//                mHandler.sendEmptyMessageDelayed(255, 50);
+                selectedDate = new Date(mDate.get(position).getTime() );
+                String value = DateFormatUtil.getDateTimeStr(selectedDate);
+
+               String date =  DateFormatUtil.getDateStr(selectedDate);
+
+                getMerchantDetail(mStoreId, DateFormatUtil.dateToStamp(value),date);
             }
         });
 
+        long times = DateFormatUtil.getDate4StrDate(DateFormatUtil.getDateStr(), "yyyy-MM-dd").getTime() / 1000;
 
-        getMerchantDetail(mStoreId);   //
+     String date =    DateFormatUtil.getDateStr();
+
+        getMerchantDetail(mStoreId, times + "",date);   //
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         mRc.setLayoutManager(linearLayoutManager);
@@ -178,12 +175,15 @@ public class MerchantHouseNewsFragment extends BaseFragment {
         return this;
     }
 
-    private void getMerchantDetail(String id) {
+    private void getMerchantDetail(String id, String times, final String date) {
         showProgress();
-        Log.e("token", mUser.getToken() + "\n" + Network.User.PUBLIC_HOUSENEWS);
+
+
         OkHttpUtils.post()
                 .url(Network.User.PUBLIC_HOUSENEWS)
                 .addParams(Network.Param.STORE_ID, id)
+                .addParams(Network.Param.TOKEN, mUser.getToken())
+                .addParams("time", times)
                 .build()
                 .execute(new DCallback<HousenewsList>() {
                     @Override
@@ -196,15 +196,15 @@ public class MerchantHouseNewsFragment extends BaseFragment {
                         if (isSuccess(response)) {
                             if (response.getStatus() != null) {
                                 housenews = response.getStatus();
-                                showHouseNewsList(housenews);
+                                showHouseNewsList(housenews,date);
                             }
                         }
                     }
                 });
     }
 
-    private void showHouseNewsList(List<HousenewsList.StatusBean> housenews) {
-        HouseNewsAdapter houseNewsAdapter = new HouseNewsAdapter(mContext, housenews, mStoreId, open);
+    private void showHouseNewsList(List<HousenewsList.StatusBean> housenews,String date) {
+        HouseNewsAdapter houseNewsAdapter = new HouseNewsAdapter(mContext, housenews, mStoreId, open, date);
         mRc.setAdapter(houseNewsAdapter);
     }
 

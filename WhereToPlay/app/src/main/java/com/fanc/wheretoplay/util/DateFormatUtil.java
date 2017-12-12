@@ -4,6 +4,7 @@ package com.fanc.wheretoplay.util;
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
 
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -67,6 +68,7 @@ public class DateFormatUtil {
      * 格式：MM.dd
      */
     public static SimpleDateFormat MMdd = new SimpleDateFormat("MM.dd");
+    private static Date dt2;
 
     /**
      * 日期字符串解析成Date
@@ -414,6 +416,10 @@ public class DateFormatUtil {
         return yMd_Hms.format(date);
     }
 
+    public static String getDateStr2(Date date) {
+        return yyyy_MM_dd.format(date);
+    }
+
 
     public static String getDateFormatString(Date date) {
 //        if (time == null || time.isEmpty()) {
@@ -757,14 +763,6 @@ public class DateFormatUtil {
     }
 
 
-
-
-
-
-
-
-
-
     /**
      * add by gongtao
      * <p>
@@ -972,7 +970,8 @@ public class DateFormatUtil {
         return date_time;
     }
 
-    /** 字符串时间格式转换为 Date
+    /**
+     * 字符串时间格式转换为 Date
      *
      * @param date 此格式 yyyy-MM-dd
      * @return
@@ -1260,12 +1259,61 @@ public class DateFormatUtil {
 
 
     public static String stampToDate(String s) {
-        if ("0".equals(s)||TextUtils.isEmpty(s)){
+        if ("0".equals(s) || TextUtils.isEmpty(s)) {
             return "";
-        }else {
-            String date = new  SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(new java.util.Date(Long.parseLong(s) * 1000));
+        } else {
+            String date = new SimpleDateFormat("yyyy年MM月dd日 HH:mm:ss").format(new java.util.Date(Long.parseLong(s) * 1000));
             return date;
         }
     }
 
+    public static String dateToStamp(String s) {
+        String res;
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        Date date = null;
+        try {
+            date = simpleDateFormat.parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        long ts = date.getTime() / 1000;
+        res = String.valueOf(ts);
+        return res;
+    }
+
+
+    public static boolean time1totime2(String dt2time) {
+
+        DateFormat df = new SimpleDateFormat("HH:mm");//创建日期转换对象HH:mm:ss为时分秒，年月日为yyyy-MM-dd
+
+        Date dt1 = null;//将字符串转换为date类型
+        try {
+
+            Date now = new Date();
+            String value = df.format(now);
+            dt1 = df.parse(value);
+            dt2 = df.parse(dt2time);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        //比较时间大小,如果dt1大于dt2
+        return dt1.getTime() > dt2.getTime();
+    }
+
+    public static boolean isCurrentDay(String value) {
+        if (TextUtils.isEmpty(value)){
+            return  true;
+        }
+        //当前时间
+        Date now = new Date();
+        SimpleDateFormat sf = new SimpleDateFormat("yyyy-MM-dd");
+        //获取今天的日期
+        String nowDay = sf.format(now);
+        return value.equals(nowDay);
+
+
+    }
 }
+
+
+

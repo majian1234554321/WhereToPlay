@@ -40,26 +40,10 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnCheckedChangeListener {
 
-    /**
-     * 主页fragment
-     */
     List<Fragment> fragments;
-    /**
-     * 屏幕宽度
-     */
     int screenWidth;
-
-    /**
-     * 预定
-     */
     ReserveFragment reserveFragment;
-    /**
-     * 上一次点击的时间
-     */
     long preClickTime;
-    /**
-     * 退出登录广播
-     */
     Receiver receiver;
     @BindView(R.id.mvp_main)
     MyViewPager mMvpMain;

@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.adapter.DateAdapter;
@@ -123,7 +124,7 @@ public class DateFragment extends BaseFragment {
         mTmDate.setTitle(R.string.choose_date);
         mTmDate.setTitleColor(getResources().getColor(R.color.white));
         // 最晚时间
-        last = DateFormatUtil.parseStringTolong("03:30", DateFormatUtil.HHmm);
+        last = DateFormatUtil.parseStringTolong("23:30", DateFormatUtil.HHmm);
 
         // 年月
         mTvDataMonth.setText(DateFormatUtil.getCurrentMonth() + UIUtils.getString(R.string.month));
@@ -141,7 +142,18 @@ public class DateFragment extends BaseFragment {
         mRvDate.setAdapter(mDateAdapter);
         // 时间列表
         mTime = Arrays.asList(UIUtils.getStrings(R.array.reserve_time));
-        mDateTimeAdaper = new DateTimeAdapter(mContext, mTime);
+
+
+        //判断是不是今天
+
+
+
+        if (DateFormatUtil.isCurrentDay(lastDate)){
+            mDateTimeAdaper = new DateTimeAdapter(mContext, mTime,true);
+        }else {
+            mDateTimeAdaper = new DateTimeAdapter(mContext, mTime,false);
+        }
+
         if (TextUtils.equals(Constants.RESERVE_WAY_CREDIT, reserveWay)) {
             mDateTimeAdaper.setLastTime(lastTime);
         }
@@ -180,19 +192,21 @@ public class DateFragment extends BaseFragment {
             @Override
             public void onItemClick(int position) {
                 selectedTime = mTime.get(position);
-                if (DateFormatUtil.parseStringTolong(selectedTime, DateFormatUtil.HHmm) <= last) {
+
+
+               /* if (DateFormatUtil.parseStringTolong(selectedTime, DateFormatUtil.HHmm) <= last) {
                     if (selectedDate.getTime() - mDate.get(mDateAdapter.getSelectedPosition()).getTime() < DAY) {
                         long date = selectedDate.getTime() + DAY;
                         selectedDate.setTime(date);
                     }
-                }
+                }*/
             }
         });
         mBtnDateConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Constants.ACTION_SELECT_DATE_TIME);
-                String date = DateFormatUtil.getDateStr(selectedDate) + " " + selectedTime;
+                String date =  selectedTime;
                 intent.putExtra(Constants.TIMES, date);
                 LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
                 mContext.finish();
@@ -207,6 +221,12 @@ public class DateFragment extends BaseFragment {
 
     public DateFragment setLastTime(String lastTime) {
         this.lastTime = lastTime;
+        return this;
+    }
+
+    public String lastDate;
+    public DateFragment setLastDate(String lastDate) {
+        this.lastDate = lastDate;
         return this;
     }
 }

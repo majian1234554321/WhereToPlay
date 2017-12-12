@@ -25,7 +25,6 @@ import com.fanc.wheretoplay.fragment.ToEvaluateFragment;
 import com.fanc.wheretoplay.util.Constants;
 
 /**
- *
  * @author Administrator
  * @date 2017/6/14
  */
@@ -62,7 +61,7 @@ public class ReuseActivity extends BaseFragmentActivity {
                         .setOrderId(intent.getStringExtra(Constants.ORDER_ID))
                         .setComment(intent.getBooleanExtra(Constants.IS_COMMENT, false))
                         .setPrice(intent.getStringExtra(Constants.PRICE))
-                        .setStoreValue(intent.getStringExtra("store_name"),intent.getStringExtra("address"))
+                        .setStoreValue(intent.getStringExtra("store_name"), intent.getStringExtra("address"))
                         .isCreditReserve(intent.getBooleanExtra(Constants.CREDIT_RESERVE, false)));
                 break;
             case Constants.RESERVE_INFO:   //在线预订
@@ -73,16 +72,16 @@ public class ReuseActivity extends BaseFragmentActivity {
                 break;
 
 
-                //去掉活动界面跳转
+            //去掉活动界面跳转
 //            case Constants.ACTION:   //活动
 //                initFragment(new ActionFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID)));
 //                break;
             case Constants.HOUSENEWS:   //房态
                 initFragment(new MerchantHouseNewsFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID))
-                .setStoreAddress(intent.getStringExtra(Constants.ADDRESS))
-                .setStoreName(intent.getStringExtra(Constants.STORE_NAME))
-                .setStoreDiscount(intent.getStringExtra(Constants.DISCOUNT_COUPON))
-                        .setisOpen(intent.getBooleanExtra("open",false))
+                        .setStoreAddress(intent.getStringExtra(Constants.ADDRESS))
+                        .setStoreName(intent.getStringExtra(Constants.STORE_NAME))
+                        .setStoreDiscount(intent.getStringExtra(Constants.DISCOUNT_COUPON))
+                        .setisOpen(intent.getBooleanExtra("open", false))
                 );
                 break;
             case Constants.DRINKS:   //酒水
@@ -106,7 +105,7 @@ public class ReuseActivity extends BaseFragmentActivity {
                 break;
             case Constants.DATE:
                 initFragment(new DateFragment().setReserveWay(intent.getStringExtra(Constants.TYPE))
-                        .setLastTime(intent.getStringExtra(Constants.TIMES)));
+                        .setLastTime(intent.getStringExtra(Constants.TIMES)).setLastDate(intent.getStringExtra("Date")));
                 break;
             case Constants.ORDER_TO_COMPLETE:
                 initFragment(new OrderToCompleteFragment().setOrderId(intent.getStringExtra(Constants.ORDER_ID)));

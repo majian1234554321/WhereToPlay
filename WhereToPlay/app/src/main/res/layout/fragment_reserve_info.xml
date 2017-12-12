@@ -361,6 +361,50 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"/>
 
+                <TextView
+                    android:id="@+id/tv_yd"
+                    android:layout_width="@dimen/width_60"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginLeft="@dimen/margin_15"
+                    android:layout_marginTop="@dimen/margin_1"
+                    android:gravity="center_vertical"
+                    android:text="预订时间"
+                    android:textColor="@color/text_black"
+                    android:textSize="@dimen/normal_textsize"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tv1"/>
+
+
+                <TextView
+                    android:id="@+id/tv_ydtext"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginLeft="@dimen/margin_90"
+                    android:gravity="center_vertical"
+                    android:onClick="@{click.onViewClick}"
+                    android:hint="请选择预订时间"
+                    android:textColorHint="@color/text_detail_white_bc"
+                    android:textSize="@dimen/normal_textsize"
+                    app:layout_constraintEnd_toStartOf="@+id/iv_reserve_info_date"
+                    app:layout_constraintStart_toEndOf="@+id/tv_yd"
+                    app:layout_constraintTop_toTopOf="@+id/tv_yd"/>
+
+                <ImageView
+                    android:id="@+id/iv_yd"
+                    android:layout_width="@dimen/width_40"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_marginRight="@dimen/margin_5"
+                    android:onClick="@{click.onViewClick}"
+                    android:padding="@dimen/padding_10"
+                    android:src="@drawable/date"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/tv_yd"/>
+
+
+
+
+
+
 
                 <TextView
                     android:id="@+id/tv_reserve_info_reserve_time"
@@ -373,7 +417,7 @@
                     android:textColor="@color/text_black"
                     android:textSize="@dimen/normal_textsize"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tv1"/>
+                    app:layout_constraintTop_toBottomOf="@+id/tv_yd"/>
 
                 <TextView
                     android:id="@+id/tv_reserve_info_time"

@@ -109,6 +109,7 @@ public class ReserveInfoFragment extends BaseFragment {
     private TextView tv2;
     private ImageView iv3;
     public String number;
+    private TextView tvYdtext;
 
     @Nullable
     @Override
@@ -128,6 +129,9 @@ public class ReserveInfoFragment extends BaseFragment {
                             tv2.setText(s.getNumber());
                             number = s.getNumber();
                             tv2.setTextColor(Color.parseColor("#333333"));
+
+                            tvYdtext.setText(s.date);
+                            tvYdtext.setTextColor(Color.parseColor("#333333"));
                         }
 
                     }
@@ -136,6 +140,12 @@ public class ReserveInfoFragment extends BaseFragment {
     }
 
     private void initViews() {
+
+
+        TextView tvYd = reserveInfoBinding.tvYd;
+        tvYdtext = reserveInfoBinding.tvYdtext;
+        ImageView ivYd = reserveInfoBinding.ivYd;
+
 
         mTmReserveInfo = reserveInfoBinding.tmReserveInfo;
         mTvReserveInfoTitle = reserveInfoBinding.tvReserveInfoTitle;
@@ -190,9 +200,7 @@ public class ReserveInfoFragment extends BaseFragment {
         mIvReserveInfoService.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                Intent intent = new Intent(mContext, ServiceActivity.class);
-//                intent.putExtra(Constants.STORE_NAME, storeName);
-//                startActivity(intent);
+
                 ConsultSource source = new ConsultSource(null, null, null);
                 Unicorn.openServiceActivity(mContext, mContext.getResources().getString(R.string.app_name), source);
             }
@@ -212,6 +220,12 @@ public class ReserveInfoFragment extends BaseFragment {
                 break;
             case R.id.iv_reserve_info_date:
                 showReserveDateTime();
+                break;
+            case R.id.tv_ydtext:
+                selectedRoomId();
+                break;
+            case R.id.iv_yd:
+                selectedRoomId();
                 break;
             case R.id.tv2:
                 selectedRoomId();
@@ -237,7 +251,7 @@ public class ReserveInfoFragment extends BaseFragment {
         intent.putExtra(Constants.DISCOUNT_COUPON, mTvReserveInfoRealDiscount.getText().toString());
         intent.putExtra(Constants.ADDRESS, mTvReserveInfoAddress.getText().toString() + "  " + mTvReserveInfoDistance.getText().toString());
         intent.putExtra("open", false);
-        intent.putExtra("arrival_time", mTvReserveInfoTime.getText().toString().trim());
+        intent.putExtra("arrival_time",tvYdtext.getText().toString()+" "+ mTvReserveInfoTime.getText().toString().trim());
 
 
         startActivity(intent);
@@ -256,10 +270,10 @@ public class ReserveInfoFragment extends BaseFragment {
             params.put(Network.Param.STORE_ID, storeId);
         }
 
-            params.put(Network.Param.LAT, lat);
+        params.put(Network.Param.LAT, lat);
 
 
-            params.put(Network.Param.LNG, lng);
+        params.put(Network.Param.LNG, lng);
 
 
         OkHttpUtils.post()
@@ -284,7 +298,7 @@ public class ReserveInfoFragment extends BaseFragment {
     }
 
     private void showStoreDescribe(StoreDescribe.Store store) {
-        Log.i("XXXXXXXXXXXXXX",store.cover);
+        Log.i("XXXXXXXXXXXXXX", store.cover);
         reserveInfoBinding.setStore(store);
         String d = "";
         // 距离
@@ -325,32 +339,7 @@ public class ReserveInfoFragment extends BaseFragment {
         storeName = store.name;
     }
 
-    /**
-     * 获取房型
-     *
-     * @param storeId
-     */
-    private void getRoomList(String storeId) {
-        OkHttpUtils.post()
-                .url(Network.User.PUBLIC_ROOM_LIST)
-                .addParams(Network.Param.STORE_ID, storeId)
-                .build()
-                .execute(new DCallback<RoomList>() {
-                    @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
-                    }
 
-                    @Override
-                    public void onResponse(RoomList response) {
-                        if (isSuccess(response)) {
-                            if (response.getList() != null) {
-                                rooms = response.getList();
-                            }
-                        }
-                    }
-                });
-    }
 
     /**
      * 选择房间类型
@@ -375,6 +364,7 @@ public class ReserveInfoFragment extends BaseFragment {
         Intent intent = new Intent(mContext, ReuseActivity.class);
         intent.putExtra(Constants.PAGE, Constants.DATE);
         intent.putExtra(Constants.TIMES, reservedTime);
+        intent.putExtra("Date",tvYdtext.getText().toString().trim());
         intent.putExtra(Constants.TYPE, type);
         Log.w("llm", reservedTime);
         startActivity(intent);
@@ -403,7 +393,7 @@ public class ReserveInfoFragment extends BaseFragment {
         public void onReceive(Context context, Intent intent) {
             String action = intent.getAction();
             if (Constants.ACTION_WAITER_PHOTO_CONFIRM.equals(action)) {
-//                mTvReserveInfoWaiterInfo.setText(intent.getStringExtra(Constants.WAITER_NAME));
+
                 waiterId = intent.getStringExtra(Constants.WAITER_ID);
             } else if (Constants.ACTION_PAY_SUCCESS.equals(action) || Constants.ACTION_WXPAY_SUCCESS.equals(action)) {
                 mContext.finish();
@@ -413,7 +403,7 @@ public class ReserveInfoFragment extends BaseFragment {
                 selectedRoomId = intent.getStringExtra(Constants.ROOM);
                 number = "0";
                 tv2.setText("");
-            } else if (Constants.ACTION_SELECT_DATE_TIME.equals(action)) {
+            } else if (Constants.ACTION_SELECT_DATE_TIME.equals(action)) {//到店时间
                 reserveDate = intent.getStringExtra(Constants.TIMES);
                 mTvReserveInfoTime.setText(reserveDate);
                 mTvReserveInfoTime.setTextColor(getResources().getColor(R.color.text_black));
@@ -533,7 +523,7 @@ public class ReserveInfoFragment extends BaseFragment {
         String nickname = mEtReserveInfoName.getText().toString();
         String mobile = mEtReserveInfoMobile.getText().toString().trim();
         HashMap params = constructionParam(storeId, nickname, mobile, selectedRoomId, type,
-                mTvReserveInfoTime.getText().toString(), waiterId, mEtReserveInfoCarport.getText().toString(),
+               tvYdtext.getText().toString().trim()+" "+ mTvReserveInfoTime.getText().toString(), waiterId, mEtReserveInfoCarport.getText().toString(),
                 mEtReserveInfoNumberOfPeople.getText().toString().trim(), mEtReserveInfoRemark.getText().toString());
         if (params == null) {
             return;

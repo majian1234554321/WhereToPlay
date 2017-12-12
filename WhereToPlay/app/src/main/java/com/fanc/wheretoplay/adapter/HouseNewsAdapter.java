@@ -32,14 +32,15 @@ public class HouseNewsAdapter extends RecyclerView.Adapter<HouseNewsAdapter.View
     Context mContext;
     public String mStoreId;
     public boolean open;
+    public String date;
 
-    public HouseNewsAdapter(Activity mContext, List<HousenewsList.StatusBean> housenews, String mStoreId,boolean open) {
+    public HouseNewsAdapter(Activity mContext, List<HousenewsList.StatusBean> housenews, String mStoreId, boolean open, String date) {
         this.mContext = mContext;
         this.housenews = housenews;
         this.mStoreId = mStoreId;
         this.open = open;
+        this.date = date;
     }
-
 
 
     @Override
@@ -70,12 +71,13 @@ public class HouseNewsAdapter extends RecyclerView.Adapter<HouseNewsAdapter.View
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                HousenewsList.StatusBean statusBean =     new HousenewsList.StatusBean(housenews.get(position).getName(),
+                HousenewsList.StatusBean statusBean = new HousenewsList.StatusBean(housenews.get(position).getName(),
                         housenews.get(position).getNumber(),
                         housenews.get(position).getMin_price(),
                         housenews.get(position).getStatus(),
-                        housenews.get(position).room_id);
-                if ("1".equals(housenews.get(position).getStatus())){
+                        housenews.get(position).room_id,
+                        date);
+                if ("1".equals(housenews.get(position).getStatus())) {
                     if (open) {
                         Intent intent = new Intent(mContext, ReuseActivity.class);
                         intent.putExtra(Constants.STORE_ID, mStoreId);
@@ -83,13 +85,13 @@ public class HouseNewsAdapter extends RecyclerView.Adapter<HouseNewsAdapter.View
                         mContext.startActivity(intent);
                         RxBus.getDefault().post(statusBean);
 
-                    }else {
+                    } else {
 
 
                         RxBus.getDefault().post(statusBean);
                         ((Activity) mContext).finish();
                     }
-                }else {
+                } else {
                     Toast.makeText(mContext, "该房间已被预订或者正在使用", Toast.LENGTH_SHORT).show();
                 }
             }

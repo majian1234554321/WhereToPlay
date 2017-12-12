@@ -37,13 +37,15 @@ public class HousenewsList extends BaseModel {
         private String min_price;
         private String status;
         public String room_id;
+        public String date;
 
-        public StatusBean(String name, String number, String min_price, String status, String room_id) {
+        public StatusBean(String name, String number, String min_price, String status, String room_id,String date) {
             this.name = name;
             this.number = number;
             this.min_price = min_price;
             this.status = status;
             this.room_id = room_id;
+            this.date = date ;
         }
 
         public String getName() {
