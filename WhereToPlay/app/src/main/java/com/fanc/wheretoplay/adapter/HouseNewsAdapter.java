@@ -81,13 +81,18 @@ public class HouseNewsAdapter extends RecyclerView.Adapter<HouseNewsAdapter.View
                     if (open) {
                         Intent intent = new Intent(mContext, ReuseActivity.class);
                         intent.putExtra(Constants.STORE_ID, mStoreId);
+
+                        intent.putExtra("number", housenews.get(position).getNumber());
+                        intent.putExtra("name", housenews.get(position).getName());
+                        intent.putExtra("price", housenews.get(position).getMin_price());
+                        intent.putExtra("status", housenews.get(position).getStatus());
+                        intent.putExtra("room_id", housenews.get(position).room_id);
+                        intent.putExtra("date", date);
                         intent.putExtra(Constants.PAGE, Constants.RESERVE_INFO);
+
                         mContext.startActivity(intent);
-                        RxBus.getDefault().post(statusBean);
 
                     } else {
-
-
                         RxBus.getDefault().post(statusBean);
                         ((Activity) mContext).finish();
                     }

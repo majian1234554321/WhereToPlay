@@ -43,6 +43,7 @@ public class ToEvaluateFragment extends BaseFragment {
     boolean isCreditReserve;
 
     String storeName,storeAddress;
+    public String disCount;
 
 
     @Nullable
@@ -104,6 +105,7 @@ public class ToEvaluateFragment extends BaseFragment {
 
                 intent.putExtra("store_name", storeName);
                 intent.putExtra("address", storeAddress);
+                intent.putExtra("discount", disCount);
 
 
                 startActivity(intent);
@@ -125,9 +127,6 @@ public class ToEvaluateFragment extends BaseFragment {
 
 
 
-
-
-
     public ToEvaluateFragment setOrderId(String orderId) {
         this.orderId = orderId;
         return this;
@@ -145,6 +144,11 @@ public class ToEvaluateFragment extends BaseFragment {
 
     public ToEvaluateFragment isCreditReserve(boolean isCreditReserve) {
         this.isCreditReserve = isCreditReserve;
+        return this;
+    }
+
+    public ToEvaluateFragment setDisCount(String  disCount) {
+        this.disCount = disCount;
         return this;
     }
 

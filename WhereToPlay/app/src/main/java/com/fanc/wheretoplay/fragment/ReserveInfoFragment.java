@@ -94,7 +94,7 @@ public class ReserveInfoFragment extends BaseFragment {
     // 预定类型
     String type = Constants.RESERVE_WAY_CREDIT;
     String waiterId;
-    String selectedRoomId;
+
     // 预订时间
     String reserveDate;
     // 最晚预定时间
@@ -123,7 +123,7 @@ public class ReserveInfoFragment extends BaseFragment {
                     @Override
                     public void accept(HousenewsList.StatusBean s) {
                         if (s != null) {
-                            selectedRoomId = s.room_id;
+                            room_ids = s.room_id;
                             mTvReserveInfoRoom.setText(s.getName());
                             mTvReserveInfoRoom.setTextColor(Color.parseColor("#333333"));
                             tv2.setText(s.getNumber());
@@ -168,6 +168,24 @@ public class ReserveInfoFragment extends BaseFragment {
         tv1 = reserveInfoBinding.tv1;
         tv2 = reserveInfoBinding.tv2;
         iv3 = reserveInfoBinding.iv3;
+
+
+
+        if (names != null) {
+            mTvReserveInfoRoom.setText(names);
+            mTvReserveInfoRoom.setTextColor(Color.parseColor("#333333"));
+        }
+        if (numbers != null) {
+            tv2.setText(numbers);
+            number = numbers;
+            tv2.setTextColor(Color.parseColor("#333333"));
+        }
+
+        if (datas != null) {
+            tvYdtext.setText(datas);
+            tvYdtext.setTextColor(Color.parseColor("#333333"));
+        }
+
     }
 
     private void init() {
@@ -251,15 +269,24 @@ public class ReserveInfoFragment extends BaseFragment {
         intent.putExtra(Constants.DISCOUNT_COUPON, mTvReserveInfoRealDiscount.getText().toString());
         intent.putExtra(Constants.ADDRESS, mTvReserveInfoAddress.getText().toString() + "  " + mTvReserveInfoDistance.getText().toString());
         intent.putExtra("open", false);
-        intent.putExtra("arrival_time",tvYdtext.getText().toString()+" "+ mTvReserveInfoTime.getText().toString().trim());
+        intent.putExtra("arrival_time", tvYdtext.getText().toString() + " " + mTvReserveInfoTime.getText().toString().trim());
 
 
         startActivity(intent);
     }
 
 
-    public ReserveInfoFragment setStoreId(String storeId) {
+    public String numbers, prices, names, statuss, room_ids, datas;
+
+    public ReserveInfoFragment setStoreId(String storeId, String numbers, String prices, String names, String statuss, String room_ids, String datas) {
         this.storeId = storeId;
+        this.numbers = numbers;
+        this.names = names;
+        this.statuss = statuss;
+        this.room_ids = room_ids;
+        this.datas = datas;
+        this.prices = prices;
+
         return this;
     }
 
@@ -340,7 +367,6 @@ public class ReserveInfoFragment extends BaseFragment {
     }
 
 
-
     /**
      * 选择房间类型
      */
@@ -364,7 +390,7 @@ public class ReserveInfoFragment extends BaseFragment {
         Intent intent = new Intent(mContext, ReuseActivity.class);
         intent.putExtra(Constants.PAGE, Constants.DATE);
         intent.putExtra(Constants.TIMES, reservedTime);
-        intent.putExtra("Date",tvYdtext.getText().toString().trim());
+        intent.putExtra("Date", tvYdtext.getText().toString().trim());
         intent.putExtra(Constants.TYPE, type);
         Log.w("llm", reservedTime);
         startActivity(intent);
@@ -400,7 +426,7 @@ public class ReserveInfoFragment extends BaseFragment {
             } else if (Constants.ACTION_SELECT_ROOM.equals(action)) {
                 mTvReserveInfoRoom.setText(intent.getStringExtra(Constants.NAME) + " (" + intent.getStringExtra(Constants.MONEY) + ")");
                 mTvReserveInfoRoom.setTextColor(getResources().getColor(R.color.text_black));
-                selectedRoomId = intent.getStringExtra(Constants.ROOM);
+                room_ids = intent.getStringExtra(Constants.ROOM);
                 number = "0";
                 tv2.setText("");
             } else if (Constants.ACTION_SELECT_DATE_TIME.equals(action)) {//到店时间
@@ -522,8 +548,8 @@ public class ReserveInfoFragment extends BaseFragment {
     private void goToPay() {
         String nickname = mEtReserveInfoName.getText().toString();
         String mobile = mEtReserveInfoMobile.getText().toString().trim();
-        HashMap params = constructionParam(storeId, nickname, mobile, selectedRoomId, type,
-               tvYdtext.getText().toString().trim()+" "+ mTvReserveInfoTime.getText().toString(), waiterId, mEtReserveInfoCarport.getText().toString(),
+        HashMap params = constructionParam(storeId, nickname, mobile, room_ids, type,
+                tvYdtext.getText().toString().trim() + " " + mTvReserveInfoTime.getText().toString(), waiterId, mEtReserveInfoCarport.getText().toString(),
                 mEtReserveInfoNumberOfPeople.getText().toString().trim(), mEtReserveInfoRemark.getText().toString());
         if (params == null) {
             return;
@@ -542,4 +568,5 @@ public class ReserveInfoFragment extends BaseFragment {
             receiver = null;
         }
     }
-}
+
+     }

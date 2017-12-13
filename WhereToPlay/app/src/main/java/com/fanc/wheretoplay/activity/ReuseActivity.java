@@ -61,11 +61,20 @@ public class ReuseActivity extends BaseFragmentActivity {
                         .setOrderId(intent.getStringExtra(Constants.ORDER_ID))
                         .setComment(intent.getBooleanExtra(Constants.IS_COMMENT, false))
                         .setPrice(intent.getStringExtra(Constants.PRICE))
+                        .setDisCount(intent.getStringExtra("discount"))
                         .setStoreValue(intent.getStringExtra("store_name"), intent.getStringExtra("address"))
                         .isCreditReserve(intent.getBooleanExtra(Constants.CREDIT_RESERVE, false)));
                 break;
             case Constants.RESERVE_INFO:   //在线预订
-                initFragment(new ReserveInfoFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID)));
+                initFragment(new ReserveInfoFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID),
+                        intent.getStringExtra("number"),
+                        intent.getStringExtra("price"),
+                        intent.getStringExtra("name"),
+                        intent.getStringExtra("status"),
+                        intent.getStringExtra("room_id"),
+                        intent.getStringExtra("date")
+
+                ));
                 break;
             case Constants.LIST_PAGE:   //附近
                 initFragment(new ListFragment().setListPage(intent.getIntExtra(Constants.PARAM, 0)));

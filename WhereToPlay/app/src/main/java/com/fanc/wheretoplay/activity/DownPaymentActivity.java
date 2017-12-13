@@ -291,6 +291,9 @@ public class DownPaymentActivity extends BaseActivity {
                         closeProgress();
                         if ("0".equals(orderInfoModel.code)) {
                             showOrderInfo(orderInfoModel.content.order_info);
+                        }else {
+                            Toast.makeText(DownPaymentActivity.this, orderInfoModel.message, Toast.LENGTH_SHORT).show();
+                            finish();
                         }
                     }
 
@@ -298,7 +301,7 @@ public class DownPaymentActivity extends BaseActivity {
                     public void onError(Throwable throwable) {
                         Toast.makeText(DownPaymentActivity.this, "预订失败", Toast.LENGTH_SHORT).show();
                         closeProgress();
-                        connectError();
+
                     }
 
                     @Override
@@ -360,6 +363,7 @@ public class DownPaymentActivity extends BaseActivity {
         // 信誉预定
         if (Constants.RESERVE_WAY_CREDIT.equals(reserveType)) {
             Toast.makeText(mContext, "信誉预订成功", Toast.LENGTH_SHORT).show();
+           // payCompleted();
             finish();
         }
     }

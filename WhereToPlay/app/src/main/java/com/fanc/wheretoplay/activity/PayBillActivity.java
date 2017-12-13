@@ -138,6 +138,7 @@ public class PayBillActivity extends BaseActivity {
     private RadioButton rb_upp;
     private String storeName;
     private String address;
+    private String discountValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -196,7 +197,7 @@ public class PayBillActivity extends BaseActivity {
 
         storeId = intent.getStringExtra(Constants.STORE_ID);
         storeName = intent.getStringExtra("storeName");
-        String discountValue = intent.getStringExtra("discount");
+        discountValue = intent.getStringExtra("discount");
         address = intent.getStringExtra("address");
         if (discountValue != null && discountValue.length() > 0) {
             discount = Double.parseDouble(discountValue);
@@ -665,6 +666,7 @@ public class PayBillActivity extends BaseActivity {
         intent.putExtra(Constants.ORDER_ID, orderId);
         intent.putExtra(Constants.PRICE, mTvPaySumReal.getText().toString());
         intent.putExtra(Constants.IS_COMMENT, true);
+        intent.putExtra("discount",discountValue );
 
 
         intent.putExtra("store_name", storeName);

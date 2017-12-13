@@ -164,7 +164,7 @@ public class PublicationEvaluationActivity extends BaseActivity {
             imagesDisplay.remove("这不是图片");
         }
 
-        if (imagesDisplay != null && imagesDisplay.size() > 1) {
+        if (imagesDisplay != null && imagesDisplay.size() >=1) {
             for (int i = 0; i < imagesDisplay.size(); i++) {
                 bitmap = getBitmap(imagesDisplay.get(i));
                 value = Bitmap2StrByBase64(bitmap);

@@ -13,6 +13,16 @@ android {
         jumboMode = true
         javaMaxHeapSize "4g"
     }
+
+    signingConfigs {
+        release {
+            storeFile file("D:/Desktop/hpzl_keystore.jks")
+            storePassword "adminhpzl"
+            keyAlias "ktv_key"
+            keyPassword "adminhpzl"
+        }
+    }
+
     defaultConfig {
         applicationId "com.fanc.wheretoplay"
         minSdkVersion 17
@@ -76,16 +86,16 @@ android {
         _yingyongbao {}
         _baidu {}
         _xiaomi {}
-        _huawei{}
-        _androidmarkt{}
-        _wandoujia{}
-        _anzhi{}
-        _yingyonghui{}
-        _91{}
-        _oppo{}
-        _vivo{}
-        _meizu{}
-        _sougou{}
+        _huawei {}
+        _androidmarkt {}
+        _wandoujia {}
+        _anzhi {}
+        _yingyonghui {}
+        _91 {}
+        _oppo {}
+        _vivo {}
+        _meizu {}
+        _sougou {}
 
     }
 
