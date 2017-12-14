@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,12 +17,12 @@ import android.widget.LinearLayout;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.adapter.DiscountCouponAdapter;
 import com.fanc.wheretoplay.base.BaseFragment;
-import com.fanc.wheretoplay.databinding.FragmentDiscountCouponBinding;
+
 import com.fanc.wheretoplay.datamodel.DiscountCouponList;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
 import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.Constants;
-import com.fanc.wheretoplay.util.ToastUtils;
+
 import com.fanc.wheretoplay.view.TopMenu;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
@@ -37,7 +38,6 @@ import okhttp3.Call;
 
 public class DiscountCouponFragment extends BaseFragment {
 
-    FragmentDiscountCouponBinding discountBinding;
 
     TopMenu mTmDiscountCoupon;
     RecyclerView mRvDiscountCoupon;
@@ -49,18 +49,17 @@ public class DiscountCouponFragment extends BaseFragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        discountBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_discount_coupon, null, false);
-        initViews();
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+
+        View view = View.inflate(inflater.getContext(), R.layout.fragment_discount_coupon, null);
+        mTmDiscountCoupon = view.findViewById(R.id.tm_discount_coupon);
+        mRvDiscountCoupon = view.findViewById(R.id.rv_discount_coupon);
+
         init();
         setListeners();
-        return discountBinding.getRoot();
+        return view;
     }
 
-    private void initViews() {
-        mTmDiscountCoupon = discountBinding.tmDiscountCoupon;
-        mRvDiscountCoupon = discountBinding.rvDiscountCoupon;
-    }
 
     public DiscountCouponFragment setChoose(boolean choose) {
         isChoose = choose;

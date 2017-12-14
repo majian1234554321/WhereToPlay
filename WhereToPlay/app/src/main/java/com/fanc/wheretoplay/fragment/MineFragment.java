@@ -23,6 +23,7 @@ import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.DetailActivity;
 //import com.fanc.wheretoplay.activity.EvaluationSuccessActivity;
+import com.fanc.wheretoplay.activity.DisplayActivity;
 import com.fanc.wheretoplay.activity.ListOrderActivity;
 import com.fanc.wheretoplay.activity.SettingsActivity;
 import com.fanc.wheretoplay.base.BaseFragment;
@@ -271,7 +272,9 @@ public class MineFragment extends BaseFragment {
                 goToNewPage(Constants.WALLET);
                 break;
             case R.id.iv_mine_discount_coupon:
-                goToNewPage(Constants.DISCOUNT_COUPON);
+                Intent intent = new Intent(mContext, DisplayActivity.class);
+                intent.putExtra("DISPLAYTYPE", "CouponFragment");
+                startActivity(intent);
                 break;
             case R.id.iv_mine_integral:
                 goToNewPage(Constants.INTEGRAL);

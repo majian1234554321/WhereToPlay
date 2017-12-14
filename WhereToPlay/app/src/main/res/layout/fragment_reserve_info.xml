@@ -426,7 +426,7 @@
                     android:layout_marginLeft="@dimen/margin_90"
                     android:gravity="center_vertical"
                     android:onClick="@{click.onViewClick}"
-                    android:text="@string/please_choose_arrive_time"
+                    android:hint="@string/please_choose_arrive_time"
                     android:textColor="@color/text_detail_white_bc"
                     android:textSize="@dimen/normal_textsize"
                     app:layout_constraintEnd_toStartOf="@+id/iv_reserve_info_date"

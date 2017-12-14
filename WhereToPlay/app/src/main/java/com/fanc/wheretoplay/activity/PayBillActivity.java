@@ -173,7 +173,6 @@ public class PayBillActivity extends BaseActivity {
         df = new DecimalFormat("0.00");
 
 
-
         String pay_Action = getIntent().getStringExtra("pay_Action");
         String dispayMoney = getIntent().getStringExtra("money");
         if ("预订方式：预付预订".equals(pay_Action) && dispayMoney != null) {
@@ -666,8 +665,7 @@ public class PayBillActivity extends BaseActivity {
         intent.putExtra(Constants.ORDER_ID, orderId);
         intent.putExtra(Constants.PRICE, mTvPaySumReal.getText().toString());
         intent.putExtra(Constants.IS_COMMENT, true);
-        intent.putExtra("discount",discountValue );
-
+        intent.putExtra("discount", discountValue);
 
         intent.putExtra("store_name", storeName);
         intent.putExtra("address", address);
@@ -923,7 +921,7 @@ public class PayBillActivity extends BaseActivity {
                     public void onResponse(IsOk response) {
                         if (isSuccess(response)) {
                             if (response.isResult()) {
-                               // checkAliPayResult("", orderId, "");
+                                // checkAliPayResult("", orderId, "");
                                 paySuccess();
                             }
                         }
@@ -945,7 +943,12 @@ public class PayBillActivity extends BaseActivity {
             if (Constants.ACTION_CHOOSE_DISCOUNT_COUPON.equals(action)) {
                 discountId = intent.getStringExtra(Constants.DISCOUNT_ID);
                 discountPrice = intent.getStringExtra(Constants.PRICE);
-                mTvDiscountCoupon.setText(discountPrice + UIUtils.getString(R.string.currency));
+                if ("0".equals(discountPrice)) {
+                    mTvDiscountCoupon.setText("请使用优惠券");
+                } else {
+                    mTvDiscountCoupon.setText("-" + discountPrice + UIUtils.getString(R.string.currency));
+                }
+
 
                 String s = mEtConsumeSum.getText().toString();
                 if (s.isEmpty()) {

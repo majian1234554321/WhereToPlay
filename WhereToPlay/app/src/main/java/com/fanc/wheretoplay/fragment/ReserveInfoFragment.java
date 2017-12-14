@@ -170,7 +170,6 @@ public class ReserveInfoFragment extends BaseFragment {
         iv3 = reserveInfoBinding.iv3;
 
 
-
         if (names != null) {
             mTvReserveInfoRoom.setText(names);
             mTvReserveInfoRoom.setTextColor(Color.parseColor("#333333"));
@@ -478,7 +477,7 @@ public class ReserveInfoFragment extends BaseFragment {
         if (type == null || type.isEmpty()) {
             return null;
         }
-        if (arrivalTime == null || arrivalTime.isEmpty() || arrivalTime.equals(UIUtils.getString(R.string.please_choose_arrive_time))) {
+        if (TextUtils.isEmpty(mTvReserveInfoTime.getText().toString().trim())) {
             ToastUtils.makePicTextShortToast(mContext, "请选择到店时间");
             return null;
         }
@@ -569,4 +568,4 @@ public class ReserveInfoFragment extends BaseFragment {
         }
     }
 
-     }
+}

@@ -376,6 +376,11 @@ public class Network {
         @POST("Public/storeDetail")
         Observable<StoreDetailModel> storeDetail(@Part MultipartBody.Part fileA);
 
+        //优惠券的使用状态
+        @Multipart
+        @POST("User/couponList")
+        Observable<OrderInfoModel> couponList(@Part List<MultipartBody.Part> fileA);
+
 
     }
 
