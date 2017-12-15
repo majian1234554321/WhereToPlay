@@ -253,7 +253,7 @@ public class LaunchActivity extends BaseActivity {
      * 去登录
      */
     private void toSignIn() {
-        Intent intent = new Intent(mContext, SignInActivity.class);
+        Intent intent = new Intent(mContext, MainActivity.class);
         startActivity(intent);
         finish();
     }

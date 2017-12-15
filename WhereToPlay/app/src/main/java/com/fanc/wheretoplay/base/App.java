@@ -73,7 +73,10 @@ public class App extends Application {
 
         init();
 
-        DIOpenSDK.registerApp(this, "didi65434B4C6253787A30446D76544D474E", "c841ae9e1a8cf7dcc912fe3fe6624dfd");
+
+            DIOpenSDK.registerApp(this, "didi65434B4C6253787A30446D76544D474E", "c841ae9e1a8cf7dcc912fe3fe6624dfd");
+
+
 
         // 加快APP启动速度1
         // 1 把耗时操作的初始化过程放在子线程中
