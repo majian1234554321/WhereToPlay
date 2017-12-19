@@ -1,5 +1,7 @@
 package com.fanc.wheretoplay.rx;
 
+import com.fanc.wheretoplay.datamodel.CouponListModel;
+
 import org.reactivestreams.Publisher;
 
 import io.reactivex.Flowable;
@@ -16,4 +18,5 @@ public class FlowableTransformer2<T> implements FlowableTransformer<T,T> {
     public Publisher<T> apply(Flowable<T> flowable) {
         return flowable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
+
 }

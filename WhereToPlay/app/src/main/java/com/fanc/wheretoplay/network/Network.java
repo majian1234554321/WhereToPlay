@@ -7,6 +7,7 @@ import com.fanc.wheretoplay.datamodel.BookListModel;
 
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
+import io.reactivex.disposables.Disposable;
 import okhttp3.MultipartBody;
 import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
@@ -14,6 +15,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 
 import com.fanc.wheretoplay.datamodel.CancleOrderModel;
+import com.fanc.wheretoplay.datamodel.CouponListModel;
 import com.fanc.wheretoplay.datamodel.DelectCollection;
 import com.fanc.wheretoplay.datamodel.MineFriend;
 import com.fanc.wheretoplay.datamodel.MineMoney;
@@ -379,7 +381,7 @@ public class Network {
         //优惠券的使用状态
         @Multipart
         @POST("User/couponList")
-        Observable<OrderInfoModel> couponList(@Part List<MultipartBody.Part> fileA);
+        Flowable<CouponListModel.ContentBean> couponList(@Part List<MultipartBody.Part> fileA);
 
 
     }
