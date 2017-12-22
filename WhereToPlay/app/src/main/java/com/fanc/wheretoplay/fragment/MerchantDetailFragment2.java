@@ -37,6 +37,7 @@ import com.fanc.wheretoplay.adapter.MerchAdapter;
 import com.fanc.wheretoplay.base.App;
 import com.fanc.wheretoplay.base.BaseFragment;
 
+import com.fanc.wheretoplay.datamodel.AccessOrderIdModel;
 import com.fanc.wheretoplay.datamodel.DataValue;
 import com.fanc.wheretoplay.datamodel.IsOk;
 import com.fanc.wheretoplay.datamodel.MerchantDetailModel;
@@ -68,9 +69,12 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.MultipartBody;
@@ -266,8 +270,9 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
         imageView.setLayoutParams(layoutParams);
     }
 
-    public String type ;
-    public MerchantDetailFragment2 setValue(String mStoreId,String type) {
+    public String type;
+
+    public MerchantDetailFragment2 setValue(String mStoreId, String type) {
         this.mStoreId = mStoreId;
         this.type = type;
 
@@ -295,6 +300,10 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
                         }
                     }
                 });
+
+
+
+
     }
 
 
@@ -339,8 +348,15 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
                         showStoreDetail(content.store);
                         phonevalue = content.store.phone;
                         if (content != null && content.store != null & content.store.packageX != null) {
-                            if (!"2".equals(type)){
-                                getChildFragmentManager().beginTransaction().replace(R.id.fragment, new ExtendFragment(content.store.packageX,type)).commit();
+                            if (!"2".equals(type)) {
+                                getChildFragmentManager().beginTransaction().replace(R.id.fragment,
+                                        new ExtendFragment(
+                                                content.store.packageX,
+                                                type,
+                                                content.store.store_id,
+                                                discountValue,
+                                                content.store.name
+                                                ,address)).commit();
                             }
 
                         }
@@ -536,8 +552,6 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
         intent.putExtra("shearedUrl", shearedUrl);
 
         startActivity(intent);
-
-
 
 
     }

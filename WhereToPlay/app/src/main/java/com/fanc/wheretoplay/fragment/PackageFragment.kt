@@ -1,6 +1,7 @@
 package com.fanc.wheretoplay.fragment
 
 import android.annotation.SuppressLint
+import android.content.Intent
 import android.graphics.Paint
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
@@ -10,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.fanc.wheretoplay.R
+import com.fanc.wheretoplay.activity.PayPayActivity
 import com.fanc.wheretoplay.adapter.PackageAdapter
 import com.fanc.wheretoplay.base.BaseFragment
 import com.fanc.wheretoplay.datamodel.PackageModel
@@ -28,11 +30,30 @@ import okhttp3.MultipartBody
  * @date 2017/12/23
  */
 
-class PackageFragment(val idValue: String) : BaseFragment(), View.OnClickListener {
+class PackageFragment(private val idValue: String, private val storeIdValue: String, val discountValue: String,
+                      val storeName: String, val address: String) : BaseFragment(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.tv_pay -> {
+                val intent = Intent(mContext, PayPayActivity::class.java)
+                intent.putExtra("type", "套餐详情")
+                intent.putExtra("storeIdValue", storeIdValue)
+                intent.putExtra("packageIdValue", idValue)
+                intent.putExtra("value0", tv_storeName.text.toString().trim())
+                intent.putExtra("value1", tv_storeName.text.toString().trim())
+                intent.putExtra("value2", tv_introduce.text.toString().trim())
+                intent.putExtra("value3", piv1.getButtomText())
+                intent.putExtra("value4", tv_realMoney.text.toString().trim())
+                intent.putExtra("value5", tv_falseMoney.text.toString().trim())
 
+                intent.putExtra("discountValue", discountValue)
+                intent.putExtra("storeName", storeName)
+                intent.putExtra("address", address)
+
+
+
+
+                startActivity(intent)
             }
             else -> {
             }
@@ -45,11 +66,13 @@ class PackageFragment(val idValue: String) : BaseFragment(), View.OnClickListene
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         tbv.setTv_title("套餐详情")
         piv1.setTopText("有效期")
         piv2.setTopText("预约信息")
         piv3.setTopText("规则提醒")
         piv4.setTopText("温馨提示")
+
         recycle.layoutManager = LinearLayoutManager(mContext)
         tv_pay.setOnClickListener(this)
 
@@ -81,7 +104,10 @@ class PackageFragment(val idValue: String) : BaseFragment(), View.OnClickListene
     }
 
     private fun setData(content: PackageModel.ContentBean) {
-        Glide.with(context).load(content.pic_list[0]).placeholder(R.drawable.default_rect).into(iv)
+        if (content.pic_list.size > 0) {
+            Glide.with(mContext).load(content.pic_list[0]).placeholder(R.drawable.default_rect).into(iv)
+        }
+        tv_address.text = address
         tv_storeName.text = content.name
         tv_storeName2.text = content.name
         tv_introduce.text = content.introduce

@@ -19,7 +19,9 @@ import kotlinx.android.synthetic.main.extendadapter.view.*
  * @date 2017/12/24
  */
 
-class ExtendAdapter(val context: Context, var flag: Boolean, val list: List<PkgListBean>) : RecyclerView.Adapter<ExtendAdapter.ViewHolder>() {
+class ExtendAdapter(val context: Context, var flag: Boolean, val list: List<PkgListBean>, val storeid: String
+                    , val discountValue: String, val storeName: String, val address: String
+) : RecyclerView.Adapter<ExtendAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder =
             ViewHolder(View.inflate(context, R.layout.extendadapter, null))
 
@@ -36,7 +38,14 @@ class ExtendAdapter(val context: Context, var flag: Boolean, val list: List<PkgL
             setOnClickListener {
                 val intent = Intent(context, DisplayActivity::class.java)
                 intent.putExtra("DISPLAYTYPE", "PackageFragment")
-                intent.putExtra("idValue",list[position].id)
+                intent.putExtra("idValue", list[position].id)
+                intent.putExtra("storeIdValue", storeid)
+
+                intent.putExtra("discountValue", discountValue)
+                intent.putExtra("storeName", storeName)
+                intent.putExtra("address", address)
+
+
                 context.startActivity(intent)
 
             }
@@ -44,7 +53,16 @@ class ExtendAdapter(val context: Context, var flag: Boolean, val list: List<PkgL
         }
     }
 
-    override fun getItemCount(): Int = if (flag) list.size else 2
+    override fun getItemCount(): Int {
+        return if (flag && list.size > 2) {
+            list.size
+        } else if (list.size > 2) {
+            2
+        } else {
+            list.size
+        }
+    }
+
 
     fun change(flag: Boolean) {
         this.flag = flag

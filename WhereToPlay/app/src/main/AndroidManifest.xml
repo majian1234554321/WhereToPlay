@@ -249,7 +249,8 @@
         <activity
             android:name=".Main2Activity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.DisplayActivity"></activity>
+        <activity android:name=".activity.DisplayActivity" />
+        <activity android:name=".activity.PayPayActivity"></activity>
     </application>
 
 </manifest>

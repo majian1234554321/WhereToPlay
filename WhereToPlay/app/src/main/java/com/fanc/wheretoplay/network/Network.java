@@ -25,6 +25,7 @@ import com.fanc.wheretoplay.datamodel.NewUser;
 import com.fanc.wheretoplay.datamodel.OrderDetailModel;
 import com.fanc.wheretoplay.datamodel.OrderInfo;
 import com.fanc.wheretoplay.datamodel.OrderInfoModel;
+import com.fanc.wheretoplay.datamodel.OrderPayoffModel;
 import com.fanc.wheretoplay.datamodel.PackageModel;
 import com.fanc.wheretoplay.datamodel.PayOrder;
 import com.fanc.wheretoplay.datamodel.ScoreList;
@@ -310,6 +311,13 @@ public class Network {
         @POST("User/immediatelyPay")
         Observable<AccessOrderIdModel> immediatelyPay(@Part List<MultipartBody.Part> fileA);
 
+
+        //商家详情支付获取订单Id
+        @Multipart
+        @POST("User/setMealImmediatelyPay")
+        Observable<AccessOrderIdModel> setMealImmediatelyPay(@Part List<MultipartBody.Part> fileA);
+
+
         //商家详情支付获取支付信息
         @Multipart
         @POST("User/order_payoff")
@@ -406,6 +414,14 @@ public class Network {
         @Multipart
         @POST("Package/Detail")
         Flowable<PackageModel.ContentBean> packageDetail(@Part List<MultipartBody.Part> fileA);
+
+
+        //优惠券的使用状态
+        @Multipart
+        @POST("User/setMealOrderPayoff")
+        Observable<OrderPayoffModel> setMealOrderPayoff(@Part List<MultipartBody.Part> fileA);
+
+
 
     }
 

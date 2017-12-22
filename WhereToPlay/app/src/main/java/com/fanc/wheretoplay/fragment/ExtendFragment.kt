@@ -23,12 +23,22 @@ import kotlinx.android.synthetic.main.extendfragment.*
 class ExtendFragment() : BaseFragment(), View.OnClickListener {
     private var packageX: MerchantDetailModel.ContentBean.StoreBean.PackageBean? = null
     var type: String? = null
+    var storeid: String? = null
 
+    var discountValue: String? = null
+    var storeName: String? = null
+    var address: String? = null
 
-    constructor(packageX: MerchantDetailModel.ContentBean.StoreBean.PackageBean, type: String) : this() {
+    constructor(packageX: MerchantDetailModel.ContentBean.StoreBean.PackageBean, type: String, storeid: String?,discountValue:String,storeName:String,address:String) : this() {
         this.packageX = packageX
         this.type = type
+        this.storeid = storeid
+        this.discountValue = discountValue
+        this.storeName = storeName
+        this.address = address
     }
+
+
 
 
     lateinit var adapter: ExtendAdapter
@@ -61,11 +71,15 @@ class ExtendFragment() : BaseFragment(), View.OnClickListener {
         }
         tv_title.text = "套餐（" + packageX!!.count + ")"
         val list = packageX?.pkg_list
-
+        if (list?.isNotEmpty()!! && list.size > 2) {
+            tv_more.visibility = View.VISIBLE
+        } else {
+            tv_more.visibility = View.GONE
+        }
         recycle.addItemDecoration(RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL,
                 UIUtils.dp2Px(1), mContext.resources.getColor(R.color.pay_reserve_list_divider_white)))
         recycle.layoutManager = LinearLayoutManager(mContext)
-        adapter = ExtendAdapter(mContext, flag, list!!)
+        adapter = ExtendAdapter(mContext, flag, list, storeid!!, discountValue!!, storeName!!, address!!)
         recycle.adapter = adapter
 
         tv_more.setOnClickListener(this)

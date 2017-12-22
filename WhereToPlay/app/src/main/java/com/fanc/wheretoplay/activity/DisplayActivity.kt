@@ -14,14 +14,22 @@ class DisplayActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display)
         val displayType = intent.getStringExtra("DISPLAYTYPE")
-       val idValue =  intent.getStringExtra("idValue")
+        val idValue = intent.getStringExtra("idValue")
+        val storeIdValue = intent.getStringExtra("storeIdValue")
+
+        val discountValue = intent.getStringExtra("discountValue")
+        val address = intent.getStringExtra("address")
+        val storeName = intent.getStringExtra("storeName")
+
+
+
 
         when (displayType) {
             "CouponFragment" -> {
                 supportFragmentManager.beginTransaction().replace(R.id.displayfragment, CouponFragment()).commit()
             }
             "PackageFragment" -> {
-                supportFragmentManager.beginTransaction().replace(R.id.displayfragment, PackageFragment(idValue)).commit()
+                supportFragmentManager.beginTransaction().replace(R.id.displayfragment, PackageFragment(idValue, storeIdValue,discountValue,storeName,address)).commit()
             }
         }
     }
