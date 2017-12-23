@@ -104,9 +104,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
     LinearLayout mLlReserveFilterRealSuspend;
     TextView mTvReserveFilterSuspend;
     ImageView mIvReserveFilterSuspend;
-    //    LinearLayout mLlReserveCategorySuspend;
-//    TextView mTvReserveCategorySuspend;
-    ImageView mIvReserveCategorySuspend;
+
 
     // 悬停栏在scrollView中的位置
     int mLlSuspendTop;
@@ -172,6 +170,8 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
      * 选中的娱乐分栏图标
      */
     int selectedId;
+
+    public String type = "1";
 
     private RotateAnimation animation_up;
 
@@ -256,7 +256,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
         mBanner.setImageLoader(new GlideImageLoader());
         // 商铺列表
         mStores = new ArrayList();
-        mReserveAdapter = new ReserveAdapter(mContext, mStores);
+        mReserveAdapter = new ReserveAdapter(mContext, mStores,storeType);
         LinearLayoutManager lm = new LinearLayoutManager(mContext);
         lm.setOrientation(LinearLayoutManager.VERTICAL);
         mRvReserve.setLayoutManager(lm);
@@ -859,7 +859,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
      * @param filter
      * @param value
      */
-    private void getStoreList(String token, String cityId, int page, int size, String area, String storeTypeId, String type, String filter, String value) {
+    private void getStoreList(String token, String cityId, int page, int size, String area, final String storeTypeId, final String type, String filter, String value) {
         Map<String, String> param = new HashMap<>();
 //        param.put(Network.Param.TOKEN, token);
         param.put(Network.Param.CITY, cityId);
@@ -908,7 +908,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
                                 showBanner(response.getSliders());
                                 isFirst = !isFirst;
                             }
-                            showStoreList(response.getStore());
+                            showStoreList(response.getStore(),storeTypeId);
                         } else {
                             refreshOrLoadFail();
                         }
@@ -936,7 +936,8 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
      *
      * @param stores
      */
-    private void showStoreList(List<StoreList.Store> stores) {
+    private void showStoreList(List<StoreList.Store> stores,String type) {
+        mReserveAdapter.setType(type);
         if (isPullDown) {   // 下拉刷新
             mStores.clear();
             mStores.addAll(stores);

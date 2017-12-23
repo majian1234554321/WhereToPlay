@@ -73,6 +73,13 @@
 -keep public class * extends android.content.ContentProvider
 -keep public class com.android.vending.licensing.ILicensingService
 -keep public class * extends android.support.v4.app.Fragment
+
+-keep public class * extends android.app.backup.BackupAgentHelper
+-keep public class * extends android.preference.Preference
+
+ -dontwarn com.unionpay.**
+    #不混淆某个类和成员变量
+    -keep class com.unionpay.** { *; }
  -dontwarn android.support.**
  -dontwarn okhttp3.**
  -keep class com.fanc.wheretoplay.datamodel.** { *; }
@@ -208,4 +215,75 @@ public static final int *;
 
 
 -keep class com.sdu.** {*;}
+
+-keep public class com.android.vending.licensing.ILicensingService
+
+
+-keep  public class com.unionpay.uppay.net.HttpConnection {
+	public <methods>;
+}
+-keep  public class com.unionpay.uppay.net.HttpParameters {
+	public <methods>;
+}
+-keep  public class com.unionpay.uppay.model.BankCardInfo {
+	public <methods>;
+}
+-keep  public class com.unionpay.uppay.model.PAAInfo {
+	public <methods>;
+}
+-keep  public class com.unionpay.uppay.model.ResponseInfo {
+	public <methods>;
+}
+-keep  public class com.unionpay.uppay.model.PurchaseInfo {
+	public <methods>;
+}
+-keep  public class com.unionpay.uppay.util.DeviceInfo {
+	public <methods>;
+}
+-keep  public class java.util.HashMap {
+	public <methods>;
+}
+-keep  public class java.lang.String {
+	public <methods>;
+}
+-keep  public class java.util.List {
+	public <methods>;
+}
+-keep  public class com.unionpay.uppay.util.PayEngine {
+	public <methods>;
+	native <methods>;
+}
+
+-keepclasseswithmembernames class * {
+    native <methods>;
+}
+
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet);
+}
+
+-keepclasseswithmembers class * {
+    public <init>(android.content.Context, android.util.AttributeSet, int);
+}
+
+-keepclassmembers class * extends android.app.Activity {
+   public void *(android.view.View);
+}
+
+-keepclassmembers enum * {
+    public static **[] values();
+    public static ** valueOf(java.lang.String);
+}
+
+-keep class * implements android.os.Parcelable {
+  public static final android.os.Parcelable$Creator *;
+}
+
+-keep  public class com.unionpay.utils.UPUtils {
+	native <methods>;
+}
+
+-keep class com.unionpay.UPPayWapActivity {*;}
+-keep class com.unionpay.uppay.PayActivity {*;}
+
 

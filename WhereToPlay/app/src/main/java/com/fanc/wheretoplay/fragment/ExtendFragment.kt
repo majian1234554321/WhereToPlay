@@ -22,10 +22,12 @@ import kotlinx.android.synthetic.main.extendfragment.*
 @SuppressLint("ValidFragment")
 class ExtendFragment() : BaseFragment(), View.OnClickListener {
     private var packageX: MerchantDetailModel.ContentBean.StoreBean.PackageBean? = null
+    var type: String? = null
 
 
-    constructor(packageX: MerchantDetailModel.ContentBean.StoreBean.PackageBean) : this() {
+    constructor(packageX: MerchantDetailModel.ContentBean.StoreBean.PackageBean, type: String) : this() {
         this.packageX = packageX
+        this.type = type
     }
 
 
@@ -52,6 +54,11 @@ class ExtendFragment() : BaseFragment(), View.OnClickListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        if (type == "3") {//KTV
+
+        } else {//酒吧
+
+        }
         tv_title.text = "套餐（" + packageX!!.count + ")"
         val list = packageX?.pkg_list
 

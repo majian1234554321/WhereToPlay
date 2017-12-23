@@ -75,9 +75,9 @@
         <ImageView
             android:id="@+id/iv001"
             android:layout_width="wrap_content"
-            android:layout_toRightOf="@+id/tv_001"
-
-            android:layout_marginTop="@dimen/margin_12"
+            android:layout_toRightOf="@+id/tv_item_discount_coupon_text"
+            android:paddingBottom="8dp"
+            android:layout_marginTop="@dimen/margin_4"
             android:layout_height="wrap_content" />
 
 

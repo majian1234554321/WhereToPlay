@@ -2,6 +2,7 @@ package com.fanc.wheretoplay.adapter
 
 import android.content.Context
 import android.content.Intent
+import android.graphics.Paint
 import android.support.v7.widget.RecyclerView
 import android.view.Display
 import android.view.View
@@ -29,6 +30,8 @@ class ExtendAdapter(val context: Context, var flag: Boolean, val list: List<PkgL
             tv1text.text = list[position].name
             tv2.text = "￥" + list[position].discount_price
             tv3.text = "￥" + list[position].origin_price
+
+            tv3.paint.flags = Paint.STRIKE_THRU_TEXT_FLAG
 
             setOnClickListener {
                 val intent = Intent(context, DisplayActivity::class.java)

@@ -60,7 +60,7 @@ public class ListOrderActivity extends BaseFragmentActivity {
 
         public ListOrderActivity listOrderActivity;
 
-        private String[] mTitles = new String[]{"全部", "已预订", "已支付", "已完成"};
+        private String[] mTitles = new String[]{"全部", "待支付", "待评价", "已完成"};
 
         public ArrayList<BaseFragment> fragments;
 

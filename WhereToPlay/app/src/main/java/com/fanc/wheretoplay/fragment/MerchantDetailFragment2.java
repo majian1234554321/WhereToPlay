@@ -28,6 +28,7 @@ import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.CheckCommentsActivity;
 import com.fanc.wheretoplay.activity.LargeImageActivity;
 
+import com.fanc.wheretoplay.activity.PayBillActivity;
 import com.fanc.wheretoplay.activity.ReuseActivity;
 import com.fanc.wheretoplay.activity.ShareActivity;
 
@@ -265,8 +266,11 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
         imageView.setLayoutParams(layoutParams);
     }
 
-    public MerchantDetailFragment2 setStoreId(String mStoreId) {
+    public String type ;
+    public MerchantDetailFragment2 setValue(String mStoreId,String type) {
         this.mStoreId = mStoreId;
+        this.type = type;
+
         return this;
     }
 
@@ -335,7 +339,10 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
                         showStoreDetail(content.store);
                         phonevalue = content.store.phone;
                         if (content != null && content.store != null & content.store.packageX != null) {
-                            getChildFragmentManager().beginTransaction().replace(R.id.fragment, new ExtendFragment(content.store.packageX)).commit();
+                            if (!"2".equals(type)){
+                                getChildFragmentManager().beginTransaction().replace(R.id.fragment, new ExtendFragment(content.store.packageX,type)).commit();
+                            }
+
                         }
 
                     }
@@ -532,24 +539,7 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
 
 
 
-  /*      new ShareAction(mContext)
-                .setDisplayList(SHARE_MEDIA.QQ, SHARE_MEDIA.QZONE, SHARE_MEDIA.WEIXIN, SHARE_MEDIA.WEIXIN_CIRCLE,SHARE_MEDIA.SINA)
-                .setShareboardclickCallback(new ShareBoardlistener() {
-                    @Override
-                    public void onclick(SnsPlatform snsPlatform, SHARE_MEDIA share_media) {
-                        // 分享内容
-                        UMWeb web = new UMWeb(shearedUrl);
-                        web.setTitle("偷着乐娱乐平台");//标题
-                        web.setThumb(new UMImage(mContext, R.mipmap.ic_launcher));  //缩略图
-                        web.setDescription("商家详情");//描述
-                        new ShareAction(mContext)
-                                .setPlatform(share_media)
-                                .setCallback(new UMShareListener())
-                                .withMedia(web)
-                                .share();
-                    }
-                })
-                .open();*/
+
     }
 
     @Override
@@ -595,21 +585,6 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
                 intent.putExtra("open", true);
                 startActivity(intent);
                 break;
-
-            case R.id.tv_pay:
-                if (isLogin()) {
-                    intent.putExtra(Constants.STORE_ID, mStoreId);
-                    intent.putExtra("storeName", tv_storeName.getText().toString());
-                    intent.putExtra("address", tv_address.getText().toString());
-                    intent.putExtra("discount", discountValue);
-                    intent.putExtra(Constants.PAGE, "商家详情支付");
-                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    mContext.startActivity(intent);
-                } else {
-                    Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
-                }
-                break;
-
             case R.id.tv_yd:
                 if (isLogin()) {
                     intent.putExtra(Constants.STORE_ID, mStoreId);
@@ -620,6 +595,22 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
                     Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
                 }
                 break;
+
+            case R.id.tv_pay:
+                if (isLogin()) {
+                    Intent intent1 = new Intent(mContext, PayBillActivity.class);
+                    intent1.putExtra(Constants.STORE_ID, mStoreId);
+                    intent1.putExtra("storeName", tv_storeName.getText().toString());
+                    intent1.putExtra("address", tv_address.getText().toString());
+                    intent1.putExtra("discount", discountValue);
+                    intent1.putExtra(Constants.PAGE, "商家详情支付");
+                    intent1.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    mContext.startActivity(intent1);
+                } else {
+                    Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+                }
+                break;
+
             case R.id.tv_tel:
                 Intent intent2 = new Intent(Intent.ACTION_DIAL);
                 Uri uri = Uri.parse("tel:" + (TextUtils.isEmpty(phonevalue) ? "4000051179" : phonevalue));

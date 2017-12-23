@@ -65,7 +65,7 @@ public class DetailActivity extends BaseFragmentActivity {
     private void initPage(String page) {
         switch (page) {
             case Constants.MERCHANT_DETAIL:
-                initFragment(new MerchantDetailFragment2().setStoreId(intent.getStringExtra(Constants.STORE_ID)));
+                initFragment(new MerchantDetailFragment2().setValue(intent.getStringExtra(Constants.STORE_ID),intent.getStringExtra("type")));
                 break;
             case Constants.AGREEMENT:
                 initFragment(new RegisterAgreement());

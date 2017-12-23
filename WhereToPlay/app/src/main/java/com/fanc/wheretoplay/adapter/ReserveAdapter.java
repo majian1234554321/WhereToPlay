@@ -19,6 +19,7 @@ import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
@@ -40,12 +41,19 @@ public class ReserveAdapter extends RecyclerView.Adapter<ReserveAdapter.ViewHold
 
     List mData;
     Context mContext;
+    public String type;
 
     int lastPosition;
 
     public ReserveAdapter(Context mContext, List mData) {
         this.mContext = mContext;
         this.mData = mData;
+    }
+
+    public ReserveAdapter(Context mContext, List mData,String type) {
+        this.mContext = mContext;
+        this.mData = mData;
+        this.type = type;
     }
 
     @Override
@@ -101,15 +109,24 @@ public class ReserveAdapter extends RecyclerView.Adapter<ReserveAdapter.ViewHold
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+
+
                 Intent intent = new Intent(mContext, DetailActivity.class);
                 intent.putExtra(Constants.PAGE, Constants.MERCHANT_DETAIL);
                 intent.putExtra(Constants.STORE_ID, store.getId());
+                intent.putExtra("type",type);
+
                 ActivityOptionsCompat compat = ActivityOptionsCompat.makeCustomAnimation(mContext, R.anim.anim_enter_bottom, R.anim.anim_out_top_right);
-//                mContext.startActivity(intent);
+
                 ActivityCompat.startActivity(mContext, intent, compat.toBundle());
             }
         });
 
+    }
+
+    public void setType(String type){
+        this.type = type;
     }
 
     @Override
