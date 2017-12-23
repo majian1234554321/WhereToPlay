@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <com.fanc.wheretoplay.view.TitleBarView
+            android:id="@+id/tbv"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/iv"
+            android:layout_width="match_parent"
+            android:layout_height="200dp" />
+
+        <TextView
+            android:id="@+id/tv_storeName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ff000000"
+            android:textSize="17dp"
+            tools:text="上海天地汇会所" />
+
+        <TextView
+            android:id="@+id/tv_introduce"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="仅售2580元，价值2980元3-4人小包套餐，不限时段通用！"
+            android:textColor="#ff999999"
+            android:textSize="13dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ffe5e5e5" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="适用商户"
+            android:textColor="#ff333333"
+            android:textSize="15dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ffe5e5e5" />
+
+        <TextView
+            android:id="@+id/tv_storeName2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ff000000"
+            android:textSize="17dp"
+            tools:text="上海天地汇会所" />
+
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="#ff666666"
+            android:textSize="13dp"
+            tools:text="黄浦区淮海路东段嵩山路77号" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ffe5e5e5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:drawableRight="@drawable/package1"
+            android:text="套餐详情"
+            android:textColor="#ff333333"
+            android:textSize="15dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ffe5e5e5" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:drawablePadding="8dp"
+            android:drawableRight="@drawable/notice"
+            android:text="购买须知"
+            android:textColor="#ff333333"
+            android:textSize="15dp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ffe5e5e5" />
+
+        <com.fanc.wheretoplay.view.PackageItemView
+            android:id="@+id/piv1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.fanc.wheretoplay.view.PackageItemView
+            android:id="@+id/piv2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <com.fanc.wheretoplay.view.PackageItemView
+            android:id="@+id/piv3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <com.fanc.wheretoplay.view.PackageItemView
+            android:id="@+id/piv4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ffe5e5e5" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#ffe5e5e5" />
+
+    </LinearLayout>
+
+    <RelativeLayout
+
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+
+        android:layout_alignParentBottom="true">
+
+        <TextView
+            android:id="@+id/tv_pay"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true"
+            android:layout_margin="8dp"
+            android:background="#ffc4483c"
+            android:padding="8dp"
+            android:text="立即抢购"
+            android:textColor="#ffffffff"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/tv_001"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:gravity="bottom"
+            android:text="¥"
+            android:textColor="#ffc4483c"
+            android:textSize="18dp" />
+
+        <TextView
+
+            android:id="@+id/tv_realMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@id/tv_001"
+            android:gravity="bottom"
+            android:text="2580"
+            android:textColor="#ffc4483c"
+            android:textSize="30dp" />
+
+        <TextView
+            android:id="@+id/tv_falseMoney"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="8dp"
+            android:layout_toRightOf="@id/tv_realMoney"
+            android:gravity="bottom"
+            android:text="￥2888"
+            android:textSize="20dp" />
+
+
+    </RelativeLayout>
+
+
+</RelativeLayout>
