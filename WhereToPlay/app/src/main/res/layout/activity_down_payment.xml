@@ -132,7 +132,7 @@
     <RelativeLayout
         android:id="@+id/rl_down_payment_pay_way"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/height_150"
+        android:layout_height="@dimen/height_200"
         android:background="@color/white">
 
         <LinearLayout
@@ -213,7 +213,7 @@
             android:layout_below="@+id/ll_down_payment_balance"
             android:background="@color/white"
             android:onClick="onViewClick"
-            android:visibility="gone"
+
             android:orientation="horizontal">
 
             <ImageView
@@ -266,7 +266,7 @@
                 android:id="@+id/rb_upp"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/height_0"
-                android:visibility="gone"
+
                 android:layout_weight="1"
                 android:button="@drawable/selector_pay_way" />
         </RadioGroup>

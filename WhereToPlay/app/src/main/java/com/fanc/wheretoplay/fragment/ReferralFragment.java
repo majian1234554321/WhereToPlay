@@ -82,7 +82,7 @@ public class ReferralFragment extends BaseFragment {
         mTmReferrals.setTitleColor(getResources().getColor(R.color.white));
         referralsBinding.setClick(this);
 
-        mTvMineNickname.setText(TextUtils.isEmpty(mUser.getNickname()) ? UIUtils.getString(R.string.nickname) : mUser.getNickname());
+        //  mTvMineNickname.setText(TextUtils.isEmpty(mUser.getNickname()) ? UIUtils.getString(R.string.nickname) : mUser.getNickname());
         mTvInvitationCode.setText(mUser.getShare_code());
         Glide.with(mContext).load(Network.IMAGE + mUser.getAvatar()).into(mCivMineHeader);
 
@@ -100,7 +100,7 @@ public class ReferralFragment extends BaseFragment {
         mTvInvitationCode.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                ClipboardManager cm =(ClipboardManager)getContext().getSystemService(Context.CLIPBOARD_SERVICE);
+                ClipboardManager cm = (ClipboardManager) getContext().getSystemService(Context.CLIPBOARD_SERVICE);
                 cm.setText(mUser.getShare_code());
                 //ToastUtil.toastSth(getContext() , "订单号已复制到剪切板，快去粘贴吧~");
                 return false;
@@ -145,6 +145,10 @@ public class ReferralFragment extends BaseFragment {
                         if (isSuccess(response)) {
                             Glide.with(mContext).load(Network.IMAGE + response.share_ad).into(mIvReferralsAD);
                             shearedUrl = Network.BASE + "/" + response.share_code;
+                            mTvMineNickname.setText("已邀请" + response.count + "人");
+
+
+
                         }
                     }
                 });

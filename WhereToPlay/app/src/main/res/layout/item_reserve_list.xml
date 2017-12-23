@@ -60,7 +60,7 @@
             android:layout_alignBaseline="@+id/tv_reserve_list_item_title"
             android:layout_alignParentRight="true"
             android:layout_marginRight="@dimen/margin_10"
-            android:text='@{order.room_type+" "+order.room_number}'
+
             android:textColor="@color/text_red"
             android:textSize="@dimen/normal_textsize"/>
 

@@ -183,6 +183,8 @@ public class MineFragment extends BaseFragment {
                         }
 
 
+
+
                     }
                 });
         // registerBroadcastReceiver();

@@ -32,7 +32,7 @@ class CouponChildAdapter(val context: Context, val list: List<CouponListModel.Co
                 iv001.visibility = View.VISIBLE
                 if (type == "2") {
                     iv001.setBackgroundResource(R.drawable.coupon2)
-                } else {
+                } else  {
                     iv001.setBackgroundResource(R.drawable.coupon3)
                 }
 

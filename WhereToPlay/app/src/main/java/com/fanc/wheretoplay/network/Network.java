@@ -15,6 +15,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Part;
 
 import com.fanc.wheretoplay.datamodel.CancleOrderModel;
+import com.fanc.wheretoplay.datamodel.CouponCountModel;
 import com.fanc.wheretoplay.datamodel.CouponListModel;
 import com.fanc.wheretoplay.datamodel.DelectCollection;
 import com.fanc.wheretoplay.datamodel.MineFriend;
@@ -41,8 +42,8 @@ import java.util.List;
 public class Network {
 
 
-     public static String BASE = "http://testapi.51tzl.cn";   // 测试
-   // public static String BASE = "https://ktv.51tzl.cn";
+    // public static String BASE = "http://testapi.51tzl.cn";   // 测试
+    public static String BASE = "https://ktv.51tzl.cn";
 
 
     public static String IMAGE = "";   // 测试
@@ -383,6 +384,10 @@ public class Network {
         @POST("User/couponList")
         Flowable<CouponListModel.ContentBean> couponList(@Part List<MultipartBody.Part> fileA);
 
+        //优惠券的数量
+        @Multipart
+        @POST("User/couponCount")
+        Observable<CouponCountModel> couponCount(@Part MultipartBody.Part fileA);
 
     }
 

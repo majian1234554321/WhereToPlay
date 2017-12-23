@@ -178,6 +178,17 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.ViewHo
             }
         });
 
+        if (!TextUtils.isEmpty(order.room_type)) {
+            holder.title.setText(order.room_type+" "+order.room_number);
+        }else {
+           holder.title.setText("");
+        }
+
+
+
+
+
+
     }
 
     @Override
@@ -193,7 +204,7 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.ViewHo
 
         TextView mTvDiscount;
         ImageView mIvState;
-        TextView mTvState;
+        TextView mTvState,title;
         ImageView mIvWay;
         TextView mTvTime;
         Button mBtnBuy;
@@ -213,6 +224,9 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.ViewHo
             mBtnBuy = this.binding.btnReserveListItemBuy;
             mBtnCancel = this.binding.btnReserveListItemCancel;
             mBtnToComment = this.binding.btnReserveListItemToComment;
+              title =   this.binding.tvReserveListItemRoom;
+
+
         }
     }
 

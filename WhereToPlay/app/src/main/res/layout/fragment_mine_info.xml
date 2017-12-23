@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="click"
-            type="com.fanc.wheretoplay.fragment.MineInfoFragment"/>
+            type="com.fanc.wheretoplay.fragment.MineInfoFragment" />
     </data>
 
     <LinearLayout
@@ -18,14 +18,14 @@
         <com.fanc.wheretoplay.view.TopMenu
             android:id="@+id/tm_mine_info"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
+            android:layout_height="wrap_content" />
 
         <!--<View-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="@dimen/height_15"-->
-            <!--android:background="@color/pay_reserve_list_divider_white"-->
-            <!--android:focusable="true"-->
-            <!--android:focusableInTouchMode="true"/>-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="@dimen/height_15"-->
+        <!--android:background="@color/pay_reserve_list_divider_white"-->
+        <!--android:focusable="true"-->
+        <!--android:focusableInTouchMode="true"/>-->
 
         <LinearLayout
             android:id="@+id/ll_mine_info_photo"
@@ -44,13 +44,13 @@
                 android:layout_weight="1"
                 android:text="头像"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/normal_textsize"/>
+                android:textSize="@dimen/normal_textsize" />
 
             <com.fanc.wheretoplay.view.CircleImageView
                 android:id="@+id/civ_mine_info_photo"
                 android:layout_width="@dimen/width_45"
                 android:layout_height="@dimen/height_45"
-                android:layout_alignParentRight="true"/>
+                android:layout_alignParentRight="true" />
 
         </LinearLayout>
 
@@ -70,7 +70,7 @@
                 android:layout_centerVertical="true"
                 android:text="@string/nickname"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/normal_textsize"/>
+                android:textSize="@dimen/normal_textsize" />
 
             <EditText
                 android:id="@+id/et_mine_info_nickname"
@@ -83,7 +83,7 @@
                 android:paddingRight="@dimen/padding_15"
                 android:textColor="@color/text_black"
                 android:textCursorDrawable="@drawable/color_cursor"
-                android:textSize="@dimen/textsize_levelsmall"/>
+                android:textSize="@dimen/textsize_levelsmall" />
 
         </RelativeLayout>
 
@@ -107,7 +107,7 @@
                 android:layout_centerVertical="true"
                 android:text="@string/gender"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/normal_textsize"/>
+                android:textSize="@dimen/normal_textsize" />
 
             <ImageView
                 android:id="@+id/iv_mine_info_gender"
@@ -117,7 +117,7 @@
                 android:layout_centerVertical="true"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:src="@drawable/right"/>
+                android:src="@drawable/right" />
 
             <TextView
                 android:id="@+id/tv_mine_info_gender"
@@ -130,7 +130,7 @@
                 android:focusableInTouchMode="false"
                 android:text="@string/please_choose"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/textsize_levelsmall"/>
+                android:textSize="@dimen/textsize_levelsmall" />
 
         </RelativeLayout>
 
@@ -155,7 +155,7 @@
                 android:layout_marginRight="@dimen/margin_5"
                 android:text="@string/birthday"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/normal_textsize"/>
+                android:textSize="@dimen/normal_textsize" />
 
             <ImageView
                 android:id="@+id/iv_mine_info_birthday"
@@ -165,7 +165,7 @@
                 android:layout_centerVertical="true"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:src="@drawable/right"/>
+                android:src="@drawable/right" />
 
             <TextView
                 android:id="@+id/tv_mine_infor_birthday"
@@ -178,7 +178,7 @@
                 android:focusableInTouchMode="false"
                 android:text="@string/please_choose"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/textsize_levelsmall"/>
+                android:textSize="@dimen/textsize_levelsmall" />
 
         </RelativeLayout>
 
@@ -204,7 +204,7 @@
                 android:focusableInTouchMode="false"
                 android:text="@string/location"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/normal_textsize"/>
+                android:textSize="@dimen/normal_textsize" />
 
             <ImageView
                 android:id="@+id/iv_mine_info_location"
@@ -214,7 +214,7 @@
                 android:layout_centerVertical="true"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
-                android:src="@drawable/right"/>
+                android:src="@drawable/right" />
 
             <TextView
                 android:id="@+id/tv_mine_info_location"
@@ -227,7 +227,7 @@
                 android:focusableInTouchMode="false"
                 android:text="@string/please_choose"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/textsize_levelsmall"/>
+                android:textSize="@dimen/textsize_levelsmall" />
 
         </RelativeLayout>
 
@@ -247,7 +247,7 @@
                 android:layout_centerVertical="true"
                 android:text="@string/mobile"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/normal_textsize"/>
+                android:textSize="@dimen/normal_textsize" />
 
             <EditText
                 android:id="@+id/et_mine_info_mobile"
@@ -256,12 +256,12 @@
                 android:layout_alignParentRight="true"
                 android:background="@null"
                 android:gravity="right|center_vertical"
-                android:paddingRight="@dimen/padding_15"
                 android:inputType="number"
                 android:maxLength="11"
+                android:paddingRight="@dimen/padding_15"
                 android:textColor="@color/text_black"
                 android:textCursorDrawable="@drawable/color_cursor"
-                android:textSize="@dimen/textsize_levelsmall"/>
+                android:textSize="@dimen/textsize_levelsmall" />
 
         </RelativeLayout>
 
@@ -274,7 +274,9 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_120"
             android:gravity="top"
-            android:orientation="horizontal">
+
+            android:orientation="horizontal"
+            android:visibility="gone">
 
             <TextView
                 android:layout_width="wrap_content"
@@ -285,9 +287,10 @@
                 android:layout_marginTop="@dimen/margin_15"
                 android:text="@string/signing"
                 android:textColor="@color/text_black"
-                android:textSize="@dimen/normal_textsize"/>
+                android:textSize="@dimen/normal_textsize" />
 
             <EditText
+
                 android:id="@+id/et_mine_info_sign"
                 android:layout_width="@dimen/width_0"
                 android:layout_height="@dimen/height_100"
@@ -300,7 +303,7 @@
                 android:padding="@dimen/padding_5"
                 android:textColor="@color/text_black"
                 android:textCursorDrawable="@drawable/color_cursor"
-                android:textSize="@dimen/normal_textsize"/>
+                android:textSize="@dimen/normal_textsize" />
 
         </LinearLayout>
 
@@ -312,7 +315,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"/>
+            android:layout_weight="1" />
 
         <Button
             android:id="@+id/btn_mine_info_confirm"
@@ -325,7 +328,7 @@
             android:onClick="@{click.onViewClick}"
             android:text="@string/confirm_1"
             android:textColor="@color/text_white"
-            android:textSize="@dimen/textsize_level2"/>
+            android:textSize="@dimen/textsize_level2" />
 
     </LinearLayout>
 </layout>

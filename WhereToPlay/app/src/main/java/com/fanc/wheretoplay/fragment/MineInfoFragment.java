@@ -476,7 +476,10 @@ public class MineInfoFragment extends BaseFragment {
 
                             Intent intent = new Intent(Constants.ACTION_AVATAR_MODIFY_SUCCESS);
                             intent.putExtra(Constants.URL, avatar.getAbsolutePath());
-                            LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
+
+                            RxBus.getDefault().post(intent);
+
+
                         }
                         closeProgress();
                     }
@@ -573,6 +576,7 @@ public class MineInfoFragment extends BaseFragment {
                                 Intent intent = new Intent(Constants.ACTION_MINE_INFO_MODIFY_SUCCESS);
                                 intent.putExtra(Constants.MOBILE, mobile);
                                 intent.putExtra(Constants.NAME, nickname);
+
                                // LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
 
                                 RxBus.getDefault().post(intent);

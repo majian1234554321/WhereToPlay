@@ -1,6 +1,7 @@
 package com.fanc.wheretoplay.datamodel;
 
 import android.databinding.BindingAdapter;
+import android.text.TextUtils;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
@@ -20,4 +21,12 @@ public class ShearedAD extends BaseModel {
 
     public String share_ad;
     public String share_code;
+    public String count;
+
+    public String getCount() {
+        if (!TextUtils.isEmpty(count)) {
+            return count;
+        } else return "0";
+
+    }
 }
