@@ -14,6 +14,7 @@ import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.adapter.ReserveAdapter;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentCollectionBinding;
+import com.fanc.wheretoplay.datamodel.MerchantDetailModel;
 import com.fanc.wheretoplay.datamodel.StoreList;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
 import com.fanc.wheretoplay.network.Network;
@@ -35,21 +36,13 @@ import okhttp3.Call;
 
 public class ListFragment extends BaseFragment {
     FragmentCollectionBinding binding;
-    /**
-     * Views
-     */
+
     TopMenu mTm;
     RecyclerView mRv;
-    /**
-     * 列表类型
-     * 1，附近
-     * 2, 最热
-     * 3，新店
-     * 4，最惠
-     */
+
     int listPage;
 
-    List<StoreList.Store> mStores;
+    List mStores;
     ReserveAdapter adapter;
 
     @Nullable
@@ -62,17 +55,13 @@ public class ListFragment extends BaseFragment {
         return binding.getRoot();
     }
 
-    /**
-     * 初始化控件
-     */
+
     private void initViews() {
         mTm = binding.tmCollection;
         mRv = binding.rvCollection;
     }
 
-    /**
-     * 业务逻辑
-     */
+
     private void init() {
         mTm.setLeftIcon(R.drawable.left);
 
@@ -107,9 +96,7 @@ public class ListFragment extends BaseFragment {
         getStoreList();
     }
 
-    /**
-     * 监听器
-     */
+
     private void initListeners() {
         mTm.setLeftIconOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,9 +111,7 @@ public class ListFragment extends BaseFragment {
         return this;
     }
 
-    /**
-     * 获取店铺列表
-     */
+
     private void getStoreList() {
         Map<String, String> param = new HashMap<>();
         if (isLogin()) {
@@ -160,11 +145,7 @@ public class ListFragment extends BaseFragment {
                 });
     }
 
-    /**
-     * 显示店铺列表
-     *
-     * @param list
-     */
+
     private void showStoreList(List<StoreList.Store> list) {
         mStores.addAll(list);
         adapter.notifyDataSetChanged();

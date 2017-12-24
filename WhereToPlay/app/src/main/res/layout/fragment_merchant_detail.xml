@@ -74,13 +74,7 @@
                 android:layout_height="match_parent"
                 android:background="@color/bg_gray"
                 android:orientation="vertical">
-                <!--去掉新版的图片展示区-->
-                <!--<com.youth.banner.Banner-->
-                <!--android:id="@+id/banner_detail"-->
-                <!--android:layout_width="match_parent"-->
-                <!--android:layout_height="@dimen/height_190"-->
 
-                <!--/>-->
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -110,16 +104,7 @@
                         android:rating="3.5"
                         android:stepSize="0.2" />
 
-                    <!--<TextView
-                        android:id="@+id/tv_merchant_detail_discount"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
-                        android:layout_alignParentRight="true"
-                        android:layout_marginRight="@dimen/margin_15"
-                        android:gravity="center"
-                        android:text="@string/discount"
-                        android:textColor="@color/text_and_buttor_orange"
-                        android:textSize="@dimen/textsize_levelsmall"/>-->
+
 
                     <TextView
                         android:id="@+id/tv_merchant_detail_discount_sum"
@@ -361,53 +346,6 @@
                     android:background="@color/pay_reserve_list_divider_white" />
 
 
-                <!--<Button
-                    android:id="@+id/btn_merchant_reserve_promptly"
-                    android:layout_width="@dimen/width_100"
-                    android:layout_height="@dimen/height_30"
-                    android:layout_marginBottom="@dimen/margin_15"
-                    android:layout_marginLeft="@dimen/margin_15"
-                    android:background="@drawable/shape_btn_signin"
-                    android:text="@string/reserve_promptly"
-                    android:textColor="@color/text_black"
-                    android:textSize="@dimen/normal_textsize"/>-->
-
-
-                <!--<LinearLayout
-                    android:id="@+id/ll_merchant_reserve_tel"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_50"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal">
-
-                    <ImageView
-                        android:id="@+id/iv_merchant_reserve_tel"
-                        android:layout_width="@dimen/width_40"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="@dimen/margin_10"
-                        android:padding="@dimen/padding_14"
-                        android:src="@drawable/tel"/>
-
-                    <TextView
-                        android:id="@+id/tv_merchant_reserve_tel"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center_vertical"
-                        android:textColor="@color/white"
-                        android:textSize="@dimen/normal_textsize"/>
-
-                    <ImageView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginRight="@dimen/margin_15"/>
-
-                </LinearLayout>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/line_height"
-                    android:background="@color/pay_reserve_list_divider"/>-->
 
                 <!--去掉中间象征着“简介 酒水 房态 。。。”的图标-->
                 <android.support.constraint.ConstraintLayout
@@ -470,15 +408,7 @@
                             android:textSize="@dimen/normal_textsize" />
                     </LinearLayout>
 
-                    <!--<View
-                        android:id="@+id/line_room"
-                        android:layout_width="@dimen/line_width"
-                        android:layout_height="@dimen/height_30"
-                        android:background="@color/pay_reserve_list_divider"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintLeft_toRightOf="@+id/ll_merchant_detail_room"
-                        app:layout_constraintRight_toLeftOf="@+id/ll_merchant_detail_drinks"
-                        app:layout_constraintTop_toTopOf="parent"/>-->
+
 
                     <LinearLayout
                         android:id="@+id/ll_merchant_detail_drinks"
@@ -532,34 +462,7 @@
                 </android.support.constraint.ConstraintLayout>
 
 
-                <!--去掉新加的tablayout 和 viewpager 组合-->
-                <!--                <LinearLayout
-                                    xmlns:app="http://schemas.android.com/apk/res-auto"
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:orientation="vertical"
-                                    android:layout_marginTop="@dimen/margin_10">
 
-                                    <android.support.design.widget.TabLayout
-                                        android:id="@+id/ll_merchant_detail_tablayout"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="@dimen/height_40"
-                                        app:tabGravity="fill"
-                                        app:tabIndicatorColor="@color/text_red"
-                                        app:tabMode="scrollable"
-                                        app:tabSelectedTextColor="@color/text_red"
-                                        app:tabIndicatorHeight="@dimen/height_2"
-                                        app:tabTextAppearance="@style/MyTabLayoutTextStyle"
-                                        android:background="@color/white"
-                                        />
-
-                                    <android.support.v4.view.ViewPager
-                                        android:id="@+id/ll_merchant_detail_viewpager"
-                                        android:layout_width="match_parent"
-                                        android:layout_height="@dimen/height_411"
-                                        />
-
-                                </LinearLayout>-->
 
 
                 <View

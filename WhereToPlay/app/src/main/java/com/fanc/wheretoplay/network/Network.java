@@ -18,15 +18,18 @@ import com.fanc.wheretoplay.datamodel.CancleOrderModel;
 import com.fanc.wheretoplay.datamodel.CouponCountModel;
 import com.fanc.wheretoplay.datamodel.CouponListModel;
 import com.fanc.wheretoplay.datamodel.DelectCollection;
+import com.fanc.wheretoplay.datamodel.MerchantDetailModel;
 import com.fanc.wheretoplay.datamodel.MineFriend;
 import com.fanc.wheretoplay.datamodel.MineMoney;
 import com.fanc.wheretoplay.datamodel.NewUser;
 import com.fanc.wheretoplay.datamodel.OrderDetailModel;
 import com.fanc.wheretoplay.datamodel.OrderInfo;
 import com.fanc.wheretoplay.datamodel.OrderInfoModel;
+import com.fanc.wheretoplay.datamodel.PackageModel;
 import com.fanc.wheretoplay.datamodel.PayOrder;
 import com.fanc.wheretoplay.datamodel.ScoreList;
 import com.fanc.wheretoplay.datamodel.StoreDetailModel;
+import com.fanc.wheretoplay.datamodel.StoreListModel;
 import com.fanc.wheretoplay.datamodel.SubmitCommentModel;
 import com.fanc.wheretoplay.datamodel.VerifyCode;
 import com.fanc.wheretoplay.rx.BaseResponseModel;
@@ -42,8 +45,8 @@ import java.util.List;
 public class Network {
 
 
-    // public static String BASE = "http://testapi.51tzl.cn";   // 测试
-    public static String BASE = "https://ktv.51tzl.cn";
+     public static String BASE = "http://testapi.51tzl.cn";   // 测试
+    //public static String BASE = "https://ktv.51tzl.cn";
 
 
     public static String IMAGE = "";   // 测试
@@ -388,6 +391,21 @@ public class Network {
         @Multipart
         @POST("User/couponCount")
         Observable<CouponCountModel> couponCount(@Part MultipartBody.Part fileA);
+
+        //优惠券的使用状态
+        @Multipart
+        @POST("Public/storeDetail")
+        Flowable<MerchantDetailModel.ContentBean> storeDetail(@Part List<MultipartBody.Part> fileA);
+
+        //优惠券的使用状态
+        @Multipart
+        @POST("Common/storeList")
+        Flowable<StoreListModel.ContentBean> storeList(@Part List<MultipartBody.Part> fileA);
+
+        //优惠券的使用状态
+        @Multipart
+        @POST("Package/Detail")
+        Flowable<PackageModel.ContentBean> packageDetail(@Part List<MultipartBody.Part> fileA);
 
     }
 

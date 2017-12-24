@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:drawableLeft="@drawable/tao"
+        tools:text="套餐（5）"
+        android:layout_margin="12dp"
+        android:drawablePadding="8dp"
+        android:textColor="#ff333333"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content" />
+
+    <android.support.v7.widget.RecyclerView
+        android:layout_below="@+id/tv_title"
+        android:layout_width="match_parent"
+        android:id="@+id/recycle"
+        android:layout_height="wrap_content"></android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/tv_more"
+        android:padding="16dp"
+        android:textSize="15dp"
+       android:gravity="center"
+        android:layout_below="@id/recycle"
+        android:text="更多2个套餐"
+        android:textColor="#ff333333"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>

@@ -18,7 +18,7 @@ import com.fanc.wheretoplay.fragment.CommentDetailFragment;
 import com.fanc.wheretoplay.fragment.DealDetailFragment;
 import com.fanc.wheretoplay.fragment.DiscountCouponFragment;
 import com.fanc.wheretoplay.fragment.IntegralFragment;
-import com.fanc.wheretoplay.fragment.MerchantDetailFragment;
+import com.fanc.wheretoplay.fragment.MerchantDetailFragment2;
 import com.fanc.wheretoplay.fragment.MessageDetailFragment;
 import com.fanc.wheretoplay.fragment.MessageFragment;
 import com.fanc.wheretoplay.fragment.MineCommendMoneyFragment;
@@ -65,7 +65,7 @@ public class DetailActivity extends BaseFragmentActivity {
     private void initPage(String page) {
         switch (page) {
             case Constants.MERCHANT_DETAIL:
-                initFragment(new MerchantDetailFragment().setStoreId(intent.getStringExtra(Constants.STORE_ID)));
+                initFragment(new MerchantDetailFragment2().setStoreId(intent.getStringExtra(Constants.STORE_ID)));
                 break;
             case Constants.AGREEMENT:
                 initFragment(new RegisterAgreement());

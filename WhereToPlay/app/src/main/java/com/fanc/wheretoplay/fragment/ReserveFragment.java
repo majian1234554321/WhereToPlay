@@ -1,6 +1,5 @@
 package com.fanc.wheretoplay.fragment;
 
-import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -45,14 +44,12 @@ import com.fanc.wheretoplay.datamodel.CityResource;
 import com.fanc.wheretoplay.datamodel.DataValue;
 import com.fanc.wheretoplay.datamodel.Filter;
 import com.fanc.wheretoplay.datamodel.IsOk;
+
 import com.fanc.wheretoplay.datamodel.StoreList;
 import com.fanc.wheretoplay.image.GlideImageLoader;
 import com.fanc.wheretoplay.network.Network;
-import com.fanc.wheretoplay.util.BaiDuMapUtils;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LocationUtils;
-import com.fanc.wheretoplay.util.LogUtils;
-import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.FilterPopupDialog;

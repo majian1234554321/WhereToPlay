@@ -5,143 +5,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
+    <com.fanc.wheretoplay.view.TitleBarView
+        android:id="@+id/tbv"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <com.fanc.wheretoplay.view.TitleBarView
-            android:id="@+id/tbv"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <ImageView
-            android:id="@+id/iv"
-            android:layout_width="match_parent"
-            android:layout_height="200dp" />
-
-        <TextView
-            android:id="@+id/tv_storeName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#ff000000"
-            android:textSize="17dp"
-            tools:text="上海天地汇会所" />
-
-        <TextView
-            android:id="@+id/tv_introduce"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="仅售2580元，价值2980元3-4人小包套餐，不限时段通用！"
-            android:textColor="#ff999999"
-            android:textSize="13dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#ffe5e5e5" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="适用商户"
-            android:textColor="#ff333333"
-            android:textSize="15dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#ffe5e5e5" />
-
-        <TextView
-            android:id="@+id/tv_storeName2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#ff000000"
-            android:textSize="17dp"
-            tools:text="上海天地汇会所" />
-
-        <TextView
-            android:id="@+id/tv_address"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="#ff666666"
-            android:textSize="13dp"
-            tools:text="黄浦区淮海路东段嵩山路77号" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#ffe5e5e5" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawablePadding="8dp"
-            android:drawableRight="@drawable/package1"
-            android:text="套餐详情"
-            android:textColor="#ff333333"
-            android:textSize="15dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#ffe5e5e5" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:drawablePadding="8dp"
-            android:drawableRight="@drawable/notice"
-            android:text="购买须知"
-            android:textColor="#ff333333"
-            android:textSize="15dp" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#ffe5e5e5" />
-
-        <com.fanc.wheretoplay.view.PackageItemView
-            android:id="@+id/piv1"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <com.fanc.wheretoplay.view.PackageItemView
-            android:id="@+id/piv2"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <com.fanc.wheretoplay.view.PackageItemView
-            android:id="@+id/piv3"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-        <com.fanc.wheretoplay.view.PackageItemView
-            android:id="@+id/piv4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#ffe5e5e5" />
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#ffe5e5e5" />
-
-    </LinearLayout>
+        android:layout_height="wrap_content" />
 
     <RelativeLayout
-
+        android:id="@+id/rl"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-
         android:layout_alignParentBottom="true">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+
+            android:background="#ffe5e5e5" />
 
         <TextView
             android:id="@+id/tv_pay"
+
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_alignParentRight="true"
@@ -150,15 +33,17 @@
             android:padding="8dp"
             android:text="立即抢购"
             android:textColor="#ffffffff"
-            android:textSize="18sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/tv_001"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
             android:layout_marginBottom="8dp"
+            android:layout_marginLeft="12dp"
+
             android:gravity="bottom"
-            android:text="¥"
+            android:text="¥ "
             android:textColor="#ffc4483c"
             android:textSize="18dp" />
 
@@ -166,25 +51,221 @@
 
             android:id="@+id/tv_realMoney"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
+            android:layout_height="50dp"
+
+            android:layout_alignBaseline="@id/tv_001"
+
             android:layout_toRightOf="@id/tv_001"
-            android:gravity="bottom"
-            android:text="2580"
+
+            android:gravity="top"
             android:textColor="#ffc4483c"
-            android:textSize="30dp" />
+
+            android:textSize="25dp"
+            tools:text="2580" />
 
         <TextView
             android:id="@+id/tv_falseMoney"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_marginBottom="8dp"
+            android:layout_height="50dp"
+
+            android:layout_alignBaseline="@id/tv_001"
+            android:layout_marginLeft="12dp"
             android:layout_toRightOf="@id/tv_realMoney"
-            android:gravity="bottom"
-            android:text="￥2888"
-            android:textSize="20dp" />
+            android:gravity="top"
+            android:textSize="18dp"
+            tools:text="￥2888" />
 
 
     </RelativeLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/rl"
+        android:layout_below="@id/tbv">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+
+            <ImageView
+                android:id="@+id/iv"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:scaleType="fitXY" />
+
+            <TextView
+
+                android:id="@+id/tv_storeName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:textColor="#ff000000"
+                android:textSize="17dp"
+                tools:text="上海天地汇会所" />
+
+            <TextView
+                android:id="@+id/tv_introduce"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:textColor="#ff999999"
+                android:textSize="13dp"
+                tools:text="仅售2580元，价值2980元3-4人小包套餐，不限时段通用！" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="#ffe5e5e5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="适用商户"
+                android:textColor="#ff333333"
+                android:textSize="15dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="12dp"
+                android:background="#ffe5e5e5" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_storeName2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="12dp"
+                    android:textColor="#ff000000"
+                    android:textSize="17dp"
+                    tools:text="上海天地汇会所" />
+
+                <TextView
+                    android:id="@+id/tv_address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/tv_storeName2"
+                    android:layout_marginBottom="12dp"
+                    android:layout_marginLeft="12dp"
+                    android:textColor="#ff666666"
+                    android:textSize="13dp"
+                    tools:text="黄浦区淮海路东段嵩山路77号" />
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ffe5e5e5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="12dp"
+                android:drawablePadding="8dp"
+                android:drawableRight="@drawable/package1"
+                android:text="套餐详情"
+                android:textColor="#ff333333"
+                android:textSize="15dp" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:id="@+id/tv_falseMoney1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:gravity="right"
+                tools:text="总价值     2980元" />
+
+            <TextView
+                android:id="@+id/tv_realMoney1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="12dp"
+                android:gravity="right"
+                android:textColor="#ff333333"
+                tools:text="套餐价     2580元" />
+
+
+            <TextView
+                android:id="@+id/tv_detail"
+                android:layout_width="match_parent"
+                android:textColor="#ff333333"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ffe5e5e5" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:drawablePadding="8dp"
+                android:drawableRight="@drawable/notice"
+                android:text="购买须知"
+                android:textColor="#ff333333"
+                android:textSize="15dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ffe5e5e5" />
+
+            <com.fanc.wheretoplay.view.PackageItemView
+                android:id="@+id/piv1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp" />
+
+            <com.fanc.wheretoplay.view.PackageItemView
+                android:id="@+id/piv2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp" />
+
+            <com.fanc.wheretoplay.view.PackageItemView
+                android:id="@+id/piv3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp" />
+
+            <com.fanc.wheretoplay.view.PackageItemView
+                android:id="@+id/piv4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ffe5e5e5" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#ffe5e5e5" />
+
+        </LinearLayout>
+    </ScrollView>
 
 
 </RelativeLayout>

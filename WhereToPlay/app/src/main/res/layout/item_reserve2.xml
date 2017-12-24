@@ -1,19 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
-
-    <data>
-
-        <variable
-            name="store"
-            type="com.fanc.wheretoplay.datamodel.StoreList.Store" />
-    </data>
-
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingBottom="@dimen/margin_5">
+    android:paddingBottom="@dimen/margin_5">
 
         <ImageView
             android:id="@+id/iv_reserve_item"
@@ -78,7 +69,7 @@
             android:id="@+id/tv_reserve_item_price"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@{store.capita}"
+
             android:textColor="@color/text_black"
             android:textSize="@dimen/textsize_level4"
             android:paddingBottom="@dimen/margin_7"
@@ -95,8 +86,8 @@
             android:drawableLeft="@drawable/reserve_address"
             android:drawablePadding="@dimen/padding_5"
             android:paddingBottom="@dimen/margin_10"
-            android:text="@{store.area}"
-            android:textColor="@color/textcolor_3b"
+
+
             android:textSize="@dimen/textsize_levelsmall"
             app:layout_constraintBottom_toBottomOf="@+id/tv_reserve_item_rise"
             app:layout_constraintEnd_toEndOf="parent"
@@ -106,4 +97,4 @@
             /><!--app:layout_constraintVertical_bias="0.217" -->
 
     </android.support.constraint.ConstraintLayout>
-</layout>
+
