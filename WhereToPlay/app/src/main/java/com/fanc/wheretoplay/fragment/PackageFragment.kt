@@ -1,10 +1,15 @@
 package com.fanc.wheretoplay.fragment
 
+import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
+import android.content.pm.PackageManager
 import android.graphics.Paint
+import android.net.Uri
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
 import android.support.v7.widget.LinearLayoutManager
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -31,7 +36,7 @@ import okhttp3.MultipartBody
  */
 
 class PackageFragment(private val idValue: String, private val storeIdValue: String, val discountValue: String,
-                      val storeName: String, val address: String) : BaseFragment(), View.OnClickListener {
+                      val storeName: String, val address: String, val phonevalue: String) : BaseFragment(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.tv_pay -> {
@@ -50,12 +55,17 @@ class PackageFragment(private val idValue: String, private val storeIdValue: Str
                 intent.putExtra("storeName", storeName)
                 intent.putExtra("address", address)
 
-
-
-
                 startActivity(intent)
             }
-            else -> {
+            R.id.iv_phone -> {
+                val intent2 = Intent(Intent.ACTION_DIAL)
+
+                val uri = Uri.parse("tel:" + if (TextUtils.isEmpty(phonevalue)) "4000051179" else phonevalue)
+                intent2.data = uri
+                if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                    startActivity(intent2)
+                }
+
             }
         }
     }
@@ -75,6 +85,7 @@ class PackageFragment(private val idValue: String, private val storeIdValue: Str
 
         recycle.layoutManager = LinearLayoutManager(mContext)
         tv_pay.setOnClickListener(this)
+        iv_phone.setOnClickListener(this)
 
         loadData()
 

@@ -28,17 +28,19 @@ class ExtendFragment() : BaseFragment(), View.OnClickListener {
     var discountValue: String? = null
     var storeName: String? = null
     var address: String? = null
+    var phonevalue: String? = null
+    var list: List<MerchantDetailModel.ContentBean.StoreBean.PackageBean.PkgListBean>? = null
 
-    constructor(packageX: MerchantDetailModel.ContentBean.StoreBean.PackageBean, type: String, storeid: String?,discountValue:String,storeName:String,address:String) : this() {
+
+    constructor(packageX: MerchantDetailModel.ContentBean.StoreBean.PackageBean, type: String, storeid: String?, discountValue: String, storeName: String, address: String, phonevalue: String) : this() {
         this.packageX = packageX
         this.type = type
         this.storeid = storeid
         this.discountValue = discountValue
         this.storeName = storeName
         this.address = address
+        this.phonevalue = phonevalue
     }
-
-
 
 
     lateinit var adapter: ExtendAdapter
@@ -49,7 +51,16 @@ class ExtendFragment() : BaseFragment(), View.OnClickListener {
             R.id.tv_more -> {
                 adapter.change(!flag)
                 adapter.notifyDataSetChanged()
+                if (flag) {
+                    tv_more.text = "更多" + (list!!.size - 2) + "个套餐 "
+                } else {
+                    tv_more.text = "收起"
+
+                }
+
                 flag = !flag
+
+
             }
             else -> {
             }
@@ -70,8 +81,8 @@ class ExtendFragment() : BaseFragment(), View.OnClickListener {
 
         }
         tv_title.text = "套餐（" + packageX!!.count + ")"
-        val list = packageX?.pkg_list
-        if (list?.isNotEmpty()!! && list.size > 2) {
+        list = packageX?.pkg_list
+        if (list?.isNotEmpty()!! && list!!.size > 2) {
             tv_more.visibility = View.VISIBLE
         } else {
             tv_more.visibility = View.GONE
@@ -79,8 +90,13 @@ class ExtendFragment() : BaseFragment(), View.OnClickListener {
         recycle.addItemDecoration(RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL,
                 UIUtils.dp2Px(1), mContext.resources.getColor(R.color.pay_reserve_list_divider_white)))
         recycle.layoutManager = LinearLayoutManager(mContext)
-        adapter = ExtendAdapter(mContext, flag, list, storeid!!, discountValue!!, storeName!!, address!!)
+        adapter = ExtendAdapter(mContext, flag, list!!, storeid!!, discountValue!!, storeName!!, address!!, phonevalue!!)
         recycle.adapter = adapter
+        if (list!!.size > 2) {
+            tv_more.text = "更多" + (list!!.size - 2) + "个套餐 "
+        } else {
+            tv_more.visibility = View.GONE
+        }
 
         tv_more.setOnClickListener(this)
 

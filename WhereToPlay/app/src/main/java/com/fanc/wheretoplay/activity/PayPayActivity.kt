@@ -19,6 +19,7 @@ import com.fanc.wheretoplay.fragment.PayPayFragment
 import com.fanc.wheretoplay.network.Network
 import com.fanc.wheretoplay.pay.AliPayResult
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils
+import com.fanc.wheretoplay.rx.RxBus
 import com.fanc.wheretoplay.util.Constants
 import com.fanc.wheretoplay.util.ToastUtils
 import com.orhanobut.logger.Logger
@@ -43,10 +44,10 @@ import java.util.ArrayList
 
 class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
-    var payWay = 1
-    var storeIdValue: String = ""
-    var packageIdValue: String = ""
-    var orderId: String = ""
+    var payWay = 2
+    var storeIdValue: String? = ""
+    var packageIdValue: String? = ""
+    var orderId: String? = ""
 
 
     lateinit var value4: String
@@ -57,11 +58,11 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
         when (p1) {
             R.id.rb_wxpay -> {
                 rb_wxpay.isChecked = true
-                payWay = 1
+                payWay = 2
             }
             R.id.rb_alipay -> {
                 rb_alipay.isChecked = true
-                payWay = 2
+                payWay = 1
             }
             R.id.rb_yupay -> {
                 rb_yupay.isChecked = true
@@ -118,6 +119,7 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
                             ToastUtils.showShortToast(mContext, "支付成功")
                             // checkAliPayResult(resultInfo, orderId, discountId);
                             paySuccess()
+
                         } else {
                             // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                             ToastUtils.showShortToast(mContext, "支付失败")
@@ -144,7 +146,12 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
                         alertBalancePay()
                     }
                     else -> {
-                        payMoney("")
+                        if (TextUtils.isEmpty(orderId)) {
+                            payMoney("")
+                        } else {
+                            payOrder("")
+                        }
+
                     }
                 }
 
@@ -153,6 +160,60 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
         }
     }
 
+
+    //根orderId直接支付
+    private fun payOrder(password: String) {
+        val list2 = ArrayList<MultipartBody.Part>()
+        list2.add(MultipartBody.Part.createFormData("token", mUser.token))
+        list2.add(MultipartBody.Part.createFormData("order_id", orderId))
+        list2.add(MultipartBody.Part.createFormData("money", value4))
+        list2.add(MultipartBody.Part.createFormData("type", payWay.toString()))
+        list2.add(MultipartBody.Part.createFormData("code", password))
+        Retrofit_RequestUtils.getRequest().setMealOrderPayoff(list2).
+                subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : Observer<OrderPayoffModel> {
+                    override fun onSubscribe(disposable: Disposable) {
+
+                    }
+
+                    override fun onNext(orderPayoffModel: OrderPayoffModel) {
+
+                        when (payWay) {
+                            1 -> {
+                                aliPay(orderPayoffModel.content.orderString)
+                            }
+                            2 -> {
+                                wxPay(orderPayoffModel.content)
+                            }
+
+                            3 -> {
+                                if ("0" == orderPayoffModel.code) {
+                                    paySuccess()
+                                }
+                            }
+
+                            4 -> {
+                                UPPayAssistEx.startPay(this@PayPayActivity, null, null, orderPayoffModel.content.orderString, mMode)
+                            }
+                        }
+
+
+                    }
+
+                    override fun onError(throwable: Throwable) {
+                        Toast.makeText(this@PayPayActivity, throwable.toString(), Toast.LENGTH_LONG).show()
+                    }
+
+                    override fun onComplete() {
+
+                    }
+                })
+
+
+    }
+
+    //根据获取orderId后支付
     private fun payMoney(password: String) {
         //支付流程  根据StoreId 金额  获取到订单id才能支付
 
@@ -196,7 +257,7 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
                             }
 
                             3 -> {
-                                if ("0".equals(orderPayoffModel.code)) {
+                                if ("0" == orderPayoffModel.code) {
                                     paySuccess()
                                 }
                             }
@@ -242,6 +303,8 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
         storeName = intent.getStringExtra("storeName")
 
 
+        orderId = intent.getStringExtra("order_id")
+
         val value0 = intent.getStringExtra("value0")
         val value1 = intent.getStringExtra("value1")
         val value2 = intent.getStringExtra("value2")
@@ -284,7 +347,14 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
                             ToastUtils.makePicTextShortToast(mContext, "支付密码位数不正确")
                             return@OnBtnClickListener
                         }
-                        payMoney(input)
+
+
+                        if (TextUtils.isEmpty(orderId)) {
+                            payMoney(input)
+                        } else {
+                            payOrder(input)
+                        }
+
                     })
                     .setCanceledOnTouchOutside(true)
                     .show()
@@ -303,8 +373,8 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
         /*
          * 支付控件返回字符串:success、fail、cancel 分别代表支付成功，支付失败，支付取消
          */
-        val str = data.extras!!.getString("pay_result")
-        if ("success".equals(str!!, ignoreCase = true)) {
+        val str = data.extras?.getString("pay_result")
+        if ("success".equals(str, ignoreCase = true)) {
 
             // 如果想对结果数据验签，可使用下面这段代码，但建议不验签，直接去商户后台查询交易结果
             // result_data结构见c）result_data参数说明
@@ -354,8 +424,10 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
     // 支付成功去评价
     private fun paySuccess() {
         // 去评价
+
+
         Toast.makeText(this@PayPayActivity, "支付成功", Toast.LENGTH_SHORT).show()
-        val intent = Intent(mContext, ReuseActivity::class.java)
+        val intent = Intent(mContext, EvaluationSuccessActivity::class.java)
         intent.putExtra(Constants.PAGE, Constants.TO_EVALUATE)
         intent.putExtra(Constants.STORE_ID, storeIdValue)
         intent.putExtra(Constants.ORDER_ID, orderId)
@@ -364,6 +436,10 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
         intent.putExtra("discount", discountValue)
         intent.putExtra("store_name", storeName)
         intent.putExtra("address", address)
+        intent.putExtra("titleType", "支付成功")
+
+        intent.putExtra("Key", "Value")
+        RxBus.getDefault().post(intent)
 
         startActivity(intent)
         finish()

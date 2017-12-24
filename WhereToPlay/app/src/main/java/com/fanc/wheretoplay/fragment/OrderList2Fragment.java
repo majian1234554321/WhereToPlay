@@ -102,7 +102,10 @@ public class OrderList2Fragment extends BaseLazyFragment implements PullToRefres
                         if (intent!=null&&"Value".equals(intent.getStringExtra("Key"))){
                             //Toast.makeText(mContext, "QQQQ", Toast.LENGTH_SHORT).show();
                             currentPage=0;
-                            ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
+                            if (ordelListFragmentPresenter!=null){
+                                ordelListFragmentPresenter.getOrdelListData(TYPE,currentPage,"onRefresh");
+                            }
+
                         }
 
                     }

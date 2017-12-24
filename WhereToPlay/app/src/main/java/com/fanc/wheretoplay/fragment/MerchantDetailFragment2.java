@@ -118,6 +118,7 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
     private TextView view1, tv_storeName, tv_discount, tv_address, tv_pingjiashuliang;
     private RatingBar rb_merchant;
     private LinearLayout ll_merchant_detail_image;
+    private List<MerchantDetailModel.ContentBean.StoreBean.ListBean> stores;
 
 
     @Nullable
@@ -184,7 +185,7 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
         linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
         recycle.setLayoutManager(linearLayoutManager);
 
-        List<MerchantDetailModel.ContentBean.StoreBean.ListBean> stores = new ArrayList<>();
+        stores = new ArrayList<>();
         recommendAdapter = new MerchAdapter(mContext, stores);
         recycle.setAdapter(recommendAdapter);
 
@@ -302,8 +303,6 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
                 });
 
 
-
-
     }
 
 
@@ -334,7 +333,7 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
         MultipartBody.Part requestFileA = MultipartBody.Part.createFormData("id", id);
         MultipartBody.Part requestFileb = MultipartBody.Part.createFormData(Network.Param.LAT, lat);
         MultipartBody.Part requestFilec = MultipartBody.Part.createFormData(Network.Param.LNG, lng);
-        List list = new ArrayList<MultipartBody.Part>();
+        List<MultipartBody.Part> list = new ArrayList<>();
         list.add(requestFileA);
         list.add(requestFileb);
         list.add(requestFilec);
@@ -347,8 +346,9 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
                         shearedUrl = Network.BASE + "/" + content.store.url;
                         showStoreDetail(content.store);
                         phonevalue = content.store.phone;
-                        if (content != null && content.store != null & content.store.packageX != null) {
-                            if (!"2".equals(type)) {
+
+                        if (!"2".equals(type)) {
+                            if (content.store != null & content.store.packageX != null) {
                                 getChildFragmentManager().beginTransaction().replace(R.id.fragment,
                                         new ExtendFragment(
                                                 content.store.packageX,
@@ -356,7 +356,7 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
                                                 content.store.store_id,
                                                 discountValue,
                                                 content.store.name
-                                                ,address)).commit();
+                                                , address, phonevalue)).commit();
                             }
 
                         }
@@ -365,7 +365,7 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
 
                     @Override
                     public void failed(String t) {
-
+                        Toast.makeText(mContext, t, Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -439,7 +439,7 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
      * @param list
      */
     private void showRecommend(List<MerchantDetailModel.ContentBean.StoreBean.ListBean> list) {
-        list.addAll(list);
+        stores.addAll(list);
         recommendAdapter.notifyDataSetChanged();
     }
 

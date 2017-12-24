@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
 
-    xmlns:tools="http://schemas.android.com/tools"
+
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -10,105 +10,118 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <FrameLayout
-        android:id="@+id/fragment_dispaly"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tbv" />
+        android:layout_below="@+id/tbv">
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/line_height"
-        android:background="@color/pay_reserve_list_divider_white" />
 
-    <RadioGroup
-        android:id="@+id/rg"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/fragment_dispaly"
-        android:orientation="vertical">
+        <LinearLayout
 
-        <RadioButton
-            android:id="@+id/rb_wxpay"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:button="@null"
-            android:checked="true"
-            android:drawableLeft="@drawable/pay_by_weixin"
-            android:drawablePadding="8dp"
-            android:drawableRight="@drawable/selector_pay_way"
-            android:gravity="center_vertical"
-            android:padding="8dp"
-            android:text="微信支付" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_height"
-            android:background="@color/pay_reserve_list_divider_white" />
+            <FrameLayout
+                android:id="@+id/fragment_dispaly"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
 
-        <RadioButton
-            android:id="@+id/rb_alipay"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:button="@null"
-            android:drawableLeft="@drawable/pay_by_ali"
-            android:drawablePadding="8dp"
-            android:drawableRight="@drawable/selector_pay_way"
-            android:gravity="center_vertical"
-            android:padding="8dp"
-            android:text="支付宝支付" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:background="@color/pay_reserve_list_divider_white" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_height"
-            android:background="@color/pay_reserve_list_divider_white" />
+            <RadioGroup
+                android:id="@+id/rg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/fragment_dispaly"
+                android:orientation="vertical">
 
-        <RadioButton
-            android:id="@+id/rb_yupay"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:button="@null"
-            android:drawableLeft="@drawable/pay_by_balance"
-            android:drawablePadding="8dp"
-            android:drawableRight="@drawable/selector_pay_way"
-            android:gravity="center_vertical"
-            android:padding="8dp"
-            android:text="余额支付" />
+                <RadioButton
+                    android:id="@+id/rb_wxpay"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:button="@null"
+                    android:checked="true"
+                    android:drawableLeft="@drawable/pay_by_weixin"
+                    android:drawablePadding="8dp"
+                    android:drawableRight="@drawable/selector_pay_way"
+                    android:gravity="center_vertical"
+                    android:padding="8dp"
+                    android:text="微信支付" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_height"
-            android:background="@color/pay_reserve_list_divider_white" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:background="@color/pay_reserve_list_divider_white" />
 
-        <RadioButton
-            android:id="@+id/rb_upppay"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:button="@null"
-            android:drawableLeft="@drawable/icon_yinlian"
-            android:drawablePadding="8dp"
-            android:drawableRight="@drawable/selector_pay_way"
-            android:gravity="center_vertical"
-            android:padding="8dp"
-            android:text="银联支付" />
+                <RadioButton
+                    android:id="@+id/rb_alipay"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/pay_by_ali"
+                    android:drawablePadding="8dp"
+                    android:drawableRight="@drawable/selector_pay_way"
+                    android:gravity="center_vertical"
+                    android:padding="8dp"
+                    android:text="支付宝支付" />
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/line_height"
-            android:background="@color/pay_reserve_list_divider_white" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:background="@color/pay_reserve_list_divider_white" />
 
-        <Button
-            android:id="@+id/btn_pay"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/height_40"
-            android:layout_marginLeft="@dimen/margin_20"
-            android:layout_marginRight="@dimen/margin_20"
-            android:layout_marginTop="@dimen/margin_30"
-            android:background="@drawable/shape_btn_orange"
-            android:text="@string/pay"
-            android:textColor="@color/text_white"
-            android:textSize="@dimen/textsize_level2" />
+                <RadioButton
+                    android:id="@+id/rb_yupay"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/pay_by_balance"
+                    android:drawablePadding="8dp"
+                    android:drawableRight="@drawable/selector_pay_way"
+                    android:gravity="center_vertical"
+                    android:padding="8dp"
+                    android:text="余额支付" />
 
-    </RadioGroup>
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:background="@color/pay_reserve_list_divider_white" />
+
+                <RadioButton
+                    android:id="@+id/rb_upppay"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:button="@null"
+                    android:drawableLeft="@drawable/icon_yinlian"
+                    android:drawablePadding="8dp"
+                    android:drawableRight="@drawable/selector_pay_way"
+                    android:gravity="center_vertical"
+                    android:padding="8dp"
+                    android:text="银联支付" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/line_height"
+                    android:background="@color/pay_reserve_list_divider_white" />
+
+                <Button
+                    android:id="@+id/btn_pay"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/height_40"
+                    android:layout_margin="20dp"
+                    android:background="@drawable/shape_btn_orange"
+                    android:text="@string/pay"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/textsize_level2" />
+
+            </RadioGroup>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 </RelativeLayout>

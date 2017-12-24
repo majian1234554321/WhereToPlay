@@ -38,7 +38,20 @@ class EvaluationSuccessActivity : BaseActivity(), View.OnClickListener {
         super.onCreate(savedInstanceState)
 
         setContentView(R.layout.activity_evaluation_success)
-        tv_title.text = "评价成功"
+        val titleType = intent.getStringExtra("titleType")
+        when (titleType) {
+            "支付成功" -> {
+                tv_title.text = "支付成功"
+                tv001.text = "支付成功"
+                tv002.text = "快去店里消费吧～"
+            }
+            else -> {
+                tv_title.text = "评价成功"
+                tv001.text = "评价成功"
+                tv002.text = "你的评价将是其他用户选择的重要参考!"
+            }
+        }
+
 
         val idValue = intent.getStringExtra("store_id")
 

@@ -16,9 +16,11 @@ import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.DetailsOrderActivity;
+import com.fanc.wheretoplay.activity.DisplayActivity;
 import com.fanc.wheretoplay.activity.DownPaymentActivity;
 import com.fanc.wheretoplay.activity.EvaluationSuccessActivity;
 import com.fanc.wheretoplay.activity.PayBillActivity;
+import com.fanc.wheretoplay.activity.PayPayActivity;
 import com.fanc.wheretoplay.activity.PublicationEvaluationActivity;
 import com.fanc.wheretoplay.datamodel.BookListModel;
 
@@ -49,7 +51,6 @@ import okhttp3.MultipartBody;
 import static com.fanc.wheretoplay.network.Network.IMAGE;
 
 /**
- *
  * @author admin
  * @date 2017/11/1
  */
@@ -87,7 +88,13 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                     intent.putExtra("status", dataBean.list.get(position).order_action);
                 }
                 intent.putExtra("discount", dataBean.list.get(position).discount);
-                intent.setClass(context, DetailsOrderActivity.class);
+                if ("6".equals(dataBean.list.get(position).order_function)) {
+                    intent.setClass(context, DisplayActivity.class);
+                    intent.putExtra("DISPLAYTYPE", "PackageDetailsFragment");
+
+                } else {
+                    intent.setClass(context, DetailsOrderActivity.class);
+                }
 
                 fragment.startActivity(intent);
 
@@ -96,15 +103,37 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         });
 
 
+        if ("6".equals(dataBean.list.get(position).order_function)) {
+            holder.tvPayItemTime.setText("套餐名称：");
+            holder.tvPayItemRoomCategory.setText("有效期至：");
+            holder.tvPayItemReserveCode.setText("数量");
+            holder.tvPayItemRealTime.setText(dataBean.list.get(position).package_name);
+            holder.tvPayItemDecorateCategory.setVisibility(View.GONE);
+            holder.tvPayItemDecorate.setVisibility(View.GONE);
+
+            String times = !TextUtils.isEmpty(DateFormatUtil.stampToDate(dataBean.list.get(position).package_end_time)) ? DateFormatUtil.stampToDate(dataBean.list.get(position).package_end_time) : "";
+            holder.tvPayItemRoom.setText(times);
+            holder.tvPayItemReserveRealCode.setText(dataBean.list.get(position).package_number);
+        } else {
+            holder.tvPayItemTime.setText("到店时间：");
+            holder.tvPayItemRoomCategory.setText("房型：");
+            holder.tvPayItemReserveCode.setText("订单编号：");
+            String time = !TextUtils.isEmpty(DateFormatUtil.stampToDate(dataBean.list.get(position).arrival_time)) ? DateFormatUtil.stampToDate(dataBean.list.get(position).arrival_time) + "前" : "";
+            holder.tvPayItemRealTime.setText(time);
+            holder.tvPayItemRoom.setText(dataBean.list.get(position).room_type);
+            holder.tvPayItemDecorateCategory.setVisibility(View.VISIBLE);
+            holder.tvPayItemDecorate.setVisibility(View.VISIBLE);
+            holder.tvPayItemReserveRealCode.setText(dataBean.list.get(position).book_sn);
+        }
+
+
         holder.tv_storeName.setText(dataBean.list.get(position).name);
         holder.tvPayItemRoom.setText(dataBean.list.get(position).room_type);
         holder.tvPayItemDecorate.setText(dataBean.list.get(position).decorate_type);
-        holder.tvPayItemReserveRealCode.setText(dataBean.list.get(position).book_sn);
+
 
         GlideImageLoader.display(context, holder.ivPayItem, IMAGE + dataBean.list.get(position).cover);
         holder.tv_payState.setText(dataBean.list.get(position).statusdesc);
-        String time = !TextUtils.isEmpty(DateFormatUtil.stampToDate(dataBean.list.get(position).arrival_time))  ? DateFormatUtil.stampToDate(dataBean.list.get(position).arrival_time) + "前":"";
-        holder.tvPayItemRealTime.setText(time);
 
 
         for (int i = 0; i < holder.lists.size(); i++) {
@@ -117,6 +146,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                     switch (holder.lists.get(finalI).getText().toString().trim()) {
 
                         case "查看":
+
                             intent.putExtra("discount", dataBean.list.get(position).discount);
                             intent.putExtra("order_id", dataBean.list.get(position).order_id);
                             intent.putExtra("store_id", dataBean.list.get(position).store_id);
@@ -125,7 +155,13 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                             if (dataBean.list != null && dataBean.list.get(position).order_action != null) {
                                 intent.putExtra("status", dataBean.list.get(position).order_action);
                             }
-                            intent.setClass(context, DetailsOrderActivity.class);
+                            if ("6".equals(dataBean.list.get(position).order_function)) {
+                                intent.putExtra("DISPLAYTYPE", "PackageDetailsFragment");
+                                intent.setClass(context, DisplayActivity.class);
+                            } else {
+                                intent.setClass(context, DetailsOrderActivity.class);
+                            }
+
                             fragment.startActivityForResult(intent, 1001);
                             break;
                         case "取消订单":
@@ -166,8 +202,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
                             break;
 
-                            default:
-                                break;
+                        default:
+                            break;
                     }
                 }
             });
@@ -199,22 +235,27 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         if (dataBean.list != null && dataBean.list.get(position).order_function != null) {
             switch (dataBean.list.get(position).order_function) {
                 case "1":
-                    holder.tvPayItemTitle.setText("预订方式：预付预订");
+                    holder.tvPayItemTitle.setText("预订类型：预付预订");
                     holder.tvPayItemPrice.setText("总价：" + dataBean.list.get(position).prepay);
                     break;
                 case "2":
-                    holder.tvPayItemTitle.setText("预订方式：信用预订");
+                    holder.tvPayItemTitle.setText("预订类型：信用预订");
                     holder.tvPayItemPrice.setText("总价：" + dataBean.list.get(position).total);
                     break;
                 case "3":
-                    holder.tvPayItemTitle.setText("预订方式：充值");
+                    holder.tvPayItemTitle.setText("预订类型：充值");
                     holder.tvPayItemPrice.setText("总价：" + dataBean.list.get(position).total);
                 case "5":
-                    holder.tvPayItemTitle.setText("预订方式：结单支付");
+                    holder.tvPayItemTitle.setText("预订类型：结单支付");
+                    holder.tvPayItemPrice.setText("总价：" + dataBean.list.get(position).total);
+                    break;
+
+                case "6":
+                    holder.tvPayItemTitle.setText("预订类型：套餐");
                     holder.tvPayItemPrice.setText("总价：" + dataBean.list.get(position).total);
                     break;
                 default:
-                    holder.tvPayItemTitle.setText("预订方式：...");
+                    holder.tvPayItemTitle.setText("预订类型：...");
                     holder.tvPayItemPrice.setText("总价：" + dataBean.list.get(position).total);
                     break;
             }
@@ -225,15 +266,36 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
     private void pay(int position, ViewHolder holder) {
         Intent intent = new Intent();
-        intent.setClass(context, PayBillActivity.class);
 
 
-        if ("预订方式：预付预订".equals(holder.tvPayItemTitle.getText().toString().trim())) {
-            intent.putExtra("pay_Action", "预订方式：预付预订");
+
+        if ("预订类型：预付预订".equals(holder.tvPayItemTitle.getText().toString().trim())) {
+            intent.setClass(context, PayBillActivity.class);
+            intent.putExtra("pay_Action", "预订类型：预付预订");
             intent.putExtra("money", dataBean.list.get(position).prepay);
-        } else {
-            intent.putExtra("pay_Action", "预订方式：结单支付");
+        } else if ("预订类型：结单支付".equals(holder.tvPayItemTitle.getText().toString().trim())) {
+            intent.setClass(context, PayBillActivity.class);
+            intent.putExtra("pay_Action", "预订类型：结单支付");
             intent.putExtra("money", dataBean.list.get(position).total);
+        } else {
+            intent.setClass(context, PayPayActivity.class);
+            intent.putExtra("type", "套餐详情");
+            intent.putExtra("storeIdValue", dataBean.list.get(position).store_id);
+
+            intent.putExtra("value0", dataBean.list.get(position).name);
+            intent.putExtra("value1", dataBean.list.get(position).name);
+            intent.putExtra("value2", dataBean.list.get(position).package_introduce);
+            intent.putExtra("value3", DateFormatUtil.stampToDate(dataBean.list.get(position).finish_time));
+            intent.putExtra("value4", dataBean.list.get(position).total);
+            intent.putExtra("value5", dataBean.list.get(position).origin_price);
+            intent.putExtra("order_id", dataBean.list.get(position).order_id);
+
+
+
+            intent.putExtra("discountValue", dataBean.list.get(position).discount);
+
+
+            //startActivity(intent)
         }
 
 
@@ -245,7 +307,6 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         intent.putExtra(Constants.PAGE, "商家详情支付");
 
         context.startActivity(intent);
-
 
 
     }

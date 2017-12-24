@@ -10,8 +10,11 @@ import android.view.ViewGroup
 import com.bumptech.glide.Glide
 import com.fanc.wheretoplay.R
 import com.fanc.wheretoplay.activity.DisplayActivity
+import com.fanc.wheretoplay.activity.SignInActivity
 
 import com.fanc.wheretoplay.datamodel.MerchantDetailModel.ContentBean.StoreBean.PackageBean.PkgListBean
+import com.fanc.wheretoplay.util.Constants
+import com.fanc.wheretoplay.util.SPUtils
 import kotlinx.android.synthetic.main.extendadapter.view.*
 
 /**
@@ -20,7 +23,7 @@ import kotlinx.android.synthetic.main.extendadapter.view.*
  */
 
 class ExtendAdapter(val context: Context, var flag: Boolean, val list: List<PkgListBean>, val storeid: String
-                    , val discountValue: String, val storeName: String, val address: String
+                    , val discountValue: String, val storeName: String, val address: String, val phonevalue: String
 ) : RecyclerView.Adapter<ExtendAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder =
             ViewHolder(View.inflate(context, R.layout.extendadapter, null))
@@ -36,14 +39,24 @@ class ExtendAdapter(val context: Context, var flag: Boolean, val list: List<PkgL
             tv3.paint.flags = Paint.STRIKE_THRU_TEXT_FLAG
 
             setOnClickListener {
-                val intent = Intent(context, DisplayActivity::class.java)
-                intent.putExtra("DISPLAYTYPE", "PackageFragment")
-                intent.putExtra("idValue", list[position].id)
-                intent.putExtra("storeIdValue", storeid)
+                val intent = Intent()
+                if (!SPUtils(context).getBoolean(Constants.IS_SIGN_IN, false)) {
+                    intent.setClass(context, SignInActivity::class.java)
+                } else {
+                    intent.setClass(context, DisplayActivity::class.java)
+                    intent.putExtra("DISPLAYTYPE", "PackageFragment")
+                    intent.putExtra("idValue", list[position].id)
+                    intent.putExtra("storeIdValue", storeid)
 
-                intent.putExtra("discountValue", discountValue)
-                intent.putExtra("storeName", storeName)
-                intent.putExtra("address", address)
+                    intent.putExtra("discountValue", discountValue)
+                    intent.putExtra("storeName", storeName)
+                    intent.putExtra("address", address)
+                    intent.putExtra("phonevalue", phonevalue)
+                }
+
+
+
+
 
 
                 context.startActivity(intent)

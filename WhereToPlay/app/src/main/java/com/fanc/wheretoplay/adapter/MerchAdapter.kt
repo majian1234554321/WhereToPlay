@@ -50,9 +50,14 @@ class MerchAdapter(val mContext: Context, val mData: List<MerchantDetailModel.Co
                 text.setSpan(TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length - 1, text.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
                 tv_reserve_item_discount_sum.setText(text, TextView.BufferType.SPANNABLE)
                 tv_reserve_item_discount_sum.visibility = View.VISIBLE
+
+                tv_reserve_item_price.text =mData[position].capita
+
             } else {
                 tv_reserve_item_discount_sum.visibility = View.GONE
             }
+
+
 
 
 
@@ -74,7 +79,7 @@ class MerchAdapter(val mContext: Context, val mData: List<MerchantDetailModel.Co
                     }
 
                 }
-                tv_reserve_item_distance.text = d
+                tv_reserve_item_address.text =mData[position].area+ "   "+d
             }
 
 

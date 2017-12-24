@@ -37,7 +37,7 @@ class CouponFragment : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = View.inflate(inflater.context, R.layout.couponfragment, null)
         view.findViewById<TitleBarView>(R.id.tbv).setTv_title("优惠券")
-         tabLayout = view.findViewById<TabLayout>(R.id.tab_layout)
+        tabLayout = view.findViewById<TabLayout>(R.id.tab_layout)
         val viewPager = view.findViewById<ViewPager>(R.id.viewPager)
 
         val list = arrayListOf<BaseLazyFragment>()
@@ -49,10 +49,7 @@ class CouponFragment : BaseFragment() {
 
         viewPager.adapter = CouponFragmentAdapter(list)
 
-        tabLayout!!.setupWithViewPager(viewPager)
-
-
-
+        tabLayout?.setupWithViewPager(viewPager)
 
         loadData()
         return view
@@ -60,26 +57,25 @@ class CouponFragment : BaseFragment() {
 
     private fun loadData() {
         val requestFileA = MultipartBody.Part.createFormData("token", mUser.token)
-       Retrofit_RequestUtils.getRequest().couponCount(requestFileA)
-               .compose(ObservableTransformer2<CouponCountModel>())
-               .subscribe(object : Observer<CouponCountModel> {
-                   override fun onSubscribe(p0: Disposable) = Unit
+        Retrofit_RequestUtils.getRequest().couponCount(requestFileA)
+                .compose(ObservableTransformer2<CouponCountModel>())
+                .subscribe(object : Observer<CouponCountModel> {
+                    override fun onSubscribe(p0: Disposable) = Unit
 
-                   override fun onError(p0: Throwable) {
+                    override fun onError(p0: Throwable) {
 
-                   }
+                    }
 
-                   override fun onNext(p0: CouponCountModel) {
-                       tabLayout?.getTabAt(0)?.text = "未使用("+p0.content.list.available.toString()+")"
-                       tabLayout?.getTabAt(1)?.text = "使用记录("+p0.content.list.used.toString()+")"
-                       tabLayout?.getTabAt(2)?.text = "已过期("+p0.content.list.expired.toString()+")"
-                   }
+                    override fun onNext(p0: CouponCountModel) {
+                        tabLayout?.getTabAt(0)?.text = "未使用(" + p0.content.list.available.toString() + ")"
+                        tabLayout?.getTabAt(1)?.text = "使用记录(" + p0.content.list.used.toString() + ")"
+                        tabLayout?.getTabAt(2)?.text = "已过期(" + p0.content.list.expired.toString() + ")"
+                    }
 
-                   override fun onComplete() = Unit
+                    override fun onComplete() = Unit
 
 
-               })
-
+                })
 
 
     }

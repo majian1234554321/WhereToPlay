@@ -43,7 +43,7 @@ class PackageItemView : RelativeLayout {
     }
 
     fun setButtomText(value: String) {
-        tv_buttom?.text ="●"+ value
+        tv_buttom?.text ="."+ value
     }
 
     fun getButtomText():String {

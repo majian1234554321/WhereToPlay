@@ -66,6 +66,12 @@ public class PackageModel  {
             public String name;
             public String price;
             public String num;
+
+            public ProductListBean(String name, String price, String num) {
+                this.name = name;
+                this.price = price;
+                this.num = num;
+            }
         }
     }
 }

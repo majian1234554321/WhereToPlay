@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tool="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -10,78 +9,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <RelativeLayout
-        android:id="@+id/rl"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_alignParentBottom="true">
-
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-
-            android:background="#ffe5e5e5" />
-
-        <TextView
-            android:id="@+id/tv_pay"
-
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_alignParentRight="true"
-            android:layout_margin="8dp"
-            android:background="#ffc4483c"
-            android:padding="8dp"
-            android:text="立即抢购"
-            android:textColor="#ffffffff"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/tv_001"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="12dp"
-
-            android:gravity="bottom"
-            android:text="¥ "
-            android:textColor="#ffc4483c"
-            android:textSize="18dp" />
-
-        <TextView
-
-            android:id="@+id/tv_realMoney"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-
-            android:layout_alignBaseline="@id/tv_001"
-
-            android:layout_toRightOf="@id/tv_001"
-
-            android:gravity="top"
-            android:textColor="#ffc4483c"
-
-            android:textSize="25dp"
-            tools:text="2580" />
-
-        <TextView
-            android:id="@+id/tv_falseMoney"
-            android:layout_width="wrap_content"
-            android:layout_height="50dp"
-
-            android:layout_alignBaseline="@id/tv_001"
-            android:layout_marginLeft="12dp"
-            android:layout_toRightOf="@id/tv_realMoney"
-            android:gravity="top"
-            android:textSize="18dp"
-            tools:text="￥2888" />
-
-
-    </RelativeLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/rl"
+
         android:layout_below="@id/tbv">
 
         <LinearLayout
@@ -89,33 +21,156 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
+            <RelativeLayout
 
-
-
-            <ImageView
-                android:id="@+id/iv"
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
-                android:scaleType="fitXY" />
+                android:layout_height="wrap_content"
+                android:padding="12dp">
+
+                <ImageView
+                    android:id="@+id/iv001"
+                    android:layout_width="80dp"
+                    android:layout_height="60dp"
+                    android:layout_centerVertical="true" />
+
+
+                <ImageView
+                    android:id="@+id/iv"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/icon_right" />
+
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/iv001"
+                    android:layout_alignTop="@+id/iv001"
+                    android:layout_toLeftOf="@+id/iv"
+                    android:layout_toRightOf="@+id/iv001"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tv_storeName00"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#333333"
+                        tools:text="1212" />
+
+                    <TextView
+                        android:id="@+id/tv_desc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:singleLine="true"
+                        android:textColor="#999999"
+                        tools:text="1212" />
+
+                    <TextView
+                        android:id="@+id/tv_realMoney"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_red"
+                        tools:text="1212" />
+
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="#ffe5e5e5" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="套餐劵"
+                android:textColor="#ff666666"
+                android:textSize="15dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="#ffe5e5e5" />
+
+            <TextView
+                android:id="@+id/tv_endtime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="有效期至："
+                android:textColor="#ff666666"
+                android:textSize="15dp" />
+
 
             <TextView
 
                 android:id="@+id/tv_storeName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="12dp"
+                android:layout_marginLeft="12dp"
+                android:text="订单信息"
                 android:textColor="#ff000000"
-                android:textSize="17dp"
-                tools:text="上海天地汇会所" />
+                android:textSize="17dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="#ffe5e5e5" />
+
 
             <TextView
-                android:id="@+id/tv_introduce"
+                android:id="@+id/tv_orderNumber"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="12dp"
+                android:text="订  单   号：121212121" />
+
+            <TextView
+                android:id="@+id/tv_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginTop="12dp"
+
+                android:text="手  机   号：121212121" />
+
+            <TextView
+                android:id="@+id/tv_payTime"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="24dp"
+                android:text="付款时间：121212121" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="12dp"
+                android:background="#ffe5e5e5" />
+
+            <TextView
+                android:id="@+id/tv_realMoney02"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="订单总价：121212121" />
+
+            <TextView
+                android:id="@+id/tv_realMoney03"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
-                android:textColor="#ff999999"
-                android:textSize="13dp"
-                tools:text="仅售2580元，价值2980元3-4人小包套餐，不限时段通用！" />
+                android:text="实际付款：121212121" />
 
             <View
                 android:layout_width="match_parent"
@@ -179,7 +234,7 @@
                     android:layout_height="30dp"
                     android:layout_centerVertical="true"
                     android:layout_marginRight="30dp"
-                    android:layout_toLeftOf="@+id/iv_phone"
+                    android:layout_toLeftOf="@id/iv_phone"
                     android:background="#ffe5e5e5" />
 
             </RelativeLayout>
@@ -318,6 +373,5 @@
 
         </LinearLayout>
     </ScrollView>
-
 
 </RelativeLayout>

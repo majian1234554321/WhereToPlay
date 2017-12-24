@@ -175,10 +175,10 @@ public class PayBillActivity extends BaseActivity {
 
         String pay_Action = getIntent().getStringExtra("pay_Action");
         String dispayMoney = getIntent().getStringExtra("money");
-        if ("预订方式：预付预订".equals(pay_Action) && dispayMoney != null) {
+        if ("预订类型：预付预订".equals(pay_Action) && dispayMoney != null) {
             mTvDownPaymentSum.setText(dispayMoney);
             mTvPaySumReal.setText(dispayMoney);
-        } else if ("预订方式：结单支付".equals(pay_Action) && dispayMoney != null) {
+        } else if ("预订类型：结单支付".equals(pay_Action) && dispayMoney != null) {
             mEtConsumeSum.setText(dispayMoney);
             mEtConsumeSum.setFocusable(false);
             mEtConsumeSum.setFocusableInTouchMode(false);

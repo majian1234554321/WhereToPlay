@@ -58,6 +58,13 @@ public class BookListModel {
             public List<ButtonlistBean> buttonlist;
             public String book_price;
             public String prepay;
+            public String package_name;
+            public String package_number;
+            public String package_end_time;
+            public String package_introduce;
+            public String origin_price;
+            public String finish_time;
+
 
             public static class ButtonlistBean {
                 /**

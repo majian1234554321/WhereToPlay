@@ -13,7 +13,7 @@ import kotlinx.android.synthetic.main.packageadapter.view.*
  * @date 2017/12/24
  */
 
-class PackageAdapter(val context: Context, val product_list: MutableList<PackageModel.ContentBean.ProductListBean>) : RecyclerView.Adapter<PackageAdapter.ViewHolder>() {
+class PackageAdapter(val context: Context, val product_list: List<PackageModel.ContentBean.ProductListBean>) : RecyclerView.Adapter<PackageAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         with(holder?.itemView!!) {
             tv_001.text = product_list[position].name
