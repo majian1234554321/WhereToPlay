@@ -56,7 +56,7 @@ class PackageDetailsFragment(val order_idValue: String?) : BaseFragment(), Detai
         Glide.with(mContext).load(contentBean?.package_detail?.pic_list?.get(0)).placeholder(R.drawable.default_square).into(iv001)
         tv_storeName00.text = contentBean?.store_name
         tv_desc.text = contentBean?.package_detail?.introduce
-        tv_realMoney.text = "￥" + contentBean?.package_detail?.origin_price
+        tv_realMoney.text = "￥" +  contentBean?.package_detail?.origin_price
         tv_endtime.text = "有效期至" + DateFormatUtil.stampToDate(contentBean?.package_end_time)
         tv_orderNumber.text = "订  单   号：" + contentBean?.order_sn
         tv_phone.text = "手  机   号：" + contentBean?.mobile
@@ -78,15 +78,15 @@ class PackageDetailsFragment(val order_idValue: String?) : BaseFragment(), Detai
         piv3.setTopText("规则提醒")
         piv4.setTopText("温馨提示")
 
-        piv1.setButtomText(contentBean?.package_detail?.buy_notice?.effect_date!!)
-        piv2.setButtomText(contentBean?.package_detail?.buy_notice?.booking_info!!)
-        piv3.setButtomText(contentBean?.package_detail?.buy_notice?.rule_remind!!)
-        piv4.setButtomText(contentBean?.package_detail?.buy_notice?.tip!!)
+        piv1.setButtomText(contentBean?.package_detail?.buy_notice?.effect_date)
+        piv2.setButtomText(contentBean?.package_detail?.buy_notice?.booking_info)
+        piv3.setButtomText(contentBean?.package_detail?.buy_notice?.rule_remind)
+        piv4.setButtomText(contentBean?.package_detail?.buy_notice?.tip)
 
 
         val lists = arrayListOf<PackageModel.ContentBean.ProductListBean>()
 
-        val list = contentBean.package_detail?.product_list
+        val list = contentBean?.package_detail?.product_list
         list?.forEachIndexed { index, productListBean ->
             val model = PackageModel.ContentBean.ProductListBean(productListBean.name, productListBean.price, productListBean.num)
             lists.add(model)

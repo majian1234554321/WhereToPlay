@@ -3,6 +3,7 @@ package com.fanc.wheretoplay.fragment;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -45,7 +46,7 @@ public class ResetPwdFragment extends BaseFragment {
 
     TopMenu mTmResetPwd;
     EditText mEtResetPwdMobile;
-    EditText mEtResetPwdPwd,mEtResetPwdPwd2;
+    EditText mEtResetPwdPwd, mEtResetPwdPwd2;
     EditText mEtResetPwdVerification;
     Button mBtnResetPwdVerify;
     Button mBtnResetPwd;
@@ -55,7 +56,7 @@ public class ResetPwdFragment extends BaseFragment {
     String verifyCode;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         resetPwdBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_reset_pwd, container, false);
         initView();
         init();
@@ -110,7 +111,7 @@ public class ResetPwdFragment extends BaseFragment {
 
             MultipartBody.Part requestFileA = MultipartBody.Part.createFormData(Network.Param.MOBILE, mobile);
 
-          Retrofit_RequestUtils.getRequest().getMyVerification(requestFileA)
+            Retrofit_RequestUtils.getRequest().getMyVerification(requestFileA)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(new Observer<VerifyCode>() {
@@ -179,7 +180,7 @@ public class ResetPwdFragment extends BaseFragment {
 
         String password2 = mEtResetPwdPwd2.getText().toString();
 
-        if (!password.equals(password2)){
+        if (!password.equals(password2)) {
             Toast.makeText(mContext, "两次密码不相符合", Toast.LENGTH_SHORT).show();
             return;
         }
@@ -191,7 +192,7 @@ public class ResetPwdFragment extends BaseFragment {
                 .addParams(Network.Param.MOBILE, mobile)
                 .addParams(Network.Param.PASSWORD, password)
                 .addParams(Network.Param.CODE, inputVerifyCode)
-                .addParams("newpassword",password2)
+                .addParams("newpassword", password2)
                 .build()
                 .execute(new DCallback<User>() {
                     @Override
@@ -204,9 +205,9 @@ public class ResetPwdFragment extends BaseFragment {
                     public void onResponse(User response) {
                         mBtnResetPwd.setEnabled(true);
                         if (isSuccess(response)) {
-                            ToastUtils.showShortToast(mContext,"密码修改成功");
+                            ToastUtils.showShortToast(mContext, "密码修改成功");
                             mSpUtils.putUser(response);
-                            mSpUtils.putBoolean(Constants.IS_SIGN_IN,true);
+                            mSpUtils.putBoolean(Constants.IS_SIGN_IN, true);
                             ((SignInActivity) mContext).startActivityToHome();
                         }
                     }
