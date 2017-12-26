@@ -5,6 +5,8 @@ import android.content.Context;
 import com.fanc.wheretoplay.datamodel.CancleOrderModel;
 import com.fanc.wheretoplay.datamodel.OrderDetailModel;
 import com.fanc.wheretoplay.rx.BaseResponseModel;
+import com.fanc.wheretoplay.rx.ObservableTransformer2;
+import com.fanc.wheretoplay.rx.Observer2;
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
@@ -55,9 +57,10 @@ public class DetailsOrderPresenter implements BasePresenter {
                 MultipartBody.Part.createFormData("order_id", order_idValue);
         Retrofit_RequestUtils.getRequest()
                 .orderDetail(requestFileA, requestFileC)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+
+                .compose(new ObservableTransformer2<BaseResponseModel<OrderDetailModel.ContentBean>>())
                 .subscribe(new Observer<BaseResponseModel<OrderDetailModel.ContentBean>>() {
+
                     @Override
                     public void onSubscribe(Disposable disposable) {
 
@@ -77,9 +80,20 @@ public class DetailsOrderPresenter implements BasePresenter {
                     public void onComplete() {
 
                     }
-
-
                 });
+
+              /*  .compose(new ObservableTransformer2())
+               .subscribe(new Observer2<OrderDetailModel.ContentBean>() {
+                   @Override
+                   public void successful(OrderDetailModel.ContentBean content) {
+                       detailsOrderView.setDetailsOrderViewData(content);
+                   }
+
+                   @Override
+                   public void failed(String t) {
+
+                   }
+               });*/
 
     }
 

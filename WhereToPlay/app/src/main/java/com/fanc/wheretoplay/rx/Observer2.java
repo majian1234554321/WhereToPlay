@@ -1,9 +1,6 @@
 package com.fanc.wheretoplay.rx;
 
-import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.ObservableTransformer;
+
 import io.reactivex.Observer;
 import io.reactivex.disposables.Disposable;
 
@@ -38,9 +35,9 @@ public abstract class Observer2<T extends BaseResponseModel> implements Observer
 
     }
 
-    abstract void successful(T content);
+    public abstract void successful(T content);
 
-    abstract void failed(String t);
+    public abstract void failed(String t);
 
 
 }

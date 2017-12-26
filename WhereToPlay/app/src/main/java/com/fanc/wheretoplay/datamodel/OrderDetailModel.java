@@ -1,12 +1,14 @@
 package com.fanc.wheretoplay.datamodel;
 
+import com.fanc.wheretoplay.rx.BaseResponseModel;
+
 import java.util.List;
 
 /**
  * Created by admin on 2017/11/3.
  */
 
-public class OrderDetailModel {
+public class OrderDetailModel extends BaseResponseModel {
 
 
     /**
@@ -19,7 +21,7 @@ public class OrderDetailModel {
     public String message;
     public ContentBean content;
 
-    public static class ContentBean {
+    public static class ContentBean extends BaseResponseModel {
         /**
          * discount : 8.6
          * store_name : LIGHT
