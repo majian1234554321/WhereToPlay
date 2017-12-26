@@ -106,7 +106,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         if ("6".equals(dataBean.list.get(position).order_function)) {
             holder.tvPayItemTime.setText("套餐名称：");
             holder.tvPayItemRoomCategory.setText("有效期至：");
-            holder.tvPayItemReserveCode.setText("数量");
+            holder.tvPayItemReserveCode.setText("数量：");
             holder.tvPayItemRealTime.setText(dataBean.list.get(position).package_name);
             holder.tvPayItemDecorateCategory.setVisibility(View.GONE);
             holder.tvPayItemDecorate.setVisibility(View.GONE);
@@ -124,12 +124,13 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
             holder.tvPayItemDecorateCategory.setVisibility(View.VISIBLE);
             holder.tvPayItemDecorate.setVisibility(View.VISIBLE);
             holder.tvPayItemReserveRealCode.setText(dataBean.list.get(position).book_sn);
+            holder.tvPayItemDecorate.setText(dataBean.list.get(position).decorate_type);
         }
 
 
         holder.tv_storeName.setText(dataBean.list.get(position).name);
-        holder.tvPayItemRoom.setText(dataBean.list.get(position).room_type);
-        holder.tvPayItemDecorate.setText(dataBean.list.get(position).decorate_type);
+
+
 
 
         GlideImageLoader.display(context, holder.ivPayItem, IMAGE + dataBean.list.get(position).cover);
@@ -176,6 +177,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                             intent.putExtra("order_id", dataBean.list.get(position).order_id);
                             intent.putExtra("store_id", dataBean.list.get(position).store_id);
                             intent.putExtra("discount", dataBean.list.get(position).discount);
+
 
                             intent.putExtra("total", dataBean.list.get(position).total);
                             if (dataBean.list != null && dataBean.list.get(position).order_action != null) {

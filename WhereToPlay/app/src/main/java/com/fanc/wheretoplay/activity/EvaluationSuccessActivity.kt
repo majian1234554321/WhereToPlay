@@ -21,7 +21,7 @@ import okhttp3.MultipartBody
 
 class EvaluationSuccessActivity : BaseActivity(), View.OnClickListener {
     override fun onClick(p0: View?) {
-        when (p0!!.id) {
+        when (p0?.id) {
             R.id.menu_iv_lefticon -> {
 
                 finish()

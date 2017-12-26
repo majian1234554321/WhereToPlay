@@ -109,6 +109,7 @@ public class OrderDetailModel {
             public String detail;
             public BuyNoticeBean buy_notice;
             public String create_time;
+
             public String effect_start_time;
             public String effect_end_time;
             public String status;

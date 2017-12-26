@@ -2,15 +2,15 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:background="#FFFFFF"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
 
     <LinearLayout
         android:id="@+id/ll00"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:visibility="visible">
 
         <TextView
             android:id="@+id/tv_title00"
@@ -18,26 +18,209 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_margin="12dp"
-            android:drawableLeft="@drawable/tao"
+            android:drawableLeft="@drawable/extent2"
             android:drawablePadding="8dp"
-            android:textColor="#ff333333"
-            tools:text="套餐（5）" />
+            android:gravity="center_vertical"
+            android:text="优惠预订"
+            android:textColor="#ff333333" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="@dimen/line_height"
             android:background="@color/pay_reserve_list_divider_white" />
-        <GridView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"></GridView>
 
+        <RadioGroup
+            android:id="@+id/rg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector_text_background"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:lineSpacingExtra="5dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingTop="8dp"
+                android:text="5\n星期二"
+                android:textColor="@drawable/selector_text" />
+
+            <RadioButton
+                android:id="@+id/rb2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector_text_background"
+                android:button="@null"
+                android:gravity="center"
+                android:lineSpacingExtra="5dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingTop="8dp"
+                android:text="5\n星期二"
+                android:textColor="@drawable/selector_text" />
+
+            <RadioButton
+                android:id="@+id/rb3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector_text_background"
+                android:button="@null"
+                android:gravity="center"
+                android:lineSpacingExtra="5dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingTop="8dp"
+                android:text="5\n星期二"
+                android:textColor="@drawable/selector_text" />
+
+            <RadioButton
+                android:id="@+id/rb4"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector_text_background"
+                android:button="@null"
+                android:gravity="center"
+                android:lineSpacingExtra="5dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingTop="8dp"
+                android:text="5\n星期二"
+                android:textColor="@drawable/selector_text" />
+
+            <RadioButton
+                android:id="@+id/rb5"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector_text_background"
+                android:button="@null"
+                android:gravity="center"
+                android:lineSpacingExtra="5dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingTop="8dp"
+                android:text="5\n星期二"
+                android:textColor="@drawable/selector_text" />
+
+            <RadioButton
+                android:id="@+id/rb6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector_text_background"
+                android:button="@null"
+                android:gravity="center"
+                android:lineSpacingExtra="5dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingTop="8dp"
+                android:text="5\n星期二"
+                android:textColor="@drawable/selector_text" />
+
+            <RadioButton
+                android:id="@+id/rb7"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector_text_background"
+                android:button="@null"
+                android:gravity="center"
+                android:lineSpacingExtra="5dp"
+                android:paddingBottom="8dp"
+                android:paddingLeft="4dp"
+                android:paddingRight="4dp"
+                android:paddingTop="8dp"
+                android:text="5\n星期二"
+                android:textColor="@drawable/selector_text" />
+
+
+        </RadioGroup>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/line_height"
+            android:background="@color/pay_reserve_list_divider_white" />
+
+        <RadioGroup
+            android:id="@+id/rg2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="8dp"
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal">
+
+            <RadioButton
+                android:id="@+id/rb21"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_boder"
+                android:button="@null"
+                android:checked="true"
+                android:gravity="center"
+                android:padding="6dp"
+                android:text="小包（3~4人）"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/rb22"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="6dp"
+                android:layout_marginRight="6dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_boder"
+                android:button="@null"
+                android:gravity="center"
+                android:padding="6dp"
+                android:text="中包（5~8人）"
+                android:textSize="12sp" />
+
+            <RadioButton
+                android:id="@+id/rb23"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="12dp"
+                android:layout_weight="1"
+                android:background="@drawable/selector_boder"
+                android:button="@null"
+                android:gravity="center"
+                android:padding="6dp"
+                android:text="大包（10~12人）"
+                android:textSize="12sp" />
+
+
+        </RadioGroup>
+
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/recycle0"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
     <TextView
-        android:layout_below="@id/ll00"
         android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/ll00"
         android:layout_centerHorizontal="true"
         android:layout_margin="12dp"
         android:drawableLeft="@drawable/tao"
@@ -49,7 +232,7 @@
         android:id="@+id/recycle"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/tv_title"></android.support.v7.widget.RecyclerView>
+        android:layout_below="@+id/tv_title" />
 
     <TextView
         android:id="@+id/tv_more"
@@ -58,9 +241,9 @@
         android:layout_below="@id/recycle"
         android:gravity="center"
         android:padding="16dp"
-        tools:text="更多2个套餐"
         android:textColor="#ff333333"
-        android:textSize="15dp" />
+        android:textSize="15dp"
+        tools:text="更多2个套餐" />
 
 
 </RelativeLayout>

@@ -13,7 +13,7 @@ import io.reactivex.schedulers.Schedulers;
 
 public class ObservableTransformer2<T> implements ObservableTransformer<T,T> {
     @Override
-    public ObservableSource apply(Observable observable) {
+    public ObservableSource<T> apply(Observable<T> observable) {
         return observable.subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }
 }

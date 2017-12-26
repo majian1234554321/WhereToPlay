@@ -379,7 +379,7 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
             // 如果想对结果数据验签，可使用下面这段代码，但建议不验签，直接去商户后台查询交易结果
             // result_data结构见c）result_data参数说明
             if (data.hasExtra("result_data")) {
-                val result = data.extras!!.getString("result_data")
+                val result = data.extras.getString("result_data")
                 try {
                     val resultJson = JSONObject(result)
                     val sign = resultJson.getString("sign")

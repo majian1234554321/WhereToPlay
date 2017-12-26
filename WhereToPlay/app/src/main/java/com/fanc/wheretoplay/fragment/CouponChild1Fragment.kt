@@ -59,9 +59,9 @@ class CouponChild1Fragment : BaseLazyFragment(), CouponChildView {
     override fun initView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = View.inflate(inflater.context, R.layout.couponchildfragment, null)
         recycle = view.findViewById<RecyclerView>(R.id.recycle) as RecyclerView
-        recycle!!.layoutManager = LinearLayoutManager(inflater.context)
+        recycle?.layoutManager = LinearLayoutManager(inflater.context)
         val viewDivider = RecycleViewDivider(mContext, LinearLayout.HORIZONTAL)
-        recycle!!.addItemDecoration(viewDivider)
+        recycle?.addItemDecoration(viewDivider)
         return view
     }
 }

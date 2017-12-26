@@ -11,6 +11,7 @@ import com.bumptech.glide.Glide
 import com.fanc.wheretoplay.R
 import com.fanc.wheretoplay.activity.DisplayActivity
 import com.fanc.wheretoplay.activity.SignInActivity
+import com.fanc.wheretoplay.datamodel.MerchantDetailModel
 
 import com.fanc.wheretoplay.datamodel.MerchantDetailModel.ContentBean.StoreBean.PackageBean.PkgListBean
 import com.fanc.wheretoplay.util.Constants
@@ -22,8 +23,10 @@ import kotlinx.android.synthetic.main.extendadapter.view.*
  * @date 2017/12/24
  */
 
-class ExtendAdapter(val context: Context, var flag: Boolean, val list: List<PkgListBean>, val storeid: String
-                    , val discountValue: String, val storeName: String, val address: String, val phonevalue: String
+class ExtendAdapter(val context: Context, var flag: Boolean,
+                    val list: MutableList<MerchantDetailModel.ContentBean.StoreBean.PackageBean.PkgListBean>,
+                    val storeid: String?
+                    , val discountValue: String?, val storeName: String?, val address: String?, val phonevalue: String?
 ) : RecyclerView.Adapter<ExtendAdapter.ViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder =
             ViewHolder(View.inflate(context, R.layout.extendadapter, null))
@@ -31,9 +34,9 @@ class ExtendAdapter(val context: Context, var flag: Boolean, val list: List<PkgL
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         with(holder?.itemView!!) {
-            Glide.with(context).load(list[position].pic).placeholder(R.drawable.default_rect).into(iv)
+            Glide.with(context).load(list?.get(position)?.pic).placeholder(R.drawable.default_rect).into(iv)
             tv1text.text = list[position].name
-            tv2.text = "￥" + list[position].discount_price
+            tv2.text = "￥" + list?.get(position).discount_price
             tv3.text = "￥" + list[position].origin_price
 
             tv3.paint.flags = Paint.STRIKE_THRU_TEXT_FLAG
@@ -68,7 +71,7 @@ class ExtendAdapter(val context: Context, var flag: Boolean, val list: List<PkgL
 
     override fun getItemCount(): Int {
         return if (flag && list.size > 2) {
-            list.size
+            list?.size
         } else if (list.size > 2) {
             2
         } else {

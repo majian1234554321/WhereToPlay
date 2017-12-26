@@ -140,9 +140,29 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
+                <ImageView
+                    android:id="@+id/iv_phone"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="30dp"
+                    android:src="@drawable/phone1" />
+
+                <View
+                    android:id="@+id/view"
+                    android:layout_width="1dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="12dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="30dp"
+                    android:layout_toLeftOf="@+id/iv_phone"
+                    android:background="#ffe5e5e5" />
+
                 <TextView
+                    android:layout_toLeftOf="@+id/view"
                     android:id="@+id/tv_storeName2"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="12dp"
                     android:layout_marginLeft="12dp"
@@ -163,22 +183,7 @@
                     android:textSize="13dp"
                     tools:text="黄浦区淮海路东段嵩山路77号" />
 
-                <ImageView
-                    android:id="@+id/iv_phone"
-                    android:layout_width="30dp"
-                    android:layout_height="30dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="30dp"
-                    android:src="@drawable/phone1" />
 
-                <View
-                    android:layout_width="1dp"
-                    android:layout_height="30dp"
-                    android:layout_centerVertical="true"
-                    android:layout_marginRight="30dp"
-                    android:layout_toLeftOf="@+id/iv_phone"
-                    android:background="#ffe5e5e5" />
 
             </RelativeLayout>
 
@@ -291,6 +296,12 @@
 
             <com.fanc.wheretoplay.view.PackageItemView
                 android:id="@+id/piv1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp" />
+
+            <com.fanc.wheretoplay.view.PackageItemView
+                android:id="@+id/piv11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp" />

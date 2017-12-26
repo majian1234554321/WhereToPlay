@@ -87,7 +87,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/tv_pay_item_time"
                 android:layout_below="@+id/tv_pay_item_time"
-                android:layout_marginLeft="@dimen/margin_10"
+
                 android:layout_toRightOf="@+id/tv_pay_item_time"
                 android:text="text"
                 android:textColor="#333333"
@@ -110,7 +110,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/tv_pay_item_room_category"
-                android:layout_marginLeft="@dimen/margin_10"
+
                 android:layout_toRightOf="@+id/tv_pay_item_room_category"
                 android:text="text"
                 android:textColor="#333333"
@@ -156,7 +156,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignTop="@+id/tv_pay_item_reserve_code"
-                android:layout_marginLeft="@dimen/margin_10"
+
                 android:layout_toRightOf="@+id/tv_pay_item_reserve_code"
                 android:text="text"
                 android:textColor="#333333"

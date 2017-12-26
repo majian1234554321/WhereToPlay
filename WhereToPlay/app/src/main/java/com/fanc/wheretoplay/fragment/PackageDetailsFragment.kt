@@ -18,11 +18,17 @@ import com.fanc.wheretoplay.adapter.PackageAdapter
 import com.fanc.wheretoplay.base.BaseFragment
 import com.fanc.wheretoplay.datamodel.OrderDetailModel
 import com.fanc.wheretoplay.datamodel.PackageModel
-import com.fanc.wheretoplay.network.Network
 import com.fanc.wheretoplay.presenter.DetailsOrderPresenter
 import com.fanc.wheretoplay.util.DateFormatUtil
 import com.fanc.wheretoplay.view.DetailsOrderView
 import kotlinx.android.synthetic.main.packagedetailsfragment.*
+import android.databinding.adapters.TextViewBindingAdapter.setText
+import android.graphics.Color
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
+import android.text.SpannableStringBuilder
+
+
 
 
 @SuppressLint("ValidFragment")
@@ -60,9 +66,15 @@ class PackageDetailsFragment(val order_idValue: String?) : BaseFragment(), Detai
         tv_endtime.text = "有效期至" + DateFormatUtil.stampToDate(contentBean?.package_end_time)
         tv_orderNumber.text = "订  单   号：" + contentBean?.order_sn
         tv_phone.text = "手  机   号：" + contentBean?.mobile
-        tv_payTime.text = "付款时间：" + DateFormatUtil.stampToDate(contentBean?.package_detail?.create_time)
-        tv_realMoney02.text = "订单总价：" + "￥" + contentBean?.package_detail?.origin_price
-        tv_realMoney03.text = "实际付款：" + "￥" + contentBean?.package_detail?.discount_price
+        tv_payTime.text = "付款时间：" + DateFormatUtil.stampToDate(contentBean?.finish_time)
+        tv_realMoney02.text = "订单总价：" + "￥" + contentBean?.package_detail?.origin_price+"元"
+
+
+        val style1 = SpannableStringBuilder("实际付款：" + "￥" + contentBean?.package_detail?.discount_price+"元")
+        style1.setSpan(ForegroundColorSpan(Color.parseColor("#C4483C")), 5, style1.length, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE)
+
+
+        tv_realMoney03.text = style1
 
 
         tv_storeName2.text = contentBean?.store_name

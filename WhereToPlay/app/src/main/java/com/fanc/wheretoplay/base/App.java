@@ -61,7 +61,7 @@ public class App extends Application {
     @Override
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
-      //  MultiDex.install(this);
+        MultiDex.install(this);
     }
 
     @Override
@@ -74,8 +74,7 @@ public class App extends Application {
         init();
 
 
-            DIOpenSDK.registerApp(this, "didi65434B4C6253787A30446D76544D474E", "c841ae9e1a8cf7dcc912fe3fe6624dfd");
-
+        DIOpenSDK.registerApp(this, "didi65434B4C6253787A30446D76544D474E", "c841ae9e1a8cf7dcc912fe3fe6624dfd");
 
 
         // 加快APP启动速度1

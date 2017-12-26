@@ -1,6 +1,5 @@
 package com.fanc.wheretoplay.fragment
 
-import android.content.Context
 import android.os.Bundle
 import android.support.v4.app.Fragment
 
@@ -16,10 +15,8 @@ import com.fanc.wheretoplay.base.BaseLazyFragment
 import com.fanc.wheretoplay.view.TitleBarView
 import android.support.design.widget.TabLayout
 import com.fanc.wheretoplay.datamodel.CouponCountModel
-import com.fanc.wheretoplay.rx.ObservableOnSubscribe2
 import com.fanc.wheretoplay.rx.ObservableTransformer2
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils
-import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.disposables.Disposable
 import okhttp3.MultipartBody

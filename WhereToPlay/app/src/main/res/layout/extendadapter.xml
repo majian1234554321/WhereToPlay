@@ -15,9 +15,21 @@
         android:scaleType="fitXY"
         android:src="@mipmap/ic_launcher" />
 
+    <ImageView
+        android:id="@+id/iv_1"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_marginLeft="12dp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginRight="12dp"
+        android:paddingRight="8dp"
+        android:src="@drawable/icon_right" />
+
     <TextView
         android:id="@+id/tv1text"
-        android:layout_width="wrap_content"
+        android:layout_toLeftOf="@+id/iv_1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignTop="@id/iv"
         android:layout_marginLeft="8dp"
@@ -53,13 +65,6 @@
         tools:text="¥ 2888" />
 
 
-    <ImageView
-        android:layout_width="15dp"
-        android:layout_height="15dp"
-        android:layout_alignParentRight="true"
-        android:layout_centerVertical="true"
-        android:layout_marginRight="12dp"
-        android:paddingRight="8dp"
-        android:src="@drawable/icon_right" />
+
 
 </RelativeLayout>

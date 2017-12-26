@@ -64,6 +64,8 @@ class PackageFragment(private val idValue: String, private val storeIdValue: Str
                 intent2.data = uri
                 if (ActivityCompat.checkSelfPermission(mContext, Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
                     startActivity(intent2)
+                } else {
+                    Toast.makeText(mContext, "请到设置页面开启拨打电话权限", Toast.LENGTH_SHORT).show()
                 }
 
             }
@@ -82,6 +84,7 @@ class PackageFragment(private val idValue: String, private val storeIdValue: Str
         piv2.setTopText("预约信息")
         piv3.setTopText("规则提醒")
         piv4.setTopText("温馨提示")
+        piv11.setTopText("除外日期")
 
         recycle.layoutManager = LinearLayoutManager(mContext)
         tv_pay.setOnClickListener(this)
@@ -126,9 +129,9 @@ class PackageFragment(private val idValue: String, private val storeIdValue: Str
         tv_falseMoney.text = "￥ " + content.origin_price
         tv_realMoney1.text = content.discount_price + "元"
         tv_falseMoney1.text = content.origin_price + "元"
-        piv1.setButtomText(content.buy_notice?.effect_date!!)
-        piv2.setButtomText(content.buy_notice?.booking_info!!)
-        piv3.setButtomText(content.buy_notice?.rule_remind!!)
+        piv1.setButtomText(content.buy_notice?.effect_date)
+        piv2.setButtomText(content.buy_notice?.booking_info)
+        piv3.setButtomText(content.buy_notice?.rule_remind)
         piv4.setButtomText(content.buy_notice?.tip!!)
         tv_falseMoney.paint.flags = Paint.STRIKE_THRU_TEXT_FLAG
 
