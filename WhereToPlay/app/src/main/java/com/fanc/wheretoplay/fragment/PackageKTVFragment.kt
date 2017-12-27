@@ -8,7 +8,7 @@ import android.graphics.Paint
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
-import android.support.v7.widget.LinearLayoutManager
+import android.support.v7.widget.GridLayoutManager
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -17,7 +17,7 @@ import android.widget.Toast
 import com.bumptech.glide.Glide
 import com.fanc.wheretoplay.R
 import com.fanc.wheretoplay.activity.PayPayActivity
-import com.fanc.wheretoplay.adapter.PackageAdapter
+import com.fanc.wheretoplay.adapter.PackageDateAdapter
 import com.fanc.wheretoplay.base.BaseFragment
 import com.fanc.wheretoplay.datamodel.PackageModel
 import com.fanc.wheretoplay.rx.DisposableSubscriber2
@@ -25,7 +25,7 @@ import com.fanc.wheretoplay.rx.FlowableTransformer2
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils
 
 
-import kotlinx.android.synthetic.main.packagefragment.*
+import kotlinx.android.synthetic.main.packagektvfragment.*
 import okhttp3.MultipartBody
 
 @SuppressLint("ValidFragment")
@@ -35,8 +35,8 @@ import okhttp3.MultipartBody
  * @date 2017/12/23
  */
 
-class PackageFragment(private val idValue: String, private val storeIdValue: String, val discountValue: String,
-                      val storeName: String, val address: String, val phonevalue: String) : BaseFragment(), View.OnClickListener {
+class PackageKTVFragment(private val idValue: String, private val storeIdValue: String, val discountValue: String,
+                         val storeName: String, val address: String, val phonevalue: String) : BaseFragment(), View.OnClickListener {
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.tv_pay -> {
@@ -72,12 +72,24 @@ class PackageFragment(private val idValue: String, private val storeIdValue: Str
         }
     }
 
+    val list = arrayListOf<String>()
+    val values = arrayOf("18:00", "18:30", "19:00", "19:30",
+            "20:00", "20:30", "21:00", "21:30",
+            "22:00", "22:30", "23:00", "23:30",
+            "00:00", "00:30", "01:00", "01:30",
+            "02:00", "02:30", "03:00", "03:30"
+    )
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return View.inflate(inflater.context, R.layout.packagefragment, null)
+        return View.inflate(inflater.context, R.layout.packagektvfragment, null)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        list.clear()
+        values.forEach { value -> list.add(value) }
+
 
         tbv.setTv_title("套餐详情")
         piv1.setTopText("有效期")
@@ -86,7 +98,10 @@ class PackageFragment(private val idValue: String, private val storeIdValue: Str
         piv4.setTopText("温馨提示")
         piv11.setTopText("除外日期")
 
-        recycle.layoutManager = LinearLayoutManager(mContext)
+        recycle.layoutManager = GridLayoutManager(mContext, 5)
+        val adapter = PackageDateAdapter(mContext, list)
+        recycle.adapter = adapter
+
         tv_pay.setOnClickListener(this)
         iv_phone.setOnClickListener(this)
 
@@ -126,9 +141,9 @@ class PackageFragment(private val idValue: String, private val storeIdValue: Str
         tv_storeName2.text = content.name
         tv_introduce.text = content.introduce
         tv_realMoney.text = content.discount_price
-        tv_falseMoney.text = "￥ " + content.origin_price
-        tv_realMoney1.text = content.discount_price + "元"
-        tv_falseMoney1.text = content.origin_price + "元"
+        tv_falseMoney.text = "￥ ".plus(content.origin_price)
+
+
         piv1.setButtomText(content.buy_notice?.effect_date)
         piv2.setButtomText(content.buy_notice?.booking_info)
         piv3.setButtomText(content.buy_notice?.rule_remind)
@@ -140,8 +155,9 @@ class PackageFragment(private val idValue: String, private val storeIdValue: Str
 
         tv_detail.text = content.detail.replace("/n", "\n")
 
-        val adapter = PackageAdapter(mContext, content.product_list)
-        recycle.adapter = adapter
+
+
+
     }
 
 

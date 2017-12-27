@@ -1,15 +1,15 @@
 package com.fanc.wheretoplay.network;
 
-import android.util.Log;
+
 
 import com.fanc.wheretoplay.datamodel.AccessOrderIdModel;
 import com.fanc.wheretoplay.datamodel.BookListModel;
 
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
-import io.reactivex.disposables.Disposable;
+
 import okhttp3.MultipartBody;
-import retrofit2.http.Headers;
+
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -23,7 +23,7 @@ import com.fanc.wheretoplay.datamodel.MineFriend;
 import com.fanc.wheretoplay.datamodel.MineMoney;
 import com.fanc.wheretoplay.datamodel.NewUser;
 import com.fanc.wheretoplay.datamodel.OrderDetailModel;
-import com.fanc.wheretoplay.datamodel.OrderInfo;
+
 import com.fanc.wheretoplay.datamodel.OrderInfoModel;
 import com.fanc.wheretoplay.datamodel.OrderPayoffModel;
 import com.fanc.wheretoplay.datamodel.PackageModel;
@@ -46,8 +46,8 @@ import java.util.List;
 public class Network {
 
 
-    // public static String BASE = "http://testapi.51tzl.cn";   // 测试
-    public static String BASE = "https://ktv.51tzl.cn";
+     public static String BASE = "http://testapi.51tzl.cn";   // 测试
+   // public static String BASE = "https://ktv.51tzl.cn";
 
 
     public static String IMAGE = "";   // 测试

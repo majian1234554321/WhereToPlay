@@ -95,7 +95,7 @@ class ExtendFragment(
         super.onViewCreated(view, savedInstanceState)
 
         if (type == "3") {//KTV
-            ll00.visibility = View.GONE
+            ll00.visibility = View.VISIBLE
         } else {//酒吧
             ll00.visibility = View.GONE
         }
@@ -147,8 +147,9 @@ class ExtendFragment(
         rg2.setOnCheckedChangeListener(this)
 
 
+        val adapter0 = Extend0Adapter(mContext, flag, list, storeid, discountValue, storeName, address, phonevalue)
 
-        recycle0.adapter = Extend0Adapter(mContext)
+        recycle0.adapter = adapter0
 
 
     }

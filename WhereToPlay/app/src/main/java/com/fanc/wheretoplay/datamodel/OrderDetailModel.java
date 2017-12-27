@@ -135,6 +135,7 @@ public class OrderDetailModel extends BaseResponseModel {
                 public String booking_info;
                 public String effect_date;
                 public String rule_remind;
+                public String effect_date_desc;
                 public String tip;
             }
 

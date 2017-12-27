@@ -9,7 +9,7 @@ import java.util.List;
  * @date 2017/12/24
  */
 
-public class PackageModel  {
+public class PackageModel {
 
     /**
      * code : 0
@@ -21,7 +21,7 @@ public class PackageModel  {
     public String message;
     public ContentBean content;
 
-    public static class ContentBean extends BaseResponseModel<PackageModel.ContentBean>{
+    public static class ContentBean extends BaseResponseModel<PackageModel.ContentBean> {
         /**
          * pic_list : ["http://oz3cqe2qe.bkt.clouddn.com//Upload/user/avatar/images/20171218/20171218092711_21524.jpg-origin","http://oz3cqe2qe.bkt.clouddn.com//Upload/user/avatar/images/20171218/20171218092711_21524.jpg-origin","http://oz3cqe2qe.bkt.clouddn.com//Upload/user/avatar/images/20171218/20171218092711_21524.jpg-origin"]
          * name : 测试套餐1
@@ -53,6 +53,8 @@ public class PackageModel  {
             public String effect_date;
             public String booking_info;
             public String rule_remind;
+            public String effect_date_desc;
+
             public String tip;
         }
 

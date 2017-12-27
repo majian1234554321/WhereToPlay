@@ -57,11 +57,6 @@ class ExtendAdapter(val context: Context, var flag: Boolean,
                     intent.putExtra("phonevalue", phonevalue)
                 }
 
-
-
-
-
-
                 context.startActivity(intent)
 
             }

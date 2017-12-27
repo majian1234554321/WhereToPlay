@@ -141,11 +141,13 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
 
         when (p0?.id) {
             R.id.btn_pay -> {
+
                 when (payWay) {
                     3 -> {
                         alertBalancePay()
                     }
                     else -> {
+                        showProgress()
                         if (TextUtils.isEmpty(orderId)) {
                             payMoney("")
                         } else {
@@ -178,7 +180,7 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
                     }
 
                     override fun onNext(orderPayoffModel: OrderPayoffModel) {
-
+                        closeProgress()
                         when (payWay) {
                             1 -> {
                                 aliPay(orderPayoffModel.content.orderString)
@@ -202,6 +204,7 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
                     }
 
                     override fun onError(throwable: Throwable) {
+                        closeProgress()
                         Toast.makeText(this@PayPayActivity, throwable.toString(), Toast.LENGTH_LONG).show()
                     }
 
@@ -247,7 +250,7 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
                     }
 
                     override fun onNext(orderPayoffModel: OrderPayoffModel) {
-
+                        closeProgress()
                         when (payWay) {
                             1 -> {
                                 aliPay(orderPayoffModel.content.orderString)
@@ -271,6 +274,7 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
                     }
 
                     override fun onError(throwable: Throwable) {
+                        closeProgress()
                         Toast.makeText(this@PayPayActivity, throwable.toString(), Toast.LENGTH_LONG).show()
                     }
 

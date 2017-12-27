@@ -22,7 +22,6 @@ import com.fanc.wheretoplay.presenter.DetailsOrderPresenter
 import com.fanc.wheretoplay.util.DateFormatUtil
 import com.fanc.wheretoplay.view.DetailsOrderView
 import kotlinx.android.synthetic.main.packagedetailsfragment.*
-import android.databinding.adapters.TextViewBindingAdapter.setText
 import android.graphics.Color
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
@@ -42,7 +41,7 @@ class PackageDetailsFragment(val order_idValue: String?) : BaseFragment(), Detai
     var discountValue: String? = null
     var storeName: String? = null
     var storeid: String? = null
-    var idValue:String ? = null
+    var idValue: String? = null
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.iv_phone -> {
@@ -60,7 +59,7 @@ class PackageDetailsFragment(val order_idValue: String?) : BaseFragment(), Detai
                 val intent = Intent()
                 intent.setClass(context, DisplayActivity::class.java)
                 intent.putExtra("DISPLAYTYPE", "PackageFragment")
-                intent.putExtra("idValue",idValue )
+                intent.putExtra("idValue", idValue)
                 intent.putExtra("storeIdValue", storeid)
 
                 intent.putExtra("discountValue", discountValue)
@@ -74,11 +73,11 @@ class PackageDetailsFragment(val order_idValue: String?) : BaseFragment(), Detai
 
     override fun setDetailsOrderViewData(contentBean: OrderDetailModel.ContentBean?) {
 
-         address = contentBean?.address
+        address = contentBean?.address
         discountValue = contentBean?.discount
         storeName = contentBean?.store_name
         storeid = contentBean?.store_id
-         idValue = contentBean?.package_detail?.id
+        idValue = contentBean?.package_detail?.id
 
 
         Glide.with(mContext).load(contentBean?.package_detail?.pic_list?.get(0)).placeholder(R.drawable.default_square).into(iv001)
@@ -88,7 +87,7 @@ class PackageDetailsFragment(val order_idValue: String?) : BaseFragment(), Detai
         tv_endtime.text = "有效期至：" + DateFormatUtil.stampToDate(contentBean?.package_end_time)
         tv_orderNumber.text = "订  单   号：" + contentBean?.order_sn
         tv_phone.text = "手  机   号：" + contentBean?.mobile
-        tv_payTime.text = "付款时间：" + DateFormatUtil.stampToDate(contentBean?.finish_time)
+        tv_payTime.text = "付款时间：".plus(DateFormatUtil.stampToDate(contentBean?.finish_time))
         tv_realMoney02.text = "订单总价：" + "￥" + contentBean?.package_detail?.origin_price + "元"
 
 
@@ -108,11 +107,13 @@ class PackageDetailsFragment(val order_idValue: String?) : BaseFragment(), Detai
         tv_realMoney1.text = contentBean?.package_detail?.discount_price + "元"
         tv_detail.text = contentBean?.package_detail?.detail
         piv1.setTopText("有效期")
+        piv11.setTopText("除外日期")
         piv2.setTopText("预约信息")
         piv3.setTopText("规则提醒")
         piv4.setTopText("温馨提示")
 
         piv1.setButtomText(contentBean?.package_detail?.buy_notice?.effect_date)
+        piv11.setButtomText(contentBean?.package_detail?.buy_notice?.effect_date_desc)
         piv2.setButtomText(contentBean?.package_detail?.buy_notice?.booking_info)
         piv3.setButtomText(contentBean?.package_detail?.buy_notice?.rule_remind?.replace("\r", "\n"))
         piv4.setButtomText(contentBean?.package_detail?.buy_notice?.tip)

@@ -6,6 +6,7 @@ import com.fanc.wheretoplay.base.BaseActivity
 import com.fanc.wheretoplay.fragment.CouponFragment
 import com.fanc.wheretoplay.fragment.PackageDetailsFragment
 import com.fanc.wheretoplay.fragment.PackageFragment
+import com.fanc.wheretoplay.fragment.PackageKTVFragment
 
 class DisplayActivity : BaseActivity() {
 
@@ -40,6 +41,9 @@ class DisplayActivity : BaseActivity() {
                 supportFragmentManager.beginTransaction().replace(R.id.displayfragment, PackageDetailsFragment(order_idValue)).commit()
             }
 
+            "PackageKTVFragment" -> {
+                supportFragmentManager.beginTransaction().replace(R.id.displayfragment, PackageKTVFragment(idValue, storeIdValue, discountValue, storeName, address, phonevalue)).commit()
+            }
 
         }
     }
