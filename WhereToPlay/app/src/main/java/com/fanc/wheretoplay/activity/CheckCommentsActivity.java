@@ -35,7 +35,6 @@ import okhttp3.Call;
 
 
 /**
- *
  * @author peace
  * @date 2017/10/30
  */
@@ -65,7 +64,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
     private int mID = R.id.bt_comments_one;
     private CheckComments mResponse;
 
-    private int page = 1, count = 9,size = count;
+    private int page = 1, count = 9, size = count;
     private int mType = 1;
     private List mStores;
     private CheckCommentsAdapter checkCommentsAdapter;
@@ -114,7 +113,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
         mRc.addItemDecoration(divider1);
         requestComments(mType, page, size);
         //底部评论
-        checkCommentsAdapter = new CheckCommentsAdapter(this,  mStores);
+        checkCommentsAdapter = new CheckCommentsAdapter(this, mStores);
         mRc.setAdapter(checkCommentsAdapter);
         // 是否可以上下拉
         mSvReserve.setCanPullDown(true);
@@ -154,7 +153,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
 //                } else {
 //                    page++;
 //                }
-                page ++ ;
+                page++;
                 requestComments(mType, page, size);
             }
         });
@@ -162,6 +161,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
 
     /**
      * 点击中部四个按钮
+     *
      * @param view
      */
     public void comments(View view) {   //不能把权限设置为私有
@@ -197,6 +197,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
 
     /**
      * 点击按钮改变颜色
+     *
      * @param id
      */
     private void clickPress(int id) {
@@ -206,6 +207,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
 
     /**
      * 改变颜色
+     *
      * @param id
      */
     private void pressChange(int id) {
@@ -241,6 +243,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
 
     /**
      * 记录点下的id值
+     *
      * @param id
      */
     private void recordId(int id) {
@@ -267,19 +270,20 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
 
     /**
      * 请求评论数据
+     *
      * @param type
      * @param pageIndex
      * @param pageSize
      */
     private void requestComments(int type, int pageIndex, int pageSize) {
-        Log.e("dd",intent.getStringExtra(Constants.STORE_ID));
+        Log.e("dd", intent.getStringExtra(Constants.STORE_ID));
         OkHttpUtils.post()
                 .url(Network.User.PUBLIC_COMMENTS)
                 .addParams(Network.Param.STORE_ID, intent.getStringExtra(Constants.STORE_ID))
                 .addParams(Network.Param.TYPE, String.valueOf(type))
                 .addParams(Network.Param.PAGEINDEX, String.valueOf(pageIndex))
                 .addParams(Network.Param.PAGESIZE, String.valueOf(pageSize))
-                .addParams(Network.Param.TOKEN,  mSPUtils.getUser().getToken())
+                .addParams(Network.Param.TOKEN, mSPUtils.getUser().getToken())
                 .build()
                 .execute(new DCallback<CheckComments>() {
                     @Override
@@ -315,23 +319,33 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
 
     /**
      * 展示获取的数据
+     *
      * @param response
      */
     private void showCheckComments(CheckComments response) {
-            //顶部分数显示
-            mTvAverageScore.setText(response.getAverage_comment());
-            mTvScoreEnvironment.setText(response.getComment_environment());
-            mTvScoreatmosphere.setText(response.getComment_atmosphere());
-            mTvScoreservice.setText(response.getComment_server());
-            //顶部3个星星
+        //顶部分数显示
+        mTvAverageScore.setText(response.getAverage_comment());
+        mTvScoreEnvironment.setText(response.getComment_environment());
+        mTvScoreatmosphere.setText(response.getComment_atmosphere());
+        mTvScoreservice.setText(response.getComment_server());
+        //顶部3个星星
+        if (response.getComment_environment() != null) {
             mRbEnvironment.setRating(Float.parseFloat(response.getComment_environment()));
+        }
+        if (response.getComment_atmosphere() != null) {
             mRbAtmosphere.setRating(Float.parseFloat(response.getComment_atmosphere()));
+        }
+
+        if (response.getComment_server() != null) {
             mRbService.setRating(Float.parseFloat(response.getComment_server()));
-            //中部四个文字按钮
-            mBtAll.setText(getResources().getText(R.string.check_comment_all) + "(" + response.getAll_count() +")");
-            mBtPleasure.setText(getResources().getText(R.string.check_comment_pleasure) + "(" + response.getPleasure_count() +")");
-            mBtDispleasure.setText(getResources().getText(R.string.check_comment_displeasure) + "(" + response.getDispleasure_count() +")");
-            mBtpicture.setText(getResources().getText(R.string.check_comment_picture) + "(" + response.getPicture_count() +")");
+        }
+
+
+        //中部四个文字按钮
+        mBtAll.setText(getResources().getText(R.string.check_comment_all) + "(" + response.getAll_count() + ")");
+        mBtPleasure.setText(getResources().getText(R.string.check_comment_pleasure) + "(" + response.getPleasure_count() + ")");
+        mBtDispleasure.setText(getResources().getText(R.string.check_comment_displeasure) + "(" + response.getDispleasure_count() + ")");
+        mBtpicture.setText(getResources().getText(R.string.check_comment_picture) + "(" + response.getPicture_count() + ")");
         //集合添加数据
         storeList(response.getComment_list());
 //        //底部评论

@@ -127,9 +127,7 @@ class PackageKTVFragment(private val idValue: String, private val storeIdValue: 
                     override fun failed(t: String?) {
                         Toast.makeText(context, t, Toast.LENGTH_LONG).show()
                     }
-
                 })
-
     }
 
     private fun setData(content: PackageModel.ContentBean) {
@@ -154,8 +152,6 @@ class PackageKTVFragment(private val idValue: String, private val storeIdValue: 
         tv_falseMoney.paint.flags = Paint.STRIKE_THRU_TEXT_FLAG
 
         tv_detail.text = content.detail.replace("/n", "\n")
-
-
 
 
     }

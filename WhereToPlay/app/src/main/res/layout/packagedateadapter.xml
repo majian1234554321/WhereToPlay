@@ -9,6 +9,13 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@drawable/selector_boder"
+        android:padding="12dp"
         tools:text="1221212121212121" />
+
+    <ImageView
+        android:id="@+id/ivs"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/nextday" />
 
 </RelativeLayout>

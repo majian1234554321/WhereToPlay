@@ -23,9 +23,9 @@ class PackageDateAdapter(val context: Context, val list: List<String>) : Recycle
             tvs.text = list[position]
             //如果是00:00 显示角标
             if ("00:00" == list[position]) {
-
+                ivs.visibility = View.VISIBLE
             } else {
-
+                ivs.visibility = View.GONE
             }
 
             holder?.itemView?.setOnClickListener { position ->
