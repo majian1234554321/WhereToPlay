@@ -65,7 +65,7 @@ public class ReserveAdapter extends RecyclerView.Adapter<ReserveAdapter.ViewHold
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        startAnimation(holder.itemView, position);
+       // startAnimation(holder.itemView, position);
 //        holder.binding.setClick(this);
         final StoreList.Store store = (StoreList.Store) mData.get(position);
         holder.binding.setStore(store);

@@ -350,7 +350,7 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
                         phonevalue = content.store.phone;
 
                         if (!"2".equals(type)&&type!=null) {
-                            if (content.store != null & content.store.packageX != null) {
+                            if (content.store != null ) {
                                 getChildFragmentManager().beginTransaction().replace(R.id.fragment,
                                         new ExtendFragment(
                                                 content.store.packageX,

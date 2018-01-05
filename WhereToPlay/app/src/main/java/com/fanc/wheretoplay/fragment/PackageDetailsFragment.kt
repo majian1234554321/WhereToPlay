@@ -97,7 +97,7 @@ class PackageDetailsFragment(val order_idValue: String?, val order_functionValue
             idValue = contentBean?.package_id
             tv_000.text = "优惠预订详情"
             lll.visibility = View.VISIBLE
-            tv001.text = contentBean?.book_start_date.plus(" "+contentBean?.book_start_time_desc).plus("7小时")
+            tv001.text = contentBean?.book_start_date.plus(" "+contentBean?.book_start_time_desc).plus("    (7小时)")
 
             tv003.text = contentBean?.package_detail?.room_name
         }

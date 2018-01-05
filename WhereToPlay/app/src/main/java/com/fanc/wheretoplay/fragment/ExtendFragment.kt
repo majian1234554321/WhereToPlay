@@ -133,35 +133,40 @@ class ExtendFragment(
             val weekType: String = DateFormatUtil.getCustomDayOfWeek(mDate[0]).substring(2)
             dateType = DateFormatUtil.getCustomDay(mDate[0]).toString()
             loadKTVData(weekType)
-
-
         } else {//酒吧
             ll00.visibility = View.GONE
         }
 
-        tv_title.text = "套餐（" + packageX?.count + ")"
-        list = packageX?.pkg_list as MutableList<MerchantDetailModel.ContentBean.StoreBean.PackageBean.PkgListBean>
 
-        if (list.size > 2) {
-            tv_more.visibility = View.VISIBLE
-        } else {
-            tv_more.visibility = View.GONE
+        if (packageX!=null) {
+            tv_title.text = "套餐(" + packageX?.count + ")"
+            list = packageX?.pkg_list as MutableList<MerchantDetailModel.ContentBean.StoreBean.PackageBean.PkgListBean>
+            if (list.size > 2) {
+                tv_more.visibility = View.VISIBLE
+            } else {
+                tv_more.visibility = View.GONE
+            }
+            recycle.addItemDecoration(RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL,
+                    UIUtils.dp2Px(1), mContext.resources.getColor(R.color.pay_reserve_list_divider_white)))
+            recycle.layoutManager = LinearLayoutManager(mContext)
+            adapter = ExtendAdapter(mContext, flag, list, storeid, discountValue, storeName, address, phonevalue)
+            recycle.adapter = adapter
+
+
+            if (list.size > 2) {
+                tv_more.text = "更多".plus(list.size.minus(2)).plus("个套餐 ")
+            } else {
+                tv_more.visibility = View.GONE
+            }
         }
 
 
 
-        recycle.addItemDecoration(RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL,
-                UIUtils.dp2Px(1), mContext.resources.getColor(R.color.pay_reserve_list_divider_white)))
-        recycle.layoutManager = LinearLayoutManager(mContext)
-        adapter = ExtendAdapter(mContext, flag, list, storeid, discountValue, storeName, address, phonevalue)
-        recycle.adapter = adapter
 
 
-        if (list.size > 2) {
-            tv_more.text = "更多".plus(list.size.minus(2)).plus("个套餐 ")
-        } else {
-            tv_more.visibility = View.GONE
-        }
+
+
+
 
         tv_more.setOnClickListener(this)
 
