@@ -48,8 +48,8 @@ import java.util.List;
 public class Network {
 
 
-    // public static String BASE = "http://testapi.51tzl.cn";   // 测试
-    public static String BASE = "http://ktv.51tzl.cn";
+     public static String BASE = "http://testapi.51tzl.cn";   // 测试
+    //public static String BASE = "http://ktv.51tzl.cn";
 
 
     public static String IMAGE = "";   // 测试
@@ -445,7 +445,7 @@ public class Network {
 
 
 
-        //优惠券的使用状态
+        //ktv订单支付
         @Multipart
         @POST("User/discountBookPayoff")
         Observable<OrderPayoffModel> discountBookPayoff(@Part List<MultipartBody.Part> fileA);

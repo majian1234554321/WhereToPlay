@@ -83,6 +83,8 @@ public class OrderDetailModel extends BaseResponseModel {
         public PackageDetailBean package_detail;
         public StoreBean store;
         public List<ButtonlistBean> buttonlist;
+        public String book_start_date;
+        public String book_start_time_desc;
 
         public static class PackageDetailBean {
             /**
@@ -112,11 +114,13 @@ public class OrderDetailModel extends BaseResponseModel {
             public BuyNoticeBean buy_notice;
             public String create_time;
 
+
             public String effect_start_time;
             public String effect_end_time;
             public String status;
             public List<String> pic_list;
             public List<ProductListBean> product_list;
+            public String room_name;
 
             public static class BuyNoticeBean {
                 /**

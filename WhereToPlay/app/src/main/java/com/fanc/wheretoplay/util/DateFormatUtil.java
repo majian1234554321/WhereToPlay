@@ -1317,11 +1317,32 @@ public class DateFormatUtil {
     public static String getMM() {
         Calendar cale = Calendar.getInstance();
         int month = cale.get(Calendar.MONTH) + 1;
-        if (month<10){
-            return "0"+month;
-        }else {
-            return month+"";
+        if (month < 10) {
+            return "0" + month;
+        } else {
+            return month + "";
         }
+
+    }
+
+    public static String getDD() {
+        Calendar cale = Calendar.getInstance();
+        int date = cale.get(Calendar.DATE);
+        return date+"";
+
+    }
+
+    public static String getWeek() {
+        String[] weekDays = {"日", "一", "二", "三", "四", "五", "六"};
+        Date today = new Date();
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(today);
+
+        int w = cal.get(Calendar.DAY_OF_WEEK) - 1;
+        if (w < 0)
+            w = 0;
+
+        return weekDays[w];
 
     }
 

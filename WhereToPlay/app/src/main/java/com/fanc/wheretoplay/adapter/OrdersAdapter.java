@@ -88,8 +88,9 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                     intent.putExtra("status", dataBean.list.get(position).order_action);
                 }
                 intent.putExtra("discount", dataBean.list.get(position).discount);
-                if ("6".equals(dataBean.list.get(position).order_function)) {
+                if ("6".equals(dataBean.list.get(position).order_function) || "7".equals(dataBean.list.get(position).order_function)) {
                     intent.setClass(context, DisplayActivity.class);
+                    intent.putExtra("order_function", dataBean.list.get(position).order_function);
                     intent.putExtra("DISPLAYTYPE", "PackageDetailsFragment");
 
                 } else {
@@ -103,7 +104,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         });
 
 
-        if ("6".equals(dataBean.list.get(position).order_function)) {
+        if ("6".equals(dataBean.list.get(position).order_function) || "7".equals(dataBean.list.get(position).order_function)) {
             holder.tvPayItemTime.setText("套餐名称：");
             holder.tvPayItemRoomCategory.setText("有效期至：");
             holder.tvPayItemReserveCode.setText("数量：");
@@ -131,8 +132,6 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         holder.tv_storeName.setText(dataBean.list.get(position).name);
 
 
-
-
         GlideImageLoader.display(context, holder.ivPayItem, IMAGE + dataBean.list.get(position).cover);
         holder.tv_payState.setText(dataBean.list.get(position).statusdesc);
 
@@ -156,8 +155,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                             if (dataBean.list != null && dataBean.list.get(position).order_action != null) {
                                 intent.putExtra("status", dataBean.list.get(position).order_action);
                             }
-                            if ("6".equals(dataBean.list.get(position).order_function)) {
+                            if ("6".equals(dataBean.list.get(position).order_function) || "7".equals(dataBean.list.get(position).order_function)) {
                                 intent.putExtra("DISPLAYTYPE", "PackageDetailsFragment");
+
+                                intent.putExtra("order_function", dataBean.list.get(position).order_function);
+
+
                                 intent.setClass(context, DisplayActivity.class);
                             } else {
                                 intent.setClass(context, DetailsOrderActivity.class);
@@ -256,6 +259,10 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                     holder.tvPayItemTitle.setText("预订类型：套餐");
                     holder.tvPayItemPrice.setText("总价：" + dataBean.list.get(position).total);
                     break;
+                case "7":
+                    holder.tvPayItemTitle.setText("预订类型：优惠预订");
+                    holder.tvPayItemPrice.setText("总价：" + dataBean.list.get(position).total);
+                    break;
                 default:
                     holder.tvPayItemTitle.setText("预订类型：...");
                     holder.tvPayItemPrice.setText("总价：" + dataBean.list.get(position).total);
@@ -270,34 +277,49 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         Intent intent = new Intent();
 
 
+        switch (holder.tvPayItemTitle.getText().toString().trim()) {
+            case "预订类型：预付预订":
+                intent.setClass(context, PayBillActivity.class);
+                intent.putExtra("pay_Action", "预订类型：预付预订");
+                intent.putExtra("money", dataBean.list.get(position).prepay);
+                break;
+            case "预订类型：结单支付":
+                intent.setClass(context, PayBillActivity.class);
+                intent.putExtra("pay_Action", "预订类型：结单支付");
+                intent.putExtra("money", dataBean.list.get(position).total);
+                break;
+            case "套餐详情":
+                intent.setClass(context, PayPayActivity.class);
+                intent.putExtra("type", "套餐详情");
+                intent.putExtra("storeIdValue", dataBean.list.get(position).store_id);
 
-        if ("预订类型：预付预订".equals(holder.tvPayItemTitle.getText().toString().trim())) {
-            intent.setClass(context, PayBillActivity.class);
-            intent.putExtra("pay_Action", "预订类型：预付预订");
-            intent.putExtra("money", dataBean.list.get(position).prepay);
-        } else if ("预订类型：结单支付".equals(holder.tvPayItemTitle.getText().toString().trim())) {
-            intent.setClass(context, PayBillActivity.class);
-            intent.putExtra("pay_Action", "预订类型：结单支付");
-            intent.putExtra("money", dataBean.list.get(position).total);
-        } else {
-            intent.setClass(context, PayPayActivity.class);
-            intent.putExtra("type", "套餐详情");
-            intent.putExtra("storeIdValue", dataBean.list.get(position).store_id);
-
-            intent.putExtra("value0", dataBean.list.get(position).name);
-            intent.putExtra("value1", dataBean.list.get(position).name);
-            intent.putExtra("value2", dataBean.list.get(position).package_introduce);
-            intent.putExtra("value3", DateFormatUtil.stampToDate(dataBean.list.get(position).finish_time));
-            intent.putExtra("value4", dataBean.list.get(position).total);
-            intent.putExtra("value5", dataBean.list.get(position).origin_price);
-            intent.putExtra("order_id", dataBean.list.get(position).order_id);
-
-
-
-            intent.putExtra("discountValue", dataBean.list.get(position).discount);
+                intent.putExtra("value0", dataBean.list.get(position).name);
+                intent.putExtra("value1", dataBean.list.get(position).name);
+                intent.putExtra("value2", dataBean.list.get(position).package_introduce);
+                intent.putExtra("value3", DateFormatUtil.stampToDate(dataBean.list.get(position).finish_time));
+                intent.putExtra("value4", dataBean.list.get(position).total);
+                intent.putExtra("value5", dataBean.list.get(position).origin_price);
+                intent.putExtra("order_id", dataBean.list.get(position).order_id);
 
 
-            //startActivity(intent)
+                intent.putExtra("discountValue", dataBean.list.get(position).discount);
+                break;
+            default://优惠预订
+                intent.setClass(context, PayPayActivity.class);
+                intent.putExtra("type", "优惠预订");
+                intent.putExtra("storeIdValue", dataBean.list.get(position).store_id);
+
+                intent.putExtra("value0", dataBean.list.get(position).name);
+                intent.putExtra("value1", dataBean.list.get(position).name);
+                intent.putExtra("value2", dataBean.list.get(position).package_introduce);
+                intent.putExtra("value3", DateFormatUtil.stampToDate(dataBean.list.get(position).finish_time));
+                intent.putExtra("value4", dataBean.list.get(position).total);
+                intent.putExtra("value5", dataBean.list.get(position).origin_price);
+                intent.putExtra("order_id", dataBean.list.get(position).order_id);
+
+
+                intent.putExtra("discountValue", dataBean.list.get(position).discount);
+                break;
         }
 
 

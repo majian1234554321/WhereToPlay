@@ -30,6 +30,11 @@ class DisplayActivity : BaseActivity() {
 
         val weekValue = intent.getStringExtra("weekType")
 
+        val order_functionValue = intent.getStringExtra("order_function")
+
+
+
+
 
 
 
@@ -42,7 +47,7 @@ class DisplayActivity : BaseActivity() {
             }
 
             "PackageDetailsFragment" -> {
-                supportFragmentManager.beginTransaction().replace(R.id.displayfragment, PackageDetailsFragment(order_idValue)).commit()
+                supportFragmentManager.beginTransaction().replace(R.id.displayfragment, PackageDetailsFragment(order_idValue,order_functionValue)).commit()
             }
 
             "PackageKTVFragment" -> {

@@ -137,8 +137,8 @@ class PackageFragment(private val idValue: String, private val storeIdValue: Str
         piv11.setButtomText(content.buy_notice?.effect_date_desc)
 
         tv_falseMoney.paint.flags = Paint.STRIKE_THRU_TEXT_FLAG
-
-        tv_detail.text = content.detail.replace("/n", "\n")
+        if (content.detail!=null&&content.detail.contains("/r"))
+            tv_detail.text = content.detail.replace("/r", "\n")
 
         val adapter = PackageAdapter(mContext, content.product_list)
         recycle.adapter = adapter

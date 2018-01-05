@@ -35,7 +35,7 @@ import com.fanc.wheretoplay.activity.DisplayActivity
  * @author admin
  * @date 2017/12/22
  */
-class PackageDetailsFragment(val order_idValue: String?) : BaseFragment(), DetailsOrderView, View.OnClickListener {
+class PackageDetailsFragment(val order_idValue: String?, val order_functionValue: String) : BaseFragment(), DetailsOrderView, View.OnClickListener {
     var phoneNum: String? = null
     var address: String? = null
     var discountValue: String? = null
@@ -58,7 +58,19 @@ class PackageDetailsFragment(val order_idValue: String?) : BaseFragment(), Detai
             R.id.rl -> {
                 val intent = Intent()
                 intent.setClass(context, DisplayActivity::class.java)
-                intent.putExtra("DISPLAYTYPE", "PackageFragment")
+                if ("6" == order_functionValue) {
+                    intent.putExtra("DISPLAYTYPE", "PackageFragment")
+
+                } else {
+                    intent.putExtra("DISPLAYTYPE", "PackageKTVFragment")
+
+
+                    intent.putExtra("date", DateFormatUtil.getDD())
+                    intent.putExtra("desc", tv003.text.toString().trim())
+                    intent.putExtra("weekType", DateFormatUtil.getWeek())
+
+                }
+
                 intent.putExtra("idValue", idValue)
                 intent.putExtra("storeIdValue", storeid)
 
@@ -77,7 +89,22 @@ class PackageDetailsFragment(val order_idValue: String?) : BaseFragment(), Detai
         discountValue = contentBean?.discount
         storeName = contentBean?.store_name
         storeid = contentBean?.store_id
-        idValue = contentBean?.package_detail?.id
+        if ("6" == order_functionValue) {
+            idValue = contentBean?.package_detail?.id
+            tv_000.text = "套餐详情"
+            lll.visibility = View.GONE
+        } else {
+            idValue = contentBean?.package_id
+            tv_000.text = "优惠预订详情"
+            lll.visibility = View.VISIBLE
+            tv001.text = contentBean?.book_start_date.plus(" "+contentBean?.book_start_time_desc).plus("7小时")
+
+            tv003.text = contentBean?.package_detail?.room_name
+        }
+
+
+
+
 
 
         Glide.with(mContext).load(contentBean?.package_detail?.pic_list?.get(0)).placeholder(R.drawable.default_square).into(iv001)
@@ -123,7 +150,7 @@ class PackageDetailsFragment(val order_idValue: String?) : BaseFragment(), Detai
 
         val list = contentBean?.package_detail?.product_list
         list?.forEachIndexed { index, productListBean ->
-            val model = PackageModel.ContentBean.ProductListBean(productListBean.name, productListBean.price, productListBean.num,productListBean.unit)
+            val model = PackageModel.ContentBean.ProductListBean(productListBean.name, productListBean.price, productListBean.num, productListBean.unit)
             lists.add(model)
         }
 

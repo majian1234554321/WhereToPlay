@@ -104,7 +104,7 @@ class PackageKTVFragment(private val idValue: String, private val storeIdValue: 
         when (p0?.id) {
             R.id.tv_pay -> {
                 val intent = Intent(mContext, PayPayActivity::class.java)
-                intent.putExtra("type", "KTV套餐详情")
+                intent.putExtra("type", "优惠预订")
                 intent.putExtra("storeIdValue", storeIdValue)
                 intent.putExtra("packageIdValue", idValue)
                 intent.putExtra("value0", tv_storeName.text.toString().trim())

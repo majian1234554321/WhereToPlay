@@ -173,7 +173,7 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
         list2.add(MultipartBody.Part.createFormData("code", password))
 
 
-        val observable = if (typeValue == "KTV套餐详情") {
+        val observable = if (typeValue == "优惠预订") {
             Retrofit_RequestUtils
                     .getRequest()
                     .discountBookPayoff(list2)
@@ -246,7 +246,7 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
         list.add(MultipartBody.Part.createFormData("discount_book_hour", if (TextUtils.isEmpty(discount_book_hour)) "" else discount_book_hour))
         list.add(MultipartBody.Part.createFormData("book_week_day", if (TextUtils.isEmpty(book_week_day)) "" else book_week_day))
 
-        val observable = if (typeValue == "KTV套餐详情") {
+        val observable = if (typeValue == "优惠预订") {
             Retrofit_RequestUtils
                     .getRequest()
                     .discountBookImmediatelyPay(list)
@@ -293,7 +293,7 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
                     list2.add(MultipartBody.Part.createFormData("type", payWay.toString()))
                     list2.add(MultipartBody.Part.createFormData("code", password))
                     orderId = accessOrderIdModel.content.order_id
-                    if (typeValue == "KTV套餐详情") {
+                    if (typeValue == "优惠预订") {
                         Retrofit_RequestUtils.getRequest().discountBookPayoff(list2)
                     } else {
                         Retrofit_RequestUtils.getRequest().setMealOrderPayoff(list2)
