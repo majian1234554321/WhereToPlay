@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.databinding.DataBindingUtil;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
@@ -15,11 +15,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.adapter.RechargeDetailAdapter;
 import com.fanc.wheretoplay.base.BaseFragment;
-import com.fanc.wheretoplay.databinding.FragmentDealDetailListBinding;
+
 import com.fanc.wheretoplay.datamodel.Recharge;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
 import com.fanc.wheretoplay.network.Network;
@@ -41,7 +42,7 @@ import okhttp3.Call;
 
 public class RechargeDetailFragment extends BaseFragment {
 
-    FragmentDealDetailListBinding detailListBinding;
+
 
     RecyclerView mRvDealDetailRecharge;
 
@@ -51,19 +52,24 @@ public class RechargeDetailFragment extends BaseFragment {
     Receiver receiver;
     //    private String storeName;
     private String time;
+    private RelativeLayout rrrrrr;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        detailListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_deal_detail_list, null, false);
-        initView();
+       // detailListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_deal_detail_list, null, false);
+
+
+      View  view  =   View.inflate(inflater.getContext(),R.layout.fragment_deal_detail_list, null);
+        mRvDealDetailRecharge =    view.findViewById(R.id.rv_deal_detail) ;
+        rrrrrr = view.findViewById(R.id.rrrrrr);
+
+
+
         init();
-        return detailListBinding.getRoot();
+        return view;
     }
 
-    private void initView() {
-        mRvDealDetailRecharge = detailListBinding.rvDealDetail;
-    }
 
     private void init() {
         // 列表
@@ -107,7 +113,11 @@ public class RechargeDetailFragment extends BaseFragment {
                         if (response.code == 0) {
                             if (response.getList() != null) {
                                 showRechargeDetailList(response.getList());
+                            }else {
+                                rrrrrr.setVisibility(View.VISIBLE);
                             }
+                        }else {
+                            rrrrrr.setVisibility(View.VISIBLE);
                         }
                     }
                 });

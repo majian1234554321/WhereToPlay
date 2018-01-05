@@ -395,7 +395,9 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
         if (!store.level.isEmpty()) {
             rb_merchant.setRating(Float.parseFloat(store.level));
         }
-        tv_pingjiashuliang.setText(String.valueOf(store.number));
+
+
+        tv_pingjiashuliang.setText((TextUtils.isEmpty(store.number)?"0":String.valueOf(store.number)));
 
 
         // 图片

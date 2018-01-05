@@ -15,6 +15,7 @@ import com.fanc.wheretoplay.datamodel.CouponListModel
 import com.fanc.wheretoplay.divider.RecycleViewDivider
 import com.fanc.wheretoplay.presenter.CouponChildPresent
 import com.fanc.wheretoplay.presenter.CouponChildView
+import kotlinx.android.synthetic.main.couponchildfragment.*
 
 /**
  * @author admin
@@ -22,6 +23,10 @@ import com.fanc.wheretoplay.presenter.CouponChildView
  */
 
 class CouponChild2Fragment : BaseLazyFragment(), CouponChildView {
+    override fun setFailDateDate() {
+        rrrrrr.visibility = View.VISIBLE
+    }
+
     var type = "2"
     override fun setCouponChildDate(content: CouponListModel.ContentBean) {
         val adapter = CouponChildAdapter(mContext, content.list, type)
@@ -45,9 +50,14 @@ class CouponChild2Fragment : BaseLazyFragment(), CouponChildView {
     override fun initView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val view = View.inflate(inflater.context, R.layout.couponchildfragment, null)
         recycle = view.findViewById<RecyclerView>(R.id.recycle) as RecyclerView
-        recycle!!.layoutManager = LinearLayoutManager(inflater.context)
+        recycle?.layoutManager = LinearLayoutManager(inflater.context)
         val viewDivider = RecycleViewDivider(mContext, LinearLayout.HORIZONTAL)
         recycle!!.addItemDecoration(viewDivider)
         return view
     }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
 }

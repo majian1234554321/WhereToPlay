@@ -4,7 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.databinding.DataBindingUtil;
+
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.content.LocalBroadcastManager;
@@ -14,17 +14,18 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.adapter.ConsumeDetailAdapter;
 import com.fanc.wheretoplay.base.BaseFragment;
-import com.fanc.wheretoplay.databinding.FragmentDealDetailListBinding;
+
 import com.fanc.wheretoplay.datamodel.Consume;
 import com.fanc.wheretoplay.divider.RecycleViewDivider;
 import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.DateFormatUtil;
-import com.fanc.wheretoplay.view.TopMenu;
+
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
@@ -41,7 +42,6 @@ import okhttp3.Call;
 
 public class ConsumeDetailFragment extends BaseFragment {
 
-    FragmentDealDetailListBinding detailListBinding;
 
     RecyclerView mRvDealDetailConsume;
 
@@ -53,19 +53,20 @@ public class ConsumeDetailFragment extends BaseFragment {
     String time;
 
     Receiver receiver;
+    private RelativeLayout rrrrrr;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        detailListBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_deal_detail_list, null, false);
-        initView();
+
+
+        View view = View.inflate(inflater.getContext(), R.layout.fragment_deal_detail_list, null);
+        mRvDealDetailConsume = view.findViewById(R.id.rv_deal_detail);
+        rrrrrr = view.findViewById(R.id.rrrrrr);
         init();
-        return detailListBinding.getRoot();
+        return view;
     }
 
-    private void initView() {
-        mRvDealDetailConsume = detailListBinding.rvDealDetail;
-    }
 
     private void init() {
         // 列表
@@ -116,7 +117,11 @@ public class ConsumeDetailFragment extends BaseFragment {
                         if (isSuccess(response)) {
                             if (response.getList() != null) {
                                 showConsumeDetailList(response.getList());
+                            } else {
+                                rrrrrr.setVisibility(View.VISIBLE);
                             }
+                        } else {
+                            rrrrrr.setVisibility(View.VISIBLE);
                         }
                     }
                 });

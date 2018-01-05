@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.fanc.wheretoplay.R;
@@ -60,6 +61,7 @@ public class MineCommendMoneyFragment extends BaseFragment {
     private List mStores;
     private MyScrollView vCommendFriend;
     private MyScrollView mSvCommendMoney;
+    private RelativeLayout rrrrrr;
 
     //
     @Nullable
@@ -77,6 +79,7 @@ public class MineCommendMoneyFragment extends BaseFragment {
         mTmMineCommendMoney = mbinding.tmMineFriend;
         mPtrl = mbinding.ptrlCommendFriend;
         mSvCommendMoney = mbinding.svCommendFriend;
+        rrrrrr = mbinding.rrrrrr;
     }
 
     private void init() {
@@ -157,14 +160,14 @@ public class MineCommendMoneyFragment extends BaseFragment {
 //                    }
 //                });
         showProgress();
-                MultipartBody.Part requestFileA =
+        MultipartBody.Part requestFileA =
                 MultipartBody.Part.createFormData("size", size + "");
         MultipartBody.Part requestFileB =
                 MultipartBody.Part.createFormData("page", page + "");
         MultipartBody.Part requestFileC =
-                MultipartBody.Part.createFormData("token",  mUser.getToken());
+                MultipartBody.Part.createFormData("token", mUser.getToken());
 
-         Retrofit_RequestUtils.getRequest().recomReward(requestFileA, requestFileB, requestFileC)
+        Retrofit_RequestUtils.getRequest().recomReward(requestFileA, requestFileB, requestFileC)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<MineMoney>() {
@@ -216,13 +219,16 @@ public class MineCommendMoneyFragment extends BaseFragment {
             mStores.addAll(mCommenMoneyList);
             mineMoneyAdapter.notifyDataSetChanged();
             refreshAndLoadMoreSuccess();
-            return;
         } else {   //正常
             mStores.clear();
             mStores.addAll(mCommenMoneyList);
             mineMoneyAdapter.notifyDataSetChanged();
             if (mCommenMoneyList.size() == 0) {
-                ToastUtils.showShortToast(mContext, "暂时还没有推荐奖励");
+                if (page == 0) {
+                    rrrrrr.setVisibility(View.VISIBLE);
+                   // ToastUtils.showShortToast(mContext, "暂时还没有推荐奖励");
+                }
+
             }
         }
     }

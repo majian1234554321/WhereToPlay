@@ -49,7 +49,7 @@ public class Network {
 
 
      public static String BASE = "http://testapi.51tzl.cn";   // 测试
-    //public static String BASE = "http://ktv.51tzl.cn";
+    // public static String BASE = "http://ktv.51tzl.cn";
 
 
     public static String IMAGE = "";   // 测试

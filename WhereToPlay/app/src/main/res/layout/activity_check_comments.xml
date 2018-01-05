@@ -203,133 +203,168 @@
                 app:layout_constraintTop_toBottomOf="@+id/view_top_bg" />
         </android.support.constraint.ConstraintLayout>
 
-        <com.fanc.wheretoplay.view.PullToRefreshLayout
-            android:id="@+id/ptrl_reserve"
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/cl_comments"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/cl"
+            android:background="@color/bg_gray">
+            <!--评论显示-->
+            <View
+                android:id="@+id/view_bottom_bg"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/height_60"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/bt_comments_one"
+                android:layout_width="@dimen/width_75"
+                android:layout_height="@dimen/height_30"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:layout_marginStart="@dimen/margin_15"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/shape_reserve_info_checked"
+                android:gravity="center"
+                android:onClick="comments"
+                android:text="全部"
+                android:textColor="@color/white"
+                android:textSize="@dimen/textsize_13"
+                app:layout_constraintBottom_toBottomOf="@+id/view_bottom_bg"
+                app:layout_constraintEnd_toStartOf="@+id/bt_comments_two"
+                app:layout_constraintHorizontal_chainStyle="spread_inside"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/view_bottom_bg" />
+
+            <TextView
+                android:id="@+id/bt_comments_two"
+                android:layout_width="@dimen/width_75"
+                android:layout_height="@dimen/height_30"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/shape_pink"
+                android:gravity="center"
+                android:onClick="comments"
+                android:text="满意"
+                android:textColor="@color/text_black_sec"
+                android:textSize="@dimen/textsize_13"
+                app:layout_constraintBottom_toBottomOf="@+id/view_bottom_bg"
+                app:layout_constraintEnd_toStartOf="@+id/bt_comments_three"
+                app:layout_constraintStart_toEndOf="@+id/bt_comments_one"
+                app:layout_constraintTop_toTopOf="@+id/view_bottom_bg" />
+
+            <TextView
+                android:id="@+id/bt_comments_three"
+                android:layout_width="@dimen/width_75"
+                android:layout_height="@dimen/height_30"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/selector_red_gray"
+                android:gravity="center"
+                android:onClick="comments"
+                android:text="不满意"
+                android:textColor="@color/pay_reserve_list_divider"
+                android:textSize="@dimen/textsize_13"
+                app:layout_constraintBottom_toBottomOf="@+id/view_bottom_bg"
+                app:layout_constraintEnd_toStartOf="@+id/bt_comments_four"
+                app:layout_constraintStart_toEndOf="@+id/bt_comments_two"
+                app:layout_constraintTop_toTopOf="@+id/view_bottom_bg" />
+
+            <TextView
+                android:id="@+id/bt_comments_four"
+                android:layout_width="@dimen/width_75"
+                android:layout_height="@dimen/height_30"
+                android:layout_marginBottom="@dimen/margin_10"
+                android:layout_marginEnd="@dimen/margin_15"
+                android:layout_marginTop="@dimen/margin_10"
+                android:background="@drawable/shape_pink"
+                android:gravity="center"
+                android:onClick="comments"
+                android:text="有图"
+                android:textColor="@color/text_black_sec"
+                android:textSize="@dimen/textsize_13"
+                app:layout_constraintBottom_toBottomOf="@+id/view_bottom_bg"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/bt_comments_three"
+                app:layout_constraintTop_toTopOf="@+id/view_bottom_bg" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/line_height"
+                android:background="@color/pay_reserve_list_divider_white"
+                app:layout_constraintTop_toBottomOf="@+id/view_bottom_bg" />
+        </android.support.constraint.ConstraintLayout>
+
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_below="@+id/cl">
+            android:layout_below="@+id/cl_comments">
 
-            <include layout="@layout/refresh_head" />
-
-            <com.fanc.wheretoplay.view.MyScrollView
-                android:id="@+id/sv_reserve"
+            <com.fanc.wheretoplay.view.PullToRefreshLayout
+                android:id="@+id/ptrl_reserve"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent">
 
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical">
 
-                    <android.support.constraint.ConstraintLayout
-                        android:id="@+id/cl_comments"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:background="@color/bg_gray">
-                        <!--评论显示-->
-                        <View
-                            android:id="@+id/view_bottom_bg"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/height_60"
-                            android:layout_marginTop="@dimen/margin_10"
-                            android:background="@color/white"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="parent" />
+                <include layout="@layout/refresh_head" />
 
-                        <TextView
-                            android:id="@+id/bt_comments_one"
-                            android:layout_width="@dimen/width_75"
-                            android:layout_height="@dimen/height_30"
-                            android:layout_marginBottom="@dimen/margin_10"
-                            android:layout_marginStart="@dimen/margin_15"
-                            android:layout_marginTop="@dimen/margin_10"
-                            android:background="@drawable/shape_reserve_info_checked"
-                            android:gravity="center"
-                            android:onClick="comments"
-                            android:text="全部"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/textsize_13"
-                            app:layout_constraintBottom_toBottomOf="@+id/view_bottom_bg"
-                            app:layout_constraintEnd_toStartOf="@+id/bt_comments_two"
-                            app:layout_constraintHorizontal_chainStyle="spread_inside"
-                            app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toTopOf="@+id/view_bottom_bg" />
+                <com.fanc.wheretoplay.view.MyScrollView
+                    android:id="@+id/sv_reserve"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                        <TextView
-                            android:id="@+id/bt_comments_two"
-                            android:layout_width="@dimen/width_75"
-                            android:layout_height="@dimen/height_30"
-                            android:layout_marginBottom="@dimen/margin_10"
-                            android:layout_marginTop="@dimen/margin_10"
-                            android:background="@drawable/shape_pink"
-                            android:gravity="center"
-                            android:onClick="comments"
-                            android:text="满意"
-                            android:textColor="@color/text_black_sec"
-                            android:textSize="@dimen/textsize_13"
-                            app:layout_constraintBottom_toBottomOf="@+id/view_bottom_bg"
-                            app:layout_constraintEnd_toStartOf="@+id/bt_comments_three"
-                            app:layout_constraintStart_toEndOf="@+id/bt_comments_one"
-                            app:layout_constraintTop_toTopOf="@+id/view_bottom_bg" />
-
-                        <TextView
-                            android:id="@+id/bt_comments_three"
-                            android:layout_width="@dimen/width_75"
-                            android:layout_height="@dimen/height_30"
-                            android:layout_marginBottom="@dimen/margin_10"
-                            android:layout_marginTop="@dimen/margin_10"
-                            android:background="@drawable/selector_red_gray"
-                            android:gravity="center"
-                            android:onClick="comments"
-                            android:text="不满意"
-                            android:textColor="@color/pay_reserve_list_divider"
-                            android:textSize="@dimen/textsize_13"
-                            app:layout_constraintBottom_toBottomOf="@+id/view_bottom_bg"
-                            app:layout_constraintEnd_toStartOf="@+id/bt_comments_four"
-                            app:layout_constraintStart_toEndOf="@+id/bt_comments_two"
-                            app:layout_constraintTop_toTopOf="@+id/view_bottom_bg" />
-
-                        <TextView
-                            android:id="@+id/bt_comments_four"
-                            android:layout_width="@dimen/width_75"
-                            android:layout_height="@dimen/height_30"
-                            android:layout_marginBottom="@dimen/margin_10"
-                            android:layout_marginEnd="@dimen/margin_15"
-                            android:layout_marginTop="@dimen/margin_10"
-                            android:background="@drawable/shape_pink"
-                            android:gravity="center"
-                            android:onClick="comments"
-                            android:text="有图"
-                            android:textColor="@color/text_black_sec"
-                            android:textSize="@dimen/textsize_13"
-                            app:layout_constraintBottom_toBottomOf="@+id/view_bottom_bg"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toEndOf="@+id/bt_comments_three"
-                            app:layout_constraintTop_toTopOf="@+id/view_bottom_bg" />
-
-                        <View
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/line_height"
-                            android:background="@color/pay_reserve_list_divider_white"
-                            app:layout_constraintTop_toBottomOf="@+id/view_bottom_bg" />
-                    </android.support.constraint.ConstraintLayout>
-
-
-                    <!--评论列表-->
-                    <com.fanc.wheretoplay.view.MyRecycleView
-                        android:id="@+id/rc_comments"
-                        android:layout_width="match_parent"
+                    <LinearLayout
+                        android:layout_width="wrap_content"
                         android:layout_height="match_parent"
-                        android:background="@color/white"
-                        android:focusable="false"
-                        android:focusableInTouchMode="false"
-                        />
+                        android:orientation="vertical">
 
-                </LinearLayout>
-            </com.fanc.wheretoplay.view.MyScrollView>
+                        <!--评论列表-->
 
-            <include layout="@layout/load_more" />
-        </com.fanc.wheretoplay.view.PullToRefreshLayout>
+
+                        <com.fanc.wheretoplay.view.MyRecycleView
+                            android:id="@+id/rc_comments"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@color/white"
+                            android:focusable="false"
+                            android:focusableInTouchMode="false" />
+
+
+                    </LinearLayout>
+                </com.fanc.wheretoplay.view.MyScrollView>
+
+                <include layout="@layout/load_more" />
+            </com.fanc.wheretoplay.view.PullToRefreshLayout>
+
+            <RelativeLayout
+                android:id="@+id/rrrrrr"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:gravity="center"
+                android:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/iv"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerHorizontal="true"
+
+                    android:src="@drawable/nodate" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv"
+                    android:layout_margin="10dp"
+                    android:gravity="center"
+                    android:text="暂无相关数据" />
+            </RelativeLayout>
+        </RelativeLayout>
+
+
     </RelativeLayout>
 </layout>

@@ -999,7 +999,7 @@ public class ReserveFragment extends BaseFragment implements IOnFocusListener, L
             category = null;
 
             showProgress();
-            getStoreList(null, city.getId(), 0, 0, areaId, storeType, category, filterType, value);
+            getStoreList(null, city.getId(), 0, 10, areaId, storeType, category, filterType, value);
         }
     }
 

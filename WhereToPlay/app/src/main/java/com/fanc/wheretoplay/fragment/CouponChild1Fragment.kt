@@ -27,6 +27,7 @@ import io.reactivex.ObservableTransformer
 import io.reactivex.Observer
 import io.reactivex.subscribers.DisposableSubscriber
 import kotlinx.android.synthetic.main.activity_evaluation_success.*
+import kotlinx.android.synthetic.main.couponchildfragment.*
 import okhttp3.MultipartBody
 import java.util.*
 
@@ -36,6 +37,10 @@ import java.util.*
  */
 
 class CouponChild1Fragment : BaseLazyFragment(), CouponChildView {
+    override fun setFailDateDate() {
+        rrrrrr.visibility = View.VISIBLE
+    }
+
     var type = "1"
     override fun setCouponChildDate(content: CouponListModel.ContentBean) {
         val adapter = CouponChildAdapter(mContext, content.list, type)
@@ -63,6 +68,10 @@ class CouponChild1Fragment : BaseLazyFragment(), CouponChildView {
         val viewDivider = RecycleViewDivider(mContext, LinearLayout.HORIZONTAL)
         recycle?.addItemDecoration(viewDivider)
         return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
     }
 }
 

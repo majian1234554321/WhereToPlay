@@ -106,7 +106,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
         if ("6".equals(dataBean.list.get(position).order_function) || "7".equals(dataBean.list.get(position).order_function)) {
             holder.tvPayItemTime.setText("套餐名称：");
-            holder.tvPayItemRoomCategory.setText("有效期至：");
+            if ("6".equals(dataBean.list.get(position).order_function)) {
+                holder.tvPayItemRoomCategory.setText("有效期至：");
+            } else {
+                holder.tvPayItemRoomCategory.setText("预订时间：");
+            }
+
             holder.tvPayItemReserveCode.setText("数量：");
             holder.tvPayItemRealTime.setText(dataBean.list.get(position).package_name);
             holder.tvPayItemDecorateCategory.setVisibility(View.GONE);
@@ -288,7 +293,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 intent.putExtra("pay_Action", "预订类型：结单支付");
                 intent.putExtra("money", dataBean.list.get(position).total);
                 break;
-            case "套餐详情":
+            case "预订类型：套餐":
                 intent.setClass(context, PayPayActivity.class);
                 intent.putExtra("type", "套餐详情");
                 intent.putExtra("storeIdValue", dataBean.list.get(position).store_id);

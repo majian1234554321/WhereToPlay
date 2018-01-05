@@ -9,4 +9,6 @@ import com.fanc.wheretoplay.datamodel.CouponListModel
  */
 interface CouponChildView {
     fun setCouponChildDate(content: CouponListModel.ContentBean)
+
+    fun setFailDateDate()
 }

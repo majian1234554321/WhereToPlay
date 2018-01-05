@@ -366,7 +366,12 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
 
 
         typeValue = intent.getStringExtra("type")
-        tbv.setTv_title(typeValue)
+        if ("优惠预订" == typeValue) {
+            tbv.setTv_title("优惠预订支付")
+        } else {
+            tbv.setTv_title("套餐支付")
+        }
+
         storeIdValue = intent.getStringExtra("storeIdValue")
         packageIdValue = intent.getStringExtra("packageIdValue")
 

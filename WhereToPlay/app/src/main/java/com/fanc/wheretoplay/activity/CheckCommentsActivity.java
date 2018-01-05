@@ -10,6 +10,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.RatingBar;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
@@ -69,6 +70,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
     private List mStores;
     private CheckCommentsAdapter checkCommentsAdapter;
     private MyScrollView mSvReserve;
+    private RelativeLayout rrrrrr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,6 +97,8 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
         mBtpicture = mCheckCommentsBinding.btCommentsFour;
         mPtrl = mCheckCommentsBinding.ptrlReserve;
         mSvReserve = mCheckCommentsBinding.svReserve;
+        rrrrrr = mCheckCommentsBinding.rrrrrr;
+
     }
 
     private void init() {
@@ -275,7 +279,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
      * @param pageIndex
      * @param pageSize
      */
-    private void requestComments(int type, int pageIndex, int pageSize) {
+    private void requestComments(int type, final int pageIndex, int pageSize) {
         Log.e("dd", intent.getStringExtra(Constants.STORE_ID));
         OkHttpUtils.post()
                 .url(Network.User.PUBLIC_COMMENTS)
@@ -298,6 +302,12 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
                         if (response.getComment_list() == null) {
                             ToastUtils.showShortToast(CheckCommentsActivity.this, getResources().getString(R.string.no_data));
                             refreshOrLoadFail();
+                            if (pageIndex == 1) {
+                                rrrrrr.setVisibility(View.VISIBLE);
+                                mSvReserve.setVisibility(View.GONE);
+                            } else {
+
+                            }
                             return;
                         }
                         if (response.code != 0 || !TextUtils.isEmpty(response.message)) {
@@ -307,7 +317,6 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
                                 LocalBroadcastManager.getInstance(CheckCommentsActivity.this).sendBroadcast(intent);
                             }
                             refreshOrLoadFail();
-                            return;
                         } else {
                             mResponse = response;
                             showCheckComments(response);

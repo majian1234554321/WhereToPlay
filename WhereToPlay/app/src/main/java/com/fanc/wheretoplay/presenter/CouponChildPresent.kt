@@ -40,7 +40,8 @@ class CouponChildPresent(val context: Context, val view: CouponChildView, val to
                     }
 
                     override fun failed(t: String) {
-                        Toast.makeText(context, t, Toast.LENGTH_LONG).show()
+                       // Toast.makeText(context, t, Toast.LENGTH_LONG).show()
+                        view.setFailDateDate()
                     }
                 })
     }
