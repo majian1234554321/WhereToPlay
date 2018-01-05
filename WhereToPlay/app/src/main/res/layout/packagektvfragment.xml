@@ -206,44 +206,105 @@
 
 
             <TextView
+                android:id="@+id/tv_date"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
                 tools:text="12-26 18：00-次日02：00 （8小时）" />
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="欢畅时长不足8小时，按8小时计算"
+                android:layout_margin="12dp"
+                android:text="欢畅时长不足6小时，按6小时计算"
                 android:textColor="#fff55669"
                 android:textSize="12dp" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
-
-            <TextView
+            <com.fanc.wheretoplay.view.MyGridView
+                android:id="@+id/myGridView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:numColumns="5" />
+
+            <TextView
+                android:id="@+id/tv_desc"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
                 android:text="包房"
                 android:textColor="#ff666666"
                 android:textSize="15dp" />
 
-            <RelativeLayout
+            <com.fanc.wheretoplay.view.MyRecycleView
+                android:id="@+id/recycle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:horizontalSpacing="20dp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:verticalSpacing="20dp"
+
+                />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:text="小包（3-5人）" />
+                    android:layout_weight="1" />
 
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentRight="true"
-                    android:text="¥3980" />
-            </RelativeLayout>
+                    android:layout_weight="2"
+                    android:gravity="right|center_vertical"
+                    android:text="总价值" />
+
+                <TextView
+                    android:id="@+id/tv_falseMoney1"
+
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+
+                    android:layout_marginRight="12dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:textColor="#ff333333"
+                    tools:text="2580元" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1" />
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="2"
+                    android:gravity="right"
+                    android:text="套餐价" />
+
+                <TextView
+                    android:id="@+id/tv_realMoney1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="12dp"
+                    android:layout_weight="1"
+                    android:gravity="right"
+                    android:textColor="@color/text_red"
+                    tools:text="2580元" />
+            </LinearLayout>
 
 
             <TextView

@@ -158,7 +158,7 @@
 
         <RadioGroup
             android:id="@+id/rg2"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
             android:layout_marginTop="8dp"
@@ -166,7 +166,7 @@
 
             <RadioButton
                 android:id="@+id/rb21"
-                android:layout_width="match_parent"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="12dp"
                 android:layout_weight="1"
@@ -187,6 +187,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/selector_boder"
                 android:button="@null"
+                android:visibility="gone"
                 android:gravity="center"
                 android:padding="6dp"
                 android:text="中包（5~8人）"
@@ -194,6 +195,7 @@
 
             <RadioButton
                 android:id="@+id/rb23"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="12dp"

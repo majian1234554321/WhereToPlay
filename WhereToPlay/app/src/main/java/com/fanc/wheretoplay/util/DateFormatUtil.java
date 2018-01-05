@@ -1301,8 +1301,8 @@ public class DateFormatUtil {
     }
 
     public static boolean isCurrentDay(String value) {
-        if (TextUtils.isEmpty(value)){
-            return  true;
+        if (TextUtils.isEmpty(value)) {
+            return true;
         }
         //当前时间
         Date now = new Date();
@@ -1313,6 +1313,19 @@ public class DateFormatUtil {
 
 
     }
+
+    public static String getMM() {
+        Calendar cale = Calendar.getInstance();
+        int month = cale.get(Calendar.MONTH) + 1;
+        if (month<10){
+            return "0"+month;
+        }else {
+            return month+"";
+        }
+
+    }
+
+
 }
 
 

@@ -319,6 +319,8 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
                 }
             });
         }
+
+
     }
 
     /**
@@ -347,7 +349,7 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
                         showStoreDetail(content.store);
                         phonevalue = content.store.phone;
 
-                        if (!"2".equals(type)) {
+                        if (!"2".equals(type)&&type!=null) {
                             if (content.store != null & content.store.packageX != null) {
                                 getChildFragmentManager().beginTransaction().replace(R.id.fragment,
                                         new ExtendFragment(

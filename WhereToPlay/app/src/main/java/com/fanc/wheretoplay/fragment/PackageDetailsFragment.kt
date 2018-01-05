@@ -123,7 +123,7 @@ class PackageDetailsFragment(val order_idValue: String?) : BaseFragment(), Detai
 
         val list = contentBean?.package_detail?.product_list
         list?.forEachIndexed { index, productListBean ->
-            val model = PackageModel.ContentBean.ProductListBean(productListBean.name, productListBean.price, productListBean.num)
+            val model = PackageModel.ContentBean.ProductListBean(productListBean.name, productListBean.price, productListBean.num,productListBean.unit)
             lists.add(model)
         }
 

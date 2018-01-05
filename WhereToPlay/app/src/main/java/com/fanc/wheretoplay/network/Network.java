@@ -14,6 +14,8 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 
+import com.fanc.wheretoplay.datamodel.BookPackageDetailModel;
+import com.fanc.wheretoplay.datamodel.BookPackageListModel;
 import com.fanc.wheretoplay.datamodel.CancleOrderModel;
 import com.fanc.wheretoplay.datamodel.CouponCountModel;
 import com.fanc.wheretoplay.datamodel.CouponListModel;
@@ -46,8 +48,8 @@ import java.util.List;
 public class Network {
 
 
-     public static String BASE = "http://testapi.51tzl.cn";   // 测试
-   //1 public static String BASE = "http://ktv.51tzl.cn";
+    // public static String BASE = "http://testapi.51tzl.cn";   // 测试
+    public static String BASE = "http://ktv.51tzl.cn";
 
 
     public static String IMAGE = "";   // 测试
@@ -421,6 +423,32 @@ public class Network {
         @POST("User/setMealOrderPayoff")
         Observable<OrderPayoffModel> setMealOrderPayoff(@Part List<MultipartBody.Part> fileA);
 
+
+        //优惠预订列表
+        @Multipart
+        @POST("Package/bookPackageList")
+        Observable<BookPackageListModel> bookPackageList(@Part List<MultipartBody.Part> fileA);
+
+
+        //优惠预订详情
+        @Multipart
+        @POST("Package/bookPackageDetail")
+        Flowable<BookPackageDetailModel.ContentBean> bookPackageDetail(@Part List<MultipartBody.Part> fileA);
+
+
+
+        //KTV详情支付获取订单Id
+        @Multipart
+        @POST("User/discountBookImmediatelyPay")
+        Observable<AccessOrderIdModel> discountBookImmediatelyPay(@Part List<MultipartBody.Part> fileA);
+
+
+
+
+        //优惠券的使用状态
+        @Multipart
+        @POST("User/discountBookPayoff")
+        Observable<OrderPayoffModel> discountBookPayoff(@Part List<MultipartBody.Part> fileA);
 
 
     }

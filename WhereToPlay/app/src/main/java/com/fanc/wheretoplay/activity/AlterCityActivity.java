@@ -77,6 +77,8 @@ public class AlterCityActivity extends BaseActivity {
         setListeners();
     }
 
+
+
     private void initViews() {
         mTmAlterCity = cityBinding.tmAlterCity;
         mEtAlterCity = cityBinding.etAlterCity;
@@ -86,6 +88,7 @@ public class AlterCityActivity extends BaseActivity {
         mLvAlterCityResult = cityBinding.lvAlterCityResult;
         mTvAlterCitySearchError = cityBinding.tvAlterCitySearchError;
         mTvAlterCityLoading = cityBinding.tvAlterCityLoading;
+
     }
 
     private void init() {

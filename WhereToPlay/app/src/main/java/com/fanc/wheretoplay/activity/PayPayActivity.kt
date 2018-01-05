@@ -171,8 +171,20 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
         list2.add(MultipartBody.Part.createFormData("money", value4))
         list2.add(MultipartBody.Part.createFormData("type", payWay.toString()))
         list2.add(MultipartBody.Part.createFormData("code", password))
-        Retrofit_RequestUtils.getRequest().setMealOrderPayoff(list2).
-                subscribeOn(Schedulers.io())
+
+
+        val observable = if (typeValue == "KTV套餐详情") {
+            Retrofit_RequestUtils
+                    .getRequest()
+                    .discountBookPayoff(list2)
+
+        } else {
+            Retrofit_RequestUtils
+                    .getRequest()
+                    .setMealOrderPayoff(list2)
+        }
+
+        observable.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<OrderPayoffModel> {
                     override fun onSubscribe(disposable: Disposable) {
@@ -192,6 +204,8 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
                             3 -> {
                                 if ("0" == orderPayoffModel.code) {
                                     paySuccess()
+                                } else {
+                                    Toast.makeText(this@PayPayActivity, orderPayoffModel.code.plus(orderPayoffModel.message).plus("------->" + orderId), Toast.LENGTH_SHORT).show()
                                 }
                             }
 
@@ -223,15 +237,53 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
         val list = arrayListOf<MultipartBody.Part>()
 
 
-
-        list.add(MultipartBody.Part.createFormData("store_id", storeIdValue))
+        list.add(MultipartBody.Part.createFormData("store_id", if (TextUtils.isEmpty(storeIdValue)) "" else storeIdValue))
         list.add(MultipartBody.Part.createFormData("token", mUser.token))
-        list.add(MultipartBody.Part.createFormData("package_id", packageIdValue))
+        list.add(MultipartBody.Part.createFormData("package_id", if (TextUtils.isEmpty(packageIdValue)) "" else packageIdValue))
+
+        list.add(MultipartBody.Part.createFormData("book_package_detail_id", if (TextUtils.isEmpty(packageIdValue)) "" else packageIdValue))
+        list.add(MultipartBody.Part.createFormData("book_start_time", if (TextUtils.isEmpty(book_start_time)) "" else book_start_time))
+        list.add(MultipartBody.Part.createFormData("discount_book_hour", if (TextUtils.isEmpty(discount_book_hour)) "" else discount_book_hour))
+        list.add(MultipartBody.Part.createFormData("book_week_day", if (TextUtils.isEmpty(book_week_day)) "" else book_week_day))
+
+        val observable = if (typeValue == "KTV套餐详情") {
+            Retrofit_RequestUtils
+                    .getRequest()
+                    .discountBookImmediatelyPay(list)
+
+        } else {
+            Retrofit_RequestUtils
+                    .getRequest()
+                    .setMealImmediatelyPay(list)
+        }
 
 
-        Retrofit_RequestUtils
-                .getRequest()
-                .setMealImmediatelyPay(list)
+        /* observable.subscribeOn(Schedulers.io())
+                 .observeOn(AndroidSchedulers.mainThread())
+                 .subscribe(object :Observer<AccessOrderIdModel>{
+                     override fun onNext(p0: AccessOrderIdModel) {
+                         //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                         Toast.makeText(this@PayPayActivity, p0.message, Toast.LENGTH_LONG).show()
+                     }
+
+                     override fun onComplete() {
+                         //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
+                     }
+
+                     override fun onError(p0: Throwable) {
+                         //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                     }
+
+                     override fun onSubscribe(p0: Disposable) {
+                         //TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                     }
+
+                 })*/
+
+
+        /****************************/
+        observable
                 .subscribeOn(Schedulers.io())
                 .flatMap { accessOrderIdModel ->
                     val list2 = ArrayList<MultipartBody.Part>()
@@ -241,7 +293,12 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
                     list2.add(MultipartBody.Part.createFormData("type", payWay.toString()))
                     list2.add(MultipartBody.Part.createFormData("code", password))
                     orderId = accessOrderIdModel.content.order_id
-                    Retrofit_RequestUtils.getRequest().setMealOrderPayoff(list2)
+                    if (typeValue == "KTV套餐详情") {
+                        Retrofit_RequestUtils.getRequest().discountBookPayoff(list2)
+                    } else {
+                        Retrofit_RequestUtils.getRequest().setMealOrderPayoff(list2)
+                    }
+
                 }.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<OrderPayoffModel> {
@@ -262,6 +319,8 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
                             3 -> {
                                 if ("0" == orderPayoffModel.code) {
                                     paySuccess()
+                                } else {
+                                    Toast.makeText(this@PayPayActivity, orderPayoffModel.message.plus(orderId), Toast.LENGTH_SHORT).show()
                                 }
                             }
 
@@ -282,14 +341,21 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
 
                     }
                 })
-
+        /**************************/
 
     }
 
 
-    var discountValue: String = ""
-    var address: String = ""
-    var storeName: String = ""
+    var discountValue: String? = ""
+    var address: String? = ""
+    var storeName: String? = ""
+    var typeValue: String? = ""
+
+    var book_package_detail_id: String? = ""
+    var book_week_day: String? = ""
+    var discount_book_hour: String? = ""
+
+    var book_start_time: String? = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -298,7 +364,9 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
         wxApi = WXAPIFactory.createWXAPI(mContext, Constants.WX_APP_ID)
         wxApi.registerApp(Constants.WX_APP_ID)
 
-        tbv.setTv_title(intent.getStringExtra("type"))
+
+        typeValue = intent.getStringExtra("type")
+        tbv.setTv_title(typeValue)
         storeIdValue = intent.getStringExtra("storeIdValue")
         packageIdValue = intent.getStringExtra("packageIdValue")
 
@@ -315,6 +383,13 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
         val value3 = intent.getStringExtra("value3")
         value4 = intent.getStringExtra("value4")
         val value5 = intent.getStringExtra("value5")
+
+
+        book_package_detail_id = intent.getStringExtra("book_package_detail_id")
+        book_week_day = intent.getStringExtra("book_week_day")
+        discount_book_hour = intent.getStringExtra("discount_book_hour")
+        book_start_time = intent.getStringExtra("book_start_time")
+
 
         val fragment = PayPayFragment(value0, value1, value2, value3, value4, value5)
         supportFragmentManager.beginTransaction().replace(R.id.fragment_dispaly, fragment).commit()

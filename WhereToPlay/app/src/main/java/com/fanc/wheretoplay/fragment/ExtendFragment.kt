@@ -7,17 +7,26 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioGroup
+import android.widget.Toast
 import com.fanc.wheretoplay.R
 import com.fanc.wheretoplay.adapter.Extend0Adapter
 import com.fanc.wheretoplay.adapter.ExtendAdapter
 
 import com.fanc.wheretoplay.base.BaseFragment
+import com.fanc.wheretoplay.datamodel.BookPackageListModel
 import com.fanc.wheretoplay.datamodel.MerchantDetailModel
 import com.fanc.wheretoplay.divider.RecycleViewDivider
+import com.fanc.wheretoplay.rx.Retrofit_RequestUtils
 import com.fanc.wheretoplay.util.DateFormatUtil
 import com.fanc.wheretoplay.util.UIUtils
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.extendfragment.*
+import okhttp3.MultipartBody
 import java.util.*
+import kotlin.collections.ArrayList
 
 /**
  * @author admin
@@ -26,23 +35,44 @@ import java.util.*
 @SuppressLint("ValidFragment")
 class ExtendFragment(
         val packageX: MerchantDetailModel.ContentBean.StoreBean.PackageBean?, val type: String
-        , val storeid: String?, val discountValue: String, val storeName: String, val address: String, val phonevalue: String
+        , val storeid: String, val discountValue: String, val storeName: String, val address: String, val phonevalue: String
 ) : BaseFragment(), View.OnClickListener, RadioGroup.OnCheckedChangeListener {
+
+    var dateType:String =""
+    val mDate = (0..6).map { Date(System.currentTimeMillis() + it * DAY) }
+
     override fun onCheckedChanged(p0: RadioGroup?, p1: Int) {
+        var weekType:String =""
+
         when (p1) {
+
             R.id.rb1 -> {
+                weekType =rb1.text.substring(rb1.text.lastIndex)
+                dateType = rb1.text.split("\n")[0]
             }
             R.id.rb2 -> {
+                weekType =rb2.text.substring(rb2.text.lastIndex)
+                dateType = rb2.text.split("\n")[0]
             }
             R.id.rb3 -> {
+                weekType =rb3.text.substring(rb3.text.lastIndex)
+                dateType = rb3.text.split("\n")[0]
             }
             R.id.rb4 -> {
+                weekType =rb4.text.substring(rb4.text.lastIndex)
+                dateType = rb4.text.split("\n")[0]
             }
             R.id.rb5 -> {
+                weekType =rb5.text.substring(rb5.text.lastIndex)
+                dateType = rb5.text.split("\n")[0]
             }
             R.id.rb6 -> {
+                weekType =rb6.text.substring(rb6.text.lastIndex)
+                dateType = rb6.text.split("\n")[0]
             }
             R.id.rb7 -> {
+                weekType =rb7.text.substring(rb7.text.lastIndex)
+                dateType = rb7.text.split("\n")[0]
             }
 
 
@@ -56,6 +86,7 @@ class ExtendFragment(
             else -> {
             }
         }
+        loadKTVData(weekType)
     }
 
 
@@ -63,6 +94,9 @@ class ExtendFragment(
 
 
     lateinit var adapter: ExtendAdapter
+
+     var adapter0: Extend0Adapter? = null
+
     var flag: Boolean = false
 
     override fun onClick(p0: View?) {
@@ -96,6 +130,11 @@ class ExtendFragment(
 
         if (type == "3") {//KTV
             ll00.visibility = View.VISIBLE
+            val weekType: String = DateFormatUtil.getCustomDayOfWeek(mDate[0]).substring(2)
+            dateType = DateFormatUtil.getCustomDay(mDate[0]).toString()
+            loadKTVData(weekType)
+
+
         } else {//酒吧
             ll00.visibility = View.GONE
         }
@@ -119,7 +158,7 @@ class ExtendFragment(
 
 
         if (list.size > 2) {
-            tv_more.text = "更多".plus(list?.size?.minus(2)).plus("个套餐 ")
+            tv_more.text = "更多".plus(list.size.minus(2)).plus("个套餐 ")
         } else {
             tv_more.visibility = View.GONE
         }
@@ -147,10 +186,50 @@ class ExtendFragment(
         rg2.setOnCheckedChangeListener(this)
 
 
-        val adapter0 = Extend0Adapter(mContext, flag, list, storeid, discountValue, storeName, address, phonevalue)
+    }
 
-        recycle0.adapter = adapter0
+    private fun loadKTVData(weekType: String) {
+        val requestFileA = MultipartBody.Part.createFormData("token", mUser.token)
+        val requestFileB = MultipartBody.Part.createFormData("store_id", storeid)
+        val requestFilec = MultipartBody.Part.createFormData("week_day", weekType)
 
+        val list = arrayListOf<MultipartBody.Part>()
+        list.add(requestFileA)
+        list.add(requestFileB)
+        list.add(requestFilec)
 
+        Retrofit_RequestUtils
+                .getRequest()
+                .bookPackageList(list)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(object : Observer<BookPackageListModel> {
+                    override fun onSubscribe(p0: Disposable) {
+
+                    }
+
+                    override fun onError(p0: Throwable) {
+                        Toast.makeText(mContext, p0.toString(), Toast.LENGTH_LONG).show()
+                    }
+
+                    override fun onNext(p0: BookPackageListModel) {
+                        if (p0.content.isNotEmpty()) {
+                            rb21.text = p0.content[0].room_name
+                            adapter0 = Extend0Adapter(mContext, flag, p0.content[0].package_list as ArrayList<BookPackageListModel.ContentBean.PackageListBean>
+                                    , storeid, discountValue, storeName, address, phonevalue,dateType,p0.content[0].room_name,weekType)
+                            recycle0.adapter = adapter0
+                        } else {
+                            adapter0?.clearAll()
+                            rb21.visibility = View.GONE
+                           // Toast.makeText(mContext, "", Toast.LENGTH_LONG).show()
+                        }
+
+                    }
+
+                    override fun onComplete() {
+
+                    }
+
+                })
     }
 }
