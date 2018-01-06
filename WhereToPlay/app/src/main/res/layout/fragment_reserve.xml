@@ -331,6 +331,7 @@
 
                     <!--“区域 风格”栏-->
                     <LinearLayout
+
                         android:id="@+id/ll_reserve_filter"
                         android:layout_width="match_parent"
                         android:layout_height="@dimen/height_40"
@@ -418,6 +419,8 @@
         </com.fanc.wheretoplay.view.PullToRefreshLayout>
         <!--"区域 风格"栏-->
         <LinearLayout
+
+
             android:id="@+id/ll_reserve_filter_suspend"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_40"
@@ -429,6 +432,8 @@
             <!--区域-->
             <LinearLayout
                 android:id="@+id/ll_reserve_area_suspend"
+
+
                 android:layout_width="@dimen/width_0"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -466,6 +471,8 @@
                 app:layout_constraintVertical_bias="0.52"/>
             <!--风格-->
             <LinearLayout
+
+
                 android:id="@+id/ll_reserve_filter_real_suspend"
                 android:layout_width="@dimen/width_0"
                 android:layout_height="match_parent"
@@ -492,121 +499,7 @@
 
         </LinearLayout>
 
-        <!--去掉“区域 筛选 全部”选项栏-->
-        <!--
-                <LinearLayout
-                    android:id="@+id/ll_reserve_filter_suspend"
-                    android:layout_width="match_parent"
-                    android:layout_height="@dimen/height_40"
-                    android:layout_below="@+id/rl_top_menu"
-                    android:background="@color/filter"
-                    android:gravity="center_vertical"
-                    android:orientation="horizontal"
-                    android:visibility="invisible">
 
-                    <LinearLayout
-                        android:id="@+id/ll_reserve_area_suspend"
-                        android:layout_width="@dimen/width_0"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/tv_reserve_area__suspend"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="@string/area_filter"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/textsize_levelsmall"/>
-
-                        <ImageView
-                            android:id="@+id/iv_reserve_area__suspend"
-                            android:layout_width="@dimen/width_20"
-                            android:layout_height="@dimen/height_36"
-                            android:padding="@dimen/padding_5"
-                            android:src="@drawable/pull_down_3"/>
-                    </LinearLayout>
-
-
-                    <View
-                        android:id="@+id/v_reserve_divider1__suspend"
-                        android:layout_width="@dimen/line_height"
-                        android:layout_height="@dimen/height_15"
-                        android:background="@color/white"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/tv_reserve_filter"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/tv_reserve_area"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.52"/>
-
-                    <LinearLayout
-                        android:id="@+id/ll_reserve_filter_real_suspend"
-                        android:layout_width="@dimen/width_0"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/tv_reserve_filter_suspend"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="@string/filter"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/textsize_levelsmall"/>
-
-                        <ImageView
-                            android:id="@+id/iv_reserve_filter__suspend"
-                            android:layout_width="@dimen/width_20"
-                            android:layout_height="@dimen/height_36"
-                            android:padding="@dimen/padding_5"
-                            android:src="@drawable/pull_down_3"/>
-                    </LinearLayout>
-
-
-                    <View
-                        android:id="@+id/v_reserve_divider2_suspend"
-                        android:layout_width="@dimen/line_height"
-                        android:layout_height="@dimen/height_15"
-                        android:background="@color/white"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintEnd_toStartOf="@+id/tv_reserve_category"
-                        app:layout_constraintHorizontal_bias="0.5"
-                        app:layout_constraintStart_toEndOf="@+id/tv_reserve_filter"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintVertical_bias="0.52"/>
-
-                    <LinearLayout
-                        android:id="@+id/ll_reserve_category_suspend"
-                        android:layout_width="@dimen/width_0"
-                        android:layout_height="match_parent"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/tv_reserve_category_suspend"
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:gravity="center"
-                            android:text="距离最近"
-                            android:textColor="@color/white"
-                            android:textSize="@dimen/textsize_levelsmall"/>
-
-                        <ImageView
-                            android:id="@+id/iv_reserve_category_suspend"
-                            android:layout_width="@dimen/width_20"
-                            android:layout_height="@dimen/height_36"
-                            android:padding="@dimen/padding_5"
-                            android:src="@drawable/pull_down_3"/>
-                    </LinearLayout>
-
-                </LinearLayout>
-        -->
 
     </RelativeLayout>
 </layout>

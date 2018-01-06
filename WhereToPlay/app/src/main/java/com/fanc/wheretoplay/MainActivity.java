@@ -24,6 +24,7 @@ import com.fanc.wheretoplay.fragment.DiscoverFragment;
 import com.fanc.wheretoplay.fragment.MineFragment;
 import com.fanc.wheretoplay.fragment.PayFragment;
 import com.fanc.wheretoplay.fragment.ReserveFragment;
+import com.fanc.wheretoplay.fragment.ReserveFragment2;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
@@ -86,8 +87,9 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
      */
     private void initFragments() {
         fragments = new ArrayList<>();
-        fragments.add(reserveFragment = new ReserveFragment());
-        fragments.add(new PayFragment());
+        fragments.add(new ReserveFragment2());
+      //  fragments.add(reserveFragment = new ReserveFragment());
+       fragments.add(new PayFragment());
         fragments.add(new DiscoverFragment());
         fragments.add(new MineFragment());
 

@@ -151,6 +151,8 @@ dependencies {
     implementation project(':didi_sdk_for_common_v1.1.0_12_08')
     implementation 'com.android.support:support-v4:27.0.2'
     debugCompile 'com.amitshekhar.android:debug-db:1.0.0'
+    compile 'com.jcodecraeer:xrecyclerview:1.5.7'
+
 }
 
 

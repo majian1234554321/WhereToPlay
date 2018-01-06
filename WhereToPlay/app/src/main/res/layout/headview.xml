@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+    <com.youth.banner.Banner
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/banner_reserve"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_150"
+        android:background="@color/bg"
+        app:indicator_drawable_selected="@drawable/indicator_drawable_selected"
+        app:indicator_drawable_unselected="@drawable/indicator_drawable_unselected"
+        app:indicator_height="@dimen/margin_6"
+        app:indicator_width="@dimen/margin_6"
+        />
+
+
+    <LinearLayout
+        android:id="@+id/ll_reserve_entertainment"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_103"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        android:layout_below="@id/rl_top_menu"
+        android:background="@color/white"
+        >
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_marginLeft="@dimen/height_15">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:src="@drawable/shape_reserve_shortline"
+                android:layout_gravity="top"
+                android:layout_marginTop="@dimen/height_15"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reserve_entertainment"
+                android:textSize="@dimen/textsize_levelmedium"
+                android:layout_marginTop="@dimen/margin_10"
+                android:textColor="@color/text_black"
+                />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/ll_reserve_commercial_ktv"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_reserve_commercial_ktv"
+                    android:layout_width="@dimen/width_50"
+                    android:layout_height="@dimen/height_50"
+                    android:src="@drawable/reserve_commercial_ktv"
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:layout_gravity="center_horizontal"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_reserve_commercial_ktv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reserve_commercial_ktv"
+                    android:textSize="@dimen/textsize_levelmedium"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/text_black"/>
+
+            </LinearLayout>
+
+
+
+            <LinearLayout
+                android:id="@+id/ll_reserve_bar"
+                android:layout_width="@dimen/width_0"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_reserve_reserve_bar"
+                    android:layout_width="@dimen/width_50"
+                    android:layout_height="@dimen/height_50"
+                    android:src="@drawable/reserve_bar"
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:layout_gravity="center_horizontal"/>
+
+                <TextView
+                    android:id="@+id/tv_reserve_reserve_bar"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reserve_bar"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="@dimen/textsize_levelmedium"
+                    android:textColor="@color/text_black"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/ll_reserve_volume_sales"
+                android:layout_width="@dimen/width_0"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                >
+
+                <ImageView
+                    android:id="@+id/iv_reserve_volume_sales"
+                    android:layout_width="@dimen/width_50"
+                    android:layout_height="@dimen/height_50"
+                    android:src="@drawable/reserve_volume_sales"
+                    android:layout_marginTop="@dimen/margin_15"
+                    android:layout_gravity="center_horizontal"
+                    />
+
+                <TextView
+                    android:id="@+id/tv_reserve_volume_sales"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/reserve_volume_sales"
+                    android:layout_marginTop="@dimen/margin_10"
+                    android:textSize="@dimen/textsize_levelmedium"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/text_black"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:id="@+id/ll_reserve_filter"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/height_40"
+        android:background="@color/white"
+        android:gravity="center_vertical"
+        android:layout_marginTop="@dimen/margin_11"
+        android:orientation="horizontal">
+
+        <LinearLayout
+
+
+            android:id="@+id/ll_reserve_area"
+            android:layout_width="@dimen/width_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_reserve_area"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/area_filter"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textsize_levelsmall"/>
+
+            <ImageView
+                android:id="@+id/iv_reserve_area"
+                android:layout_width="@dimen/width_20"
+                android:layout_height="@dimen/height_36"
+                android:padding="@dimen/padding_5"
+                android:src="@drawable/pull_down_3"/>
+        </LinearLayout>
+
+
+        <View
+            android:id="@+id/v_reserve_divider1"
+            android:layout_width="@dimen/line_height"
+            android:layout_height="@dimen/height_15"
+            android:background="@color/btn_pressed"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/tv_reserve_filter"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toEndOf="@+id/tv_reserve_area"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.52"/>
+
+        <LinearLayout
+            android:id="@+id/ll_reserve_filter_real"
+            android:layout_width="@dimen/width_0"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/tv_reserve_filter"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:text="@string/reserve_style"
+                android:textColor="@color/text_black"
+                android:textSize="@dimen/textsize_levelsmall"/>
+
+            <ImageView
+                android:id="@+id/iv_reserve_filter"
+                android:layout_width="@dimen/width_20"
+                android:layout_height="@dimen/height_36"
+                android:padding="@dimen/padding_5"
+                android:src="@drawable/pull_down_3"/>
+        </LinearLayout>
+
+    </LinearLayout>
+
+    </LinearLayout>
+
+</RelativeLayout>
