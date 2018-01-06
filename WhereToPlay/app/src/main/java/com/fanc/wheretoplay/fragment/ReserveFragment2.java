@@ -240,6 +240,24 @@ public class ReserveFragment2 extends BaseFragment implements IOnFocusListener, 
     }
 
 
+    @Override
+    public void onClick(View view) {
+        Intent intent = new Intent(mContext, ReuseActivity.class);
+        switch (view.getId()) {
+            case R.id.tv_reserve_city:
+                intent.setClass(mContext, AlterCityActivity.class);
+                mContext.startActivity(intent);
+                break;
+            case R.id.ib_reserve_search:
+                intent.putExtra(Constants.PAGE, Constants.SEARCH);
+                mContext.startActivity(intent);
+                break;
+            default:
+                break;
+        }
+
+    }
+
     private void init() {
         //商务ktv圆形按钮被选中
         clickToChange(0);
@@ -903,21 +921,7 @@ public class ReserveFragment2 extends BaseFragment implements IOnFocusListener, 
         getStoreList("onLoadMore", city.getId(), page, size, areaId, storeType, category, filterType, value);
     }
 
-    @Override
-    public void onClick(View view) {
-        Intent intent = new Intent(mContext, ReuseActivity.class);
-        switch (view.getId()) {
-            case R.id.tv_reserve_city:
-                intent.setClass(mContext, AlterCityActivity.class);
-                break;
-            case R.id.ib_reserve_search:
-                intent.putExtra(Constants.PAGE, Constants.SEARCH);
-                break;
-            default:
-                break;
-        }
-        mContext.startActivity(intent);
-    }
+
 
     class Receiver extends BroadcastReceiver {
 
