@@ -48,8 +48,8 @@ import java.util.List;
 public class Network {
 
 
-   //  public static String BASE = "http://testapi.51tzl.cn";   // 测试
-     public static String BASE = "http://ktv.51tzl.cn";
+     public static String BASE = "http://testapi.51tzl.cn";   // 测试
+  //  public static String BASE = "http://ktv.51tzl.cn";
 
 
     public static String IMAGE = "";   // 测试
@@ -99,7 +99,7 @@ public class Network {
         public static String USER_HOME = USER + "User/home";// 我的主页
         public static String USER_RCOMMEND_FRIEND = USER + "Reco/recomList";// 推荐好友
         public static String USER_RCOMMEND_MONEY = USER + "Reco/recomReward";// 推荐奖励
-        public static String RECOMREWARD = USER + "Reco/recomReward";// 推荐
+
 
         public static String USER_MODIFY_AVATAR = USER + "User/modifyAvatar";// 修改头像
         public static String USER_MODIFY_PRO_FILE = USER + "User/modifyProfile";//修改资料
@@ -240,32 +240,24 @@ public class Network {
         public static String GENDER = "gender";//性别
         public static String BIRTHDAY = "birthday";// 生日
         public static String SIGNATURE = "signature";//签名
-        public static String MESSAGE_ID = "message_id";// 消息id
+
         public static String STORE_NAME = "store_name";// 店名
         public static String STORE_ID = "store_id";// 店名
         public static String TIMES = "times";// 时间戳
-        public static String REPASSWORD = "repassword";// 第二次输入密码
+
         public static String TITLE = "title";// 内容
         public static String CONTENT = "content";// 内容
         public static String OS = "os";// 手机系统
         public static String VERSION = "version";// 版本
         public static String COLLECT_ID = "collect_id";//收藏id
         public static String WAITER_ID = "waiter_id";//服务员id
-        public static String PRICE = "price";// 价格
-        public static String PAY_PW = "pay_pw";// 支付密码
+
         public static String ROOM_ID = "room_id";// 房型id
         public static String ARRIVAL_TIME = "arrival_time";// 预订时间
         public static String REMARK = "remark";// 备注
         public static String CAR_NUM = "car_num";// 车位数
         public static String MANS = "mans";// 人数
-        public static String SYS_ENVIRONMENT = "sys_environment";//系统环境评论标签id
-        public static String SYS_ATMOSPHERE = "sys_atmosphere";//系统环境评论标签id
-        public static String SYS_SERVICE = "sys_service";//系统环境评论标签id
-        public static String SYS_OTHER = "sys_other";//系统环境评论标签id
-        public static String CUS_ENVIRONMENT = "cus_environment";//自定义环境评论内容
-        public static String CUS_ATMOSPHERE = "cus_atmosphere";//自定义气氛评论内容
-        public static String CUS_SERVICE = "cus_service";//自定义服务评论内容
-        public static String CUS_OTHER = "cus_other";//自定义其他评论内容
+
         public static String MONEY = "money";// 充值金额
         public static String ORDERFORM_ID = "orderform_id";// 订单id
         public static String KEYWORD = "keyword";//关键字
@@ -275,7 +267,7 @@ public class Network {
         public static String COUPON_ID = "coupon_id";// 优惠券id
         public static String PREPAY = "prepay";// 预付
         public static String CITY = "city";// 城市
-        public static String DISCOUNT = "discount";//优惠金额
+
         public static String REGISTRATIONID = "registrationid";// 极光注册id
         public static String REMAIN = "remain";// 剩余订金
         public static String DISPLAY_BALANCE = "display_balance";
@@ -407,12 +399,12 @@ public class Network {
         @POST("Public/storeDetail")
         Flowable<MerchantDetailModel.ContentBean> storeDetail(@Part List<MultipartBody.Part> fileA);
 
-        //优惠券的使用状态
+        //
         @Multipart
         @POST("Common/storeList")
         Flowable<StoreListModel.ContentBean> storeList(@Part List<MultipartBody.Part> fileA);
 
-        //优惠券的使用状态
+        //
         @Multipart
         @POST("Package/Detail")
         Flowable<PackageModel.ContentBean> packageDetail(@Part List<MultipartBody.Part> fileA);

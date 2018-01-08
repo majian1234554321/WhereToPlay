@@ -20,7 +20,7 @@ class CouponChildAdapter(val context: Context, val list: List<CouponListModel.Co
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder.itemView) {
             tv_money.text = list[position].price
-            tv_endtime.text = DateFormatUtil.stampToDate(list[position].end_time)
+            tv_endtime.text =DateFormatUtil.stampToDateMM(list[position].start_time)+"-"+ DateFormatUtil.stampToDateMM(list[position].end_time)
             if ("2" == type || "3" == type) {
                 tv_money.setTextColor(Color.parseColor("#ffcccccc"))
                 tv_item_discount_coupon_text.setTextColor(Color.parseColor("#ffcccccc"))

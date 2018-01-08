@@ -3,6 +3,8 @@ package com.fanc.wheretoplay.fragment
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
+import android.text.TextUtils
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,40 +40,40 @@ class ExtendFragment(
         , val storeid: String, val discountValue: String, val storeName: String, val address: String, val phonevalue: String
 ) : BaseFragment(), View.OnClickListener, RadioGroup.OnCheckedChangeListener {
 
-    var dateType:String =""
+    var dateType: String = ""
     val mDate = (0..6).map { Date(System.currentTimeMillis() + it * DAY) }
 
     override fun onCheckedChanged(p0: RadioGroup?, p1: Int) {
-        var weekType:String =""
+        var weekType: String = ""
 
         when (p1) {
 
             R.id.rb1 -> {
-                weekType =rb1.text.substring(rb1.text.lastIndex)
+                weekType = rb1.text.substring(rb1.text.lastIndex)
                 dateType = rb1.text.split("\n")[0]
             }
             R.id.rb2 -> {
-                weekType =rb2.text.substring(rb2.text.lastIndex)
+                weekType = rb2.text.substring(rb2.text.lastIndex)
                 dateType = rb2.text.split("\n")[0]
             }
             R.id.rb3 -> {
-                weekType =rb3.text.substring(rb3.text.lastIndex)
+                weekType = rb3.text.substring(rb3.text.lastIndex)
                 dateType = rb3.text.split("\n")[0]
             }
             R.id.rb4 -> {
-                weekType =rb4.text.substring(rb4.text.lastIndex)
+                weekType = rb4.text.substring(rb4.text.lastIndex)
                 dateType = rb4.text.split("\n")[0]
             }
             R.id.rb5 -> {
-                weekType =rb5.text.substring(rb5.text.lastIndex)
+                weekType = rb5.text.substring(rb5.text.lastIndex)
                 dateType = rb5.text.split("\n")[0]
             }
             R.id.rb6 -> {
-                weekType =rb6.text.substring(rb6.text.lastIndex)
+                weekType = rb6.text.substring(rb6.text.lastIndex)
                 dateType = rb6.text.split("\n")[0]
             }
             R.id.rb7 -> {
-                weekType =rb7.text.substring(rb7.text.lastIndex)
+                weekType = rb7.text.substring(rb7.text.lastIndex)
                 dateType = rb7.text.split("\n")[0]
             }
 
@@ -95,7 +97,7 @@ class ExtendFragment(
 
     lateinit var adapter: ExtendAdapter
 
-     var adapter0: Extend0Adapter? = null
+    var adapter0: Extend0Adapter? = null
 
     var flag: Boolean = false
 
@@ -129,6 +131,7 @@ class ExtendFragment(
         super.onViewCreated(view, savedInstanceState)
 
         if (type == "3") {//KTV
+
             ll00.visibility = View.VISIBLE
             val weekType: String = DateFormatUtil.getCustomDayOfWeek(mDate[0]).substring(2)
             dateType = DateFormatUtil.getCustomDay(mDate[0]).toString()
@@ -138,8 +141,13 @@ class ExtendFragment(
         }
 
 
-        if (packageX!=null) {
-            tv_title.text = "套餐(" + packageX?.count + ")"
+
+        if (packageX != null) {
+
+            if (!TextUtils.isEmpty(packageX.count.toString())) {
+                tv_title.text = "套餐(" + packageX?.count + ")"
+            }
+
             list = packageX?.pkg_list as MutableList<MerchantDetailModel.ContentBean.StoreBean.PackageBean.PkgListBean>
             if (list.size > 2) {
                 tv_more.visibility = View.VISIBLE
@@ -158,6 +166,8 @@ class ExtendFragment(
             } else {
                 tv_more.visibility = View.GONE
             }
+        }else {
+            tv_title.visibility = View.GONE
         }
 
 
@@ -221,12 +231,12 @@ class ExtendFragment(
                         if (p0.content.isNotEmpty()) {
                             rb21.text = p0.content[0].room_name
                             adapter0 = Extend0Adapter(mContext, flag, p0.content[0].package_list as ArrayList<BookPackageListModel.ContentBean.PackageListBean>
-                                    , storeid, discountValue, storeName, address, phonevalue,dateType,p0.content[0].room_name,weekType)
+                                    , storeid, discountValue, storeName, address, phonevalue, dateType, p0.content[0].room_name, weekType)
                             recycle0.adapter = adapter0
                         } else {
                             adapter0?.clearAll()
                             rb21.visibility = View.GONE
-                           // Toast.makeText(mContext, "", Toast.LENGTH_LONG).show()
+                            // Toast.makeText(mContext, "", Toast.LENGTH_LONG).show()
                         }
 
                     }

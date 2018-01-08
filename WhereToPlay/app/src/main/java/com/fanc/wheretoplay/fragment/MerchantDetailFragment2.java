@@ -1,5 +1,6 @@
 package com.fanc.wheretoplay.fragment;
 
+import android.app.Application;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -349,8 +350,8 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
                         showStoreDetail(content.store);
                         phonevalue = content.store.phone;
 
-                        if (!"2".equals(type)&&type!=null) {
-                            if (content.store != null ) {
+                        if (!"2".equals(type) && type != null) {
+                            if (content.store != null) {
                                 getChildFragmentManager().beginTransaction().replace(R.id.fragment,
                                         new ExtendFragment(
                                                 content.store.packageX,
@@ -397,7 +398,7 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
         }
 
 
-        tv_pingjiashuliang.setText((TextUtils.isEmpty(store.number)?"0":String.valueOf(store.number)));
+        tv_pingjiashuliang.setText((TextUtils.isEmpty(store.number) ? "0" : String.valueOf(store.number)));
 
 
         // 图片
@@ -468,7 +469,7 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
             }
             imgs.add(pictures.get(i).picture_path);
             if (Util.isOnMainThread()) {
-                Glide.with(mContext).load(Network.IMAGE + pictures.get(i).picture_path).placeholder(defaultImage).into(mImageViews.get(i));
+                Glide.with(App.getContext()).load(Network.IMAGE + pictures.get(i).picture_path).placeholder(defaultImage).into(mImageViews.get(i));
             }
             final int finalI = i;
             mImageViews.get(i).setOnClickListener(new View.OnClickListener() {
@@ -660,6 +661,14 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
                 }
                 break;
 
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        if (Util.isOnMainThread()) {
+            Glide.with(this).pauseRequests();
         }
     }
 }

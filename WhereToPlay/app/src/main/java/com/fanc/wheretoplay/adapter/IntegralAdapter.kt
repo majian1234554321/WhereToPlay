@@ -25,7 +25,7 @@ class IntegralAdapter(val context: Activity, val list: List<ScoreList.ContentBea
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         with(holder?.itemView!!) {
             tv_time?.text = DateFormatUtil.stampToDate(list[position].finish_time)
-            tv_item_integral_no.text = "+" + java.lang.Double.parseDouble(list[position].score_detail).toInt()
+            tv_item_integral_no.text = "+" + java.lang.Double.parseDouble(list[position].score_detail).toInt()+"积分"
             tv_item_integral_title.text = list[position].name
         }
     }

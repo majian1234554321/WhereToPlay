@@ -99,7 +99,7 @@
             android:layout_toLeftOf="@+id/tv_endtime"
             android:text="@string/use_deadline"
             android:textColor="@color/text_white"
-            android:textSize="@dimen/normal_textsize" />
+            android:textSize="13sp" />
 
         <TextView
             android:id="@+id/tv_endtime"
@@ -107,7 +107,7 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:textColor="@color/text_white"
-            android:textSize="@dimen/normal_textsize" />
+            android:textSize="13sp" />
 
     </RelativeLayout>
 </RelativeLayout>

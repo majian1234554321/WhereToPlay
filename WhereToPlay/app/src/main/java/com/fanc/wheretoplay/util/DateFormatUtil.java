@@ -1267,6 +1267,16 @@ public class DateFormatUtil {
         }
     }
 
+    public static String stampToDateMM(String s) {
+        if ("0".equals(s) || TextUtils.isEmpty(s)) {
+            return "";
+        } else {
+            String date = new SimpleDateFormat("yyyy年MM月dd日").format(new java.util.Date(Long.parseLong(s) * 1000));
+            return date;
+        }
+    }
+
+
     public static String dateToStamp(String s) {
         String res;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -1279,6 +1289,19 @@ public class DateFormatUtil {
         long ts = date.getTime() / 1000;
         res = String.valueOf(ts);
         return res;
+    }
+
+
+    public static String dateToStamp2(String s) {
+        SimpleDateFormat format =  new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        Date date = null;
+        try {
+            date = format.parse(s);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return date.getTime()+"";
     }
 
 
@@ -1322,6 +1345,13 @@ public class DateFormatUtil {
         } else {
             return month + "";
         }
+
+    }
+
+    public static String getYY() {
+        Calendar cale = Calendar.getInstance();
+        int year = cale.get(Calendar.YEAR) ;
+       return year+"";
 
     }
 

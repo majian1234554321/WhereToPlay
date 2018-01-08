@@ -53,6 +53,8 @@ class PackageKTVFragment(private val idValue: String, private val storeIdValue: 
 
     var adapter: PackageDateAdapter? = null
     var listTime: List<String>? = null
+
+    var stamp: String? = null
     override fun onItemClick(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
         //  TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
 
@@ -62,6 +64,16 @@ class PackageKTVFragment(private val idValue: String, private val storeIdValue: 
 
         setTextValue(listTime?.get(p2).toString())
 
+        val dateValues = if (dateValue!!.length > 1) {
+            dateValue
+        } else {
+            "0".plus(dateValue)
+        }
+        //yyyy-MM-dd HH:mm:ss
+
+         stamp = DateFormatUtil.dateToStamp2(DateFormatUtil.getYY() + "-" + DateFormatUtil.getMM() + "-" + dateValues + " " + listTime?.get(p2).toString()+ ":00")
+
+
     }
 
     fun setTextValue(value: String) {
@@ -69,6 +81,7 @@ class PackageKTVFragment(private val idValue: String, private val storeIdValue: 
         when (value) {
             "18:00" -> {
                 endTime = "次日00:00"
+
             }
             "18:30" -> {
                 endTime = "次日00:30"
@@ -100,6 +113,8 @@ class PackageKTVFragment(private val idValue: String, private val storeIdValue: 
 
     }
 
+
+
     override fun onClick(p0: View?) {
         when (p0?.id) {
             R.id.tv_pay -> {
@@ -122,6 +137,8 @@ class PackageKTVFragment(private val idValue: String, private val storeIdValue: 
 
 
 
+
+
                 intent.putExtra("book_week_day", weekValue)
                 intent.putExtra("discount_book_hour", "6")
                 intent.putExtra("book_start_time", "1515055228")
@@ -132,6 +149,8 @@ class PackageKTVFragment(private val idValue: String, private val storeIdValue: 
 
                 startActivity(intent)
             }
+
+
             R.id.iv_phone -> {
                 val intent2 = Intent(Intent.ACTION_DIAL)
 
@@ -170,7 +189,7 @@ class PackageKTVFragment(private val idValue: String, private val storeIdValue: 
         recycle.layoutManager = LinearLayoutManager(mContext)
 
         myGridView.onItemClickListener = this
-        myGridView.selector = ColorDrawable(TRANSPARENT);
+        myGridView.selector = ColorDrawable(TRANSPARENT)
         tv_pay.setOnClickListener(this)
         iv_phone.setOnClickListener(this)
 
@@ -194,63 +213,83 @@ class PackageKTVFragment(private val idValue: String, private val storeIdValue: 
                     }
 
                     override fun failed(t: String?) {
+
                         Toast.makeText(context, t, Toast.LENGTH_LONG).show()
                     }
                 })
     }
 
 
-    private fun setData(content: BookPackageDetailModel.ContentBean) {
+    private fun setData(content: BookPackageDetailModel.ContentBean?) {
+        if (content != null) {
+
+
+            if (content?.pic_list?.size!! > 0) {
+                Glide.with(mContext).load(content.pic_list?.get(0)).placeholder(R.drawable.default_rect).into(iv)
+            }
+            tv_address.text = address
+            tv_storeName.text = content.name
+            tv_storeName2.text = content.name
+            tv_introduce.text = content.introduce
+            tv_realMoney.text = content.discount_price
+            tv_falseMoney.text = "￥ ".plus(content.origin_price)
+            tv_realMoney1.text = content.discount_price + "元"
+            tv_falseMoney1.text = content.origin_price + "元"
+
+
+            if (content.time_list != null) {
+                setTextValue(content.time_list[0])
+
+
+                listTime = content.time_list
+
+                val dateValues = if (dateValue!!.length > 1) {
+                    dateValue
+                } else {
+                    "0".plus(dateValue)
+                }
+                //yyyy-MM-dd HH:mm:ss
+
+                stamp = DateFormatUtil.dateToStamp2(DateFormatUtil.getYY() + "-" + DateFormatUtil.getMM() + "-" + dateValues + " " + listTime?.get(0).toString()+ ":00")
 
 
 
-        if (content.pic_list?.size!! > 0) {
-            Glide.with(mContext).load(content.pic_list?.get(0)).placeholder(R.drawable.default_rect).into(iv)
+
+                adapter = PackageDateAdapter(mContext, content.time_list, 0)
+                myGridView.adapter = adapter
+            }
+
+            piv1.setButtomText(content.buy_notice?.effect_date)
+            piv2.setButtomText(content.buy_notice?.booking_info)
+            piv3.setButtomText(content.buy_notice?.rule_remind)
+
+            if (content.buy_notice?.tip != null) {
+                piv4.setButtomText(content.buy_notice?.tip?.replace("/r", "." + "\n"))
+            }
+
+            piv11.setButtomText(content.buy_notice?.effect_date_desc)
+            tv_falseMoney.paint.flags = Paint.STRIKE_THRU_TEXT_FLAG
+
+            if (content.detail != null && content.detail.contains("/r")) {
+                tv_detail.text = content.detail.replace("/r", "." + "\n")
+            } else {
+                tv_detail.text = content.detail
+            }
+
+
+            val lists2 = arrayListOf<PackageModel.ContentBean.ProductListBean>()
+            content.product_list.forEach { value ->
+                lists2.add(PackageModel.ContentBean.ProductListBean(value.name
+                        , value.price
+                        , value.num
+                        , value.unit))
+            }
+
+
+            val adapter2 = PackageAdapter(mContext, lists2)
+            recycle.adapter = adapter2
         }
-        tv_address.text = address
-        tv_storeName.text = content.name
-        tv_storeName2.text = content.name
-        tv_introduce.text = content.introduce
-        tv_realMoney.text = content.discount_price
-        tv_falseMoney.text = "￥ ".plus(content.origin_price)
-        tv_realMoney1.text = content.discount_price + "元"
-        tv_falseMoney1.text = content.origin_price + "元"
-
-
-        if (content.time_list.isNotEmpty())
-            setTextValue(content.time_list[0])
-
-        listTime = content.time_list
-        adapter = PackageDateAdapter(mContext, content.time_list, 0)
-        myGridView.adapter = adapter
-
-        piv1.setButtomText(content.buy_notice?.effect_date)
-        piv2.setButtomText(content.buy_notice?.booking_info)
-        piv3.setButtomText(content.buy_notice?.rule_remind)
-        piv4.setButtomText(content.buy_notice?.tip)
-        piv11.setButtomText(content.buy_notice?.effect_date_desc)
-        tv_falseMoney.paint.flags = Paint.STRIKE_THRU_TEXT_FLAG
-
-        if (content.detail.isNotEmpty() && content.detail.contains("/r")) {
-            tv_detail.text = content.detail.replace("/r", "\n")
-        } else {
-            tv_detail.text = content.detail
-        }
-
-
-        val lists2 = arrayListOf<PackageModel.ContentBean.ProductListBean>()
-        content.product_list.forEach { value ->
-            lists2.add(PackageModel.ContentBean.ProductListBean(value.name
-                    , value.price
-                    , value.num
-                    , value.unit))
-        }
-
-
-        val adapter2 = PackageAdapter(mContext, lists2)
-        recycle.adapter = adapter2
     }
-
 
 }
 
