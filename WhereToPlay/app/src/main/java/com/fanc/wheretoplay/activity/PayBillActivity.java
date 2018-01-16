@@ -36,15 +36,19 @@ import com.fanc.wheretoplay.databinding.ActivityPayBillBinding;
 import com.fanc.wheretoplay.datamodel.AccessOrderIdModel;
 import com.fanc.wheretoplay.datamodel.IsOk;
 import com.fanc.wheretoplay.datamodel.OrderDone;
+import com.fanc.wheretoplay.datamodel.OrderDoneModel;
+import com.fanc.wheretoplay.datamodel.OrderPayoffModel;
 import com.fanc.wheretoplay.datamodel.PayOrder;
 import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.pay.AliPayResult;
+import com.fanc.wheretoplay.presenter.PayPresenter;
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
+import com.fanc.wheretoplay.view.PayView;
 import com.fanc.wheretoplay.view.TopMenu;
 import com.orhanobut.logger.Logger;
 
@@ -83,7 +87,7 @@ import okhttp3.MultipartBody;
  * Created by Administrator on 2017/6/16.
  */
 
-public class PayBillActivity extends BaseActivity {
+public class PayBillActivity extends BaseActivity implements PayView {
 
     ActivityPayBillBinding payBillBinding;
 
@@ -127,7 +131,7 @@ public class PayBillActivity extends BaseActivity {
     double lastPaySum;
 
     // 服务费率
-    double cashRate;
+    double cashRate = 15.00f;
 
     Receiver receiver;
 
@@ -139,14 +143,67 @@ public class PayBillActivity extends BaseActivity {
     private String storeName;
     private String address;
     private String discountValue;
+    private Observable<AccessOrderIdModel> observable;
+    private String order_id;
+    private String fee;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         payBillBinding = DataBindingUtil.setContentView(this, R.layout.activity_pay_bill);
+
+        Intent intent = getIntent();
+        storeId = intent.getStringExtra(Constants.STORE_ID);
+
+
+        order_id = intent.getStringExtra("order_id");
+
+        if (order_id != null) {
+            Retrofit_RequestUtils
+                    .getRequest()
+                    .order_done(
+                            MultipartBody.Part.createFormData("order_id", order_id),
+                            MultipartBody.Part.createFormData("token", new SPUtils(mContext).getUser().getToken())
+                    )
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Observer<OrderDoneModel>() {
+                        @Override
+                        public void onSubscribe(Disposable disposable) {
+
+                        }
+
+                        @Override
+                        public void onNext(OrderDoneModel orderDoneModel) {
+                            if ("0".equals(orderDoneModel.code) && orderDoneModel.content != null && orderDoneModel.content.order != null) {
+                                cashRate = Double.parseDouble(orderDoneModel.content.order.cash_rate);
+                            }
+                        }
+
+                        @Override
+                        public void onError(Throwable throwable) {
+
+                        }
+
+                        @Override
+                        public void onComplete() {
+
+                        }
+                    });
+        }
+
+
+        storeName = intent.getStringExtra("storeName");
+        discountValue = intent.getStringExtra("discount");
+        address = intent.getStringExtra("address");
+        statusTitle = intent.getStringExtra(Constants.PAGE);
+
+
         initViews();
         setListeners();
         init();
+
+        mTvPayBillAddress.setText(address);
     }
 
     private void initViews() {
@@ -159,6 +216,8 @@ public class PayBillActivity extends BaseActivity {
         mTvPayBillAddress = payBillBinding.tvPayBillAddress;
         mTvDiscount = payBillBinding.tvPayBillDiscountReal;//折扣
         mTvDownPaymentSum = payBillBinding.tvPayBillDownPaymentSum;
+
+
         mTvDiscountCoupon = payBillBinding.tvPayBillDiscountCoupon;
         mEtConsumeSum = payBillBinding.etPayBillConsumeSum;
         mTvPaySumReal = payBillBinding.tvPayBillPaySumReal;
@@ -173,31 +232,6 @@ public class PayBillActivity extends BaseActivity {
         df = new DecimalFormat("0.00");
 
 
-        String pay_Action = getIntent().getStringExtra("pay_Action");
-        String dispayMoney = getIntent().getStringExtra("money");
-        if ("预订类型：预付预订".equals(pay_Action) && dispayMoney != null) {
-            mTvDownPaymentSum.setText(dispayMoney);
-            mTvPaySumReal.setText(dispayMoney);
-        } else if ("预订类型：结单支付".equals(pay_Action) && dispayMoney != null) {
-            mEtConsumeSum.setText(dispayMoney);
-            mEtConsumeSum.setFocusable(false);
-            mEtConsumeSum.setFocusableInTouchMode(false);
-            mTvPaySumReal.setText(dispayMoney);
-        }
-
-
-    }
-
-    private void init() {
-        mTmPayBill.setLeftIcon(R.drawable.left);
-        mTmPayBill.setTitleColor(Color.WHITE);
-        payWay = Constants.PAY_WAY_WEIXIN;
-        Intent intent = getIntent();
-
-        storeId = intent.getStringExtra(Constants.STORE_ID);
-        storeName = intent.getStringExtra("storeName");
-        discountValue = intent.getStringExtra("discount");
-        address = intent.getStringExtra("address");
         if (discountValue != null && discountValue.length() > 0) {
             discount = Double.parseDouble(discountValue);
         } else {
@@ -216,10 +250,37 @@ public class PayBillActivity extends BaseActivity {
         }
 
 
-        mTvPayBillAddress.setText(address);
+        String pay_Action = getIntent().getStringExtra("pay_Action");
+        String dispayMoney = getIntent().getStringExtra("money");
+        if ("预订类型：预付预订".equals(pay_Action) && dispayMoney != null) {
+            mTvDownPaymentSum.setText(dispayMoney);
+            String money = df.format(Double.parseDouble(dispayMoney) * (discount / 10));
+
+            lastPaySum = Double.parseDouble(dispayMoney) * (discount / 10);
+            mTvPaySumReal.setText(money);
+
+        } else if ("预订类型：结单支付".equals(pay_Action) && dispayMoney != null) {
+            mEtConsumeSum.setText(dispayMoney);
+           /* mEtConsumeSum.setFocusable(false);
+            mEtConsumeSum.setFocusableInTouchMode(false);*/
+            String money = df.format(Double.parseDouble(dispayMoney) * (discount / 10));
+            mTvPaySumReal.setText(money);
+
+            lastPaySum = Double.parseDouble(dispayMoney) * (discount / 10);
+        }
+
+
+    }
+
+    private void init() {
+        mTmPayBill.setLeftIcon(R.drawable.left);
+        mTmPayBill.setTitleColor(Color.WHITE);
+        payWay = Constants.PAY_WAY_WEIXIN;
+
+
+
         tvPayBillStore.setText(storeName);
 
-        statusTitle = intent.getStringExtra(Constants.PAGE);
 
         switch (statusTitle) {
             case Constants.CONSUME:
@@ -228,6 +289,45 @@ public class PayBillActivity extends BaseActivity {
                 break;
             case "商家详情支付":
                 mTmPayBill.setTitle("支付");
+                break;
+
+            case "支付再支付":
+
+                List<MultipartBody.Part> list = new ArrayList();
+                list.add(MultipartBody.Part.createFormData("pid", order_id));
+
+                list.add(MultipartBody.Part.createFormData("token", new SPUtils(mContext).getUser().getToken()));
+
+                Retrofit_RequestUtils.getRequest().getPrepayByOrderId(list)
+                        .subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Observer<AccessOrderIdModel>() {
+                            @Override
+                            public void onSubscribe(Disposable disposable) {
+
+                            }
+
+                            @Override
+                            public void onNext(AccessOrderIdModel accessOrderIdModel) {
+                                if (accessOrderIdModel != null && "0".equals(accessOrderIdModel.code) && accessOrderIdModel.content != null) {
+                                    mTvDownPaymentSum.setText(accessOrderIdModel.content.prepay);
+                                } else {
+                                    Toast.makeText(mContext, "获取订金失败", Toast.LENGTH_SHORT).show();
+                                }
+
+                            }
+
+                            @Override
+                            public void onError(Throwable throwable) {
+                                Toast.makeText(mContext, "", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onComplete() {
+
+                            }
+                        });
+
                 break;
             default:
                 mTmPayBill.setTitle(R.string.buy);
@@ -251,12 +351,7 @@ public class PayBillActivity extends BaseActivity {
                 finish();
             }
         });
-//        mRgPayBill.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                ToastUtils.showShortToast(mContext, String.valueOf(checkedId));
-//            }
-//        });
+
         mEtConsumeSum.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -266,14 +361,7 @@ public class PayBillActivity extends BaseActivity {
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
                 if (s.toString().isEmpty()) {
-//                    mTvPaySumReal.setText("0");
-//                    // 优惠金额
-//                    if (discountPrice == null) {
-//                        mTvDiscountSum.setText(String.valueOf(0));
-//                    } else {
-//                        mTvDiscountSum.setText(discountPrice);
-//                    }
-//                    return;
+
                 } else {
                     double sum = Double.parseDouble(s.toString());
                     if (discountPrice == null) {
@@ -358,6 +446,13 @@ public class PayBillActivity extends BaseActivity {
 
                             mTvPaySumReal.setText(value);
                         }
+                    } else {
+                        if (lastPaySum > 0) {
+                            String value = df.format(lastPaySum);
+                            mTvPaySumReal.setText(value);
+                        } else {
+                            mTvPaySumReal.setText("0");
+                        }
                     }
                 } else {
                     mLlNotParticipation.setVisibility(View.GONE);
@@ -438,13 +533,18 @@ public class PayBillActivity extends BaseActivity {
             return;
         }
 
+
         if ("商家详情支付".equals(statusTitle)) {
-            storeDetailPay();
+            storeDetailPay("immediatelyPay");
+        } else if ("支付再支付".equals(statusTitle)) {
+
+            storeDetailPay("continuePay");
+
         } else {
 
             double paySum = Double.parseDouble(mTvPaySumReal.getText().toString());
             if (paySum <= 0) {
-//            ToastUtils.makePicTextShortToast(mContext, "实际支付金额必须大于0");
+
                 payBillDeductTheDeposit();
             } else {
                 switch (payWay) {
@@ -453,13 +553,13 @@ public class PayBillActivity extends BaseActivity {
                         break;
                     case 1://支付宝支付
                     case 2:// 微信支付
-                        payOrder();
+                        payOrder("");
                         break;
                     case 3:// 余额支付
                         alertBalancePay();
                         break;
                     case 4:
-                        payOrder();
+                        payOrder("");
                         break;
                     default:
                         break;
@@ -471,10 +571,10 @@ public class PayBillActivity extends BaseActivity {
     }
 
     //商家详情支付
-    private void storeDetailPay() {
+    private void storeDetailPay(String type) {
 
 
-        String[] key = {"store_id", "token", "total", "fee", "display_prepay", "coup_id", "coup_amount", "money"};
+        String[] key = {"store_id", "token", "total", "fee", "display_prepay", "coup_id", "coup_amount", "money", "pid"};
 
         String[] value = {
                 storeId
@@ -484,7 +584,8 @@ public class PayBillActivity extends BaseActivity {
                 , mTvDownPaymentSum.getText().toString().trim()
                 , discountId
                 , discountPrice
-                , mTvPaySumReal.getText().toString().trim()
+                , mTvPaySumReal.getText().toString().trim(),
+                order_id
 
         };
 
@@ -496,13 +597,22 @@ public class PayBillActivity extends BaseActivity {
 
         }
 
+        switch (type) {
+            case "immediatelyPay":
+                observable = Retrofit_RequestUtils.getRequest()
+                        .immediatelyPay(list);
+                break;
+            case "continuePay":
+                observable = Retrofit_RequestUtils.getRequest()
+                        .continuePay(list);
+                break;
+        }
 
-        Retrofit_RequestUtils.getRequest()
-                .immediatelyPay(list)
+
+        observable
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<AccessOrderIdModel>() {
-
                     @Override
                     public void onSubscribe(Disposable disposable) {
 
@@ -524,14 +634,14 @@ public class PayBillActivity extends BaseActivity {
                                         break;
                                     case 1://支付宝支付
                                     case 2:// 微信支付
-                                        payOrder();
+                                        payOrder("");
                                         break;
                                     case 3:// 余额支付
                                         alertBalancePay();
                                         break;
                                     case 4:
 
-                                        payOrder();
+                                        payOrder("");
                                         break;
 
                                     default:
@@ -659,17 +769,26 @@ public class PayBillActivity extends BaseActivity {
     // 支付成功去评价
     private void paySuccess() {
         // 去评价
-        Intent intent = new Intent(mContext, ReuseActivity.class);
+        Intent intent = new Intent();
+
+        switch (statusTitle) {
+            case "商家详情支付":
+                intent.setClass(mContext, ListOrderActivity.class);
+                break;
+            default:
+                intent.setClass(mContext, ReuseActivity.class);
+                break;
+
+        }
+
         intent.putExtra(Constants.PAGE, Constants.TO_EVALUATE);
         intent.putExtra(Constants.STORE_ID, storeId);
         intent.putExtra(Constants.ORDER_ID, orderId);
         intent.putExtra(Constants.PRICE, mTvPaySumReal.getText().toString());
         intent.putExtra(Constants.IS_COMMENT, true);
         intent.putExtra("discount", discountValue);
-
         intent.putExtra("store_name", storeName);
         intent.putExtra("address", address);
-
 
         startActivity(intent);
         // 通知消费页面
@@ -679,63 +798,51 @@ public class PayBillActivity extends BaseActivity {
         finish();
     }
 
-    private void payOrder() {
 
+    @Override
+    public void setPayOffData(OrderPayoffModel.ContentBean contentBean) {
+        closeProgress();
+        switch (payWay) {
+            case 0:
+                ToastUtils.makePicTextShortToast(mContext, "请选择支付方式");
+                break;
+            case 1://支付宝支付
+                aliPay(contentBean.orderString);
+                break;
+            case 2:// 微信支付
+                wxPay(contentBean);
+                break;
+            case 3:
+                paySuccess();
+                break;
+            case 4:
 
-        Map<String, String> params = new HashMap<>();
-        params.put(Network.Param.TOKEN, mUser.getToken());
-        params.put(Network.Param.ORDER_ID, orderId);
-        params.put(Network.Param.MONEY, mTvPaySumReal.getText().toString());
-        params.put(Network.Param.TYPE, String.valueOf(payWay));
-        params.put(Network.Param.REMAIN, String.valueOf(0));
-        params.put(Network.Param.DISPLAY_BALANCE, mEtConsumeSum.getText().toString());
-        if (mCbNotParticipation.isChecked()) {
-            params.put(Network.Param.FEE, mEtNotParticipation.getText().toString());
-        } else {
-            params.put(Network.Param.FEE, String.valueOf(0));
+                UPPayAssistEx.startPay(PayBillActivity.this, null, null, contentBean.orderString, mMode);
+                break;
+
+            default:
+                break;
         }
-//        params.put(Network.Param.DISCOUNT, mTvDiscountSum.getText().toString());
-        if (discountId != null) {
-            params.put(Network.Param.COUPON_ID, discountId);
-        }
+    }
+
+    private void payOrder(String password) {
+
         showProgress();
-        OkHttpUtils.post()
-                .url(Network.User.USER_ORDER_PAYOFF)
-                .params(params)
-                .build()
-                .execute(new StringCallback() {
-                    @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
-                    }
+        if (mCbNotParticipation.isChecked()) {
+            fee = mEtNotParticipation.getText().toString();
+        } else {
+            fee = String.valueOf(0);
+        }
 
-                    @Override
-                    public void onResponse(String response) {
-                        Log.i("response", response);
-                        try {
-                            JSONObject object = new JSONObject(response);
-                            JSONObject json = object.getJSONObject("content");
-                            if (payWay == 1) {// 支付宝
-                                orderId = json.getString("orderform_id");
-                                discountId = json.getString("coupon_id");
-                                // 唤起支付宝
-//                                EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);// 沙箱环境
 
-                                aliPay(json.getString("orderString"));
-                            }
-                            if (payWay == 2) {// 微信
-                                wxPay(json);
-                            }
-                            if (payWay == 4) {
-                                UPPayAssistEx.startPay(PayBillActivity.this, null, null, json.getString("orderString"), mMode);
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        closeProgress();
-                    }
-                });
+        PayPresenter payPresenter = new PayPresenter(this,this);
+        payPresenter.payOff(mUser.getToken(),
+                orderId,
+                mTvPaySumReal.getText().toString(),
+                String.valueOf(payWay),
+                String.valueOf(0),
+                mEtConsumeSum.getText().toString(),
+                fee, discountId,password);
     }
 
     /**
@@ -793,56 +900,24 @@ public class PayBillActivity extends BaseActivity {
 
 
     /**
-     * 支付结果验证
-     *
-     * @param resultInfo
-     * @param orderId
-     * @param coupon_id
-     */
-    private void checkAliPayResult(String resultInfo, String orderId, String coupon_id) {
-//        ToastUtils.makePicTextShortToast(mContext, "支付成功");
-        showProgress();
-        OkHttpUtils.post()
-                .url(Network.User.USER_ORDER_PAYOFF_VALIDATE)
-                .addParams(Network.Param.TOKEN, mUser.getToken())
-                .addParams(Network.Param.ORDERFORM_ID, orderId)
-                .addParams(Network.Param.CONTENT, resultInfo)
-                .addParams(Network.Param.COUPON_ID, coupon_id)
-                .build()
-                .execute(new DCallback<IsOk>() {
-                    @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
-                    }
-
-                    @Override
-                    public void onResponse(IsOk response) {
-                        if (isSuccess(response)) {
-                            //  ToastUtils.makePicTextShortToast(mContext, response.getInfo());
-                            if (response.isResult()) {
-                                paySuccess();
-                            }
-                        }
-                    }
-                });
-    }
-
-    /**
      * 微信支付
      *
-     * @param json
+     * @param
      * @throws JSONException
      */
-    private void wxPay(JSONObject json) throws JSONException {
+    private void wxPay(OrderPayoffModel.ContentBean content) {
         PayReq req = new PayReq();
 //        req.appId = "wxf8b4f85f3a794e77";  // 测试用appId
-        req.appId = json.getString("appid");
-        req.partnerId = json.getString("partnerid");
-        req.prepayId = json.getString("prepayid");
-        req.nonceStr = json.getString("noncestr");
-        req.timeStamp = json.getString("timestamp");
-        req.packageValue = json.getString("package");
-        req.sign = json.getString("sign");
+        req.appId = content.appid;
+        req.partnerId = content.partnerid;
+        req.prepayId = content.prepayid;
+        req.nonceStr = content.noncestr;
+        req.timeStamp = content.timestamp;
+        req.packageValue = content.packageX;
+        req.sign = content.sign;
+//        req.extData = "app data"; // optional
+//        Toast.makeText(PayActivity.this, "正常调起支付", Toast.LENGTH_SHORT).show();
+        // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信
         wxApi.sendReq(req);
     }
 
@@ -878,55 +953,12 @@ public class PayBillActivity extends BaseActivity {
                                 ToastUtils.makePicTextShortToast(mContext, "支付密码位数不正确");
                                 return;
                             }
-                            payOrderByBalance(input);
+                            payOrder(input);
                         }
                     })
                     .setCanceledOnTouchOutside(true)
                     .show();
         }
-    }
-
-    private void payOrderByBalance(String password) {
-        Map<String, String> params = new HashMap<>();
-        params.put(Network.Param.TOKEN, mUser.getToken());
-        params.put(Network.Param.ORDER_ID, orderId);
-        params.put(Network.Param.MONEY, mTvPaySumReal.getText().toString());
-        params.put(Network.Param.REMAIN, String.valueOf(0));
-        params.put(Network.Param.TYPE, String.valueOf(payWay));
-        params.put(Network.Param.CODE, password);
-        params.put(Network.Param.DISPLAY_BALANCE, mEtConsumeSum.getText().toString());
-        if (mCbNotParticipation.isChecked()) {
-            params.put(Network.Param.FEE, mEtNotParticipation.getText().toString());
-        } else {
-            params.put(Network.Param.FEE, String.valueOf(0));
-        }
-//        params.put(Network.Param.DISCOUNT, mTvDiscountSum.getText().toString());
-        if (discountId != null && !discountId.isEmpty()) {
-            params.put(Network.Param.COUPON_ID, discountId);
-        }
-
-        showProgress();
-        OkHttpUtils.post()
-                .url(Network.User.USER_ORDER_PAYOFF)
-                .params(params)
-                .build()
-                .execute(new DCallback<IsOk>() {
-                    @Override
-                    public void onError(Call call, Exception e) {
-                        Toast.makeText(mContext, e.toString(), Toast.LENGTH_SHORT).show();
-                        connectError();
-                    }
-
-                    @Override
-                    public void onResponse(IsOk response) {
-                        if (isSuccess(response)) {
-                            if (response.isResult()) {
-                                // checkAliPayResult("", orderId, "");
-                                paySuccess();
-                            }
-                        }
-                    }
-                });
     }
 
     private void registerBroadcastReceiver() {
@@ -1010,10 +1042,6 @@ public class PayBillActivity extends BaseActivity {
      * mMode参数解释： "00" - 启动银联正式环境 "01" - 连接银联测试环境
      *****************************************************************/
     private final String mMode = "00";
-    private static final String TN_URL_01 = "http://101.231.204.84:8091/sim/getacptn";
-
-
-    //  UPPayAssistEx.startPay(this, null, null, tn, mode);
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {

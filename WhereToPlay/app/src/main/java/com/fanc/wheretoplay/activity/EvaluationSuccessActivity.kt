@@ -66,9 +66,9 @@ class EvaluationSuccessActivity : BaseActivity(), View.OnClickListener {
 
     }
 
-    private fun loadData(idValue: String?) {
+    private fun loadData(idValue: String) {
 
-        @Suppress("NULLABILITY_MISMATCH_BASED_ON_JAVA_ANNOTATIONS")
+
         val requestFileA = MultipartBody.Part.createFormData("id", idValue)
 
         Retrofit_RequestUtils.getRequest()

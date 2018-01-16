@@ -21,14 +21,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alipay.sdk.app.PayTask;
+import com.fanc.wheretoplay.MainActivity;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.base.BaseActivity;
 
 import com.fanc.wheretoplay.datamodel.IsOk;
 import com.fanc.wheretoplay.datamodel.OrderInfoModel;
+import com.fanc.wheretoplay.datamodel.OrderPayoffModel;
 import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.pay.AliPayResult;
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
+import com.fanc.wheretoplay.rx.RxBus;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.DateFormatUtil;
 import com.fanc.wheretoplay.util.ToastUtils;
@@ -245,14 +248,17 @@ public class DownPaymentActivity extends BaseActivity {
         Intent paySuccess = new Intent(Constants.ACTION_PAY_SUCCESS);
         LocalBroadcastManager.getInstance(mContext).sendBroadcast(paySuccess);
         // 跳转去评价
-        Intent intent = new Intent(mContext, ReuseActivity.class);
+       /* Intent intent = new Intent(mContext, ReuseActivity.class);
         intent.putExtra(Constants.PAGE, Constants.ORDER_TO_COMPLETE);
         intent.putExtra(Constants.STORE_ID, storeId);
         intent.putExtra(Constants.ORDER_ID, orderId);
-//        intent.putExtra(Constants.PRICE, price);
-//        if (Constants.RESERVE_WAY_CREDIT.equals(reserveType)) {
-//            intent.putExtra(Constants.CREDIT_RESERVE, true);// 信誉预订
-//        }
+
+        //tmDownPayment.setTitle(storeId+orderId);
+
+        startActivity(intent);*/
+        Intent intent = new Intent(this, ListOrderActivity.class);
+        intent.putExtra("Key", "Value");
+        RxBus.getDefault().post(intent);
         startActivity(intent);
 
         finish();
@@ -291,7 +297,7 @@ public class DownPaymentActivity extends BaseActivity {
                         closeProgress();
                         if ("0".equals(orderInfoModel.code)) {
                             showOrderInfo(orderInfoModel.content.order_info);
-                        }else {
+                        } else {
                             Toast.makeText(DownPaymentActivity.this, orderInfoModel.message, Toast.LENGTH_SHORT).show();
                             finish();
                         }
@@ -347,14 +353,14 @@ public class DownPaymentActivity extends BaseActivity {
                     break;
                 case 1:
                 case 2:
-                    payOrder();
+                    payOrder("");
                     break;
                 case 3:
                     alertBalancePay();
                     break;
 
                 case 4:
-                    payOrder();
+                    payOrder("");
                     break;
                 default:
                     break;
@@ -363,52 +369,76 @@ public class DownPaymentActivity extends BaseActivity {
         // 信誉预定
         if (Constants.RESERVE_WAY_CREDIT.equals(reserveType)) {
             Toast.makeText(mContext, "信誉预订成功", Toast.LENGTH_SHORT).show();
-           // payCompleted();
+            startActivity(new Intent(this, ListOrderActivity.class));
             finish();
         }
     }
 
-    private void payOrder() {
+
+    private void payOrder(String password) {
         showProgress();
-        OkHttpUtils.post()
-                .url(Network.User.USER_PAYORDER)
-                .addParams(Network.Param.TOKEN, mUser.getToken())
-                .addParams(Network.Param.ORDERFORM_ID, orderId)
-                .addParams(Network.Param.TYPE, String.valueOf(payWay))
-                .addParams(Network.Param.PREPAY, price)
-                .build()
-                .execute(new StringCallback() {
+
+        List<MultipartBody.Part> lists = new ArrayList<>();
+        lists.add(MultipartBody.Part.createFormData("token", mUser.getToken()));
+        lists.add(MultipartBody.Part.createFormData("orderform_id", orderId));
+        lists.add(MultipartBody.Part.createFormData("type", String.valueOf(payWay)));
+        lists.add(MultipartBody.Part.createFormData("prepay", price));
+        lists.add(MultipartBody.Part.createFormData("token", mUser.getToken()));
+
+        lists.add(MultipartBody.Part.createFormData("code", password));
+
+
+        Retrofit_RequestUtils.getRequest().payOrder(lists)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<OrderPayoffModel>() {
                     @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
+                    public void onSubscribe(Disposable disposable) {
+
                     }
 
                     @Override
-                    public void onResponse(String response) {
+                    public void onNext(OrderPayoffModel orderPayoffModel) {
                         closeProgress();
-                        Logger.json(response);
-                        try {
-                            JSONObject object = new JSONObject(response);
-                            JSONObject json = object.getJSONObject("content");
-                            if (payWay == 1) {
-                                // 支付宝
-                                orderId = json.getString("orderform_id");
-                                // 唤起支付宝
-//                                EnvUtils.setEnv(EnvUtils.EnvEnum.SANDBOX);// 沙箱环境
+                        if ("0".equals(orderPayoffModel.code)) {
 
-                                aliPay(json.getString("orderString"));
-                            }
-                            if (payWay == 2) {
-                                // 微信
-                                wxPay(json);
+
+                            switch (payWay) {
+                                case 0:
+                                    ToastUtils.makePicTextShortToast(mContext, "请选择支付方式");
+                                    break;
+                                case 1://支付宝支付
+                                    aliPay(orderPayoffModel.content.orderString);
+                                    break;
+                                case 2:// 微信支付
+                                    wxPay(orderPayoffModel.content);
+                                    break;
+                                case 3:
+                                    payCompleted();
+                                    break;
+                                case 4:
+
+                                    UPPayAssistEx.startPay(DownPaymentActivity.this, null, null, orderPayoffModel.content.orderString, mMode);
+                                    break;
+
+                                default:
+                                    break;
                             }
 
-                            if (payWay == 4) {
-                                UPPayAssistEx.startPay(DownPaymentActivity.this, null, null, json.getString("orderString"), mMode);
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+
+                        } else {
+                            Toast.makeText(mContext, "请求失败", Toast.LENGTH_SHORT).show();
                         }
+                    }
+
+                    @Override
+                    public void onError(Throwable throwable) {
+                        closeProgress();
+                    }
+
+                    @Override
+                    public void onComplete() {
+
                     }
                 });
     }
@@ -416,32 +446,6 @@ public class DownPaymentActivity extends BaseActivity {
 
     private final String mMode = "00";
 
-    /**
-     * 确认信誉预订
-     */
-    private void payCreditOrder() {
-        showProgress();
-        OkHttpUtils.post()
-                .url(Network.User.USER_IS_DISPLAY)
-                .addParams(Network.Param.TOKEN, mUser.getToken())
-                .addParams(Network.Param.ORDER_ID, orderId)
-                .build()
-                .execute(new DCallback<IsOk>() {
-                    @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
-                    }
-
-                    @Override
-                    public void onResponse(IsOk response) {
-                        if (isSuccess(response)) {
-                            if (response.isResult()) {
-                                payCompleted();
-                            }
-                        }
-                    }
-                });
-    }
 
     /**
      * 支付宝支付
@@ -479,9 +483,7 @@ public class DownPaymentActivity extends BaseActivity {
             String resultStatus = payResult.getResultStatus();
             // 判断resultStatus 为9000则代表支付成功
             if (TextUtils.equals(resultStatus, "9000")) {
-                // 该笔订单是否真实支付成功，需要依赖服务端的异步通知。
-                // checkAliPayResult(resultInfo, orderId);
-
+                ToastUtils.showShortToast(mContext, "支付成功");
                 payCompleted();
             } else {
                 // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
@@ -490,37 +492,6 @@ public class DownPaymentActivity extends BaseActivity {
         }
     };
 
-    /**
-     * 支付结果验证
-     *
-     * @param resultInfo
-     * @param orderId
-     */
-    private void checkAliPayResult(String resultInfo, String orderId) {
-        showProgress();
-        OkHttpUtils.post()
-                .url(Network.User.USER_PREPAY_ORDER_VALIDATE)
-                .addParams(Network.Param.TOKEN, mUser.getToken())
-                .addParams(Network.Param.ORDERFORM_ID, orderId)
-                .addParams(Network.Param.CONTENT, resultInfo)
-                .build()
-                .execute(new DCallback<IsOk>() {
-                    @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
-                    }
-
-                    @Override
-                    public void onResponse(IsOk response) {
-                        if (isSuccess(response)) {
-                            ToastUtils.makePicTextShortToast(mContext, response.getInfo());
-                            if (response.isResult()) {
-                                payCompleted();
-                            }
-                        }
-                    }
-                });
-    }
 
     //余额支付时检查有没有设置过密码
     private void alertBalancePay() {
@@ -552,7 +523,7 @@ public class DownPaymentActivity extends BaseActivity {
                                 ToastUtils.makePicTextShortToast(mContext, "支付密码位数不正确");
                                 return;
                             }
-                            payByBalance(input);
+                            payOrder(input);
                         }
                     })
                     .setCanceledOnTouchOutside(true)
@@ -560,55 +531,24 @@ public class DownPaymentActivity extends BaseActivity {
         }
     }
 
-    /**
-     * 余额支付
-     *
-     * @param password
-     */
-    private void payByBalance(String password) {
-        showProgress();
-        OkHttpUtils.post()
-                .url(Network.User.USER_PAYORDER)
-                .addParams(Network.Param.TOKEN, mUser.getToken())
-                .addParams(Network.Param.ORDERFORM_ID, orderId)
-                .addParams(Network.Param.CODE, password)
-                .addParams(Network.Param.TYPE, String.valueOf(payWay))
-                .addParams(Network.Param.PREPAY, price)
-                .build()
-                .execute(new DCallback<IsOk>() {
-                    @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
-                    }
-
-                    @Override
-                    public void onResponse(IsOk response) {
-                        if (isSuccess(response)) {
-                            ToastUtils.makePicTextShortToast(mContext, response.getInfo());
-                            if (response.isResult()) {// 支付成功
-                                payCompleted();
-                            }
-                        }
-                    }
-                });
-    }
 
     /**
      * 微信支付
      *
-     * @param json
+     * @param
+     * @param content
      * @throws JSONException
      */
-    private void wxPay(JSONObject json) throws JSONException {
+    private void wxPay(OrderPayoffModel.ContentBean content) {
         PayReq req = new PayReq();
 //        req.appId = "wxf8b4f85f3a794e77";  // 测试用appId
-        req.appId = json.getString("appid");
-        req.partnerId = json.getString("partnerid");
-        req.prepayId = json.getString("prepayid");
-        req.nonceStr = json.getString("noncestr");
-        req.timeStamp = json.getString("timestamp");
-        req.packageValue = json.getString("package");
-        req.sign = json.getString("sign");
+        req.appId = content.appid;
+        req.partnerId = content.partnerid;
+        req.prepayId = content.prepayid;
+        req.nonceStr = content.noncestr;
+        req.timeStamp = content.timestamp;
+        req.packageValue = content.packageX;
+        req.sign = content.sign;
 //        req.extData = "app data"; // optional
 //        Toast.makeText(PayActivity.this, "正常调起支付", Toast.LENGTH_SHORT).show();
         // 在支付之前，如果应用没有注册到微信，应该先调用IWXMsg.registerApp将应用注册到微信

@@ -47,7 +47,7 @@ public class DateTimeAdapter extends BaseAdapter {
      * @param context
      * @param data
      */
-    public DateTimeAdapter(Context context, List data,boolean flag ) {
+    public DateTimeAdapter(Context context, List data, boolean flag) {
         super(context, data);
         status = new HashMap<>();
 //        status.put(0, true);
@@ -75,17 +75,29 @@ public class DateTimeAdapter extends BaseAdapter {
         // 超过最晚预定时间则item不可用
 
 
-        if (flag){
-            if (DateFormatUtil.time1totime2(time)){
-                holder.mCbTime.setEnabled(false);
-            }else {
-                holder.mCbTime.setEnabled(true);
+        long current = DateFormatUtil.parseStringTolong(time, DateFormatUtil.HHmm);
+
+        if (flag) {
+
+
+            if (lastTime ==0){
+                if (!DateFormatUtil.time1totime2(time)) {
+                    holder.mCbTime.setEnabled(true);
+                }else {
+                    holder.mCbTime.setEnabled(false);
+                }
+            }else  {
+                if (current <= lastTime&&!DateFormatUtil.time1totime2(time)){
+                    holder.mCbTime.setEnabled(true);
+                }else {
+                    holder.mCbTime.setEnabled(false);
+                }
             }
-        }else {
+
+
+        } else {
             holder.mCbTime.setEnabled(true);
         }
-
-
 
 
         statusAble.put(position, holder.mCbTime.isEnabled());

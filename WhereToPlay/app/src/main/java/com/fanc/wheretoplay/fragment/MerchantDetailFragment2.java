@@ -34,6 +34,7 @@ import com.fanc.wheretoplay.activity.ReuseActivity;
 import com.fanc.wheretoplay.activity.ShareActivity;
 
 
+import com.fanc.wheretoplay.activity.SignInActivity;
 import com.fanc.wheretoplay.adapter.MerchAdapter;
 import com.fanc.wheretoplay.base.App;
 import com.fanc.wheretoplay.base.BaseFragment;
@@ -120,6 +121,7 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
     private RatingBar rb_merchant;
     private LinearLayout ll_merchant_detail_image;
     private List<MerchantDetailModel.ContentBean.StoreBean.ListBean> stores;
+    private TextView tv_pay;
 
 
     @Nullable
@@ -157,6 +159,7 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
             view1.setOnClickListener(this);
         }
 
+        tv_pay = view.findViewById(R.id.tv_pay);
 
         initImageLayout();
         init();
@@ -381,6 +384,13 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
      * @param store
      */
     private void showStoreDetail(final MerchantDetailModel.ContentBean.StoreBean store) {
+
+        if ("0".equals(store.is_immediate_pay)){
+            tv_pay.setVisibility(View.GONE);
+        }else {
+            tv_pay.setVisibility(View.VISIBLE);
+        }
+
         discountValue = store.discount;
         tv_storeName.setText(store.name);
         if (store.discount.length() > 0) {
@@ -612,6 +622,9 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
                     mContext.overridePendingTransition(R.anim.anim_enter_bottom, R.anim.anim_out_top_right);
                 } else {
                     Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
+                    Intent intent2 = new Intent(mContext, SignInActivity.class);
+                    intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(intent2);
                 }
                 break;
 

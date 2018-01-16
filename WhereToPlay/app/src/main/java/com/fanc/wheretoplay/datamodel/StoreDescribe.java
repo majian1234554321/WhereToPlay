@@ -38,5 +38,6 @@ public class StoreDescribe extends BaseModel {
         public String capita;
         public String area;
         public String cover;
+        public String credit_book_status;
     }
 }

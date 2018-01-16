@@ -1,13 +1,16 @@
 package com.fanc.wheretoplay.view;
 
+import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
 import android.os.Message;
+import android.view.Display;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
@@ -31,7 +34,7 @@ public class DealDetailFilterDialog {
     private final int CONSUME_DETAIL = 1;// 消费明细
     private final int RECHARGE_DETAIL = 2;// 充值明细
 
-    Context mContext;
+    Activity mContext;
     Dialog mDialog;
 
     LinearLayout mLlStroreName;
@@ -47,12 +50,12 @@ public class DealDetailFilterDialog {
 
     boolean isUnfold = true;
 
-    public DealDetailFilterDialog(Context context) {
+    public DealDetailFilterDialog(Activity context) {
         mContext = context;
-        initViews();
+        initViews(context);
     }
 
-    private void initViews() {
+    private void initViews(Activity context) {
         DialogDealDetailFilterBinding binding = DataBindingUtil.inflate(LayoutInflater.from(mContext),
                 R.layout.dialog_deal_detail_filter, null, false);
         mLlStroreName = binding.llDealDetailFilterStoreName;
@@ -63,16 +66,28 @@ public class DealDetailFilterDialog {
         mBtnConfirm = binding.btnDialogFilterConfirm;
         mBtnCancel = binding.btnDialogFilterCancel;
 
-        mDialog = new Dialog(mContext, R.style.DialogStyle);
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                UIUtils.getScreenWidth(), LinearLayout.LayoutParams.MATCH_PARENT);
+        mDialog = new Dialog(mContext, R.style.Transparent);
+
+
+        Display defaultDisplay = context.getWindowManager().getDefaultDisplay();
+        Window dialogWindow = mDialog.getWindow();
+        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
+        lp.width = defaultDisplay.getWidth() - 44;//两边设置的间隙相当于margin
+        dialogWindow.setAttributes(lp);
+
+
+        mDialog.setContentView(binding.getRoot());
+
+
+     /*   LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+                LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         mDialog.setContentView(binding.getRoot(), layoutParams);
         Window dialogWindow = mDialog.getWindow();
         if (dialogWindow != null) {
-            dialogWindow.setGravity(Gravity.TOP);
+            dialogWindow.setGravity(Gravity.CENTER);
         }
 //        WindowManager.LayoutParams lp = dialogWindow.getAttributes();
-
+*/
         init();
     }
 

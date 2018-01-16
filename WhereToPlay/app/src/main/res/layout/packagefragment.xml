@@ -205,7 +205,7 @@
                 android:textColor="#ff333333"
                 android:textSize="15dp" />
 
-            <android.support.v7.widget.RecyclerView
+            <com.fanc.wheretoplay.view.MyRecycleView
                 android:id="@+id/recycle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
@@ -217,12 +217,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="right|center_vertical"
@@ -231,11 +231,11 @@
                 <TextView
                     android:id="@+id/tv_falseMoney1"
 
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
                     android:layout_marginRight="12dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:gravity="right"
                     android:textColor="#ff333333"
                     tools:text="2580元" />
@@ -246,11 +246,11 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="right"
@@ -258,10 +258,10 @@
 
                 <TextView
                     android:id="@+id/tv_realMoney1"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="12dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:gravity="right"
                     android:textColor="@color/text_red"
                     tools:text="2580元" />

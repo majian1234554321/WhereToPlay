@@ -123,7 +123,7 @@ class PackageFragment(private val idValue: String, private val storeIdValue: Str
         }
         tv_address.text = address
         tv_storeName.text = content.name
-        tv_storeName2.text = content.name
+        tv_storeName2.text = storeName
         tv_introduce.text = content.introduce
         tv_realMoney.text = content.discount_price
         tv_falseMoney.text = "￥ " + content.origin_price
@@ -132,13 +132,25 @@ class PackageFragment(private val idValue: String, private val storeIdValue: Str
         piv1.setButtomText(content.buy_notice?.effect_date)
         piv2.setButtomText(content.buy_notice?.booking_info)
         piv3.setButtomText(content.buy_notice?.rule_remind)
-        piv4.setButtomText(content.buy_notice?.tip)
+
+
+        if (content.buy_notice?.rule_remind != null) {
+            piv3.setButtomText(content.buy_notice?.rule_remind?.replace("\r", "\n.")?.trim())
+        }
+
+
+
+        if (content.buy_notice?.tip != null) {
+            piv4.setButtomText(content.buy_notice?.tip?.replace("\r", "\n.")?.trim())
+        }
+
+
 
         piv11.setButtomText(content.buy_notice?.effect_date_desc)
 
         tv_falseMoney.paint.flags = Paint.STRIKE_THRU_TEXT_FLAG
-        if (content.detail!=null&&content.detail.contains("/r"))
-            tv_detail.text = content.detail.replace("/r", "\n")
+        if (content.detail!=null&&content.detail.contains("\r"))
+            tv_detail.text = content.detail.replace("\r", ".\n")
 
         val adapter = PackageAdapter(mContext, content.product_list)
         recycle.adapter = adapter

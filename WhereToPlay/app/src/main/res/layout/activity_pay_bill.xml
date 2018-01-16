@@ -215,9 +215,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:drawableLeft="@drawable/mine_icon"
-                        android:text="@string/earnest"
-                        android:gravity="center_vertical"
                         android:drawablePadding="8dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/earnest"
                         android:textColor="#333333"
                         android:textSize="@dimen/textsize_level2" />
 
@@ -258,9 +258,9 @@
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
                         android:drawableLeft="@drawable/mine_icon"
-                        android:text="@string/discount_coupon"
-                        android:gravity="center_vertical"
                         android:drawablePadding="8dp"
+                        android:gravity="center_vertical"
+                        android:text="@string/discount_coupon"
                         android:textColor="#333333"
                         android:textSize="@dimen/textsize_level2" />
 
@@ -268,8 +268,8 @@
                         android:id="@+id/tv_pay_bill_discount_coupon"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColor="#333333"
                         android:hint="选择可用的优惠券"
+                        android:textColor="#333333"
                         android:textColorHint="#333333"
                         android:textSize="@dimen/textsize_level2" />
 
@@ -350,35 +350,12 @@
 
                     </LinearLayout>
 
-                    <LinearLayout
-                        android:id="@+id/ll_pay_bill_balance"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_below="@+id/ll_pay_bill_ali"
-                        android:onClick="onViewClick"
-                        android:orientation="horizontal">
-
-                        <ImageView
-                            android:layout_width="@dimen/width_50"
-                            android:layout_height="@dimen/height_50"
-                            android:padding="@dimen/padding_14"
-                            android:src="@drawable/pay_by_balance" />
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_gravity="center_vertical"
-                            android:text="@string/pay_by_balance"
-                            android:textColor="@color/bg"
-                            android:textSize="@dimen/normal_textsize" />
-
-                    </LinearLayout>
 
                     <LinearLayout
                         android:id="@+id/ll_upp"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/ll_pay_bill_balance"
+                        android:layout_below="@+id/ll_pay_bill_ali"
                         android:onClick="onViewClick"
 
                         android:orientation="horizontal">
@@ -398,6 +375,31 @@
                             android:textSize="@dimen/normal_textsize" />
 
                     </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/ll_pay_bill_balance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/ll_upp"
+                        android:onClick="onViewClick"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="@dimen/width_50"
+                            android:layout_height="@dimen/height_50"
+                            android:padding="@dimen/padding_14"
+                            android:src="@drawable/pay_by_balance" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:text="@string/pay_by_balance"
+                            android:textColor="@color/bg"
+                            android:textSize="@dimen/normal_textsize" />
+
+                    </LinearLayout>
+
 
                     <RadioGroup
                         android:id="@+id/rg_pay_bill"
@@ -423,12 +425,6 @@
                             android:layout_weight="1"
                             android:button="@drawable/selector_pay_way" />
 
-                        <RadioButton
-                            android:id="@+id/rb_pay_bill_balance"
-                            android:layout_width="match_parent"
-                            android:layout_height="@dimen/height_0"
-                            android:layout_weight="1"
-                            android:button="@drawable/selector_pay_way" />
 
                         <RadioButton
                             android:id="@+id/rb_upp"
@@ -437,6 +433,14 @@
 
                             android:layout_weight="1"
                             android:button="@drawable/selector_pay_way" />
+
+                        <RadioButton
+                            android:id="@+id/rb_pay_bill_balance"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/height_0"
+                            android:layout_weight="1"
+                            android:button="@drawable/selector_pay_way" />
+
                     </RadioGroup>
 
                     <View

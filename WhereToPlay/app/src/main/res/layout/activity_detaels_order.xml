@@ -33,25 +33,49 @@
             <TextView
                 android:id="@+id/tv_left"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:background="@color/text_red"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:text="发表评价"
+                android:textColor="#FFFFFF"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_mid"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
                 android:layout_gravity="center"
                 android:layout_weight="1"
                 android:drawablePadding="4dp"
                 android:gravity="center"
-                android:visibility="gone"
-                android:text="发表评价" />
+                android:text="发表评价"
+                android:visibility="gone" />
+
+            <TextView
+                android:id="@+id/tv_mid2"
+                android:layout_width="0dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:drawablePadding="4dp"
+                android:gravity="center"
+                android:text="发表评价"
+                android:visibility="gone" />
 
 
             <TextView
                 android:id="@+id/tv_right"
                 android:layout_width="0dp"
-                android:visibility="gone"
-                android:layout_height="match_parent"
+                android:layout_height="50dp"
                 android:layout_weight="1"
                 android:background="#C4483C"
                 android:gravity="center"
                 android:text="立即支付"
-                android:textColor="#FFFFFF" />
+                android:textColor="#FFFFFF"
+                android:visibility="gone" />
         </LinearLayout>
 
 
@@ -129,57 +153,88 @@
             <com.fanc.wheretoplay.view.OrderetailsItemView
                 android:id="@+id/oi1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.fanc.wheretoplay.view.OrderetailsItemView>
+                android:layout_height="wrap_content" />
 
             <com.fanc.wheretoplay.view.OrderetailsItemView
                 android:id="@+id/oi2"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.fanc.wheretoplay.view.OrderetailsItemView>
+                android:layout_height="wrap_content" />
 
             <com.fanc.wheretoplay.view.OrderetailsItemView
                 android:id="@+id/oi3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.fanc.wheretoplay.view.OrderetailsItemView>
+                android:layout_height="wrap_content" />
 
             <com.fanc.wheretoplay.view.OrderetailsItemView
                 android:id="@+id/oi4"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.fanc.wheretoplay.view.OrderetailsItemView>
+                android:layout_height="wrap_content" />
 
             <com.fanc.wheretoplay.view.OrderetailsItemView
                 android:id="@+id/oi5"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.fanc.wheretoplay.view.OrderetailsItemView>
+                android:layout_height="wrap_content" />
 
             <com.fanc.wheretoplay.view.OrderetailsItemView
                 android:id="@+id/oi6"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.fanc.wheretoplay.view.OrderetailsItemView>
+                android:layout_height="wrap_content" />
 
             <com.fanc.wheretoplay.view.OrderetailsItemView
                 android:id="@+id/oi7"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.fanc.wheretoplay.view.OrderetailsItemView>
+                android:layout_height="wrap_content" />
 
             <com.fanc.wheretoplay.view.OrderetailsItemView
                 android:id="@+id/oi8"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.fanc.wheretoplay.view.OrderetailsItemView>
+                android:layout_height="wrap_content" />
 
             <com.fanc.wheretoplay.view.OrderetailsItemView
                 android:id="@+id/oi9"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.fanc.wheretoplay.view.OrderetailsItemView>
+                android:layout_height="wrap_content" />
+
+            <com.fanc.wheretoplay.view.OrderetailsItemView
+                android:id="@+id/oi91"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.fanc.wheretoplay.view.OrderetailsItemView
+                android:id="@+id/oi92"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.fanc.wheretoplay.view.OrderetailsItemView
+                android:id="@+id/oi93"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.fanc.wheretoplay.view.OrderetailsItemView
+                android:id="@+id/oi94"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.fanc.wheretoplay.view.OrderetailsItemView
+                android:id="@+id/oi95"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.fanc.wheretoplay.view.OrderetailsItemView
+                android:id="@+id/oi96"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
 
             <com.fanc.wheretoplay.view.OrderetailsItemView
                 android:id="@+id/oi10"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.fanc.wheretoplay.view.OrderetailsItemView>
+                android:layout_height="wrap_content" />
 
             <com.fanc.wheretoplay.view.OrderetailsItemView
                 android:id="@+id/oi11"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"></com.fanc.wheretoplay.view.OrderetailsItemView>
+                android:layout_height="wrap_content" />
 
 
             <LinearLayout
@@ -232,9 +287,9 @@
 
                 <TextView
                     android:id="@+id/tv1"
-                    android:layout_centerVertical="true"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
                     android:text="订单编号："
                     android:textColor="#999999" />
 
@@ -242,8 +297,8 @@
                     android:id="@+id/tv_copy"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerVertical="true"
                     android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
                     android:background="@drawable/shape_btn_999999_stoke"
                     android:paddingBottom="2dp"
                     android:paddingLeft="12dp"

@@ -124,7 +124,7 @@ public class DateFragment extends BaseFragment {
         mTmDate.setTitle(R.string.choose_date);
         mTmDate.setTitleColor(getResources().getColor(R.color.white));
         // 最晚时间
-        last = DateFormatUtil.parseStringTolong("23:30", DateFormatUtil.HHmm);
+        last = DateFormatUtil.parseStringTolong(lastTime, DateFormatUtil.HHmm);
 
         // 年月
         mTvDataMonth.setText(DateFormatUtil.getCurrentMonth() + UIUtils.getString(R.string.month));
@@ -147,11 +147,10 @@ public class DateFragment extends BaseFragment {
         //判断是不是今天
 
 
-
-        if (DateFormatUtil.isCurrentDay(lastDate)){
-            mDateTimeAdaper = new DateTimeAdapter(mContext, mTime,true);
-        }else {
-            mDateTimeAdaper = new DateTimeAdapter(mContext, mTime,false);
+        if (DateFormatUtil.isCurrentDay(lastDate)) {
+            mDateTimeAdaper = new DateTimeAdapter(mContext, mTime, true);
+        } else {
+            mDateTimeAdaper = new DateTimeAdapter(mContext, mTime, false);
         }
 
         if (TextUtils.equals(Constants.RESERVE_WAY_CREDIT, reserveWay)) {
@@ -206,7 +205,7 @@ public class DateFragment extends BaseFragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Constants.ACTION_SELECT_DATE_TIME);
-                String date =  selectedTime;
+                String date = selectedTime;
                 intent.putExtra(Constants.TIMES, date);
                 LocalBroadcastManager.getInstance(mContext).sendBroadcast(intent);
                 mContext.finish();
@@ -225,6 +224,7 @@ public class DateFragment extends BaseFragment {
     }
 
     public String lastDate;
+
     public DateFragment setLastDate(String lastDate) {
         this.lastDate = lastDate;
         return this;

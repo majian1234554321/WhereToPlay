@@ -23,5 +23,6 @@ public class AccessOrderIdModel {
          */
 
         public String order_id;
+        public String prepay;
     }
 }

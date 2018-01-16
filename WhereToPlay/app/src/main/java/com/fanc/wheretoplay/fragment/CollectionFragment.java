@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.fanc.wheretoplay.R;
@@ -66,6 +67,7 @@ public class CollectionFragment extends BaseFragment {
     private double lat, lng;
     boolean isDeleting;
     List<Integer> deleteIndex;
+    private RelativeLayout rrrrr;
 
     @Nullable
     @Override
@@ -80,6 +82,7 @@ public class CollectionFragment extends BaseFragment {
     private void initViews() {
         mTmCollection = binding.tmCollection;
         mRvCollection = binding.rvCollection;
+        rrrrr = binding.rrrrrr;
     }
 
     private void init() {
@@ -230,7 +233,11 @@ public class CollectionFragment extends BaseFragment {
                         if (isSuccess(response)) {
                             if (response.getList() != null) {
                                 showCollectionList(response.getList());
+                            }else {
+                                rrrrr.setVisibility(View.VISIBLE);
                             }
+                        }else {
+                            rrrrr.setVisibility(View.VISIBLE);
                         }
                     }
                 });
@@ -246,6 +253,8 @@ public class CollectionFragment extends BaseFragment {
             this.collections.clear();
             this.collections.addAll(collections);
             collectionAdapter.notifyDataSetChanged();
+        }else {
+            rrrrr.setVisibility(View.VISIBLE);
         }
     }
 

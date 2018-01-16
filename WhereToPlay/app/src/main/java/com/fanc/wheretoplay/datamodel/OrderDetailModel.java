@@ -86,6 +86,12 @@ public class OrderDetailModel extends BaseResponseModel {
         public String book_start_date;
         public String book_start_time_desc;
 
+
+        public String display_balance;
+        public String fee;
+        public String coupon_amount;
+        public String pay_method;
+
         public static class PackageDetailBean {
             /**
              * id : 28
@@ -128,12 +134,10 @@ public class OrderDetailModel extends BaseResponseModel {
                  * effect_date : 加到几点到家
                  * rule_remind : 加防腐剂家
                  * tip : 1.  滴滴客服客服参加课程教材反馈
-                 2.（看看反馈反馈方法看看反馈反馈发3.  加方法看看反馈方法美女呢
-                 4.  看反馈反馈
-                 5.  反馈反馈反馈看
-                 6.  度假酒店扩大开放
-
-
+                 * 2.（看看反馈反馈方法看看反馈反馈发3.  加方法看看反馈方法美女呢
+                 * 4.  看反馈反馈
+                 * 5.  反馈反馈反馈看
+                 * 6.  度假酒店扩大开放
                  */
 
                 public String booking_info;

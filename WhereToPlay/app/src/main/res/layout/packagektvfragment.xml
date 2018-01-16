@@ -172,7 +172,8 @@
 
                 <TextView
                     android:id="@+id/tv_address"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
+                    android:layout_toLeftOf="@+id/view"
                     android:layout_height="wrap_content"
                     android:layout_below="@id/tv_storeName2"
                     android:layout_marginBottom="12dp"
@@ -254,12 +255,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="right|center_vertical"
@@ -268,11 +269,11 @@
                 <TextView
                     android:id="@+id/tv_falseMoney1"
 
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
 
                     android:layout_marginRight="12dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:gravity="right"
                     android:textColor="#ff333333"
                     tools:text="2580元" />
@@ -284,12 +285,12 @@
                 android:orientation="horizontal">
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1" />
 
                 <TextView
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="2"
                     android:gravity="right"
@@ -297,10 +298,10 @@
 
                 <TextView
                     android:id="@+id/tv_realMoney1"
-                    android:layout_width="0dp"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginRight="12dp"
-                    android:layout_weight="1"
+                    android:layout_weight="2"
                     android:gravity="right"
                     android:textColor="@color/text_red"
                     tools:text="2580元" />
@@ -312,7 +313,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="12dp"
-                android:textColor="#ff333333" />
+                android:text="121212"
+                 />
 
             <View
                 android:layout_width="match_parent"

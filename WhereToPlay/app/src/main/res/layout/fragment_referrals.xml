@@ -133,6 +133,7 @@
                     android:background="@drawable/shape_btn_signin"
                     android:onClick="@{click.onViewClick}"
                     android:text="@string/sheared"
+                    android:layout_marginBottom="18dp"
                     android:textColor="@color/text_white"
                     android:textSize="@dimen/textsize_level2" />
             </LinearLayout>

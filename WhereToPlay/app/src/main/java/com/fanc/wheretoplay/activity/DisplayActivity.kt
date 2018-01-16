@@ -40,19 +40,27 @@ class DisplayActivity : BaseActivity() {
 
         when (displayType) {
             "CouponFragment" -> {
-                supportFragmentManager.beginTransaction().replace(R.id.displayfragment, CouponFragment()).commit()
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.displayfragment, CouponFragment())
+                        .commit()
             }
             "PackageFragment" -> {
-                supportFragmentManager.beginTransaction().replace(R.id.displayfragment, PackageFragment(idValue, storeIdValue, discountValue, storeName, address, phonevalue)).commit()
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.displayfragment, PackageFragment(idValue, storeIdValue, discountValue, storeName, address, phonevalue))
+                        .commit()
             }
 
             "PackageDetailsFragment" -> {
-                supportFragmentManager.beginTransaction().replace(R.id.displayfragment, PackageDetailsFragment(order_idValue,order_functionValue)).commit()
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.displayfragment, PackageDetailsFragment(order_idValue, order_functionValue))
+                        .commit()
             }
 
             "PackageKTVFragment" -> {
-                supportFragmentManager.beginTransaction().replace(R.id.displayfragment, PackageKTVFragment(idValue, storeIdValue, discountValue, storeName, address, phonevalue,
-                        dateValue, descValue,weekValue)).commit()
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.displayfragment, PackageKTVFragment(idValue, storeIdValue, discountValue, storeName, address, phonevalue,
+                                dateValue, descValue, weekValue))
+                        .commit()
             }
 
         }

@@ -4,15 +4,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+
         android:orientation="horizontal">
 
         <View
-            android:layout_width="@dimen/width_0"
+            android:layout_width="20dp"
             android:layout_height="match_parent"
-            android:layout_weight="0.2"/>
+            />
 
         <LinearLayout
             android:layout_width="@dimen/width_0"
+
             android:layout_height="wrap_content"
             android:layout_weight="0.8"
             android:background="@drawable/shape_white"
@@ -157,5 +159,10 @@
                     android:textSize="@dimen/normal_textsize"/>
             </LinearLayout>
         </LinearLayout>
+
+        <View
+            android:layout_width="20dp"
+            android:layout_height="match_parent"
+            />
     </LinearLayout>
 </layout>

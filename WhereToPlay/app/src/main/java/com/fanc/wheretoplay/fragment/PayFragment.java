@@ -92,14 +92,12 @@ public class PayFragment extends BaseFragment {
         LinearLayoutManager lm = new LinearLayoutManager(mContext);
         lm.setOrientation(LinearLayoutManager.VERTICAL);
         mRvPayReserve.setLayoutManager(lm);
-//        books = new ArrayList<>();
-//        payReserveAdapter = new PayReserveAdapter(mContext, books);
+
 
         orders = new ArrayList<>();
         orderNewAdapter = new OrderNewAdapter(mContext, orders);
 
-//        mRvPayReserve.addItemDecoration(new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL,
-//                UIUtils.dp2Px(5), mContext.getResources().getColor(R.color.bg)));
+
         mRvPayReserve.setAdapter(orderNewAdapter);
 
         mRvPayReserve.setCanPullDown(true);
@@ -122,11 +120,7 @@ public class PayFragment extends BaseFragment {
                 isPullUp = true;
                 size = count;
                 page ++;
-//                if (orders.size() < 10) {
-//                    page = 0;
-//                } else {
-//                    page++;
-//                }
+
                 getOrderList(page, size);
             }
         });
@@ -146,26 +140,12 @@ public class PayFragment extends BaseFragment {
                         .show();
             }
         });
-//        mRvPayReserve.setOnScrollChangedListener(new PullableRecyclerView.OnScrollChangedListener() {
-//            @Override
-//            public void onScroll(RecyclerView recyclerView, int l, int t, int oldl, int oldt) {
-//                Log.w("aaa", "onScrollChanged: l = " + l + ",  t = " + t + ",  oldl = " + oldl + ",  oldt = " + oldt);
-//                if (oldt > t) {// 上滑
-//                    payReserveAdapter.setScrollOrientation(payReserveAdapter.SCROLL_UP);
-//                } else {// 下滑
-//                    payReserveAdapter.setScrollOrientation(payReserveAdapter.SCROLL_DOWN);
-//                }
-//            }
-//        });
+
         mRvPayReserve.addOnScrollListener(new OnScrollListener() {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-//                if (dy > 0) {
-//                    payReserveAdapter.setScrollOrientation(payReserveAdapter.SCROLL_DOWN);
-//                } else {
-//                    payReserveAdapter.setScrollOrientation(payReserveAdapter.SCROLL_UP);
-//                }
+
                 if (dy > 0) {
                     orderNewAdapter.setScrollOrientation(orderNewAdapter.SCROLL_DOWN);
                 } else {
@@ -237,64 +217,7 @@ public class PayFragment extends BaseFragment {
                     }
                 });
     }
-//    private void getOrderList(int page, int size) {
-//        OkHttpUtils.post()
-//                .url(Network.User.USER_NEW_ORDERLIST)
-//                .addParams(Network.Param.TOKEN, mUser.getToken())
-//                .addParams(Network.Param.PAGE, String.valueOf(page))
-//                .addParams(Network.Param.SIZE, String.valueOf(size))
-//                .addParams(Network.Param.TYPE, String.valueOf(1))// 今日订单，不含历史订单
-//                .build()
-//                .execute(new DCallback<BookList>() {
-//                    @Override
-//                    public void onError(Call call, Exception e) {
-//                        connectError();
-//                        refreshOrLoadFail();
-//                    }
-//
-//                    @Override
-//                    public void onResponse(BookList response) {
-//                        if (isSuccess(response)) {
-//                            if (response.getList() != null) {
-//                                showBookList(response.getList());
-//                            } else {
-//                                refreshOrLoadFail();
-//                            }
-//                        } else {
-//                            refreshOrLoadFail();
-//                        }
-//                    }
-//                });
-//    }
 
-//    private void showBookList(List<BookList.Book> books) {
-//        if (isPullDown) {
-//            this.books.clear();
-//            this.books.addAll(books);
-//            payReserveAdapter.notifyDataSetChanged();
-//            refreshAndLoadMoreSuccess();
-//        } else if (isPullUp) {
-//            if (books.size() < 1) {
-//                ToastUtils.makePicTextShortToast(mContext, "没有更多了哦");
-//                refreshOrLoadFail();
-//                return;
-//            }
-//            if (this.books.size() < 10) {
-//                this.books.clear();
-//            }
-//            for (int i = 0; i < books.size(); i++) {
-//                this.books.add(books.get(i));
-//                payReserveAdapter.notifyItemChanged(this.books.size() + i);
-//            }
-////            this.books.addAll(books);
-////            payReserveAdapter.notifyDataSetChanged();
-//            refreshAndLoadMoreSuccess();
-//        } else {
-//            this.books.clear();
-//            this.books.addAll(books);
-//            payReserveAdapter.notifyDataSetChanged();
-//        }
-//    }
 
     private void showOrderList(List<OrderList.Order> orders) {
         if (isPullDown) {   // 下拉刷新
@@ -352,32 +275,7 @@ public class PayFragment extends BaseFragment {
                     }
                 });
     }
-//    private void cancelOrder(final BookList.Book order, final int position) {
-//        showProgress();
-//        OkHttpUtils.post()
-//                .url(Network.User.USER_CANCLE_ORDER)
-//                .addParams(Network.Param.TOKEN, mUser.getToken())
-//                .addParams(Network.Param.ID, order.getOrder_id())
-//                .build()
-//                .execute(new DCallback<IsOk>() {
-//                    @Override
-//                    public void onError(Call call, Exception e) {
-//                        connectError();
-//                    }
-//
-//                    @Override
-//                    public void onResponse(IsOk response) {
-//                        if (isSuccess(response)) {
-//                            if (response.isIs_cancle()) {
-//                                // 取消成功，改变状态，通知UI
-//                                order.setStatus("1");
-//                                payReserveAdapter.notifyItemChanged(position);
-//                                ToastUtils.makePicTextShortToast(mContext, "订单取消成功");
-//                            }
-//                        }
-//                    }
-//                });
-//    }
+
 
     private void registerBroadcastReceiver() {
         receiver = new Receiver();

@@ -12,17 +12,16 @@
 
         <TextView
             android:id="@+id/tv_001"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="12dp"
             android:layout_weight="1"
-            android:singleLine="true"
             android:textColor="#ff333333"
-            tools:text="002" />
+            tools:text="0022323232323223223232322323232323" />
 
         <TextView
             android:id="@+id/tv_003"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="right"
             android:layout_weight="2"
@@ -32,9 +31,9 @@
         <TextView
             android:id="@+id/tv_002"
             android:gravity="right"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:textColor="#ff333333"
             android:layout_marginRight="12dp"
             tools:text="002" />

@@ -10,7 +10,7 @@ import java.util.List;
  * @date 2017/12/24
  */
 
-public class MerchantDetailModel  {
+public class MerchantDetailModel {
 
 
     /**
@@ -51,6 +51,7 @@ public class MerchantDetailModel  {
              * package : {"count":5,"pkg_list":[{"id":1,"name":"测试套餐1","pic":"http://oz3cqe2qe.bkt.clouddn.com//Upload/user/avatar/images/20171218/20171218092711_21524.jpg-thumb","origin_price":"3580","discount_price":"2580"},{"id":2,"name":"测试套餐2","pic":"http://oz3cqe2qe.bkt.clouddn.com//Upload/user/avatar/images/20171218/20171218092711_21524.jpg-thumb","origin_price":"3580","discount_price":"2580"},{"id":3,"name":"测试套餐3","pic":"http://oz3cqe2qe.bkt.clouddn.com//Upload/user/avatar/images/20171218/20171218092711_21524.jpg-thumb","origin_price":"3580","discount_price":"2580"},{"id":4,"name":"测试套餐4","pic":"http://oz3cqe2qe.bkt.clouddn.com//Upload/user/avatar/images/20171218/20171218092711_21524.jpg-thumb","origin_price":"3580","discount_price":"2580"},{"id":5,"name":"测试套餐5","pic":"http://oz3cqe2qe.bkt.clouddn.com//Upload/user/avatar/images/20171218/20171218092711_21524.jpg-thumb","origin_price":"3580","discount_price":"2580"}]}
              */
 
+            public String is_immediate_pay;
             public String store_id;
             public String name;
             public String branch;

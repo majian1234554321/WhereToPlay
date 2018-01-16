@@ -152,11 +152,7 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
             public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
                 isPullUp = true;
                 size = count;
-//                if (mStores.size() < 6) {
-//                    page = 0;
-//                } else {
-//                    page++;
-//                }
+
                 page++;
                 requestComments(mType, page, size);
             }
@@ -384,7 +380,6 @@ public class CheckCommentsActivity extends BaseFragmentActivity {
             mStores.addAll(commentList);
             checkCommentsAdapter.notifyDataSetChanged();
             refreshAndLoadMoreSuccess();
-            return;
         } else {   //正常
             mStores.clear();
             mStores.addAll(commentList);

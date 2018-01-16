@@ -17,6 +17,7 @@ import android.widget.RadioButton;
 import android.widget.RadioGroup;
 
 import com.fanc.wheretoplay.activity.SignInActivity;
+import com.fanc.wheretoplay.activity.main.Main2Fragment;
 import com.fanc.wheretoplay.base.App;
 import com.fanc.wheretoplay.base.BaseFragmentActivity;
 import com.fanc.wheretoplay.callback.IOnFocusListener;
@@ -88,8 +89,10 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
     private void initFragments() {
         fragments = new ArrayList<>();
         fragments.add(new ReserveFragment2());
-      //  fragments.add(reserveFragment = new ReserveFragment());
-       fragments.add(new PayFragment());
+        //  fragments.add(reserveFragment = new ReserveFragment());
+        fragments.add(new Main2Fragment());
+
+        //  fragments.add(new PayFragment());
         fragments.add(new DiscoverFragment());
         fragments.add(new MineFragment());
 
@@ -118,7 +121,6 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
         DisplayMetrics displayMetrics = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         screenWidth = displayMetrics.widthPixels;
-
 
     }
 

@@ -3,6 +3,7 @@ package com.fanc.wheretoplay.fragment;
 import android.content.Intent;
 import android.databinding.DataBindingUtil;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,12 +45,10 @@ public class SignInFragment extends BaseFragment {
     EditText mEtMobil;
     EditText mEtPassword;
 
-    //    TextView mTvForgetPwd;
-//    TextView mTvMobilRegister;
     Button mBtnSignIn;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         signinBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_signin, container, false);
         initView();
         init();
@@ -62,8 +61,6 @@ public class SignInFragment extends BaseFragment {
     private void initView() {
         mEtMobil = signinBinding.etSigninMobile;
         mEtPassword = signinBinding.etSigninPassword;
-//        mTvForgetPwd = signinBinding.tvSigninForgetPwd;
-//        mTvMobilRegister = signinBinding.tvSigninRegister;
         mBtnSignIn = signinBinding.btnSignin;
     }
 
@@ -114,7 +111,7 @@ public class SignInFragment extends BaseFragment {
         MultipartBody.Part requestFileC = MultipartBody.Part.createFormData(Network.Param.REGISTRATIONID, registrationID);
 
 
-         Retrofit_RequestUtils.getRequest().logIn(requestFileA, requestFileB, requestFileC)
+        Retrofit_RequestUtils.getRequest().logIn(requestFileA, requestFileB, requestFileC)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<NewUser>() {

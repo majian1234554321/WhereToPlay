@@ -1,7 +1,6 @@
 package com.fanc.wheretoplay.network;
 
 
-
 import com.fanc.wheretoplay.datamodel.AccessOrderIdModel;
 import com.fanc.wheretoplay.datamodel.BookListModel;
 
@@ -26,6 +25,7 @@ import com.fanc.wheretoplay.datamodel.MineMoney;
 import com.fanc.wheretoplay.datamodel.NewUser;
 import com.fanc.wheretoplay.datamodel.OrderDetailModel;
 
+import com.fanc.wheretoplay.datamodel.OrderDoneModel;
 import com.fanc.wheretoplay.datamodel.OrderInfoModel;
 import com.fanc.wheretoplay.datamodel.OrderPayoffModel;
 import com.fanc.wheretoplay.datamodel.PackageModel;
@@ -48,8 +48,8 @@ import java.util.List;
 public class Network {
 
 
-     public static String BASE = "http://testapi.51tzl.cn";   // 测试
-  //  public static String BASE = "http://ktv.51tzl.cn";
+   public static String BASE = "http://testapi.51tzl.cn";   // 测试
+     //public static String BASE = "http://ktv.51tzl.cn";
 
 
     public static String IMAGE = "";   // 测试
@@ -306,6 +306,12 @@ public class Network {
         Observable<AccessOrderIdModel> immediatelyPay(@Part List<MultipartBody.Part> fileA);
 
 
+        //商家支付再支付
+        @Multipart
+        @POST("User/continuePay")
+        Observable<AccessOrderIdModel> continuePay(@Part List<MultipartBody.Part> fileA);
+
+
         //商家详情支付获取订单Id
         @Multipart
         @POST("User/setMealImmediatelyPay")
@@ -314,9 +320,9 @@ public class Network {
 
         //商家详情支付获取支付信息
         @Multipart
-        @POST("User/order_payoff")
-        Observable<PayOrder> order_payoff(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB, @Part MultipartBody.Part fileC, @Part MultipartBody.Part fileAA,
-                                          @Part MultipartBody.Part fileBB, @Part MultipartBody.Part fileCC, @Part MultipartBody.Part fileCCC, @Part MultipartBody.Part fileCCCC);
+        @POST("User/order_done")
+        Observable<OrderDoneModel> order_done(@Part MultipartBody.Part fileA, @Part MultipartBody.Part fileB);
+
 
         //推荐奖励
         @Multipart
@@ -428,13 +434,10 @@ public class Network {
         Flowable<BookPackageDetailModel.ContentBean> bookPackageDetail(@Part List<MultipartBody.Part> fileA);
 
 
-
         //KTV详情支付获取订单Id
         @Multipart
         @POST("User/discountBookImmediatelyPay")
         Observable<AccessOrderIdModel> discountBookImmediatelyPay(@Part List<MultipartBody.Part> fileA);
-
-
 
 
         //ktv订单支付
@@ -442,6 +445,21 @@ public class Network {
         @POST("User/discountBookPayoff")
         Observable<OrderPayoffModel> discountBookPayoff(@Part List<MultipartBody.Part> fileA);
 
+
+        //
+        @Multipart
+        @POST("User/getPrepayByOrderId")
+        Observable<AccessOrderIdModel> getPrepayByOrderId(@Part List<MultipartBody.Part> fileA);
+
+
+        @Multipart
+        @POST("User/payOrder")
+        Observable<OrderPayoffModel> payOrder(@Part List<MultipartBody.Part> fileA);
+
+
+        @Multipart
+        @POST("User/order_payoff")
+        Observable<OrderPayoffModel> order_payoff(@Part List<MultipartBody.Part> fileA);
 
     }
 

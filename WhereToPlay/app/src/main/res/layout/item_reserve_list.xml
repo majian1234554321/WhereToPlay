@@ -5,29 +5,28 @@
 
         <variable
             name="order"
-            type="com.fanc.wheretoplay.datamodel.OrderList.Order"/>
+            type="com.fanc.wheretoplay.datamodel.OrderList.Order" />
     </data>
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="@dimen/height_1"
         android:layout_margin="@dimen/margin_10"
-        android:background="@drawable/border_shadow_fir">
+        android:background="@drawable/border_shadow_fir"
+        android:padding="@dimen/height_1">
 
         <View
             android:id="@+id/v_bg_top"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_50"
-            android:background="@drawable/shape_reserve_list_item_top"/>
+            android:background="@drawable/shape_reserve_list_item_top" />
 
         <View
             android:id="@+id/v_bg_bottom"
             android:layout_width="match_parent"
             android:layout_height="@dimen/height_120"
             android:layout_below="@+id/v_bg_top"
-            android:background="@color/bg_white"
-            />
+            android:background="@color/bg_white" />
 
         <TextView
             android:id="@+id/tv_reserve_list_item_title"
@@ -39,7 +38,7 @@
             android:gravity="center_vertical"
             android:text="@{order.store_name}"
             android:textColor="@color/textcolor_3b"
-            android:textSize="@dimen/textsize_level2"/>
+            android:textSize="@dimen/textsize_level2" />
 
         <TextView
             android:id="@+id/tv_reserve_list_item_discount"
@@ -51,7 +50,7 @@
             android:background="@drawable/discount"
             android:paddingLeft="@dimen/padding_20"
             android:paddingRight="@dimen/padding_5"
-            android:textColor="@color/text_white"/>
+            android:textColor="@color/text_white" />
 
         <TextView
             android:id="@+id/tv_reserve_list_item_room"
@@ -62,7 +61,7 @@
             android:layout_marginRight="@dimen/margin_10"
 
             android:textColor="@color/text_red"
-            android:textSize="@dimen/normal_textsize"/>
+            android:textSize="@dimen/normal_textsize" />
 
         <TextView
             android:id="@+id/tv_reserve_list_item_name"
@@ -73,7 +72,7 @@
             android:layout_marginTop="@dimen/margin_15"
             android:text="@{order.nickname}"
             android:textColor="@color/textcolor_btn_normal"
-            android:textSize="@dimen/normal_textsize"/>
+            android:textSize="@dimen/normal_textsize" />
 
         <TextView
             android:id="@+id/tv_reserve_list_item_mobile"
@@ -84,7 +83,7 @@
             android:layout_marginTop="@dimen/margin_10"
             android:text="@{order.mobile}"
             android:textColor="@color/textcolor_btn_normal"
-            android:textSize="@dimen/normal_textsize"/>
+            android:textSize="@dimen/normal_textsize" />
 
         <TextView
             android:id="@+id/tv_reserve_list_item_time"
@@ -95,7 +94,7 @@
             android:layout_marginTop="@dimen/margin_10"
             android:text="到店 09-10 22:00"
             android:textColor="@color/textcolor_btn_normal"
-            android:textSize="@dimen/normal_textsize"/>
+            android:textSize="@dimen/normal_textsize" />
 
         <ImageView
             android:id="@+id/iv_reserve_list_item_way"
@@ -103,7 +102,7 @@
             android:layout_height="@dimen/height_50"
             android:layout_alignParentRight="true"
             android:layout_alignTop="@+id/v_bg_bottom"
-            android:src="@drawable/prepay"/>
+            android:src="@drawable/prepay" />
 
         <TextView
             android:id="@+id/tv_reserve_list_item_state"
@@ -115,7 +114,7 @@
             android:layout_marginTop="@dimen/margin_2"
             android:text="@string/reserving"
             android:textColor="@color/text_red"
-            android:textSize="@dimen/textsize_level2"/>
+            android:textSize="@dimen/textsize_level2" />
 
         <ImageView
             android:id="@+id/iv_reserve_list_item_state"
@@ -124,7 +123,7 @@
             android:layout_alignTop="@+id/tv_reserve_list_item_name"
             android:layout_marginRight="@dimen/margin_5"
             android:layout_toLeftOf="@+id/tv_reserve_list_item_state"
-            android:src="@drawable/reserve_book_in_hollow"/>
+            android:src="@drawable/reserve_book_in_hollow" />
 
         <LinearLayout
             android:layout_width="wrap_content"
@@ -144,7 +143,7 @@
                 android:text="@string/to_evaluate"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/normal_textsize"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
             <Button
                 android:id="@+id/btn_reserve_list_item_cancel"
@@ -156,7 +155,7 @@
                 android:text="@string/cancel_reverse"
                 android:textColor="@color/text_gray"
                 android:textSize="@dimen/normal_textsize"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
 
             <Button
@@ -169,7 +168,7 @@
                 android:text="@string/buy"
                 android:textColor="@color/text_white"
                 android:textSize="@dimen/normal_textsize"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </LinearLayout>
     </RelativeLayout>
 </layout>

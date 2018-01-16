@@ -3,8 +3,8 @@ package com.fanc.wheretoplay.adapter;
 import android.app.Activity;
 import android.content.Context;
 import android.databinding.DataBindingUtil;
-import android.databinding.ViewDataBinding;
-import android.support.v7.widget.GridLayoutManager;
+
+
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,13 +16,15 @@ import android.widget.TextView;
 import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.databinding.ItemCheckCommentsBinding;
-import com.fanc.wheretoplay.databinding.ItemHousenewsBinding;
+
 import com.fanc.wheretoplay.datamodel.CheckComments;
-import com.fanc.wheretoplay.datamodel.HousenewsList;
+
 import com.fanc.wheretoplay.divider.GridDivider;
 import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.DateFormatUtil;
 import com.fanc.wheretoplay.util.UIUtils;
+import com.fanc.wheretoplay.view.MyGridView;
+
 
 import java.util.List;
 
@@ -34,11 +36,11 @@ public class CheckCommentsAdapter extends RecyclerView.Adapter<CheckCommentsAdap
     private  CheckComments mResponse;
     private List mList;
     Context mContext;
-    GridDivider gridDivider ;
+
     public CheckCommentsAdapter(Activity mContext, List list) {
         this.mContext = mContext;
         this.mList = list;
-        gridDivider = new GridDivider(mContext, 4, UIUtils.dp2Px(5), mContext.getResources().getColor(R.color.white));
+
     }
 
     @Override
@@ -66,10 +68,7 @@ public class CheckCommentsAdapter extends RecyclerView.Adapter<CheckCommentsAdap
         if (commentListBean.getPicture() != null && commentListBean.getPicture().size() > 0) {
             holder.mRcCardView.setVisibility(View.VISIBLE);
             CardViewAdapter cardViewAdapter = new CardViewAdapter(mContext, commentListBean.getPicture());
-            holder.mRcCardView.setLayoutManager(new GridLayoutManager(mContext, 4));
-            //设置图片间距
-            holder.mRcCardView.removeItemDecoration(gridDivider);   //ItemDecoration会持续叠加在一个recyclerview上面，所以每次添加ItemDecoration之前要先删除ItemDecoration
-            holder.mRcCardView.addItemDecoration(gridDivider);
+
             holder.mRcCardView.setAdapter(cardViewAdapter);
         } else {
             holder.mRcCardView.setVisibility(View.GONE);
@@ -89,7 +88,7 @@ public class CheckCommentsAdapter extends RecyclerView.Adapter<CheckCommentsAdap
 
         private final ItemCheckCommentsBinding mBinding;
         private ImageView mIvAvatar;
-        private RecyclerView mRcCardView;
+        private MyGridView mRcCardView;
         private TextView mTvContent;
         private TextView mTvNickName;
         private TextView mTvTime;

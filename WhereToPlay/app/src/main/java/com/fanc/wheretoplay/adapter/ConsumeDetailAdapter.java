@@ -51,17 +51,17 @@ public class ConsumeDetailAdapter extends RecyclerView.Adapter<ConsumeDetailAdap
             holder.mTvItemConsumeOrderTime.setText(
                     DateFormatUtil.getDateTimeStr(new Date(Long.parseLong(consumeDetail.getReserve_time()) * 1000)));
         }
-        if (Double.parseDouble(consumeDetail.getPrepay()) == 0D) {
+        /*if (Double.parseDouble(consumeDetail.getPrepay()) == 0D) {
             holder.mLlTvItemConsumeSubscription.setVisibility(View.GONE);
         }
         if (Double.parseDouble(consumeDetail.getAccount()) == 0D) {
             holder.mLlTvItemConsumeOrder.setVisibility(View.GONE);
-        }
-        if (consumeDetail.getDiscount()!=null){
+        }*/
+       /* if (consumeDetail.getDiscount()!=null){
             if (Double.parseDouble(consumeDetail.getDiscount()) == 0D) {
                 holder.mLlTvItemConsumeDiscount.setVisibility(View.GONE);
             }
-        }
+        }*/
 
     }
 

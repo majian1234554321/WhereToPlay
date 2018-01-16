@@ -47,6 +47,7 @@
         <com.fanc.wheretoplay.view.DrawableCenterLeftTextView
             android:id="@+id/tv_pay"
             android:layout_width="0dp"
+            android:visibility="gone"
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:background="@color/text_red"

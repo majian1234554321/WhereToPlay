@@ -165,6 +165,8 @@ public class ReserveInfoFragment extends BaseFragment {
         mEtReserveInfoNumberOfPeople = reserveInfoBinding.etReserveInfoNumberOfPeople;
         mEtReserveInfoRemark = reserveInfoBinding.etReserveInfoRemark;
         mBtnReserveInfoPay = reserveInfoBinding.btnReserveInfoPay;
+
+
         tv1 = reserveInfoBinding.tv1;
         tv2 = reserveInfoBinding.tv2;
         iv3 = reserveInfoBinding.iv3;
@@ -326,6 +328,16 @@ public class ReserveInfoFragment extends BaseFragment {
     private void showStoreDescribe(StoreDescribe.Store store) {
         Log.i("XXXXXXXXXXXXXX", store.cover);
         reserveInfoBinding.setStore(store);
+
+        if (store.credit_book_status != null && "0".equals(store.credit_book_status)) {
+            mRbReserveInfoCredit.setVisibility(View.GONE);
+            mRbReserveInfoRepay.setChecked(true);
+        } else {
+            mRbReserveInfoCredit.setVisibility(View.VISIBLE);
+            mRbReserveInfoCredit.setChecked(true);
+
+        }
+
         String d = "";
         // 距离
         if ("-1".equals(store.distance)) {

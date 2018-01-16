@@ -530,7 +530,7 @@ public class ReserveFragment2 extends BaseFragment implements IOnFocusListener, 
                     mTvReserveFilter.setText(name);
                     mTvReserveFilterSuspend.setText(name);
                 }
-                getStoreList(null, city.getId(), 0, 0, areaId, storeType, category, filterType, value);
+                getStoreList("onRefresh", city.getId(), 0, 0, areaId, storeType, category, filterType, value);
             }
         });
 

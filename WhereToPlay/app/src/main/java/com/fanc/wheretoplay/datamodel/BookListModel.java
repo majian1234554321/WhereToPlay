@@ -50,6 +50,9 @@ public class BookListModel {
             public String order_action;
             public String order_function;
             public String room_type;
+            public  String room_number;
+            public String order_mobile;
+            public String order_name;
             public String decorate_type;
             public String total;
             public String statusdesc;

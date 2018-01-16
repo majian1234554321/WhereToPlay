@@ -49,7 +49,6 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
     var packageIdValue: String? = ""
     var orderId: String? = ""
 
-
     lateinit var value4: String
     lateinit var wxApi: IWXAPI
     private val mMode = "00"
@@ -77,7 +76,6 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
 
     }
 
-
     private fun wxPay(json: OrderPayoffModel.ContentBean) {
         val req = PayReq()
         req.appId = json.appid
@@ -93,7 +91,6 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
 
 
     }
-
 
     private fun aliPay(orderString: String) {
         Observable.just(orderString).map {
@@ -161,7 +158,6 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
 
         }
     }
-
 
     //根orderId直接支付
     private fun payOrder(password: String) {
@@ -237,7 +233,7 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
         val list = arrayListOf<MultipartBody.Part>()
 
 
-        list.add(MultipartBody.Part.createFormData("store_id", if (TextUtils.isEmpty(storeIdValue)) "" else storeIdValue))
+        list.add(MultipartBody.Part.createFormData("store_id", storeIdValue))
         list.add(MultipartBody.Part.createFormData("token", mUser.token))
         list.add(MultipartBody.Part.createFormData("package_id", if (TextUtils.isEmpty(packageIdValue)) "" else packageIdValue))
 
@@ -345,7 +341,6 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
 
     }
 
-
     var discountValue: String? = ""
     var address: String? = ""
     var storeName: String? = ""
@@ -396,13 +391,12 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
         book_start_time = intent.getStringExtra("book_start_time")
 
 
-        val fragment = PayPayFragment(value0, value1, value2, value3, value4, value5)
+        val fragment = PayPayFragment(storeName, value1, value2, value3, value4, value5)
         supportFragmentManager.beginTransaction().replace(R.id.fragment_dispaly, fragment).commit()
 
         rg.setOnCheckedChangeListener(this)
         btn_pay.setOnClickListener(this)
     }
-
 
     /**
      * 余额支付时，检查是否设置过支付密码
@@ -444,7 +438,6 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
                     .show()
         }
     }
-
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         /*************************************************
@@ -503,7 +496,6 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
         return true
 
     }
-
 
     // 支付成功去评价
     private fun paySuccess() {

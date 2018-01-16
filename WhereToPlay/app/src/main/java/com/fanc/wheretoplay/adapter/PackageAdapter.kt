@@ -17,8 +17,9 @@ class PackageAdapter(val context: Context, val product_list: List<PackageModel.C
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         with(holder?.itemView!!) {
             tv_001.text = product_list[position].name
-            tv_002.text = product_list[position].num+product_list[position].unit
-            tv_003.text = product_list[position].price+"元"
+            tv_002.text = product_list[position].price+"元"
+            tv_003.text = product_list[position].num+product_list[position].unit
+
         }
     }
 

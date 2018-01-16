@@ -154,6 +154,7 @@
                         android:background="@drawable/selector_reserve_info_bg"
                         android:button="@null"
                         android:checked="true"
+                        android:visibility="gone"
                         android:paddingLeft="@dimen/padding_20"
                         android:paddingRight="@dimen/padding_20"
                         android:text="@string/credit_reserve"

@@ -92,7 +92,7 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.ViewHo
                     break;
                 case "2":// 预定成功状态，取消按钮显示，消费按钮为结账
                     holder.mIvState.setImageResource(R.drawable.reserved);
-                    holder.mTvState.setTextColor(UIUtils.getColor(R.color.order_reserved));
+                    holder.mTvState.setTextColor(UIUtils.getColor(R.color.text_red));
                     holder.mTvState.setText(R.string.pay_reserved);
                     holder.mBtnCancel.setVisibility(View.VISIBLE);
                     holder.mBtnBuy.setText(R.string.buy);
@@ -129,7 +129,7 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.ViewHo
                     break;
             }
         }
-        // 次日八点后所有订单不可用
+     /*   // 次日八点后所有订单不可用
         if (TextUtils.equals("0", order.consume_again)) {// 不可用
             holder.mBtnBuy.setVisibility(View.GONE);
             holder.mBtnCancel.setVisibility(View.GONE);
@@ -143,7 +143,7 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.ViewHo
             if (TextUtils.equals("1", status) || TextUtils.equals("6", status) || TextUtils.equals("5", status)) {
                 holder.mBtnBuy.setVisibility(View.GONE);
             }
-        }
+        }*/
 
         holder.mBtnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -225,6 +225,8 @@ public class OrderNewAdapter extends RecyclerView.Adapter<OrderNewAdapter.ViewHo
             mBtnCancel = this.binding.btnReserveListItemCancel;
             mBtnToComment = this.binding.btnReserveListItemToComment;
               title =   this.binding.tvReserveListItemRoom;
+
+
 
 
         }

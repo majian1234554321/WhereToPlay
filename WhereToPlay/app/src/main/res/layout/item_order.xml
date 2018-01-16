@@ -190,9 +190,9 @@
                     android:layout_width="@dimen/width_80"
                     android:layout_height="@dimen/height_30"
                     android:layout_marginRight="10dp"
+                    android:padding="4dp"
                     android:background="@drawable/shape_btn_black_stoke"
                     android:gravity="center"
-                    android:padding="4dp"
                     android:textColor="#333333"
                     android:textSize="@dimen/normal_textsize"
                     android:visibility="gone" />
@@ -204,14 +204,37 @@
                     android:layout_marginRight="10dp"
                     android:background="@drawable/shape_btn_black_stoke"
                     android:gravity="center"
-                    android:padding="4dp"
                     android:textColor="#333333"
+                    android:padding="4dp"
+
                     android:textSize="@dimen/normal_textsize"
                     android:visibility="gone" />
 
 
                 <TextView
                     android:id="@+id/tv_003"
+                    android:layout_width="@dimen/width_80"
+                    android:layout_height="@dimen/height_30"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/shape_btn_black_stoke"
+                    android:gravity="center"
+                    android:textColor="#333333"
+                    android:textSize="@dimen/normal_textsize"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tv_004"
+                    android:layout_width="@dimen/width_80"
+                    android:layout_height="@dimen/height_30"
+                    android:layout_marginRight="10dp"
+                    android:background="@drawable/shape_btn_signin"
+                    android:gravity="center"
+                    android:textColor="@color/text_white"
+                    android:textSize="@dimen/normal_textsize"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/tv_005"
                     android:layout_width="@dimen/width_80"
                     android:layout_height="@dimen/height_30"
                     android:layout_marginRight="10dp"

@@ -27,9 +27,9 @@ android {
         applicationId "com.fanc.wheretoplay"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 20171225
+        versionCode 20181515
 
-        versionName "1.3.2"
+        versionName "1.3.3"
 
 
         sourceSets.main {
@@ -128,6 +128,8 @@ dependencies {
     compile 'cn.jiguang.sdk:jpush:3.0.8'
     compile 'cn.jiguang.sdk:jcore:1.1.6'
     compile 'com.zhy:percent-support-extends:1.1.1'
+
+    compile 'com.google.android:flexbox:0.3.2'
     compile 'com.android.support.constraint:constraint-layout:1.0.2'
     compile 'com.android.support:support-annotations:27.0.2'
     compile 'com.android.support:design:27.0.2'

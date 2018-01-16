@@ -37,7 +37,6 @@ import com.fanc.wheretoplay.view.TitleBarView;
 import com.qiyukf.unicorn.api.ConsultSource;
 import com.qiyukf.unicorn.api.Unicorn;
 
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -109,10 +108,27 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
     @BindView(R.id.tv_right)
     TextView tvRight;
 
+    @BindView(R.id.tv_mid)
+    TextView tv_mid;
+    @BindView(R.id.tv_mid2)
+    TextView tv_mid2;
+
     @BindView(R.id.tv_copy)
     TextView tv_copy;
+    @BindView(R.id.oi91)
+    OrderetailsItemView oi91;
+    @BindView(R.id.oi92)
+    OrderetailsItemView oi92;
+    @BindView(R.id.oi93)
+    OrderetailsItemView oi93;
+    @BindView(R.id.oi94)
+    OrderetailsItemView oi94;
+    @BindView(R.id.oi95)
+    OrderetailsItemView oi95;
+    @BindView(R.id.oi96)
+    OrderetailsItemView oi96;
 
-    private String order_idValue, store_idValue, storeNameValue, statusValue, totalValue, discountValue,addressValue;
+    private String order_idValue, store_idValue, storeNameValue, statusValue, totalValue, discountValue, addressValue;
 
     @BindView(R.id.rl)
     RelativeLayout rl;
@@ -137,10 +153,21 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
         oi7.setTv_left("车位");
         oi8.setTv_left("人数");
         oi9.setTv_left("预订方式");
+
+        oi91.setTv_left("订金");
+        oi92.setTv_left("消费");
+        oi93.setTv_left("不参与优惠金额");
+        oi94.setTv_left("优惠券金额");
+        oi95.setTv_left("实际支付");
+        oi96.setTv_left("支付方式");
+
+
         oi10.setTv_left("总价");
         oi11.setTv_left("备注");
 
         lists.add(tvLeft);
+        lists.add(tv_mid);
+        lists.add(tv_mid2);
         lists.add(tvRight);
 
         oi1.setTv_rightTextColor(Color.parseColor("#C4483C"));
@@ -175,7 +202,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
     }
 
 
-    @OnClick({R.id.rl, R.id.tv_msn, R.id.tv_call,R.id.tv_copy})
+    @OnClick({R.id.rl, R.id.tv_msn, R.id.tv_call, R.id.tv_copy})
     public void onViewClicked(View view) {
         Intent intent = new Intent();
         switch (view.getId()) {
@@ -220,8 +247,8 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                 Unicorn.openServiceActivity(mContext, getResources().getString(R.string.app_name), source);
                 break;
 
-                default:
-                    break;
+            default:
+                break;
 
         }
     }
@@ -258,10 +285,88 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
             for (int i = 0; i < contentBean.buttonlist.size(); i++) {
                 lists.get(i).setText(contentBean.buttonlist.get(i).title);
                 lists.get(i).setVisibility(View.VISIBLE);
+
+                final int finalI = i;
+                lists.get(i).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+
+                     /*   Toast.makeText(DetailsOrderActivity.this, "title" + contentBean.buttonlist.get(finalI).title + "----->" +
+                                        contentBean.buttonlist.get(finalI).buttonid
+                                , Toast.LENGTH_SHORT).show();*/
+                        Intent intent = new Intent();
+                        switch (contentBean.buttonlist.get(finalI).buttonid) {
+                            case "1":
+                                intent.setClass(mContext, PayBillActivity.class);
+                                intent.putExtra(Constants.STORE_ID, store_idValue);
+                                intent.putExtra("storeName", storeNameValue);
+                                intent.putExtra("address", tvAddress.getText().toString());
+                                intent.putExtra("discount", discountValue);
+
+                                if ("预付预订".equals(oi9.getTv_right())) {
+                                    intent.putExtra("pay_Action", "预订方式：预付预订");
+                                    intent.putExtra("money", contentBean.prepay);
+                                } else {
+                                    intent.putExtra("pay_Action", "预订方式：结单支付");
+                                    intent.putExtra("money", contentBean.total);
+                                }
+
+                                intent.putExtra(Constants.PAGE, "商家详情支付");
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                                mContext.startActivity(intent);
+                                break;
+                            case "2"://转预付
+                                intent.putExtra("flag", "预订支付");
+                                intent.putExtra("order_id", order_idValue);
+                                intent.putExtra("store_name", storeNameValue);
+                                intent.putExtra("pay_type", "1");
+                                intent.putExtra("arrival_time", contentBean.arrival_time);
+                                intent.putExtra("prepay", contentBean.book_price);
+
+
+                                intent.setClass(DetailsOrderActivity.this, DownPaymentActivity.class);
+                                mContext.startActivity(intent);
+                                break;
+                            case "3"://立即评论
+                                intent.putExtra("order_id", order_idValue);
+                                intent.putExtra("store_id", store_idValue);
+
+                                intent.putExtra("store_id", store_idValue);
+
+                                intent.putExtra("store_name", storeNameValue);
+
+                                intent.putExtra("address", tvAddress.getText().toString());
+
+
+                                intent.setClass(DetailsOrderActivity.this, PublicationEvaluationActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                                mContext.startActivity(intent);
+                                break;
+                            case "4":
+                                break;
+                            case "5":
+                                intent.setClass(DetailsOrderActivity.this, MainActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
+                                mContext.startActivity(intent);
+                                finish();
+                                break;
+                            case "6":
+                                break;
+                            case "7":
+                                break;
+
+
+                            case "0":
+                                detailsOrderPresenter.cancelOrder();
+                                break;
+                        }
+                    }
+                });
+
             }
         }
 
-        for (int i = 0; i < lists.size(); i++) {
+       /* for (int i = 0; i < lists.size(); i++) {
             final int finalI = i;
             lists.get(i).setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -309,7 +414,6 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                             intent.putExtra("address", tvAddress.getText().toString());
 
 
-
                             intent.setClass(DetailsOrderActivity.this, PublicationEvaluationActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS);
                             mContext.startActivity(intent);
@@ -330,14 +434,14 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                             mContext.startActivity(intent);
 
                             break;
-                            default:
-                                break;
+                        default:
+                            break;
                     }
 
                 }
 
             });
-        }
+        }*/
 
         oi1.setTv_right(contentBean.statusdesc);
         oi2.setTv_right(contentBean.order_name);
@@ -345,10 +449,18 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
         oi4.setTv_right(contentBean.name);
         oi5.setTv_right(contentBean.number);
 
-        phone = contentBean.mobile;
+        phone = contentBean.phone;
         oi6.setTv_right(DateFormatUtil.stampToDate(contentBean.arrival_time));
         oi7.setTv_right(contentBean.car_num);
         oi8.setTv_right(contentBean.people_num);
+
+
+        oi91.setTv_right(contentBean.prepay);
+        oi92.setTv_right(contentBean.display_balance);
+        oi93.setTv_right(contentBean.fee);
+        oi94.setTv_right(contentBean.coupon_amount);
+        oi95.setTv_right(contentBean.total);
+        oi96.setTv_right(contentBean.pay_method);
 
         if (contentBean.action != null) {
             switch (contentBean.action) {

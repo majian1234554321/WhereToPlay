@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.DetailsOrderActivity;
@@ -123,7 +124,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         } else {
             holder.tvPayItemTime.setText("到店时间：");
             holder.tvPayItemRoomCategory.setText("房型：");
-            holder.tvPayItemReserveCode.setText("订单编号：");
+            holder.tvPayItemReserveCode.setText("订单号：");
             String time = !TextUtils.isEmpty(DateFormatUtil.stampToDate(dataBean.list.get(position).arrival_time)) ? DateFormatUtil.stampToDate(dataBean.list.get(position).arrival_time) + "前" : "";
             holder.tvPayItemRealTime.setText(time);
             holder.tvPayItemRoom.setText(dataBean.list.get(position).room_type);
@@ -141,7 +142,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         holder.tv_payState.setText(dataBean.list.get(position).statusdesc);
 
 
-        for (int i = 0; i < holder.lists.size(); i++) {
+        /*for (int i = 0; i < holder.lists.size(); i++) {
             final int finalI = i;
             holder.lists.get(i).setVisibility(View.GONE);
             holder.lists.get(i).setOnClickListener(new View.OnClickListener() {
@@ -217,26 +218,128 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                     }
                 }
             });
-        }
+        }*/
 
 
-        for (int i = 0; i < dataBean.list.get(position).buttonlist.size(); i++) {
+        if (dataBean!=null&&dataBean.list!=null&&dataBean.list.get(position)!=null&&dataBean.list.get(position).buttonlist!=null){
+            for (int i = 0; i < dataBean.list.get(position).buttonlist.size(); i++) {
 
-            if (i + 1 == dataBean.list.get(position).buttonlist.size()) {
-                holder.lists.get(i).setBackgroundResource(R.drawable.shape_btn_black_c4483c);
-                holder.lists.get(i).setTextColor(Color.WHITE);
-            } else {
-                holder.lists.get(i).setBackgroundResource(R.drawable.shape_btn_black_stoke);
-                holder.lists.get(i).setTextColor(Color.parseColor("#333333"));
+//            if (i + 1 == dataBean.list.get(position).buttonlist.size()) {
+//                holder.lists.get(i).setBackgroundResource(R.drawable.shape_btn_black_c4483c);
+//                holder.lists.get(i).setTextColor(Color.WHITE);
+//            } else {
+//                holder.lists.get(i).setBackgroundResource(R.drawable.shape_btn_black_stoke);
+//                holder.lists.get(i).setTextColor(Color.parseColor("#333333"));
+//            }
+
+                if (dataBean.list.get(position).buttonlist.get(i).title != null) {
+                    holder.lists.get(i).setText(dataBean.list.get(position).buttonlist.get(i).title);
+                    holder.lists.get(i).setVisibility(View.VISIBLE);
+                } else {
+                    holder.lists.get(i).setText("");
+                    holder.lists.get(i).setVisibility(View.GONE);
+
+                }
+
+
+                final int finalI = i;
+                holder.lists.get(i).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                   /* Toast.makeText(context, "title" + dataBean.list.get(position).buttonlist.get(finalI).title + "----->" +
+                                    dataBean.list.get(position).buttonlist.get(finalI).buttonid
+                            , Toast.LENGTH_SHORT).show();*/
+
+                        Intent intent = new Intent();
+                        switch (dataBean.list.get(position).buttonlist.get(finalI).buttonid) {
+                            case "0"://取消订单
+                                cancleOrder(position);
+                                break;
+                            case "1"://
+                                pay(position, holder);
+                                break;
+                            case "4"://查看
+                                intent.putExtra("discount", dataBean.list.get(position).discount);
+                                intent.putExtra("order_id", dataBean.list.get(position).order_id);
+                                intent.putExtra("store_id", dataBean.list.get(position).store_id);
+                                intent.putExtra("storeName", dataBean.list.get(position).name);
+                                intent.putExtra("total", dataBean.list.get(position).total);
+                                intent.putExtra("address", dataBean.list.get(position).address);
+                                if (dataBean.list != null && dataBean.list.get(position).order_action != null) {
+                                    intent.putExtra("status", dataBean.list.get(position).order_action);
+                                }
+                                if ("6".equals(dataBean.list.get(position).order_function) || "7".equals(dataBean.list.get(position).order_function)) {
+                                    intent.putExtra("DISPLAYTYPE", "PackageDetailsFragment");
+
+                                    intent.putExtra("order_function", dataBean.list.get(position).order_function);
+
+
+                                    intent.setClass(context, DisplayActivity.class);
+                                } else {
+                                    intent.setClass(context, DetailsOrderActivity.class);
+                                }
+
+                                fragment.startActivityForResult(intent, 1001);
+                                break;
+                            case "3"://立即评论
+
+                                intent.putExtra("store_name", dataBean.list.get(position).name);
+                                intent.putExtra("address", dataBean.list.get(position).address);
+                                intent.putExtra("order_id", dataBean.list.get(position).order_id);
+                                intent.putExtra("store_id", dataBean.list.get(position).store_id);
+                                intent.putExtra("discount", dataBean.list.get(position).discount);
+                                intent.putExtra("address", dataBean.list.get(position).address);
+
+                                intent.putExtra("total", dataBean.list.get(position).total);
+                                if (dataBean.list != null && dataBean.list.get(position).order_action != null) {
+                                    intent.putExtra("status", dataBean.list.get(position).order_action);
+                                }
+                                intent.setClass(context, PublicationEvaluationActivity.class);
+                                fragment.startActivityForResult(intent, 1001);
+                                break;
+
+                            case "2":
+                                intent.putExtra("flag", "预订支付");
+                                intent.putExtra("order_id", dataBean.list.get(position).order_id);
+                                intent.putExtra("store_name", dataBean.list.get(position).name);
+
+                                intent.putExtra("pay_type", "1");
+                                intent.putExtra("pay_Action", "转预付");
+                                intent.putExtra("address", dataBean.list.get(position).address);
+                                intent.putExtra("arrival_time", dataBean.list.get(position).arrival_time);
+                                intent.putExtra("prepay", dataBean.list.get(position).book_price);
+
+
+                                intent.setClass(context, DownPaymentActivity.class);
+                                fragment.startActivity(intent);
+                                break;
+
+                            case "7":
+
+                                intent.setClass(context, PayBillActivity.class);
+
+                                intent.putExtra(Constants.STORE_ID, dataBean.list.get(position).store_id);
+
+                                intent.putExtra("storeName", dataBean.list.get(position).name);
+                                intent.putExtra("displayMoney", dataBean.list.get(position).total);
+                                intent.putExtra("discount", dataBean.list.get(position).discount);
+                                intent.putExtra("order_id", dataBean.list.get(position).order_id);
+                                intent.putExtra("address", dataBean.list.get(position).address);
+                                intent.putExtra(Constants.PAGE, "支付再支付");
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                context.startActivity(intent);
+
+                                break;
+
+                        }
+
+
+                    }
+                });
+
+
             }
 
-            if (dataBean.list.get(position).buttonlist.get(i).title != null) {
-                holder.lists.get(i).setText(dataBean.list.get(position).buttonlist.get(i).title);
-                holder.lists.get(i).setVisibility(View.VISIBLE);
-            } else {
-                holder.lists.get(i).setText("");
-                holder.lists.get(i).setVisibility(View.GONE);
-            }
         }
 
 
@@ -287,11 +390,13 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 intent.setClass(context, PayBillActivity.class);
                 intent.putExtra("pay_Action", "预订类型：预付预订");
                 intent.putExtra("money", dataBean.list.get(position).prepay);
+                intent.putExtra("order_id", dataBean.list.get(position).order_id);
                 break;
             case "预订类型：结单支付":
                 intent.setClass(context, PayBillActivity.class);
                 intent.putExtra("pay_Action", "预订类型：结单支付");
                 intent.putExtra("money", dataBean.list.get(position).total);
+                intent.putExtra("order_id", dataBean.list.get(position).order_id);
                 break;
             case "预订类型：套餐":
                 intent.setClass(context, PayPayActivity.class);
@@ -370,7 +475,9 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                                             ToastUtils.showShortToast(context, "取消订单成功");
                                             Intent intent = new Intent();
                                             intent.putExtra("Key", "Value");
-                                            RxBus.getDefault().post(intent);
+                                            dataBean.list.remove(position);
+                                            notifyDataSetChanged();
+                                          //  RxBus.getDefault().post(intent);
 
                                         } else {
                                             ToastUtils.showShortToast(context, "取消订单失败");
@@ -446,7 +553,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
             super(itemView);
             ButterKnife.bind(this, itemView);
             lists.clear();
-            int[] ids = {R.id.tv_001, R.id.tv_002, R.id.tv_003};
+            int[] ids = {R.id.tv_005, R.id.tv_004, R.id.tv_003,R.id.tv_002,R.id.tv_001};
             for (int i = 0; i < ids.length; i++) {
                 textView = (TextView) itemView.findViewById(ids[i]);
                 lists.add(textView);

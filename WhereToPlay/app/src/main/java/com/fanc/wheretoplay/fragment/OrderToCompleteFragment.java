@@ -150,28 +150,33 @@ public class OrderToCompleteFragment extends BaseFragment {
     private void showOrderInfo(OrderReserved.OrderInfo orderInfo) {
         binding.setOrder(orderInfo);
         // 折扣
-        if (orderInfo.discount.length() > 0) {
-            SpannableString text = new SpannableString(orderInfo.discount + "折");
-            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            mTvOrderToCompleteDiscount.setText(text, TextView.BufferType.SPANNABLE);
+
+        if (orderInfo.discount != null) {
+            if (orderInfo.discount.length() > 0) {
+                SpannableString text = new SpannableString(orderInfo.discount + "折");
+                text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+                mTvOrderToCompleteDiscount.setText(text, TextView.BufferType.SPANNABLE);
+            }
         }
         // 距离
-        if (!TextUtils.isEmpty(orderInfo.distance)) {
-            double distance = Double.parseDouble(orderInfo.distance);
-            String d = "";
-            if (distance < 500) {
-                d = "<500m";
-            } else {
-                if (distance < 1000) {
-                    d = orderInfo.distance + "m";
+        if (orderInfo.distance != null) {
+            if (!TextUtils.isEmpty(orderInfo.distance)) {
+                double distance = Double.parseDouble(orderInfo.distance);
+                String d = "";
+                if (distance < 500) {
+                    d = "<500m";
                 } else {
-                    // 0.几的时候，格式化会把小数点前的0去掉，原因未知
-                    DecimalFormat df = new DecimalFormat("#.0");
-                    d = df.format(distance / 1000) + "km";
+                    if (distance < 1000) {
+                        d = orderInfo.distance + "m";
+                    } else {
+                        // 0.几的时候，格式化会把小数点前的0去掉，原因未知
+                        DecimalFormat df = new DecimalFormat("#.0");
+                        d = df.format(distance / 1000) + "km";
+                    }
                 }
+                mTvOrderToCompleteDistance.setText(d);
             }
-            mTvOrderToCompleteDistance.setText(d);
         }
     }
 }
