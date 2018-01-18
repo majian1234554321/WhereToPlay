@@ -569,6 +569,7 @@ public class ReserveInfoFragment extends BaseFragment {
         intent.putExtra(Constants.STORE_ID, storeId);
         intent.putExtra(Constants.PARAM, params);
         startActivity(intent);
+        mContext.finish();
     }
 
     @Override

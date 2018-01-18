@@ -7,6 +7,7 @@ import android.text.SpannableString
 import android.text.Spanned
 import android.text.TextUtils
 import android.text.style.TextAppearanceSpan
+import android.util.Log
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
@@ -23,6 +24,7 @@ import com.fanc.wheretoplay.util.DateFormatUtil
 import com.fanc.wheretoplay.util.SPUtils
 import com.fanc.wheretoplay.util.ToastUtils
 import com.fanc.wheretoplay.view.AlertDialog
+import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
@@ -31,6 +33,7 @@ import io.reactivex.schedulers.Schedulers
 
 import kotlinx.android.synthetic.main.main2adapter.view.*
 import okhttp3.MultipartBody
+import java.util.concurrent.TimeUnit
 
 
 /**
@@ -53,12 +56,12 @@ class Main2Adapter(val mContext: Context, private val lists: ArrayList<BookListM
             } else {
                 tv_discount.visibility = View.GONE
             }
-
-            tv_room.text = lists[position].room_type.plus(lists[position].room_number)
+            //if (lists[position].room_type != null)
+            tv_room.text = lists[position].room_type?.plus(lists[position].room_number)
 
             tv_name.text = lists[position].order_name
             tv_phone.text = lists[position].order_mobile
-            val time = if (!TextUtils.isEmpty(DateFormatUtil.stampToDate(lists[position].arrival_time))) DateFormatUtil.stampToDate(lists[position].arrival_time) + "前" else ""
+            val time = if (!TextUtils.isEmpty(DateFormatUtil.stampToDate3(lists[position].arrival_time))) DateFormatUtil.stampToDate3(lists[position].arrival_time) + "前" else ""
 
             tv_arrTime.text = "到店时间 ".plus(time)
 
@@ -120,7 +123,7 @@ class Main2Adapter(val mContext: Context, private val lists: ArrayList<BookListM
                         .setContent("确定取消订单吗")
                         .setBtnOnClickListener(object : AlertDialog.OnBtnClickListener {
                             override fun onBtnClick(view: View, input: String) {
-                                val requestFileA = MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken())
+                                val requestFileA = MultipartBody.Part.createFormData("token", SPUtils(context).user.token)
 
                                 val requestFileC = MultipartBody.Part.createFormData("id", lists[position].order_id)
 
@@ -159,6 +162,7 @@ class Main2Adapter(val mContext: Context, private val lists: ArrayList<BookListM
                         .setCanceledOnTouchOutside(true)
                         .show()
             }
+
 
         }
     }

@@ -71,18 +71,9 @@ public abstract class DCallback<T>
                     return (T) response.body()
                             .string();
                 } else {
-                    //如果是 Bean List Map ，则解析完后返回
+
                     return new Gson().fromJson(contentJson, beanType);
-//                    JsonElement content = rootObject.get("content");
-//                    if (content.isJsonArray()) {
-//                        JsonArray asJsonArray = content.getAsJsonArray();
-////                        new Gson().fromJson(asJsonArray, beanType);
-//                        Log.e("dd",content.toString());
-//                        Log.e("dd", "Iverson:\t" + mResponse.body().string());
-//                        return (T)response;
-//                    } else if (content.isJsonObject()) {
-//                        return new Gson().fromJson(content.getAsJsonObject(),beanType);
-//                    }
+
                 }
             } else {
                 //如果没有写泛型，直接返回Response对象

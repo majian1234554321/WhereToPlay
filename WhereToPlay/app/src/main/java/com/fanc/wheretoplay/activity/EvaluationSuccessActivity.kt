@@ -91,7 +91,6 @@ class EvaluationSuccessActivity : BaseActivity(), View.OnClickListener {
 
                     override fun onComplete() = Unit
 
-
                 })
 
     }

@@ -58,7 +58,8 @@
 -optimizations !code/simplification/arithmetic,!field/*,!class/merging/*
 
 
-
+-dontwarn com.qiyukf.**
+-keep class com.qiyukf.** {*;}
 
 
 -dontwarn cn.jiguang.**

@@ -1267,11 +1267,22 @@ public class DateFormatUtil {
         }
     }
 
+
+    public static String stampToDate3(String s) {
+        if ("0".equals(s) || TextUtils.isEmpty(s)) {
+            return "";
+        } else {
+            String date = new SimpleDateFormat("MM-dd HH:mm:ss").format(new java.util.Date(Long.parseLong(s) * 1000));
+            return date;
+        }
+    }
+
+
     public static String stampToDateMM(String s) {
         if ("0".equals(s) || TextUtils.isEmpty(s)) {
             return "";
         } else {
-            String date = new SimpleDateFormat("yyyy年MM月dd日").format(new java.util.Date(Long.parseLong(s) * 1000));
+            String date = new SimpleDateFormat("yyyy.MM.dd").format(new java.util.Date(Long.parseLong(s) * 1000));
             return date;
         }
     }

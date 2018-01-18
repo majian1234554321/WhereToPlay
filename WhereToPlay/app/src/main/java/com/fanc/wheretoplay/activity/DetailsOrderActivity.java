@@ -353,6 +353,19 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                             case "6":
                                 break;
                             case "7":
+                                intent.setClass(DetailsOrderActivity.this, PayBillActivity.class);
+
+                                intent.putExtra(Constants.STORE_ID, store_idValue);
+
+                                intent.putExtra("storeName", storeNameValue);
+                                intent.putExtra("displayMoney", contentBean.total);
+                                intent.putExtra("discount", discountValue);
+                                intent.putExtra("order_id", order_idValue);
+                                intent.putExtra("address", tvAddress.getText().toString());
+                                intent.putExtra(Constants.PAGE, "支付再支付");
+                                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intent);
+
                                 break;
 
 

@@ -1,6 +1,7 @@
 package com.fanc.wheretoplay.activity
 
 import android.app.AlertDialog
+import android.content.Context
 import android.content.DialogInterface
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -12,8 +13,10 @@ import android.widget.RadioGroup
 import android.widget.Toast
 import com.alipay.sdk.app.PayTask
 import com.fanc.wheretoplay.R
+import com.fanc.wheretoplay.base.ApiException
 import com.fanc.wheretoplay.base.BaseActivity
 import com.fanc.wheretoplay.datamodel.AccessOrderIdModel
+import com.fanc.wheretoplay.datamodel.MessageDetail
 import com.fanc.wheretoplay.datamodel.OrderPayoffModel
 import com.fanc.wheretoplay.fragment.PayPayFragment
 import com.fanc.wheretoplay.network.Network
@@ -226,6 +229,7 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
 
     }
 
+    fun Context.toast(message: CharSequence) = Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     //根据获取orderId后支付
     private fun payMoney(password: String) {
         //支付流程  根据StoreId 金额  获取到订单id才能支付
@@ -282,17 +286,25 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
         observable
                 .subscribeOn(Schedulers.io())
                 .flatMap { accessOrderIdModel ->
-                    val list2 = ArrayList<MultipartBody.Part>()
-                    list2.add(MultipartBody.Part.createFormData("token", mUser.token))
-                    list2.add(MultipartBody.Part.createFormData("order_id", accessOrderIdModel.content.order_id))
-                    list2.add(MultipartBody.Part.createFormData("money", value4))
-                    list2.add(MultipartBody.Part.createFormData("type", payWay.toString()))
-                    list2.add(MultipartBody.Part.createFormData("code", password))
-                    orderId = accessOrderIdModel.content.order_id
-                    if (typeValue == "优惠预订") {
-                        Retrofit_RequestUtils.getRequest().discountBookPayoff(list2)
+
+                    if (accessOrderIdModel.code != "0") {
+                        toast(accessOrderIdModel.message)
+
+                        Observable.error<OrderPayoffModel>(ApiException(accessOrderIdModel.message))
+
                     } else {
-                        Retrofit_RequestUtils.getRequest().setMealOrderPayoff(list2)
+                        val list2 = ArrayList<MultipartBody.Part>()
+                        list2.add(MultipartBody.Part.createFormData("token", mUser.token))
+                        list2.add(MultipartBody.Part.createFormData("order_id", accessOrderIdModel.content.order_id))
+                        list2.add(MultipartBody.Part.createFormData("money", value4))
+                        list2.add(MultipartBody.Part.createFormData("type", payWay.toString()))
+                        list2.add(MultipartBody.Part.createFormData("code", password))
+                        orderId = accessOrderIdModel.content.order_id
+                        if (typeValue == "优惠预订") {
+                            Retrofit_RequestUtils.getRequest().discountBookPayoff(list2)
+                        } else {
+                            Retrofit_RequestUtils.getRequest().setMealOrderPayoff(list2)
+                        }
                     }
 
                 }.subscribeOn(Schedulers.io())
@@ -406,7 +418,7 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
             com.fanc.wheretoplay.view.AlertDialog(this)
                     .setTitle("提示")
                     .setContent("您还没有设置支付密码，现在去设置？")
-                    .setBtnOnClickListener { view, input ->
+                    .setBtnOnClickListener { _, _ ->
                         val intent = Intent(mContext, DetailActivity::class.java)
                         intent.putExtra(Constants.PAGE, Constants.SET_PAY_PWD)
                         startActivity(intent)
@@ -416,7 +428,7 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
         } else {
             com.fanc.wheretoplay.view.AlertDialog(this)
                     .setPasswordInputBox()
-                    .setBtnOnClickListener(com.fanc.wheretoplay.view.AlertDialog.OnBtnClickListener { view, input ->
+                    .setBtnOnClickListener(com.fanc.wheretoplay.view.AlertDialog.OnBtnClickListener { _, input ->
                         if (input.isEmpty()) {
                             ToastUtils.makePicTextShortToast(mContext, "请输入支付密码")
                             return@OnBtnClickListener
