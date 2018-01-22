@@ -293,7 +293,7 @@ public class MainActivity extends BaseFragmentActivity implements RadioGroup.OnC
     }
 
     public interface MyOnTouchListener {
-        public boolean onTouch(MotionEvent ev);
+        boolean onTouch(MotionEvent ev);
     }
 
 

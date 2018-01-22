@@ -92,7 +92,7 @@ public class Main2Fragment extends BaseFragment implements XRecyclerView.Loading
 
               @Override
               public void failed(String t) {
-                Toast.makeText(mContext, t, Toast.LENGTH_SHORT).show();
+             //   Toast.makeText(mContext, t, Toast.LENGTH_SHORT).show();
                 if ("onRefresh".equals(action)) {
                   recyclerview.refreshComplete();
                 } else {

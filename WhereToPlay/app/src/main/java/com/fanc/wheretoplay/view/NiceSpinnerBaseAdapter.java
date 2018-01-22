@@ -29,7 +29,7 @@ public abstract class NiceSpinnerBaseAdapter<T> extends BaseAdapter {
 
         if (convertView == null) {
             convertView = View.inflate(mContext, R.layout.spinner_list_item, null);
-            textView = (TextView) convertView.findViewById(R.id.tv_tinted_spinner);
+            textView = convertView.findViewById(R.id.tv_tinted_spinner);
 
 //            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
 //                textView.setBackground(ContextCompat.getDrawable(mContext, R.drawable.selector));

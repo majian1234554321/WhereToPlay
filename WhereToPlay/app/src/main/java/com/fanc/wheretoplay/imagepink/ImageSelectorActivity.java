@@ -125,14 +125,14 @@ public class ImageSelectorActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        rvImage = (RecyclerView) findViewById(R.id.rv_image);
-        rvFolder = (RecyclerView) findViewById(R.id.rv_folder);
-        tvConfirm = (TextView) findViewById(R.id.tv_confirm);
-        tvPreview = (TextView) findViewById(R.id.tv_preview);
-        btnConfirm = (FrameLayout) findViewById(R.id.btn_confirm);
-        btnPreview = (FrameLayout) findViewById(R.id.btn_preview);
-        tvFolderName = (TextView) findViewById(R.id.tv_folder_name);
-        tvTime = (TextView) findViewById(R.id.tv_time);
+        rvImage = findViewById(R.id.rv_image);
+        rvFolder = findViewById(R.id.rv_folder);
+        tvConfirm = findViewById(R.id.tv_confirm);
+        tvPreview = findViewById(R.id.tv_preview);
+        btnConfirm = findViewById(R.id.btn_confirm);
+        btnPreview = findViewById(R.id.btn_preview);
+        tvFolderName = findViewById(R.id.tv_folder_name);
+        tvTime = findViewById(R.id.tv_time);
         masking = findViewById(R.id.masking);
     }
 

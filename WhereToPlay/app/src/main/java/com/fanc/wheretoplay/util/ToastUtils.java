@@ -30,9 +30,9 @@ public class ToastUtils {
      */
     public static void makePicTextShortToast(Context activity, int resId, int tipResId) {
         View view = View.inflate(activity, R.layout.view_toast_pic, null);
-        ImageView ivPic = (ImageView) view.findViewById(R.id.toast_iv_pic);
+        ImageView ivPic = view.findViewById(R.id.toast_iv_pic);
         ivPic.setImageResource(resId);
-        TextView tvTip = (TextView) view.findViewById(R.id.toast_tv_tip);
+        TextView tvTip = view.findViewById(R.id.toast_tv_tip);
         tvTip.setText(UIUtils.getString(tipResId));
         Toast toast = new Toast(activity);
         toast.setDuration(Toast.LENGTH_SHORT);
@@ -49,9 +49,9 @@ public class ToastUtils {
      */
     public static void makePicTextShortToast(Context activity, int resId, String tip) {
         View view = View.inflate(activity,R.layout.view_toast_pic, null);
-        ImageView ivPic = (ImageView) view.findViewById(R.id.toast_iv_pic);
+        ImageView ivPic = view.findViewById(R.id.toast_iv_pic);
         ivPic.setImageResource(resId);
-        TextView tvTip = (TextView) view.findViewById(R.id.toast_tv_tip);
+        TextView tvTip = view.findViewById(R.id.toast_tv_tip);
         tvTip.setText(tip);
         Toast toast = new Toast(activity);
         toast.setDuration(Toast.LENGTH_SHORT);
@@ -66,10 +66,10 @@ public class ToastUtils {
      */
     public static void makePicTextShortToast(Context activity,  String tip) {
         View view = View.inflate(activity,R.layout.view_toast_pic, null);
-        ImageView ivPic = (ImageView) view.findViewById(R.id.toast_iv_pic);
+        ImageView ivPic = view.findViewById(R.id.toast_iv_pic);
         ivPic.setVisibility(View.GONE);
         view.setPadding(UIUtils.dp2Px(10), UIUtils.dp2Px(5), UIUtils.dp2Px(10), UIUtils.dp2Px(5));
-        TextView tvTip = (TextView) view.findViewById(R.id.toast_tv_tip);
+        TextView tvTip = view.findViewById(R.id.toast_tv_tip);
         tvTip.setText(tip);
         Toast toast = new Toast(activity);
         toast.setDuration(Toast.LENGTH_SHORT);
@@ -86,9 +86,9 @@ public class ToastUtils {
      */
     public static void makePicTextLongToast(Activity activity, int resId, String tip) {
         View view = activity.getLayoutInflater().inflate(R.layout.view_toast_pic, null);
-        ImageView ivPic = (ImageView) view.findViewById(R.id.toast_iv_pic);
+        ImageView ivPic = view.findViewById(R.id.toast_iv_pic);
         ivPic.setImageResource(resId);
-        TextView tvTip = (TextView) view.findViewById(R.id.toast_tv_tip);
+        TextView tvTip = view.findViewById(R.id.toast_tv_tip);
         tvTip.setText(tip);
         Toast toast = new Toast(activity);
         toast.setDuration(Toast.LENGTH_SHORT);

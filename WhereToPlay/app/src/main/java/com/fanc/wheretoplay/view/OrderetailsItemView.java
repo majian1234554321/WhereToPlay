@@ -29,8 +29,8 @@ public class OrderetailsItemView extends RelativeLayout {
 
     private void initView() {
         View view = View.inflate(getContext(), R.layout.view_orderetailsitemview, this);
-        tv_left = (TextView) view.findViewById(R.id.tv_left);
-        tv_right = (TextView) view.findViewById(R.id.tv_right);
+        tv_left = view.findViewById(R.id.tv_left);
+        tv_right = view.findViewById(R.id.tv_right);
     }
 
     public void setTv_left(String value) {

@@ -211,6 +211,12 @@
                 android:layout_height="wrap_content" />
 
             <com.fanc.wheretoplay.view.OrderetailsItemView
+                android:id="@+id/oi931"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <com.fanc.wheretoplay.view.OrderetailsItemView
                 android:id="@+id/oi94"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />

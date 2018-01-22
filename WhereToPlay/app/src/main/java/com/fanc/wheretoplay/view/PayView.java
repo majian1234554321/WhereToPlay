@@ -8,5 +8,5 @@ import com.fanc.wheretoplay.datamodel.OrderPayoffModel;
  */
 
 public interface PayView {
-    public void setPayOffData(OrderPayoffModel.ContentBean contentBean);
+    void setPayOffData(OrderPayoffModel.ContentBean contentBean);
 }

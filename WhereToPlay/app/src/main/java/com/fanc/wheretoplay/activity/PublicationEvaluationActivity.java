@@ -86,7 +86,6 @@ public class PublicationEvaluationActivity extends BaseActivity {
   private ImageAdapter mAdapter;
   private ArrayList<String> imagesfinal;
   private ArrayList<String> imagesDisplay;
-  private Bitmap bitmap;
   private String value;
   private String order_idValue;
   private String store_idValue;
@@ -94,8 +93,8 @@ public class PublicationEvaluationActivity extends BaseActivity {
   float ratingValue2 = 10f;
   float ratingValue3 = 10f;
   private String addressValue;
-  private String discountValue, store_nameValue;
   private double discount;
+  private Bitmap bitmap;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -107,8 +106,8 @@ public class PublicationEvaluationActivity extends BaseActivity {
     order_idValue = getIntent().getStringExtra("order_id");
     store_idValue = getIntent().getStringExtra("store_id");
     addressValue = getIntent().getStringExtra("address");
-    discountValue = getIntent().getStringExtra("discount");
-    store_nameValue = getIntent().getStringExtra("store_name");
+    String discountValue = getIntent().getStringExtra("discount");
+    String store_nameValue = getIntent().getStringExtra("store_name");
     tvMerchantDetailTitle.setText(store_nameValue);
     tvMerchantReserveAddress.setText(addressValue);
 

@@ -82,10 +82,10 @@ public class FolderAdapter extends RecyclerView.Adapter<FolderAdapter.ViewHolder
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ivImage = (ImageView) itemView.findViewById(R.id.iv_image);
-            ivSelect = (ImageView) itemView.findViewById(R.id.iv_select);
-            tvFolderName = (TextView) itemView.findViewById(R.id.tv_folder_name);
-            tvFolderSize = (TextView) itemView.findViewById(R.id.tv_folder_size);
+            ivImage = itemView.findViewById(R.id.iv_image);
+            ivSelect = itemView.findViewById(R.id.iv_select);
+            tvFolderName = itemView.findViewById(R.id.tv_folder_name);
+            tvFolderSize = itemView.findViewById(R.id.tv_folder_size);
         }
     }
 

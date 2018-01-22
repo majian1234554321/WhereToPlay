@@ -247,10 +247,7 @@ public class OrderAdapter extends RecyclerView.Adapter<OrderAdapter.ViewHolder> 
     }
 
     public boolean getItemStatus(int position) {
-        if (status.get(position) != null && status.get(position)) {
-            return true;
-        }
-        return false;
+        return status.get(position) != null && status.get(position);
     }
 
     public void clearAllStatus() {

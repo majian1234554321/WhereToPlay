@@ -574,13 +574,13 @@ public class PullToRefreshLayout extends RelativeLayout
 	{
 		// 初始化下拉布局
 		pullView = refreshView.findViewById(R.id.pull_icon);
-		refreshStateTextView = (TextView) refreshView
+		refreshStateTextView = refreshView
 				.findViewById(R.id.state_tv);
 		refreshingView = refreshView.findViewById(R.id.refreshing_icon);
 		refreshStateImageView = refreshView.findViewById(R.id.state_iv);
 		// 初始化上拉布局
 		pullUpView = loadmoreView.findViewById(R.id.pullup_icon);
-		loadStateTextView = (TextView) loadmoreView
+		loadStateTextView = loadmoreView
 				.findViewById(R.id.loadstate_tv);
 		loadingView = loadmoreView.findViewById(R.id.loading_icon);
 		loadStateImageView = loadmoreView.findViewById(R.id.loadstate_iv);

@@ -84,10 +84,7 @@ public class RoomTypeInDialogAdapter extends RecyclerView.Adapter<RoomTypeInDial
     }
 
     private boolean getItemStatus(int position) {
-        if (status.get(position) != null && status.get(position)) {
-            return true;
-        }
-        return false;
+        return status.get(position) != null && status.get(position);
     }
 
     private void cleanItemStatus(int position) {

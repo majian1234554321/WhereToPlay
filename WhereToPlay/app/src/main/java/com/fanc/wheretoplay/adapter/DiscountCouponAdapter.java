@@ -114,10 +114,7 @@ public class DiscountCouponAdapter extends RecyclerView.Adapter<DiscountCouponAd
     }
 
     private boolean getItemStatus(int position) {
-        if (status.get(position) != null && status.get(position)) {
-            return true;
-        }
-        return false;
+        return status.get(position) != null && status.get(position);
     }
 
     public DiscountCouponList.DiscountCoupon getSelectedItem() {

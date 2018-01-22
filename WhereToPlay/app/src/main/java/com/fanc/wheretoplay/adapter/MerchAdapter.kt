@@ -28,10 +28,10 @@ import java.text.DecimalFormat
 
 
 /**
-*
-* @author Administrator
-* @date 2017/6/13
-*/
+ *
+ * @author Administrator
+ * @date 2017/6/13
+ */
 
 class MerchAdapter(val mContext: Context, val mData: List<MerchantDetailModel.ContentBean.StoreBean.ListBean>) : RecyclerView.Adapter<MerchAdapter.ViewHolder>() {
 
@@ -51,7 +51,7 @@ class MerchAdapter(val mContext: Context, val mData: List<MerchantDetailModel.Co
                 tv_reserve_item_discount_sum.setText(text, TextView.BufferType.SPANNABLE)
                 tv_reserve_item_discount_sum.visibility = View.VISIBLE
 
-                tv_reserve_item_price.text =mData[position].capita
+                tv_reserve_item_price.text = mData[position].capita
 
             } else {
                 tv_reserve_item_discount_sum.visibility = View.GONE
@@ -65,11 +65,11 @@ class MerchAdapter(val mContext: Context, val mData: List<MerchantDetailModel.Co
             if (mData[position].distance != null && !TextUtils.isEmpty(mData[position].distance)) {
 
                 val distance = java.lang.Double.parseDouble(mData[position].distance)
-                var d = ""
-                if (distance < 500) {
-                    d = "<500m"
+
+                val d = if (distance < 500) {
+                    "<500m"
                 } else {
-                    d = if (distance < 1000) {
+                    if (distance < 1000) {
 
                         mData[position].distance + "m"
                     } else {
@@ -79,7 +79,7 @@ class MerchAdapter(val mContext: Context, val mData: List<MerchantDetailModel.Co
                     }
 
                 }
-                tv_reserve_item_address.text =mData[position].area+ "   "+d
+                tv_reserve_item_address.text = mData[position].area + "   " + d
             }
 
 

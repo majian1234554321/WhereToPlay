@@ -47,9 +47,7 @@ public class GPSUtil {
     public static boolean outOfChina(double lat, double lon) {
         if (lon < 72.004 || lon > 137.8347)
             return true;
-        if (lat < 0.8293 || lat > 55.8271)
-            return true;
-        return false;
+        return lat < 0.8293 || lat > 55.8271;
     }
     /**
      * 84 to 火星坐标系 (GCJ-02) World Geodetic System ==> Mars Geodetic System

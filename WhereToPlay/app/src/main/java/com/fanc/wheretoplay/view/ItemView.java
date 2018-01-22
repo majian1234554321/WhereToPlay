@@ -44,13 +44,13 @@ public class ItemView extends RelativeLayout {
 
     private void initView() {
         View view = View.inflate(getContext(), R.layout.view_item, this);
-        mIvIcon = (ImageView) view.findViewById(R.id.item_view_icon);
-        mTvText = (TextView) view.findViewById(R.id.item_view_text);
-        mIvArrow = (ImageView) view.findViewById(R.id.item_view_arrow);
+        mIvIcon = view.findViewById(R.id.item_view_icon);
+        mTvText = view.findViewById(R.id.item_view_text);
+        mIvArrow = view.findViewById(R.id.item_view_arrow);
         mViewLine = view.findViewById(R.id.item_view_line);
-        mTvRightText = (TextView) view.findViewById(R.id.item_view_right_text);
-        mTvContent = (TextView) view.findViewById(R.id.item_view_content);
-        mIvSwitch = (Switch) view.findViewById(R.id.item_view_switch);
+        mTvRightText = view.findViewById(R.id.item_view_right_text);
+        mTvContent = view.findViewById(R.id.item_view_content);
+        mIvSwitch = view.findViewById(R.id.item_view_switch);
     }
 
     public void setText(String text) {
@@ -260,6 +260,6 @@ public class ItemView extends RelativeLayout {
     }
 
     public interface CheckStatus {
-        public void statusChange(boolean b);
+        void statusChange(boolean b);
     }
 }

@@ -221,9 +221,7 @@ class PayPayActivity : BaseActivity(), View.OnClickListener, RadioGroup.OnChecke
                         Toast.makeText(this@PayPayActivity, throwable.toString(), Toast.LENGTH_LONG).show()
                     }
 
-                    override fun onComplete() {
-
-                    }
+                    override fun onComplete() = Unit
                 })
 
 

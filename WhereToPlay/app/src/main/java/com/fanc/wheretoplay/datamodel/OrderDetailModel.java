@@ -85,6 +85,7 @@ public class OrderDetailModel extends BaseResponseModel {
         public List<ButtonlistBean> buttonlist;
         public String book_start_date;
         public String book_start_time_desc;
+        public String discount_rate;
 
 
         public String display_balance;

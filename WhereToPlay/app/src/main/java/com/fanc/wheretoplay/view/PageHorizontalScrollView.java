@@ -72,8 +72,8 @@ public class PageHorizontalScrollView extends HorizontalScrollView {
                 child.setLayoutParams(layoutParams);
                 children.put(i, (TextView) child);
                 // 获取左边的坐标
-                if (((View) firstChild.getChildAt(i)).getWidth() > 0) {
-                    pointList.add(((View) firstChild.getChildAt(i)).getLeft());
+                if (firstChild.getChildAt(i).getWidth() > 0) {
+                    pointList.add(firstChild.getChildAt(i).getLeft());
                 }
             }
         }
@@ -121,7 +121,7 @@ public class PageHorizontalScrollView extends HorizontalScrollView {
         @Override
         public boolean onSingleTapConfirmed(MotionEvent e) {
             for (int i = 0; i < children.size(); i++) {
-                TextView tv = (TextView) children.get(i);
+                TextView tv = children.get(i);
                 int x = (int) e.getX();
                 int y = (int) e.getY();
                 if (x > tv.getLeft() - getScrollX() && x < tv.getRight() - getScrollX()) {

@@ -125,7 +125,7 @@ public class CityAdapter extends BaseAdapter<CityResource.City> {
         switch (viewType) {
             case VIEW_TYPE_CURRENT:// 定位
                 convertView = getLayoutInflater().inflate(R.layout.item_city_local, null);
-                final TextView mTvCurrentCity = (TextView) convertView.findViewById(R.id.tv_item_city_local);
+                final TextView mTvCurrentCity = convertView.findViewById(R.id.tv_item_city_local);
                 LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) mTvCurrentCity.getLayoutParams();
                 lp.width = (screenWidth - UIUtils.dp2Px(86)) / 3;
                 mTvCurrentCity.setLayoutParams(lp);
@@ -163,7 +163,7 @@ public class CityAdapter extends BaseAdapter<CityResource.City> {
                 break;
             case VIEW_TYPE_HOT://热门
                 convertView = getLayoutInflater().inflate(R.layout.item_city_hot, null);
-                WrapHeightGridView hotCityGrid = (WrapHeightGridView) convertView.findViewById(R.id.whgv_hot_city);
+                WrapHeightGridView hotCityGrid = convertView.findViewById(R.id.whgv_hot_city);
                 HotCityAdapter hotCityAdapter = new HotCityAdapter(getContext(), hotCities);
                 hotCityGrid.setAdapter(hotCityAdapter);
                 hotCityGrid.setOnItemClickListener(new AdapterView.OnItemClickListener() {

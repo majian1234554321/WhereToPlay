@@ -7,8 +7,8 @@ import java.util.Map;
  */
 public interface HasParamsable
 {
-    public abstract OkHttpRequestBuilder params(Map<String, String> params);
+    OkHttpRequestBuilder params(Map<String, String> params);
 
-    public abstract OkHttpRequestBuilder addParams(String key, String val);
+    OkHttpRequestBuilder addParams(String key, String val);
 
 }

@@ -7,6 +7,6 @@ import com.fanc.wheretoplay.datamodel.OrderDetailModel;
  */
 
 public interface DetailsOrderView {
-    public void setDetailsOrderViewData(OrderDetailModel.ContentBean contentBean);
-    public void cancelOrderAction();
+    void setDetailsOrderViewData(OrderDetailModel.ContentBean contentBean);
+    void cancelOrderAction();
 }

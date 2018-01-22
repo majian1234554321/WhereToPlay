@@ -41,8 +41,8 @@ public class MerchantDetailImageAdapter extends RecyclerView.Adapter<MerchantDet
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        Log.w("llm", "onBindViewHolder: " + (Network.IMAGE + (String) mData.get(position)));
-        Glide.with(mContext).load(Network.IMAGE + (String) mData.get(position)).placeholder(R.drawable.default_rect).into(holder.imageView);
+        Log.w("llm", "onBindViewHolder: " + (Network.IMAGE + mData.get(position)));
+        Glide.with(mContext).load(Network.IMAGE + mData.get(position)).placeholder(R.drawable.default_rect).into(holder.imageView);
         holder.imageView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

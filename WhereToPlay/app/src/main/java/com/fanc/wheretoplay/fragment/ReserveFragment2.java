@@ -20,6 +20,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.view.animation.RotateAnimation;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
@@ -162,6 +163,9 @@ public class ReserveFragment2 extends BaseFragment implements IOnFocusListener, 
         mLlReserveAreaSuspend = view.findViewById(R.id.ll_reserve_area_suspend);
         mTvReserveAreaSuspend = view.findViewById(R.id.tv_reserve_area__suspend);
         mIvReserveAreaSuspend = view.findViewById(R.id.iv_reserve_area__suspend);
+
+        ImageButton ib_reserve_search = view.findViewById(R.id.ib_reserve_search);
+        ib_reserve_search.setOnClickListener(this);
 
 
         mTvReserveFilterSuspend = view.findViewById(R.id.tv_reserve_filter_suspend);

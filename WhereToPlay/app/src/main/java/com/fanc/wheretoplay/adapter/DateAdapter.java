@@ -89,10 +89,7 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.ViewHolder> {
     }
 
     private boolean getItemStatus(int position) {
-        if (status.get(position) != null && status.get(position)) {
-            return true;
-        }
-        return false;
+        return status.get(position) != null && status.get(position);
     }
     /**
      * 获取选中的position

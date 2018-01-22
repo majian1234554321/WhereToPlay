@@ -142,10 +142,7 @@ public class CollectionAdapter extends RecyclerView.Adapter<CollectionAdapter.Vi
     }
 
     public boolean getItemStatus(int position) {
-        if (status.get(position) != null && status.get(position)) {
-            return true;
-        }
-        return false;
+        return status.get(position) != null && status.get(position);
     }
 
     public void clearAllStatus() {

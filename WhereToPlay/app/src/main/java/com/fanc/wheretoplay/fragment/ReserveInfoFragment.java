@@ -501,7 +501,7 @@ public class ReserveInfoFragment extends BaseFragment {
         param.put(Network.Param.MOBILE, mobile);
         param.put(Network.Param.ROOM_ID, roomId);
         param.put(Network.Param.TYPE, type);
-        param.put(Network.Param.TYPE, type);
+
         param.put("number", number);
         try {
             param.put(Network.Param.ARRIVAL_TIME, String.valueOf(DateFormatUtil.parseDateFromYYYY_MM_DD_HH_mmStr(arrivalTime).getTime() / 1000));

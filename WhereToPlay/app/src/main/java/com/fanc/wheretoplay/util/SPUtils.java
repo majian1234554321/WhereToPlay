@@ -23,7 +23,7 @@ public class SPUtils {
     private Editor mEditor;
 
     public SPUtils(Context context) {
-        mSp = context.getSharedPreferences("fanc", context.MODE_PRIVATE);
+        mSp = context.getSharedPreferences("fanc", Context.MODE_PRIVATE);
         mEditor = mSp.edit();
     }
 

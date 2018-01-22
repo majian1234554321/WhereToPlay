@@ -106,10 +106,7 @@ public class CacheManager {
     private static boolean isDataTimeOut(Context context, String file, long exprieTime) {
         File data = context.getFileStreamPath(file);
         long time = data.lastModified();
-        if (System.currentTimeMillis() - time > exprieTime) {
-            return true;
-        }
-        return false;
+        return System.currentTimeMillis() - time > exprieTime;
     }
 
     /**

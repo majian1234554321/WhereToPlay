@@ -110,6 +110,6 @@ public class ShearedPopDialog extends PopupWindow {
     }
 
     public interface MListener{
-        public void collect();
+        void collect();
     }
 }

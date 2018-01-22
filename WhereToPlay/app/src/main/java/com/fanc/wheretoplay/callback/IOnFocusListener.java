@@ -7,5 +7,5 @@ package com.fanc.wheretoplay.callback;
  * 焦点监听器
  */
 public interface IOnFocusListener {
-    public void onWindowFocusChanged(boolean hasFocus);
+    void onWindowFocusChanged(boolean hasFocus);
 }

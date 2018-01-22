@@ -225,11 +225,7 @@ public class FilterPopDialogAdapter extends BaseAdapter {
      */
     public boolean getIsClicked() {
         if (textViewHashMap != null) {
-            if (textViewHashMap.size() != 0) {
-                return true;
-            } else {
-                return false;
-            }
+            return textViewHashMap.size() != 0;
         }
         return false;
     }

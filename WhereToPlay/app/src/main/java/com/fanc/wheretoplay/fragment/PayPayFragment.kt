@@ -18,7 +18,7 @@ import kotlinx.android.synthetic.main.paypayfragment.*
  */
 class PayPayFragment(val value0: String?, val value1: String?, val value2: String?, val value3: String?, val value4: String?, val value5: String?) : BaseFragment() {
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        return View.inflate(inflater.context, R.layout.paypayfragment, null);
+        return View.inflate(inflater.context, R.layout.paypayfragment, null)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

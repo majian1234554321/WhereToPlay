@@ -123,7 +123,7 @@ public class MyScrollView extends ScrollView implements Pullable {
          *
          * @param
          */
-        public void onScroll(int l, int t, int oldl, int oldt);
+        void onScroll(int l, int t, int oldl, int oldt);
     }
 
 }

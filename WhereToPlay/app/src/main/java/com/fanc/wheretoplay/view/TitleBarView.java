@@ -36,9 +36,9 @@ public class TitleBarView  extends RelativeLayout {
 
     private void initView(final Context context) {
       View view  =   View.inflate(context, R.layout.titlebarview,this);
-        tv_title = (TextView) view.findViewById(R.id.tv_title);
+        tv_title = view.findViewById(R.id.tv_title);
 
-        menu_iv_lefticon = (ImageView) view.findViewById(R.id.menu_iv_lefticon);
+        menu_iv_lefticon = view.findViewById(R.id.menu_iv_lefticon);
 
         menu_iv_lefticon.setOnClickListener(new OnClickListener() {
             @Override

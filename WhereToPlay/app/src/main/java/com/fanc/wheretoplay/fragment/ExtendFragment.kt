@@ -107,7 +107,7 @@ class ExtendFragment(
                 adapter.change(!flag)
                 adapter.notifyDataSetChanged()
                 if (flag) {
-                    tv_more.text = "更多".plus(list.size?.minus(2)).plus("个套餐 ")
+                    tv_more.text = "更多".plus(list.size.minus(2)).plus("个套餐 ")
                 } else {
                     tv_more.text = "收起"
 
@@ -145,10 +145,10 @@ class ExtendFragment(
         if (packageX != null) {
 
             if (!TextUtils.isEmpty(packageX.count.toString())) {
-                tv_title.text = "套餐(" + packageX?.count + ")"
+                tv_title.text = "套餐(" + packageX.count + ")"
             }
 
-            list = packageX?.pkg_list as MutableList<MerchantDetailModel.ContentBean.StoreBean.PackageBean.PkgListBean>
+            list = packageX.pkg_list as MutableList<MerchantDetailModel.ContentBean.StoreBean.PackageBean.PkgListBean>
             if (list.size > 2) {
                 tv_more.visibility = View.VISIBLE
             } else {

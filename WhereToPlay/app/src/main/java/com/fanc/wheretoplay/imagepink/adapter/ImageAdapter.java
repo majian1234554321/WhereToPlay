@@ -164,9 +164,9 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ViewHolder> 
 
         public ViewHolder(View itemView) {
             super(itemView);
-            ivImage = (ImageView) itemView.findViewById(R.id.iv_image);
-            ivSelectIcon = (ImageView) itemView.findViewById(R.id.iv_select);
-            ivMasking = (ImageView) itemView.findViewById(R.id.iv_masking);
+            ivImage = itemView.findViewById(R.id.iv_image);
+            ivSelectIcon = itemView.findViewById(R.id.iv_select);
+            ivMasking = itemView.findViewById(R.id.iv_masking);
         }
     }
 

@@ -555,7 +555,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
             lists.clear();
             int[] ids = {R.id.tv_005, R.id.tv_004, R.id.tv_003,R.id.tv_002,R.id.tv_001};
             for (int i = 0; i < ids.length; i++) {
-                textView = (TextView) itemView.findViewById(ids[i]);
+                textView = itemView.findViewById(ids[i]);
                 lists.add(textView);
             }
         }
