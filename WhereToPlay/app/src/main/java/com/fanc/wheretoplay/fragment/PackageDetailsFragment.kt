@@ -4,6 +4,7 @@ import android.Manifest
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.pm.PackageManager
+import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.support.v4.app.ActivityCompat
@@ -13,7 +14,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import com.bumptech.glide.Glide
-import com.fanc.wheretoplay.R
 import com.fanc.wheretoplay.adapter.PackageAdapter
 import com.fanc.wheretoplay.base.BaseFragment
 import com.fanc.wheretoplay.datamodel.OrderDetailModel
@@ -26,7 +26,9 @@ import android.graphics.Color
 import android.text.Spanned
 import android.text.style.ForegroundColorSpan
 import android.text.SpannableStringBuilder
+import com.fanc.wheretoplay.R
 import com.fanc.wheretoplay.activity.DisplayActivity
+import com.uuzuche.lib_zxing.activity.CodeUtils
 
 
 @SuppressLint("ValidFragment")
@@ -102,8 +104,9 @@ class PackageDetailsFragment(val order_idValue: String?, val order_functionValue
             tv003.text = contentBean?.package_detail?.room_name
         }
 
-
-
+        val qrCodeText = com.fanc.wheretoplay.network.Network.QRCODE + storeid + "/order/" + order_idValue
+        val mBitmap = CodeUtils.createImage(qrCodeText, 400, 400, BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher))
+        iv_qrcode.setImageBitmap(mBitmap)
 
 
 
@@ -149,7 +152,7 @@ class PackageDetailsFragment(val order_idValue: String?, val order_functionValue
         val lists = arrayListOf<PackageModel.ContentBean.ProductListBean>()
 
         val list = contentBean?.package_detail?.product_list
-        list?.forEachIndexed { index, productListBean ->
+        list?.forEachIndexed { _, productListBean ->
             val model = PackageModel.ContentBean.ProductListBean(productListBean.name, productListBean.price, productListBean.num, productListBean.unit)
             lists.add(model)
         }

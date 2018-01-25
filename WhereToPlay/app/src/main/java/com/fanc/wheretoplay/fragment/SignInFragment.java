@@ -35,112 +35,109 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.MultipartBody;
 
-/**
- * Created by Administrator on 2017/6/12.
- */
-
+/** Created by Administrator on 2017/6/12. */
 public class SignInFragment extends BaseFragment {
-    FragmentSigninBinding signinBinding;
+  FragmentSigninBinding signinBinding;
 
-    EditText mEtMobil;
-    EditText mEtPassword;
+  EditText mEtMobil;
+  EditText mEtPassword;
 
-    Button mBtnSignIn;
+  Button mBtnSignIn;
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        signinBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_signin, container, false);
-        initView();
-        init();
-        return signinBinding.getRoot();
+  @Override
+  public View onCreateView(
+      @NonNull LayoutInflater inflater,
+      @Nullable ViewGroup container,
+      @Nullable Bundle savedInstanceState) {
+    signinBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_signin, container, false);
+    initView();
+    init();
+    return signinBinding.getRoot();
+  }
+
+  /** init views */
+  private void initView() {
+    mEtMobil = signinBinding.etSigninMobile;
+    mEtPassword = signinBinding.etSigninPassword;
+    mBtnSignIn = signinBinding.btnSignin;
+  }
+
+  private void init() {
+    signinBinding.setDoClick(this);
+  }
+
+  /**
+   * 点击事件
+   *
+   * @param v
+   */
+  public void doClick(View v) {
+    switch (v.getId()) {
+      case R.id.tv_signin_forget_pwd:
+        ((SignInActivity) mContext).resetPwd();
+        break;
+      case R.id.tv_signin_register:
+        ((SignInActivity) mContext).register("");
+        break;
+      case R.id.btn_signin:
+        signIn();
+        break;
+      default:
+        break;
+    }
+  }
+
+  /** 登录 */
+  private void signIn() {
+    String mobile = mEtMobil.getText().toString().trim();
+    if (!((SignInActivity) mContext).mobileFormat(mobile)) {
+      return;
+    }
+    String pwd = mEtPassword.getText().toString();
+    if (!((SignInActivity) mContext).passwordFormat(pwd)) {
+      return;
     }
 
-    /**
-     * init views
-     */
-    private void initView() {
-        mEtMobil = signinBinding.etSigninMobile;
-        mEtPassword = signinBinding.etSigninPassword;
-        mBtnSignIn = signinBinding.btnSignin;
-    }
+    mBtnSignIn.setEnabled(false);
+    showProgress();
 
-    private void init() {
-        signinBinding.setDoClick(this);
-    }
+    String registrationID = JPushInterface.getRegistrationID(mContext); // 极光推送id
+    MultipartBody.Part requestFileA =
+        MultipartBody.Part.createFormData(Network.Param.MOBILE, mobile);
+    MultipartBody.Part requestFileB =
+        MultipartBody.Part.createFormData(Network.Param.PASSWORD, pwd);
+    MultipartBody.Part requestFileC =
+        MultipartBody.Part.createFormData(Network.Param.REGISTRATIONID, registrationID);
 
-    /**
-     * 点击事件
-     *
-     * @param v
-     */
-    public void doClick(View v) {
-        switch (v.getId()) {
-            case R.id.tv_signin_forget_pwd:
-                ((SignInActivity) mContext).resetPwd();
-                break;
-            case R.id.tv_signin_register:
-                ((SignInActivity) mContext).register();
-                break;
-            case R.id.btn_signin:
-                signIn();
-                break;
-            default:
-                break;
-        }
-    }
+    Retrofit_RequestUtils.getRequest()
+        .logIn(requestFileA, requestFileB, requestFileC)
+        .subscribeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+        .subscribe(
+            new Observer<NewUser>() {
+              @Override
+              public void onComplete() {}
 
-    /**
-     * 登录
-     */
-    private void signIn() {
-        String mobile = mEtMobil.getText().toString().trim();
-        if (!((SignInActivity) mContext).mobileFormat(mobile)) {
-            return;
-        }
-        String pwd = mEtPassword.getText().toString();
-        if (!((SignInActivity) mContext).passwordFormat(pwd)) {
-            return;
-        }
+              @Override
+              public void onError(Throwable e) {
+                closeProgress();
+                Toast.makeText(mContext, "网络出错", Toast.LENGTH_SHORT).show();
+                mBtnSignIn.setEnabled(true);
+              }
 
-        mBtnSignIn.setEnabled(false);
-        showProgress();
+              @Override
+              public void onSubscribe(Disposable disposable) {}
 
-        String registrationID = JPushInterface.getRegistrationID(mContext);//极光推送id
-        MultipartBody.Part requestFileA = MultipartBody.Part.createFormData(Network.Param.MOBILE, mobile);
-        MultipartBody.Part requestFileB = MultipartBody.Part.createFormData(Network.Param.PASSWORD, pwd);
-        MultipartBody.Part requestFileC = MultipartBody.Part.createFormData(Network.Param.REGISTRATIONID, registrationID);
-
-
-        Retrofit_RequestUtils.getRequest().logIn(requestFileA, requestFileB, requestFileC)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<NewUser>() {
-                    @Override
-                    public void onComplete() {
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-                        closeProgress();
-                        Toast.makeText(mContext, "网络出错", Toast.LENGTH_SHORT).show();
-                        mBtnSignIn.setEnabled(true);
-                    }
-
-                    @Override
-                    public void onSubscribe(Disposable disposable) {
-
-                    }
-
-                    @Override
-                    public void onNext(NewUser response) {
-                        mBtnSignIn.setEnabled(true);
-                        if (isSuccess(response)) {
-                            ToastUtils.showShortToast(mContext, "登录成功");
-                            mSpUtils.putUser(response.getUser());
-                            mSpUtils.putBoolean(Constants.IS_SIGN_IN, true);
-                            ((SignInActivity) mContext).startActivityToHome();
-                        }
-                    }
-                });
-    }
+              @Override
+              public void onNext(NewUser response) {
+                mBtnSignIn.setEnabled(true);
+                if (isSuccess(response)) {
+                  ToastUtils.showShortToast(mContext, "登录成功");
+                  mSpUtils.putUser(response.getUser());
+                  mSpUtils.putBoolean(Constants.IS_SIGN_IN, true);
+                  ((SignInActivity) mContext).startActivityToHome();
+                }
+              }
+            });
+  }
 }

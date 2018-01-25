@@ -1,1 +1,1 @@
-include ':app', ':okhttputils', ':didi_sdk_for_common_v1.1.0_12_08'
+include ':app', ':okhttputils', ':didi_sdk_for_common_v1.1.0_12_08', ':lib-zxing', ':common'

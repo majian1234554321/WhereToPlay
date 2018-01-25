@@ -2,6 +2,7 @@ package com.fanc.wheretoplay.fragment
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.support.v4.content.ContextCompat
 import android.support.v7.widget.LinearLayoutManager
 import android.text.TextUtils
 import android.util.Log
@@ -155,7 +156,7 @@ class ExtendFragment(
                 tv_more.visibility = View.GONE
             }
             recycle.addItemDecoration(RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL,
-                    UIUtils.dp2Px(1), mContext.resources.getColor(R.color.pay_reserve_list_divider_white)))
+                    UIUtils.dp2Px(1), ContextCompat.getColor(mContext,R.color.pay_reserve_list_divider_white)))
             recycle.layoutManager = LinearLayoutManager(mContext)
             adapter = ExtendAdapter(mContext, flag, list, storeid, discountValue, storeName, address, phonevalue)
             recycle.adapter = adapter
@@ -184,7 +185,7 @@ class ExtendFragment(
         val mDate = (0..6).map { Date(System.currentTimeMillis() + it * DAY) }
 
         recycle0.addItemDecoration(RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL,
-                UIUtils.dp2Px(1), mContext.resources.getColor(R.color.pay_reserve_list_divider_white)))
+                UIUtils.dp2Px(1), ContextCompat.getColor(mContext,R.color.pay_reserve_list_divider_white)))
         recycle0.layoutManager = LinearLayoutManager(mContext)
 
 

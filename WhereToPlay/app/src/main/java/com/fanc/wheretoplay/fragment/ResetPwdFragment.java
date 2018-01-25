@@ -33,194 +33,193 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.MultipartBody;
 
-/**
- * Created by Administrator on 2017/6/12.
- */
-
+/** Created by Administrator on 2017/6/12. */
 public class ResetPwdFragment extends BaseFragment {
 
-    private final long MINUTE = 1000 * 60;// 分钟
-    private final long SECOND = 1000;// 秒
+  private final long MINUTE = 1000 * 60; // 分钟
+  private final long SECOND = 1000; // 秒
 
-    FragmentResetPwdBinding resetPwdBinding;
+  FragmentResetPwdBinding resetPwdBinding;
 
-    TopMenu mTmResetPwd;
-    EditText mEtResetPwdMobile;
-    EditText mEtResetPwdPwd, mEtResetPwdPwd2;
-    EditText mEtResetPwdVerification;
-    Button mBtnResetPwdVerify;
-    Button mBtnResetPwd;
+  TopMenu mTmResetPwd;
+  EditText mEtResetPwdMobile;
+  EditText mEtResetPwdPwd, mEtResetPwdPwd2;
+  EditText mEtResetPwdVerification;
+  Button mBtnResetPwdVerify;
+  Button mBtnResetPwd;
 
-    CountDownTimer mTimer;
+  CountDownTimer mTimer;
 
-    String verifyCode;
+  String verifyCode;
 
-    @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        resetPwdBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_reset_pwd, container, false);
-        initView();
-        init();
-        return resetPwdBinding.getRoot();
-    }
+  @Override
+  public View onCreateView(
+      @NonNull LayoutInflater inflater,
+      @Nullable ViewGroup container,
+      @Nullable Bundle savedInstanceState) {
+    resetPwdBinding =
+        DataBindingUtil.inflate(inflater, R.layout.fragment_reset_pwd, container, false);
+    initView();
+    init();
+    return resetPwdBinding.getRoot();
+  }
 
-    private void initView() {
-        mTmResetPwd = resetPwdBinding.tmResetPwd;
-        mEtResetPwdMobile = resetPwdBinding.etResetPwdMobile;
-        mEtResetPwdPwd = resetPwdBinding.etResetPwdPassword;
-        mEtResetPwdVerification = resetPwdBinding.etResetPwdVerification;
-        mBtnResetPwdVerify = resetPwdBinding.btnResetPwdVerification;
-        mBtnResetPwd = resetPwdBinding.btnResetPwd;
-        mEtResetPwdPwd2 = resetPwdBinding.etResetPwdPassword2;
+  private void initView() {
+    mTmResetPwd = resetPwdBinding.tmResetPwd;
+    mEtResetPwdMobile = resetPwdBinding.etResetPwdMobile;
+    mEtResetPwdPwd = resetPwdBinding.etResetPwdPassword;
+    mEtResetPwdVerification = resetPwdBinding.etResetPwdVerification;
+    mBtnResetPwdVerify = resetPwdBinding.btnResetPwdVerification;
+    mBtnResetPwd = resetPwdBinding.btnResetPwd;
+    mEtResetPwdPwd2 = resetPwdBinding.etResetPwdPassword2;
+  }
 
-    }
-
-    private void init() {
-        mTmResetPwd.setLeftIcon(R.drawable.left);
-        mTmResetPwd.setTitle(R.string.reset_password);
-        mTmResetPwd.setTitleColor(getResources().getColor(R.color.white));
-        mTmResetPwd.setLeftIconOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ((SignInActivity) mContext).signIn();
-            }
+  private void init() {
+    mTmResetPwd.setLeftIcon(R.drawable.left);
+    mTmResetPwd.setTitle(R.string.reset_password);
+    mTmResetPwd.setTitleColor(getResources().getColor(R.color.white));
+    mTmResetPwd.setLeftIconOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            ((SignInActivity) mContext).signIn("");
+          }
         });
 
-        resetPwdBinding.setClick(this);
+    resetPwdBinding.setClick(this);
+  }
+
+  public void onBtnClick(View view) {
+    switch (view.getId()) {
+      case R.id.btn_reset_pwd_verification:
+        getVerifyCode();
+        break;
+      case R.id.btn_reset_pwd:
+        resetPassword();
+        break;
+      default:
+        break;
     }
+  }
 
-    public void onBtnClick(View view) {
-        switch (view.getId()) {
-            case R.id.btn_reset_pwd_verification:
-                getVerifyCode();
-                break;
-            case R.id.btn_reset_pwd:
-                resetPassword();
-                break;
-            default:
-                break;
-        }
+  private void getVerifyCode() {
+    String mobile = mEtResetPwdMobile.getText().toString().trim();
+    if (((SignInActivity) mContext).mobileFormat(mobile)) {
+      mBtnResetPwdVerify.setEnabled(false);
+      countDown();
+
+      showProgress();
+
+      MultipartBody.Part requestFileA =
+          MultipartBody.Part.createFormData(Network.Param.MOBILE, mobile);
+
+      Retrofit_RequestUtils.getRequest()
+          .getMyVerification(requestFileA)
+          .subscribeOn(Schedulers.io())
+          .observeOn(AndroidSchedulers.mainThread())
+          .subscribe(
+              new Observer<VerifyCode>() {
+                @Override
+                public void onComplete() {}
+
+                @Override
+                public void onError(Throwable e) {
+                  connectError();
+                  mTimer.cancel();
+                  mBtnResetPwdVerify.setEnabled(true);
+                  mBtnResetPwdVerify.setText("重新获取");
+                }
+
+                @Override
+                public void onSubscribe(Disposable disposable) {}
+
+                @Override
+                public void onNext(VerifyCode response) {
+                  closeProgress();
+                  if (isSuccess(response)) {
+                    verifyCode = response.getVerifyCode();
+                  }
+                }
+              });
     }
+  }
 
-    private void getVerifyCode() {
-        String mobile = mEtResetPwdMobile.getText().toString().trim();
-        if (((SignInActivity) mContext).mobileFormat(mobile)) {
-            mBtnResetPwdVerify.setEnabled(false);
-            countDown();
+  /** 倒计时 */
+  private void countDown() {
+    mTimer =
+        new CountDownTimer(MINUTE, SECOND) {
+          @Override
+          public void onTick(long millisUntilFinished) {
+            mBtnResetPwdVerify.setText((millisUntilFinished / SECOND) + "s后重新获取");
+          }
 
-            showProgress();
-
-            MultipartBody.Part requestFileA = MultipartBody.Part.createFormData(Network.Param.MOBILE, mobile);
-
-            Retrofit_RequestUtils.getRequest().getMyVerification(requestFileA)
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(new Observer<VerifyCode>() {
-                        @Override
-                        public void onComplete() {
-
-                        }
-
-                        @Override
-                        public void onError(Throwable e) {
-                            connectError();
-                            mTimer.cancel();
-                            mBtnResetPwdVerify.setEnabled(true);
-                            mBtnResetPwdVerify.setText("重新获取");
-                        }
-
-                        @Override
-                        public void onSubscribe(Disposable disposable) {
-
-                        }
-
-                        @Override
-                        public void onNext(VerifyCode response) {
-                            closeProgress();
-                            if (isSuccess(response)) {
-                                verifyCode = response.getVerifyCode();
-                            }
-                        }
-                    });
-        }
-    }
-
-    /**
-     * 倒计时
-     */
-    private void countDown() {
-        mTimer = new CountDownTimer(MINUTE, SECOND) {
-            @Override
-            public void onTick(long millisUntilFinished) {
-                mBtnResetPwdVerify.setText((millisUntilFinished / SECOND) + "s后重新获取");
-            }
-
-            @Override
-            public void onFinish() {
-                mBtnResetPwdVerify.setText("重新获取");
-                mBtnResetPwdVerify.setEnabled(true);
-            }
+          @Override
+          public void onFinish() {
+            mBtnResetPwdVerify.setText("重新获取");
+            mBtnResetPwdVerify.setEnabled(true);
+          }
         };
-        mTimer.start();
+    mTimer.start();
+  }
+
+  private void resetPassword() {
+    String mobile = mEtResetPwdMobile.getText().toString().trim();
+    if (!((SignInActivity) mContext).mobileFormat(mobile)) {
+      return;
     }
 
-    private void resetPassword() {
-        String mobile = mEtResetPwdMobile.getText().toString().trim();
-        if (!((SignInActivity) mContext).mobileFormat(mobile)) {
-            return;
-        }
-
-        String password = mEtResetPwdPwd.getText().toString();
-        if (!((SignInActivity) mContext).passwordFormat(password)) {
-            return;
-        }
-        String inputVerifyCode = mEtResetPwdVerification.getText().toString().trim();
-        if (!((SignInActivity) mContext).verifyCodeFormat(inputVerifyCode)) {
-            return;
-        }
-
-        String password2 = mEtResetPwdPwd2.getText().toString();
-
-        if (!password.equals(password2)) {
-            Toast.makeText(mContext, "两次密码不相符合", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        mBtnResetPwd.setEnabled(false);
-        showProgress();
-        OkHttpUtils.post()
-                .url(Network.User.LOGIN_FIND_PASSWORD)
-                .addParams(Network.Param.MOBILE, mobile)
-                .addParams(Network.Param.PASSWORD, password)
-                .addParams(Network.Param.CODE, inputVerifyCode)
-                .addParams("newpassword", password2)
-                .build()
-                .execute(new DCallback<User>() {
-                    @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
-                        mBtnResetPwd.setEnabled(true);
-                    }
-
-                    @Override
-                    public void onResponse(User response) {
-                        mBtnResetPwd.setEnabled(true);
-                        if (isSuccess(response)) {
-                            ToastUtils.showShortToast(mContext, "密码修改成功");
-                            mSpUtils.putUser(response);
-                            mSpUtils.putBoolean(Constants.IS_SIGN_IN, true);
-                            ((SignInActivity) mContext).startActivityToHome();
-                        }
-                    }
-                });
-
+    String password = mEtResetPwdPwd.getText().toString();
+    if (!((SignInActivity) mContext).passwordFormat(password)) {
+      return;
+    }
+    String inputVerifyCode = mEtResetPwdVerification.getText().toString().trim();
+    if (!((SignInActivity) mContext).verifyCodeFormat(inputVerifyCode)) {
+      return;
     }
 
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        if (mTimer != null) {
-            mTimer.cancel();
-            mTimer = null;
-        }
+    String password2 = mEtResetPwdPwd2.getText().toString();
+
+    if (!password.equals(password2)) {
+      Toast.makeText(mContext, "两次密码不相符合", Toast.LENGTH_SHORT).show();
+      return;
     }
+
+    mBtnResetPwd.setEnabled(false);
+    showProgress();
+    OkHttpUtils.post()
+        .url(Network.User.LOGIN_FIND_PASSWORD)
+        .addParams(Network.Param.MOBILE, mobile)
+        .addParams(Network.Param.PASSWORD, password)
+        .addParams(Network.Param.CODE, inputVerifyCode)
+        .addParams("newpassword", password2)
+        .build()
+        .execute(
+            new DCallback<User>() {
+              @Override
+              public void onError(Call call, Exception e) {
+                connectError();
+                mBtnResetPwd.setEnabled(true);
+              }
+
+              @Override
+              public void onResponse(User response) {
+                mBtnResetPwd.setEnabled(true);
+                if (isSuccess(response)) {
+                  ToastUtils.showShortToast(mContext, "密码修改成功");
+                  mSpUtils.putUser(response);
+                  mSpUtils.putBoolean(Constants.IS_SIGN_IN, true);
+                  ((SignInActivity) mContext).startActivityToHome();
+                }
+              }
+            });
+  }
+
+  @Override
+  public void onDestroyView() {
+    super.onDestroyView();
+    if (mTimer != null) {
+      mTimer.cancel();
+      mTimer = null;
+    }
+  }
 }

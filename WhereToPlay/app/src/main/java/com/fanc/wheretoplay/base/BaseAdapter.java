@@ -51,7 +51,7 @@ public abstract class BaseAdapter<T> extends android.widget.BaseAdapter {
     }
 
 
-    private final void setLayouInflater() {
+    private void setLayouInflater() {
         inflater = LayoutInflater.from(context);
     }
 
@@ -60,14 +60,12 @@ public abstract class BaseAdapter<T> extends android.widget.BaseAdapter {
         return inflater;
     }
 
-
     protected final void setData(List<T> data) {
         if (data == null) {
             data = new ArrayList<T>();
         }
         this.data = data;
     }
-
 
     protected final List<T> getData() {
         return data;

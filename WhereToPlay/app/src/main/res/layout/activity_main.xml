@@ -5,6 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
     <com.fanc.wheretoplay.view.MyViewPager
         android:id="@+id/mvp_main"
         android:layout_width="0dp"
@@ -99,6 +101,8 @@
         </RadioButton>
 
     </RadioGroup>
+
+
 
 </android.support.constraint.ConstraintLayout>
 

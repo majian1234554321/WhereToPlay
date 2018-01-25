@@ -6,7 +6,10 @@ import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.net.Network;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -17,6 +20,7 @@ import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -36,6 +40,7 @@ import com.fanc.wheretoplay.view.OrderetailsItemView;
 import com.fanc.wheretoplay.view.TitleBarView;
 import com.qiyukf.unicorn.api.ConsultSource;
 import com.qiyukf.unicorn.api.Unicorn;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -155,6 +160,9 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
 
   @BindView(R.id.oi96)
   OrderetailsItemView oi96;
+
+  @BindView(R.id.iv_qrcode)
+  ImageView iv_qrcode;
 
   private String order_idValue,
       store_idValue,
@@ -315,6 +323,17 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
   public void setDetailsOrderViewData(final OrderDetailModel.ContentBean contentBean) {
     tvStoreName.setText(contentBean.store_name);
     tvAddress.setText(contentBean.address);
+
+    // String qrCodeText =
+    String qrCodeText =
+        com.fanc.wheretoplay.network.Network.QRCODE + store_idValue + "/order/" + order_idValue;
+    Bitmap mBitmap =
+        CodeUtils.createImage(
+            qrCodeText,
+            400,
+            400,
+            BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
+    iv_qrcode.setImageBitmap(mBitmap);
 
     if (contentBean.buttonlist != null) {
       for (int i = 0; i < contentBean.buttonlist.size(); i++) {
@@ -506,7 +525,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
     oi91.setTv_right(contentBean.prepay);
     oi92.setTv_right(contentBean.display_balance);
     oi93.setTv_right(contentBean.fee);
-    if (contentBean.discount != null) oi931.setTv_right(contentBean.discount_rate + "折");
+    if (contentBean.discount_rate != null) oi931.setTv_right(contentBean.discount_rate + "折");
     oi94.setTv_right(contentBean.coupon_amount);
     oi95.setTv_right(contentBean.total);
     oi96.setTv_right(contentBean.pay_method);

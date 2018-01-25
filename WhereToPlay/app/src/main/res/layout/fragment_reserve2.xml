@@ -30,19 +30,29 @@
 
 
             <!--区域选项-->
+
+            <ImageButton
+                android:id="@+id/ib_scan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@null"
+                android:padding="4dp"
+                android:src="@drawable/qr_scan"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></ImageButton>
+
             <TextView
                 android:id="@+id/tv_reserve_city"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:drawablePadding="@dimen/padding_3"
                 android:drawableRight="@drawable/pull_down_4"
-
-                android:paddingLeft="@dimen/padding_15"
                 android:text="选择地区"
                 android:textColor="@color/white"
                 android:textSize="@dimen/textsize_level3"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintLeft_toRightOf="@+id/ib_scan"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <!--标题名称-->
@@ -59,8 +69,6 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
-
-
 
 
             <!--标题栏右侧搜索按钮-->
@@ -163,10 +171,10 @@
 
 
     <com.jcodecraeer.xrecyclerview.XRecyclerView
-        android:layout_below="@id/rl_top_menu"
         android:id="@+id/recyclerview"
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
+        android:layout_below="@id/rl_top_menu"
         app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
 

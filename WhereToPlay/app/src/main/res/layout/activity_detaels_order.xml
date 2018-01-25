@@ -346,6 +346,14 @@
                 android:textColor="#999999" />
 
 
+            <ImageView
+                android:id="@+id/iv_qrcode"
+                android:layout_width="120dp"
+                android:layout_gravity="center"
+                android:layout_marginBottom="40dp"
+                android:layout_height="120dp" />
+
+
         </LinearLayout>
     </android.support.v4.widget.NestedScrollView>
 </RelativeLayout>

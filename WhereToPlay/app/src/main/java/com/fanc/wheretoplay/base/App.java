@@ -27,6 +27,7 @@ import com.qiyukf.unicorn.api.Unicorn;
 import com.qiyukf.unicorn.api.YSFOptions;
 
 import com.sdu.didi.openapi.DIOpenSDK;
+import com.uuzuche.lib_zxing.activity.ZXingLibrary;
 import com.zhy.http.okhttp.OkHttpUtils;
 
 import java.io.File;
@@ -73,6 +74,7 @@ public class App extends Application {
 
         init();
 
+        ZXingLibrary.initDisplayOpinion(this);
 
         DIOpenSDK.registerApp(this, "didi65434B4C6253787A30446D76544D474E", "c841ae9e1a8cf7dcc912fe3fe6624dfd");
 

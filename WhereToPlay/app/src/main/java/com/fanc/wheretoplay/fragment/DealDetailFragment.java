@@ -22,7 +22,7 @@ import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.view.DealDetailFilterDialog;
-import com.fanc.wheretoplay.view.MyViewPager;
+
 import com.fanc.wheretoplay.view.TopMenu;
 
 import java.util.ArrayList;
@@ -41,7 +41,7 @@ public class DealDetailFragment extends BaseFragment implements RadioGroup.OnChe
     private final int RECHARGE_DETAIL = 2;// 充值明细
 
     TopMenu mTmDealDetail;
-    MyViewPager mMvpDealDetail;
+    ViewPager mMvpDealDetail;
     RadioButton mRbDealDetailConsume;
     RadioButton mRbDealDetailRechage, referral;
 
@@ -186,9 +186,7 @@ public class DealDetailFragment extends BaseFragment implements RadioGroup.OnChe
                 break;
             case R.id.rb_deal_detail_referral:
                 mMvpDealDetail.setCurrentItem(2);
-
                 mTmDealDetail.mTvRightText.setVisibility(View.GONE);
-
                 break;
             default:
                 break;

@@ -99,6 +99,7 @@
                     android:textSize="@dimen/normal_textsize" />
 
                 <EditText
+                    android:visibility="gone"
                     android:id="@+id/tv_referral_mine_code"
                     android:layout_width="@dimen/width_180"
                     android:layout_height="wrap_content"
@@ -111,11 +112,21 @@
                     android:textColor="@color/text_red"
                     android:textIsSelectable="true" />
 
+                <ImageView
+                    android:id="@+id/iv_qrcode"
+
+                    android:layout_marginTop="20dp"
+                    android:layout_width="120dp"
+                    android:layout_gravity="center"
+                    android:layout_marginBottom="20dp"
+                    android:layout_height="120dp" />
+
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_horizontal"
-                    android:layout_marginTop="@dimen/margin_15"
+
                     android:gravity="center"
                     android:lineSpacingExtra="@dimen/text_line_space_5"
                     android:text="@string/invitation_code_explain"
@@ -136,6 +147,7 @@
                     android:layout_marginBottom="18dp"
                     android:textColor="@color/text_white"
                     android:textSize="@dimen/textsize_level2" />
+
             </LinearLayout>
         </ScrollView>
 

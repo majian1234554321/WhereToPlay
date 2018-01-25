@@ -26,12 +26,14 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.baidu.location.BDLocation;
 import com.fanc.wheretoplay.MainActivity;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.AlterCityActivity;
 import com.fanc.wheretoplay.activity.ReuseActivity;
+import com.fanc.wheretoplay.activity.SignInActivity;
 import com.fanc.wheretoplay.adapter.FilterPopChildAdapter;
 import com.fanc.wheretoplay.adapter.FilterPopDialogAdapter;
 import com.fanc.wheretoplay.adapter.FilterPopStoreTypeAdapter;
@@ -58,6 +60,8 @@ import com.fanc.wheretoplay.view.PullToRefreshLayout;
 import com.google.gson.Gson;
 import com.jcodecraeer.xrecyclerview.ProgressStyle;
 import com.jcodecraeer.xrecyclerview.XRecyclerView;
+import com.uuzuche.lib_zxing.activity.CaptureActivity;
+import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.youth.banner.Banner;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
@@ -156,6 +160,13 @@ public class ReserveFragment2 extends BaseFragment implements IOnFocusListener, 
         tv_reserve_city.setOnClickListener(this);
 
 
+         view.findViewById(R.id.ib_scan).setOnClickListener(new View.OnClickListener() {
+             @Override
+             public void onClick(View v) {
+                 Intent intent = new Intent(mContext, CaptureActivity.class);
+                        startActivityForResult(intent, 10086);
+             }
+         });
         mLlReserveFilterRealSuspend = view.findViewById(R.id.ll_reserve_filter_real_suspend);
 
         mFilterSuspend = view.findViewById(R.id.ll_reserve_filter_suspend);
@@ -241,6 +252,43 @@ public class ReserveFragment2 extends BaseFragment implements IOnFocusListener, 
         // 上传极光id
         uploadRegistrationID();
 
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        //
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if (requestCode == 10086) {
+            // 处理扫描结果（在界面上显示）
+            if (null != data) {
+                Bundle bundle = data.getExtras();
+                if (bundle == null) {
+                    return;
+                }
+                if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_SUCCESS) {
+                    String result = bundle.getString(CodeUtils.RESULT_STRING);
+
+                    if (result != null
+                            && result.contains("51tzl.cn/register/")
+                            && result.split("51tzl.cn/register/").length == 2) {
+
+                        String value = result.split("51tzl.cn/register/")[1];
+                        Intent intent = new Intent(mContext, SignInActivity.class);
+                        intent.putExtra("type", "register");
+                        intent.putExtra("value", value);
+                        startActivity(intent);
+
+                    } else {
+                        Toast.makeText(mContext, "二维码不符合规则", Toast.LENGTH_SHORT).show();
+                    }
+                    Toast.makeText(mContext, "解析结果:" + result, Toast.LENGTH_LONG).show();
+                } else if (bundle.getInt(CodeUtils.RESULT_TYPE) == CodeUtils.RESULT_FAILED) {
+                    Toast.makeText(mContext, "解析二维码失败", Toast.LENGTH_LONG).show();
+                }
+            }
+        }
     }
 
 
