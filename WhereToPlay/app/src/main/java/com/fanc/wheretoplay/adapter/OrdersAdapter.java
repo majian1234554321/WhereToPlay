@@ -459,7 +459,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                         MultipartBody.Part requestFileC =
                                 MultipartBody.Part.createFormData("id", dataBean.list.get(position).order_id);
 
-                        Retrofit_RequestUtils.getRequest().cancle_order(requestFileA, requestFileC)
+                        Retrofit_RequestUtils.INSTANCE.getRequest().cancle_order(requestFileA, requestFileC)
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(new Observer<BaseResponseModel<CancleOrderModel.ContentBean>>() {

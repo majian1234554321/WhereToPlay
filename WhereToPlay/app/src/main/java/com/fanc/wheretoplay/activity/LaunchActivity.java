@@ -115,7 +115,7 @@ public class LaunchActivity extends BaseActivity {
     private void initPermissions() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             String[] permissions = new String[]{
-//                    Manifest.permission.CAMERA,
+                    Manifest.permission.CAMERA,
 //                    Manifest.permission.READ_EXTERNAL_STORAGE,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE
             };

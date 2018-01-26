@@ -113,7 +113,7 @@ public class ResetPwdFragment extends BaseFragment {
       MultipartBody.Part requestFileA =
           MultipartBody.Part.createFormData(Network.Param.MOBILE, mobile);
 
-      Retrofit_RequestUtils.getRequest()
+      Retrofit_RequestUtils.INSTANCE.getRequest()
           .getMyVerification(requestFileA)
           .subscribeOn(Schedulers.io())
           .observeOn(AndroidSchedulers.mainThread())

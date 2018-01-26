@@ -159,7 +159,7 @@ public class PayBillActivity extends BaseActivity implements PayView {
     init();
 
     if (order_id != null) {
-      Retrofit_RequestUtils.getRequest()
+      Retrofit_RequestUtils.INSTANCE.getRequest()
           .order_done(
               MultipartBody.Part.createFormData("order_id", order_id),
               MultipartBody.Part.createFormData(
@@ -289,7 +289,7 @@ public class PayBillActivity extends BaseActivity implements PayView {
         list.add(
             MultipartBody.Part.createFormData("token", new SPUtils(mContext).getUser().getToken()));
 
-        Retrofit_RequestUtils.getRequest()
+        Retrofit_RequestUtils.INSTANCE.getRequest()
             .getPrepayByOrderId(list)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
@@ -627,10 +627,10 @@ public class PayBillActivity extends BaseActivity implements PayView {
 
     switch (type) {
       case "immediatelyPay":
-        observable = Retrofit_RequestUtils.getRequest().immediatelyPay(list);
+        observable = Retrofit_RequestUtils.INSTANCE.getRequest().immediatelyPay(list);
         break;
       case "continuePay":
-        observable = Retrofit_RequestUtils.getRequest().continuePay(list);
+        observable = Retrofit_RequestUtils.INSTANCE.getRequest().continuePay(list);
         break;
     }
 

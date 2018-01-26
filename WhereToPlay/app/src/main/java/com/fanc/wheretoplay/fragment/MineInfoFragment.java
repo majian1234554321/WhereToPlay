@@ -546,7 +546,7 @@ public class MineInfoFragment extends BaseFragment {
         showProgress();
 
         //用retrofit代替原有网络进行请求
-         Retrofit_RequestUtils.getRequest().changeMineInfo(requestFileA, requestFileB, requestFileC, requestFileD, requestFileE, requestFileF, requestFileG)
+         Retrofit_RequestUtils.INSTANCE.getRequest().changeMineInfo(requestFileA, requestFileB, requestFileC, requestFileD, requestFileE, requestFileF, requestFileG)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<DelectCollection>() {

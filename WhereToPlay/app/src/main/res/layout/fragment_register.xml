@@ -154,6 +154,7 @@
                 android:layout_below="@+id/tv_register_verification"
                 android:gravity="center_vertical"
                 android:paddingLeft="@dimen/margin_15"
+                android:visibility="gone"
                 android:text="@string/redeem_code"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/normal_textsize"/>
@@ -165,6 +166,7 @@
                 android:layout_alignBottom="@+id/tv_redeem_code"
                 android:layout_toRightOf="@+id/tv_redeem_code"
                 android:background="@null"
+                android:visibility="gone"
                 android:hint="@string/hint_redeem_code"
                 android:maxLength="20"
                 android:textColor="@color/text_black"

@@ -344,7 +344,7 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
         list.add(requestFileb);
         list.add(requestFilec);
 
-        Retrofit_RequestUtils.getRequest().storeDetail(list)
+        Retrofit_RequestUtils.INSTANCE.getRequest().storeDetail(list)
                 .compose(new FlowableTransformer2<MerchantDetailModel.ContentBean>())
                 .subscribe(new DisposableSubscriber2<MerchantDetailModel.ContentBean>() {
                     @Override
@@ -508,7 +508,7 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
         MultipartBody.Part requestFileC =
                 MultipartBody.Part.createFormData("store_id", storeId);
 
-        Retrofit_RequestUtils.getRequest().collect(requestFileA, requestFileC)
+        Retrofit_RequestUtils.INSTANCE.getRequest().collect(requestFileA, requestFileC)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<SubmitCommentModel>() {

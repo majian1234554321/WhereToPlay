@@ -286,7 +286,7 @@ public class CollectionFragment extends BaseFragment {
         MultipartBody.Part requestFileB =
                 MultipartBody.Part.createFormData(Network.Param.COLLECT_ID, collectionIds);
 
-        Retrofit_RequestUtils.getRequest().delectCollection(requestFileA, requestFileB)
+        Retrofit_RequestUtils.INSTANCE.getRequest().delectCollection(requestFileA, requestFileB)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<DelectCollection>() {

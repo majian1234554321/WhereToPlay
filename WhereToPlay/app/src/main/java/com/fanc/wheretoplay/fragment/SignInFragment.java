@@ -60,6 +60,15 @@ public class SignInFragment extends BaseFragment {
     mEtMobil = signinBinding.etSigninMobile;
     mEtPassword = signinBinding.etSigninPassword;
     mBtnSignIn = signinBinding.btnSignin;
+    signinBinding.ivclose.setOnClickListener(
+        new View.OnClickListener() {
+          @Override
+          public void onClick(View v) {
+            startActivity(new Intent(mContext, MainActivity.class));
+
+             mContext.finish();
+          }
+        });
   }
 
   private void init() {
@@ -109,7 +118,7 @@ public class SignInFragment extends BaseFragment {
     MultipartBody.Part requestFileC =
         MultipartBody.Part.createFormData(Network.Param.REGISTRATIONID, registrationID);
 
-    Retrofit_RequestUtils.getRequest()
+    Retrofit_RequestUtils.INSTANCE.getRequest()
         .logIn(requestFileA, requestFileB, requestFileC)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
