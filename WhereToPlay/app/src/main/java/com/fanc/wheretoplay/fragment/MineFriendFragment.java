@@ -156,7 +156,7 @@ public class MineFriendFragment extends BaseFragment {
         MultipartBody.Part requestFileC =
                 MultipartBody.Part.createFormData("token", mUser.getToken());
 
-        Retrofit_RequestUtils.INSTANCE.getRequest().recomFriend(requestFileA, requestFileB, requestFileC)
+        Retrofit_RequestUtils.getRequest().recomFriend(requestFileA, requestFileB, requestFileC)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<MineFriend>() {

@@ -72,7 +72,7 @@ public class OrdelListFragmentPresenter implements BasePresenter {
                 MultipartBody.Part.createFormData("type", typeValue);
 
 
-        Retrofit_RequestUtils.INSTANCE.getRequest()
+        Retrofit_RequestUtils.getRequest()
                 .bookList(requestFileA, requestFileC, requestFileB, requestFileD)
                 .compose(new FlowableTransformer2<BookListModel.ContentBean>())
                 .subscribe(new DisposableSubscriber2<BookListModel.ContentBean>() {

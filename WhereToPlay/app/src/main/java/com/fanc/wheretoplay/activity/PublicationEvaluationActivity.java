@@ -202,7 +202,7 @@ public class PublicationEvaluationActivity extends BaseActivity {
     MultipartBody.Part requestFileA =
         MultipartBody.Part.createFormData("data", jsonObject.toString() + "");
 
-    Retrofit_RequestUtils.INSTANCE.getRequest()
+    Retrofit_RequestUtils.getRequest()
         .SubmitCommentModel(requestFileA)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())

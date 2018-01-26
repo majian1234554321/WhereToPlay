@@ -101,7 +101,7 @@ public class IntegralFragment extends BaseFragment {
 
         MultipartBody.Part requestFileA =
                 MultipartBody.Part.createFormData("token", new SPUtils(mContext).getUser().getToken());
-        Retrofit_RequestUtils.INSTANCE.getRequest().scoreList(requestFileA)
+        Retrofit_RequestUtils.getRequest().scoreList(requestFileA)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<ScoreList>() {

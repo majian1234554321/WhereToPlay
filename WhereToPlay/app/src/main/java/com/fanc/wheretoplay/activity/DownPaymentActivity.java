@@ -291,7 +291,7 @@ public class DownPaymentActivity extends BaseActivity {
       fileA.add(requestFileA);
     }
 
-    Retrofit_RequestUtils.INSTANCE.getRequest()
+    Retrofit_RequestUtils.getRequest()
         .onlineBook(fileA)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
@@ -374,7 +374,7 @@ public class DownPaymentActivity extends BaseActivity {
         List<MultipartBody.Part> list2 = new ArrayList<>();
         list2.add(MultipartBody.Part.createFormData("token", mUser.getToken()));
         list2.add(MultipartBody.Part.createFormData("order_id", orderId));
-      Retrofit_RequestUtils.INSTANCE.getRequest()
+      Retrofit_RequestUtils.getRequest()
           .is_display(list2)
           .subscribeOn(Schedulers.io())
           .observeOn(AndroidSchedulers.mainThread())
@@ -422,7 +422,7 @@ public class DownPaymentActivity extends BaseActivity {
 
     lists.add(MultipartBody.Part.createFormData("code", password));
 
-    Retrofit_RequestUtils.INSTANCE.getRequest()
+    Retrofit_RequestUtils.getRequest()
         .payOrder(lists)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())

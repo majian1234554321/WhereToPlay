@@ -65,7 +65,7 @@ public class PayPresenter implements BasePresenter {
       lists.add(MultipartBody.Part.createFormData("coupon_id", coupon_id));
     }
 
-    Retrofit_RequestUtils.INSTANCE.getRequest()
+    Retrofit_RequestUtils.getRequest()
         .order_payoff(lists)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())

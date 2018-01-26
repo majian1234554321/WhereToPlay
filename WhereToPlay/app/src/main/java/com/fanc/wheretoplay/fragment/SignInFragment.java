@@ -118,7 +118,7 @@ public class SignInFragment extends BaseFragment {
     MultipartBody.Part requestFileC =
         MultipartBody.Part.createFormData(Network.Param.REGISTRATIONID, registrationID);
 
-    Retrofit_RequestUtils.INSTANCE.getRequest()
+    Retrofit_RequestUtils.getRequest()
         .logIn(requestFileA, requestFileB, requestFileC)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())

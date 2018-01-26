@@ -175,7 +175,7 @@ public class RegisterFragment extends BaseFragment {
       MultipartBody.Part requestFileA =
           MultipartBody.Part.createFormData(Network.Param.MOBILE, mobile);
 
-      Retrofit_RequestUtils.INSTANCE.getRequest()
+      Retrofit_RequestUtils.getRequest()
           .getMyVerification(requestFileA)
           .subscribeOn(Schedulers.io())
           .observeOn(AndroidSchedulers.mainThread())
@@ -298,7 +298,7 @@ public class RegisterFragment extends BaseFragment {
     //                    }
     //                });
 
-    Retrofit_RequestUtils.INSTANCE.getRequest()
+    Retrofit_RequestUtils.getRequest()
         .register(requestFileA, requestFileB, requestFileC, requestFileD, requestFileF)
         .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())

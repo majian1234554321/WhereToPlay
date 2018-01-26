@@ -80,7 +80,7 @@ public class Main2Fragment extends BaseFragment implements XRecyclerView.Loading
     MultipartBody.Part requestFileD = MultipartBody.Part.createFormData("size", "10");
     MultipartBody.Part requestFileB = MultipartBody.Part.createFormData("type", "2");
 
-    Retrofit_RequestUtils.INSTANCE.getRequest()
+    Retrofit_RequestUtils.getRequest()
         .bookList(requestFileA, requestFileC, requestFileB, requestFileD)
         .compose(new FlowableTransformer2<BookListModel.ContentBean>())
         .subscribe(

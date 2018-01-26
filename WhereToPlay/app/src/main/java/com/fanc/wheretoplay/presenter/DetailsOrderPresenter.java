@@ -55,7 +55,7 @@ public class DetailsOrderPresenter implements BasePresenter {
 
         MultipartBody.Part requestFileC =
                 MultipartBody.Part.createFormData("order_id", order_idValue);
-        Retrofit_RequestUtils.INSTANCE.getRequest()
+        Retrofit_RequestUtils.getRequest()
                 .orderDetail(requestFileA, requestFileC)
 
                 .compose(new ObservableTransformer2<BaseResponseModel<OrderDetailModel.ContentBean>>())
@@ -104,7 +104,7 @@ public class DetailsOrderPresenter implements BasePresenter {
 
         MultipartBody.Part requestFileC =
                 MultipartBody.Part.createFormData("id", order_idValue);
-       Retrofit_RequestUtils.INSTANCE.getRequest().cancle_order(requestFileA, requestFileC)
+       Retrofit_RequestUtils.getRequest().cancle_order(requestFileA, requestFileC)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<BaseResponseModel<CancleOrderModel.ContentBean>>() {

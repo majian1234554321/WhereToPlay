@@ -167,7 +167,7 @@ public class MineCommendMoneyFragment extends BaseFragment {
         MultipartBody.Part requestFileC =
                 MultipartBody.Part.createFormData("token", mUser.getToken());
 
-        Retrofit_RequestUtils.INSTANCE.getRequest().recomReward(requestFileA, requestFileB, requestFileC)
+        Retrofit_RequestUtils.getRequest().recomReward(requestFileA, requestFileB, requestFileC)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Observer<MineMoney>() {
