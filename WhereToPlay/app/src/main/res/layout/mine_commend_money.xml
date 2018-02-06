@@ -21,6 +21,7 @@
             android:layout_width="@dimen/width_50"
             android:layout_height="@dimen/height_50"
             android:src="@drawable/check_comments_boy"
+            android:visibility="gone"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"/>
 
@@ -28,25 +29,26 @@
             android:id="@+id/tv_mine_money_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/margin_65"
+            android:layout_marginStart="@dimen/margin_10"
             android:layout_marginTop="@dimen/margin_5"
             android:text="@string/where_to_play_recreation_terrace"
             android:textColor="@color/text_black_sec"
             android:textSize="@dimen/normal_textsize"
-            app:layout_constraintStart_toEndOf="@+id/iv_mine_money"
-            app:layout_constraintTop_toTopOf="@+id/iv_mine_money"
+
             />
 
         <TextView
             android:id="@+id/tv_mine_money_time"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/margin_5"
+            android:layout_marginStart="@dimen/margin_10"
             android:text="2017-11-8 16:00"
             android:textColor="@color/textcolor_btn_normal"
             android:textSize="@dimen/textsize_levelsmall"
-            app:layout_constraintStart_toStartOf="@+id/tv_mine_money_title"
-            app:layout_constraintBottom_toBottomOf="@+id/iv_mine_money"/>
+            app:layout_constraintTop_toBottomOf="@+id/tv_mine_money_title"
+
+            />
 <!-- android:text="@{DateFormatUtil.getDateFormatMMDDHHmm(notification.created_time)}"-->
 
         <TextView

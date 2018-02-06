@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.DetailActivity;
@@ -38,10 +39,7 @@ import java.util.List;
 
 import okhttp3.Call;
 
-/**
- * Created by Administrator on 2017/6/16.
- */
-
+/** Created by Administrator on 2017/6/16. */
 public class MessageFragment extends BaseFragment {
     FragmentCollectionBinding messageBinding;
 
@@ -50,12 +48,16 @@ public class MessageFragment extends BaseFragment {
 
     List<MessageList.Message> messages;
     MessageAdapter adapter;
-
+    private RelativeLayout rrrrrr;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        messageBinding = DataBindingUtil.inflate(inflater, R.layout.fragment_collection, null, false);
+    public View onCreateView(
+            @NonNull LayoutInflater inflater,
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
+        messageBinding =
+                DataBindingUtil.inflate(inflater, R.layout.fragment_collection, null, false);
         initViews();
         init();
 
@@ -65,17 +67,17 @@ public class MessageFragment extends BaseFragment {
     private void initViews() {
         mTmMessage = messageBinding.tmCollection;
         mRvMessage = messageBinding.rvCollection;
+        rrrrrr = messageBinding.rrrrrr;
     }
 
-
-
     private void init() {
-        mTmMessage.setLeftIconOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                mContext.finish();
-            }
-        });
+        mTmMessage.setLeftIconOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        mContext.finish();
+                    }
+                });
         mTmMessage.setLeftIcon(R.drawable.left);
         mTmMessage.setTitle(R.string.message);
         mTmMessage.setTitleColor(getResources().getColor(R.color.white));
@@ -85,15 +87,18 @@ public class MessageFragment extends BaseFragment {
         mRvMessage.setLayoutManager(layoutManager);
         messages = new ArrayList<>();
         adapter = new MessageAdapter(mContext, messages);
-        RecycleViewDivider divider = new RecycleViewDivider(mContext,
-                LinearLayoutManager.HORIZONTAL, UIUtils.dp2Px(1), UIUtils.getColor(R.color.bg_gray));
+        RecycleViewDivider divider =
+                new RecycleViewDivider(
+                        mContext,
+                        LinearLayoutManager.HORIZONTAL,
+                        UIUtils.dp2Px(1),
+                        UIUtils.getColor(R.color.bg_gray));
         mRvMessage.addItemDecoration(divider);
         mRvMessage.setItemAnimator(new DefaultItemAnimator());
         mRvMessage.setHasFixedSize(true);
         mRvMessage.setAdapter(adapter);
 
         getMessageList();
-
     }
 
     private void getMessageList() {
@@ -102,21 +107,30 @@ public class MessageFragment extends BaseFragment {
                 .url(Network.User.USER_MESSAGE_LIST)
                 .addParams(Network.Param.TOKEN, mUser.getToken())
                 .build()
-                .execute(new DCallback<MessageList>() {
-                    @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
-                    }
-
-                    @Override
-                    public void onResponse(MessageList response) {
-                        if (isSuccess(response)) {
-                            if (response.getList() != null) {
-                                showMessageList(response.getList());
+                .execute(
+                        new DCallback<MessageList>() {
+                            @Override
+                            public void onError(Call call, Exception e) {
+                                connectError();
                             }
-                        }
-                    }
-                });
+
+                            @Override
+                            public void onResponse(MessageList response) {
+                                if (isSuccess(response)) {
+                                    if (response.getList() != null&&response.getList().size()>0) {
+                                        mRvMessage.setVisibility(View.VISIBLE);
+                                        showMessageList(response.getList());
+
+                                    }else {
+                                        rrrrrr.setVisibility(View.VISIBLE);
+                                        mRvMessage.setVisibility(View.GONE);
+                                    }
+                                }else {
+                                    rrrrrr.setVisibility(View.VISIBLE);
+                                    mRvMessage.setVisibility(View.GONE);
+                                }
+                            }
+                        });
     }
 
     private void showMessageList(List<MessageList.Message> messages) {
@@ -124,10 +138,4 @@ public class MessageFragment extends BaseFragment {
         this.messages.addAll(messages);
         adapter.notifyDataSetChanged();
     }
-
-
-
-
-
-
 }

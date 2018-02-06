@@ -115,9 +115,12 @@ public class ConsumeDetailFragment extends BaseFragment {
                     @Override
                     public void onResponse(Consume response) {
                         if (isSuccess(response)) {
-                            if (response.getList() != null) {
+                            if (response.getList() != null&&response.getList().size()>0) {
+                                mRvDealDetailConsume.setVisibility(View.VISIBLE);
                                 showConsumeDetailList(response.getList());
+
                             } else {
+                                mRvDealDetailConsume.setVisibility(View.GONE);
                                 rrrrrr.setVisibility(View.VISIBLE);
                             }
                         } else {

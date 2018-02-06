@@ -234,13 +234,15 @@ public class ReserveFragment2 extends BaseFragment
     recyclerview.setLayoutManager(layoutManager);
 
     recyclerview.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
-    recyclerview.setLoadingMoreProgressStyle(ProgressStyle.BallRotate);
+
     recyclerview.setArrowImageView(R.drawable.iconfont_downgrey);
 
     init();
     // 第一次请求数据，city.getId()强制设置为上海的id
     getStoreList("onRefresh", city.getId(), page, size, null, storeType, null, null, null);
 
+    recyclerview.setRefreshProgressStyle(ProgressStyle.BallSpinFadeLoader);
+    recyclerview.setLoadingMoreProgressStyle(ProgressStyle.BallRotate);
     recyclerview.getDefaultFootView().setLoadingHint("正在加载......");
     recyclerview.getDefaultFootView().setNoMoreHint("数据加载完毕");
 

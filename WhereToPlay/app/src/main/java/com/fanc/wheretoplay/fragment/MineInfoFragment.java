@@ -1,16 +1,27 @@
 package com.fanc.wheretoplay.fragment;
 
 import android.Manifest;
+import android.content.ClipData;
+import android.content.ContentResolver;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.databinding.DataBindingUtil;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
+import android.os.ParcelFileDescriptor;
+import android.provider.MediaStore;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.FileProvider;
 import android.support.v4.content.LocalBroadcastManager;
 import android.text.TextUtils;
 import android.util.Log;
@@ -49,9 +60,14 @@ import com.google.gson.Gson;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -70,6 +86,8 @@ import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.MultipartBody;
+
+import static android.app.Activity.RESULT_OK;
 
 
 /**
@@ -105,6 +123,7 @@ public class MineInfoFragment extends BaseFragment {
     private MultipartBody.Part requestFileD;
     private MultipartBody.Part requestFileE;
     private MultipartBody.Part requestFileF;
+    private Uri contentUri;
 
     @Nullable
     @Override
@@ -404,13 +423,149 @@ public class MineInfoFragment extends BaseFragment {
     public void selectIcon(int which) {
         switch (which) {
             case 1: //拍照
-                GalleryFinal.openCamera(1001, mOnHanlderResultCallback);
+               // GalleryFinal.openCamera(1001, mOnHanlderResultCallback);
+
+                //检测是否有相机和读写文件权限
+                if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.CAMERA)
+                        != PackageManager.PERMISSION_GRANTED
+                        || ContextCompat.checkSelfPermission(mContext, Manifest.permission.WRITE_EXTERNAL_STORAGE)
+                        != PackageManager.PERMISSION_GRANTED) {
+                    mContext.requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE}, 10085);
+                } else {
+                    startCamera();
+                }
+
                 break;
             case 2: //打开相册
                 GalleryFinal.openGallerySingle(1002, mOnHanlderResultCallback);
                 break;
         }
     }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case 10085:
+                // 如果权限被拒绝，grantResults 为空
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    startCamera();
+                } else {
+                    Toast.makeText(mContext, "改功能需要相机和读写文件权限", Toast.LENGTH_SHORT).show();
+                }
+                break;
+
+        }
+    }
+
+
+    private void startCamera() {
+        File imagePath = new File(Environment.getExternalStorageDirectory(), "images");
+        if (!imagePath.exists()) imagePath.mkdirs();
+        File newFile = new File(imagePath, "default_image.jpg");
+
+        //第二参数是在manifest.xml定义 provider的authorities属性
+        contentUri = FileProvider.getUriForFile(mContext, "com.fanc.wheretoplay.camera_photos", newFile);
+
+        Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+        //兼容版本处理，因为 intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION) 只在5.0以上的版本有效
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        } else if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
+            ClipData clip =
+                    ClipData.newUri(mContext.getContentResolver(), "A photo", contentUri);
+            intent.setClipData(clip);
+            intent.addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+        } else {
+            List<ResolveInfo> resInfoList =
+                    mContext.getPackageManager()
+                            .queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+            for (ResolveInfo resolveInfo : resInfoList) {
+                String packageName = resolveInfo.activityInfo.packageName;
+                mContext.grantUriPermission(packageName, contentUri,
+                        Intent.FLAG_GRANT_WRITE_URI_PERMISSION);
+            }
+        }
+        intent.putExtra(MediaStore.EXTRA_OUTPUT, contentUri);
+        startActivityForResult(intent, 1000);
+    }
+
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (resultCode == RESULT_OK) {
+            ContentResolver contentProvider = mContext.getContentResolver();
+
+            ParcelFileDescriptor mInputPFD;
+            try {
+                //获取contentProvider图片
+                mInputPFD = contentProvider.openFileDescriptor(contentUri, "r");
+
+                FileDescriptor fileDescriptor = mInputPFD.getFileDescriptor();
+
+             //   mCivMineInfo.setImageBitmap(BitmapFactory.decodeFileDescriptor(fileDescriptor));
+
+              File headPhoto =   compressImage(BitmapFactory.decodeFileDescriptor(fileDescriptor));
+
+                Glide.with(mContext)
+                        .load(headPhoto)
+                        .centerCrop()
+                        .override(R.dimen.width_45, R.dimen.height_45)
+                        .into(mCivMineInfo);
+                //上传图片到服务器
+                modifyAvatar(headPhoto);
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
+    public static File compressImage(Bitmap bitmap) {
+        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);//质量压缩方法，这里100表示不压缩，把压缩后的数据存放到baos中
+        int options = 100;
+        while (baos.toByteArray().length / 1024 > 500) {  //循环判断如果压缩后图片是否大于500kb,大于继续压缩
+            baos.reset();//重置baos即清空baos
+            options -= 10;//每次都减少10
+            bitmap.compress(Bitmap.CompressFormat.JPEG, options, baos);//这里压缩options%，把压缩后的数据存放到baos中
+            long length = baos.toByteArray().length;
+        }
+        SimpleDateFormat format = new SimpleDateFormat("yyyyMMddHHmmss");
+        Date date = new Date(System.currentTimeMillis());
+        String filename = format.format(date);
+        File file = new File(Environment.getExternalStorageDirectory(),filename+".png");
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            try {
+                fos.write(baos.toByteArray());
+                fos.flush();
+                fos.close();
+            } catch (IOException e) {
+                //BAFLogger.e(TAG,e.getMessage());
+                e.printStackTrace();
+            }
+        } catch (FileNotFoundException e) {
+          //  BAFLogger.e(TAG,e.getMessage());
+            e.printStackTrace();
+        }
+        recycleBitmap(bitmap);
+        return file;
+    }
+
+
+    public static void recycleBitmap(Bitmap... bitmaps) {
+        if (bitmaps==null) {
+            return;
+        }
+        for (Bitmap bm : bitmaps) {
+            if (null != bm && !bm.isRecycled()) {
+                bm.recycle();
+            }
+        }
+    }
+
 
     private List mPhotoList = new ArrayList();
     /**

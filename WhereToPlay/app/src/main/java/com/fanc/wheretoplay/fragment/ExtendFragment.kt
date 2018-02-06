@@ -156,7 +156,7 @@ class ExtendFragment(
                 tv_more.visibility = View.GONE
             }
             recycle.addItemDecoration(RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL,
-                    UIUtils.dp2Px(1), ContextCompat.getColor(mContext,R.color.pay_reserve_list_divider_white)))
+                    UIUtils.dp2Px(1), ContextCompat.getColor(mContext, R.color.pay_reserve_list_divider_white)))
             recycle.layoutManager = LinearLayoutManager(mContext)
             adapter = ExtendAdapter(mContext, flag, list, storeid, discountValue, storeName, address, phonevalue)
             recycle.adapter = adapter
@@ -167,7 +167,7 @@ class ExtendFragment(
             } else {
                 tv_more.visibility = View.GONE
             }
-        }else {
+        } else {
             tv_title.visibility = View.GONE
         }
 
@@ -185,7 +185,7 @@ class ExtendFragment(
         val mDate = (0..6).map { Date(System.currentTimeMillis() + it * DAY) }
 
         recycle0.addItemDecoration(RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL,
-                UIUtils.dp2Px(1), ContextCompat.getColor(mContext,R.color.pay_reserve_list_divider_white)))
+                UIUtils.dp2Px(1), ContextCompat.getColor(mContext, R.color.pay_reserve_list_divider_white)))
         recycle0.layoutManager = LinearLayoutManager(mContext)
 
 
@@ -229,14 +229,15 @@ class ExtendFragment(
                     }
 
                     override fun onNext(p0: BookPackageListModel) {
-                        if (p0.content.isNotEmpty()) {
+                        if (p0.content.isNotEmpty() && rb21 != null) {
                             rb21.text = p0.content[0].room_name
                             adapter0 = Extend0Adapter(mContext, flag, p0.content[0].package_list as ArrayList<BookPackageListModel.ContentBean.PackageListBean>
                                     , storeid, discountValue, storeName, address, phonevalue, dateType, p0.content[0].room_name, weekType)
                             recycle0.adapter = adapter0
                         } else {
                             adapter0?.clearAll()
-                            rb21.visibility = View.GONE
+                            if (rb21 != null)
+                                rb21.visibility = View.GONE
                             // Toast.makeText(mContext, "", Toast.LENGTH_LONG).show()
                         }
 

@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,7 +51,8 @@ public class OrderList2Fragment extends BaseLazyFragment implements PullToRefres
     @BindView(R.id.ptrl_pay_reserve)
     PullToRefreshLayout ptrlPayReserve;
     public static final String TYPE = "2";
-
+    @BindView(R.id.rrrrrr)
+    RelativeLayout rrrrrr;
     public int currentPage ;
     private OrdelListFragmentPresenter ordelListFragmentPresenter;
     private OrdersAdapter myAdapter;
@@ -147,7 +149,7 @@ public class OrderList2Fragment extends BaseLazyFragment implements PullToRefres
 
 
 
-        if (contentBean.list != null) {
+        if (contentBean.list != null&&contentBean.list.size()>0) {
             if ("onRefresh".equals(action)) {
                 if ("onLoadMore".equals(action) && myAdapter != null) {
                     myAdapter.notifyDataSetChanged();
@@ -169,6 +171,7 @@ public class OrderList2Fragment extends BaseLazyFragment implements PullToRefres
         } else {
             if (ptrlPayReserve!=null)
                 ptrlPayReserve.loadmoreFinish(-1);
+            if (currentPage == 0) rrrrrr.setVisibility(View.VISIBLE);
         }
     }
 }

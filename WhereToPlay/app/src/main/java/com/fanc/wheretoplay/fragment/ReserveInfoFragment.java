@@ -110,6 +110,7 @@ public class ReserveInfoFragment extends BaseFragment {
     private ImageView iv3;
     public String number;
     private TextView tvYdtext;
+    private String discountValue;
 
     @Nullable
     @Override
@@ -354,6 +355,7 @@ public class ReserveInfoFragment extends BaseFragment {
         mTvReserveInfoAddress.setText(store.area + "    " + d);
         // 折扣
         if (!TextUtils.isEmpty(store.discount) && store.discount.length() > 0) {
+            discountValue = store.discount;
             SpannableString text = new SpannableString(store.discount + "折");
             text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
@@ -567,6 +569,14 @@ public class ReserveInfoFragment extends BaseFragment {
         }
         Intent intent = new Intent(mContext, DownPaymentActivity.class);
         intent.putExtra(Constants.STORE_ID, storeId);
+        if ("1".equals(type)){
+
+            intent.putExtra("flag", "预付预订");
+        }else {
+            intent.putExtra("flag", "信用预订");
+        }
+
+        intent.putExtra("discount", discountValue);
         intent.putExtra(Constants.PARAM, params);
         startActivity(intent);
         mContext.finish();

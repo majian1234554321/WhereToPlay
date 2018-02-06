@@ -99,7 +99,7 @@
                     android:textSize="@dimen/normal_textsize" />
 
                 <EditText
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:id="@+id/tv_referral_mine_code"
                     android:layout_width="@dimen/width_180"
                     android:layout_height="wrap_content"

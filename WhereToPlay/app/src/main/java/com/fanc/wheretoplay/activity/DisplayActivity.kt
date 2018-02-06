@@ -10,6 +10,11 @@ import com.fanc.wheretoplay.fragment.PackageKTVFragment
 
 class DisplayActivity : BaseActivity() {
 
+
+
+
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display)
@@ -31,6 +36,12 @@ class DisplayActivity : BaseActivity() {
         val weekValue = intent.getStringExtra("weekType")
 
         val order_functionValue = intent.getStringExtra("order_function")
+
+
+
+
+
+
 
 
 

@@ -227,7 +227,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
 
     addressValue = getIntent().getStringExtra("address");
 
-    Disposable rxSbscription =
+    Disposable rxSubscription =
         RxBus.getDefault()
             .toFlowable(String.class)
             .subscribe(
@@ -239,7 +239,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                     }
                   }
                 });
-    compositeSubscription.add(rxSbscription);
+    compositeSubscription.add(rxSubscription);
 
     detailsOrderPresenter = new DetailsOrderPresenter(this, order_idValue, this);
     detailsOrderPresenter.getDetailsOrderData();

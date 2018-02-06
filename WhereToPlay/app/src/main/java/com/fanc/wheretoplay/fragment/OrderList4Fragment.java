@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -33,121 +34,129 @@ import io.reactivex.functions.Consumer;
 
 /** Created by admin on 2017/11/1. */
 public class OrderList4Fragment extends BaseLazyFragment
-    implements PullToRefreshLayout.OnRefreshListener, OrderListFragmentView {
-  @BindView(R.id.rv_pay)
-  PullableRecyclerView mRvOrder;
+        implements PullToRefreshLayout.OnRefreshListener, OrderListFragmentView {
+    @BindView(R.id.rv_pay)
+    PullableRecyclerView mRvOrder;
 
-  Unbinder unbinder;
+    @BindView(R.id.rrrrrr)
+    RelativeLayout rrrrrr;
 
-  @BindView(R.id.ptrl_pay_reserve)
-  PullToRefreshLayout ptrlPayReserve;
+    Unbinder unbinder;
 
-  public static final String TYPE = "4";
+    @BindView(R.id.ptrl_pay_reserve)
+    PullToRefreshLayout ptrlPayReserve;
 
-  public int currentPage;
-  private OrdelListFragmentPresenter ordelListFragmentPresenter;
-  private OrdersAdapter myAdapter;
+    public static final String TYPE = "4";
 
-  @Override
-  protected void initPrepare() {}
+    public int currentPage;
+    private OrdelListFragmentPresenter ordelListFragmentPresenter;
+    private OrdersAdapter myAdapter;
 
-  @Override
-  protected void onInvisible() {}
+    @Override
+    protected void initPrepare() {}
 
-  @Override
-  protected void initData() {
-    Log.i("OrderList2Fragment", getClass().getSimpleName());
-    ordelListFragmentPresenter =
-        new OrdelListFragmentPresenter(mContext, this, ptrlPayReserve, OrderList4Fragment.this);
-    ordelListFragmentPresenter.getOrdelListData(TYPE, currentPage, "onRefresh");
-  }
+    @Override
+    protected void onInvisible() {}
 
-  @Override
-  protected View initView(
-      LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-    View view = View.inflate(inflater.getContext(), R.layout.orderlistallfragment4, null);
-    unbinder = ButterKnife.bind(this, view);
+    @Override
+    protected void initData() {
+        Log.i("OrderList2Fragment", getClass().getSimpleName());
+        ordelListFragmentPresenter =
+                new OrdelListFragmentPresenter(
+                        mContext, this, ptrlPayReserve, OrderList4Fragment.this);
+        ordelListFragmentPresenter.getOrdelListData(TYPE, currentPage, "onRefresh");
+    }
 
-    LinearLayoutManager lm = new LinearLayoutManager(mContext);
-    lm.setOrientation(LinearLayoutManager.VERTICAL);
-    mRvOrder.setLayoutManager(lm);
+    @Override
+    protected View initView(
+            LayoutInflater inflater,
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
+        View view = View.inflate(inflater.getContext(), R.layout.orderlistallfragment4, null);
+        unbinder = ButterKnife.bind(this, view);
 
-    mRvOrder.addItemDecoration(
-        new RecycleViewDivider(
-            mContext,
-            LinearLayoutManager.HORIZONTAL,
-            UIUtils.dp2Px(1),
-            mContext.getResources().getColor(R.color.pay_reserve_list_divider_white)));
-    mRvOrder.setItemAnimator(new DefaultItemAnimator());
+        LinearLayoutManager lm = new LinearLayoutManager(mContext);
+        lm.setOrientation(LinearLayoutManager.VERTICAL);
+        mRvOrder.setLayoutManager(lm);
 
-    mRvOrder.setCanPullDown(true);
-    mRvOrder.setCanPullUp(true);
+        mRvOrder.addItemDecoration(
+                new RecycleViewDivider(
+                        mContext,
+                        LinearLayoutManager.HORIZONTAL,
+                        UIUtils.dp2Px(1),
+                        mContext.getResources().getColor(R.color.pay_reserve_list_divider_white)));
+        mRvOrder.setItemAnimator(new DefaultItemAnimator());
 
-    ptrlPayReserve.setOnRefreshListener(this);
-    currentPage = 0;
+        mRvOrder.setCanPullDown(true);
+        mRvOrder.setCanPullUp(true);
 
-    RxBus.getDefault()
-        .toFlowable(Intent.class)
-        .subscribe(
-            new Consumer<Intent>() {
-              @Override
-              public void accept(Intent intent) throws Exception {
-                if (intent != null && "Value".equals(intent.getStringExtra("Key"))) {
+        ptrlPayReserve.setOnRefreshListener(this);
+        currentPage = 0;
 
-                  currentPage = 0;
-                  if (ordelListFragmentPresenter != null) {
-                    ordelListFragmentPresenter.getOrdelListData(TYPE, currentPage, "onRefresh");
-                  }
+        RxBus.getDefault()
+                .toFlowable(Intent.class)
+                .subscribe(
+                        new Consumer<Intent>() {
+                            @Override
+                            public void accept(Intent intent) throws Exception {
+                                if (intent != null
+                                        && "Value".equals(intent.getStringExtra("Key"))) {
+
+                                    currentPage = 0;
+                                    if (ordelListFragmentPresenter != null) {
+                                        ordelListFragmentPresenter.getOrdelListData(
+                                                TYPE, currentPage, "onRefresh");
+                                    }
+                                }
+                            }
+                        });
+
+        return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+    }
+
+    @Override
+    public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
+        currentPage = 0;
+        ordelListFragmentPresenter.getOrdelListData(TYPE, currentPage, "onRefresh");
+    }
+
+    @Override
+    public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
+        if (myAdapter != null && myAdapter.getItemCount() >= 10) {
+            currentPage++;
+            ordelListFragmentPresenter.getOrdelListData(TYPE, currentPage, "onLoadMore");
+        } else {
+            ptrlPayReserve.loadmoreFinish(-1);
+        }
+    }
+
+    @Override
+    public void setOrderListFragmentData(BookListModel.ContentBean contentBean, String action) {
+        if (contentBean.list != null&&contentBean.list.size()>0) {
+            if ("onRefresh".equals(action)) {
+                if ("onLoadMore".equals(action) && myAdapter != null) {
+                    myAdapter.notifyDataSetChanged();
+                } else {
+                    myAdapter = new OrdersAdapter(mContext, OrderList4Fragment.this, contentBean);
+                    mRvOrder.setAdapter(myAdapter);
                 }
-              }
-            });
+            } else if ("onLoadMore".equals(action)) {
+                if (contentBean.list.size() > 0) {
+                    //   loadMoreFooterView.setStatus(LoadMoreFooterView.Status.GONE);
+                    myAdapter.append(contentBean.list);
 
-    return view;
-  }
-
-  @Override
-  public void onDestroyView() {
-    super.onDestroyView();
-  }
-
-  @Override
-  public void onRefresh(PullToRefreshLayout pullToRefreshLayout) {
-    currentPage = 0;
-    ordelListFragmentPresenter.getOrdelListData(TYPE, currentPage, "onRefresh");
-  }
-
-  @Override
-  public void onLoadMore(PullToRefreshLayout pullToRefreshLayout) {
-    if (myAdapter != null && myAdapter.getItemCount() >= 10) {
-      currentPage++;
-      ordelListFragmentPresenter.getOrdelListData(TYPE, currentPage, "onLoadMore");
-    } else {
-      ptrlPayReserve.loadmoreFinish(-1);
-    }
-  }
-
-  @Override
-  public void setOrderListFragmentData(BookListModel.ContentBean contentBean, String action) {
-    if (contentBean.list != null) {
-      if ("onRefresh".equals(action)) {
-        if ("onLoadMore".equals(action) && myAdapter != null) {
-          myAdapter.notifyDataSetChanged();
+                } else {
+                    if (ptrlPayReserve != null) ptrlPayReserve.loadmoreFinish(-1);
+                }
+            }
         } else {
-          myAdapter = new OrdersAdapter(mContext, OrderList4Fragment.this, contentBean);
-          mRvOrder.setAdapter(myAdapter);
+            if (ptrlPayReserve != null) ptrlPayReserve.loadmoreFinish(-1);
+            if (currentPage == 0) rrrrrr.setVisibility(View.VISIBLE);
         }
-      } else if ("onLoadMore".equals(action)) {
-        if (contentBean.list.size() > 0) {
-          //   loadMoreFooterView.setStatus(LoadMoreFooterView.Status.GONE);
-          myAdapter.append(contentBean.list);
-
-        } else {
-          if (ptrlPayReserve != null) ptrlPayReserve.loadmoreFinish(-1);
-          //     loadMoreFooterView.setStatus(LoadMoreFooterView.Status.THE_END);
-        }
-      }
-    } else {
-      if (ptrlPayReserve != null) ptrlPayReserve.loadmoreFinish(-1);
     }
-  }
 }

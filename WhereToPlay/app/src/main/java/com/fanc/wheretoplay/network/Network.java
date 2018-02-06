@@ -45,7 +45,7 @@ import java.util.List;
 public class Network {
 
   public static String BASE = "http://testapi.51tzl.cn"; // 测试
-  // public static String BASE = "https://ktv.51tzl.cn";
+   //public static String BASE = "https://ktv.51tzl.cn";
 
   public static  String QRCODE = "51tzl.cn/store/";
 
@@ -477,5 +477,12 @@ public class Network {
     @Multipart
     @POST("User/is_display")
     Observable<AccessOrderIdModel> is_display(@Part List<MultipartBody.Part> fileA);
+
+
+    // 確認信用预订是否成功
+    @Multipart
+    @POST("User/submitCancleOrder")
+    Observable<AccessOrderIdModel> submitCancleOrder(@Part List<MultipartBody.Part> fileA);
+
   }
 }

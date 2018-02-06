@@ -3,6 +3,7 @@ package com.fanc.wheretoplay.fragment;
 import android.Manifest;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.graphics.Bitmap;
@@ -25,6 +26,7 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
+import com.fanc.wheretoplay.activity.ShareActivity;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentReferralsBinding;
 import com.fanc.wheretoplay.datamodel.ShearedAD;
@@ -103,7 +105,7 @@ public class ReferralFragment extends BaseFragment {
     Glide.with(mContext).load(Network.IMAGE + mUser.getAvatar()).into(mCivMineHeader);
 
     getShearedAD();
-    //        getShearedUrl();
+    getShearedUrl();
   }
 
   private void setListeners() {
@@ -148,6 +150,14 @@ public class ReferralFragment extends BaseFragment {
         }
       }
     }
+
+      Intent intent = new Intent(mContext, ShareActivity.class);
+      intent.putExtra("title", "乐互网");
+      intent.putExtra("secondtitle", "我的专属邀请码");
+
+      intent.putExtra("shearedUrl", shearedUrl);
+
+      startActivity(intent);
   }
 
   private void getShearedAD() {

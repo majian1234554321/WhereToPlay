@@ -16,6 +16,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RatingBar;
@@ -33,7 +34,6 @@ import com.fanc.wheretoplay.activity.PayBillActivity;
 import com.fanc.wheretoplay.activity.ReuseActivity;
 import com.fanc.wheretoplay.activity.ShareActivity;
 
-
 import com.fanc.wheretoplay.activity.SignInActivity;
 import com.fanc.wheretoplay.adapter.MerchAdapter;
 import com.fanc.wheretoplay.base.App;
@@ -43,7 +43,6 @@ import com.fanc.wheretoplay.datamodel.AccessOrderIdModel;
 import com.fanc.wheretoplay.datamodel.DataValue;
 import com.fanc.wheretoplay.datamodel.IsOk;
 import com.fanc.wheretoplay.datamodel.MerchantDetailModel;
-
 
 import com.fanc.wheretoplay.datamodel.SubmitCommentModel;
 
@@ -81,16 +80,10 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.MultipartBody;
 
-
-/**
- * Created by Administrator on 2017/6/14.
- */
-
+/** Created by Administrator on 2017/6/14. */
 public class MerchantDetailFragment2 extends BaseFragment implements View.OnClickListener {
 
-
     TopMenu mTmDetail;
-
 
     MerchAdapter recommendAdapter;
 
@@ -99,34 +92,36 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
     // 展示图片
     List<ImageView> mImageViews;
 
-
     // 分享链接
     String shearedUrl;
-    /**
-     * 是否收藏
-     */
+    /** 是否收藏 */
     boolean isCollected;
     // 导航数据
     String address, lat, lng;
-
 
     private String briefUrl;
     private String discountValue;
     private MyRecycleView recycle;
     private ImageView iv1, iv2, iv3, iv4, iv5, iv6;
 
-
-    private int[] ids = {R.id.tv1, R.id.tv2, R.id.tv3, R.id.tv4, R.id.tv_pay, R.id.tv_yd, R.id.tv_tel};
+    private int[] ids = {
+        R.id.tv1, R.id.tv2, R.id.tv3, R.id.tv4, R.id.tv_pay, R.id.tv_yd, R.id.tv_tel
+    };
     private TextView view1, tv_storeName, tv_discount, tv_address, tv_pingjiashuliang;
     private RatingBar rb_merchant;
     private LinearLayout ll_merchant_detail_image;
     private List<MerchantDetailModel.ContentBean.StoreBean.ListBean> stores;
     private TextView tv_pay;
-
+    public String start = "1";
+    private FrameLayout fragment;
+    private SPUtils spUtils;
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(
+            @NonNull LayoutInflater inflater,
+            @Nullable ViewGroup container,
+            @Nullable Bundle savedInstanceState) {
         View view = View.inflate(inflater.getContext(), R.layout.fragment_merchant_detail2, null);
 
         recycle = view.findViewById(R.id.recycle);
@@ -138,6 +133,38 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
         iv4 = view.findViewById(R.id.iv4);
         iv5 = view.findViewById(R.id.iv5);
         iv6 = view.findViewById(R.id.iv6);
+        spUtils = new SPUtils(mContext);
+        fragment = view.findViewById(R.id.framelayout);
+
+        if ("STORE".equals(spUtils.getString("STORE", ""))) {
+            fragment.setVisibility(View.GONE);
+        } else {
+            fragment.setBackgroundResource(R.drawable.store1);
+            start = "2";
+        }
+
+        fragment.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        switch (start) {
+                            case "1":
+                                break;
+                            case "2":
+                                fragment.setBackgroundResource(R.drawable.store1);
+                                start = "3";
+                                break;
+                            case "3":
+                                fragment.setBackgroundResource(R.drawable.store3);
+                                start = "GONE";
+                                break;
+                            case "GONE":
+                                spUtils.putString("STORE","STORE");
+                                fragment.setVisibility(View.GONE);
+                                break;
+                        }
+                    }
+                });
 
         rb_merchant = view.findViewById(R.id.rb_merchant);
         tv_storeName = view.findViewById(R.id.tv_storeName);
@@ -145,11 +172,9 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
         tv_address = view.findViewById(R.id.tv_address);
         tv_pingjiashuliang = view.findViewById(R.id.tv_pingjiashuliang);
 
-
         LinearLayout ll_pinglun = view.findViewById(R.id.ll_pinglun);
         LinearLayout ll_address = view.findViewById(R.id.ll_address);
         ll_merchant_detail_image = view.findViewById(R.id.ll_merchant_detail_image);
-
 
         ll_address.setOnClickListener(this);
         ll_pinglun.setOnClickListener(this);
@@ -165,13 +190,10 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
         init();
         setListeners();
 
-
         return view;
     }
 
-
     private void init() {
-
 
         mTmDetail.setLeftIcon(R.drawable.left);
         mTmDetail.setRightIcon(R.drawable.merchant_detail_sheard);
@@ -179,10 +201,9 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
         mTmDetail.setTitle(R.string.merchant_detail);
         int color = App.getContext().getResources().getColor(R.color.text_red);
         mTmDetail.setBackgroundColor(color);
-//        getShearedUrl(this.mStoreId);
+        //        getShearedUrl(this.mStoreId);
         getMerchantDetail();
         getCollected(this.mStoreId);
-
 
         // 推荐店铺
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(mContext);
@@ -192,53 +213,54 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
         stores = new ArrayList<>();
         recommendAdapter = new MerchAdapter(mContext, stores);
         recycle.setAdapter(recommendAdapter);
-
-
     }
 
-
     private void setListeners() {
-        //商家后台传来的未读消息数量
-        UnreadCountChangeListener listener = new UnreadCountChangeListener() {
-            @Override
-            public void onUnreadCountChange(int count) {
-                Log.e("wade", count + "");
-            }
-        };
+        // 商家后台传来的未读消息数量
+        UnreadCountChangeListener listener =
+                new UnreadCountChangeListener() {
+                    @Override
+                    public void onUnreadCountChange(int count) {
+                        Log.e("wade", count + "");
+                    }
+                };
         Unicorn.addUnreadCountChangeListener(listener, true);
 
-        mTmDetail.setLeftIconOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mContext.finish();
-//                mContext.overridePendingTransition(R.anim.anim_in_top_right, R.anim.anim_close_top);
-            }
-        });
+        mTmDetail.setLeftIconOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        mContext.finish();
+                        //
+                        // mContext.overridePendingTransition(R.anim.anim_in_top_right,
+                        // R.anim.anim_close_top);
+                    }
+                });
 
-
-        //收藏
-        mTmDetail.setRightIconOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                new ShearedPopDialog(mContext)
-                        .setCollected(isCollected)
-                        .setOnCollectClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                collectStore(mStoreId);
-                            }
-                        })
-                        .setOnShearedClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View v) {
-                                sheared();
-                            }
-                        })
-                        .show(mTmDetail.getIvRightIcon());
-            }
-        });
-
-
+        // 收藏
+        mTmDetail.setRightIconOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        new ShearedPopDialog(mContext)
+                                .setCollected(isCollected)
+                                .setOnCollectClickListener(
+                                        new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                collectStore(mStoreId);
+                                            }
+                                        })
+                                .setOnShearedClickListener(
+                                        new View.OnClickListener() {
+                                            @Override
+                                            public void onClick(View v) {
+                                                sheared();
+                                            }
+                                        })
+                                .show(mTmDetail.getIvRightIcon());
+                    }
+                });
     }
 
     private void initImageLayout() {
@@ -252,25 +274,27 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
 
         int smallImageWidth = (UIUtils.getScreenWidth() - UIUtils.dp2Px(10 + 4 + 4 + 10)) / 4;
         for (int i = 0; i < mImageViews.size(); i++) {
-//            if (i != 0) {
+            //            if (i != 0) {
             mImageViews.get(i).setScaleType(ImageView.ScaleType.FIT_XY);
-//            }
+            //            }
         }
         // 图片区域总高度
 
-
-        LinearLayout.LayoutParams lp = (LinearLayout.LayoutParams) ll_merchant_detail_image.getLayoutParams();
+        LinearLayout.LayoutParams lp =
+                (LinearLayout.LayoutParams) ll_merchant_detail_image.getLayoutParams();
         lp.height = smallImageWidth * 3 + UIUtils.dp2Px(5 + 5);
         ll_merchant_detail_image.setLayoutParams(lp);
         // 左边大图片
         ImageView imageView0 = mImageViews.get(0);
-        LinearLayout.LayoutParams layoutParams0 = (LinearLayout.LayoutParams) imageView0.getLayoutParams();
+        LinearLayout.LayoutParams layoutParams0 =
+                (LinearLayout.LayoutParams) imageView0.getLayoutParams();
         layoutParams0.width = UIUtils.getScreenWidth();
         imageView0.setLayoutParams(layoutParams0);
 
         // 右边上面图片
         ImageView imageView = mImageViews.get(1);
-        LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) imageView.getLayoutParams();
+        LinearLayout.LayoutParams layoutParams =
+                (LinearLayout.LayoutParams) imageView.getLayoutParams();
         layoutParams.height = smallImageWidth;
         imageView.setLayoutParams(layoutParams);
     }
@@ -290,41 +314,39 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
                 .addParams(Network.Param.TOKEN, mUser.getToken())
                 .addParams(Network.Param.STORE_ID, storeId)
                 .build()
-                .execute(new DCallback<IsOk>() {
-                    @Override
-                    public void onError(Call call, Exception e) {
-                        connectError();
-                    }
-
-                    @Override
-                    public void onResponse(IsOk response) {
-                        if (isSuccess(response)) {
-                            if (response.isResult()) {
-                                isCollected = true;
+                .execute(
+                        new DCallback<IsOk>() {
+                            @Override
+                            public void onError(Call call, Exception e) {
+                                connectError();
                             }
-                        }
-                    }
-                });
 
-
+                            @Override
+                            public void onResponse(IsOk response) {
+                                if (isSuccess(response)) {
+                                    if (response.isResult()) {
+                                        isCollected = true;
+                                    }
+                                }
+                            }
+                        });
     }
-
 
     private void getMerchantDetail() {
         if (LocationUtils.location != null) {
             getMerchantDetail(this.mStoreId, DataValue.latitude, DataValue.longitude);
         } else {
             showTextProgress("定位中...");
-            LocationUtils.getLocation(mContext, new LocationUtils.Callback() {
-                @Override
-                public void onReceiveLocation(BDLocation bdLocation) {
-                    closeProgress();
-                    getMerchantDetail(mStoreId, DataValue.latitude, DataValue.longitude);
-                }
-            });
+            LocationUtils.getLocation(
+                    mContext,
+                    new LocationUtils.Callback() {
+                        @Override
+                        public void onReceiveLocation(BDLocation bdLocation) {
+                            closeProgress();
+                            getMerchantDetail(mStoreId, DataValue.latitude, DataValue.longitude);
+                        }
+                    });
         }
-
-
     }
 
     /**
@@ -344,38 +366,41 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
         list.add(requestFileb);
         list.add(requestFilec);
 
-        Retrofit_RequestUtils.getRequest().storeDetail(list)
+        Retrofit_RequestUtils.getRequest()
+                .storeDetail(list)
                 .compose(new FlowableTransformer2<MerchantDetailModel.ContentBean>())
-                .subscribe(new DisposableSubscriber2<MerchantDetailModel.ContentBean>() {
-                    @Override
-                    protected void successful(MerchantDetailModel.ContentBean content) {
-                        shearedUrl = Network.BASE + "/" + content.store.url;
-                        showStoreDetail(content.store);
-                        phonevalue = content.store.phone;
+                .subscribe(
+                        new DisposableSubscriber2<MerchantDetailModel.ContentBean>() {
+                            @Override
+                            protected void successful(MerchantDetailModel.ContentBean content) {
+                                shearedUrl = Network.BASE + "/" + content.store.url;
+                                showStoreDetail(content.store);
+                                phonevalue = content.store.phone;
 
-                        if (!"2".equals(type) && type != null) {
-                            if (content.store != null) {
-                                getChildFragmentManager().beginTransaction().replace(R.id.fragment,
-                                        new ExtendFragment(
-                                                content.store.packageX,
-                                                type,
-                                                content.store.store_id,
-                                                discountValue,
-                                                content.store.name
-                                                , address, phonevalue)).commit();
+                                if (!"2".equals(type) && type != null) {
+                                    if (content.store != null) {
+                                        getChildFragmentManager()
+                                                .beginTransaction()
+                                                .replace(
+                                                        R.id.fragment,
+                                                        new ExtendFragment(
+                                                                content.store.packageX,
+                                                                type,
+                                                                content.store.store_id,
+                                                                discountValue,
+                                                                content.store.name,
+                                                                address,
+                                                                phonevalue))
+                                                .commit();
+                                    }
+                                }
                             }
 
-                        }
-
-                    }
-
-                    @Override
-                    public void failed(String t) {
-                        Toast.makeText(mContext, t, Toast.LENGTH_SHORT).show();
-                    }
-                });
-
-
+                            @Override
+                            public void failed(String t) {
+                                Toast.makeText(mContext, t, Toast.LENGTH_SHORT).show();
+                            }
+                        });
     }
 
     /**
@@ -385,9 +410,9 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
      */
     private void showStoreDetail(final MerchantDetailModel.ContentBean.StoreBean store) {
 
-        if ("0".equals(store.is_immediate_pay)){
+        if ("0".equals(store.is_immediate_pay)) {
             tv_pay.setVisibility(View.GONE);
-        }else {
+        } else {
             tv_pay.setVisibility(View.VISIBLE);
         }
 
@@ -395,8 +420,16 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
         tv_storeName.setText(store.name);
         if (store.discount.length() > 0) {
             SpannableString text = new SpannableString(store.discount + "折");
-            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount), 0, text.length() - 1, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-            text.setSpan(new TextAppearanceSpan(mContext, R.style.reserve_dicount_small), text.length() - 1, text.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            text.setSpan(
+                    new TextAppearanceSpan(mContext, R.style.reserve_dicount),
+                    0,
+                    text.length() - 1,
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            text.setSpan(
+                    new TextAppearanceSpan(mContext, R.style.reserve_dicount_small),
+                    text.length() - 1,
+                    text.length(),
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
             tv_discount.setText(text, TextView.BufferType.SPANNABLE);
             tv_discount.setVisibility(View.VISIBLE);
         } else {
@@ -407,9 +440,10 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
             rb_merchant.setRating(Float.parseFloat(store.level));
         }
 
-
-        tv_pingjiashuliang.setText(("null".equals(store.number)||TextUtils.isEmpty(store.number) ? "0" : String.valueOf(store.number)));
-
+        tv_pingjiashuliang.setText(
+                ("null".equals(store.number) || TextUtils.isEmpty(store.number)
+                        ? "0"
+                        : String.valueOf(store.number)));
 
         // 图片
         if (store.picture != null) {
@@ -417,13 +451,15 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
         }
 
         String d = "";
-        if (store.distance != null && !TextUtils.isEmpty(store.distance) && !TextUtils.equals("-1", store.distance)) {
+        if (store.distance != null
+                && !TextUtils.isEmpty(store.distance)
+                && !TextUtils.equals("-1", store.distance)) {
 
             double distance = Double.parseDouble(store.distance);
             if (distance < 500) {
                 d = "<500m";
             } else
-//                if (distance < 100000)
+            //                if (distance < 100000)
             {
                 if (distance < 1000) {
                     d = store.distance + "m";
@@ -437,7 +473,6 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
         tv_address.setText(store.address + "    " + d);
 
         briefUrl = Network.BASE + "/" + store.remark;
-
 
         if (store.list != null) {
             showRecommend(store.list);
@@ -457,7 +492,6 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
         stores.addAll(list);
         recommendAdapter.notifyDataSetChanged();
     }
-
 
     /**
      * 图片
@@ -479,18 +513,24 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
             }
             imgs.add(pictures.get(i).picture_path);
             if (Util.isOnMainThread()) {
-                Glide.with(App.getContext()).load(Network.IMAGE + pictures.get(i).picture_path).placeholder(defaultImage).into(mImageViews.get(i));
+                Glide.with(App.getContext())
+                        .load(Network.IMAGE + pictures.get(i).picture_path)
+                        .placeholder(defaultImage)
+                        .into(mImageViews.get(i));
             }
             final int finalI = i;
-            mImageViews.get(i).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(mContext, LargeImageActivity.class);
-                    intent.putExtra(Constants.URL, imgs);
-                    intent.putExtra(Constants.POSITION, finalI);
-                    startActivity(intent);
-                }
-            });
+            mImageViews
+                    .get(i)
+                    .setOnClickListener(
+                            new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    Intent intent = new Intent(mContext, LargeImageActivity.class);
+                                    intent.putExtra(Constants.URL, imgs);
+                                    intent.putExtra(Constants.POSITION, finalI);
+                                    startActivity(intent);
+                                }
+                            });
         }
     }
 
@@ -501,64 +541,57 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
      */
     private void collectStore(String storeId) {
 
-
         MultipartBody.Part requestFileA =
-                MultipartBody.Part.createFormData("token", new SPUtils(mContext).getUser().getToken());
+                MultipartBody.Part.createFormData(
+                        "token", new SPUtils(mContext).getUser().getToken());
 
-        MultipartBody.Part requestFileC =
-                MultipartBody.Part.createFormData("store_id", storeId);
+        MultipartBody.Part requestFileC = MultipartBody.Part.createFormData("store_id", storeId);
 
-        Retrofit_RequestUtils.getRequest().collect(requestFileA, requestFileC)
+        Retrofit_RequestUtils.getRequest()
+                .collect(requestFileA, requestFileC)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<SubmitCommentModel>() {
+                .subscribe(
+                        new Observer<SubmitCommentModel>() {
 
+                            @Override
+                            public void onError(Throwable e) {
+                                connectError();
+                            }
 
-                    @Override
-                    public void onError(Throwable e) {
-                        connectError();
-                    }
+                            @Override
+                            public void onComplete() {}
 
-                    @Override
-                    public void onComplete() {
+                            @Override
+                            public void onSubscribe(Disposable disposable) {}
 
-                    }
-
-                    @Override
-                    public void onSubscribe(Disposable disposable) {
-
-                    }
-
-                    @Override
-                    public void onNext(SubmitCommentModel submitCommentModel) {
-                        if ("0".equals(submitCommentModel.code)) {
-                            isCollected = true;
-                            ToastUtils.makePicTextShortToast(mContext, "收藏成功");
-                        }
-                    }
-                });
-
-
+                            @Override
+                            public void onNext(SubmitCommentModel submitCommentModel) {
+                                if ("0".equals(submitCommentModel.code)) {
+                                    isCollected = true;
+                                    ToastUtils.makePicTextShortToast(mContext, "收藏成功");
+                                }
+                            }
+                        });
     }
 
-    /**
-     * 分享
-     */
+    /** 分享 */
     private void sheared() {
-//        if (Build.VERSION.SDK_INT >= 23) {
-//            String[] mPermissionList = new String[]{
-//                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
-//                    Manifest.permission.READ_EXTERNAL_STORAGE,
-//                    Manifest.permission.ACCESS_FINE_LOCATION,
-//                    Manifest.permission.CALL_PHONE,
-//                    Manifest.permission.READ_PHONE_STATE
-//            };
-//            for (String permission : mPermissionList) {
-//                if (ContextCompat.checkSelfPermission(mContext, permission) != PackageManager.PERMISSION_GRANTED) {
-//                    ActivityCompat.requestPermissions(mContext, new String[]{permission}, Constants.REQUEST_PERMISSION_CODE);
-//                }
-//            }
-
+        //        if (Build.VERSION.SDK_INT >= 23) {
+        //            String[] mPermissionList = new String[]{
+        //                    Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        //                    Manifest.permission.READ_EXTERNAL_STORAGE,
+        //                    Manifest.permission.ACCESS_FINE_LOCATION,
+        //                    Manifest.permission.CALL_PHONE,
+        //                    Manifest.permission.READ_PHONE_STATE
+        //            };
+        //            for (String permission : mPermissionList) {
+        //                if (ContextCompat.checkSelfPermission(mContext, permission) !=
+        // PackageManager.PERMISSION_GRANTED) {
+        //                    ActivityCompat.requestPermissions(mContext, new String[]{permission},
+        // Constants.REQUEST_PERMISSION_CODE);
+        //                }
+        //            }
 
         Intent intent = new Intent(mContext, ShareActivity.class);
         intent.putExtra("title", "乐互网");
@@ -567,17 +600,13 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
         intent.putExtra("shearedUrl", shearedUrl);
 
         startActivity(intent);
-
-
     }
 
     @Override
     public void onClick(View view) {
         Intent intent = new Intent(mContext, ReuseActivity.class);
         switch (view.getId()) {
-
             case R.id.tv1:
-
                 intent.putExtra(Constants.PAGE, Constants.BRIEF);
                 intent.putExtra(Constants.DATA, briefUrl);
                 intent.putExtra(Constants.STORE_ID, mStoreId);
@@ -587,7 +616,6 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
                 startActivity(intent);
                 break;
             case R.id.tv2:
-
                 intent.putExtra(Constants.PAGE, Constants.ROOM);
                 intent.putExtra(Constants.STORE_ID, mStoreId);
                 intent.putExtra(Constants.STORE_NAME, tv_storeName.getText().toString());
@@ -596,7 +624,6 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
                 startActivity(intent);
                 break;
             case R.id.tv3:
-
                 intent.putExtra(Constants.PAGE, Constants.DRINKS);
                 intent.putExtra(Constants.STORE_ID, mStoreId);
                 intent.putExtra(Constants.STORE_NAME, tv_storeName.getText().toString());
@@ -605,7 +632,6 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
                 startActivity(intent);
                 break;
             case R.id.tv4:
-
                 intent.putExtra(Constants.PAGE, Constants.HOUSENEWS);
                 intent.putExtra(Constants.STORE_ID, mStoreId);
                 intent.putExtra(Constants.STORE_NAME, tv_storeName.getText().toString());
@@ -619,7 +645,8 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
                     intent.putExtra(Constants.STORE_ID, mStoreId);
                     intent.putExtra(Constants.PAGE, Constants.RESERVE_INFO);
                     startActivity(intent);
-                    mContext.overridePendingTransition(R.anim.anim_enter_bottom, R.anim.anim_out_top_right);
+                    mContext.overridePendingTransition(
+                            R.anim.anim_enter_bottom, R.anim.anim_out_top_right);
                 } else {
                     Toast.makeText(mContext, "请先登录", Toast.LENGTH_SHORT).show();
                     Intent intent2 = new Intent(mContext, SignInActivity.class);
@@ -645,7 +672,12 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
 
             case R.id.tv_tel:
                 Intent intent2 = new Intent(Intent.ACTION_DIAL);
-                Uri uri = Uri.parse("tel:" + (TextUtils.isEmpty(phonevalue) ? "4000051179" : phonevalue));
+                Uri uri =
+                        Uri.parse(
+                                "tel:"
+                                        + (TextUtils.isEmpty(phonevalue)
+                                                ? "4000051179"
+                                                : phonevalue));
                 intent2.setData(uri);
                 startActivity(intent2);
                 break;
@@ -659,21 +691,34 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
 
             case R.id.ll_address:
                 if (LocationUtils.location != null) {
-                    NaviUtils.checkMapExist(mContext, LocationUtils.location.getAddrStr(), String.valueOf(LocationUtils.location.getLatitude()),
-                            String.valueOf(LocationUtils.location.getLongitude()), address, lat, lng);
+                    NaviUtils.checkMapExist(
+                            mContext,
+                            LocationUtils.location.getAddrStr(),
+                            String.valueOf(LocationUtils.location.getLatitude()),
+                            String.valueOf(LocationUtils.location.getLongitude()),
+                            address,
+                            lat,
+                            lng);
                 } else {
                     showTextProgress("定位中...");
-                    LocationUtils.getLocation(mContext, new LocationUtils.Callback() {
-                        @Override
-                        public void onReceiveLocation(BDLocation bdLocation) {
-                            closeProgress();
-                            NaviUtils.checkMapExist(mContext, bdLocation.getAddrStr(), String.valueOf(bdLocation.getLatitude()),
-                                    String.valueOf(bdLocation.getLongitude()), address, lat, lng);
-                        }
-                    });
+                    LocationUtils.getLocation(
+                            mContext,
+                            new LocationUtils.Callback() {
+                                @Override
+                                public void onReceiveLocation(BDLocation bdLocation) {
+                                    closeProgress();
+                                    NaviUtils.checkMapExist(
+                                            mContext,
+                                            bdLocation.getAddrStr(),
+                                            String.valueOf(bdLocation.getLatitude()),
+                                            String.valueOf(bdLocation.getLongitude()),
+                                            address,
+                                            lat,
+                                            lng);
+                                }
+                            });
                 }
                 break;
-
         }
     }
 
