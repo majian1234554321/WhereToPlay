@@ -15,7 +15,6 @@
     -->
 
 
-
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -73,12 +72,11 @@
             android:required="false" />
 
 
-
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.fanc.wheretoplay.camera_photos"
-            android:grantUriPermissions="true"
-            android:exported="false">
+            android:exported="false"
+            android:grantUriPermissions="true">
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths" />
@@ -265,8 +263,13 @@
         <activity
             android:name=".Main2Activity"
             android:screenOrientation="portrait" />
-        <activity android:name=".activity.DisplayActivity" />
-        <activity android:name=".activity.PayPayActivity"></activity>
+        <activity
+            android:name=".activity.DisplayActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".activity.PayPayActivity"
+            android:screenOrientation="portrait"></activity>
+
     </application>
 
 </manifest>

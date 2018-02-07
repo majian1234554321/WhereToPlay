@@ -62,7 +62,7 @@ public class Main2Fragment extends BaseFragment implements XRecyclerView.Loading
     recyclerview.setLoadingMoreProgressStyle(ProgressStyle.BallRotate);
     recyclerview.setArrowImageView(R.drawable.iconfont_downgrey);
     recyclerview.getDefaultFootView().setLoadingHint("正在加载......");
-    recyclerview.getDefaultFootView().setNoMoreHint("数据加载完毕");
+    recyclerview.getDefaultFootView().setNoMoreHint("已经是最后一页");
 
     recyclerview.addItemDecoration(new ItemDecorations(12));
 

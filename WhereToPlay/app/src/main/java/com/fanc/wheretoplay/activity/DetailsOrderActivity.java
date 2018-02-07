@@ -361,10 +361,11 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                         intent.putExtra("discount", discountValue);
 
                         if ("预付预订".equals(oi9.getTv_right())) {
-                          intent.putExtra("pay_Action", "预订方式：预付预订");
+                          intent.putExtra("pay_Action", "预订类型：预付预订");
+                          intent.putExtra("money211", contentBean.origin_prepay);
                           intent.putExtra("money", contentBean.prepay);
                         } else {
-                          intent.putExtra("pay_Action", "预订方式：结单支付");
+                          intent.putExtra("pay_Action", "预订类型：结单支付");
                           intent.putExtra("money", contentBean.total);
                         }
 
@@ -412,6 +413,17 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                         break;
                       case "7":
                         intent.setClass(DetailsOrderActivity.this, PayBillActivity.class);
+
+
+                        if ("预付预订".equals(oi9.getTv_right())) {
+                          intent.putExtra("pay_Action", "预订类型：预付预订");
+
+                          intent.putExtra("money", contentBean.prepay);
+                          intent.putExtra("money211", contentBean.origin_prepay);
+
+                         }
+                         // intent.putExtra("money", dataBean.list.get(position).prepay);
+
 
                         intent.putExtra(Constants.STORE_ID, store_idValue);
 
@@ -522,7 +534,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
     oi7.setTv_right(contentBean.car_num);
     oi8.setTv_right(contentBean.people_num);
 
-    oi91.setTv_right(contentBean.prepay);
+    oi91.setTv_right(contentBean.prepay+"(原价:"+contentBean.origin_prepay+"元)");
     oi92.setTv_right(contentBean.display_balance);
     oi93.setTv_right(contentBean.fee);
     if (contentBean.discount_rate != null) oi931.setTv_right(contentBean.discount_rate + "折");

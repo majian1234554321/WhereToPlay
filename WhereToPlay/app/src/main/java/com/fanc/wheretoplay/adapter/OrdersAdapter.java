@@ -142,83 +142,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         holder.tv_payState.setText(dataBean.list.get(position).statusdesc);
 
 
-        /*for (int i = 0; i < holder.lists.size(); i++) {
-            final int finalI = i;
-            holder.lists.get(i).setVisibility(View.GONE);
-            holder.lists.get(i).setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    Intent intent = new Intent();
-                    switch (holder.lists.get(finalI).getText().toString().trim()) {
 
-                        case "查看":
-
-                            intent.putExtra("discount", dataBean.list.get(position).discount);
-                            intent.putExtra("order_id", dataBean.list.get(position).order_id);
-                            intent.putExtra("store_id", dataBean.list.get(position).store_id);
-                            intent.putExtra("storeName", dataBean.list.get(position).name);
-                            intent.putExtra("total", dataBean.list.get(position).total);
-                            if (dataBean.list != null && dataBean.list.get(position).order_action != null) {
-                                intent.putExtra("status", dataBean.list.get(position).order_action);
-                            }
-                            if ("6".equals(dataBean.list.get(position).order_function) || "7".equals(dataBean.list.get(position).order_function)) {
-                                intent.putExtra("DISPLAYTYPE", "PackageDetailsFragment");
-
-                                intent.putExtra("order_function", dataBean.list.get(position).order_function);
-
-
-                                intent.setClass(context, DisplayActivity.class);
-                            } else {
-                                intent.setClass(context, DetailsOrderActivity.class);
-                            }
-
-                            fragment.startActivityForResult(intent, 1001);
-                            break;
-                        case "取消订单":
-                            cancleOrder(position);
-                            break;
-                        case "立即支付":
-                            pay(position, holder);
-                            break;
-                        case "立即评论":
-                            intent.putExtra("store_name", dataBean.list.get(position).name);
-                            intent.putExtra("address", dataBean.list.get(position).address);
-                            intent.putExtra("order_id", dataBean.list.get(position).order_id);
-                            intent.putExtra("store_id", dataBean.list.get(position).store_id);
-                            intent.putExtra("discount", dataBean.list.get(position).discount);
-
-
-                            intent.putExtra("total", dataBean.list.get(position).total);
-                            if (dataBean.list != null && dataBean.list.get(position).order_action != null) {
-                                intent.putExtra("status", dataBean.list.get(position).order_action);
-                            }
-                            intent.setClass(context, PublicationEvaluationActivity.class);
-                            fragment.startActivityForResult(intent, 1001);
-                            break;
-                        case "转预付":
-
-                            intent.putExtra("flag", "预订支付");
-                            intent.putExtra("order_id", dataBean.list.get(position).order_id);
-                            intent.putExtra("store_name", dataBean.list.get(position).name);
-
-                            intent.putExtra("pay_type", "1");
-                            intent.putExtra("pay_Action", "转预付");
-
-                            intent.putExtra("arrival_time", dataBean.list.get(position).arrival_time);
-                            intent.putExtra("prepay", dataBean.list.get(position).prepay);
-
-
-                            intent.setClass(context, DownPaymentActivity.class);
-                            fragment.startActivity(intent);
-
-                            break;
-
-                        default:
-                            break;
-                    }
-                }
-            });
-        }*/
 
 
         if (dataBean!=null&&dataBean.list!=null&&dataBean.list.get(position)!=null&&dataBean.list.get(position).buttonlist!=null){
@@ -318,10 +242,21 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
                                 intent.setClass(context, PayBillActivity.class);
 
+
+                                if("预订类型：预付预订".equals(  holder.tvPayItemTitle.getText().toString().trim())) {
+
+                                        intent.putExtra("pay_Action", "预订类型：预付预订");
+                                    intent.putExtra("money211", dataBean.list.get(position).origin_prepay);
+                                    intent.putExtra("money", dataBean.list.get(position).prepay);
+                                       }else {
+                                    intent.putExtra("displayMoney", dataBean.list.get(position).total);
+                                }
+
+
                                 intent.putExtra(Constants.STORE_ID, dataBean.list.get(position).store_id);
 
                                 intent.putExtra("storeName", dataBean.list.get(position).name);
-                                intent.putExtra("displayMoney", dataBean.list.get(position).total);
+
                                 intent.putExtra("discount", dataBean.list.get(position).discount);
                                 intent.putExtra("order_id", dataBean.list.get(position).order_id);
                                 intent.putExtra("address", dataBean.list.get(position).address);
@@ -390,6 +325,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 intent.setClass(context, PayBillActivity.class);
                 intent.putExtra("pay_Action", "预订类型：预付预订");
                 intent.putExtra("money", dataBean.list.get(position).prepay);
+                intent.putExtra("money211", dataBean.list.get(position).origin_prepay);
                 intent.putExtra("order_id", dataBean.list.get(position).order_id);
                 break;
             case "预订类型：结单支付":

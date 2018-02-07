@@ -75,6 +75,7 @@ public class OrderDetailModel extends BaseResponseModel {
         public String phone;
         public String book_price;
         public String prepay;
+        public String origin_prepay;
         public String package_id;
         public String package_end_time;
         public String store_id;

@@ -1,6 +1,5 @@
 package com.fanc.wheretoplay.activity;
 
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -51,7 +50,6 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-
 import com.sina.weibo.sdk.api.ImageObject;
 import com.sina.weibo.sdk.api.MultiImageObject;
 import com.sina.weibo.sdk.api.TextObject;
@@ -62,25 +60,29 @@ import com.sina.weibo.sdk.share.WbShareCallback;
 import com.sina.weibo.sdk.share.WbShareHandler;
 import com.sina.weibo.sdk.utils.Utility;
 
-
-/**
- * @author admin
- */
+/** @author admin */
 public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, WbShareCallback {
     @BindView(R.id.btn_share_wechat)
     TextView btnShareWechat;
+
     @BindView(R.id.btn_share_pyq)
     TextView btnSharePyq;
+
     @BindView(R.id.btn_share_weibo)
     TextView btnShareWeibo;
+
     @BindView(R.id.btn_share_qq)
     TextView btnShareQq;
+
     @BindView(R.id.btn_share_qzone)
     TextView btnShareQzone;
+
     @BindView(R.id.pop_layout2)
     LinearLayout popLayout2;
+
     @BindView(R.id.pop_layout)
     LinearLayout popLayout;
+
     private Tencent mTencent;
 
     private IWXAPI api;
@@ -94,12 +96,12 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
     private String title, secondtitle;
     public String logo = "http://testapi.51tzl.cn/static/logo.png";
 
+    public String SHRERURL = "http://wechat.51tzl.cn/index.html#/Home?invite_code=765a12a8";
 
     /**
-     * ATTENTION: This was auto-generated to implement the App Indexing API.
-     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     * ATTENTION: This was auto-generated to implement the App Indexing API. See
+     * https://g.co/AppIndexing/AndroidStudio for more information.
      */
-
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -114,63 +116,77 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
         mTencent = Tencent.createInstance(Constants.QQAPPID, this.getApplicationContext());
         // 注册应用到新浪微博
 
-        WbSdk.install(this, new AuthInfo(this, Constants_sina.APP_KEY, Constants_sina.REDIRECT_URL, Constants_sina.SCOPE));
+        WbSdk.install(
+                this,
+                new AuthInfo(
+                        this,
+                        Constants_sina.APP_KEY,
+                        Constants_sina.REDIRECT_URL,
+                        Constants_sina.SCOPE));
         shareHandler = new WbShareHandler(this);
         shareHandler.registerApp();
 
         title = getIntent().getStringExtra("title");
         secondtitle = getIntent().getStringExtra("secondtitle");
+
         shareUrl = getIntent().getStringExtra("shearedUrl");
 
+        // http://wechat.51tzl.cn/index.html#/Home?invite_code=765a12a8
 
-        getWindow().getDecorView().setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View view, MotionEvent event) {
-                int height = popLayout.getTop();
-                int y = (int) event.getY();
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    if (y < height) {
-                        ShareActivity.this.setResult(100, getIntent());
-                        ShareActivity.this.finish();
-                    }
-                }
-                int height2 = popLayout2.getBottom();
-                int y2 = (int) event.getY();
-                if (event.getAction() == MotionEvent.ACTION_UP) {
-                    if (y2 > height2) {
-                        ShareActivity.this.setResult(100, getIntent());
-                        ShareActivity.this.finish();
-                    }
-                }
-                return true;
-            }
-        });
-
+        getWindow()
+                .getDecorView()
+                .setOnTouchListener(
+                        new View.OnTouchListener() {
+                            @Override
+                            public boolean onTouch(View view, MotionEvent event) {
+                                int height = popLayout.getTop();
+                                int y = (int) event.getY();
+                                if (event.getAction() == MotionEvent.ACTION_UP) {
+                                    if (y < height) {
+                                        ShareActivity.this.setResult(100, getIntent());
+                                        ShareActivity.this.finish();
+                                    }
+                                }
+                                int height2 = popLayout2.getBottom();
+                                int y2 = (int) event.getY();
+                                if (event.getAction() == MotionEvent.ACTION_UP) {
+                                    if (y2 > height2) {
+                                        ShareActivity.this.setResult(100, getIntent());
+                                        ShareActivity.this.finish();
+                                    }
+                                }
+                                return true;
+                            }
+                        });
     }
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         ShareActivity.this.setResult(100, getIntent());
-
     }
 
     private void sendSMS(String webUrl) {
         String smsBody = "我正在浏览这个,觉得真不错,推荐给你哦~ 地址:" + webUrl;
         Uri smsToUri = Uri.parse("smsto:");
         Intent sendIntent = new Intent(Intent.ACTION_VIEW, smsToUri);
-        //sendIntent.putExtra("address", "123456"); // 电话号码，这行去掉的话，默认就没有电话
-        //短信内容
+        // sendIntent.putExtra("address", "123456"); // 电话号码，这行去掉的话，默认就没有电话
+        // 短信内容
         sendIntent.putExtra("sms_body", smsBody);
         sendIntent.setType("vnd.android-dir/mms-sms");
         startActivityForResult(sendIntent, 1002);
     }
 
-
-    @OnClick({R.id.btn_share_wechat, R.id.btn_share_pyq, R.id.btn_share_weibo, R.id.btn_share_qq, R.id.btn_share_qzone, R.id.btn_sms})
+    @OnClick({
+        R.id.btn_share_wechat,
+        R.id.btn_share_pyq,
+        R.id.btn_share_weibo,
+        R.id.btn_share_qq,
+        R.id.btn_share_qzone,
+        R.id.btn_sms
+    })
     public void onClick(View view) {
         switch (view.getId()) {
-
             case R.id.btn_sms:
                 sendSMS(shareUrl);
                 break;
@@ -224,7 +240,6 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
         }
     }
 
-
     /**
      * 分享图片到微信
      *
@@ -240,7 +255,7 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
                 msg.mediaObject = imgObj;
                 // 设置缩略图
                 Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, 150, 200, true);
-//                bmp.recycle();
+                //                bmp.recycle();
                 msg.thumbData = ImageUtils.bmpToByteArray(thumbBmp, true);
 
                 // 构造一个Req
@@ -248,36 +263,48 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
                 // transaction 字段用于唯一标识一个请求
                 req.transaction = buildTransaction("img");
                 req.message = msg;
-                req.scene = isPYQ ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
-                //调用接口发送数据到微信
+                req.scene =
+                        isPYQ
+                                ? SendMessageToWX.Req.WXSceneTimeline
+                                : SendMessageToWX.Req.WXSceneSession;
+                // 调用接口发送数据到微信
                 api.sendReq(req);
                 break;
             case 2:
                 WXWebpageObject webpage = new WXWebpageObject();
-                webpage.webpageUrl = shareUrl;
+                if ("我的专属邀请码".equals(secondtitle)) {
+                    webpage.webpageUrl = SHRERURL;
+                } else {
+                    webpage.webpageUrl = shareUrl;
+                }
+
                 WXMediaMessage msg1 = new WXMediaMessage(webpage);
                 msg1.title = title;
                 msg1.description = secondtitle;
                 Bitmap thumb = BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher);
                 if (thumb != null) {
-                    Bitmap thumb2 = Bitmap.createScaledBitmap(thumb, 120, 120, true);//压缩Bitmap
+                    Bitmap thumb2 = Bitmap.createScaledBitmap(thumb, 120, 120, true); // 压缩Bitmap
                     msg1.thumbData = ImageUtils.bmpToByteArray(thumb2, true);
 
                 } else {
-                    Bitmap thumb2 = BitmapFactory.decodeResource(getResources(), R.drawable.umeng_socialize_wxcircle);
+                    Bitmap thumb2 =
+                            BitmapFactory.decodeResource(
+                                    getResources(), R.drawable.umeng_socialize_wxcircle);
                     msg1.thumbData = ImageUtils.bmpToByteArray(thumb2, true);
                 }
                 SendMessageToWX.Req req1 = new SendMessageToWX.Req();
                 req1.transaction = buildTransaction("webpage");
                 req1.message = msg1;
-                req1.scene = isPYQ ? SendMessageToWX.Req.WXSceneTimeline : SendMessageToWX.Req.WXSceneSession;
+                req1.scene =
+                        isPYQ
+                                ? SendMessageToWX.Req.WXSceneTimeline
+                                : SendMessageToWX.Req.WXSceneSession;
                 api.sendReq(req1);
                 finish();
                 break;
-                default:
-                    break;
+            default:
+                break;
         }
-
     }
 
     /**
@@ -293,9 +320,7 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
         return textObject;
     }
 
-    /**
-     * 获取分享的文本模板。
-     */
+    /** 获取分享的文本模板。 */
     private String getSharedText() {
 
         String text = "我正在浏览这个,觉得真不错,推荐给你哦~ 地址:" + shareUrl;
@@ -303,14 +328,10 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
         return text;
     }
 
-
-    /**
-     * 分享纯图片到微博
-     */
+    /** 分享纯图片到微博 */
     private void shareWeiBo() {
         switch (type) {
             case 1:
-
                 break;
             case 2:
                 WeiboMultiMessage weiboMessage = new WeiboMultiMessage();
@@ -320,38 +341,33 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
         }
     }
 
-    /**
-     * 分享纯图片到QQ空间
-     */
+    /** 分享纯图片到QQ空间 */
     private void shareQzone() {
         final Bundle params = new Bundle();
-        params.putInt(QzoneShare.SHARE_TO_QZONE_KEY_TYPE, QzoneShare.SHARE_TO_QZONE_TYPE_IMAGE_TEXT);
-        params.putString(QzoneShare.SHARE_TO_QQ_TITLE, title);// 标题
-        params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, secondtitle);// 摘要
-        params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL, shareUrl);// 内容地址
+        params.putInt(
+                QzoneShare.SHARE_TO_QZONE_KEY_TYPE, QzoneShare.SHARE_TO_QZONE_TYPE_IMAGE_TEXT);
+        params.putString(QzoneShare.SHARE_TO_QQ_TITLE, title); // 标题
+        params.putString(QzoneShare.SHARE_TO_QQ_SUMMARY, secondtitle); // 摘要
+        params.putString(QzoneShare.SHARE_TO_QQ_TARGET_URL, shareUrl); // 内容地址
         ArrayList<String> imgUrlList = new ArrayList<>();
         imgUrlList.add(logo);
-        params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, imgUrlList);// 图片地址
+        params.putStringArrayList(QzoneShare.SHARE_TO_QQ_IMAGE_URL, imgUrlList); // 图片地址
         mTencent.shareToQzone(this, params, new BaseUiListener());
-
     }
 
-    /**
-     * 分享纯图片到QQ好友
-     */
+    /** 分享纯图片到QQ好友 */
     private void shareQQ() {
         Bundle params = new Bundle();
         switch (type) {
             case 1:
-
-
                 params.putString(QQShare.SHARE_TO_QQ_APP_NAME, "乐互");
                 params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_IMAGE);
-                params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, QQShare.SHARE_TO_QQ_FLAG_QZONE_ITEM_HIDE);// 分享是隐藏分享到QQ空间的按钮
+                params.putInt(
+                        QQShare.SHARE_TO_QQ_EXT_INT,
+                        QQShare.SHARE_TO_QQ_FLAG_QZONE_ITEM_HIDE); // 分享是隐藏分享到QQ空间的按钮
                 mTencent.shareToQQ(this, params, new BaseUiListener());
                 break;
             case 2:
-
                 params.putInt(QQShare.SHARE_TO_QQ_KEY_TYPE, QQShare.SHARE_TO_QQ_TYPE_DEFAULT);
                 params.putString(QQShare.SHARE_TO_QQ_TITLE, title);
                 params.putString(QQShare.SHARE_TO_QQ_SUMMARY, secondtitle);
@@ -361,10 +377,8 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
                 params.putInt(QQShare.SHARE_TO_QQ_EXT_INT, 123);
                 mTencent.shareToQQ(this, params, new BaseUiListener());
 
-
                 break;
         }
-
     }
 
     @Override
@@ -378,7 +392,6 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
         ShareActivity.this.setResult(100, getIntent());
     }
 
-
     @Override
     public void onWbShareSuccess() {
         Toast.makeText(this, "分享成功", Toast.LENGTH_LONG).show();
@@ -387,9 +400,7 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
 
     @Override
     public void onWbShareFail() {
-        Toast.makeText(this,
-                "分享失败",
-                Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "分享失败", Toast.LENGTH_LONG).show();
         this.finish();
     }
 
@@ -414,7 +425,6 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
     @Override
     public void onResp(com.tencent.mm.opensdk.modelbase.BaseResp baseResp) {
         switch (baseResp.errCode) {
-
             case BaseResp.ErrCode.ERR_OK:
                 // "亲，分享成功了";
                 ShareActivity.this.setResult(100, getIntent());
@@ -435,73 +445,67 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
         }
     }
 
-
     private class BaseUiListener implements IUiListener {
         @Override
         public void onComplete(Object response) {
-//            ToastUtils.showToastOnUiThread(ShareActivity.this,"分享成功！");
+            //            ToastUtils.showToastOnUiThread(ShareActivity.this,"分享成功！");
             ShareActivity.this.setResult(100, getIntent());
             ShareActivity.this.finish();
 
             doComplete((JSONObject) response);
         }
 
-        protected void doComplete(JSONObject values) {
-        }
+        protected void doComplete(JSONObject values) {}
 
         @Override
         public void onError(UiError e) {
             ShareActivity.this.setResult(100, getIntent());
-//            ToastUtils.showToastOnUiThread(ShareActivity.this,"分享失败！");
+            //            ToastUtils.showToastOnUiThread(ShareActivity.this,"分享失败！");
         }
 
         @Override
         public void onCancel() {
             ShareActivity.this.setResult(100, getIntent());
             LogUtils.i("cancel");
-//            ToastUtils.showToastOnUiThread(ShareActivity.this,"取消分享！");
+            //            ToastUtils.showToastOnUiThread(ShareActivity.this,"取消分享！");
         }
     }
-
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
         if (null != mTencent)
             Tencent.onActivityResultData(requestCode, resultCode, data, new BaseUiListener());
-
-
     }
 
-/*    @Override
-    public void onResponse(BaseResponse baseResponse) {
-        // 接收微博客户端的请求数据
-        switch (baseResponse.errCode) {
-            case WBConstants.ErrorCode.ERR_OK:
-//                ToastUtils.showToast("分享成功");
-                ShareActivity.this.setResult(100, getIntent());
-                ShareActivity.this.finish();
-                break;
-            case WBConstants.ErrorCode.ERR_CANCEL:
-//                ToastUtils.showToast("取消分享");
-                ShareActivity.this.setResult(100, getIntent());
-                ShareActivity.this.finish();
-                break;
-            case WBConstants.ErrorCode.ERR_FAIL:
-//                ToastUtils.showToast("分享失败");
-                ShareActivity.this.setResult(100, getIntent());
-                ShareActivity.this.finish();
-                break;
-        }
+    /*    @Override
+        public void onResponse(BaseResponse baseResponse) {
+            // 接收微博客户端的请求数据
+            switch (baseResponse.errCode) {
+                case WBConstants.ErrorCode.ERR_OK:
+    //                ToastUtils.showToast("分享成功");
+                    ShareActivity.this.setResult(100, getIntent());
+                    ShareActivity.this.finish();
+                    break;
+                case WBConstants.ErrorCode.ERR_CANCEL:
+    //                ToastUtils.showToast("取消分享");
+                    ShareActivity.this.setResult(100, getIntent());
+                    ShareActivity.this.finish();
+                    break;
+                case WBConstants.ErrorCode.ERR_FAIL:
+    //                ToastUtils.showToast("分享失败");
+                    ShareActivity.this.setResult(100, getIntent());
+                    ShareActivity.this.finish();
+                    break;
+            }
 
-    }*/
+        }*/
 
     private String buildTransaction(final String type) {
 
-        return (type == null) ? String.valueOf(System.currentTimeMillis())
-
+        return (type == null)
+                ? String.valueOf(System.currentTimeMillis())
                 : type + System.currentTimeMillis();
-
     }
 
     /**
@@ -512,8 +516,8 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
      * @return
      */
     public static boolean isApkAvilible(Context context, String apkName) {
-        final PackageManager packageManager = context.getPackageManager();// 获取packagemanager
-        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0);// 获取所有已安装程序的包信息
+        final PackageManager packageManager = context.getPackageManager(); // 获取packagemanager
+        List<PackageInfo> pinfo = packageManager.getInstalledPackages(0); // 获取所有已安装程序的包信息
         if (pinfo != null) {
             for (int i = 0; i < pinfo.size(); i++) {
                 String pn = pinfo.get(i).packageName;
@@ -525,6 +529,4 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
 
         return false;
     }
-
-
 }

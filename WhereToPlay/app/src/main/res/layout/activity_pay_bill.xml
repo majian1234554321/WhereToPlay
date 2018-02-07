@@ -106,9 +106,9 @@
                     android:paddingRight="@dimen/padding_15">
 
                     <TextView
-                        android:layout_width="@dimen/width_70"
+                        android:layout_width="@dimen/width_120"
                         android:layout_height="wrap_content"
-                        android:text="@string/consume_sum"
+                        android:text="消费金额(原价)"
                         android:textColor="#333333"
                         android:textSize="@dimen/textsize_level2" />
 
@@ -211,6 +211,8 @@
                     android:paddingRight="@dimen/padding_15">
 
                     <TextView
+
+
                         android:layout_width="@dimen/width_0"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
@@ -231,6 +233,7 @@
                         android:textSize="@dimen/textsize_level2" />
 
                     <TextView
+                        android:id="@+id/tv_121212121212"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/currency"
