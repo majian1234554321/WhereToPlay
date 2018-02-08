@@ -58,6 +58,8 @@ public class ReferralFragment extends BaseFragment {
 
   String shearedUrl;
 
+  String shareCode;
+
   @Nullable
   @Override
   public View onCreateView(
@@ -157,6 +159,8 @@ public class ReferralFragment extends BaseFragment {
 
       intent.putExtra("shearedUrl", shearedUrl);
 
+      intent.putExtra("sharecode",mUser.getShare_code());
+
       startActivity(intent);
   }
 
@@ -178,6 +182,7 @@ public class ReferralFragment extends BaseFragment {
                 if (isSuccess(response)) {
                   Glide.with(mContext).load(Network.IMAGE + response.share_ad).into(mIvReferralsAD);
                   shearedUrl = Network.BASE + "/" + response.share_code;
+                  shareCode=response.share_code;
                   mTvMineNickname.setText("已邀请" + response.count + "人");
                 }
               }

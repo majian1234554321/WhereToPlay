@@ -92,11 +92,13 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
 
     private String shareUrl;
 
+    private String shareCode;
+
     private WbShareHandler shareHandler;
     private String title, secondtitle;
     public String logo = "http://testapi.51tzl.cn/static/logo.png";
 
-    public String SHRERURL = "http://wechat.51tzl.cn/index.html#/Home?invite_code=765a12a8";
+    public String SHRERURL = "http://wechat.51tzl.cn/index.html#/Home?invite_code=";
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API. See
@@ -130,6 +132,9 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
         secondtitle = getIntent().getStringExtra("secondtitle");
 
         shareUrl = getIntent().getStringExtra("shearedUrl");
+
+        shareCode=getIntent().getStringExtra("sharecode");
+
 
         // http://wechat.51tzl.cn/index.html#/Home?invite_code=765a12a8
 
@@ -273,7 +278,7 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
             case 2:
                 WXWebpageObject webpage = new WXWebpageObject();
                 if ("我的专属邀请码".equals(secondtitle)) {
-                    webpage.webpageUrl = SHRERURL;
+                    webpage.webpageUrl = SHRERURL+shareCode;
                 } else {
                     webpage.webpageUrl = shareUrl;
                 }
