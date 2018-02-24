@@ -10,65 +10,92 @@
         android:layout_height="wrap_content" />
 
     <RelativeLayout
-        android:layout_margin="8dp"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/tbv">
+        android:layout_height="120dp"
+        android:layout_below="@+id/tbv"
+        android:layout_margin="8dp">
 
         <ImageView
-            android:scaleType="fitXY"
             android:id="@+id/iv"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_centerVertical="true"
+            android:scaleType="fitXY"
             android:src="@mipmap/ic_launcher" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="110dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="8dp"
             android:layout_toRightOf="@+id/iv"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/tv1"
+                android:drawableLeft="@drawable/icon_shangjia"
+                android:drawablePadding="8dp"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="0dp"
+                android:layout_weight="1.5"
+                android:textSize="15sp" />
 
             <TextView
                 android:id="@+id/tv2"
+                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="0dp" />
 
             <TextView
                 android:id="@+id/tv3"
+                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="0dp" />
 
             <TextView
                 android:id="@+id/tv4"
+                android:layout_weight="1"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="0dp" />
         </LinearLayout>
 
     </RelativeLayout>
 
-    <TextView
-        android:layout_margin="8dp"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="退款金额" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="退款金额:" />
+
+        <TextView
+            android:id="@+id/tv_money"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text=""
+            android:textColor="@color/dactionsheet_red" />
+    </LinearLayout>
+
 
     <TextView
-        android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="取消说明" />
+        android:layout_margin="8dp"
+        android:text="取消说明:" />
 
     <EditText
-        android:layout_margin="8dp"
         android:id="@+id/et_reason"
         android:layout_width="match_parent"
         android:layout_height="150dp"
-        android:background="@null"
+        android:layout_margin="8dp"
+        android:background="@drawable/shape_mine_info_sign"
         android:gravity="top|left"
         android:hint="请输入您取消的理由哦..."
         android:padding="8dp" />

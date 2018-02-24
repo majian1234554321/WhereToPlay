@@ -438,7 +438,18 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                         break;
 
                       case "0":
-                        detailsOrderPresenter.cancelOrder();
+                       // detailsOrderPresenter.cancelOrder();
+
+                        intent.putExtra("DISPLAYTYPE", "CancelOrderFragment");
+                        intent.putExtra("order_id", order_idValue);
+                        intent.putExtra("storeName", storeNameValue);
+                        intent.putExtra("image", contentBean.package_detail.cover);
+                        intent.putExtra("book_sn", contentBean.order_sn);
+                        intent.putExtra("room_type", contentBean.name);
+                        intent.putExtra("total", contentBean.total);
+                        intent.setClass(DetailsOrderActivity.this, DisplayActivity.class);
+                        startActivity(intent);
+
                         break;
                     }
                   }
