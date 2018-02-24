@@ -2,6 +2,7 @@ package com.fanc.wheretoplay.fragment
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -37,12 +38,16 @@ class CancelOrderFragment : BaseFragment(), CancelOrderView {
     }
 
     companion object {
-        fun newInstance(order_id: String, storeName: String, image: String): CancelOrderFragment {
+        fun newInstance(order_id: String, storeName: String, image: String, book_sn: String, room_type: String
+                        , total: String): CancelOrderFragment {
             val fragment = CancelOrderFragment()
             val bundle = Bundle()
             bundle.putString("order_id", order_id)
             bundle.putString("storeName", storeName)
             bundle.putString("image", image)
+            bundle.putString("book_sn", book_sn)
+            bundle.putString("room_type", room_type)
+            bundle.putString("total", total)
 
             fragment.arguments = bundle
             return fragment
@@ -62,13 +67,20 @@ class CancelOrderFragment : BaseFragment(), CancelOrderView {
         val bundle = arguments
         val orderId = bundle?.getString("order_id")
         tv1.text = bundle?.getString("storeName")
-        tv2.text = "订单类型：${bundle?.getString("storeName")}"
-        tv3.text = bundle?.getString("storeName")
-        tv4.text = bundle?.getString("storeName")
+        tv2.text = "预订类型：${bundle?.getString("storeName")}"
+        tv3.text = "订单编号：${bundle?.getString("book_sn")}"
+        tv4.text = "房型：${bundle?.getString("room_type")}"
+        tv_money.text = "￥ ${bundle?.getString("total")}"
 
         GlideImageLoader.display(context, iv, bundle?.getString("image"))
         tbv.setOnRightClickListener({
-            CancelOrderPresent(mContext, this).cancelOrder(orderId, et_reason.text.toString())
+            if (!TextUtils.isEmpty(et_reason.text.toString())) {
+
+                CancelOrderPresent(mContext, this).cancelOrder(orderId, et_reason.text.toString())
+            } else {
+                Toast.makeText(mContext, "请输入取消原因", Toast.LENGTH_SHORT).show()
+            }
+
         })
 
 
