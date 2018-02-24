@@ -142,10 +142,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
         holder.tv_payState.setText(dataBean.list.get(position).statusdesc);
 
 
-
-
-
-        if (dataBean!=null&&dataBean.list!=null&&dataBean.list.get(position)!=null&&dataBean.list.get(position).buttonlist!=null){
+        if (dataBean != null && dataBean.list != null && dataBean.list.get(position) != null && dataBean.list.get(position).buttonlist != null) {
             for (int i = 0; i < dataBean.list.get(position).buttonlist.size(); i++) {
 
 //            if (i + 1 == dataBean.list.get(position).buttonlist.size()) {
@@ -177,7 +174,14 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                         Intent intent = new Intent();
                         switch (dataBean.list.get(position).buttonlist.get(finalI).buttonid) {
                             case "0"://取消订单
-                                cancleOrder(position);
+                                 cancleOrder(position);
+                               /* intent.putExtra("DISPLAYTYPE", "CancelOrderFragment");
+                                intent.putExtra("order_id", dataBean.list.get(position).order_id);
+                                intent.putExtra("storeName", dataBean.list.get(position).name);
+                                intent.putExtra("image", dataBean.list.get(position).cover);
+                                intent.setClass(context, DisplayActivity.class);
+                                fragment.startActivity(intent);*/
+
                                 break;
                             case "1"://
                                 pay(position, holder);
@@ -243,12 +247,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                                 intent.setClass(context, PayBillActivity.class);
 
 
-                                if("预订类型：预付预订".equals(  holder.tvPayItemTitle.getText().toString().trim())) {
+                                if ("预订类型：预付预订".equals(holder.tvPayItemTitle.getText().toString().trim())) {
 
-                                        intent.putExtra("pay_Action", "预订类型：预付预订");
+
                                     intent.putExtra("money211", dataBean.list.get(position).origin_prepay);
                                     intent.putExtra("money", dataBean.list.get(position).prepay);
-                                       }else {
+                                } else {
                                     intent.putExtra("displayMoney", dataBean.list.get(position).total);
                                 }
 
@@ -413,7 +417,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                                             intent.putExtra("Key", "Value");
                                             dataBean.list.remove(position);
                                             notifyDataSetChanged();
-                                          //  RxBus.getDefault().post(intent);
+                                            //  RxBus.getDefault().post(intent);
 
                                         } else {
                                             ToastUtils.showShortToast(context, "取消订单失败");
@@ -489,7 +493,7 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
             super(itemView);
             ButterKnife.bind(this, itemView);
             lists.clear();
-            int[] ids = {R.id.tv_005, R.id.tv_004, R.id.tv_003,R.id.tv_002,R.id.tv_001};
+            int[] ids = {R.id.tv_005, R.id.tv_004, R.id.tv_003, R.id.tv_002, R.id.tv_001};
             for (int i = 0; i < ids.length; i++) {
                 textView = itemView.findViewById(ids[i]);
                 lists.add(textView);

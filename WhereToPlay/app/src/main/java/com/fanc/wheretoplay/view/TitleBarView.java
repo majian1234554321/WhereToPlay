@@ -16,8 +16,9 @@ import com.fanc.wheretoplay.R;
 
 public class TitleBarView  extends RelativeLayout {
 
-    private TextView tv_title;
+    private TextView tv_title,tv_right;
     private ImageView menu_iv_lefticon;
+
 
     public TitleBarView(Context context) {
         super(context);
@@ -38,6 +39,8 @@ public class TitleBarView  extends RelativeLayout {
       View view  =   View.inflate(context, R.layout.titlebarview,this);
         tv_title = view.findViewById(R.id.tv_title);
 
+        tv_right = view.findViewById(R.id.tv_right);
+
         menu_iv_lefticon = view.findViewById(R.id.menu_iv_lefticon);
 
         menu_iv_lefticon.setOnClickListener(new OnClickListener() {
@@ -47,7 +50,22 @@ public class TitleBarView  extends RelativeLayout {
             }
         });
 
+
+
     }
+
+
+    public void setOnRightClickListener(final OnRightClickListener onRightClickListener ){
+
+        tv_right.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (onRightClickListener!=null)
+                    onRightClickListener.onRightClick();
+            }
+        });
+    }
+
 
     public void setleftIconVisibility(){
         menu_iv_lefticon.setVisibility(GONE);
@@ -55,5 +73,14 @@ public class TitleBarView  extends RelativeLayout {
 
     public void setTv_title(String value){
         tv_title.setText(value);
+    }
+    public void setTv_right(String value){
+        tv_right.setText(value);
+    }
+
+
+    public  interface  OnRightClickListener {
+
+        void onRightClick();
     }
 }

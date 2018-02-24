@@ -353,6 +353,24 @@ public class PayBillActivity extends BaseActivity implements PayView {
                                                 && accessOrderIdModel.content != null) {
                                             mTvDownPaymentSum.setText(
                                                     accessOrderIdModel.content.prepay);
+
+
+                                            String value = "元" + "(原价:" + accessOrderIdModel.content.origin_prepay + "元)";
+
+                                            SpannableStringBuilder spannable = new SpannableStringBuilder(value);
+                                            spannable.setSpan(
+                                                    new ForegroundColorSpan(Color.RED),
+                                                    5,
+                                                    value.length() - 2,
+                                                    Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+
+                                            tv121212121212.setText(spannable);
+
+                                            String money = df.format(Double.parseDouble(accessOrderIdModel.content.prepay) * (discount / 10));
+
+                                            lastPaySum = Double.parseDouble(accessOrderIdModel.content.prepay) * (discount / 10);
+                                            mTvPaySumReal.setText("0");
+
                                         } else {
                                             Toast.makeText(mContext, "获取订金失败", Toast.LENGTH_SHORT)
                                                     .show();

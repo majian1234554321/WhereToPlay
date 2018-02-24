@@ -107,6 +107,7 @@
                     android:background="@drawable/shape_invitaiton_code"
                     android:gravity="center_horizontal"
                     android:padding="@dimen/padding_5"
+                    android:editable="false"
                     android:paddingTop="@dimen/padding_5"
                     android:text="HL12"
                     android:textColor="@color/text_red"

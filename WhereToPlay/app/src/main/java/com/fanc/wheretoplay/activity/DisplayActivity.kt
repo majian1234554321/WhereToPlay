@@ -3,10 +3,7 @@ package com.fanc.wheretoplay.activity
 import android.os.Bundle
 import com.fanc.wheretoplay.R
 import com.fanc.wheretoplay.base.BaseActivity
-import com.fanc.wheretoplay.fragment.CouponFragment
-import com.fanc.wheretoplay.fragment.PackageDetailsFragment
-import com.fanc.wheretoplay.fragment.PackageFragment
-import com.fanc.wheretoplay.fragment.PackageKTVFragment
+import com.fanc.wheretoplay.fragment.*
 
 class DisplayActivity : BaseActivity() {
 
@@ -41,6 +38,8 @@ class DisplayActivity : BaseActivity() {
 
 
 
+        val image = intent.getStringExtra("image")
+
 
 
 
@@ -71,6 +70,11 @@ class DisplayActivity : BaseActivity() {
                 supportFragmentManager.beginTransaction()
                         .replace(R.id.displayfragment, PackageKTVFragment(idValue, storeIdValue, discountValue, storeName, address, phonevalue,
                                 dateValue, descValue, weekValue))
+                        .commit()
+            }
+            "CancelOrderFragment" ->{
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.displayfragment, CancelOrderFragment.newInstance(order_idValue,storeName,image))
                         .commit()
             }
 

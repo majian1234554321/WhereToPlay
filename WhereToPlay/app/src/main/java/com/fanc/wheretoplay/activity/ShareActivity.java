@@ -1,5 +1,6 @@
 package com.fanc.wheretoplay.activity;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageInfo;
@@ -61,7 +62,7 @@ import com.sina.weibo.sdk.share.WbShareHandler;
 import com.sina.weibo.sdk.utils.Utility;
 
 /** @author admin */
-public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, WbShareCallback {
+public class ShareActivity extends Activity implements IWXAPIEventHandler, WbShareCallback {
     @BindView(R.id.btn_share_wechat)
     TextView btnShareWechat;
 
@@ -106,6 +107,7 @@ public class ShareActivity extends BaseActivity implements IWXAPIEventHandler, W
      */
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
+        //setTheme();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.layout_dialog_share);
         ButterKnife.bind(this);

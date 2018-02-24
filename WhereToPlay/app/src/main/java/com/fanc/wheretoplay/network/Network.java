@@ -44,7 +44,7 @@ import java.util.List;
  */
 public class Network {
 
- // public static String BASE = "http://testapi.51tzl.cn"; // 测试
+  //public static String BASE = "http://testapi.51tzl.cn"; // 测试
    public static String BASE = "https://ktv.51tzl.cn";
 
   public static  String QRCODE = "51tzl.cn/store/";
@@ -295,12 +295,17 @@ public class Network {
     // 取消预订
     @Multipart
     @POST("User/cancle_order")
+
+    //submitCancleOrder
+
     Observable<BaseResponseModel<CancleOrderModel.ContentBean>> cancle_order(
         @Part MultipartBody.Part file, @Part MultipartBody.Part fileB);
 
     // 提交评论
     @Multipart
     @POST("Public/submitcomment")
+
+
     Observable<SubmitCommentModel> SubmitCommentModel(@Part MultipartBody.Part fileA);
 
     // 商家详情支付获取订单Id
@@ -483,6 +488,9 @@ public class Network {
     @Multipart
     @POST("User/submitCancleOrder")
     Observable<AccessOrderIdModel> submitCancleOrder(@Part List<MultipartBody.Part> fileA);
+
+
+
 
   }
 }

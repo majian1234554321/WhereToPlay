@@ -218,7 +218,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.ShareActivity"
-            android:screenOrientation="sensor"
+
             android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <!--

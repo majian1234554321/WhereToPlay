@@ -416,7 +416,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
 
 
                         if ("预付预订".equals(oi9.getTv_right())) {
-                          intent.putExtra("pay_Action", "预订类型：预付预订");
+                         // intent.putExtra("pay_Action", "预订类型：预付预订");
 
                           intent.putExtra("money", contentBean.prepay);
                           intent.putExtra("money211", contentBean.origin_prepay);
