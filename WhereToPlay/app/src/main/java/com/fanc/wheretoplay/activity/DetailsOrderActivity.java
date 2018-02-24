@@ -443,7 +443,12 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                         intent.putExtra("DISPLAYTYPE", "CancelOrderFragment");
                         intent.putExtra("order_id", order_idValue);
                         intent.putExtra("storeName", storeNameValue);
-                        intent.putExtra("image", contentBean.package_detail.cover);
+                        if (contentBean.package_detail!=null) {
+                          intent.putExtra("image", contentBean.package_detail.cover);
+                        }else {
+                          intent.putExtra("image", "noData");
+                        }
+
                         intent.putExtra("book_sn", contentBean.order_sn);
                         intent.putExtra("room_type", contentBean.name);
                         intent.putExtra("total", contentBean.total);
