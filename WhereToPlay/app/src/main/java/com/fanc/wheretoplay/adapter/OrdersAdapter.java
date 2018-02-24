@@ -85,6 +85,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                 intent.putExtra("store_id", dataBean.list.get(position).store_id);
                 intent.putExtra("storeName", dataBean.list.get(position).name);
                 intent.putExtra("total", dataBean.list.get(position).total);
+                intent.putExtra("image", dataBean.list.get(position).cover);
+                intent.putExtra("statues", holder.tvPayItemTitle.getText().toString());
                 if (dataBean.list != null && dataBean.list.get(position).order_action != null) {
                     intent.putExtra("status", dataBean.list.get(position).order_action);
                 }
@@ -173,8 +175,12 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
 
                         Intent intent = new Intent();
                         switch (dataBean.list.get(position).buttonlist.get(finalI).buttonid) {
-                            case "0"://取消订单
-                               //  cancleOrder(position);
+                            case "0":
+                                  cancleOrder(position);
+                                break;
+
+                            case "8":
+
                                 intent.putExtra("DISPLAYTYPE", "CancelOrderFragment");
                                 intent.putExtra("order_id", dataBean.list.get(position).order_id);
                                 intent.putExtra("storeName", dataBean.list.get(position).name);
@@ -182,6 +188,9 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                                 intent.putExtra("book_sn", dataBean.list.get(position).book_sn);
                                 intent.putExtra("room_type", dataBean.list.get(position).room_type);
                                 intent.putExtra("total", dataBean.list.get(position).total);
+                                intent.putExtra("statues", holder.tvPayItemTitle.getText().toString());
+
+
                                 intent.setClass(context, DisplayActivity.class);
                                 fragment.startActivity(intent);
 
@@ -196,6 +205,8 @@ public class OrdersAdapter extends RecyclerView.Adapter<OrdersAdapter.ViewHolder
                                 intent.putExtra("storeName", dataBean.list.get(position).name);
                                 intent.putExtra("total", dataBean.list.get(position).total);
                                 intent.putExtra("address", dataBean.list.get(position).address);
+                                intent.putExtra("image", dataBean.list.get(position).cover);
+                                intent.putExtra("statues", holder.tvPayItemTitle.getText().toString());
                                 if (dataBean.list != null && dataBean.list.get(position).order_action != null) {
                                     intent.putExtra("status", dataBean.list.get(position).order_action);
                                 }

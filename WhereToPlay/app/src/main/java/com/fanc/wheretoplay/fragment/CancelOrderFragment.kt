@@ -39,7 +39,7 @@ class CancelOrderFragment : BaseFragment(), CancelOrderView {
 
     companion object {
         fun newInstance(order_id: String, storeName: String, image: String, book_sn: String, room_type: String
-                        , total: String): CancelOrderFragment {
+                        , total: String,statues:String ): CancelOrderFragment {
             val fragment = CancelOrderFragment()
             val bundle = Bundle()
             bundle.putString("order_id", order_id)
@@ -48,6 +48,7 @@ class CancelOrderFragment : BaseFragment(), CancelOrderView {
             bundle.putString("book_sn", book_sn)
             bundle.putString("room_type", room_type)
             bundle.putString("total", total)
+            bundle.putString("statues", statues)
 
             fragment.arguments = bundle
             return fragment
@@ -67,7 +68,7 @@ class CancelOrderFragment : BaseFragment(), CancelOrderView {
         val bundle = arguments
         val orderId = bundle?.getString("order_id")
         tv1.text = bundle?.getString("storeName")
-        tv2.text = "预订类型：${bundle?.getString("storeName")}"
+        tv2.text = "${bundle?.getString("statues")}"
         tv3.text = "订单编号：${bundle?.getString("book_sn")}"
         tv4.text = "房型：${bundle?.getString("room_type")}"
         tv_money.text = "￥ ${bundle?.getString("total")}"

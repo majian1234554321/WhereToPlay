@@ -42,6 +42,8 @@ class DisplayActivity : BaseActivity() {
         val book_sn = intent.getStringExtra("book_sn")
         val room_type = intent.getStringExtra("room_type")
         val total = intent.getStringExtra("total")
+        val statues = intent.getStringExtra("statues")
+
 
 
 
@@ -79,7 +81,7 @@ class DisplayActivity : BaseActivity() {
             "CancelOrderFragment" ->{
                 supportFragmentManager.beginTransaction()
                         .replace(R.id.displayfragment, CancelOrderFragment.newInstance(order_idValue,storeName,image,book_sn,room_type
-                        ,total))
+                        ,total,statues))
                         .commit()
             }
 
