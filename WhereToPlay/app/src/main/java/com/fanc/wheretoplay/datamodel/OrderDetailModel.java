@@ -54,6 +54,7 @@ public class OrderDetailModel extends BaseResponseModel {
          * store : {"phone":"13564714856","address":"上海徐汇区2258号","distance":"-1"}
          */
 
+        public String refund_fail_reason;
         public String discount;
         public String store_name;
         public String address;

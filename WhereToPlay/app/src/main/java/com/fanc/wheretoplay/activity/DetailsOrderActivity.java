@@ -18,6 +18,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.PermissionChecker;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
+import android.text.TextUtils;
 import android.text.style.ForegroundColorSpan;
 import android.view.View;
 import android.widget.ImageView;
@@ -160,6 +161,12 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
 
     @BindView(R.id.oi96)
     OrderetailsItemView oi96;
+
+    @BindView(R.id.tv_refuse)
+    TextView tv_refuse;
+    @BindView(R.id.ll_refuse)
+    LinearLayout ll_refuse;
+
 
     @BindView(R.id.iv_qrcode)
     ImageView iv_qrcode;
@@ -326,6 +333,14 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
     public void setDetailsOrderViewData(final OrderDetailModel.ContentBean contentBean) {
         tvStoreName.setText(contentBean.store_name);
         tvAddress.setText(contentBean.address);
+
+        if ("33".equals(contentBean.order_action)) {
+            ll_refuse.setVisibility(View.VISIBLE);
+            tv_refuse.setText(contentBean.refund_fail_reason);
+        }else {
+            ll_refuse.setVisibility(View.GONE);
+        }
+
 
         // String qrCodeText =
         String qrCodeText =
