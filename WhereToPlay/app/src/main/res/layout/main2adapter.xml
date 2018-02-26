@@ -139,19 +139,42 @@
             android:visibility="gone" />
 
         <Button
-            android:id="@+id/btn_reserve_list_item_cancel"
+            android:id="@+id/btn3"
             android:layout_width="@dimen/width_80"
             android:layout_height="@dimen/height_30"
             android:layout_marginBottom="@dimen/margin_10"
             android:layout_marginRight="@dimen/margin_10"
             android:background="@drawable/shape_btn_gray"
-            android:text="取消订单"
+            android:text="取消订单" android:visibility="gone"
             android:textColor="@color/text_gray"
             android:textSize="@dimen/normal_textsize" />
 
         <Button
-            android:id="@+id/btn_reserve_list_item_buy"
+            android:id="@+id/btn2"
             android:layout_width="@dimen/width_80"
+            android:layout_height="@dimen/height_30"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:layout_marginRight="@dimen/margin_10"
+            android:background="@drawable/shape_btn_gray"
+            android:text="取消订单" android:visibility="gone"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/normal_textsize" />
+
+        <Button
+            android:id="@+id/btn1"
+            android:layout_width="@dimen/width_80"
+            android:layout_height="@dimen/height_30"
+            android:layout_marginBottom="@dimen/margin_10"
+            android:layout_marginRight="@dimen/margin_10"
+            android:background="@drawable/shape_btn_gray"
+            android:text="取消订单" android:visibility="gone"
+            android:textColor="@color/text_gray"
+            android:textSize="@dimen/normal_textsize" />
+
+        <Button
+            android:id="@+id/btn0"
+            android:layout_width="@dimen/width_80"
+            android:visibility="gone"
             android:layout_height="@dimen/height_30"
             android:layout_marginBottom="@dimen/margin_10"
             android:layout_marginRight="@dimen/margin_10"

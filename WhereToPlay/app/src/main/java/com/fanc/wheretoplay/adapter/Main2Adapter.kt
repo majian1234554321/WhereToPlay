@@ -10,10 +10,10 @@ import android.text.style.TextAppearanceSpan
 import android.util.Log
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
 import com.fanc.wheretoplay.R
-import com.fanc.wheretoplay.activity.PayBillActivity
-import com.fanc.wheretoplay.activity.PayPayActivity
+import com.fanc.wheretoplay.activity.*
 import com.fanc.wheretoplay.datamodel.BookListModel
 import com.fanc.wheretoplay.datamodel.CancleOrderModel
 import com.fanc.wheretoplay.rx.BaseResponseModel
@@ -61,24 +61,31 @@ class Main2Adapter(val mContext: Context, private val lists: ArrayList<BookListM
 
             tv_name.text = lists[position].order_name
             tv_phone.text = lists[position].order_mobile
+            tv_reserve_list_item_state.text = lists[position].statusdesc
             val time = if (!TextUtils.isEmpty(DateFormatUtil.stampToDate3(lists[position].arrival_time))) DateFormatUtil.stampToDate3(lists[position].arrival_time) + "前" else ""
 
             tv_arrTime.text = "到店时间 ".plus(time)
 
 
 
+            var statues = ""
 
             if (lists[position].order_function != null) {
                 when (lists[position].order_function) {
                     "1" -> {
                         iv_reserve_list_item_way.setBackgroundResource(R.drawable.yufu)
                         /*  holder.tvPayItemTitle.setText("预订类型：预付预订")
+
+
                           holder.tvPayItemPrice.setText("总价：" + lists[position].prepay)*/
+                        statues = "预订类型：预付预订"
                     }
                     "2" -> {
                         iv_reserve_list_item_way.setBackgroundResource(R.drawable.xinyong)
                         /*  holder.tvPayItemTitle.setText("预订类型：信用预订")
                           holder.tvPayItemPrice.setText("总价：" + lists[position].total)*/
+
+                        statues = "预订类型：信用预订"
                     }
                     "3" -> {
                         iv_reserve_list_item_way.setBackgroundResource(R.drawable.zhifu)
@@ -86,82 +93,225 @@ class Main2Adapter(val mContext: Context, private val lists: ArrayList<BookListM
                          holder.tvPayItemPrice.setText("总价：" + lists[position].total)
                          holder.tvPayItemTitle.setText("预订类型：结单支付")
                          holder.tvPayItemPrice.setText("总价：" + lists[position].total)*/
+
+                        statues = "预订类型：充值"
+
                     }
                     "5" -> {
                         iv_reserve_list_item_way.setBackgroundResource(R.drawable.zhifu)
                         /*  holder.tvPayItemTitle.setText("预订类型：结单支付")
                           holder.tvPayItemPrice.setText("总价：" + lists[position].total)*/
+
+                        statues = "预订类型：结单支付"
+
                     }
 
                     "6" -> {
                         iv_reserve_list_item_way.setBackgroundResource(R.drawable.taocan)
                         /* holder.tvPayItemTitle.setText("预订类型：套餐")
                          holder.tvPayItemPrice.setText("总价：" + lists[position].total)*/
+
+                        statues = "预订类型：套餐"
                     }
                     "7" -> {
                         iv_reserve_list_item_way.setBackgroundResource(R.drawable.youhui)
                         /*  holder.tvPayItemTitle.setText("预订类型：优惠预订")
                           holder.tvPayItemPrice.setText("总价：" + lists[position].total)*/
+
+                        statues = "预订类型：优惠预订"
                     }
                     else -> {
                         /*   holder.tvPayItemTitle.setText("预订类型：...")
                            holder.tvPayItemPrice.setText("总价：" + lists[position].total)*/
+
+                        statues = "预订类型：..."
                     }
                 }
             }
 
 
+            val listss = mutableListOf<Button>()
 
-            btn_reserve_list_item_buy.setOnClickListener {
-                pay(position)
-            }
-
-
-            btn_reserve_list_item_cancel.setOnClickListener {
-                AlertDialog(mContext)
-                        .setTitle("提示")
-                        .setContent("确定取消订单吗")
-                        .setBtnOnClickListener(object : AlertDialog.OnBtnClickListener {
-                            override fun onBtnClick(view: View, input: String) {
-                                val requestFileA = MultipartBody.Part.createFormData("token", SPUtils(context).user.token)
-
-                                val requestFileC = MultipartBody.Part.createFormData("id", lists[position].order_id)
-
-                                Retrofit_RequestUtils.getRequest().cancle_order(requestFileA, requestFileC)
-                                        .subscribeOn(Schedulers.io())
-                                        .observeOn(AndroidSchedulers.mainThread())
-                                        .subscribe(object : Observer<BaseResponseModel<CancleOrderModel.ContentBean>> {
-
-                                            override fun onSubscribe(disposable: Disposable) {
-
-                                            }
-
-                                            override fun onNext(contentBeanBaseResponseModel: BaseResponseModel<CancleOrderModel.ContentBean>) {
-                                                if (contentBeanBaseResponseModel.success() && contentBeanBaseResponseModel.content.is_cancle) {
-                                                    ToastUtils.showShortToast(context, "取消订单成功")
-                                                    lists.removeAt(position)
-                                                    notifyDataSetChanged()
-
-                                                } else {
-                                                    ToastUtils.showShortToast(context, "取消订单失败")
-                                                }
-                                            }
-
-                                            override fun onError(throwable: Throwable) {
-                                                ToastUtils.showShortToast(context, throwable.toString())
-                                            }
-
-                                            override fun onComplete() {
-
-                                            }
-                                        })
+            listss.add(btn0)
+            listss.add(btn1)
+            listss.add(btn2)
+            listss.add(btn3)
 
 
+
+            lists[position].buttonlist.forEachIndexed { index, buttonlistBean ->
+                listss[index].text = buttonlistBean.title
+                listss[index].visibility = View.VISIBLE
+
+                listss[index].setOnClickListener({
+
+
+                    val intent = Intent()
+                    when (buttonlistBean.buttonid) {
+
+                        "0" -> {
+                            AlertDialog(mContext)
+                                    .setTitle("提示")
+                                    .setContent("确定取消订单吗")
+                                    .setBtnOnClickListener(object : AlertDialog.OnBtnClickListener {
+                                        override fun onBtnClick(view: View, input: String) {
+                                            val requestFileA = MultipartBody.Part.createFormData("token", SPUtils(context).user.token)
+
+                                            val requestFileC = MultipartBody.Part.createFormData("id", lists[position].order_id)
+
+                                            Retrofit_RequestUtils.getRequest().cancle_order(requestFileA, requestFileC)
+                                                    .subscribeOn(Schedulers.io())
+                                                    .observeOn(AndroidSchedulers.mainThread())
+                                                    .subscribe(object : Observer<BaseResponseModel<CancleOrderModel.ContentBean>> {
+
+                                                        override fun onSubscribe(disposable: Disposable) {
+
+                                                        }
+
+                                                        override fun onNext(contentBeanBaseResponseModel: BaseResponseModel<CancleOrderModel.ContentBean>) {
+                                                            if (contentBeanBaseResponseModel.success() && contentBeanBaseResponseModel.content.is_cancle) {
+                                                                ToastUtils.showShortToast(context, "取消订单成功")
+                                                               // lists.removeAt(position)
+                                                                notifyDataSetChanged()
+
+                                                            } else {
+                                                                ToastUtils.showShortToast(context, "取消订单失败")
+                                                            }
+                                                        }
+
+                                                        override fun onError(throwable: Throwable) {
+                                                            ToastUtils.showShortToast(context, throwable.toString())
+                                                        }
+
+                                                        override fun onComplete() {
+
+                                                        }
+                                                    })
+
+
+                                        }
+                                    })
+                                    .setCanceledOnTouchOutside(true)
+                                    .show()
+                        }
+
+                        "1" -> {
+                            pay(position)
+                        }
+                        "2" -> {
+
+                            intent.putExtra("flag", "预订支付")
+                            intent.putExtra("order_id", lists.get(position).order_id)
+                            intent.putExtra("store_name", lists.get(position).name)
+
+                            intent.putExtra("pay_type", "1")
+                            intent.putExtra("pay_Action", "转预付")
+                            intent.putExtra("address", lists.get(position).address)
+                            intent.putExtra("arrival_time", lists.get(position).arrival_time)
+                            intent.putExtra("prepay", lists.get(position).book_price)
+
+
+                            intent.setClass(context, DownPaymentActivity::class.java)
+                            mContext.startActivity(intent)
+                        }
+                        "3" -> {
+                            intent.putExtra("store_name", lists.get(position).name)
+                            intent.putExtra("address", lists.get(position).address)
+                            intent.putExtra("order_id", lists.get(position).order_id)
+                            intent.putExtra("store_id", lists.get(position).store_id)
+                            intent.putExtra("discount", lists.get(position).discount)
+                            intent.putExtra("address", lists.get(position).address)
+
+                            intent.putExtra("total", lists.get(position).total)
+                            if (lists != null && lists.get(position).order_action != null) {
+                                intent.putExtra("status", lists.get(position).order_action)
                             }
-                        })
-                        .setCanceledOnTouchOutside(true)
-                        .show()
+                            intent.setClass(context, PublicationEvaluationActivity::class.java)
+                            mContext.startActivity(intent)
+                        }
+                        "4" -> {
+
+                            intent.putExtra("discount", lists.get(position).discount)
+                            intent.putExtra("order_id", lists.get(position).order_id)
+                            intent.putExtra("store_id", lists.get(position).store_id)
+                            intent.putExtra("storeName", lists.get(position).name)
+                            intent.putExtra("total", lists.get(position).total)
+                            intent.putExtra("address", lists.get(position).address)
+                            intent.putExtra("image", lists.get(position).cover)
+                             intent.putExtra("statues", statues)
+                            if (lists != null && lists.get(position).order_action != null) {
+                                intent.putExtra("status", lists.get(position).order_action)
+                            }
+                            if ("6" == lists.get(position).order_function || "7" == lists.get(position).order_function) {
+                                intent.putExtra("DISPLAYTYPE", "PackageDetailsFragment")
+
+                                intent.putExtra("order_function", lists.get(position).order_function)
+
+
+                                intent.setClass(context, DisplayActivity::class.java)
+                            } else {
+                                intent.setClass(context, DetailsOrderActivity::class.java)
+                            }
+
+                            mContext.startActivity(intent)
+
+                        }
+                        "5" -> {
+
+                        }
+                        "6" -> {
+
+
+                        }
+                        "7" -> {
+                            intent.setClass(context, PayBillActivity::class.java)
+
+
+                            if ("预订类型：预付预订" == statues) {
+
+
+                                intent.putExtra("money211", lists.get(position).origin_prepay)
+                                intent.putExtra("money", lists.get(position).prepay)
+                            } else {
+                                intent.putExtra("displayMoney", lists.get(position).total)
+                            }
+
+
+                            intent.putExtra(Constants.STORE_ID, lists.get(position).store_id)
+
+                            intent.putExtra("storeName", lists.get(position).name)
+
+                            intent.putExtra("discount", lists.get(position).discount)
+                            intent.putExtra("order_id", lists.get(position).order_id)
+                            intent.putExtra("address", lists.get(position).address)
+                            intent.putExtra(Constants.PAGE, "支付再支付")
+                            intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                            context.startActivity(intent)
+
+                        }
+                        "8" -> {
+                            intent.putExtra("DISPLAYTYPE", "CancelOrderFragment")
+                            intent.putExtra("order_id", lists.get(position).order_id)
+                            intent.putExtra("storeName", lists.get(position).name)
+                            intent.putExtra("image", lists.get(position).cover)
+                            intent.putExtra("book_sn", lists.get(position).book_sn)
+                            intent.putExtra("room_type", lists.get(position).room_type)
+                            intent.putExtra("total", lists.get(position).total)
+                            intent.putExtra("statues", statues)
+
+
+                            intent.setClass(context, DisplayActivity::class.java)
+                            mContext.startActivity(intent)
+                        }
+
+
+                        else -> {
+                        }
+                    }
+                })
             }
+
+
 
 
         }
