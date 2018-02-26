@@ -6,7 +6,7 @@ apply plugin: 'kotlin-android-extensions'
 android {
 
     compileSdkVersion 27
-    buildToolsVersion '27.0.1'
+    buildToolsVersion '27.0.3'
 
     flavorDimensions "color"
 
@@ -18,21 +18,25 @@ android {
 
 
     signingConfigs {
-        release {
-           // storeFile file("D:/Desktop/hpzl_keystore.jks")
+        releaseConfig {
+            storeFile file("/Users/Joenny/Desktop/ktvAndroid/hpzl_keystore.jks")
             storePassword "adminhpzl"
             keyAlias "ktv_key"
             keyPassword "adminhpzl"
+
         }
+
     }
+
+
 
     defaultConfig {
         applicationId "com.fanc.wheretoplay"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 201890203
+        versionCode 201890226
 
-        versionName "2018.02.23"
+        versionName "2018.02.26"
 
 
         sourceSets.main {
@@ -58,6 +62,7 @@ android {
     }
     buildTypes {
         release {
+            signingConfig signingConfigs.releaseConfig
             buildConfigField "boolean", "LOG_DEBUG", "false"
             minifyEnabled true
             zipAlignEnabled true
@@ -66,6 +71,7 @@ android {
 
         }
         debug {
+           // minSdkVersion 21
             debuggable true
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

@@ -337,7 +337,7 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
         if ("33".equals(contentBean.order_action)) {
             ll_refuse.setVisibility(View.VISIBLE);
             tv_refuse.setText(contentBean.refund_fail_reason);
-        }else {
+        } else {
             ll_refuse.setVisibility(View.GONE);
         }
 
@@ -359,16 +359,12 @@ public class DetailsOrderActivity extends BaseActivity implements DetailsOrderVi
                 lists.get(i).setVisibility(View.VISIBLE);
 
                 final int finalI = i;
-                lists
-                        .get(i)
+                lists.get(i)
                         .setOnClickListener(
                                 new View.OnClickListener() {
                                     @Override
                                     public void onClick(View view) {
 
-                    /*   Toast.makeText(DetailsOrderActivity.this, "title" + contentBean.buttonlist.get(finalI).title + "----->" +
-                            contentBean.buttonlist.get(finalI).buttonid
-                    , Toast.LENGTH_SHORT).show();*/
                                         Intent intent = new Intent();
                                         switch (contentBean.buttonlist.get(finalI).buttonid) {
                                             case "1":

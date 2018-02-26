@@ -268,7 +268,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.PayPayActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
 
     </application>
 

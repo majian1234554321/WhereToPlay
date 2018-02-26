@@ -34,9 +34,9 @@ class ExtendAdapter(val context: Context, var flag: Boolean,
 
     override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
         with(holder?.itemView!!) {
-            Glide.with(context).load(list.get(position).pic).placeholder(R.drawable.default_rect).into(iv)
+            Glide.with(context).load(list[position].pic).placeholder(R.drawable.default_rect).into(iv)
             tv1text.text = list[position].name
-            tv2.text = "￥" + list.get(position).discount_price
+            tv2.text = "￥ ${list[position].discount_price}"
             tv3.text = "￥" + list[position].origin_price
 
             tv3.paint.flags = Paint.STRIKE_THRU_TEXT_FLAG
