@@ -3,6 +3,7 @@ package com.fanc.wheretoplay.activity;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
 import android.os.Build;
@@ -29,6 +30,7 @@ import com.fanc.wheretoplay.databinding.ActivityLaunchBinding;
 import com.fanc.wheretoplay.datamodel.DataValue;
 import com.fanc.wheretoplay.datamodel.Version;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.service.InstallReceiver;
 import com.fanc.wheretoplay.util.BaiDuMapUtils;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.DownloadUtils;
@@ -63,6 +65,7 @@ public class LaunchActivity extends BaseActivity {
     int prePosition;
 
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +75,8 @@ public class LaunchActivity extends BaseActivity {
 
         //七鱼需要
         parseIntent();
+
+
 
 
         initViews();
@@ -97,6 +102,7 @@ public class LaunchActivity extends BaseActivity {
 
 
     }
+
 
 
     public static String getVerName(Context context) {
@@ -151,11 +157,7 @@ public class LaunchActivity extends BaseActivity {
     }
 
 
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
 
-    }
 
     /**
      * 七鱼需要
@@ -340,6 +342,14 @@ public class LaunchActivity extends BaseActivity {
         startActivity(intent);
         finish();
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+
+
+    }
+
 
     /**
      * 跳转主页

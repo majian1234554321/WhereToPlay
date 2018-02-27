@@ -30,6 +30,7 @@ import com.fanc.wheretoplay.databinding.ActivitySettingsBinding;
 import com.fanc.wheretoplay.datamodel.Version;
 import com.fanc.wheretoplay.image.GlideCatchUtil;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.service.InstallReceiver;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.DownloadUtils;
 import com.fanc.wheretoplay.util.FileUtils;
@@ -72,7 +73,7 @@ public class SettingsActivity extends BaseActivity {
     // 清除缓存进度
     ProgressDialog mDialog;
     // 下载完成后的广播
-    Receiver receiver;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -144,7 +145,7 @@ public class SettingsActivity extends BaseActivity {
             e.printStackTrace();
         }
 
-        registerReceiver();
+      //  registerReceiver();
     }
 
     /**
@@ -411,45 +412,14 @@ public class SettingsActivity extends BaseActivity {
     }
 
 
-    private void registerReceiver() {
-        receiver = new Receiver();
-        IntentFilter intentFilter = new IntentFilter(Constants.APK_DOWNLOAD_COMPLETE);
-        registerReceiver(receiver, intentFilter);
-    }
 
-    private class Receiver extends BroadcastReceiver {
 
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (Constants.APK_DOWNLOAD_COMPLETE.equals(intent.getAction())) {
-                ToastUtils.showShortToast(mContext, "下载完成，乐互网.apk保存在 Download 目录下");
-                if (DownloadUtils.APK_DOWNLOAD_ID == intent.getLongExtra(DownloadManager.EXTRA_DOWNLOAD_ID, -1)) {
-                    DownloadManager.Query query = new DownloadManager.Query();
-                    query.setFilterById(DownloadUtils.APK_DOWNLOAD_ID);
-                    Cursor cursor = ((DownloadManager) mContext.getSystemService(DOWNLOAD_SERVICE)).query(query);
-                    if (cursor.moveToFirst() && cursor.getInt(cursor.getColumnIndex(DownloadManager.COLUMN_STATUS)) == DownloadManager.STATUS_SUCCESSFUL) {
-                        String filePath = cursor.getString(cursor.getColumnIndex(DownloadManager.COLUMN_LOCAL_FILENAME));
-//                        Log.v("Aaaaa", "Downloading of the new app version complete");
-                        //start the installation of the latest version
-                        // 安装apk
-                        Intent installIntent = new Intent(Intent.ACTION_VIEW);
-                        installIntent.setDataAndType(Uri.parse("file://" + filePath), Constants.MIME_TYPE);
-                        installIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                        startActivity(installIntent);
-                    }
-                    cursor.close();
-                }
-            }
-        }
-    }
+
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (receiver != null) {
-            unregisterReceiver(receiver);
-            receiver = null;
-        }
+
         if (mHandler != null) {
             mHandler = null;
         }
