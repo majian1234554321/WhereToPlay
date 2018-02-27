@@ -108,7 +108,7 @@ public abstract class BaseFragment
     @Override
     public void onDestroy() {
         super.onDestroy();
-
+        LocationUtils.stopLocation();
     }
 
     /**
@@ -218,5 +218,7 @@ public abstract class BaseFragment
             }
         }
     }
+
+
 
 }

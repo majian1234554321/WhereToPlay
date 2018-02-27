@@ -140,7 +140,7 @@ public class MerchantDetailFragment2 extends BaseFragment implements View.OnClic
             fragment.setVisibility(View.GONE);
         } else {
             fragment.setBackgroundResource(R.drawable.store1);
-            start = "2";
+            start = "3";
         }
 
         fragment.setOnClickListener(

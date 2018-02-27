@@ -254,20 +254,26 @@ public class SettingsActivity extends BaseActivity {
     }
 
     private void alertUpdate(final Version version) {
-        if (Constants.Version.higher.equals(version.getResult())) {
+        if (getVerName(this).equals(version.getVersion())) {
             ToastUtils.makePicTextShortToast(mContext, "已是最新版本");
         } else {
             new AlertDialog(this)
-                    .setTitle(version.getUpdate_title())
-                    .setTitleGravity(Gravity.CENTER)
+                    .setTitle("提示")
+                    .setTitleGravity(Gravity.CENTER_VERTICAL)
                     .setTitleColor(UIUtils.getColor(R.color.text_black))
-                    .setContent(version.getUpdate_log())
-                    .setContentGravity(Gravity.LEFT)
+                    .setContent("检测到最新版本")
+                    .setContentColor(UIUtils.getColor(R.color.text_black))
                     .setLeftOnClickListener("更新", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            DownloadUtils.APK_DOWNLOAD_ID = DownloadUtils.downloadApk(version.getVersion(),
-                                    version.getApk_download_url(), "乐互网.apk");
+                            if (version.getApk_download_url()!=null){
+                                DownloadUtils.APK_DOWNLOAD_ID = DownloadUtils.downloadApk(version.getVersion(),
+                                        version.getApk_download_url(), "乐互网.apk");
+
+
+
+                            }
+
                         }
                     })
                     .setRightOnClickListener(new View.OnClickListener() {
@@ -279,6 +285,18 @@ public class SettingsActivity extends BaseActivity {
                     .setCanceledOnTouchOutside(true)
                     .show();
         }
+    }
+
+
+    public static String getVerName(Context context) {
+        String verName = "";
+        try {
+            verName = context.getPackageManager().
+                    getPackageInfo(context.getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return verName;
     }
 
     private void signOut() {

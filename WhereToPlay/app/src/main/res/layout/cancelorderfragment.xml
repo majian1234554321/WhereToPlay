@@ -93,12 +93,26 @@
     <EditText
         android:id="@+id/et_reason"
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="120dp"
         android:layout_margin="8dp"
         android:background="@drawable/shape_mine_info_sign"
         android:gravity="top|left"
         android:hint="请输入您取消的理由哦..."
         android:padding="8dp" />
+
+    <TextView
+        android:text="温馨提示:"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+       android:layout_marginLeft="8dp"
+        android:layout_marginRight="12dp"
+        android:layout_width="match_parent"
+
+        android:text="· 商务KTV：20:00之前退扣订单金额的20%,20:00-21:00退扣订单金额的50%,21:00过后不退款\n· 酒吧：21:30之前退扣订单金额的20%，21:30-22:30退扣订单金额的50%, 22:30过后不退款。\n· 量贩KTV：扣订单金额的20%。\n· 如有对您造成不便，尽请谅解，谢谢。"
+        android:layout_height="wrap_content" />
 
 
 </LinearLayout>

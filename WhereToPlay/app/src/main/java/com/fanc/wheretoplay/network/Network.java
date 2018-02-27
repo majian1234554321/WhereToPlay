@@ -44,8 +44,8 @@ import java.util.List;
  */
 public class Network {
 
-  public static String BASE = "http://testapi.51tzl.cn"; // 测试
-  // public static String BASE = "https://ktv.51tzl.cn";
+ // public static String BASE = "http://testapi.51tzl.cn"; // 测试
+  public static String BASE = "https://ktv.51tzl.cn";
 
   public static  String QRCODE = "51tzl.cn/store/";
 
@@ -283,7 +283,7 @@ public class Network {
     Flowable<BookListModel.ContentBean> bookList(
         @Part MultipartBody.Part file,
         @Part MultipartBody.Part fileB,
-        @Part MultipartBody.Part filec,
+        @Part MultipartBody.Part fileC,
         @Part MultipartBody.Part filed);
 
     // 订单详情

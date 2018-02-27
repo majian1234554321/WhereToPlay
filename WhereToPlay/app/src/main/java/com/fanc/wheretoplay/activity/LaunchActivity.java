@@ -1,6 +1,7 @@
 package com.fanc.wheretoplay.activity;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.databinding.DataBindingUtil;
@@ -12,6 +13,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -25,20 +27,27 @@ import com.fanc.wheretoplay.base.App;
 import com.fanc.wheretoplay.base.BaseActivity;
 import com.fanc.wheretoplay.databinding.ActivityLaunchBinding;
 import com.fanc.wheretoplay.datamodel.DataValue;
+import com.fanc.wheretoplay.datamodel.Version;
 import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.BaiDuMapUtils;
 import com.fanc.wheretoplay.util.Constants;
+import com.fanc.wheretoplay.util.DownloadUtils;
 import com.fanc.wheretoplay.util.LocationUtils;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.UIUtils;
+import com.fanc.wheretoplay.view.AlertDialog;
 import com.fanc.wheretoplay.view.ItemView;
 import com.qiyukf.nimlib.sdk.NimIntent;
 import com.qiyukf.unicorn.api.ConsultSource;
 import com.qiyukf.unicorn.api.Unicorn;
 import com.sdu.didi.openapi.DIOpenSDK;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.DCallback;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import okhttp3.Call;
 
 public class LaunchActivity extends BaseActivity {
 
@@ -61,12 +70,86 @@ public class LaunchActivity extends BaseActivity {
 //        initPermissions();
 
 
-        init();
         //七鱼需要
         parseIntent();
-        changeConvironment();
+
+
+        initViews();
+
+        OkHttpUtils.post()
+                .url(Network.User.PUBLIC_VERSION)
+                .addParams(Network.Param.OS, Network.PHONE_ANDROID)
+                .addParams(Network.Param.VERSION, UIUtils.getAppVersionName())
+                .build()
+                .execute(new DCallback<Version>() {
+                    @Override
+                    public void onError(Call call, Exception e) {
+                        connectError();
+                    }
+
+                    @Override
+                    public void onResponse(Version response) {
+                        if (isSuccess(response)) {
+                            alertUpdate(response);
+                        }
+                    }
+                });
+
 
     }
+
+
+    public static String getVerName(Context context) {
+        String verName = "";
+        try {
+            verName = context.getPackageManager().
+                    getPackageInfo(context.getPackageName(), 0).versionName;
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return verName;
+    }
+
+
+    private void alertUpdate(final Version version) {
+        if (getVerName(this).equals(version.getVersion())) {
+            init();
+
+            changeConvironment();
+        } else {
+            new AlertDialog(this)
+                    .setTitle("提示")
+                    .setTitleGravity(Gravity.CENTER_VERTICAL)
+                    .setTitleColor(UIUtils.getColor(R.color.text_black))
+                    .setContent("检测到最新版本")
+                    .setContentColor(UIUtils.getColor(R.color.text_black))
+                    .setLeftOnClickListener("更新", new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            if (version.getApk_download_url()!=null){
+                                DownloadUtils.APK_DOWNLOAD_ID = DownloadUtils.downloadApk(version.getVersion(),
+                                        version.getApk_download_url(), "乐互网.apk");
+                            }
+
+                            init();
+
+                            changeConvironment();
+
+                        }
+                    })
+                    .setRightOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            init();
+
+                            changeConvironment();
+                        }
+                    })
+                    .setCanceledOnTouchOutside(false)
+                    .show();
+        }
+    }
+
 
     @Override
     protected void onDestroy() {
@@ -136,7 +219,7 @@ public class LaunchActivity extends BaseActivity {
 
     private void init() {
         if (mSpUtils.getBoolean(Constants.IS_FIRST, true)) {// 第一次使用APP
-            initViews();
+
             // 初始化引导页
             initImageAndIndicator();
             initViewPager();

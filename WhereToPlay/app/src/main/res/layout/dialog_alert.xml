@@ -66,14 +66,15 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:orientation="horizontal">
 
             <Button
                 android:id="@+id/btn_alert_left"
                 android:layout_width="@dimen/width_0"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_weight="1"
+                android:gravity="center"
                 android:background="@null"
                 android:text="@string/confirm"
                 android:textColor="@color/text_red"
@@ -87,9 +88,10 @@
             <Button
                 android:id="@+id/btn_alert_right"
                 android:layout_width="@dimen/width_0"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
                 android:layout_weight="1"
                 android:background="@null"
+                android:gravity="center"
                 android:text="@string/cancel"
                 android:textColor="@color/text_black"
                 android:textSize="@dimen/normal_textsize"/>

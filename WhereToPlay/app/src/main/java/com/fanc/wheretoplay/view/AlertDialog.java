@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.databinding.DataBindingUtil;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -179,6 +180,7 @@ public class AlertDialog {
     public AlertDialog setLeftOnClickListener(String text, final View.OnClickListener listener) {
         if (text != null && !text.isEmpty()) {
             mBtnLeft.setText(text);
+            mBtnLeft.setGravity(Gravity.CENTER);
         }
         mBtnLeft.setOnClickListener(new View.OnClickListener() {
             @Override

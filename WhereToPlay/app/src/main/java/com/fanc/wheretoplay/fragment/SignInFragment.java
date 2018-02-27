@@ -64,7 +64,7 @@ public class SignInFragment extends BaseFragment {
         new View.OnClickListener() {
           @Override
           public void onClick(View v) {
-            startActivity(new Intent(mContext, MainActivity.class));
+            //startActivity(new Intent(mContext, MainActivity.class));
 
              mContext.finish();
           }

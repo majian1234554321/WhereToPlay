@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -11,6 +12,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v4.view.ViewPager;
 import android.util.DisplayMetrics;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -23,27 +25,34 @@ import com.fanc.wheretoplay.activity.main.Main2Fragment;
 import com.fanc.wheretoplay.base.App;
 import com.fanc.wheretoplay.base.BaseFragmentActivity;
 import com.fanc.wheretoplay.callback.IOnFocusListener;
+import com.fanc.wheretoplay.datamodel.Version;
 import com.fanc.wheretoplay.fragment.DiscoverFragment;
 import com.fanc.wheretoplay.fragment.MineFragment;
 import com.fanc.wheretoplay.fragment.PayFragment;
 import com.fanc.wheretoplay.fragment.ReserveFragment;
 import com.fanc.wheretoplay.fragment.ReserveFragment2;
+import com.fanc.wheretoplay.network.Network;
 import com.fanc.wheretoplay.util.Constants;
+import com.fanc.wheretoplay.util.DownloadUtils;
 import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.ToastUtils;
 import com.fanc.wheretoplay.util.UIUtils;
+import com.fanc.wheretoplay.view.AlertDialog;
 import com.fanc.wheretoplay.view.MyViewPager;
 import com.qiyukf.nimlib.sdk.NimIntent;
 import com.qiyukf.unicorn.api.ConsultSource;
 import com.qiyukf.unicorn.api.Unicorn;
 import com.uuzuche.lib_zxing.activity.CaptureActivity;
 import com.uuzuche.lib_zxing.activity.CodeUtils;
+import com.zhy.http.okhttp.OkHttpUtils;
+import com.zhy.http.okhttp.callback.DCallback;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import okhttp3.Call;
 
 public class MainActivity extends BaseFragmentActivity
         implements RadioGroup.OnCheckedChangeListener {
@@ -87,6 +96,11 @@ public class MainActivity extends BaseFragmentActivity
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
+
+
+
+
+
         Intent intent = this.getIntent();
 
         spUtils = new SPUtils(this);
@@ -105,7 +119,7 @@ public class MainActivity extends BaseFragmentActivity
         if ("AAA".equals(spUtils.getString("AAA", ""))) {
             fragment.setVisibility(View.GONE);
         } else {
-            start= "2";
+            start= "5";
             fragment.setBackgroundResource(R.drawable.main1);
         }
 
@@ -116,7 +130,7 @@ public class MainActivity extends BaseFragmentActivity
                         switch (start) {
                             case "1":
                                 fragment.setBackgroundResource(R.drawable.main1);
-                                start = "2";
+                                start = "5";
                                 break;
                             case "2":
                                 fragment.setBackgroundResource(R.drawable.main2);
@@ -150,6 +164,9 @@ public class MainActivity extends BaseFragmentActivity
                     }
                 });
     }
+
+
+
 
     /** new fragment page */
     private void initFragments() {
@@ -302,9 +319,10 @@ public class MainActivity extends BaseFragmentActivity
                     if ("DDD".equals(spUtils.getString("DDD", ""))) {
                         fragment.setVisibility(View.GONE);
                     } else {
-                        fragment.setBackgroundResource(R.drawable.main41);
+                        fragment.setBackgroundResource(R.drawable.main42);
                         fragment.setVisibility(View.VISIBLE);
-                        start = "42";
+                        spUtils.putString("DDD", "DDD");
+                        start = "GONE";
                     }
 
                     setDrawableTop(R.drawable.mine_in, rb4, R.color.text_red);
