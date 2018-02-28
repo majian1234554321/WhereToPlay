@@ -8,6 +8,7 @@ import android.app.Service;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Handler;
+import android.os.StrictMode;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 
@@ -134,6 +135,11 @@ public class App extends Application {
     private void init() {
         // 1.上下文
         mContext = this;
+
+
+        StrictMode.VmPolicy.Builder builder = new StrictMode.VmPolicy.Builder();
+        StrictMode.setVmPolicy(builder.build());
+        builder.detectFileUriExposure();
 
         // 2.主线程的Id
         /**

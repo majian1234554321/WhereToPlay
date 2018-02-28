@@ -53,7 +53,7 @@ public  class InstallReceiver extends BroadcastReceiver {
 
 
                     Intent installIntent = new Intent(Intent.ACTION_VIEW);
-                    installIntent.setDataAndType(Uri.parse("content://" + filePath), Constants.MIME_TYPE);
+                    installIntent.setDataAndType(Uri.parse("file://" + filePath), Constants.MIME_TYPE);
                     installIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(installIntent);
                 }
