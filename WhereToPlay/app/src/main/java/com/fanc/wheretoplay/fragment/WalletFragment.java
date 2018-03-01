@@ -371,6 +371,7 @@ public class WalletFragment extends BaseFragment {
                 sum += rechargeSum;
                 mTvBalance.setText(new BigDecimal(sum).setScale(2, BigDecimal.ROUND_HALF_UP) + UIUtils.getString(R.string.currency));
               //  ToastUtils.makePicTextShortToast(mContext, response.getInfo());
+                ToastUtils.showShortToast(mContext, "支付成功");
             } else {
                 // 该笔订单真实的支付结果，需要依赖服务端的异步通知。
                 ToastUtils.showShortToast(mContext, "支付失败");

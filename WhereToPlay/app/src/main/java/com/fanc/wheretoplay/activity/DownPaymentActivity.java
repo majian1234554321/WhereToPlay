@@ -67,10 +67,14 @@ import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 import okhttp3.MultipartBody;
 
-/** Created by Administrator on 2017/6/15. */
+/**
+ * Created by Administrator on 2017/6/15.
+ */
 public class DownPaymentActivity extends BaseActivity {
 
-    /** 店铺id */
+    /**
+     * 店铺id
+     */
     String storeId;
     // 订单参数
     HashMap<String, String> params;
@@ -265,7 +269,9 @@ public class DownPaymentActivity extends BaseActivity {
         }
     }
 
-    /** 支付完成去待评价页面 */
+    /**
+     * 支付完成去待评价页面
+     */
     private void payCompleted() {
         // 广播通知
         Intent paySuccess = new Intent(Constants.ACTION_PAY_SUCCESS);
@@ -311,7 +317,8 @@ public class DownPaymentActivity extends BaseActivity {
                         new Observer<OrderInfoModel>() {
 
                             @Override
-                            public void onSubscribe(Disposable disposable) {}
+                            public void onSubscribe(Disposable disposable) {
+                            }
 
                             @Override
                             public void onNext(OrderInfoModel orderInfoModel) {
@@ -320,9 +327,9 @@ public class DownPaymentActivity extends BaseActivity {
                                     showOrderInfo(orderInfoModel.content.order_info);
                                 } else {
                                     Toast.makeText(
-                                                    DownPaymentActivity.this,
-                                                    orderInfoModel.message,
-                                                    Toast.LENGTH_SHORT)
+                                            DownPaymentActivity.this,
+                                            orderInfoModel.message,
+                                            Toast.LENGTH_SHORT)
                                             .show();
                                     finish();
                                 }
@@ -336,7 +343,8 @@ public class DownPaymentActivity extends BaseActivity {
                             }
 
                             @Override
-                            public void onComplete() {}
+                            public void onComplete() {
+                            }
                         });
 
         // compositeSubscription.add(subscription);
@@ -358,7 +366,9 @@ public class DownPaymentActivity extends BaseActivity {
         orderId = order.id;
     }
 
-    /** 订金预定支付，信誉预定跳过支付 */
+    /**
+     * 订金预定支付，信誉预定跳过支付
+     */
     private void pay() {
         if (orderId == null || price == null) {
             ToastUtils.makePicTextShortToast(mContext, "下单失败，请重新下单");
@@ -397,7 +407,8 @@ public class DownPaymentActivity extends BaseActivity {
                     .subscribe(
                             new Observer<AccessOrderIdModel>() {
                                 @Override
-                                public void onSubscribe(Disposable disposable) {}
+                                public void onSubscribe(Disposable disposable) {
+                                }
 
                                 @Override
                                 public void onNext(AccessOrderIdModel accessOrderIdModel) {
@@ -421,7 +432,8 @@ public class DownPaymentActivity extends BaseActivity {
                                 }
 
                                 @Override
-                                public void onComplete() {}
+                                public void onComplete() {
+                                }
                             });
         }
     }
@@ -445,7 +457,8 @@ public class DownPaymentActivity extends BaseActivity {
                 .subscribe(
                         new Observer<OrderPayoffModel>() {
                             @Override
-                            public void onSubscribe(Disposable disposable) {}
+                            public void onSubscribe(Disposable disposable) {
+                            }
 
                             @Override
                             public void onNext(OrderPayoffModel orderPayoffModel) {
@@ -489,7 +502,8 @@ public class DownPaymentActivity extends BaseActivity {
                             }
 
                             @Override
-                            public void onComplete() {}
+                            public void onComplete() {
+                            }
                         });
     }
 
@@ -656,18 +670,18 @@ public class DownPaymentActivity extends BaseActivity {
                     boolean ret = verify(dataOrg, sign, mMode);
                     if (ret) {
                         // 验签成功，显示支付结果
-                        msg = "支付成功！";
+                        msg = "支付成功";
                     } else {
                         // 验签失败
-                        msg = "支付失败！";
+                        msg = "支付失败";
                     }
                 } catch (JSONException e) {
                 }
             }
             // 结果result_data为成功时，去商户后台查询一下再展示成功
-            msg = "支付成功！";
+            msg = "支付成功";
         } else if ("fail".equalsIgnoreCase(str)) {
-            msg = "支付失败！";
+            msg = "支付失败";
         } else if ("cancel".equalsIgnoreCase(str)) {
             msg = "用户取消了支付";
         }
@@ -677,11 +691,15 @@ public class DownPaymentActivity extends BaseActivity {
         builder.setMessage(msg);
         builder.setInverseBackgroundForced(true);
         // builder.setCustomTitle();
+        final String finalMsg = msg;
         builder.setNegativeButton(
                 "确定",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        if ("支付成功".equals(finalMsg)) {
+                            payCompleted();
+                        }
                         dialog.dismiss();
                     }
                 });

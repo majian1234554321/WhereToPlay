@@ -523,7 +523,7 @@ public class PayBillActivity extends BaseActivity implements PayView {
             mTvPaySumReal.setText(value);
 
 
-       // mTvPaySumReal.setText(money1 + ":" + money2 + ":" + money3 + ":" + money4);
+        // mTvPaySumReal.setText(money1 + ":" + money2 + ":" + money3 + ":" + money4);
 
     }
 
@@ -794,7 +794,7 @@ public class PayBillActivity extends BaseActivity implements PayView {
                                         ToastUtils.makePicTextShortToast(mContext, "支付密码位数不正确");
                                         return;
                                     }
-                                   // payZero(input);
+                                    // payZero(input);
 
                                     payOrder(input);
                                 }
@@ -837,8 +837,8 @@ public class PayBillActivity extends BaseActivity implements PayView {
                             public void onResponse(IsOk response) {
                                 if (response.isResult()) {
                                     paySuccess();
-                                }else {
-                                    ToastUtils.showShortToast(PayBillActivity.this,response.message);
+                                } else {
+                                    ToastUtils.showShortToast(PayBillActivity.this, response.message);
                                 }
                             }
                         });
@@ -1162,18 +1162,18 @@ public class PayBillActivity extends BaseActivity implements PayView {
                     boolean ret = verify(dataOrg, sign, mMode);
                     if (ret) {
                         // 验签成功，显示支付结果
-                        msg = "支付成功！";
+                        msg = "支付成功";
                     } else {
                         // 验签失败
-                        msg = "支付失败！";
+                        msg = "支付失败";
                     }
                 } catch (JSONException e) {
                 }
             }
             // 结果result_data为成功时，去商户后台查询一下再展示成功
-            msg = "支付成功！";
+            msg = "支付成功";
         } else if ("fail".equalsIgnoreCase(str)) {
-            msg = "支付失败！";
+            msg = "支付失败";
         } else if ("cancel".equalsIgnoreCase(str)) {
             msg = "用户取消了支付";
         }
@@ -1183,11 +1183,17 @@ public class PayBillActivity extends BaseActivity implements PayView {
         builder.setMessage(msg);
         builder.setInverseBackgroundForced(true);
         // builder.setCustomTitle();
+        final String finalMsg = msg;
         builder.setNegativeButton(
                 "确定",
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        if ("支付成功".equals(finalMsg)) {
+                            paySuccess();
+                        }
+
+
                         dialog.dismiss();
                     }
                 });
