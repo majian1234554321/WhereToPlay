@@ -19,7 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
 
-        <com.fanc.wheretoplay.view.MyScrollView
+        <ScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <LinearLayout
@@ -166,7 +166,7 @@
                     android:layout_height="@dimen/height_0"
                     android:layout_weight="1"/>
             </LinearLayout>
-        </com.fanc.wheretoplay.view.MyScrollView>
+        </ScrollView>
 
 
     </LinearLayout>

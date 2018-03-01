@@ -44,7 +44,7 @@ import java.util.List;
  */
 public class Network {
 
- // public static String BASE = "http://testapi.51tzl.cn"; // 测试
+ //public static String BASE = "http://testapi.51tzl.cn"; // 测试
   public static String BASE = "https://ktv.51tzl.cn";
 
   public static  String QRCODE = "51tzl.cn/store/";
@@ -273,6 +273,7 @@ public class Network {
     public static String FEE = "fee"; // 不参与优惠的金额
     public static String PAGEINDEX = "pageindex"; // 当前页码
     public static String PAGESIZE = "pagesize"; // 当前显示的评论用户个数
+    public static String AppMetaData = "channel" ;
   }
 
   public interface LH_API {

@@ -85,6 +85,7 @@ public class LaunchActivity extends BaseActivity {
                 .url(Network.User.PUBLIC_VERSION)
                 .addParams(Network.Param.OS, Network.PHONE_ANDROID)
                 .addParams(Network.Param.VERSION, UIUtils.getAppVersionName())
+                .addParams(Network.Param.AppMetaData, UIUtils.getAppMetaData(LaunchActivity.this,"UMENG_CHANNEL"))
                 .build()
                 .execute(new DCallback<Version>() {
                     @Override

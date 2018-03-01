@@ -228,6 +228,7 @@ public class PayBillActivity extends BaseActivity implements PayView {
 
         tv121212121212 = payBillBinding.tv121212121212;
 
+
         mCbNotParticipation = payBillBinding.cbNotParticipation;
         mLlNotParticipation = payBillBinding.llNotParticipation;
         mEtNotParticipation = payBillBinding.etPayBillNotParticipationDiscountSum;
@@ -423,71 +424,7 @@ public class PayBillActivity extends BaseActivity implements PayView {
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        if (s.toString().isEmpty()) {
-                            if (!TextUtils.isEmpty(mEtConsumeSum.getText().toString())) {
-
-                                String value =
-                                        df.format(
-                                                Double.parseDouble(
-                                                        mEtConsumeSum.getText().toString())
-                                                        * discount
-                                                        / 10);
-                                mTvPaySumReal.setText(value);
-
-                            } else {
-                                mTvPaySumReal.setText("0");
-                            }
-                        } else {
-                            double sum = Double.parseDouble(s.toString());
-                            if (discountPrice == null) {
-                                discountPrice = String.valueOf(0);
-                            }
-                            lastPaySum = sum * discount / 10 - Double.parseDouble(discountPrice);
-                            isUserSubscription = false;
-                            if (lastPaySum > 0) {
-                                lastPaySum = lastPaySum - subscription;
-                                isUserSubscription = true;
-                            }
-                            if (lastPaySum > 0) {
-                                String value = df.format(lastPaySum);
-                                mTvPaySumReal.setText(value);
-
-                            } else {
-                                mTvPaySumReal.setText("0");
-                            }
-                        }
-                        // 最终支付 = 消费支付金额 + 不参与优惠（+服务费）
-                        if (!TextUtils.isEmpty(mEtNotParticipation.getText().toString())
-                                && mCbNotParticipation.isChecked()) {
-                            if (lastPaySum < 0) {
-
-                                String value =
-                                        df.format(
-                                                Double.parseDouble(
-                                                        mEtNotParticipation
-                                                                .getText()
-                                                                .toString())
-                                                        * (1 + cashRate / 100));
-                                mTvPaySumReal.setText(value);
-
-                            } else {
-
-                                String value =
-                                        df.format(
-                                                lastPaySum
-                                                        + Double.parseDouble(
-                                                        mEtNotParticipation
-                                                                .getText()
-                                                                .toString())
-                                                        * (1 + cashRate / 100));
-                                mTvPaySumReal.setText(value);
-                            }
-                        }
-                        //                Log.d("llm", "onTextChanged: ");
-                        //                // 计算优惠金额
-                        //                mTvDiscountSum.setText(String.valueOf((new BigDecimal(sum
-                        // * (10 -
-                        // discount) / 10).add(new BigDecimal(discountPrice))).doubleValue()));
+                        setMoney();
                     }
 
                     @Override
@@ -503,41 +440,7 @@ public class PayBillActivity extends BaseActivity implements PayView {
 
                     @Override
                     public void onTextChanged(CharSequence s, int start, int before, int count) {
-                        if (s.toString().isEmpty()) {
-
-                            if (!TextUtils.isEmpty(mEtConsumeSum.getText().toString())) {
-
-                                String value =
-                                        df.format(
-                                                Double.parseDouble(
-                                                        mEtConsumeSum.getText().toString())
-                                                        * discount
-                                                        / 10);
-                                mTvPaySumReal.setText(value);
-
-                            } else {
-                                mTvPaySumReal.setText("0");
-                            }
-
-                            // Toast.makeText(mContext, "XXXXXXXXX", Toast.LENGTH_SHORT).show();
-
-                            return;
-                        }
-                        // 最终支付 = 消费支付金额 + 不参与优惠（+服务费）
-                        if (lastPaySum < 0) {
-                            String value =
-                                    df.format(
-                                            Double.parseDouble(s.toString())
-                                                    * (1 + cashRate / 100));
-                            mTvPaySumReal.setText(value);
-                        } else {
-                            String value =
-                                    df.format(
-                                            lastPaySum
-                                                    + Double.parseDouble(s.toString())
-                                                    * (1 + cashRate / 100));
-                            mTvPaySumReal.setText(value);
-                        }
+                        setMoney();
                     }
 
                     @Override
@@ -551,48 +454,77 @@ public class PayBillActivity extends BaseActivity implements PayView {
                         if (isChecked) {
                             mLlNotParticipation.setVisibility(View.VISIBLE);
                             // 最终支付 = 消费支付金额 + 不参与优惠（+服务费）
-                            if (!TextUtils.isEmpty(mEtNotParticipation.getText().toString())) {
-                                if (lastPaySum < 0) {
 
-                                    String value =
-                                            df.format(
-                                                    Double.parseDouble(
-                                                            mEtNotParticipation
-                                                                    .getText()
-                                                                    .toString())
-                                                            * (1 + cashRate / 100));
-                                    mTvPaySumReal.setText(value);
-                                } else {
-                                    String value =
-                                            df.format(
-                                                    lastPaySum
-                                                            + Double.parseDouble(
-                                                            mEtNotParticipation
-                                                                    .getText()
-                                                                    .toString())
-                                                            * (1 + cashRate / 100));
+                            setMoney();
 
-                                    mTvPaySumReal.setText(value);
-                                }
-                            } else {
-                                if (lastPaySum > 0) {
-                                    String value = df.format(lastPaySum);
-                                    mTvPaySumReal.setText(value);
-                                } else {
-                                    mTvPaySumReal.setText("0");
-                                }
-                            }
                         } else {
                             mLlNotParticipation.setVisibility(View.GONE);
-                            if (lastPaySum > 0) {
-                                String value = df.format(lastPaySum);
-                                mTvPaySumReal.setText(value);
-                            } else {
-                                mTvPaySumReal.setText("0");
-                            }
+                            setMoney();
                         }
                     }
                 });
+    }
+
+
+    public void setMoney() {
+
+        double money1 = 0;
+        if (!TextUtils.isEmpty(mEtConsumeSum.getText().toString().trim())) {
+            money1 = Double.parseDouble(mEtConsumeSum.getText().toString().trim()) * discount
+                    / 10;
+        } else {
+            money1 = 0;
+        }
+
+        double money2 = 0;
+        if (!TextUtils.isEmpty(mEtNotParticipation.getText().toString().trim())) {
+            money2 = Double.parseDouble(
+                    mEtNotParticipation
+                            .getText()
+                            .toString())
+                    * (1 + cashRate / 100);
+        } else {
+            money2 = 0;
+        }
+
+
+        double money3 = 0;
+        if (!TextUtils.isEmpty(mTvDownPaymentSum.getText().toString().trim())) {
+            money3 = Double.parseDouble(
+                    mTvDownPaymentSum
+                            .getText()
+                            .toString());
+        } else {
+            money3 = 0;
+        }
+
+        double money4 = 0.00;
+        if (discountPrice != null) {
+            money4 = Double.parseDouble(discountPrice);
+
+
+        } else {
+            money4 = 0;
+        }
+
+
+        String value = "0.00";
+        if (mCbNotParticipation.isChecked()) {
+
+            value = df.format(money1 + money2 - money3 - money4);
+
+        } else {
+            value = df.format(money1 - money3 - money4);
+        }
+
+        if (value.startsWith("-")) {
+            mTvPaySumReal.setText("0.00");
+        } else
+            mTvPaySumReal.setText(value);
+
+
+       // mTvPaySumReal.setText(money1 + ":" + money2 + ":" + money3 + ":" + money4);
+
     }
 
     /**
@@ -862,7 +794,9 @@ public class PayBillActivity extends BaseActivity implements PayView {
                                         ToastUtils.makePicTextShortToast(mContext, "支付密码位数不正确");
                                         return;
                                     }
-                                    payZero(input);
+                                   // payZero(input);
+
+                                    payOrder(input);
                                 }
                             })
                     .setCanceledOnTouchOutside(true)
@@ -903,6 +837,8 @@ public class PayBillActivity extends BaseActivity implements PayView {
                             public void onResponse(IsOk response) {
                                 if (response.isResult()) {
                                     paySuccess();
+                                }else {
+                                    ToastUtils.showShortToast(PayBillActivity.this,response.message);
                                 }
                             }
                         });
@@ -1128,7 +1064,7 @@ public class PayBillActivity extends BaseActivity implements PayView {
                     s = String.valueOf(0);
                 }
                 double sum = Double.parseDouble(s);
-                //            lastPaySum = sum * discount / 10 - Double.parseDouble(discountPrice);
+
                 lastPaySum = sum * discount / 10 - Double.parseDouble(discountPrice);
                 isUserSubscription = false;
                 // 除去优惠券后支付金额 > 0 就从订金中扣
@@ -1168,6 +1104,9 @@ public class PayBillActivity extends BaseActivity implements PayView {
                         mTvPaySumReal.setText(value);
                     }
                 }
+
+                setMoney();
+
                 //                // 计算优惠金额
                 //                mTvDiscountSum.setText(String.valueOf(Math.abs((new BigDecimal(sum
                 // * (10 -
@@ -1259,4 +1198,6 @@ public class PayBillActivity extends BaseActivity implements PayView {
         // 此处的verify，商户需送去商户后台做验签
         return true;
     }
+
+
 }

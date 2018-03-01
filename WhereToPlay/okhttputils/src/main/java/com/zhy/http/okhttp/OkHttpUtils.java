@@ -21,6 +21,7 @@ import com.zhy.http.okhttp.utils.Exceptions;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
@@ -57,6 +58,9 @@ public class OkHttpUtils {
     } else {
       mOkHttpClient = okHttpClient;
     }
+
+
+   // ThreadPoolExecutor
 
     init();
   }

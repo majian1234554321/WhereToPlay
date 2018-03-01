@@ -99,7 +99,7 @@ public class ShareActivity extends Activity implements IWXAPIEventHandler, WbSha
     private String title, secondtitle;
     public String logo = "http://testapi.51tzl.cn/static/logo.png";
 
-    public String SHRERURL = "http://wechat.51tzl.cn/index.html#/Home?invite_code=";
+    public String SHRERURL = "http://wechat.51tzl.cn/index.html?#/?invite_code=";
 
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API. See

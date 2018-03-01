@@ -130,7 +130,7 @@ public class SettingsActivity extends BaseActivity {
         mIvSettingAboutUs.setLeftTextBlod(true);
         mIvSettingAboutUs.setRightIcon(R.drawable.right);
 
-        mIvSettingCheckToUpdate.setRightText(UIUtils.getAppVersionName());
+        mIvSettingCheckToUpdate.setRightText(getVerName(this));
 
         showSwitchStatus();
 
@@ -238,6 +238,7 @@ public class SettingsActivity extends BaseActivity {
                 .url(Network.User.PUBLIC_VERSION)
                 .addParams(Network.Param.OS, Network.PHONE_ANDROID)
                 .addParams(Network.Param.VERSION, UIUtils.getAppVersionName())
+                .addParams(Network.Param.AppMetaData, UIUtils.getAppMetaData(this,"UMENG_CHANNEL"))
                 .build()
                 .execute(new DCallback<Version>() {
                     @Override

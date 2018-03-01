@@ -1,10 +1,12 @@
 package com.fanc.wheretoplay.util;
 
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.res.Resources;
 import android.os.Handler;
+import android.text.TextUtils;
 
 import com.fanc.wheretoplay.base.App;
 
@@ -180,6 +182,28 @@ public class UIUtils {
      */
     public static int getScreenHieght() {
         return getResources().getDisplayMetrics().heightPixels;
+    }
+
+
+    public static String getAppMetaData(Context context, String key) {
+        if (context == null || TextUtils.isEmpty(key)) {
+            return null;
+        }
+        String channelNumber = null;
+        try {
+            PackageManager packageManager = context.getPackageManager();
+            if (packageManager != null) {
+                ApplicationInfo applicationInfo = packageManager.getApplicationInfo(context.getPackageName(), PackageManager.GET_META_DATA);
+                if (applicationInfo != null) {
+                    if (applicationInfo.metaData != null) {
+                        channelNumber = applicationInfo.metaData.getString(key);
+                    }
+                }
+            }
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        return channelNumber;
     }
 
 }
