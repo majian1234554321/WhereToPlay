@@ -6,6 +6,8 @@
     android:layout_height="match_parent">
 
 
+
+
     <RadioGroup
         android:layout_alignParentBottom="true"
 
@@ -85,17 +87,20 @@
 
     </RadioGroup>
 
+    <View
+        android:layout_width="match_parent"
+        android:id="@+id/view"
+        android:layout_above="@+id/ll_main_tab"
 
+        android:background="#55333333"
+        android:layout_height="1px"/>
     <com.fanc.wheretoplay.view.MyViewPager
         android:id="@+id/mvp_main"
-        android:layout_above="@+id/ll_main_tab"
+        android:layout_above="@+id/view"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/ll_main_tab"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        android:layout_height="match_parent"
+         />
+
 
 
     <FrameLayout
