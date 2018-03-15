@@ -87,6 +87,12 @@
                         android:textSize="@dimen/textsize_level2"/>
                 </RelativeLayout>
 
+                <com.fanc.wheretoplay.view.ItemView
+                    android:id="@+id/iv_1234"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:onClick="@{click.onViewClick}"
+                    android:layout_marginTop="@dimen/margin_10"/>
 
 
                 <com.fanc.wheretoplay.view.ItemView

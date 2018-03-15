@@ -70,7 +70,7 @@ public class MineFragment extends BaseFragment {
     ItemView mIvMineIntegral;
     ItemView mIvMineOrder;
     ItemView mIvMineCollection;
-    ItemView mIvMineReferral;
+    ItemView mIvMineReferral,iv1234;
     private ItemView mIvMineFriend;
     private ItemView mIvMineMoney;
     private ItemView mTvMineDrive;
@@ -106,6 +106,7 @@ public class MineFragment extends BaseFragment {
         mIvMineFriend = mineBinding.ivMineCommendFriend;
         mIvMineMoney = mineBinding.ivMineCommendMoney;
         mIvMineService = mineBinding.ivMineService;
+        iv1234 =   mineBinding.iv1234;
     }
 
     private void init() {
@@ -118,6 +119,9 @@ public class MineFragment extends BaseFragment {
         showSimpleMineInfo();
         // 获取我的资料
         getScore();
+
+        iv1234.setText("娱乐行业从业申请");
+        iv1234.setRightIcon(R.drawable.right);
 
         //条目栏的文字、图片设置
         mIvMineFriend.setIcon(R.drawable.mine_recommend_friend);
@@ -309,6 +313,8 @@ public class MineFragment extends BaseFragment {
                 ConsultSource source = new ConsultSource(null, null, null);
                 Unicorn.openServiceActivity(mContext, getResources().getString(R.string.app_name), source);
 
+                break;
+            case R.id.iv_1234:
                 break;
             default:
                 break;
