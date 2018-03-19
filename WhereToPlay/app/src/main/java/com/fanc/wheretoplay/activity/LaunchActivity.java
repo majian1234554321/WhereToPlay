@@ -81,7 +81,13 @@ public class LaunchActivity extends BaseActivity {
 
         initViews();
 
-        OkHttpUtils.post()
+
+
+        init();
+
+        changeConvironment();
+
+      /*  OkHttpUtils.post()
                 .url(Network.User.PUBLIC_VERSION)
                 .addParams(Network.Param.OS, Network.PHONE_ANDROID)
                 .addParams(Network.Param.VERSION, UIUtils.getAppVersionName())
@@ -100,7 +106,7 @@ public class LaunchActivity extends BaseActivity {
                         }
                     }
                 });
-
+*/
 
     }
 

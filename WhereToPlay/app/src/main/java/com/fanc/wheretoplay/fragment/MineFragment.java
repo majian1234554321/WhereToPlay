@@ -119,7 +119,7 @@ public class MineFragment extends BaseFragment {
         showSimpleMineInfo();
         // 获取我的资料
         getScore();
-
+        iv1234.setIcon(R.drawable.iv_1234);
         iv1234.setText("娱乐行业从业申请");
         iv1234.setRightIcon(R.drawable.right);
 
@@ -315,6 +315,9 @@ public class MineFragment extends BaseFragment {
 
                 break;
             case R.id.iv_1234:
+                Intent intent2 = new Intent(mContext, DisplayActivity.class);
+                intent2.putExtra("DISPLAYTYPE", "BGirlFragment");
+                startActivity(intent2);
                 break;
             default:
                 break;

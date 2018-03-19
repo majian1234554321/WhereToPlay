@@ -157,6 +157,11 @@
         <item name="android:textColor">@color/text_black</item>
     </style>
 
+
+    <style name="CustomCheckboxTheme" parent="@android:style/Widget.CompoundButton.CheckBox">
+        <item name="android:button">@drawable/checkbox_style</item>
+    </style>
+
     <declare-styleable name="RatingBar">
         <!--尺寸值-->
         <attr name="starImageSize" format="dimension" />

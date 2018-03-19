@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.fanc.wheretoplay.view.TitleBarView
+        android:id="@+id/tbv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:ignore="InvalidId" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/tbv"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+
+            android:id="@+id/tv1"
+            android:drawableLeft="@drawable/iv1"
+            android:paddingLeft="12dp"
+            android:paddingRight="8dp"
+            android:drawablePadding="8dp"
+            android:drawableRight="@drawable/icon_right"
+            android:gravity="center_vertical"
+            android:layout_marginTop="8dp"
+            android:text="从业申请"
+            android:textColor="#ff333333"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:drawableLeft="@drawable/iv2"
+            android:drawablePadding="8dp"
+            android:layout_marginTop="8dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="8dp"
+            android:drawableRight="@drawable/icon_right"
+            android:gravity="center_vertical"
+
+            android:text="年审"
+            android:textColor="#ff333333"
+            android:textSize="12sp" />
+
+        <TextView
+            android:id="@+id/tv3"
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:drawableLeft="@drawable/iv3"
+            android:drawablePadding="8dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="8dp"
+            android:drawableRight="@drawable/icon_right"
+            android:gravity="center_vertical"
+
+            android:text="补卡"
+            android:textColor="#ff333333"
+            android:textSize="12sp" />
+
+
+    </LinearLayout>
+
+
+</RelativeLayout>

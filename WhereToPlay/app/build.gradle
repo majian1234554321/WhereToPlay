@@ -17,16 +17,7 @@ android {
     }
 
 
-    signingConfigs {
-        releaseConfig {
-            storeFile file("/Users/Joenny/Desktop/ktvAndroid/hpzl_keystore.jks")
-            storePassword "adminhpzl"
-            keyAlias "ktv_key"
-            keyPassword "adminhpzl"
 
-        }
-
-    }
 
 
 
@@ -34,9 +25,9 @@ android {
         applicationId "com.fanc.wheretoplay"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 201890302
+        versionCode 201890309
 
-        versionName "2018.03.02"
+        versionName "2018.03.09"
 
 
         sourceSets.main {
@@ -60,6 +51,17 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    /*signingConfigs {
+        releaseConfig {
+            storeFile file("/Users/Joenny/Desktop/ktvAndroid/hpzl_keystore.jks")
+            storePassword "adminhpzl"
+            keyAlias "ktv_key"
+            keyPassword "adminhpzl"
+
+        }
+
+    }
     buildTypes {
         release {
             signingConfig signingConfigs.releaseConfig
@@ -77,7 +79,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
         }
-    }
+    }*/
     dataBinding {
         enabled = true
     }
@@ -131,7 +133,7 @@ dependencies {
     implementation project(':common')
     implementation project(':okhttputils')
 
-    compile 'com.android.support:multidex:1.0.2'
+    compile 'com.android.support:multidex:1.0.3'
     compile 'com.youth.banner:banner:1.4.10'
     compile 'com.orhanobut:logger:1.15'
     compile 'cn.finalteam:galleryfinal:1.4.8.7'
@@ -153,7 +155,9 @@ dependencies {
     compile 'com.sina.weibo.sdk:core:4.1.0:openDefaultRelease@aar'
     compile 'com.umeng.analytics:analytics:6.1.2'
     debugCompile 'com.amitshekhar.android:debug-db:1.0.0'
-    compile 'com.jcodecraeer:xrecyclerview:1.5.8'
+    compile 'com.jcodecraeer:xrecyclerview:1.5.9'
+    compile 'cn.pedant.sweetalert:library:1.3'
+
 
 }
 

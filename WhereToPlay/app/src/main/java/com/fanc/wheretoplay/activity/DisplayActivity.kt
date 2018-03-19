@@ -1,6 +1,7 @@
 package com.fanc.wheretoplay.activity
 
 import android.os.Bundle
+import android.support.v4.app.FragmentManager
 import com.fanc.wheretoplay.R
 import com.fanc.wheretoplay.base.BaseActivity
 import com.fanc.wheretoplay.fragment.*
@@ -9,7 +10,7 @@ class DisplayActivity : BaseActivity() {
 
 
 
-
+var mFragmentManager : FragmentManager? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +45,8 @@ class DisplayActivity : BaseActivity() {
         val total = intent.getStringExtra("total")
         val statues = intent.getStringExtra("statues")
 
+
+        mFragmentManager = supportFragmentManager
 
 
 
@@ -85,6 +88,46 @@ class DisplayActivity : BaseActivity() {
                         .commit()
             }
 
+            "BGirlFragment" ->{
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.displayfragment, BGirlFragment.newInstance())
+                        .commit()
+            }
+
+            "BGirlApplyFragment1" ->{
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.displayfragment, BGirlApplyFragment1.newInstance())
+                        .commit()
+            }
+            "BGirlApplyFragment2" ->{
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.displayfragment, BGirlApplyFragment2.newInstance())
+                        .commit()
+            }
+
+            "BGirlApplyFragment3" ->{
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.displayfragment, BGirlApplyFragment3.newInstance())
+                        .commit()
+            }
+            "BGirlApplyFragment4" ->{
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.displayfragment, BGirlApplyFragment4.newInstance())
+                        .commit()
+            }
+
+            "BGirlApplyFragment5" ->{
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.displayfragment, BGirlApplyFragment5.newInstance())
+                        .commit()
+            }
+
         }
+    }
+
+    override fun onBackPressed() {
+        super.onBackPressed()
+        mFragmentManager?.popBackStack()
+
     }
 }
