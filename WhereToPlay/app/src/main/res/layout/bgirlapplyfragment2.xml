@@ -36,6 +36,11 @@
                 android:padding="8dp"
                 android:text="温馨提示：打※标志为必填项" />
 
+            <com.fanc.wheretoplay.view.SpinnerItem
+                android:layout_width="match_parent"
+                android:id="@+id/spi"
+                android:layout_height="wrap_content" />
+
 
             <include
                 layout="@layout/bgirlinfo"
