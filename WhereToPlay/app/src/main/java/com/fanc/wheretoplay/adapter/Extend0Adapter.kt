@@ -29,11 +29,11 @@ class Extend0Adapter(val context: Context, var flag: Boolean,
                      val dateValue: String?,
                      val descValue: String?,val weekTypeValue: String?
 ) : RecyclerView.Adapter<Extend0Adapter.ViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
             ViewHolder(View.inflate(context, R.layout.extend0adapter, null))
 
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder?.itemView!!) {
             tv_title.text = list[position].name
             tv2.text = list[position].price

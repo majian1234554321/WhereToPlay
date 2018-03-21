@@ -76,7 +76,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:button="@null"
-                android:checked="true"
                 android:drawableLeft="@drawable/pay_by_weixin"
                 android:drawablePadding="8dp"
                 android:drawableRight="@drawable/selector_pay_way"

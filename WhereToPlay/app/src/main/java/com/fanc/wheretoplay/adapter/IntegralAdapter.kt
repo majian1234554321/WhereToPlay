@@ -22,7 +22,7 @@ class IntegralAdapter(val context: Activity, val list: List<ScoreList.ContentBea
     override fun getItemCount(): Int = if (list.isNotEmpty()) list.size else 0
 
     @SuppressLint("SetTextI18n")
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder?.itemView!!) {
             tv_time?.text = DateFormatUtil.stampToDate(list[position].finish_time)
             tv_item_integral_no.text = "+" + java.lang.Double.parseDouble(list[position].score_detail).toInt()+"积分"
@@ -30,7 +30,7 @@ class IntegralAdapter(val context: Activity, val list: List<ScoreList.ContentBea
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
             ViewHolder(View.inflate(parent?.context, R.layout.item_integral_detail, null))
 
 

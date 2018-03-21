@@ -42,7 +42,7 @@ import java.util.concurrent.TimeUnit
  * @date 2018/1/16
  */
 class Main2Adapter(val mContext: Context, private val lists: ArrayList<BookListModel.ContentBean.ListBean>) : RecyclerView.Adapter<Main2Adapter.ViewHolder>() {
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         with(holder?.itemView!!) {
             tv_storeName.text = lists[position].name
@@ -317,7 +317,7 @@ class Main2Adapter(val mContext: Context, private val lists: ArrayList<BookListM
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder = ViewHolder(View.inflate(mContext, R.layout.main2adapter, null))
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(View.inflate(mContext, R.layout.main2adapter, null))
 
     override fun getItemCount(): Int = if (lists.size > 0) {
         lists.size

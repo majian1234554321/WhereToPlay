@@ -28,11 +28,11 @@ class ExtendAdapter(val context: Context, var flag: Boolean,
                     val storeid: String?
                     , val discountValue: String?, val storeName: String?, val address: String?, val phonevalue: String?
 ) : RecyclerView.Adapter<ExtendAdapter.ViewHolder>() {
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
             ViewHolder(View.inflate(context, R.layout.extendadapter, null))
 
 
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         with(holder?.itemView!!) {
             Glide.with(context).load(list[position].pic).placeholder(R.drawable.default_rect).into(iv)
             tv1text.text = list[position].name

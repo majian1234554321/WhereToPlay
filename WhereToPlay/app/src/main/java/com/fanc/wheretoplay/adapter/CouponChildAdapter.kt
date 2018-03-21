@@ -49,7 +49,7 @@ class CouponChildAdapter(val context: Context, val list: List<CouponListModel.Co
         }
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
             ViewHolder(View.inflate(context, R.layout.couponchildadapter, null))
 
     override fun getItemCount(): Int = if (list.isNotEmpty()) list.size else 0

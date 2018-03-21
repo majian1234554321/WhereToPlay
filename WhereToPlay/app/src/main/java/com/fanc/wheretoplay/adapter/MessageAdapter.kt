@@ -25,7 +25,7 @@ import kotlinx.android.synthetic.main.item_message.view.*
  */
 
 class MessageAdapter(val context: Context, val messages: List<MessageList.Message>) : RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
-    override fun onBindViewHolder(holder: ViewHolder?, position: Int) {
+    override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
         with(holder?.itemView!!) {
             tv_item_message_title?.text = messages[position].title
@@ -54,7 +54,7 @@ class MessageAdapter(val context: Context, val messages: List<MessageList.Messag
 
     override fun getItemCount(): Int = if (messages.isNotEmpty()) messages.size else 0
 
-    override fun onCreateViewHolder(parent: ViewGroup?, viewType: Int): ViewHolder =
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
             ViewHolder(View.inflate(context, R.layout.item_message, null))
 
 

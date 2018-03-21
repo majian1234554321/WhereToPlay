@@ -287,4 +287,6 @@ public static final int *;
 -keep class com.unionpay.UPPayWapActivity {*;}
 -keep class com.unionpay.uppay.PayActivity {*;}
 
-
+-keep class cn.pedant.SweetAlert.Rotate3dAnimation {
+  public <init>(...);
+}
