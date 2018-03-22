@@ -52,6 +52,8 @@ import com.zhy.http.okhttp.callback.DCallback;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -176,6 +178,8 @@ public class MainActivity extends BaseFragmentActivity
 
 
 
+    //ExecutorService
+    //ThreadPoolExecutor
 
     /** new fragment page */
     private void initFragments() {

@@ -10,8 +10,11 @@
 
     <Spinner
         android:id="@+id/sp"
-        android:layout_width="60dp"
+        android:theme="@android:style/Theme.Holo.Light"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"></Spinner>
+        android:layout_alignParentRight="true"
+        android:layout_alignParentBottom="true"
+       ></Spinner>
 
 </RelativeLayout>

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
 
@@ -12,7 +12,7 @@
         android:padding="8dp">
 
         <TextView
-           android:id="@+id/tv1_select"
+            android:id="@+id/tv1_select"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="从业须知" />
@@ -25,7 +25,8 @@
             android:src="@drawable/iv_arr" />
 
         <TextView
-            android:layout_width="wrap_content" android:id="@+id/tv2"
+            android:id="@+id/tv2"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="信息登记" />
 
@@ -37,8 +38,8 @@
             android:src="@drawable/iv_arr" />
 
         <TextView
-            android:layout_width="wrap_content"
             android:id="@+id/tv3"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="审核" />
 

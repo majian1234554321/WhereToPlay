@@ -10,9 +10,11 @@ import okhttp3.MultipartBody;
 
 import okhttp3.ResponseBody;
 import retrofit2.Call;
+import retrofit2.http.GET;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
+import retrofit2.http.Query;
 
 import com.fanc.wheretoplay.datamodel.BookPackageDetailModel;
 import com.fanc.wheretoplay.datamodel.BookPackageListModel;
@@ -47,7 +49,7 @@ import java.util.List;
 public class Network {
 
     public static String BASE = "http://testapi.51tzl.cn"; // 测试
-  //  public static String BASE = "https://ktv.51tzl.cn";
+    //  public static String BASE = "https://ktv.51tzl.cn";
 
     public static String QRCODE = "51tzl.cn/store/";
 
@@ -498,6 +500,54 @@ public class Network {
         @Multipart
         @POST("Empl/EmplRegistration")
         Observable<AccessOrderIdModel> EmplRegistration(@Part List<MultipartBody.Part> fileA);
+
+
+        @GET("/Api/public/generateQrCode?code={id}")
+        Observable<AccessOrderIdModel> getCode(@Query("id") String id);
+
+
+        //获取商家信息 --
+        @Multipart
+        @POST("Empl/emplGetMessage")
+        Observable<AccessOrderIdModel> emplGetMessage(@Part MultipartBody.Part fileA);
+
+        //从业申请状态 --
+        @Multipart
+        @POST("Empl/emplApplicationStatus")
+        Observable<AccessOrderIdModel> emplApplicationStatus(@Part MultipartBody.Part fileA);
+
+        //补卡申请状态
+        @Multipart
+        @POST("Empl/emplPatchCardStatus")
+        Observable<AccessOrderIdModel> emplPatchCardStatus(@Part MultipartBody.Part fileA);
+
+
+        //年审申请状态 --
+        @Multipart
+        @POST("Empl/emplYearReviewStatus")
+        Observable<AccessOrderIdModel> emplYearReviewStatus(@Part MultipartBody.Part fileA);
+
+
+        //获取申请 年审 补卡支付价格 --
+        @Multipart
+        @POST("Empl/emplGetAmount")
+        Observable<AccessOrderIdModel> emplGetAmount(@Part List<MultipartBody.Part> fileA);
+
+        //从业人员申请生成并支付订单 --
+        @Multipart
+        @POST("Empl/emplApplicationPayOrder")
+        Observable<AccessOrderIdModel> emplApplicationPayOrder(@Part List<MultipartBody.Part> fileA);
+
+        //从业人员补卡生成并支付订单 --
+        @Multipart
+        @POST("Empl/emplPatchCardPayOrder")
+        Observable<AccessOrderIdModel> emplPatchCardPayOrder(@Part List<MultipartBody.Part> fileA);
+
+
+        //从业人员年审生成并支付订单 --
+        @Multipart
+        @POST("Empl/emplYearReviewPayOrder")
+        Observable<AccessOrderIdModel> emplYearReviewPayOrder(@Part List<MultipartBody.Part> fileA);
 
 
     }

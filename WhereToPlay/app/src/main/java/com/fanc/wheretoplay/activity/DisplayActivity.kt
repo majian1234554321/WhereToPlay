@@ -35,6 +35,7 @@ var mFragmentManager : FragmentManager? = null
 
         val order_functionValue = intent.getStringExtra("order_function")
 
+        val statusValue = intent.getStringExtra("status")
 
 
 
@@ -107,7 +108,7 @@ var mFragmentManager : FragmentManager? = null
 
             "BGirlApplyFragment3" ->{
                 supportFragmentManager.beginTransaction()
-                        .replace(R.id.displayfragment, BGirlApplyFragment3.newInstance())
+                        .replace(R.id.displayfragment, BGirlApplyFragment3.newInstance(statues))
                         .commit()
             }
             "BGirlApplyFragment4" ->{

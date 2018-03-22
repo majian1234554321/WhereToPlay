@@ -39,6 +39,7 @@ import com.fanc.wheretoplay.util.SPUtils;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.AlertDialog;
 import com.fanc.wheretoplay.view.ItemView;
+import com.meituan.android.walle.WalleChannelReader;
 import com.qiyukf.nimlib.sdk.NimIntent;
 import com.qiyukf.unicorn.api.ConsultSource;
 import com.qiyukf.unicorn.api.Unicorn;
@@ -91,7 +92,7 @@ public class LaunchActivity extends BaseActivity {
                 .url(Network.User.PUBLIC_VERSION)
                 .addParams(Network.Param.OS, Network.PHONE_ANDROID)
                 .addParams(Network.Param.VERSION, UIUtils.getAppVersionName())
-                .addParams(Network.Param.AppMetaData, UIUtils.getAppMetaData(LaunchActivity.this,"UMENG_CHANNEL"))
+                .addParams(Network.Param.AppMetaData, "_company")
                 .build()
                 .execute(new DCallback<Version>() {
                     @Override

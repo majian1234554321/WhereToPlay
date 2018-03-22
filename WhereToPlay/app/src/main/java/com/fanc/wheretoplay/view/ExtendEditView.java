@@ -55,4 +55,8 @@ public class ExtendEditView extends RelativeLayout {
     public String getData(){
         return et_value.getText().toString().trim();
     }
+
+    public void setData(){
+        et_value.setText("11111111");
+    }
 }

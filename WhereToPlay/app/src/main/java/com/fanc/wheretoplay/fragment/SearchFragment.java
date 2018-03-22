@@ -170,6 +170,9 @@ public class SearchFragment extends BaseFragment {
                 Intent intent = new Intent(mContext, DetailActivity.class);
                 intent.putExtra(Constants.PAGE, Constants.MERCHANT_DETAIL);
                 intent.putExtra(Constants.STORE_ID, stores.get(position).id);
+
+                intent.putExtra("type",stores.get(position).style);
+
                 mContext.startActivity(intent);
             }
         });

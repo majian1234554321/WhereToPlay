@@ -258,9 +258,9 @@
         <meta-data
             android:name="UMENG_APPKEY"
             android:value="5a126b998f4a9d5e2d00001a" />
-        <meta-data
+       <!-- <meta-data
             android:name="UMENG_CHANNEL"
-            android:value="${UMENG_CHANNEL_VALUE}" />
+            android:value="${UMENG_CHANNEL_VALUE}" />-->
 
         <activity
             android:name=".Main2Activity"
@@ -271,10 +271,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.PayPayActivity"
-            android:screenOrientation="portrait" />
-
-        <activity
-            android:name=".activity.SimpleFragmentActivity"
             android:screenOrientation="portrait" />
 
 

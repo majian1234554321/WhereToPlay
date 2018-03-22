@@ -13,7 +13,7 @@ import java.util.*
  * @author admin
  * @date 2018/3/21
  */
-class BitmapUtils{
+class BitmapUtils {
     companion object {
         fun compressImage(bitmap: Bitmap): File {
             val baos = ByteArrayOutputStream()
@@ -48,6 +48,7 @@ class BitmapUtils{
             recycleBitmap(bitmap)
             return file
         }
+
         fun recycleBitmap(vararg bitmaps: Bitmap) {
 
             for (bm in bitmaps) {
@@ -57,38 +58,75 @@ class BitmapUtils{
             }
         }
 
-         fun getBitmap(srcPath: String): Bitmap {
+
+        fun getimage(srcPath: String): Bitmap {
             val newOpts = BitmapFactory.Options()
-            // 开始是先把newOpts.inJustDecodeBounds 设回true了
+            //开始读入图片，此时把options.inJustDecodeBounds 设回true了
             newOpts.inJustDecodeBounds = true
-            var bitmap = BitmapFactory.decodeFile(srcPath, newOpts) // 此时返回bitmap为null
+            //此时返回bm为空
+            var bitmap = BitmapFactory.decodeFile(srcPath, newOpts)
 
             newOpts.inJustDecodeBounds = false
             val w = newOpts.outWidth
             val h = newOpts.outHeight
-            // 以800*480分辨率为例
-            val hh = 800f // 这里设置高度为800f
-            val ww = 480f // 这里设置宽度为480f
-            // 缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
-            var scale = 1 // be=1表示不缩放
-            if (w > h && w > ww) { // 如果宽度大的话根据宽度固定大小缩放
-                scale = (newOpts.outWidth / ww).toInt()
-            } else if (w < h && h > hh) { // 如果高度高的话根据宽度固定大小缩放
-                scale = (newOpts.outHeight / hh).toInt()
+            //现在主流手机比较多是800*480分辨率，所以高和宽我们设置为
+            val hh = 800f//这里设置高度为800f
+            val ww = 480f//这里设置宽度为480f
+            //缩放比。由于是固定比例缩放，只用高或者宽其中一个数据进行计算即可
+            var be = 1//be=1表示不缩放
+            if (w > h && w > ww) {//如果宽度大的话根据宽度固定大小缩放
+                be = (newOpts.outWidth / ww).toInt()
+            } else if (w < h && h > hh) {//如果高度高的话根据宽度固定大小缩放
+                be = (newOpts.outHeight / hh).toInt()
             }
-            if (scale <= 0) scale = 1
-            newOpts.inSampleSize = scale // 设置缩放比例 // 重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了
+            if (be <= 0)
+                be = 1
+            newOpts.inSampleSize = be//设置缩放比例
+            //重新读入图片，注意此时已经把options.inJustDecodeBounds 设回false了
             bitmap = BitmapFactory.decodeFile(srcPath, newOpts)
-            return bitmap
+            return bitmap//压缩好比例大小后再进行质量压缩
         }
 
-         fun Bitmap2StrByBase64(bit: Bitmap): String {
 
-             val bos = ByteArrayOutputStream()
-             bit.compress(Bitmap.CompressFormat.JPEG, 40, bos) // 参数100表示不压缩
+        fun Bitmap2StrByBase64(bit: Bitmap): String {
 
-             val bytes = bos.toByteArray()
-             return Base64.encodeToString(bytes, Base64.DEFAULT)
-         }
+            val bos = ByteArrayOutputStream()
+            bit.compress(Bitmap.CompressFormat.JPEG, 40, bos) // 参数100表示不压缩
+
+            val bytes = bos.toByteArray()
+            return Base64.encodeToString(bytes, Base64.DEFAULT)
+        }
+
+        fun fileToBase64(file: File): String? {
+            var base64: String? = null
+            var `in`: InputStream? = null
+            try {
+                `in` = FileInputStream(file)
+                val bytes = ByteArray(`in`.available())
+                val length = `in`.read(bytes)
+                base64 = Base64.encodeToString(bytes, 0, length, Base64.DEFAULT)
+            } catch (e: FileNotFoundException) {
+                // TODO Auto-generated catch block
+                e.printStackTrace()
+            } catch (e: IOException) {
+                // TODO Auto-generated catch block
+                e.printStackTrace()
+            } finally {
+                try {
+                    if (`in` != null) {
+                        `in`.close()
+                    }
+                } catch (e: IOException) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace()
+                }
+
+            }
+            return base64
+        }
     }
+
+
+
+
 }

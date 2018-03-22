@@ -3,6 +3,7 @@ package com.fanc.wheretoplay.view;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -20,6 +21,8 @@ import java.util.List;
 public class SpinnerItem extends RelativeLayout {
 
     private Spinner spinner;
+    private ArrayAdapter<String> arrayAdapter;
+    private String value;
 
     public SpinnerItem(Context context) {
         super(context);
@@ -43,10 +46,26 @@ public class SpinnerItem extends RelativeLayout {
 
     public void setData(List<String> list, Context context) {
 
-        ArrayAdapter<String> arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item, list);
-
+        value = list.get(0);
+        arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item, list);
+        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinner.setAdapter(arrayAdapter);
     }
 
+    public String getData() {
+
+        spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                value = arrayAdapter.getItem(position);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+        return value;
+    }
 
 }

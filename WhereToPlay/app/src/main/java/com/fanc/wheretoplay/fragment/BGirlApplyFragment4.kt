@@ -11,6 +11,10 @@ import android.widget.Toast
 import com.fanc.wheretoplay.R
 import com.fanc.wheretoplay.activity.DisplayActivity
 import com.fanc.wheretoplay.base.BaseFragment
+import com.fanc.wheretoplay.rx.Retrofit_RequestUtils
+import io.reactivex.Scheduler
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.bgirlapplyfragment4.*
 import kotlinx.android.synthetic.main.bgirltitle.*
 
@@ -45,8 +49,18 @@ class BGirlApplyFragment4 : BaseFragment(), RadioGroup.OnCheckedChangeListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tbv.setTv_title("从业申请")
+        tbv.setTv_title("支付")
         tv4.setTextColor(Color.parseColor("#c4483c"))
+
+
+       /* Retrofit_RequestUtils
+                .getRequest()
+                .emplApplicationPayOrder()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .*/
+
+
         next.setOnClickListener {
             val intent = Intent(mContext, DisplayActivity::class.java)
             intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment5")

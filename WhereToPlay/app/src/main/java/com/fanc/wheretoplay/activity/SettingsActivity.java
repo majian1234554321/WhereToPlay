@@ -40,6 +40,7 @@ import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.AlertDialog;
 import com.fanc.wheretoplay.view.ItemView;
 import com.fanc.wheretoplay.view.TopMenu;
+import com.meituan.android.walle.WalleChannelReader;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
@@ -238,7 +239,7 @@ public class SettingsActivity extends BaseActivity {
                 .url(Network.User.PUBLIC_VERSION)
                 .addParams(Network.Param.OS, Network.PHONE_ANDROID)
                 .addParams(Network.Param.VERSION, UIUtils.getAppVersionName())
-                .addParams(Network.Param.AppMetaData, UIUtils.getAppMetaData(this,"UMENG_CHANNEL"))
+                .addParams(Network.Param.AppMetaData, WalleChannelReader.getChannel(this.getApplicationContext()))
                 .build()
                 .execute(new DCallback<Version>() {
                     @Override
