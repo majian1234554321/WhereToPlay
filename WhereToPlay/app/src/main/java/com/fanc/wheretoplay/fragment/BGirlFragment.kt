@@ -39,7 +39,7 @@ class BGirlFragment : BaseFragment(), View.OnClickListener, BGirlFragmentView {
                     else -> {
                         val intent = Intent(mContext, DisplayActivity::class.java)
                         intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment3")
-                        intent.putExtra("status", content.status)
+                        intent.putExtra("statues", content.status)
                         startActivity(intent)
                     }
                 }

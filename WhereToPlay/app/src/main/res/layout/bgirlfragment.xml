@@ -17,61 +17,68 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_width="match_parent"
-            android:layout_height="40dp"
-
             android:id="@+id/tv1"
+            android:layout_width="match_parent"
+
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/iv1"
-            android:paddingLeft="12dp"
-            android:paddingRight="8dp"
             android:drawablePadding="8dp"
             android:drawableRight="@drawable/icon_right"
             android:gravity="center_vertical"
-            android:layout_marginTop="8dp"
+            android:paddingLeft="12dp"
+            android:paddingRight="8dp"
             android:text="从业申请"
             android:textColor="#ff333333"
             android:textSize="14sp" />
-        <View android:layout_height="1dp"
-            android:background="#33333333"
-            android:layout_width="match_parent"/>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#33333333" />
 
 
         <TextView
             android:id="@+id/tv2"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/iv2"
             android:drawablePadding="8dp"
-            android:layout_marginTop="8dp"
-            android:paddingLeft="12dp"
-            android:paddingRight="8dp"
             android:drawableRight="@drawable/icon_right"
             android:gravity="center_vertical"
+            android:paddingLeft="12dp"
+            android:paddingRight="8dp"
 
             android:text="年审"
             android:textColor="#ff333333"
             android:textSize="14sp" />
 
-        <View android:layout_height="1dp"
-            android:background="#33333333"
-            android:layout_width="match_parent"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#33333333" />
 
         <TextView
             android:id="@+id/tv3"
-            android:layout_marginTop="8dp"
             android:layout_width="match_parent"
             android:layout_height="40dp"
+            android:layout_marginTop="8dp"
             android:drawableLeft="@drawable/iv3"
             android:drawablePadding="8dp"
-            android:paddingLeft="12dp"
-            android:paddingRight="8dp"
             android:drawableRight="@drawable/icon_right"
             android:gravity="center_vertical"
+            android:paddingLeft="12dp"
+            android:paddingRight="8dp"
 
             android:text="补卡"
             android:textColor="#ff333333"
             android:textSize="14sp" />
 
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#33333333" />
 
     </LinearLayout>
 
