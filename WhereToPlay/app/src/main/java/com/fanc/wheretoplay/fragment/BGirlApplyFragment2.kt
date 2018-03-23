@@ -49,7 +49,7 @@ import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.bgirlapplyfragment2.*
 
-import kotlinx.android.synthetic.main.bgirlinfo.*
+
 import kotlinx.android.synthetic.main.bgirltitle.*
 import okhttp3.MultipartBody
 import java.io.*
@@ -168,7 +168,7 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
         tbv.setTv_title("信息登记")
         tv2.setTextColor(Color.parseColor("#c4483c"))
         // eev1.visibility = View.GONE
-        eev1.setTv("单位名称", true)
+
         eev2.setTv("姓名", true)
         eev3.setTv("性别", true)
         eev4.setTv("出生日期", true)
@@ -186,6 +186,23 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
         eev16.setTv("职务", true)
 
         val list = arrayListOf<String>()
+
+
+        val listshangye = arrayListOf<String>();
+        list.add("歌舞娱乐")
+        list.add("酒吧")
+        list.add("音乐茶室")
+        list.add("游戏机")
+        list.add("游艺机")
+        list.add("文化游乐场（游乐园）")
+        list.add("棋牌室")
+        list.add("浴场浴室")
+        list.add("桑拿会所")
+        list.add("按摩保健")
+        list.add("足浴")
+        list.add("美容美发（含桑拿）")
+
+        list.add("其他")
 
 
         //获取所有的商家信息
@@ -254,7 +271,7 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
 
         go.setOnClickListener {
             if (!TextUtils.isEmpty(eev1.data) &&
-                    !TextUtils.isEmpty(eev1.data) &&
+
                     !TextUtils.isEmpty(eev2.data) &&
                     !TextUtils.isEmpty(eev3.data) &&
                     !TextUtils.isEmpty(eev4.data) &&

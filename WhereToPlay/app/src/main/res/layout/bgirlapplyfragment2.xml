@@ -43,11 +43,140 @@
                 android:id="@+id/spi"
                 android:layout_height="wrap_content" />
 
+            <View
+                android:layout_below="@+id/sp"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="12dp"
+                android:layout_width="match_parent"
+                android:background="#33333333"
+                android:layout_height="1dp"/>
 
-            <include
-                layout="@layout/bgirlinfo"
+
+            <com.fanc.wheretoplay.view.ExtendEditView
+                android:id="@+id/eev1"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
+
+            <com.fanc.wheretoplay.view.ExtendEditView
+                android:id="@+id/eev2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.fanc.wheretoplay.view.ExtendEditView
+                android:id="@+id/eev3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.fanc.wheretoplay.view.ExtendEditView
+                android:id="@+id/eev4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.fanc.wheretoplay.view.ExtendEditView
+                android:id="@+id/eev5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.fanc.wheretoplay.view.ExtendEditView
+                android:id="@+id/eev6"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.fanc.wheretoplay.view.ExtendEditView
+                android:id="@+id/eev7"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.fanc.wheretoplay.view.ExtendEditView
+                android:id="@+id/eev8"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.fanc.wheretoplay.view.ExtendEditView
+                android:id="@+id/eev9"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+
+            <com.fanc.wheretoplay.view.ExtendEditView
+                android:id="@+id/eev10"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.fanc.wheretoplay.view.ExtendEditView
+                android:id="@+id/eev11"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.fanc.wheretoplay.view.ExtendEditView
+                android:id="@+id/eev12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.fanc.wheretoplay.view.ExtendEditView
+                android:id="@+id/eev13"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.fanc.wheretoplay.view.ExtendEditView
+                android:id="@+id/eev14"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.fanc.wheretoplay.view.ExtendEditView
+                android:id="@+id/eev15"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <com.fanc.wheretoplay.view.ExtendEditView
+                android:id="@+id/eev16"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="个人照片" />
+
+            <ImageView
+                android:id="@+id/iv1"
+                android:layout_width="match_parent"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_height="160dp"
+                android:background="@drawable/plus" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="证件照（正反照）" />
+
+            <ImageView
+                android:id="@+id/iv2"
+                android:layout_width="match_parent"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_height="160dp"
+                android:background="@drawable/plus" />
+            <ImageView
+                android:id="@+id/iv3"
+                android:layout_width="match_parent"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_height="160dp"
+                android:background="@drawable/plus" />
+
+
+
+
+
+
 
 
             <TextView

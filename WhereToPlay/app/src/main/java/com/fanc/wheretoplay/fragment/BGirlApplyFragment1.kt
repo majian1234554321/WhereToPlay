@@ -55,7 +55,7 @@ class BGirlApplyFragment1 : BaseFragment() {
 
 
 
-            return BGirlApplyFragment1()
+            return bGirlApplyFragment1
         }
     }
 }
