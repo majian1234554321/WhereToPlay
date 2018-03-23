@@ -537,18 +537,18 @@ public class Network {
         //从业人员申请生成并支付订单 --
         @Multipart
         @POST("Empl/emplApplicationPayOrder")
-        Observable<AccessOrderIdModel> emplApplicationPayOrder(@Part List<MultipartBody.Part> fileA);
+        Observable<OrderPayoffModel> emplApplicationPayOrder(@Part List<MultipartBody.Part> fileA);
 
         //从业人员补卡生成并支付订单 --
         @Multipart
         @POST("Empl/emplPatchCardPayOrder")
-        Observable<AccessOrderIdModel> emplPatchCardPayOrder(@Part List<MultipartBody.Part> fileA);
+        Observable<OrderPayoffModel> emplPatchCardPayOrder(@Part List<MultipartBody.Part> fileA);
 
 
         //从业人员年审生成并支付订单 --
         @Multipart
         @POST("Empl/emplYearReviewPayOrder")
-        Observable<AccessOrderIdModel> emplYearReviewPayOrder(@Part List<MultipartBody.Part> fileA);
+        Observable<OrderPayoffModel> emplYearReviewPayOrder(@Part List<MultipartBody.Part> fileA);
 
 
     }
