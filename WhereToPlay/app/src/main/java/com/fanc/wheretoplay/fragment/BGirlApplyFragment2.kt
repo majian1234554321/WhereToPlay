@@ -36,6 +36,7 @@ import com.fanc.wheretoplay.activity.DisplayActivity
 import com.fanc.wheretoplay.base.App
 import com.fanc.wheretoplay.base.BaseFragment
 import com.fanc.wheretoplay.datamodel.AccessOrderIdModel
+import com.fanc.wheretoplay.datamodel.EmplStoreModel
 import com.fanc.wheretoplay.image.GlideGalleryImageLoader
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils
 import com.fanc.wheretoplay.util.*
@@ -72,7 +73,7 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
                 ivDsplay = "2"
                 modifyHeader()
 
-                Toast.makeText(mContext, spi.data, Toast.LENGTH_SHORT).show()
+                Toast.makeText(mContext, spi.value, Toast.LENGTH_SHORT).show()
 
             }
             R.id.iv3 -> {
@@ -88,6 +89,7 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
     private var iv164Value: String? = null
     var iv264Value: String? = null
     var iv364Value: String? = null
+    var store_id: String? = null
 
     var ivDsplay: String? = "-1"
 
@@ -165,6 +167,7 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         tbv.setTv_title("信息登记")
         tv2.setTextColor(Color.parseColor("#c4483c"))
+        // eev1.visibility = View.GONE
         eev1.setTv("单位名称", true)
         eev2.setTv("姓名", true)
         eev3.setTv("性别", true)
@@ -182,6 +185,8 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
         eev15.setTv("行业", true)
         eev16.setTv("职务", true)
 
+        val list = arrayListOf<String>()
+
 
         //获取所有的商家信息
 
@@ -189,20 +194,36 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
                 .emplGetMessage(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object :Observer<>{
+                .subscribe(object : Observer<EmplStoreModel> {
+                    override fun onComplete() = Unit
+
+                    override fun onSubscribe(d: Disposable) = Unit
+
+                    override fun onNext(t: EmplStoreModel) {
+
+                        if (t.code == "0") {
+                            t.content.forEach {
+
+                                list.add(it.name)
+                                spi.setData(list, mContext, "单位名称")
+
+
+                            }
+                        }
+
+                        Toast.makeText(mContext, t.message, Toast.LENGTH_SHORT).show()
+                    }
+
+                    override fun onError(e: Throwable) {
+                        Toast.makeText(mContext, e.toString(), Toast.LENGTH_SHORT).show()
+                    }
 
                 })
 
 
 
-        val list = arrayListOf<String>()
-        list.add("a")
-        list.add("天上人间")
-        list.add("天地会")
-        list.add("a")
 
 
-        spi.setData(list, mContext)
 
 
         eev1.setData()
@@ -255,44 +276,45 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
             ) {
 
 
-                val list = arrayListOf<MultipartBody.Part>()
+                val listArgs = arrayListOf<MultipartBody.Part>()
 
 
 
 
 
 
-                list.add(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken()))
-                list.add(MultipartBody.Part.createFormData("store_id", SPUtils(context).getUser().getToken()))
-                list.add(MultipartBody.Part.createFormData("user_id", SPUtils(context).getUser().id))
+                listArgs.add(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken()))
+                listArgs.add(MultipartBody.Part.createFormData("store_name", spi.value))
+                listArgs.add(MultipartBody.Part.createFormData("user_id", SPUtils(context).getUser().id))
 
 
 
-                list.add(MultipartBody.Part.createFormData("name", eev1.data))
-                list.add(MultipartBody.Part.createFormData("id", eev2.data))
-                list.add(MultipartBody.Part.createFormData("sex", eev3.data))//sex
-                list.add(MultipartBody.Part.createFormData("birthday", eev4.data))//生日
-                list.add(MultipartBody.Part.createFormData("ethnic", eev5.data))//民族
-                list.add(MultipartBody.Part.createFormData("id_type", eev6.data))//证件类型 1身份证 2 其他
-                list.add(MultipartBody.Part.createFormData("id_number", eev7.data))//身份证号
-                list.add(MultipartBody.Part.createFormData("birth_address", eev8.data))//户籍地址
-                list.add(MultipartBody.Part.createFormData("birthdetailaddress", eev9.data))// 户籍详细地址
-                list.add(MultipartBody.Part.createFormData("nowdetailaddress", eev10.data))//现住地址
-                list.add(MultipartBody.Part.createFormData("harvest_address", eev11.data))//现住详细地址
-                list.add(MultipartBody.Part.createFormData("mobile", eev12.data))//手机号
-                list.add(MultipartBody.Part.createFormData("urgent_man", eev13.data)) //紧急联系人
-                list.add(MultipartBody.Part.createFormData("urgent_mobile", eev14.data))//紧急联系人号码
-                list.add(MultipartBody.Part.createFormData("profession", eev15.data))//行业
-                list.add(MultipartBody.Part.createFormData("position", eev16.data))//职务
+                listArgs.add(MultipartBody.Part.createFormData("name", eev2.data))
+                listArgs.add(MultipartBody.Part.createFormData("sex", eev3.data))//sex
+                listArgs.add(MultipartBody.Part.createFormData("birthday", eev4.data))//生日
+
+                listArgs.add(MultipartBody.Part.createFormData("ethnic", eev5.data))//民族
+                listArgs.add(MultipartBody.Part.createFormData("id_type", eev6.data))//证件类型 1身份证 2 其他
+                listArgs.add(MultipartBody.Part.createFormData("id_number", eev7.data))//身份证号
+                listArgs.add(MultipartBody.Part.createFormData("birth_address", eev8.data))//户籍地址
+                listArgs.add(MultipartBody.Part.createFormData("birth_detail_address", eev9.data))// 户籍详细地址
+                listArgs.add(MultipartBody.Part.createFormData("now_address", eev10.data))//现住地址
+                listArgs.add(MultipartBody.Part.createFormData("now_detail_address", eev10.data))//现住详细地址
+                listArgs.add(MultipartBody.Part.createFormData("harvest_address", eev11.data))//收获地址
+                listArgs.add(MultipartBody.Part.createFormData("mobile", eev12.data))//手机号
+                listArgs.add(MultipartBody.Part.createFormData("urgent_man", eev13.data)) //紧急联系人
+                listArgs.add(MultipartBody.Part.createFormData("urgent_mobile", eev14.data))//紧急联系人号码
+                listArgs.add(MultipartBody.Part.createFormData("profession", eev15.data))//行业
+                listArgs.add(MultipartBody.Part.createFormData("position", eev16.data))//职务
 
 
-                list.add(MultipartBody.Part.createFormData("personal_path", iv164Value))//个人照片
-                list.add(MultipartBody.Part.createFormData("id_pic_path1", iv264Value))//身份证正面
-                list.add(MultipartBody.Part.createFormData("id_pic_path2", iv364Value))//身份证背面
+                listArgs.add(MultipartBody.Part.createFormData("personal_path", iv164Value))//个人照片
+                listArgs.add(MultipartBody.Part.createFormData("id_pic_path1", iv264Value))//身份证正面
+                listArgs.add(MultipartBody.Part.createFormData("id_pic_path2", iv364Value))//身份证背面
 
 
                 Retrofit_RequestUtils.getRequest()
-                        .EmplRegistration(list)
+                        .EmplRegistration(listArgs)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(object : Observer<AccessOrderIdModel> {
@@ -306,10 +328,16 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
 
                             override fun onNext(p0: AccessOrderIdModel) {
 
-                                val intent = Intent(mContext, DisplayActivity::class.java)
-                                intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment3")
-                                intent.putExtra("statues", "-1")
-                                startActivity(intent)
+                                if (p0.code == "0") {
+                                    val intent = Intent(mContext, DisplayActivity::class.java)
+                                    intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment3")
+                                    intent.putExtra("statues", "1")
+                                    startActivity(intent)
+                                } else {
+                                    Toast.makeText(mContext, p0.message, Toast.LENGTH_SHORT).show()
+                                }
+
+
                             }
 
                             override fun onError(p0: Throwable) {
@@ -330,8 +358,16 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
     }
 
     companion object {
-        fun newInstance(): BGirlApplyFragment2 {
-            return BGirlApplyFragment2()
+        fun newInstance(bgirltype: String): BGirlApplyFragment2 {
+            val bGirlApplyFragment2 = BGirlApplyFragment2()
+            val args = Bundle()
+
+
+            args.putString("bgirltype", bgirltype)
+
+            bGirlApplyFragment2.arguments = args
+
+            return bGirlApplyFragment2
         }
     }
 

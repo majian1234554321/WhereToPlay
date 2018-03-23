@@ -12,8 +12,17 @@ import android.widget.Toast
 import com.fanc.wheretoplay.R
 import com.fanc.wheretoplay.activity.DisplayActivity
 import com.fanc.wheretoplay.base.BaseFragment
+import com.fanc.wheretoplay.datamodel.AccessOrderIdModel
+import com.fanc.wheretoplay.rx.Retrofit_RequestUtils
+import com.fanc.wheretoplay.util.SPUtils
+import io.reactivex.Observer
+import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.disposables.Disposable
+import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.bgirlapplyfragment3.*
 import kotlinx.android.synthetic.main.bgirltitle.*
+import okhttp3.MultipartBody
+import java.util.*
 
 /**
  *
@@ -30,6 +39,46 @@ class BGirlApplyFragment3 : BaseFragment() {
         tbv.setTv_title("从业申请")
         tv3.setTextColor(Color.parseColor("#c4483c"))
 
+        val bgirltype = arguments?.getString("bgirltype");
+
+
+
+        next.setOnClickListener {
+            Retrofit_RequestUtils.getRequest()
+                    .emplGetAmount(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken()))
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(object : Observer<AccessOrderIdModel> {
+                        override fun onComplete() = Unit
+
+                        override fun onSubscribe(d: Disposable) = Unit
+
+                        override fun onNext(t: AccessOrderIdModel) {
+                            if (t.code == "0") {
+                                val intent = Intent(mContext, DisplayActivity::class.java)
+
+                                when (bgirltype) {
+                                    "emplApplicationStatus" -> intent.putExtra("bGirlPayMoney", t.content.application_amount)
+                                    "emplYearReviewStatus" -> intent.putExtra("bGirlPayMoney", t.content.year_review_amount)
+                                    else -> intent.putExtra("bGirlPayMoney", t.content.patch_card_amount)
+                                }
+
+                                intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment4")
+                                intent.putExtra("bgirltype", bgirltype)
+
+                                startActivity(intent)
+
+                            }
+
+                        }
+
+                        override fun onError(e: Throwable) {
+
+                        }
+
+                    })
+        }
+
 
         //0未申请1未审核2已审核3审核不通过
         when (arguments?.getString("statues")) {
@@ -43,11 +92,7 @@ class BGirlApplyFragment3 : BaseFragment() {
                 iv_status.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.iv_status2))
                 next.text = "支付"
                 next.visibility = View.VISIBLE
-                next.setOnClickListener {
-                    val intent = Intent(mContext, DisplayActivity::class.java)
-                    intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment4")
-                    startActivity(intent)
-                }
+
 
             }
             "3" -> {
@@ -69,10 +114,12 @@ class BGirlApplyFragment3 : BaseFragment() {
     }
 
     companion object {
-        fun newInstance(status: String): BGirlApplyFragment3 {
+        fun newInstance(status: String, bgirltype: String): BGirlApplyFragment3 {
             val bGirlApplyFragment3 = BGirlApplyFragment3()
             val args = Bundle()
             args.putString("statues", status)
+            args.putString("bgirltype", bgirltype)
+
             bGirlApplyFragment3.arguments = args
 
             return bGirlApplyFragment3

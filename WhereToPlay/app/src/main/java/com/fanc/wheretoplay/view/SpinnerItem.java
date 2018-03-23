@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
+import android.widget.TextView;
 
 import com.fanc.wheretoplay.R;
 
@@ -23,6 +24,7 @@ public class SpinnerItem extends RelativeLayout {
     private Spinner spinner;
     private ArrayAdapter<String> arrayAdapter;
     private String value;
+    private TextView tv ;
 
     public SpinnerItem(Context context) {
         super(context);
@@ -42,17 +44,21 @@ public class SpinnerItem extends RelativeLayout {
     public void init(Context context) {
         View view = View.inflate(context, R.layout.spinneritem, this);
         spinner = view.findViewById(R.id.sp);
+        tv = view.findViewById(R.id.tv);
+
     }
 
-    public void setData(List<String> list, Context context) {
+    public void setData(List<String> list, Context context,String leftData) {
 
+
+        tv.setText(leftData);
         value = list.get(0);
-        arrayAdapter = new ArrayAdapter(context, android.R.layout.simple_spinner_item, list);
-        arrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        arrayAdapter = new ArrayAdapter(context, R.layout.spinner_list_item, list);
+        arrayAdapter.setDropDownViewResource(R.layout.spinner_list_item);
         spinner.setAdapter(arrayAdapter);
     }
 
-    public String getData() {
+    public String getValue() {
 
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override

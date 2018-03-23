@@ -22,6 +22,7 @@ import com.fanc.wheretoplay.datamodel.CancleOrderModel;
 import com.fanc.wheretoplay.datamodel.CouponCountModel;
 import com.fanc.wheretoplay.datamodel.CouponListModel;
 import com.fanc.wheretoplay.datamodel.DelectCollection;
+import com.fanc.wheretoplay.datamodel.EmplStoreModel;
 import com.fanc.wheretoplay.datamodel.MerchantDetailModel;
 import com.fanc.wheretoplay.datamodel.MineFriend;
 import com.fanc.wheretoplay.datamodel.MineMoney;
@@ -509,7 +510,7 @@ public class Network {
         //获取商家信息 --
         @Multipart
         @POST("Empl/emplGetMessage")
-        Observable<AccessOrderIdModel> emplGetMessage(@Part MultipartBody.Part fileA);
+        Observable<EmplStoreModel> emplGetMessage(@Part MultipartBody.Part fileA);
 
         //从业申请状态 --
         @Multipart
@@ -531,7 +532,7 @@ public class Network {
         //获取申请 年审 补卡支付价格 --
         @Multipart
         @POST("Empl/emplGetAmount")
-        Observable<AccessOrderIdModel> emplGetAmount(@Part List<MultipartBody.Part> fileA);
+        Observable<AccessOrderIdModel> emplGetAmount(@Part MultipartBody.Part fileA);
 
         //从业人员申请生成并支付订单 --
         @Multipart

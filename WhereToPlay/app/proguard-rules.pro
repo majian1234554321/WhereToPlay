@@ -286,6 +286,7 @@ public static final int *;
 
 -keep class com.unionpay.UPPayWapActivity {*;}
 -keep class com.unionpay.uppay.PayActivity {*;}
+-keepattributes SourceFile,LineNumberTable
 
 -keep class cn.pedant.SweetAlert.Rotate3dAnimation {
   public <init>(...);

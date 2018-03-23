@@ -38,6 +38,7 @@ var mFragmentManager : FragmentManager? = null
         val statusValue = intent.getStringExtra("status")
 
 
+        val bGirlPayMoney =  intent.getStringExtra("bGirlPayMoney")
 
 
         val image = intent.getStringExtra("image")
@@ -45,6 +46,9 @@ var mFragmentManager : FragmentManager? = null
         val room_type = intent.getStringExtra("room_type")
         val total = intent.getStringExtra("total")
         val statues = intent.getStringExtra("statues")
+
+
+        val bgirltype = intent.getStringExtra("bgirltype")
 
 
         mFragmentManager = supportFragmentManager
@@ -97,23 +101,23 @@ var mFragmentManager : FragmentManager? = null
 
             "BGirlApplyFragment1" ->{
                 supportFragmentManager.beginTransaction()
-                        .replace(R.id.displayfragment, BGirlApplyFragment1.newInstance())
+                        .replace(R.id.displayfragment, BGirlApplyFragment1.newInstance(bgirltype))
                         .commit()
             }
             "BGirlApplyFragment2" ->{
                 supportFragmentManager.beginTransaction()
-                        .replace(R.id.displayfragment, BGirlApplyFragment2.newInstance())
+                        .replace(R.id.displayfragment, BGirlApplyFragment2.newInstance(bgirltype))
                         .commit()
             }
 
             "BGirlApplyFragment3" ->{
                 supportFragmentManager.beginTransaction()
-                        .replace(R.id.displayfragment, BGirlApplyFragment3.newInstance(statues))
+                        .replace(R.id.displayfragment, BGirlApplyFragment3.newInstance(statues,bgirltype))
                         .commit()
             }
             "BGirlApplyFragment4" ->{
                 supportFragmentManager.beginTransaction()
-                        .replace(R.id.displayfragment, BGirlApplyFragment4.newInstance())
+                        .replace(R.id.displayfragment, BGirlApplyFragment4.newInstance(bGirlPayMoney,bgirltype))
                         .commit()
             }
 

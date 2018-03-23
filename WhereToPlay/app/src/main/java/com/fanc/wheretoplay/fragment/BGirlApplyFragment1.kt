@@ -31,6 +31,7 @@ class BGirlApplyFragment1 : BaseFragment() {
             if (checkbox.isChecked) {
                 val intent = Intent(mContext, DisplayActivity::class.java)
                 intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment2")
+                intent.putExtra("bgirltype", arguments?.getString("bgirltype"))
                 startActivity(intent)
             } else {
                 Toast.makeText(mContext, "确认阅读相关须知", Toast.LENGTH_SHORT).show()
@@ -40,7 +41,20 @@ class BGirlApplyFragment1 : BaseFragment() {
     }
 
     companion object {
-        fun newInstance():BGirlApplyFragment1{
+        fun newInstance(bgirltype:String):BGirlApplyFragment1{
+            val bGirlApplyFragment1 = BGirlApplyFragment1()
+
+
+            val args = Bundle()
+
+            args.putString("bgirltype", bgirltype)
+
+            bGirlApplyFragment1.arguments = args
+
+
+
+
+
             return BGirlApplyFragment1()
         }
     }
