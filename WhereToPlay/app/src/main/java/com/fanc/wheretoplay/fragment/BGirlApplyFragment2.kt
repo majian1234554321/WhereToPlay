@@ -185,13 +185,13 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
 
         //获取所有的商家信息
 
-      /*  Retrofit_RequestUtils.getRequest()
+        Retrofit_RequestUtils.getRequest()
                 .emplGetMessage(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object :Observer<>{
 
-                })*/
+                })
 
 
 
@@ -308,7 +308,7 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
 
                                 val intent = Intent(mContext, DisplayActivity::class.java)
                                 intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment3")
-                                intent.putExtra("status", "-1")
+                                intent.putExtra("statues", "-1")
                                 startActivity(intent)
                             }
 

@@ -32,7 +32,7 @@ class BGirlApplyFragment3 : BaseFragment() {
 
 
         //0未申请1未审核2已审核3审核不通过
-        when (arguments?.getString("status")) {
+        when (arguments?.getString("statues")) {
             "1" -> {
                 tv_text.text = "资料审核中，请耐心等待···"
                 iv_status.setImageDrawable(ContextCompat.getDrawable(mContext, R.drawable.iv_status1))
@@ -72,7 +72,7 @@ class BGirlApplyFragment3 : BaseFragment() {
         fun newInstance(status: String): BGirlApplyFragment3 {
             val bGirlApplyFragment3 = BGirlApplyFragment3()
             val args = Bundle()
-            args.putString("status", status)
+            args.putString("statues", status)
             bGirlApplyFragment3.arguments = args
 
             return bGirlApplyFragment3
