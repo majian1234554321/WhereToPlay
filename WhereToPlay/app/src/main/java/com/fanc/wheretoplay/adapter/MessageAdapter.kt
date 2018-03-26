@@ -27,7 +27,7 @@ import kotlinx.android.synthetic.main.item_message.view.*
 class MessageAdapter(val context: Context, val messages: List<MessageList.Message>) : RecyclerView.Adapter<MessageAdapter.ViewHolder>() {
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
 
-        with(holder?.itemView!!) {
+        with(holder.itemView) {
             tv_item_message_title?.text = messages[position].title
             tv_item_message_content.text = messages[position].content
 

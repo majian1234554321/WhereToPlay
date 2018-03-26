@@ -39,6 +39,7 @@ import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.bgirlapplyfragment4.*
 import kotlinx.android.synthetic.main.bgirltitle.*
 import okhttp3.MultipartBody
+import kotlin.properties.Delegates
 
 /**
  *
@@ -63,7 +64,7 @@ class BGirlApplyFragment4 : BaseFragment(), RadioGroup.OnCheckedChangeListener {
         }
     }
 
-    lateinit var wxApi: IWXAPI
+     var wxApi: IWXAPI by Delegates.notNull()
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return View.inflate(inflater.context, R.layout.bgirlapplyfragment4, null)
     }

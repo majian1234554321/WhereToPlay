@@ -33,7 +33,7 @@ class ExtendAdapter(val context: Context, var flag: Boolean,
 
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        with(holder?.itemView!!) {
+        with(holder.itemView) {
             Glide.with(context).load(list[position].pic).placeholder(R.drawable.default_rect).into(iv)
             tv1text.text = list[position].name
             tv2.text = "￥ ${list[position].discount_price}"

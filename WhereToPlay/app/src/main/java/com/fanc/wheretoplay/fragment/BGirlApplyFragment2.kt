@@ -499,7 +499,7 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
         val name = DateFormat.format("yyyyMMdd_hhmmss", Calendar.getInstance(Locale.CHINA)).toString() + ".jpg"
 
         val RealFilePath = getRealFilePath(mContext, uriData)
-        if (RealFilePath!!.endsWith("jpg") || RealFilePath!!.endsWith("jpeg") || RealFilePath!!.endsWith("png")) {
+        if (RealFilePath!!.endsWith("jpg") || RealFilePath.endsWith("jpeg") || RealFilePath!!.endsWith("png")) {
             val bitmap = BitmapUtils.getimage(RealFilePath)
 
 
@@ -673,7 +673,7 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
 
     public fun initData(list: List<String>, type: String) {
         val pvNoLinkOptions = OptionsPickerBuilder(mContext, OnOptionsSelectListener { options1, options2, options3, v ->
-            val str = ("food:" + list.get(options1)
+            val str = ("food:" + list[options1]
                     )
 
 
@@ -702,7 +702,7 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
             }
 
         })
-                .setOptionsSelectChangeListener { options1, options2, options3 ->
+                .setOptionsSelectChangeListener { options1, _, _ ->
                     val str = "options1: $options1"
                     // Toast.makeText(mContext, str, Toast.LENGTH_SHORT).show()
                 }
