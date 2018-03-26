@@ -1,8 +1,13 @@
 package com.fanc.wheretoplay.fragment
 
+import android.app.Activity
+import android.content.BroadcastReceiver
+import android.content.Context
 import android.content.Intent
+import android.content.IntentFilter
 import android.graphics.Color
 import android.os.Bundle
+import android.support.v4.content.LocalBroadcastManager
 import android.text.TextUtils
 import android.view.LayoutInflater
 import android.view.View
@@ -58,15 +63,15 @@ class BGirlApplyFragment4 : BaseFragment(), RadioGroup.OnCheckedChangeListener {
         }
     }
 
-    lateinit var wxApi :IWXAPI
+    lateinit var wxApi: IWXAPI
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return View.inflate(inflater.context, R.layout.bgirlapplyfragment4, null)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        wxApi  = WXAPIFactory.createWXAPI(mContext, Constants.WX_APP_ID)
+        registerBroadcastReceiver()
+        wxApi = WXAPIFactory.createWXAPI(mContext, Constants.WX_APP_ID)
         wxApi.registerApp(Constants.WX_APP_ID)
 
         tbv.setTv_title("支付")
@@ -127,9 +132,6 @@ class BGirlApplyFragment4 : BaseFragment(), RadioGroup.OnCheckedChangeListener {
 
                         override fun onNext(t: OrderPayoffModel) {
                             if (t.code == "0") {
-
-                                Toast.makeText(mContext, "确认阅读相关须知", Toast.LENGTH_SHORT).show()
-
 
                                 when (payValue) {
 
@@ -224,10 +226,32 @@ class BGirlApplyFragment4 : BaseFragment(), RadioGroup.OnCheckedChangeListener {
     }
 
 
+    var receiver: Receiver? = null
+    private fun registerBroadcastReceiver() {
+        receiver = Receiver()
+        val filter = IntentFilter(Constants.ACTION_CHOOSE_DISCOUNT_COUPON)
+        filter.addAction(Constants.ACTION_WXPAY_SUCCESS)
+        LocalBroadcastManager.getInstance(mContext).registerReceiver(receiver!!, filter)
+    }
 
+
+    class Receiver : BroadcastReceiver() {
+        override fun onReceive(context: Context?, intent: Intent?) {
+            val action = intent?.getAction()
+            if (Constants.ACTION_WXPAY_SUCCESS == action) {
+                Toast.makeText(context, "支付成功", Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, DisplayActivity::class.java)
+                intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment5")
+                context?.startActivity(intent)
+                val activity = context as DisplayActivity
+                activity.finish()
+            }
+        }
+
+    }
 
     // 支付成功去评价
-    private fun paySuccess() {
+    public fun paySuccess() {
         // 去评价
 
 
@@ -252,6 +276,15 @@ class BGirlApplyFragment4 : BaseFragment(), RadioGroup.OnCheckedChangeListener {
             bGirlApplyFragment4.arguments = args
 
             return bGirlApplyFragment4
+        }
+    }
+
+
+    override fun onDestroy() {
+        super.onDestroy()
+        if (receiver != null) {
+            LocalBroadcastManager.getInstance(mContext).unregisterReceiver(receiver!!)
+            receiver = null
         }
     }
 }
