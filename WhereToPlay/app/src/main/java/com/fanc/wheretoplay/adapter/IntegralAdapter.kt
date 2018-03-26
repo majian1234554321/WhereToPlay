@@ -23,7 +23,7 @@ class IntegralAdapter(val context: Activity, val list: List<ScoreList.ContentBea
 
     @SuppressLint("SetTextI18n")
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        with(holder?.itemView!!) {
+        with(holder.itemView) {
             tv_time?.text = DateFormatUtil.stampToDate(list[position].finish_time)
             tv_item_integral_no.text = "+" + java.lang.Double.parseDouble(list[position].score_detail).toInt()+"积分"
             tv_item_integral_title.text = list[position].name
@@ -31,7 +31,7 @@ class IntegralAdapter(val context: Activity, val list: List<ScoreList.ContentBea
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-            ViewHolder(View.inflate(parent?.context, R.layout.item_integral_detail, null))
+            ViewHolder(View.inflate(parent.context, R.layout.item_integral_detail, null))
 
 
     class ViewHolder(itemView: View?) : RecyclerView.ViewHolder(itemView)

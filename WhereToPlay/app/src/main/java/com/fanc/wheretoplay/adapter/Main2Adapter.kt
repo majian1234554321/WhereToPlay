@@ -223,7 +223,7 @@ class Main2Adapter(val mContext: Context, private val lists: ArrayList<BookListM
                             intent.putExtra("address", lists.get(position).address)
 
                             intent.putExtra("total", lists.get(position).total)
-                            if (lists != null && lists.get(position).order_action != null) {
+                            if (lists.get(position).order_action != null) {
                                 intent.putExtra("status", lists.get(position).order_action)
                             }
                             intent.setClass(context, PublicationEvaluationActivity::class.java)
@@ -239,7 +239,7 @@ class Main2Adapter(val mContext: Context, private val lists: ArrayList<BookListM
                             intent.putExtra("address", lists.get(position).address)
                             intent.putExtra("image", lists.get(position).cover)
                              intent.putExtra("statues", statues)
-                            if (lists != null && lists.get(position).order_action != null) {
+                            if (lists.get(position).order_action != null) {
                                 intent.putExtra("status", lists.get(position).order_action)
                             }
                             if ("6" == lists.get(position).order_function || "7" == lists.get(position).order_function) {

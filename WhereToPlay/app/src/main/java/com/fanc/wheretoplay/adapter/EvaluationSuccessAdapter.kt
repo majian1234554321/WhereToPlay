@@ -28,10 +28,10 @@ class EvaluationSuccessAdapter(var list: MutableList<StoreDetailModel.ContentBea
     override fun getItemCount(): Int = if (list.size > 0) list.size else 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder =
-            ViewHolder(View.inflate(parent?.context, R.layout.evaluationsuccessadapter, null))
+            ViewHolder(View.inflate(parent.context, R.layout.evaluationsuccessadapter, null))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        with(holder?.itemView!!) {
+        with(holder.itemView) {
             tv_reserve_item_title.text = list[position].name
             if (list[position].discount.isNotEmpty()) {
                 val text = SpannableString(list[position].discount + "折")
