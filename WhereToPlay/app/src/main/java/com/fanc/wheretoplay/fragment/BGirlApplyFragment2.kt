@@ -329,10 +329,15 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
                     !TextUtils.isEmpty(eev12.data) &&
                     !TextUtils.isEmpty(eev13.data) &&
                     !TextUtils.isEmpty(eev14.data) &&
+                    !TextUtils.isEmpty(eev15.data) &&
+                    !TextUtils.isEmpty(eev16.data) &&
 
                     !TextUtils.isEmpty(iv164Value) &&
                     !TextUtils.isEmpty(iv264Value) &&
-                    !TextUtils.isEmpty(iv364Value)
+                    !TextUtils.isEmpty(iv364Value) &&
+                    iv164Value != null &&
+                    iv264Value != null &&
+                    iv364Value != null
             ) {
 
 
@@ -689,7 +694,7 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
         })
                 .setOptionsSelectChangeListener { options1, options2, options3 ->
                     val str = "options1: $options1"
-                    Toast.makeText(mContext, str, Toast.LENGTH_SHORT).show()
+                   // Toast.makeText(mContext, str, Toast.LENGTH_SHORT).show()
                 }
 
                 .build()
