@@ -170,6 +170,7 @@ dependencies {
     compile 'com.jcodecraeer:xrecyclerview:1.5.9'
     compile 'com.meituan.android.walle:library:1.1.6'
 
+    compile 'com.contrarywind:Android-PickerView:4.0.1'
 }
 
 

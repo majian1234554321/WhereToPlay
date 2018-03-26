@@ -499,8 +499,8 @@ public class Network {
 
 
         @Multipart
-        @POST("Empl/EmplRegistration")
-        Observable<AccessOrderIdModel> EmplRegistration(@Part List<MultipartBody.Part> fileA);
+        @POST("Empl/emplRegistration")
+        Observable<AccessOrderIdModel> emplRegistration(@Part List<MultipartBody.Part> fileA);
 
 
         @GET("/Api/public/generateQrCode?code={id}")

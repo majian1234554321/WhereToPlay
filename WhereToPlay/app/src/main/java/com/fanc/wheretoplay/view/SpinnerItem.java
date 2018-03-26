@@ -53,7 +53,7 @@ public class SpinnerItem extends RelativeLayout {
 
         tv.setText(leftData);
         value = list.get(0);
-        arrayAdapter = new ArrayAdapter(context, R.layout.spinner_list_item, list);
+        arrayAdapter = new ArrayAdapter(context, R.layout.spinner_list_item1, list);
         arrayAdapter.setDropDownViewResource(R.layout.spinner_list_item);
         spinner.setAdapter(arrayAdapter);
     }
