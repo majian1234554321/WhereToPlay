@@ -33,6 +33,7 @@ class BGirlApplyFragment1 : BaseFragment() {
                 intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment2")
                 intent.putExtra("bgirltype", arguments?.getString("bgirltype"))
                 startActivity(intent)
+                mContext.finish()
             } else {
                 Toast.makeText(mContext, "确认阅读相关须知", Toast.LENGTH_SHORT).show()
             }
@@ -55,7 +56,7 @@ class BGirlApplyFragment1 : BaseFragment() {
 
 
 
-            return BGirlApplyFragment1()
+            return bGirlApplyFragment1
         }
     }
 }

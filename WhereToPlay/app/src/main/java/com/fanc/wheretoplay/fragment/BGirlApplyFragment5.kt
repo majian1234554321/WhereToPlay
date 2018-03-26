@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import com.fanc.wheretoplay.MainActivity
 import com.fanc.wheretoplay.R
 import com.fanc.wheretoplay.activity.DisplayActivity
 import com.fanc.wheretoplay.base.BaseFragment
@@ -26,25 +27,13 @@ class BGirlApplyFragment5 : BaseFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tbv.setTv_title("从业申请")
+        tbv.setTv_title("支付结果")
         tv5.setTextColor(Color.parseColor("#c4483c"))
 
-        eev1.setTv("单位名称", false)
-        eev2.setTv("姓名", false)
-        eev3.setTv("性别", false)
-        eev4.setTv("出生日期", false)
-        eev5.setTv("民族", false)
-        eev6.setTv("证件类型", false)
-        eev7.setTv("证件号", false)
-        eev8.setTv("户籍地址", false)
-        eev9.setTv("详细地址", false)
-        eev10.setTv("现住地址", false)
-        eev11.setTv("收货地址", false)
-        eev12.setTv("本人手机号", false)
-        eev13.setTv("紧急联系人", false)
-        eev14.setTv("联系人电话", false)
-        eev15.setTv("行业", false)
-        eev16.setTv("职务", false)
+        next.setOnClickListener {
+            mContext.startActivity(Intent(mContext, MainActivity::class.java))
+            mContext.finish()
+        }
 
 
     }

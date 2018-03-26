@@ -1,6 +1,7 @@
 package com.fanc.wheretoplay.fragment
 
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity.RESULT_OK
 import android.content.*
 import android.content.pm.PackageManager
@@ -8,11 +9,8 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.graphics.Color
 import android.net.Uri
-import android.os.Build
+import android.os.*
 import android.os.Build.*
-import android.os.Bundle
-import android.os.Environment
-import android.os.ParcelFileDescriptor
 import android.provider.MediaStore
 import android.support.v4.app.ActivityCompat
 import android.support.v4.content.ContextCompat
@@ -23,13 +21,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ScrollView
-import android.widget.Toast
+import android.widget.*
 import cn.finalteam.galleryfinal.CoreConfig
 import cn.finalteam.galleryfinal.FunctionConfig
 import cn.finalteam.galleryfinal.GalleryFinal
 import cn.finalteam.galleryfinal.ThemeConfig
 import cn.finalteam.galleryfinal.model.PhotoInfo
+import com.bigkoo.pickerview.builder.OptionsPickerBuilder
+import com.bigkoo.pickerview.builder.TimePickerBuilder
+import com.bigkoo.pickerview.listener.*
 import com.bumptech.glide.Glide
 import com.fanc.wheretoplay.R
 import com.fanc.wheretoplay.activity.DisplayActivity
@@ -37,21 +37,25 @@ import com.fanc.wheretoplay.base.App
 import com.fanc.wheretoplay.base.BaseFragment
 import com.fanc.wheretoplay.datamodel.AccessOrderIdModel
 import com.fanc.wheretoplay.datamodel.EmplStoreModel
+import com.fanc.wheretoplay.datamodel.JsonBean
 import com.fanc.wheretoplay.image.GlideGalleryImageLoader
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils
 import com.fanc.wheretoplay.util.*
 import com.fanc.wheretoplay.util.BitmapUtils.Companion.Bitmap2StrByBase64
 import com.fanc.wheretoplay.util.BitmapUtils.Companion.compressImage
 import com.fanc.wheretoplay.view.ModifyHeadDialog
+import com.google.gson.Gson
+import io.reactivex.Observable
 import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.bgirlapplyfragment2.*
 
-import kotlinx.android.synthetic.main.bgirlinfo.*
+
 import kotlinx.android.synthetic.main.bgirltitle.*
 import okhttp3.MultipartBody
+import org.json.JSONArray
 import java.io.*
 import java.text.SimpleDateFormat
 import java.util.*
@@ -73,7 +77,6 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
                 ivDsplay = "2"
                 modifyHeader()
 
-                Toast.makeText(mContext, spi.value, Toast.LENGTH_SHORT).show()
 
             }
             R.id.iv3 -> {
@@ -159,7 +162,11 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        return View.inflate(inflater.context, R.layout.bgirlapplyfragment2, null)
+        val view = View.inflate(inflater.context, R.layout.bgirlapplyfragment2, null)
+
+
+
+        return view
     }
 
 
@@ -167,13 +174,15 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
         tbv.setTv_title("信息登记")
         tv2.setTextColor(Color.parseColor("#c4483c"))
-        // eev1.visibility = View.GONE
+
+
+
         eev1.setTv("单位名称", true)
         eev2.setTv("姓名", true)
-        eev3.setTv("性别", true)
+
         eev4.setTv("出生日期", true)
         eev5.setTv("民族", true)
-        eev6.setTv("证件类型", true)
+
         eev7.setTv("证件号", true)
         eev8.setTv("户籍地址", true)
         eev9.setTv("详细地址", true)
@@ -185,8 +194,56 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
         eev15.setTv("行业", true)
         eev16.setTv("职务", true)
 
-        val list = arrayListOf<String>()
+        mHandler.sendEmptyMessage(MSG_LOAD_DATA)
 
+
+        eev4.setOnClickListener {
+            initTimePicker()
+        }
+
+
+        val list1 = arrayListOf<String>()
+
+        val list5 = arrayListOf<String>()
+        list5.add("汉")
+        list5.add("回")
+
+
+        val list15 = arrayListOf<String>();
+        list15.add("歌舞娱乐")
+        list15.add("酒吧")
+        list15.add("音乐茶室")
+        list15.add("游戏机")
+        list15.add("游艺机")
+        list15.add("文化游乐场（游乐园）")
+        list15.add("棋牌室")
+        list15.add("浴场浴室")
+        list15.add("桑拿会所")
+        list15.add("按摩保健")
+        list15.add("足浴")
+        list15.add("美容美发（含桑拿）")
+
+
+        val list16 = arrayListOf<String>()
+        list16.add("A级经营负责人")
+        list16.add("B级行政人员")
+        list16.add("C级业务主管")
+        list16.add("D级服务生")
+        list16.add("E级服务员")
+        list16.add("其他")
+
+
+
+        eev5.setOnClickListener {
+            initData(list5, "eev5")
+        }
+        eev15.setOnClickListener {
+            initData(list15, "eev15")
+        }
+
+        eev16.setOnClickListener {
+            initData(list16, "eev16")
+        }
 
         //获取所有的商家信息
 
@@ -204,14 +261,12 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
                         if (t.code == "0") {
                             t.content.forEach {
 
-                                list.add(it.name)
-                                spi.setData(list, mContext, "单位名称")
+                                list1.add(it.name)
 
 
                             }
                         }
 
-                        Toast.makeText(mContext, t.message, Toast.LENGTH_SHORT).show()
                     }
 
                     override fun onError(e: Throwable) {
@@ -221,27 +276,33 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
                 })
 
 
+        eev8.setOnClickListener {
+
+            if (isLoaded) {
+                showPickerView("eev8")
+            } else {
+                Toast.makeText(mContext, "Please waiting until the data is parsed", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+
+        eev10.setOnClickListener {
+            if (isLoaded) {
+                showPickerView("eev10")
+            } else {
+                Toast.makeText(mContext, "Please waiting until the data is parsed", Toast.LENGTH_SHORT).show()
+            }
+        }
+
+//
+//
+        eev1.setOnClickListener {
+            initData(list1, "eev1")
+        }
 
 
 
 
-
-        eev1.setData()
-        eev2.setData()
-        eev3.setData()
-        eev4.setData()
-        eev5.setData()
-        eev6.setData()
-        eev7.setData()
-        eev8.setData()
-        eev9.setData()
-        eev10.setData()
-        eev11.setData()
-        eev12.setData()
-        eev13.setData()
-        eev14.setData()
-        eev15.setData()
-        eev16.setData()
         iv164Value = "122112"
         iv264Value = "122112"
         iv364Value = "122112"
@@ -254,12 +315,12 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
 
         go.setOnClickListener {
             if (!TextUtils.isEmpty(eev1.data) &&
-                    !TextUtils.isEmpty(eev1.data) &&
+
                     !TextUtils.isEmpty(eev2.data) &&
-                    !TextUtils.isEmpty(eev3.data) &&
+
                     !TextUtils.isEmpty(eev4.data) &&
                     !TextUtils.isEmpty(eev5.data) &&
-                    !TextUtils.isEmpty(eev6.data) &&
+
                     !TextUtils.isEmpty(eev7.data) &&
                     !TextUtils.isEmpty(eev8.data) &&
                     !TextUtils.isEmpty(eev9.data) &&
@@ -268,8 +329,7 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
                     !TextUtils.isEmpty(eev12.data) &&
                     !TextUtils.isEmpty(eev13.data) &&
                     !TextUtils.isEmpty(eev14.data) &&
-                    !TextUtils.isEmpty(eev16.data) &&
-                    !TextUtils.isEmpty(eev15.data) &&
+
                     !TextUtils.isEmpty(iv164Value) &&
                     !TextUtils.isEmpty(iv264Value) &&
                     !TextUtils.isEmpty(iv364Value)
@@ -284,17 +344,23 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
 
 
                 listArgs.add(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken()))
-                listArgs.add(MultipartBody.Part.createFormData("store_name", spi.value))
-                listArgs.add(MultipartBody.Part.createFormData("user_id", SPUtils(context).getUser().id))
-
+                listArgs.add(MultipartBody.Part.createFormData("store_name", eev1.data))
+                // listArgs.add(MultipartBody.Part.createFormData("user_id", SPUtils(context).getUser().id))
 
 
                 listArgs.add(MultipartBody.Part.createFormData("name", eev2.data))
-                listArgs.add(MultipartBody.Part.createFormData("sex", eev3.data))//sex
+
+                if (rb1.isChecked) {
+                    listArgs.add(MultipartBody.Part.createFormData("sex", "1"))//sex
+                } else {
+                    listArgs.add(MultipartBody.Part.createFormData("sex", "2"))//sex
+                }
+
+
                 listArgs.add(MultipartBody.Part.createFormData("birthday", eev4.data))//生日
 
                 listArgs.add(MultipartBody.Part.createFormData("ethnic", eev5.data))//民族
-                listArgs.add(MultipartBody.Part.createFormData("id_type", eev6.data))//证件类型 1身份证 2 其他
+                // listArgs.add(MultipartBody.Part.createFormData("id_type", eev6.data))//证件类型 1身份证 2 其他
                 listArgs.add(MultipartBody.Part.createFormData("id_number", eev7.data))//身份证号
                 listArgs.add(MultipartBody.Part.createFormData("birth_address", eev8.data))//户籍地址
                 listArgs.add(MultipartBody.Part.createFormData("birth_detail_address", eev9.data))// 户籍详细地址
@@ -314,7 +380,7 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
 
 
                 Retrofit_RequestUtils.getRequest()
-                        .EmplRegistration(listArgs)
+                        .emplRegistration(listArgs)
                         .subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
                         .subscribe(object : Observer<AccessOrderIdModel> {
@@ -331,8 +397,11 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
                                 if (p0.code == "0") {
                                     val intent = Intent(mContext, DisplayActivity::class.java)
                                     intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment3")
+                                    intent.putExtra("bgirltype", arguments?.getString("bgirltype"))
                                     intent.putExtra("statues", "1")
+
                                     startActivity(intent)
+                                    mContext.finish()
                                 } else {
                                     Toast.makeText(mContext, p0.message, Toast.LENGTH_SHORT).show()
                                 }
@@ -566,5 +635,206 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
                 REQUEST_CODE_CAMERA)
 
     }
+
+    private fun getTime(date: Date): String {//可根据需要自行截取数据显示
+        Log.d("getTime()", "choice date millis: " + date.time)
+        val format = SimpleDateFormat("yyyy-MM-dd")
+        return format.format(date)
+    }
+
+    private fun initTimePicker() {
+
+        val pvTime = TimePickerBuilder(mContext, OnTimeSelectListener { date, v ->
+            eev4.data = getTime(date)
+        })
+                .setTimeSelectChangeListener { date ->
+                    eev4.data = getTime(date)
+                }
+                .setType(booleanArrayOf(true, true, true, false, false, false))
+                .build().show()
+
+    }
+
+
+    public fun initData(list: List<String>, type: String) {
+        val pvNoLinkOptions = OptionsPickerBuilder(mContext, OnOptionsSelectListener { options1, options2, options3, v ->
+            val str = ("food:" + list.get(options1)
+                    )
+
+
+
+            when (type) {
+                "eev1" -> {
+                    eev1.data = list[options1]
+                }
+
+                "eev5" -> {
+                    eev5.data = list[options1]
+                }
+
+
+                "eev15" -> {
+                    eev15.data = list[options1]
+                }
+
+                "eev16" -> {
+                    eev16.data = list[options1]
+                }
+
+
+                else -> {
+                }
+            }
+
+        })
+                .setOptionsSelectChangeListener { options1, options2, options3 ->
+                    val str = "options1: $options1"
+                    Toast.makeText(mContext, str, Toast.LENGTH_SHORT).show()
+                }
+
+                .build()
+
+        pvNoLinkOptions.setPicker(list)
+        pvNoLinkOptions.show()
+    }
+
+    fun parseData(result: String): ArrayList<JsonBean> {//Gson 解析
+        val detail = ArrayList<JsonBean>()
+        try {
+            val data = JSONArray(result)
+            val gson = Gson()
+            for (i in 0 until data.length()) {
+                val entity = gson.fromJson<JsonBean>(data.optJSONObject(i).toString(), JsonBean::class.java!!)
+                detail.add(entity)
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+
+        }
+
+        return detail
+    }
+
+
+    private fun showPickerView(type: String) {// 弹出选择器
+
+        val pvOptions = OptionsPickerBuilder(mContext, OnOptionsSelectListener { options1, options2, options3, v ->
+            //返回的分别是三个级别的选中位置
+            val tx = options1Items.get(options1).getPickerViewText() +
+                    options2Items.get(options1).get(options2) +
+                    options3Items.get(options1).get(options2).get(options3)
+            when (type) {
+                "eev8" -> {
+                    eev8.data = tx
+                }
+                "eev10" -> {
+                    eev10.data = tx
+                }
+                else -> {
+                }
+            }
+
+        })
+
+                .setTitleText("城市选择")
+                .setDividerColor(Color.BLACK)
+                .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
+                .setContentTextSize(20)
+                .build()
+
+
+        pvOptions.setPicker(options1Items, options2Items, options3Items)//三级选择器
+        pvOptions.show()
+    }
+
+
+    @SuppressLint("HandlerLeak")
+    private val mHandler = object : Handler() {
+        override fun handleMessage(msg: Message) {
+            when (msg.what) {
+                MSG_LOAD_DATA -> if (thread == null) {//如果已创建就不再重新创建子线程了
+
+                    // Toast.makeText(mContext, "Begin Parse Data", Toast.LENGTH_SHORT).show()
+                    thread = Thread(Runnable {
+                        // 子线程中解析省市区数据
+                        initJsonData()
+                    })
+                    thread!!.start()
+                }
+
+                MSG_LOAD_SUCCESS -> {
+                    // Toast.makeText(mContext, "Parse Succeed", Toast.LENGTH_SHORT).show()
+                    isLoaded = true
+                }
+
+
+            }
+        }
+    }
+
+    private val MSG_LOAD_DATA = 0x0001
+    private val MSG_LOAD_SUCCESS = 0x0002
+    private val MSG_LOAD_FAILED = 0x0003
+
+    private var isLoaded = false
+
+    var thread: Thread? = null
+
+
+    private fun initJsonData() {//解析数据
+
+        /**
+         * 注意：assets 目录下的Json文件仅供参考，实际使用可自行替换文件
+         * 关键逻辑在于循环体
+         *
+         */
+        val JsonData = GetJsonDataUtil().getJson(mContext, "province.json")//获取assets目录下的json文件数据
+
+        val jsonBean = parseData(JsonData)//用Gson 转成实体
+
+        /**
+         * 添加省份数据
+         *
+         * 注意：如果是添加的JavaBean实体，则实体类需要实现 IPickerViewData 接口，
+         * PickerView会通过getPickerViewText方法获取字符串显示出来。
+         */
+        options1Items = jsonBean
+
+        for (i in jsonBean.indices) {//遍历省份
+            val CityList = ArrayList<String>()//该省的城市列表（第二级）
+            val Province_AreaList = ArrayList<ArrayList<String>>()//该省的所有地区列表（第三极）
+
+            for (c in 0 until jsonBean[i].cityList.size) {//遍历该省份的所有城市
+                val CityName = jsonBean[i].cityList[c].name
+                CityList.add(CityName)//添加城市
+                val City_AreaList = ArrayList<String>()//该城市的所有地区列表
+
+                //如果无地区数据，建议添加空字符串，防止数据为null 导致三个选项长度不匹配造成崩溃
+                if (jsonBean[i].cityList[c].area == null || jsonBean[i].cityList[c].area.size === 0) {
+                    City_AreaList.add("")
+                } else {
+                    City_AreaList.addAll(jsonBean[i].cityList[c].area)
+                }
+                Province_AreaList.add(City_AreaList)//添加该省所有地区数据
+            }
+
+            /**
+             * 添加城市数据
+             */
+            options2Items.add(CityList)
+
+            /**
+             * 添加地区数据
+             */
+            options3Items.add(Province_AreaList)
+        }
+
+        mHandler.sendEmptyMessage(MSG_LOAD_SUCCESS)
+
+    }
+
+    private var options1Items = ArrayList<JsonBean>()
+    private val options2Items = ArrayList<ArrayList<String>>()
+    private val options3Items = ArrayList<ArrayList<ArrayList<String>>>()
 
 }
