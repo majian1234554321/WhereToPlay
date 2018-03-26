@@ -176,6 +176,7 @@
 
 
             <TextView
+                android:layout_margin="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="个人照片" />
@@ -191,6 +192,7 @@
                 android:background="@drawable/plus" />
 
             <TextView
+                android:layout_margin="12dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="证件照（正反照）" />

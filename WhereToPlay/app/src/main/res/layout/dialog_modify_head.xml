@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -11,7 +12,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin_10"
-            android:text="@string/modify_head_photo"
+            tools:text="@string/modify_head_photo"
+            android:visibility="gone"
             android:textColor="@color/text_black"
             android:textSize="@dimen/normal_textsize"/>
 

@@ -110,6 +110,12 @@ var mFragmentManager : FragmentManager? = null
                         .commit()
             }
 
+            "BGirlApplyFragment2_1" ->{
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.displayfragment, BGirlApplyFragment2_1.newInstance(bgirltype))
+                        .commit()
+            }
+
             "BGirlApplyFragment3" ->{
                 supportFragmentManager.beginTransaction()
                         .replace(R.id.displayfragment, BGirlApplyFragment3.newInstance(statues,bgirltype))
