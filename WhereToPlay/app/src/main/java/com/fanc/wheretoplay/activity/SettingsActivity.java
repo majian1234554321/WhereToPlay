@@ -40,7 +40,7 @@ import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.AlertDialog;
 import com.fanc.wheretoplay.view.ItemView;
 import com.fanc.wheretoplay.view.TopMenu;
-import com.meituan.android.walle.WalleChannelReader;
+
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
@@ -239,7 +239,7 @@ public class SettingsActivity extends BaseActivity {
                 .url(Network.User.PUBLIC_VERSION)
                 .addParams(Network.Param.OS, Network.PHONE_ANDROID)
                 .addParams(Network.Param.VERSION, UIUtils.getAppVersionName())
-                .addParams(Network.Param.AppMetaData, WalleChannelReader.getChannel(this.getApplicationContext()))
+                .addParams(Network.Param.AppMetaData, "_company")
                 .build()
                 .execute(new DCallback<Version>() {
                     @Override
@@ -272,9 +272,6 @@ public class SettingsActivity extends BaseActivity {
                             if (version.getApk_download_url()!=null){
                                 DownloadUtils.APK_DOWNLOAD_ID = DownloadUtils.downloadApk(version.getVersion(),
                                         version.getApk_download_url(), "乐互网.apk");
-
-
-
                             }
 
                         }

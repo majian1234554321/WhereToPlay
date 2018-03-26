@@ -4,7 +4,7 @@ apply plugin: 'kotlin-android-extensions'
 
 
 buildscript {
-    ext.kotlin_version = '1.2.21'
+    ext.kotlin_version = '1.2.30'
     repositories {
         jcenter()
 
@@ -18,7 +18,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
-        classpath 'com.jakewharton:butterknife-gradle-plugin:8.8.1'
+       // classpath 'com.jakewharton:butterknife-gradle-plugin:8.8.1'
         classpath 'com.neenbedankt.gradle.plugins:android-apt:1.8'
         classpath 'com.meituan.android.walle:plugin:1.1.6'
 //        classpath "com.tencent.tinker:tinker-patch-gradle-plugin:1.7.10"

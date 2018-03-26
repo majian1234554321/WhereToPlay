@@ -1,8 +1,7 @@
 apply plugin: 'com.android.application'
-//apply plugin: 'com.jakewharton.butterknife'
+
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-apply plugin: 'walle'
 
 android {
 
@@ -18,15 +17,7 @@ android {
     }
 
 
-    signingConfigs {
-        android {
-            storeFile file("keystore/hpzl_keystore")
-            storePassword "adminhpzl"
-            keyAlias "ktv_key"
-            keyPassword "adminhpzl"
-        }
 
-    }
 
 
 
@@ -34,9 +25,9 @@ android {
         applicationId "com.fanc.wheretoplay"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 201890308
+        versionCode 201890309
 
-        versionName "2018.03.08"
+        versionName "2018.03.09"
 
 
         sourceSets.main {
@@ -60,15 +51,25 @@ android {
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+
+    /*signingConfigs {
+        releaseConfig {
+            storeFile file("/Users/Joenny/Desktop/ktvAndroid/hpzl_keystore.jks")
+            storePassword "adminhpzl"
+            keyAlias "ktv_key"
+            keyPassword "adminhpzl"
+
+        }
+
+    }
     buildTypes {
         release {
-
+            signingConfig signingConfigs.releaseConfig
             buildConfigField "boolean", "LOG_DEBUG", "false"
             minifyEnabled true
             zipAlignEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            signingConfig signingConfigs.android
 
         }
         debug {
@@ -78,18 +79,18 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.debug
         }
-    }
+    }*/
     dataBinding {
         enabled = true
     }
 
 
-   /* productFlavors {
+    productFlavors {
 
         _test {
             dimension "color"
         }
-        _company {
+       /* _company {
             dimension "color"
         }
         _360 {}
@@ -105,30 +106,17 @@ android {
         _oppo {}
         _vivo {}
         _meizu {}
-        _sougou {}
+        _sougou {}*/
 
-    }*/
+    }
 
-    /*productFlavors.all {
+    productFlavors.all {
         flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]
-    }*/
-
-
-}
-
-configurations.all {
-    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+    }
 }
 
 
-walle {
-    // 指定渠道包的输出路径
-    apkOutputFolder = new File("${project.buildDir}/outputs/channels");
-    // 定制渠道包的APK的文件名称
-    apkFileNameFormat = '${channel}.apk';
-    // 渠道配置文件
-    channelFile = new File("${project.getProjectDir()}/channel")
-}
+
 
 repositories {
     flatDir {
@@ -144,23 +132,19 @@ dependencies {
     implementation project(':lib-zxing')
     implementation project(':common')
     implementation project(':okhttputils')
-
     compile 'com.android.support:multidex:1.0.3'
     compile 'com.youth.banner:banner:1.4.10'
-    compile 'com.orhanobut:logger:1.15'
     compile 'cn.finalteam:galleryfinal:1.4.8.7'
     compile 'com.uwetrottmann.photoview:library:1.2.4'
     compile 'cn.jiguang.sdk:jpush:3.0.8'
     compile 'cn.jiguang.sdk:jcore:1.1.6'
     compile 'com.zhy:percent-support-extends:1.1.1'
-
     compile 'io.reactivex.rxjava2:rxjava:2.1.1'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     compile 'com.squareup.retrofit2:retrofit:2.3.0'
     compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
     compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-
-    compile 'com.jakewharton:butterknife:8.8.1'
+    implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compile 'com.qiyukf.unicorn:unicorn:3.13.0'
     compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:1.4.0'
@@ -168,7 +152,6 @@ dependencies {
     compile 'com.umeng.analytics:analytics:6.1.2'
     debugCompile 'com.amitshekhar.android:debug-db:1.0.0'
     compile 'com.jcodecraeer:xrecyclerview:1.5.9'
-    compile 'com.meituan.android.walle:library:1.1.6'
 
 }
 
