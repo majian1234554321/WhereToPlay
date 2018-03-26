@@ -51,7 +51,7 @@ class BGirlFragment : BaseFragment(), View.OnClickListener, BGirlFragmentView {
             "emplYearReviewStatus" -> {
 
                 //0未年审1未审核2年审已审核3审核不通过
-                when (content.status) {
+                when (content.year_review_status) {
 
                     "0" -> {
                         val intent = Intent(mContext, DisplayActivity::class.java)
@@ -65,7 +65,7 @@ class BGirlFragment : BaseFragment(), View.OnClickListener, BGirlFragmentView {
                         val intent = Intent(mContext, DisplayActivity::class.java)
                         intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment3")
                         intent.putExtra("bgirltype", "emplYearReviewStatus")
-                        intent.putExtra("statues", content.status)
+                        intent.putExtra("statues", content.year_review_status)
                         startActivity(intent)
                     }
 
@@ -74,7 +74,7 @@ class BGirlFragment : BaseFragment(), View.OnClickListener, BGirlFragmentView {
             }
             "emplPatchCardStatus" -> {
                 //string 0未补卡1未审核2已审核3审核不通过
-                when (content.status) {
+                when (content.patch_card_status) {
 
                     "0" -> {
                         val intent = Intent(mContext, DisplayActivity::class.java)
@@ -86,7 +86,7 @@ class BGirlFragment : BaseFragment(), View.OnClickListener, BGirlFragmentView {
                         val intent = Intent(mContext, DisplayActivity::class.java)
                         intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment3")
                         intent.putExtra("bgirltype", "emplPatchCardStatus")
-                        intent.putExtra("statues", content.status)
+                        intent.putExtra("statues", content.patch_card_status)
                         startActivity(intent)
                     }
 

@@ -29,10 +29,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.fanc.wheretoplay.view.ExtendEditView
-        android:id="@+id/eev6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
 
     <com.fanc.wheretoplay.view.ExtendEditView
         android:id="@+id/eev7"
@@ -85,42 +82,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="个人照片" />
 
-    <ImageView
-        android:id="@+id/iv1"
-        android:layout_width="match_parent"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_height="160dp"
-        android:background="@drawable/plus" />
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="证件照（正反照）" />
-
-    <ImageView
-        android:id="@+id/iv2"
-        android:layout_width="match_parent"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_height="160dp"
-        android:background="@drawable/plus" />
-    <ImageView
-        android:id="@+id/iv3"
-        android:layout_width="match_parent"
-        android:layout_marginTop="12dp"
-        android:layout_marginBottom="12dp"
-        android:layout_marginLeft="40dp"
-        android:layout_marginRight="40dp"
-        android:layout_height="160dp"
-        android:background="@drawable/plus" />
 
 </LinearLayout>

@@ -76,7 +76,7 @@ class BGirlApplyFragment4 : BaseFragment(), RadioGroup.OnCheckedChangeListener {
 
         tbv.setTv_title("支付")
         tv4.setTextColor(Color.parseColor("#c4483c"))
-        tv_money.text = arguments?.getString("bGirlPayMoney")
+        tv_money.text = "￥ ${arguments?.getString("bGirlPayMoney")}"
 
 
         val bgirltype = arguments?.getString("bgirltype")

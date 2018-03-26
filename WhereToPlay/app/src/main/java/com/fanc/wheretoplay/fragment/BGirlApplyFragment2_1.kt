@@ -22,14 +22,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
-import cn.finalteam.galleryfinal.CoreConfig
-import cn.finalteam.galleryfinal.FunctionConfig
-import cn.finalteam.galleryfinal.GalleryFinal
-import cn.finalteam.galleryfinal.ThemeConfig
-import cn.finalteam.galleryfinal.model.PhotoInfo
-import com.bigkoo.pickerview.builder.OptionsPickerBuilder
-import com.bigkoo.pickerview.builder.TimePickerBuilder
-import com.bigkoo.pickerview.listener.*
+
 import com.bumptech.glide.Glide
 import com.fanc.wheretoplay.R
 import com.fanc.wheretoplay.activity.DisplayActivity
@@ -50,10 +43,10 @@ import io.reactivex.Observer
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.Disposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.bgirlapplyfragment2.*
-
-
+import kotlinx.android.synthetic.main.bgirlapplyfragment2_1.*
+import kotlinx.android.synthetic.main.bgirlinfo.*
 import kotlinx.android.synthetic.main.bgirltitle.*
+
 import okhttp3.MultipartBody
 import org.json.JSONArray
 import java.io.*
@@ -66,7 +59,7 @@ import java.util.*
  * @author admin
  * @date 2018/3/16
  */
-class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
+class BGirlApplyFragment2_1 : BaseFragment(), View.OnClickListener {
     override fun onClick(v: View?) {
         when (v?.id) {
             R.id.iv1 -> {
@@ -162,7 +155,7 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
 
-        val view = View.inflate(inflater.context, R.layout.bgirlapplyfragment2, null)
+        val view = View.inflate(inflater.context, R.layout.bgirlapplyfragment2_1, null)
 
 
 
@@ -172,13 +165,21 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        tbv.setTv_title("信息登记")
+
+
+        if(arguments?.getString("bgirltype")=="emplYearReviewStatus"){
+            tbv.setTv_title("年审登记")
+        }else{
+            tbv.setTv_title("补卡登记")
+        }
+
         tv2.setTextColor(Color.parseColor("#c4483c"))
 
 
 
         eev1.setTv("单位名称", true)
         eev2.setTv("姓名", true)
+        eev3.setTv("性别", true)
 
         eev4.setTv("出生日期", true)
         eev5.setTv("民族", true)
@@ -197,9 +198,7 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
         mHandler.sendEmptyMessage(MSG_LOAD_DATA)
 
 
-        eev4.setOnClickListener {
-            initTimePicker()
-        }
+
 
 
         val list1 = arrayListOf<String>()
@@ -234,16 +233,6 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
 
 
 
-        eev5.setOnClickListener {
-            initData(list5, "eev5")
-        }
-        eev15.setOnClickListener {
-            initData(list15, "eev15")
-        }
-
-        eev16.setOnClickListener {
-            initData(list16, "eev16")
-        }
 
         //获取所有的商家信息
 
@@ -276,34 +265,14 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
                 })
 
 
-        eev8.setOnClickListener {
-
-            if (isLoaded) {
-                showPickerView("eev8")
-            } else {
-                Toast.makeText(mContext, "Please waiting until the data is parsed", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-
-        eev10.setOnClickListener {
-            if (isLoaded) {
-                showPickerView("eev10")
-            } else {
-                Toast.makeText(mContext, "Please waiting until the data is parsed", Toast.LENGTH_SHORT).show()
-            }
-        }
-
-//
-//
-        eev1.setOnClickListener {
-            initData(list1, "eev1")
-        }
 
 
 
 
 
+        iv164Value = "122112"
+        iv264Value = "122112"
+        iv364Value = "122112"
 
 
 
@@ -339,23 +308,11 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
             ) {
 
 
-                if (!SUtils.cardCodeVerifySimple(eev7.data)) {
-                    Toast.makeText(mContext, "身份证号异常", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-
-                if (!SUtils.isMobileNO(eev12.data)) {
-                    Toast.makeText(mContext, "本人手机号码异常", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-
-                if (!SUtils.isMobileNO(eev14.data)) {
-                    Toast.makeText(mContext, "紧急联系人手机号码异常", Toast.LENGTH_SHORT).show()
-                    return@setOnClickListener
-                }
-
-
                 val listArgs = arrayListOf<MultipartBody.Part>()
+
+
+
+
 
 
                 listArgs.add(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken()))
@@ -365,11 +322,7 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
 
                 listArgs.add(MultipartBody.Part.createFormData("name", eev2.data))
 
-                if (rb1.isChecked) {
-                    listArgs.add(MultipartBody.Part.createFormData("sex", "1"))//sex
-                } else {
-                    listArgs.add(MultipartBody.Part.createFormData("sex", "2"))//sex
-                }
+
 
 
                 listArgs.add(MultipartBody.Part.createFormData("birthday", eev4.data))//生日
@@ -442,8 +395,8 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
     }
 
     companion object {
-        fun newInstance(bgirltype: String): BGirlApplyFragment2 {
-            val bGirlApplyFragment2 = BGirlApplyFragment2()
+        fun newInstance(bgirltype: String): BGirlApplyFragment2_1 {
+            val bGirlApplyFragment2 = BGirlApplyFragment2_1()
             val args = Bundle()
 
 
@@ -657,61 +610,10 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
         return format.format(date)
     }
 
-    private fun initTimePicker() {
-
-        val pvTime = TimePickerBuilder(mContext, OnTimeSelectListener { date, v ->
-            eev4.data = getTime(date)
-        })
-                .setTimeSelectChangeListener { date ->
-                    eev4.data = getTime(date)
-                }
-                .setType(booleanArrayOf(true, true, true, false, false, false))
-                .build().show()
-
-    }
-
-
-    public fun initData(list: List<String>, type: String) {
-        val pvNoLinkOptions = OptionsPickerBuilder(mContext, OnOptionsSelectListener { options1, options2, options3, v ->
-            val str = ("food:" + list.get(options1)
-                    )
 
 
 
-            when (type) {
-                "eev1" -> {
-                    eev1.data = list[options1]
-                }
 
-                "eev5" -> {
-                    eev5.data = list[options1]
-                }
-
-
-                "eev15" -> {
-                    eev15.data = list[options1]
-                }
-
-                "eev16" -> {
-                    eev16.data = list[options1]
-                }
-
-
-                else -> {
-                }
-            }
-
-        })
-                .setOptionsSelectChangeListener { options1, options2, options3 ->
-                    val str = "options1: $options1"
-                    // Toast.makeText(mContext, str, Toast.LENGTH_SHORT).show()
-                }
-
-                .build()
-
-        pvNoLinkOptions.setPicker(list)
-        pvNoLinkOptions.show()
-    }
 
     fun parseData(result: String): ArrayList<JsonBean> {//Gson 解析
         val detail = ArrayList<JsonBean>()
@@ -731,36 +633,7 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
     }
 
 
-    private fun showPickerView(type: String) {// 弹出选择器
 
-        val pvOptions = OptionsPickerBuilder(mContext, OnOptionsSelectListener { options1, options2, options3, v ->
-            //返回的分别是三个级别的选中位置
-            val tx = options1Items.get(options1).getPickerViewText() +
-                    options2Items.get(options1).get(options2) +
-                    options3Items.get(options1).get(options2).get(options3)
-            when (type) {
-                "eev8" -> {
-                    eev8.data = tx
-                }
-                "eev10" -> {
-                    eev10.data = tx
-                }
-                else -> {
-                }
-            }
-
-        })
-
-                .setTitleText("城市选择")
-                .setDividerColor(Color.BLACK)
-                .setTextColorCenter(Color.BLACK) //设置选中项文字颜色
-                .setContentTextSize(20)
-                .build()
-
-
-        pvOptions.setPicker(options1Items, options2Items, options3Items)//三级选择器
-        pvOptions.show()
-    }
 
 
     @SuppressLint("HandlerLeak")

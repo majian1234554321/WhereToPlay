@@ -27,8 +27,10 @@ public class AccessOrderIdModel {
         public String result;
         public String origin_prepay;
         public String status;
+        public String year_review_status;
         public String application_amount;
         public String patch_card_amount;
         public String year_review_amount;
+        public String patch_card_status;
     }
 }

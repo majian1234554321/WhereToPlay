@@ -30,8 +30,18 @@ class BGirlApplyFragment1 : BaseFragment() {
         next.setOnClickListener {
             if (checkbox.isChecked) {
                 val intent = Intent(mContext, DisplayActivity::class.java)
-                intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment2")
+
                 intent.putExtra("bgirltype", arguments?.getString("bgirltype"))
+
+                if (arguments?.getString("bgirltype")=="emplApplicationStatus"){
+                    intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment2")
+                }else{
+                    intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment2_1")
+                }
+
+
+
+
                 startActivity(intent)
                 mContext.finish()
             } else {
