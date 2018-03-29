@@ -19,6 +19,7 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
+        android:scrollbars="none"
         android:layout_height="wrap_content"
         android:layout_below="@+id/ll">
 
@@ -78,6 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="40dp"
                     android:layout_toRightOf="@+id/tv"
+                    style="@style/Base.Widget.AppCompat.CompoundButton.RadioButton"
                     android:background="@null"
                     android:gravity="center_vertical|right"
                     android:orientation="horizontal"
@@ -92,6 +94,7 @@
 
                     <RadioButton
                         android:id="@+id/rb2"
+
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="女" />

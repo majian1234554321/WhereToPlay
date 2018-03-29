@@ -23,15 +23,18 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.fanc.wheretoplay.R;
 import com.fanc.wheretoplay.activity.ShareActivity;
 import com.fanc.wheretoplay.base.BaseFragment;
 import com.fanc.wheretoplay.databinding.FragmentReferralsBinding;
+import com.fanc.wheretoplay.datamodel.AccessOrderIdModel;
 import com.fanc.wheretoplay.datamodel.ShearedAD;
 import com.fanc.wheretoplay.datamodel.Url;
 import com.fanc.wheretoplay.network.Network;
+import com.fanc.wheretoplay.rx.Retrofit_RequestUtils;
 import com.fanc.wheretoplay.util.Constants;
 import com.fanc.wheretoplay.util.UIUtils;
 import com.fanc.wheretoplay.view.CircleImageView;
@@ -41,6 +44,10 @@ import com.uuzuche.lib_zxing.activity.CodeUtils;
 import com.zhy.http.okhttp.OkHttpUtils;
 import com.zhy.http.okhttp.callback.DCallback;
 
+import io.reactivex.Observer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 import okhttp3.Call;
 
 /** Created by Administrator on 2017/6/19. */
@@ -95,14 +102,36 @@ public class ReferralFragment extends BaseFragment {
     // UIUtils.getString(R.string.nickname) : mUser.getNickname());
     mTvInvitationCode.setText(mUser.getShare_code());
 
-    String qrCodeText = "51tzl.cn/register/" + mUser.getShare_code();
-    Bitmap mBitmap =
-        CodeUtils.createImage(
-            qrCodeText,
-            400,
-            400,
-            BitmapFactory.decodeResource(getResources(), R.mipmap.ic_launcher));
-    ivQrcode.setImageBitmap(mBitmap);
+
+
+
+      Retrofit_RequestUtils.getRequest()
+              .getCode(mUser.getShare_code())
+              .subscribeOn(Schedulers.io())
+              .observeOn(AndroidSchedulers.mainThread())
+              .subscribe(new Observer<AccessOrderIdModel>() {
+                  @Override
+                  public void onSubscribe(Disposable disposable) {
+
+                  }
+
+                  @Override
+                  public void onNext(AccessOrderIdModel accessOrderIdModel) {
+                      if (accessOrderIdModel.code.equals("0")) {
+                          Glide.with(mContext).load(accessOrderIdModel.content.result).into(ivQrcode);
+                      }
+                  }
+
+                  @Override
+                  public void onError(Throwable throwable) {
+                      Toast.makeText(mContext, throwable.toString(), Toast.LENGTH_SHORT).show();
+                  }
+
+                  @Override
+                  public void onComplete() {
+
+                  }
+              });
 
     Glide.with(mContext).load(Network.IMAGE + mUser.getAvatar()).into(mCivMineHeader);
 

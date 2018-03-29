@@ -504,8 +504,8 @@ public class Network {
         Observable<AccessOrderIdModel> emplRegistration(@Part List<MultipartBody.Part> fileA);
 
 
-        @GET("/Api/public/generateQrCode?code={id}")
-        Observable<AccessOrderIdModel> getCode(@Query("id") String id);
+        @GET("/Api/public/generateQrCode")
+        Observable<AccessOrderIdModel> getCode(@Query("code") String id);
 
 
         //获取商家信息 --

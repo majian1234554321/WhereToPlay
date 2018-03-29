@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.fanc.wheretoplay.R
 import com.fanc.wheretoplay.activity.DisplayActivity
 import com.fanc.wheretoplay.base.BaseFragment
@@ -38,7 +39,9 @@ class BGirlFragment : BaseFragment(), View.OnClickListener, BGirlFragmentView {
                         startActivity(intent)
                     }
 
-
+                    "4" -> {
+                        Toast.makeText(mContext, "从业申请支付完成", Toast.LENGTH_SHORT).show()
+                    }
 
                     else -> {
                         val intent = Intent(mContext, DisplayActivity::class.java)
@@ -64,6 +67,10 @@ class BGirlFragment : BaseFragment(), View.OnClickListener, BGirlFragmentView {
 
                         startActivity(intent)
                     }
+
+                    "4" -> {
+                        Toast.makeText(mContext, "年审支付完成", Toast.LENGTH_SHORT).show()
+                    }
                     else -> {
                         val intent = Intent(mContext, DisplayActivity::class.java)
                         intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment3")
@@ -85,6 +92,12 @@ class BGirlFragment : BaseFragment(), View.OnClickListener, BGirlFragmentView {
                         intent.putExtra("bgirltype", "emplPatchCardStatus")
                         startActivity(intent)
                     }
+
+
+                    "4" -> {
+                        Toast.makeText(mContext, "补卡支付完成", Toast.LENGTH_SHORT).show()
+                    }
+
                     else -> {
                         val intent = Intent(mContext, DisplayActivity::class.java)
                         intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment3")
