@@ -43,41 +43,7 @@ class BGirlApplyFragment3 : BaseFragment() {
 
 
 
-        next.setOnClickListener {
-            Retrofit_RequestUtils.getRequest()
-                    .emplGetAmount(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken()))
-                    .subscribeOn(Schedulers.io())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .subscribe(object : Observer<AccessOrderIdModel> {
-                        override fun onComplete() = Unit
 
-                        override fun onSubscribe(d: Disposable) = Unit
-
-                        override fun onNext(t: AccessOrderIdModel) {
-                            if (t.code == "0") {
-                                val intent = Intent(mContext, DisplayActivity::class.java)
-
-                                when (bgirltype) {
-                                    "emplApplicationStatus" -> intent.putExtra("bGirlPayMoney", t.content.application_amount)
-                                    "emplYearReviewStatus" -> intent.putExtra("bGirlPayMoney", t.content.year_review_amount)
-                                    else -> intent.putExtra("bGirlPayMoney", t.content.patch_card_amount)
-                                }
-
-                                intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment4")
-                                intent.putExtra("bgirltype", bgirltype)
-
-                                startActivity(intent)
-
-                            }
-
-                        }
-
-                        override fun onError(e: Throwable) {
-
-                        }
-
-                    })
-        }
 
 
         //0未申请1未审核2已审核3审核不通过
@@ -94,6 +60,46 @@ class BGirlApplyFragment3 : BaseFragment() {
                 next.visibility = View.VISIBLE
 
 
+
+                next.setOnClickListener {
+                    Retrofit_RequestUtils.getRequest()
+                            .emplGetAmount(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken()))
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(object : Observer<AccessOrderIdModel> {
+                                override fun onComplete() = Unit
+
+                                override fun onSubscribe(d: Disposable) = Unit
+
+                                override fun onNext(t: AccessOrderIdModel) {
+                                    if (t.code == "0") {
+                                        val intent = Intent(mContext, DisplayActivity::class.java)
+
+                                        when (bgirltype) {
+                                            "emplApplicationStatus" -> intent.putExtra("bGirlPayMoney", t.content.application_amount)
+                                            "emplYearReviewStatus" -> intent.putExtra("bGirlPayMoney", t.content.year_review_amount)
+                                            else -> intent.putExtra("bGirlPayMoney", t.content.patch_card_amount)
+                                        }
+
+                                        intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment4")
+                                        intent.putExtra("bgirltype", bgirltype)
+
+                                        startActivity(intent)
+                                        mContext.finish()
+
+                                    }
+
+                                }
+
+                                override fun onError(e: Throwable) {
+
+                                }
+
+                            })
+                }
+
+
+
             }
             "3" -> {
                 tv_text.text = "资料审核失败，请重新提交信息登记"
@@ -102,8 +108,15 @@ class BGirlApplyFragment3 : BaseFragment() {
                 next.visibility = View.VISIBLE
                 next.setOnClickListener {
                     val intent = Intent(mContext, DisplayActivity::class.java)
+
+
                     intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment2")
+
+                    intent.putExtra("bgirltype", bgirltype)
+
+
                     startActivity(intent)
+                    mContext.finish()
                 }
             }
             else -> {

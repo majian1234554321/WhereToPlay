@@ -183,7 +183,7 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
         eev4.setTv("出生日期", true)
         eev5.setTv("民族", true)
 
-        eev7.setTv("证件号", true)
+        eev7.setTv("身份证号", true)
         eev8.setTv("户籍地址", true)
         eev9.setTv("详细地址", true)
         eev10.setTv("现住地址", true)
@@ -499,7 +499,7 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
         val name = DateFormat.format("yyyyMMdd_hhmmss", Calendar.getInstance(Locale.CHINA)).toString() + ".jpg"
 
         val RealFilePath = getRealFilePath(mContext, uriData)
-        if (RealFilePath!!.endsWith("jpg") || RealFilePath.endsWith("jpeg") || RealFilePath!!.endsWith("png")) {
+        if (RealFilePath!!.endsWith("jpg") || RealFilePath.endsWith("jpeg") || RealFilePath.endsWith("png")) {
             val bitmap = BitmapUtils.getimage(RealFilePath)
 
 
@@ -651,6 +651,7 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
 
     }
 
+    @SuppressLint("SimpleDateFormat")
     private fun getTime(date: Date): String {//可根据需要自行截取数据显示
         Log.d("getTime()", "choice date millis: " + date.time)
         val format = SimpleDateFormat("yyyy-MM-dd")
@@ -658,6 +659,12 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
     }
 
     private fun initTimePicker() {
+
+        val selectedDate = Calendar.getInstance()//系统当前时间
+        val startDate = Calendar.getInstance()
+        startDate.set(1970, 1, 23)
+        val endDate = Calendar.getInstance()
+        endDate.set(2018, 12, 31)
 
         val pvTime = TimePickerBuilder(mContext, OnTimeSelectListener { date, v ->
             eev4.data = getTime(date)

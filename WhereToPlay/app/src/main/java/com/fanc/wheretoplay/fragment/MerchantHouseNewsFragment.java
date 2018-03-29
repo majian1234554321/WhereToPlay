@@ -139,6 +139,8 @@ public class MerchantHouseNewsFragment extends BaseFragment {
         RecycleViewDivider divider1 = new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL, UIUtils.dp2Px(1), UIUtils.getColor(R.color.btn_pressed));
         mRc.addItemDecoration(divider1);
 
+
+
     }
 
     private void initListener() {

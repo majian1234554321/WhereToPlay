@@ -73,7 +73,7 @@
 
 
             <RadioButton
-                android:id="@+id/rb_wxpay"
+                android:id="@+id/rb_wxpay1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:button="@null"
@@ -90,11 +90,11 @@
                 android:background="#33333333" />
 
             <RadioButton
-                android:id="@+id/rb_alipay"
+                android:id="@+id/rb_alipay1"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:button="@null"
-                android:checked="true"
+android:checked="true"
                 android:drawableLeft="@drawable/pay_by_ali"
                 android:drawablePadding="8dp"
                 android:drawableRight="@drawable/selector_pay_way"
@@ -109,12 +109,9 @@
                 android:background="#33333333" />
         </RadioGroup>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="1dp"
-            android:background="#33333333" />
 
-        <TextView
+
+        <Button
             android:id="@+id/next"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

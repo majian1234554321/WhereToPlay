@@ -2,6 +2,7 @@ package com.fanc.wheretoplay.activity
 
 import android.os.Bundle
 import android.support.v4.app.FragmentManager
+import android.view.WindowManager
 import com.fanc.wheretoplay.R
 import com.fanc.wheretoplay.base.BaseActivity
 import com.fanc.wheretoplay.fragment.*
@@ -16,6 +17,7 @@ var mFragmentManager : FragmentManager? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_display)
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
         val displayType = intent.getStringExtra("DISPLAYTYPE")
         val idValue = intent.getStringExtra("idValue")
         val storeIdValue = intent.getStringExtra("storeIdValue")

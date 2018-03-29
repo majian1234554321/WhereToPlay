@@ -28,9 +28,7 @@ import com.fanc.wheretoplay.R
 import com.fanc.wheretoplay.activity.DisplayActivity
 import com.fanc.wheretoplay.base.App
 import com.fanc.wheretoplay.base.BaseFragment
-import com.fanc.wheretoplay.datamodel.AccessOrderIdModel
-import com.fanc.wheretoplay.datamodel.EmplStoreModel
-import com.fanc.wheretoplay.datamodel.JsonBean
+import com.fanc.wheretoplay.datamodel.*
 import com.fanc.wheretoplay.image.GlideGalleryImageLoader
 import com.fanc.wheretoplay.rx.Retrofit_RequestUtils
 import com.fanc.wheretoplay.util.*
@@ -59,28 +57,28 @@ import java.util.*
  * @author admin
  * @date 2018/3/16
  */
-class BGirlApplyFragment2_1 : BaseFragment(), View.OnClickListener {
-    override fun onClick(v: View?) {
-        when (v?.id) {
-            R.id.iv1 -> {
-                ivDsplay = "1"
-                modifyHeader()
-            }
-            R.id.iv2 -> {
-                ivDsplay = "2"
-                modifyHeader()
+class BGirlApplyFragment2_1 : BaseFragment() {
+    /* override fun onClick(v: View?) {
+         when (v?.id) {
+             R.id.iv1 -> {
+                 ivDsplay = "1"
+                 modifyHeader()
+             }
+             R.id.iv2 -> {
+                 ivDsplay = "2"
+                 modifyHeader()
 
 
-            }
-            R.id.iv3 -> {
-                ivDsplay = "3"
-                modifyHeader()
+             }
+             R.id.iv3 -> {
+                 ivDsplay = "3"
+                 modifyHeader()
 
-            }
-            else -> {
-            }
-        }
-    }
+             }
+             else -> {
+             }
+         }
+     }*/
 
     private var iv164Value: String? = null
     var iv264Value: String? = null
@@ -167,10 +165,12 @@ class BGirlApplyFragment2_1 : BaseFragment(), View.OnClickListener {
         super.onViewCreated(view, savedInstanceState)
 
 
-        if(arguments?.getString("bgirltype")=="emplYearReviewStatus"){
+        if (arguments?.getString("bgirltype") == "emplYearReviewStatus") {
             tbv.setTv_title("年审登记")
-        }else{
+            go.text = "提交年审"
+        } else {
             tbv.setTv_title("补卡登记")
+            go.text = "提交补卡"
         }
 
         tv2.setTextColor(Color.parseColor("#c4483c"))
@@ -184,7 +184,7 @@ class BGirlApplyFragment2_1 : BaseFragment(), View.OnClickListener {
         eev4.setTv("出生日期", true)
         eev5.setTv("民族", true)
 
-        eev7.setTv("证件号", true)
+        eev7.setTv("身份证号", true)
         eev8.setTv("户籍地址", true)
         eev9.setTv("详细地址", true)
         eev10.setTv("现住地址", true)
@@ -196,9 +196,6 @@ class BGirlApplyFragment2_1 : BaseFragment(), View.OnClickListener {
         eev16.setTv("职务", true)
 
         mHandler.sendEmptyMessage(MSG_LOAD_DATA)
-
-
-
 
 
         val list1 = arrayListOf<String>()
@@ -232,28 +229,64 @@ class BGirlApplyFragment2_1 : BaseFragment(), View.OnClickListener {
         list16.add("其他")
 
 
-
-
         //获取所有的商家信息
 
         Retrofit_RequestUtils.getRequest()
-                .emplGetMessage(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken()))
+                .emplDetail(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(object : Observer<EmplStoreModel> {
+                .subscribe(object : Observer<EmplDetailModel> {
                     override fun onComplete() = Unit
 
                     override fun onSubscribe(d: Disposable) = Unit
 
-                    override fun onNext(t: EmplStoreModel) {
+                    override fun onNext(t: EmplDetailModel) {
+
 
                         if (t.code == "0") {
-                            t.content.forEach {
 
-                                list1.add(it.name)
+
+                            with(t.content) {
+
+
+                                eev1.data = store_name
+                                eev2.data = name
+
+
+                                eev3.data = if (sex == "1") "男" else "女"
+
+                                eev4.data = DateFormatUtil.stampToDateMM(birthday)
+                                eev5.data = ethnic
+
+                                eev7.data = id_number
+                                eev8.data = birth_address
+                                eev9.data = birth_detail_address
+                                eev10.data = now_address
+                                eev11.data = now_detail_address
+                                eev12.data = mobile
+                                eev13.data = urgent_man
+                                eev14.data = urgent_mobile
+                                eev15.data = profession
+                                eev16.data = position
+
+
+
+
+
+                                iv164Value = personal_path
+                                iv264Value = ic_pic_path1
+                                iv364Value = ic_pic_path2
+
+
+                                Glide.with(mContext).load(personal_path).into(iv1)
+                                Glide.with(mContext).load(ic_pic_path1).into(iv2)
+                                Glide.with(mContext).load(ic_pic_path2).into(iv3)
 
 
                             }
+                        } else {
+                            Toast.makeText(mContext, t.message, Toast.LENGTH_SHORT).show()
+                            mContext.finish()
                         }
 
                     }
@@ -265,20 +298,9 @@ class BGirlApplyFragment2_1 : BaseFragment(), View.OnClickListener {
                 })
 
 
-
-
-
-
-
-        iv164Value = "122112"
-        iv264Value = "122112"
-        iv364Value = "122112"
-
-
-
-        iv1.setOnClickListener(this)
-        iv2.setOnClickListener(this)
-        iv3.setOnClickListener(this)
+//        iv1.setOnClickListener(this)
+//        iv2.setOnClickListener(this)
+//        iv3.setOnClickListener(this)
 
         go.setOnClickListener {
             if (!TextUtils.isEmpty(eev1.data) &&
@@ -317,11 +339,13 @@ class BGirlApplyFragment2_1 : BaseFragment(), View.OnClickListener {
 
                 listArgs.add(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken()))
                 listArgs.add(MultipartBody.Part.createFormData("store_name", eev1.data))
-                // listArgs.add(MultipartBody.Part.createFormData("user_id", SPUtils(context).getUser().id))
+
 
 
                 listArgs.add(MultipartBody.Part.createFormData("name", eev2.data))
 
+
+                listArgs.add(MultipartBody.Part.createFormData("name", if (eev3.data == "男") "1" else "2"))
 
 
 
@@ -345,6 +369,9 @@ class BGirlApplyFragment2_1 : BaseFragment(), View.OnClickListener {
                 listArgs.add(MultipartBody.Part.createFormData("personal_path", iv164Value))//个人照片
                 listArgs.add(MultipartBody.Part.createFormData("id_pic_path1", iv264Value))//身份证正面
                 listArgs.add(MultipartBody.Part.createFormData("id_pic_path2", iv364Value))//身份证背面
+
+
+                listArgs.add(MultipartBody.Part.createFormData("type", if (arguments?.getString("bgirltype") == "emplYearReviewStatus") "3" else "2"))//身份证背面
 
 
                 Retrofit_RequestUtils.getRequest()
@@ -611,10 +638,6 @@ class BGirlApplyFragment2_1 : BaseFragment(), View.OnClickListener {
     }
 
 
-
-
-
-
     fun parseData(result: String): ArrayList<JsonBean> {//Gson 解析
         val detail = ArrayList<JsonBean>()
         try {
@@ -631,9 +654,6 @@ class BGirlApplyFragment2_1 : BaseFragment(), View.OnClickListener {
 
         return detail
     }
-
-
-
 
 
     @SuppressLint("HandlerLeak")

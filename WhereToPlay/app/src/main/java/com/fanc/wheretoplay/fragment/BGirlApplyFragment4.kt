@@ -78,50 +78,57 @@ class BGirlApplyFragment4 : BaseFragment(), RadioGroup.OnCheckedChangeListener {
         tbv.setTv_title("支付")
         tv4.setTextColor(Color.parseColor("#c4483c"))
         tv_money.text = "￥ ${arguments?.getString("bGirlPayMoney")}"
-
+        rg.setOnCheckedChangeListener(this)
 
         val bgirltype = arguments?.getString("bgirltype")
 
 
         var observable: Observable<OrderPayoffModel>? = null
 
-        val listArgs = arrayListOf<MultipartBody.Part>()
-        listArgs.add(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken()))
-        listArgs.add(MultipartBody.Part.createFormData("pay_mode", payValue))
 
 
-        when (bgirltype) {
-            "emplApplicationStatus" -> {//申请
-
-                listArgs.add(MultipartBody.Part.createFormData("application_amount", arguments?.getString("bGirlPayMoney")))
-                observable = Retrofit_RequestUtils
-                        .getRequest()
-                        .emplApplicationPayOrder(listArgs)
-            }
-            "emplYearReviewStatus" -> {//年审
-                listArgs.add(MultipartBody.Part.createFormData("year_review_amount", arguments?.getString("bGirlPayMoney")))
-
-                observable = Retrofit_RequestUtils
-                        .getRequest()
-                        .emplYearReviewPayOrder(listArgs)
-            }
-            "emplPatchCardStatus" -> {//补卡
-                listArgs.add(MultipartBody.Part.createFormData("patch_card_amount", arguments?.getString("bGirlPayMoney")))
-
-                observable = Retrofit_RequestUtils
-                        .getRequest()
-                        .emplPatchCardPayOrder(listArgs)
-            }
 
 
-            else -> {
-            }
-        }
+
+
+
+
 
 
 
 
         next.setOnClickListener {
+            val listArgs = arrayListOf<MultipartBody.Part>()
+            listArgs.add(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken()))
+            listArgs.add(MultipartBody.Part.createFormData("pay_mode", payValue))
+
+            when (bgirltype) {
+                "emplApplicationStatus" -> {//申请
+
+                    listArgs.add(MultipartBody.Part.createFormData("application_amount", arguments?.getString("bGirlPayMoney")))
+                    observable = Retrofit_RequestUtils
+                            .getRequest()
+                            .emplApplicationPayOrder(listArgs)
+                }
+                "emplYearReviewStatus" -> {//年审
+                    listArgs.add(MultipartBody.Part.createFormData("year_review_amount", arguments?.getString("bGirlPayMoney")))
+
+                    observable = Retrofit_RequestUtils
+                            .getRequest()
+                            .emplYearReviewPayOrder(listArgs)
+                }
+                "emplPatchCardStatus" -> {//补卡
+                    listArgs.add(MultipartBody.Part.createFormData("patch_card_amount", arguments?.getString("bGirlPayMoney")))
+
+                    observable = Retrofit_RequestUtils
+                            .getRequest()
+                            .emplPatchCardPayOrder(listArgs)
+                }
+
+
+                else -> {
+                }
+            }
 
 
             observable?.subscribeOn(Schedulers.io())
@@ -164,7 +171,7 @@ class BGirlApplyFragment4 : BaseFragment(), RadioGroup.OnCheckedChangeListener {
 
         }
 
-        rg.setOnCheckedChangeListener(this)
+
 
     }
 
@@ -252,7 +259,7 @@ class BGirlApplyFragment4 : BaseFragment(), RadioGroup.OnCheckedChangeListener {
     }
 
     // 支付成功去评价
-    public fun paySuccess() {
+     fun paySuccess() {
         // 去评价
 
 

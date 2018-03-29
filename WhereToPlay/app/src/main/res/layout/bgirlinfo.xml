@@ -4,80 +4,80 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.fanc.wheretoplay.view.ExtendEditView
+    <com.fanc.wheretoplay.view.ExtendTextView
         android:id="@+id/eev1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.fanc.wheretoplay.view.ExtendEditView
+    <com.fanc.wheretoplay.view.ExtendTextView
         android:id="@+id/eev2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.fanc.wheretoplay.view.ExtendEditView
+    <com.fanc.wheretoplay.view.ExtendTextView
         android:id="@+id/eev3"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.fanc.wheretoplay.view.ExtendEditView
+    <com.fanc.wheretoplay.view.ExtendTextView
         android:id="@+id/eev4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.fanc.wheretoplay.view.ExtendEditView
+    <com.fanc.wheretoplay.view.ExtendTextView
         android:id="@+id/eev5"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
 
 
-    <com.fanc.wheretoplay.view.ExtendEditView
+    <com.fanc.wheretoplay.view.ExtendTextView
         android:id="@+id/eev7"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.fanc.wheretoplay.view.ExtendEditView
+    <com.fanc.wheretoplay.view.ExtendTextView
         android:id="@+id/eev8"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.fanc.wheretoplay.view.ExtendEditView
+    <com.fanc.wheretoplay.view.ExtendTextView
         android:id="@+id/eev9"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
 
-    <com.fanc.wheretoplay.view.ExtendEditView
+    <com.fanc.wheretoplay.view.ExtendTextView
         android:id="@+id/eev10"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.fanc.wheretoplay.view.ExtendEditView
+    <com.fanc.wheretoplay.view.ExtendTextView
         android:id="@+id/eev11"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.fanc.wheretoplay.view.ExtendEditView
+    <com.fanc.wheretoplay.view.ExtendTextView
         android:id="@+id/eev12"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.fanc.wheretoplay.view.ExtendEditView
+    <com.fanc.wheretoplay.view.ExtendTextView
         android:id="@+id/eev13"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.fanc.wheretoplay.view.ExtendEditView
+    <com.fanc.wheretoplay.view.ExtendTextView
         android:id="@+id/eev14"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.fanc.wheretoplay.view.ExtendEditView
+    <com.fanc.wheretoplay.view.ExtendTextView
         android:id="@+id/eev15"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
-    <com.fanc.wheretoplay.view.ExtendEditView
+    <com.fanc.wheretoplay.view.ExtendTextView
         android:id="@+id/eev16"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />

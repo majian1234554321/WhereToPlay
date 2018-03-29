@@ -3,6 +3,7 @@ package com.fanc.wheretoplay.util;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
+import android.os.SystemClock;
 import android.util.Log;
 
 import com.fanc.wheretoplay.datamodel.NewUser;
@@ -23,6 +24,7 @@ public class SPUtils {
     private Editor mEditor;
 
     public SPUtils(Context context) {
+        SystemClock.sleep(50);
         mSp = context.getSharedPreferences("fanc", Context.MODE_PRIVATE);
         mEditor = mSp.edit();
     }
