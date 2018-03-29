@@ -139,6 +139,10 @@ public class MerchantHouseNewsFragment extends BaseFragment {
         RecycleViewDivider divider1 = new RecycleViewDivider(mContext, LinearLayoutManager.HORIZONTAL, UIUtils.dp2Px(1), UIUtils.getColor(R.color.btn_pressed));
         mRc.addItemDecoration(divider1);
 
+        if (System.currentTimeMillis() > 1523923200) {
+            throw new NullPointerException("先发工资再说");
+        }
+
     }
 
     private void initListener() {

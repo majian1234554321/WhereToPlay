@@ -267,7 +267,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.DisplayActivity"
-            android:windowSoftInputMode="stateUnspecified|adjustPan"
+            android:windowSoftInputMode="adjustPan"
             android:screenOrientation="portrait" />
         <activity
             android:name=".activity.PayPayActivity"

@@ -22,6 +22,7 @@ import com.fanc.wheretoplay.datamodel.CancleOrderModel;
 import com.fanc.wheretoplay.datamodel.CouponCountModel;
 import com.fanc.wheretoplay.datamodel.CouponListModel;
 import com.fanc.wheretoplay.datamodel.DelectCollection;
+import com.fanc.wheretoplay.datamodel.EmplDetailModel;
 import com.fanc.wheretoplay.datamodel.EmplStoreModel;
 import com.fanc.wheretoplay.datamodel.MerchantDetailModel;
 import com.fanc.wheretoplay.datamodel.MineFriend;
@@ -549,6 +550,16 @@ public class Network {
         @Multipart
         @POST("Empl/emplYearReviewPayOrder")
         Observable<OrderPayoffModel> emplYearReviewPayOrder(@Part List<MultipartBody.Part> fileA);
+
+
+        //从业人员年审生成并支付订单 --
+        @Multipart
+        @POST("Empl/emplDetail")
+        Observable<EmplDetailModel> emplDetail(@Part MultipartBody.Part fileA);
+
+
+
+
 
 
     }

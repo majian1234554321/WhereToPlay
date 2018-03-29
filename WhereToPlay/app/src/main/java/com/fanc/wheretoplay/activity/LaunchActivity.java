@@ -66,7 +66,6 @@ public class LaunchActivity extends BaseActivity {
     int prePosition;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -74,14 +73,13 @@ public class LaunchActivity extends BaseActivity {
 //        initPermissions();
 
 
+
+
         //七鱼需要
         parseIntent();
 
 
-
-
         initViews();
-
 
 
         init();
@@ -112,7 +110,6 @@ public class LaunchActivity extends BaseActivity {
     }
 
 
-
     public static String getVerName(Context context) {
         String verName = "";
         try {
@@ -140,7 +137,7 @@ public class LaunchActivity extends BaseActivity {
                     .setLeftOnClickListener("更新", new View.OnClickListener() {
                         @Override
                         public void onClick(View v) {
-                            if (version.getApk_download_url()!=null){
+                            if (version.getApk_download_url() != null) {
                                 DownloadUtils.APK_DOWNLOAD_ID = DownloadUtils.downloadApk(version.getVersion(),
                                         version.getApk_download_url(), "乐互网.apk");
                             }
@@ -163,8 +160,6 @@ public class LaunchActivity extends BaseActivity {
                     .show();
         }
     }
-
-
 
 
     /**

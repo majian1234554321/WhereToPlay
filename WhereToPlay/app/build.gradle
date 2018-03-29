@@ -34,9 +34,9 @@ android {
         applicationId "com.fanc.wheretoplay"
         minSdkVersion 17
         targetSdkVersion 27
-        versionCode 201890308
+        versionCode 201890401
 
-        versionName "2018.03.08"
+        versionName "2018.04.01"
 
 
         sourceSets.main {
@@ -84,12 +84,12 @@ android {
     }
 
 
-   /* productFlavors {
+    productFlavors {
 
         _test {
             dimension "color"
         }
-        _company {
+        /*_company {
             dimension "color"
         }
         _360 {}
@@ -105,9 +105,9 @@ android {
         _oppo {}
         _vivo {}
         _meizu {}
-        _sougou {}
+        _sougou {}*/
 
-    }*/
+    }
 
     /*productFlavors.all {
         flavor -> flavor.manifestPlaceholders = [UMENG_CHANNEL_VALUE: name]

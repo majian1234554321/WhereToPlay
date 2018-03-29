@@ -41,7 +41,6 @@ class BGirlApplyFragment1 : BaseFragment() {
 
 
 
-
                 startActivity(intent)
                 mContext.finish()
             } else {
