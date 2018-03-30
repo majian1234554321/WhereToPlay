@@ -41,6 +41,8 @@ class BGirlApplyFragment3 : BaseFragment() {
 
         val bgirltype = arguments?.getString("bgirltype");
 
+        val application_id = arguments?.getString("application_id");
+
 
 
 
@@ -83,6 +85,8 @@ class BGirlApplyFragment3 : BaseFragment() {
 
                                         intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment4")
                                         intent.putExtra("bgirltype", bgirltype)
+                                        intent.putExtra("application_id", application_id)
+
 
                                         startActivity(intent)
                                         mContext.finish()
@@ -127,11 +131,12 @@ class BGirlApplyFragment3 : BaseFragment() {
     }
 
     companion object {
-        fun newInstance(status: String, bgirltype: String): BGirlApplyFragment3 {
+        fun newInstance(status: String, bgirltype: String,application_id:String): BGirlApplyFragment3 {
             val bGirlApplyFragment3 = BGirlApplyFragment3()
             val args = Bundle()
             args.putString("statues", status)
             args.putString("bgirltype", bgirltype)
+            args.putString("application_id", application_id)
 
             bGirlApplyFragment3.arguments = args
 

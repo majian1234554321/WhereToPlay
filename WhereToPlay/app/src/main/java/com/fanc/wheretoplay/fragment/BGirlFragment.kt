@@ -11,14 +11,11 @@ import com.fanc.wheretoplay.activity.DisplayActivity
 import com.fanc.wheretoplay.base.BaseFragment
 import com.fanc.wheretoplay.datamodel.AccessOrderIdModel
 import com.fanc.wheretoplay.presenter.BGirlFragmentPresent
-import com.fanc.wheretoplay.rx.Retrofit_RequestUtils
-import com.fanc.wheretoplay.util.SPUtils
+
 import com.fanc.wheretoplay.util.ToastUtils
 import com.fanc.wheretoplay.view.BGirlFragmentView
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
 import kotlinx.android.synthetic.main.bgirlfragment.*
-import okhttp3.MultipartBody
+
 
 /**
  *
@@ -26,92 +23,28 @@ import okhttp3.MultipartBody
  * @date 2018/3/15
  */
 class BGirlFragment : BaseFragment(), View.OnClickListener, BGirlFragmentView {
-    override fun setSuccessData(type: String, content: AccessOrderIdModel.ContentBean) {
-
-        when (type) {
-            "emplApplicationStatus" -> {
-
-                when (content.status) {
-                    "0" -> {
-                        val intent = Intent(mContext, DisplayActivity::class.java)
-                        intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment1")
-                        intent.putExtra("bgirltype", "emplApplicationStatus")
-                        startActivity(intent)
-                    }
-
-                    "4" -> {
-                        Toast.makeText(mContext, "从业申请支付完成", Toast.LENGTH_SHORT).show()
-                    }
-
-                    else -> {
-                        val intent = Intent(mContext, DisplayActivity::class.java)
-                        intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment3")
-                        intent.putExtra("statues", content.status)
-                        intent.putExtra("bgirltype", "emplApplicationStatus")
-                        startActivity(intent)
-                    }
-                }
-
-
+    override fun setSuccessData(type: String, content: AccessOrderIdModel.ContentBean, applicationId: String) {
+        when (content.status) {
+            "0" -> {
+                val intent = Intent(mContext, DisplayActivity::class.java)
+                intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment1")
+                intent.putExtra("bgirltype", "emplApplicationStatus")
+                startActivity(intent)
             }
-            "emplYearReviewStatus" -> {
 
-                //0未年审1未审核2年审已审核3审核不通过
-                when (content.year_review_status) {
-
-                    "0" -> {
-                        val intent = Intent(mContext, DisplayActivity::class.java)
-                        intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment1")
-
-                        intent.putExtra("bgirltype", "emplYearReviewStatus")
-
-                        startActivity(intent)
-                    }
-
-                    "4" -> {
-                        Toast.makeText(mContext, "年审支付完成", Toast.LENGTH_SHORT).show()
-                    }
-                    else -> {
-                        val intent = Intent(mContext, DisplayActivity::class.java)
-                        intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment3")
-                        intent.putExtra("bgirltype", "emplYearReviewStatus")
-                        intent.putExtra("statues", content.year_review_status)
-                        startActivity(intent)
-                    }
-
-                }
-
+            "4" -> {
+                Toast.makeText(mContext, "从业申请支付完成", Toast.LENGTH_SHORT).show()
             }
-            "emplPatchCardStatus" -> {
-                //string 0未补卡1未审核2已审核3审核不通过
-                when (content.patch_card_status) {
 
-                    "0" -> {
-                        val intent = Intent(mContext, DisplayActivity::class.java)
-                        intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment1")
-                        intent.putExtra("bgirltype", "emplPatchCardStatus")
-                        startActivity(intent)
-                    }
-
-
-                    "4" -> {
-                        Toast.makeText(mContext, "补卡支付完成", Toast.LENGTH_SHORT).show()
-                    }
-
-                    else -> {
-                        val intent = Intent(mContext, DisplayActivity::class.java)
-                        intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment3")
-                        intent.putExtra("bgirltype", "emplPatchCardStatus")
-                        intent.putExtra("statues", content.patch_card_status)
-                        startActivity(intent)
-                    }
-
-                }
-            }
             else -> {
+                val intent = Intent(mContext, DisplayActivity::class.java)
+                intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment3")
+                intent.putExtra("statues", content.status)
+                intent.putExtra("bgirltype", "emplApplicationStatus")
+                intent.putExtra("application_id", "application_id")
+                startActivity(intent)
             }
         }
-
 
     }
 
@@ -124,17 +57,26 @@ class BGirlFragment : BaseFragment(), View.OnClickListener, BGirlFragmentView {
         when (v?.id) {
             R.id.tv1 -> {
 
-                val bGirlFragmentPresent = BGirlFragmentPresent(mContext, this)
+                val bGirlFragmentPresent = BGirlFragmentPresent(mContext, this, "-1")
                 bGirlFragmentPresent.emplApplicationStatus("emplApplicationStatus")
 
             }
             R.id.tv2 -> {
-                val bGirlFragmentPresent = BGirlFragmentPresent(mContext, this)
-                bGirlFragmentPresent.emplApplicationStatus("emplYearReviewStatus")
+                //0未年审1未审核2年审已审核3审核不通过
+                val intent = Intent(mContext, DisplayActivity::class.java)
+                intent.putExtra("DISPLAYTYPE", "BGirlYearFragment")
+
+                intent.putExtra("bgirltype", "emplYearReviewStatus")
+
+                startActivity(intent)
+                mContext.finish()
             }
             R.id.tv3 -> {
-                val bGirlFragmentPresent = BGirlFragmentPresent(mContext, this)
-                bGirlFragmentPresent.emplApplicationStatus("emplPatchCardStatus")
+                //string 0未补卡1未审核2已审核3审核不通过
+                val intent = Intent(mContext, DisplayActivity::class.java)
+                intent.putExtra("DISPLAYTYPE", "BGirlYearFragment")
+                intent.putExtra("bgirltype", "emplPatchCardStatus")
+                startActivity(intent)
             }
             else -> {
             }

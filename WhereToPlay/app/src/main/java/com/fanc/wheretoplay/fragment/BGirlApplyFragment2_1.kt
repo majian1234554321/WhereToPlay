@@ -232,7 +232,8 @@ class BGirlApplyFragment2_1 : BaseFragment() {
         //获取所有的商家信息
 
         Retrofit_RequestUtils.getRequest()
-                .emplDetail(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken()))
+                .emplDetail(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken()),
+                        MultipartBody.Part.createFormData("application_id", arguments?.getString("application_id")))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(object : Observer<EmplDetailModel> {
@@ -422,12 +423,13 @@ class BGirlApplyFragment2_1 : BaseFragment() {
     }
 
     companion object {
-        fun newInstance(bgirltype: String): BGirlApplyFragment2_1 {
+        fun newInstance(bgirltype: String,application_id:String): BGirlApplyFragment2_1 {
             val bGirlApplyFragment2 = BGirlApplyFragment2_1()
             val args = Bundle()
 
 
             args.putString("bgirltype", bgirltype)
+            args.putString("application_id", application_id)
 
             bGirlApplyFragment2.arguments = args
 

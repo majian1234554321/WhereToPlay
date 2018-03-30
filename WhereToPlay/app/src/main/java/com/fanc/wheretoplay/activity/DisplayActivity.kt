@@ -37,7 +37,7 @@ var mFragmentManager : FragmentManager? = null
 
         val order_functionValue = intent.getStringExtra("order_function")
 
-        val statusValue = intent.getStringExtra("status")
+        val application_id = intent.getStringExtra("application_id")
 
 
         val bGirlPayMoney =  intent.getStringExtra("bGirlPayMoney")
@@ -114,18 +114,18 @@ var mFragmentManager : FragmentManager? = null
 
             "BGirlApplyFragment2_1" ->{
                 supportFragmentManager.beginTransaction()
-                        .replace(R.id.displayfragment, BGirlApplyFragment2_1.newInstance(bgirltype))
+                        .replace(R.id.displayfragment, BGirlApplyFragment2_1.newInstance(bgirltype,application_id))
                         .commit()
             }
 
             "BGirlApplyFragment3" ->{
                 supportFragmentManager.beginTransaction()
-                        .replace(R.id.displayfragment, BGirlApplyFragment3.newInstance(statues,bgirltype))
+                        .replace(R.id.displayfragment, BGirlApplyFragment3.newInstance(statues,bgirltype,application_id))
                         .commit()
             }
             "BGirlApplyFragment4" ->{
                 supportFragmentManager.beginTransaction()
-                        .replace(R.id.displayfragment, BGirlApplyFragment4.newInstance(bGirlPayMoney,bgirltype))
+                        .replace(R.id.displayfragment, BGirlApplyFragment4.newInstance(bGirlPayMoney,bgirltype,application_id))
                         .commit()
             }
 
@@ -134,6 +134,16 @@ var mFragmentManager : FragmentManager? = null
                         .replace(R.id.displayfragment, BGirlApplyFragment5.newInstance())
                         .commit()
             }
+
+
+
+            "BGirlYearFragment" ->{
+                supportFragmentManager.beginTransaction()
+                        .replace(R.id.displayfragment, BGirlYearFragment.newInstance(bgirltype))
+                        .commit()
+            }
+
+
 
         }
     }

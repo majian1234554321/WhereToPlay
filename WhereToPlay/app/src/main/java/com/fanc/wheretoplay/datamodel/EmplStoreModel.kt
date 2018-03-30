@@ -7,16 +7,11 @@ import com.google.gson.annotations.SerializedName
  */
 
 data class EmplStoreModel(
-		@SerializedName("code") var code: Int = 0,
-		@SerializedName("message") var message: String = "",
-		@SerializedName("content") var content: Contents = Contents()
+		val code: String,
+		val message: String,
+		val content: List<Contents>
 )
 
 data class Contents(
-		@SerializedName("store_json") var storeJson: List<StoreJson> = listOf()
-)
-
-data class StoreJson(
-		@SerializedName("id") var id: Int = 0,
-		@SerializedName("name") var name: String = ""
+		val name: String
 )

@@ -15,7 +15,7 @@ import okhttp3.MultipartBody
 /**
  * Created by Joenny on 2018/3/22.
  */
-class BGirlFragmentPresent(val context: Context, val bGirlFragmentView: BGirlFragmentView) {
+class BGirlFragmentPresent(val context: Context, val bGirlFragmentView: BGirlFragmentView,val appid:String) {
 
 
     fun emplApplicationStatus(type: String) {
@@ -52,7 +52,7 @@ class BGirlFragmentPresent(val context: Context, val bGirlFragmentView: BGirlFra
 
                     override fun onNext(t: AccessOrderIdModel) {
                         if (t.code == "0"){
-                            bGirlFragmentView.setSuccessData(type,t.content)
+                            bGirlFragmentView.setSuccessData(type,t.content,appid)
                         }else{
                             bGirlFragmentView.setFailedData(t.message)
                         }

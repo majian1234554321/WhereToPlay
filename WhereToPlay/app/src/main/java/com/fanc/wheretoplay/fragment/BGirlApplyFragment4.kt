@@ -113,12 +113,15 @@ class BGirlApplyFragment4 : BaseFragment(), RadioGroup.OnCheckedChangeListener {
                 "emplYearReviewStatus" -> {//年审
                     listArgs.add(MultipartBody.Part.createFormData("year_review_amount", arguments?.getString("bGirlPayMoney")))
 
+                    listArgs.add(MultipartBody.Part.createFormData("application_id", arguments?.getString("application_id")))
+
                     observable = Retrofit_RequestUtils
                             .getRequest()
                             .emplYearReviewPayOrder(listArgs)
                 }
                 "emplPatchCardStatus" -> {//补卡
                     listArgs.add(MultipartBody.Part.createFormData("patch_card_amount", arguments?.getString("bGirlPayMoney")))
+                    listArgs.add(MultipartBody.Part.createFormData("application_id", arguments?.getString("application_id")))
 
                     observable = Retrofit_RequestUtils
                             .getRequest()
@@ -271,7 +274,7 @@ class BGirlApplyFragment4 : BaseFragment(), RadioGroup.OnCheckedChangeListener {
     }
 
     companion object {
-        fun newInstance(bGirlPayMoney: String, bgirltype: String): BGirlApplyFragment4 {
+        fun newInstance(bGirlPayMoney: String, bgirltype: String,application_id:String): BGirlApplyFragment4 {
 
             val bGirlApplyFragment4 = BGirlApplyFragment4()
 
@@ -279,6 +282,9 @@ class BGirlApplyFragment4 : BaseFragment(), RadioGroup.OnCheckedChangeListener {
             args.putString("bGirlPayMoney", bGirlPayMoney)
 
             args.putString("bgirltype", bgirltype)
+
+            args.putString("application_id", application_id)
+
 
 
             bGirlApplyFragment4.arguments = args

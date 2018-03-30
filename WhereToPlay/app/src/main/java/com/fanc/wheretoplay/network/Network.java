@@ -27,6 +27,7 @@ import com.fanc.wheretoplay.datamodel.EmplStoreModel;
 import com.fanc.wheretoplay.datamodel.MerchantDetailModel;
 import com.fanc.wheretoplay.datamodel.MineFriend;
 import com.fanc.wheretoplay.datamodel.MineMoney;
+import com.fanc.wheretoplay.datamodel.Modelsss;
 import com.fanc.wheretoplay.datamodel.NewUser;
 import com.fanc.wheretoplay.datamodel.OrderDetailModel;
 
@@ -555,8 +556,17 @@ public class Network {
         //从业人员年审生成并支付订单 --
         @Multipart
         @POST("Empl/emplDetail")
-        Observable<EmplDetailModel> emplDetail(@Part MultipartBody.Part fileA);
+        Observable<EmplDetailModel> emplDetail(@Part MultipartBody.Part fileA,@Part MultipartBody.Part fileB);
 
+
+
+
+
+
+        //从业人员年审生成并支付订单 --
+        @Multipart
+        @POST("Empl/emplDetailArray")
+        Observable<Modelsss> emplDetailArray(@Part MultipartBody.Part fileA);
 
 
 

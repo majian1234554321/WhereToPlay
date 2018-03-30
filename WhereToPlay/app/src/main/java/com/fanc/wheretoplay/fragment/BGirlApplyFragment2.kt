@@ -207,6 +207,10 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
         val list5 = arrayListOf<String>()
         list5.add("汉")
         list5.add("回")
+        list5.add("苗")
+        list5.add("满")
+        list5.add("蒙")
+        list5.add("其他")
 
 
         val list15 = arrayListOf<String>();
@@ -414,6 +418,8 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
                                     intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment3")
                                     intent.putExtra("bgirltype", arguments?.getString("bgirltype"))
                                     intent.putExtra("statues", "1")
+                                    intent.putExtra("application_id", "-1")
+
 
                                     startActivity(intent)
                                     mContext.finish()
