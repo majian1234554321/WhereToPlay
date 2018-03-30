@@ -15,7 +15,7 @@ import okhttp3.MultipartBody
 /**
  * Created by Joenny on 2018/3/22.
  */
-class BGirlFragmentPresent(val context: Context, val bGirlFragmentView: BGirlFragmentView,val appid:String) {
+class BGirlFragmentPresent(val context: Context, val bGirlFragmentView: BGirlFragmentView, val appid: String) {
 
 
     fun emplApplicationStatus(type: String) {
@@ -29,13 +29,17 @@ class BGirlFragmentPresent(val context: Context, val bGirlFragmentView: BGirlFra
 
             "emplYearReviewStatus" -> {
                 observable = Retrofit_RequestUtils.getRequest()
-                        .emplYearReviewStatus(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken()))
+                        .emplYearReviewStatus(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken())
+                                , MultipartBody.Part.createFormData("application_id", appid)
+                        )
             }
 
 
             "emplPatchCardStatus" -> {
                 observable = Retrofit_RequestUtils.getRequest()
-                        .emplPatchCardStatus(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken()))
+                        .emplPatchCardStatus(MultipartBody.Part.createFormData("application_id", SPUtils(context).getUser().getToken())
+                                , MultipartBody.Part.createFormData("application_id", appid)
+                        )
             }
 
             else -> {
@@ -51,9 +55,9 @@ class BGirlFragmentPresent(val context: Context, val bGirlFragmentView: BGirlFra
                     override fun onSubscribe(d: Disposable) = Unit
 
                     override fun onNext(t: AccessOrderIdModel) {
-                        if (t.code == "0"){
-                            bGirlFragmentView.setSuccessData(type,t.content,appid)
-                        }else{
+                        if (t.code == "0") {
+                            bGirlFragmentView.setSuccessData(type, t.content, appid)
+                        } else {
                             bGirlFragmentView.setFailedData(t.message)
                         }
                     }

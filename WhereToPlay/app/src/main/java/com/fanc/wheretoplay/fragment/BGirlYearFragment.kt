@@ -53,8 +53,10 @@ class BGirlYearFragment : BaseFragment() {
                     override fun onNext(p0: Modelsss) {
                         if (p0.code == "0") {
 
+                            if (recycle != null) {
+                                recycle.adapter = BGirlYearFragmentAdapter(mContext, p0.content.contents, arguments?.getString("bgirltype"))
+                            }
 
-                            recycle.adapter = BGirlYearFragmentAdapter(mContext, p0.content.contents, arguments?.getString("bgirltype"))
                         } else {
 
                         }

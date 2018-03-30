@@ -183,6 +183,7 @@ class BGirlApplyFragment2_1 : BaseFragment() {
 
         eev4.setTv("出生日期", true)
         eev5.setTv("民族", true)
+        eev5.visibility= View.GONE
 
         eev7.setTv("身份证号", true)
         eev8.setTv("户籍地址", true)
@@ -320,30 +321,21 @@ class BGirlApplyFragment2_1 : BaseFragment() {
                     !TextUtils.isEmpty(eev13.data) &&
                     !TextUtils.isEmpty(eev14.data) &&
                     !TextUtils.isEmpty(eev15.data) &&
-                    !TextUtils.isEmpty(eev16.data) &&
+                    !TextUtils.isEmpty(eev16.data)
 
-                    !TextUtils.isEmpty(iv164Value) &&
-                    !TextUtils.isEmpty(iv264Value) &&
-                    !TextUtils.isEmpty(iv364Value) &&
-                    iv164Value != null &&
-                    iv264Value != null &&
-                    iv364Value != null
+
             ) {
 
-
                 val listArgs = arrayListOf<MultipartBody.Part>()
-
-
-
-
-
 
                 listArgs.add(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken()))
                 listArgs.add(MultipartBody.Part.createFormData("store_name", eev1.data))
 
-
-
                 listArgs.add(MultipartBody.Part.createFormData("name", eev2.data))
+
+
+                listArgs.add(MultipartBody.Part.createFormData("application_id", arguments?.getString("application_id")))
+
 
 
                 listArgs.add(MultipartBody.Part.createFormData("name", if (eev3.data == "男") "1" else "2"))
@@ -367,12 +359,11 @@ class BGirlApplyFragment2_1 : BaseFragment() {
                 listArgs.add(MultipartBody.Part.createFormData("position", eev16.data))//职务
 
 
-                listArgs.add(MultipartBody.Part.createFormData("personal_path", iv164Value))//个人照片
-                listArgs.add(MultipartBody.Part.createFormData("id_pic_path1", iv264Value))//身份证正面
-                listArgs.add(MultipartBody.Part.createFormData("id_pic_path2", iv364Value))//身份证背面
 
 
-                listArgs.add(MultipartBody.Part.createFormData("type", if (arguments?.getString("bgirltype") == "emplYearReviewStatus") "3" else "2"))//身份证背面
+
+
+                listArgs.add(MultipartBody.Part.createFormData("type", if (arguments?.getString("bgirltype") == "emplYearReviewStatus") "3" else "2"))
 
 
                 Retrofit_RequestUtils.getRequest()
@@ -395,7 +386,7 @@ class BGirlApplyFragment2_1 : BaseFragment() {
                                     intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment3")
                                     intent.putExtra("bgirltype", arguments?.getString("bgirltype"))
                                     intent.putExtra("statues", "1")
-
+                                    intent.putExtra("application_id", arguments?.getString("application_id"))
                                     startActivity(intent)
                                     mContext.finish()
                                 } else {

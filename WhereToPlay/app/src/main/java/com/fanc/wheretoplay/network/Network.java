@@ -522,13 +522,13 @@ public class Network {
         //补卡申请状态
         @Multipart
         @POST("Empl/emplPatchCardStatus")
-        Observable<AccessOrderIdModel> emplPatchCardStatus(@Part MultipartBody.Part fileA);
+        Observable<AccessOrderIdModel> emplPatchCardStatus(@Part MultipartBody.Part fileA,@Part MultipartBody.Part fileB);
 
 
         //年审申请状态 --
         @Multipart
         @POST("Empl/emplYearReviewStatus")
-        Observable<AccessOrderIdModel> emplYearReviewStatus(@Part MultipartBody.Part fileA);
+        Observable<AccessOrderIdModel> emplYearReviewStatus(@Part MultipartBody.Part fileA,@Part MultipartBody.Part fileB);
 
 
         //获取申请 年审 补卡支付价格 --

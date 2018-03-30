@@ -52,12 +52,14 @@ class BGirlApplyFragment4 : BaseFragment(), RadioGroup.OnCheckedChangeListener {
 
     override fun onCheckedChanged(group: RadioGroup?, checkedId: Int) {
         when (checkedId) {
-            R.id.rb_wxpay -> {
+            R.id.rb_wxpay1 -> {
                 payValue = "2"
+                rg.check(R.id.rb_wxpay1)
             }
 
-            R.id.rb_alipay -> {
+            R.id.rb_alipay1 -> {
                 payValue = "1"
+                rg.check(R.id.rb_alipay1)
             }
             else -> {
             }
@@ -100,6 +102,7 @@ class BGirlApplyFragment4 : BaseFragment(), RadioGroup.OnCheckedChangeListener {
         next.setOnClickListener {
             val listArgs = arrayListOf<MultipartBody.Part>()
             listArgs.add(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken()))
+
             listArgs.add(MultipartBody.Part.createFormData("pay_mode", payValue))
 
             when (bgirltype) {

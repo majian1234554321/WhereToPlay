@@ -34,7 +34,7 @@ class BGirlYearFragmentAdapter(val mContext: Context, val list: List<Content2>, 
                         val intent = Intent(mContext, DisplayActivity::class.java)
 
                         intent.putExtra("bgirltype", bgirltype)
-                        intent.putExtra("applicationId", applicationId)
+                        intent.putExtra("application_id", applicationId)
                         intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment2_1")
 
                         mContext.startActivity(intent)
@@ -50,7 +50,7 @@ class BGirlYearFragmentAdapter(val mContext: Context, val list: List<Content2>, 
                         intent.putExtra("bgirltype", "emplYearReviewStatus")
                         intent.putExtra("statues", content.year_review_status)
                         intent.putExtra("application_id", applicationId)
-                        mContext.  startActivity(intent)
+                        mContext.startActivity(intent)
                     }
 
                 }
@@ -64,7 +64,7 @@ class BGirlYearFragmentAdapter(val mContext: Context, val list: List<Content2>, 
                         val intent = Intent(mContext, DisplayActivity::class.java)
 
                         intent.putExtra("bgirltype", bgirltype)
-                        intent.putExtra("applicationId", applicationId)
+                        intent.putExtra("application_id", applicationId)
                         intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment2_1")
 
                         mContext.startActivity(intent)
@@ -81,7 +81,8 @@ class BGirlYearFragmentAdapter(val mContext: Context, val list: List<Content2>, 
                         intent.putExtra("DISPLAYTYPE", "BGirlApplyFragment3")
                         intent.putExtra("bgirltype", "emplPatchCardStatus")
                         intent.putExtra("statues", content.patch_card_status)
-                        mContext.  startActivity(intent)
+                        mContext.startActivity(intent)
+
                     }
 
                 }
@@ -108,24 +109,9 @@ class BGirlYearFragmentAdapter(val mContext: Context, val list: List<Content2>, 
 
             setOnClickListener {
 
-
-
                 //判断状态
-
-
-
-
-
                 val bGirlFragmentPresent = BGirlFragmentPresent(mContext, this@BGirlYearFragmentAdapter,list[position].applicationId)
-
-
-                bGirlFragmentPresent.emplApplicationStatus(if ("bgirltype"  ==bgirltype)"emplYearReviewStatus" else "emplPatchCardStatus")
-
-
-
-
-
-
+                bGirlFragmentPresent.emplApplicationStatus(if ("emplYearReviewStatus"  ==bgirltype)"emplYearReviewStatus" else "emplPatchCardStatus")
 
             }
         }

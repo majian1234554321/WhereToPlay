@@ -182,7 +182,7 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
 
         eev4.setTv("出生日期", true)
         eev5.setTv("民族", true)
-
+        eev5.visibility = View.GONE
         eev7.setTv("身份证号", true)
         eev8.setTv("户籍地址", true)
         eev9.setTv("详细地址", true)
@@ -214,26 +214,16 @@ class BGirlApplyFragment2 : BaseFragment(), View.OnClickListener {
 
 
         val list15 = arrayListOf<String>();
-        list15.add("歌舞娱乐")
+        list15.add("商务KTV")
         list15.add("酒吧")
-        list15.add("音乐茶室")
-        list15.add("游戏机")
-        list15.add("游艺机")
-        list15.add("文化游乐场（游乐园）")
-        list15.add("棋牌室")
-        list15.add("浴场浴室")
-        list15.add("桑拿会所")
-        list15.add("按摩保健")
-        list15.add("足浴")
-        list15.add("美容美发（含桑拿）")
+        list15.add("量贩KTV")
 
 
         val list16 = arrayListOf<String>()
-        list16.add("A级经营负责人")
-        list16.add("B级行政人员")
-        list16.add("C级业务主管")
-        list16.add("D级服务生")
-        list16.add("E级服务员")
+        list16.add("A 经营负责人")
+        list16.add("B 行政人员")
+        list16.add("C 服务人员")
+        list16.add("D 酒水促销员")
         list16.add("其他")
 
 
