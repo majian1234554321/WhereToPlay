@@ -90,7 +90,7 @@ android {
         _test {
             dimension "color"
         }
-       /* _company {
+        _company {
             dimension "color"
         }
         _360 {}
@@ -106,7 +106,7 @@ android {
         _oppo {}
         _vivo {}
         _meizu {}
-        _sougou {}*/
+        _sougou {}
 
     }
 

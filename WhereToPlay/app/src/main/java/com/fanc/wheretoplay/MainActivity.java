@@ -51,6 +51,7 @@ import com.zhy.http.okhttp.callback.DCallback;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -111,6 +112,8 @@ public class MainActivity extends BaseFragmentActivity
 
 
 
+
+        Log.i("TGAS",  Calendar.getInstance().getTimeInMillis()+"");
 
         Intent intent = this.getIntent();
 

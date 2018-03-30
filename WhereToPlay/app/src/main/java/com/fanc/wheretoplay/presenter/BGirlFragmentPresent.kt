@@ -37,7 +37,7 @@ class BGirlFragmentPresent(val context: Context, val bGirlFragmentView: BGirlFra
 
             "emplPatchCardStatus" -> {
                 observable = Retrofit_RequestUtils.getRequest()
-                        .emplPatchCardStatus(MultipartBody.Part.createFormData("application_id", SPUtils(context).getUser().getToken())
+                        .emplPatchCardStatus(MultipartBody.Part.createFormData("token", SPUtils(context).getUser().getToken())
                                 , MultipartBody.Part.createFormData("application_id", appid)
                         )
             }

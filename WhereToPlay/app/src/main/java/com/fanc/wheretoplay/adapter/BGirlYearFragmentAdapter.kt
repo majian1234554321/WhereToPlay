@@ -93,7 +93,7 @@ class BGirlYearFragmentAdapter(val mContext: Context, val list: List<Content2>, 
     }
 
     override fun setFailedData(value: String) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        Toast.makeText(mContext, value, Toast.LENGTH_SHORT).show()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(View.inflate(mContext, R.layout.bgirlyearfragmentadapter, null))
